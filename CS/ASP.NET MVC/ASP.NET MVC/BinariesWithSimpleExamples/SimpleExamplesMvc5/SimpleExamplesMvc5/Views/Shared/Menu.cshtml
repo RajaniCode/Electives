@@ -1,0 +1,27 @@
+﻿@{
+    var menuTree = new SimpleMenuBuilder()
+                    .Add("Simple Controls", Url.Action("Index", "Home"))
+                    .Add("Usefull Links")
+                    .Down()
+                        .Add("Css/javascript")
+                        .Down()
+                            .Add("jQuery", "http://jquery.com/", target: "_blank")
+                            .Add("jQuery UI", "http://jqueryui.com/", target: "_blank")
+                            .Add("Twitter Bootstrap", "http://getbootstrap.com/", target: "_blank")
+                            .Add("JQuery Mobile", "http://jquerymobile.com/", target: "_blank")
+                        .Up()
+                        .Add("Asp.Net MVC", "http://www.asp.net/mvc")
+                    .Up()
+                    .Add("Item Controls")
+                    .Down()
+                        .Add("About Items Controls", Url.Action("ItemsControlsDescription", "Home"))
+                        .Add("SortableList", Url.Action("SortableListExample", "Home"))
+                        .Add("TreeView", Url.Action("TreeViewExample", "Home"))
+                        .Add("DataGrid", Url.Action("DataGridExample", "Home"))
+                    .Up()
+                    .Add("Client Blocks", Url.Action("ClientBlocksExample", "Home"))
+                    .Add("About", Url.Action("About", "Home"))
+                    .Get();
+}
+@Html.Menu("MainMenu", menuTree, new {@class="navigationMenu"},
+                    selected: (h, i) =>  i.Link != null && HttpContext.Current.Request.Url.AbsolutePath == i.Link)

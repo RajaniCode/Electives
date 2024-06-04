@@ -1,0 +1,8 @@
+USE Northwind
+GO
+
+ALTER TABLE Employees ADD LastUpdateDateTime DATETIME
+GO
+
+update employees set LastUpdateDateTime = getdate()
+go

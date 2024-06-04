@@ -1,0 +1,113 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1377"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{F1B12EC9-5A73-435A-9A12-62CCDC5CF366}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\..\Microsoft.Samples.BizTalk.SouthridgeVideo.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft BizTalk (TM) Server 2006"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright (c) Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBroker"
+                    AssemblyName = "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBroker"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "BTSScn.BPM.OrderBrokerApp"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = "BTSScn.BPM.OrderBrokerApp"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Schemas"
+                    Project = "{0C4BE102-D0AF-4AB6-95A4-EC306CE611A3}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "Utilities"
+                    Project = "{19F878AA-6D7E-4487-BCF5-AFD6AA368C73}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SchemaClasses"
+                    Project = "{86A44396-2248-4B14-83DC-00EFF2A5B244}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "OrderBrokerSchemas"
+                    Project = "{4C85F6F7-04D5-427B-B3F5-0F0CB0F21397}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "OrderBrokerMaps"
+                    Project = "{86068F72-4F06-49E4-B0F9-B5C801AA0DC8}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "ServiceLevelTracking"
+                    Project = "{D9D576AF-CE23-42E2-A561-874BE8C46A67}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Bam.EventObservation"
+                    AssemblyName = "Microsoft.BizTalk.Bam.EventObservation"
+                    HintPath = "..\..\..\..\..\..\..\..\Program Files\Microsoft BizTalk Server 2006\Tracking\Microsoft.BizTalk.Bam.EventObservation.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "OrderBroker.odx"
+                    BuildAction = "Compile"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

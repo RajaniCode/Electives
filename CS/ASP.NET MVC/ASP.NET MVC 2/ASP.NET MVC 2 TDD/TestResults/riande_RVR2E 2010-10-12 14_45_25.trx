@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="d8a335c4-aabb-4d8b-81d2-7905e9098bd6" name="riande@RVR2E 2010-10-12 14:45:25" runUser="REDMOND\riande" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Default Test Settings" id="fb201188-7047-4444-b680-145c8fa13ace">
+    <Deployment runDeploymentRoot="riande_RVR2E 2010-10-12 14_45_25">
+      <DeploymentItem filename="C:\tfs\MVC2\MvcContactsTDD\cs\MvcContacts\MvcContacts\bin\MvcContacts.dll" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2010-10-12T14:45:25.7704433-07:00" queuing="2010-10-12T14:45:27.3882058-07:00" start="2010-10-12T14:45:27.7283758-07:00" finish="2010-10-12T14:45:28.8974658-07:00" />
+  <ResultSummary outcome="Completed">
+    <Counters total="6" executed="6" passed="6" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="Create_Post_ReturnsViewIfModelStateIsNotValid" storage="c:\tfs\mvc2\mvccontactstdd\cs\mvccontacts\mvccontacts.tests\bin\debug\mvccontacts.tests.dll" id="67c69ea6-0d39-9f1f-c761-e89de54393f6">
+      <Execution id="93821fac-a34c-42b9-bbee-d670d0bb5004" />
+      <TestMethod codeBase="C:/tfs/MVC2/MvcContactsTDD/cs/MvcContacts/MvcContacts.Tests/bin/Debug/MvcContacts.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcContacts.Tests.Controllers.HomeControllerTest, MvcContacts.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Create_Post_ReturnsViewIfModelStateIsNotValid" />
+    </UnitTest>
+    <UnitTest name="Create_Post_ReturnsRedirectOnSuccess" storage="c:\tfs\mvc2\mvccontactstdd\cs\mvccontacts\mvccontacts.tests\bin\debug\mvccontacts.tests.dll" id="14b29928-f16b-4832-0c8d-d28b951b9705">
+      <Execution id="ddaa5b57-938f-4c80-8e09-646b77120bc3" />
+      <TestMethod codeBase="C:/tfs/MVC2/MvcContactsTDD/cs/MvcContacts/MvcContacts.Tests/bin/Debug/MvcContacts.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcContacts.Tests.Controllers.HomeControllerTest, MvcContacts.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Create_Post_ReturnsRedirectOnSuccess" />
+    </UnitTest>
+    <UnitTest name="Index_Get_AsksForIndexView" storage="c:\tfs\mvc2\mvccontactstdd\cs\mvccontacts\mvccontacts.tests\bin\debug\mvccontacts.tests.dll" id="b70e5ebc-8a25-4da1-faa9-0046ca2e1e9c">
+      <Execution id="494a5235-1ac9-45f8-8cea-696664b792e5" />
+      <TestMethod codeBase="C:/tfs/MVC2/MvcContactsTDD/cs/MvcContacts/MvcContacts.Tests/bin/Debug/MvcContacts.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcContacts.Tests.Controllers.HomeControllerTest, MvcContacts.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Index_Get_AsksForIndexView" />
+    </UnitTest>
+    <UnitTest name="Index_Get_RetrievesAllContactsFromRepository" storage="c:\tfs\mvc2\mvccontactstdd\cs\mvccontacts\mvccontacts.tests\bin\debug\mvccontacts.tests.dll" id="e8fe0c79-e434-d16c-c193-74a50c73feb0">
+      <Execution id="bbb0366e-e8be-44a8-a7ad-57c9128679ac" />
+      <TestMethod codeBase="C:/tfs/MVC2/MvcContactsTDD/cs/MvcContacts/MvcContacts.Tests/bin/Debug/MvcContacts.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcContacts.Tests.Controllers.HomeControllerTest, MvcContacts.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Index_Get_RetrievesAllContactsFromRepository" />
+    </UnitTest>
+    <UnitTest name="Create_Post_PutsValidContactIntoRepository" storage="c:\tfs\mvc2\mvccontactstdd\cs\mvccontacts\mvccontacts.tests\bin\debug\mvccontacts.tests.dll" id="902de969-81e2-084b-f359-e6176d358789">
+      <Execution id="5b913382-7f16-4d6f-a8dd-e410a45f52a9" />
+      <TestMethod codeBase="C:/tfs/MVC2/MvcContactsTDD/cs/MvcContacts/MvcContacts.Tests/bin/Debug/MvcContacts.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcContacts.Tests.Controllers.HomeControllerTest, MvcContacts.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Create_Post_PutsValidContactIntoRepository" />
+    </UnitTest>
+    <UnitTest name="Create_Post_ReturnsViewIfRepositoryThrowsException" storage="c:\tfs\mvc2\mvccontactstdd\cs\mvccontacts\mvccontacts.tests\bin\debug\mvccontacts.tests.dll" id="da9c792e-8864-3616-8e4a-5c365fb5d76e">
+      <Execution id="c4faf6f3-87a1-499a-825f-6bcf008ec784" />
+      <TestMethod codeBase="C:/tfs/MVC2/MvcContactsTDD/cs/MvcContacts/MvcContacts.Tests/bin/Debug/MvcContacts.Tests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcContacts.Tests.Controllers.HomeControllerTest, MvcContacts.Tests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="Create_Post_ReturnsViewIfRepositoryThrowsException" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="14b29928-f16b-4832-0c8d-d28b951b9705" executionId="ddaa5b57-938f-4c80-8e09-646b77120bc3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="67c69ea6-0d39-9f1f-c761-e89de54393f6" executionId="93821fac-a34c-42b9-bbee-d670d0bb5004" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="902de969-81e2-084b-f359-e6176d358789" executionId="5b913382-7f16-4d6f-a8dd-e410a45f52a9" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b70e5ebc-8a25-4da1-faa9-0046ca2e1e9c" executionId="494a5235-1ac9-45f8-8cea-696664b792e5" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="da9c792e-8864-3616-8e4a-5c365fb5d76e" executionId="c4faf6f3-87a1-499a-825f-6bcf008ec784" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e8fe0c79-e434-d16c-c193-74a50c73feb0" executionId="bbb0366e-e8be-44a8-a7ad-57c9128679ac" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="ddaa5b57-938f-4c80-8e09-646b77120bc3" testId="14b29928-f16b-4832-0c8d-d28b951b9705" testName="Create_Post_ReturnsRedirectOnSuccess" computerName="RVR2E" duration="00:00:00.0529014" startTime="2010-10-12T14:45:27.9356058-07:00" endTime="2010-10-12T14:45:28.5680483-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="ddaa5b57-938f-4c80-8e09-646b77120bc3">
+    </UnitTestResult>
+    <UnitTestResult executionId="93821fac-a34c-42b9-bbee-d670d0bb5004" testId="67c69ea6-0d39-9f1f-c761-e89de54393f6" testName="Create_Post_ReturnsViewIfModelStateIsNotValid" computerName="RVR2E" duration="00:00:00.0119559" startTime="2010-10-12T14:45:28.5788008-07:00" endTime="2010-10-12T14:45:28.5993283-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="93821fac-a34c-42b9-bbee-d670d0bb5004">
+    </UnitTestResult>
+    <UnitTestResult executionId="5b913382-7f16-4d6f-a8dd-e410a45f52a9" testId="902de969-81e2-084b-f359-e6176d358789" testName="Create_Post_PutsValidContactIntoRepository" computerName="RVR2E" duration="00:00:00.0035470" startTime="2010-10-12T14:45:28.6051933-07:00" endTime="2010-10-12T14:45:28.6179008-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b913382-7f16-4d6f-a8dd-e410a45f52a9">
+    </UnitTestResult>
+    <UnitTestResult executionId="494a5235-1ac9-45f8-8cea-696664b792e5" testId="b70e5ebc-8a25-4da1-faa9-0046ca2e1e9c" testName="Index_Get_AsksForIndexView" computerName="RVR2E" duration="00:00:00.0029570" startTime="2010-10-12T14:45:28.6237658-07:00" endTime="2010-10-12T14:45:28.6501583-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="494a5235-1ac9-45f8-8cea-696664b792e5">
+    </UnitTestResult>
+    <UnitTestResult executionId="c4faf6f3-87a1-499a-825f-6bcf008ec784" testId="da9c792e-8864-3616-8e4a-5c365fb5d76e" testName="Create_Post_ReturnsViewIfRepositoryThrowsException" computerName="RVR2E" duration="00:00:00.0048064" startTime="2010-10-12T14:45:28.6560233-07:00" endTime="2010-10-12T14:45:28.6687308-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c4faf6f3-87a1-499a-825f-6bcf008ec784">
+    </UnitTestResult>
+    <UnitTestResult executionId="bbb0366e-e8be-44a8-a7ad-57c9128679ac" testId="e8fe0c79-e434-d16c-c193-74a50c73feb0" testName="Index_Get_RetrievesAllContactsFromRepository" computerName="RVR2E" duration="00:00:00.0028173" startTime="2010-10-12T14:45:28.6736183-07:00" endTime="2010-10-12T14:45:28.6843708-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="bbb0366e-e8be-44a8-a7ad-57c9128679ac">
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<asmv1:assembly manifestVersion="1.0" xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <asmv1:assemblyIdentity name="CubeApp.exe" version="1.0.0.0" publicKeyToken="ea7b5fb635a84ad6" language="neutral" processorArchitecture="msil" type="win32" />
+    <application />
+    <entryPoint>
+        <assemblyIdentity name="CubeApp" version="0.0.0.0" language="neutral" processorArchitecture="msil" />
+        <commandLine file="CubeApp.exe" parameters="" />
+        <hostInBrowser xmlns="urn:schemas-microsoft-com:asm.v3" />
+    </entryPoint>
+    <trustInfo>
+        <security>
+            <applicationRequestMinimum>
+                <PermissionSet class="System.Security.PermissionSet" version="1" ID="Custom" SameSite="site">
+                    <IPermission class="System.Security.Permissions.FileDialogPermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Access="Open" />
+                    <IPermission class="System.Security.Permissions.IsolatedStorageFilePermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Allowed="ApplicationIsolationByUser" UserQuota="512000" />
+                    <IPermission class="System.Security.Permissions.SecurityPermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Flags="Execution" />
+                    <IPermission class="System.Security.Permissions.UIPermission, mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" version="1" Window="SafeTopLevelWindows" Clipboard="OwnClipboard" />
+                    <IPermission class="System.Drawing.Printing.PrintingPermission, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" version="1" Level="SafePrinting" />
+                    <IPermission class="System.Security.Permissions.MediaPermission, WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" version="1" Audio="SafeAudio" Video="SafeVideo" Image="SafeImage" />
+                    <IPermission class="System.Security.Permissions.WebBrowserPermission, WindowsBase, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" version="1" Level="Safe" />
+                </PermissionSet>
+                <defaultAssemblyRequest permissionSetReference="Custom" />
+            </applicationRequestMinimum>
+        </security>
+    </trustInfo>
+    <dependency>
+        <dependentOS>
+            <osVersionInfo>
+                <os majorVersion="5" minorVersion="1" buildNumber="2600" servicePackMajor="0" />
+            </osVersionInfo>
+        </dependentOS>
+    </dependency>
+    <dependency>
+        <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+            <assemblyIdentity name="Microsoft.Windows.CommonLanguageRuntime" version="2.0.50727.0" />
+        </dependentAssembly>
+    </dependency>
+    <dependency>
+        <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+            <assemblyIdentity name="PresentationFramework" version="3.0.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+        </dependentAssembly>
+    </dependency>
+    <dependency>
+        <dependentAssembly dependencyType="preRequisite" allowDelayedBinding="true">
+            <assemblyIdentity name="WindowsBase" version="3.0.0.0" publicKeyToken="31BF3856AD364E35" language="neutral" processorArchitecture="msil" />
+        </dependentAssembly>
+    </dependency>
+    <dependency>
+        <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CubeApp.exe" size="131072">
+            <assemblyIdentity name="CubeApp" version="0.0.0.0" language="neutral" processorArchitecture="msil" />
+            <hash>
+                <dsig:Transforms>
+                    <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+                </dsig:Transforms>
+                <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                <dsig:DigestValue>qHOYwElDBKcPJ5ymW40l0hVeIo8=</dsig:DigestValue>
+            </hash>
+        </dependentAssembly>
+    </dependency>
+<publisherIdentity name="CN=REDMOND\kcorby" issuerKeyHash="25b6257d3711fca6da09022a70174c19fd551217" /><Signature Id="StrongNameSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>KOEwGjGYdmdbaEr4lC1lTlJhhN4=</DigestValue></Reference></SignedInfo><SignatureValue>DdDuB4p6VvS7WvsIok5biyYZjrsU/f5RlKpZCU7NL85eFHVlF8RUA7hxvvHxaTApjs1BEz+vo99a4xJtgsyUalW+VZok2sjk7LKz02xVZpwbRrgYVGCSxxaLXKWpG4dxrs/ge6vXqs07elXxKwzjxSaQwiXfUnbF0iaf1277BLU=</SignatureValue><KeyInfo Id="StrongNameKeyInfo"><KeyValue><RSAKeyValue><Modulus>t8ny/2NvLBk8xyW18cGHVXhfHcoSQ1JA3ApkoGfdMqIdyVwDzdZgeNVQ43hY9aLhFm5pgnBCV+FD86zsQM1B8tNTAt5KbVxO/DSW4PKkzRo7MN3m7bFlVlcXqxRMuq44WkrFbkU9xxa6xWpJ2Q5fDKRwyQ3pkWdWjgVGmcoe9P8=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><msrel:RelData xmlns:msrel="http://schemas.microsoft.com/windows/rel/2005/reldata"><r:license xmlns:r="urn:mpeg:mpeg21:2003:01-REL-R-NS" xmlns:as="http://schemas.microsoft.com/windows/pki/2005/Authenticode"><r:grant><as:ManifestInformation Hash="de8461524e652d94f84a685b677698311a30e128" Description="" Url=""><as:assemblyIdentity name="CubeApp.exe" version="1.0.0.0" publicKeyToken="ea7b5fb635a84ad6" language="neutral" processorArchitecture="msil" type="win32" /></as:ManifestInformation><as:SignedBy /><as:AuthenticodePublisher><as:X509SubjectName>CN=REDMOND\kcorby</as:X509SubjectName></as:AuthenticodePublisher></r:grant><r:issuer><Signature Id="AuthenticodeSignature" xmlns="http://www.w3.org/2000/09/xmldsig#"><SignedInfo><CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /><SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" /><Reference URI=""><Transforms><Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" /><Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" /></Transforms><DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" /><DigestValue>K/d1o9ljzz0ONjRbnyRSb5PGbok=</DigestValue></Reference></SignedInfo><SignatureValue>R1BEUsfIQD5CG5zWlReD3tbDZEDqfT9zd+DGTXK5fIzyWfY8HXHAn1S7x97yDKFKrwAGcZKEk3lF5r1iEBBitEi2AWRwbYoRBrOlb8swYIsGZzYFC1KmufYUM9j/bCTpx7sRBOlVUYy1lFvKf3kz4oBsFu+6r74yp1lFHc3RUJo=</SignatureValue><KeyInfo><KeyValue><RSAKeyValue><Modulus>t8ny/2NvLBk8xyW18cGHVXhfHcoSQ1JA3ApkoGfdMqIdyVwDzdZgeNVQ43hY9aLhFm5pgnBCV+FD86zsQM1B8tNTAt5KbVxO/DSW4PKkzRo7MN3m7bFlVlcXqxRMuq44WkrFbkU9xxa6xWpJ2Q5fDKRwyQ3pkWdWjgVGmcoe9P8=</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue><X509Data><X509Certificate>MIIByTCCATagAwIBAgIQBsXndsf2iZ5H/N6OioxkrjAJBgUrDgMCHQUAMCcxJTAjBgNVBAMeHABSAEUARABNAE8ATgBEAFwAawBjAG8AcgBiAHkwHhcNMDYwNDIwMDIyMzQxWhcNMDcwNDIwMDgyMzQxWjAnMSUwIwYDVQQDHhwAUgBFAEQATQBPAE4ARABcAGsAYwBvAHIAYgB5MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC3yfL/Y28sGTzHJbXxwYdVeF8dyhJDUkDcCmSgZ90yoh3JXAPN1mB41VDjeFj1ouEWbmmCcEJX4UPzrOxAzUHy01MC3kptXE78NJbg8qTNGjsw3ebtsWVWVxerFEy6rjhaSsVuRT3HFrrFaknZDl8MpHDJDemRZ1aOBUaZyh70/wIDAQABMAkGBSsOAwIdBQADgYEApmpI38vUqsuWdUEvlRkcC4RogsYah5XxpbyBsCwfW79rGmJF9Mt4OosZ0KEeQ9hAgYRH4a2G8nDB4qApTLGOF/zErKzIZQ6YsE/71C+jP0GlTIqBnObCAgORmmvknWCZ4nMcAyZ78mWyI229eIdU60Cau97MrfDqGkgn1PRZtp8=</X509Certificate></X509Data></KeyInfo></Signature></r:issuer></r:license></msrel:RelData></KeyInfo></Signature></asmv1:assembly>

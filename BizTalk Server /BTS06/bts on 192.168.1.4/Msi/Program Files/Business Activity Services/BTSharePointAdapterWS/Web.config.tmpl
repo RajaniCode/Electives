@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+
+<!-- Please follow the documentation on how to install this web service in SharePoint.   
+     Do not deploy this web.config to the SharePoint bin directory. It is not needed
+     and may unintentially overwrite settings within SharePoint.  This web.config is
+     here only for the purpose of development.                                              
+                                                                                      -->
+<!-- Uncomment this block if you want to do tracing of this web service.  You need
+     to create a C:\myListener.log file and give it the appropriate permissions.      -->
+<!--
+<system.diagnostics>
+	<switches>
+		<add name="Microsoft.BizTalk.KwTpm.WssAdapter.WebService" value="1" />
+	</switches>
+	<trace autoflush="true" indentsize="0">
+		<listeners>
+			<add name="myListener" type="System.Diagnostics.TextWriterTraceListener" initializeData="c:\myListener.log" />
+		</listeners>
+	</trace>
+</system.diagnostics>
+-->
+
+  <system.web>
+        <httpModules>
+            <add name="UrlAuthorization" type="System.Web.Security.UrlAuthorizationModule" />
+        </httpModules>
+
+    <!-- Change debug="true" if you want to debug this web service -->
+    <compilation defaultLanguage="c#" debug="false" />
+    <customErrors mode="Off" />
+    <!-- Windows Authentication is required for this web service. -->
+    <authentication mode="Windows" />
+    
+    <!-- Impersonation is required for this web service. -->
+    <identity impersonate="true" />
+	<webServices>
+		<protocols>
+			<remove name="Documentation" />
+		</protocols>
+	</webServices>
+
+	  <authorization>
+        <allow roles="PUT WINDOWS GROUP NAME HERE" verbs="GET,HEAD,POST"/>
+        <deny users="*"/>
+    </authorization>
+
+    <!-- Uncomment this block if you want to do some tracing of this web service -->
+    <!-- <trace enabled="true" requestLimit="10" pageOutput="false" traceMode="SortByTime" localOnly="true" />  -->
+    
+    <globalization requestEncoding="utf-8" responseEncoding="utf-8" />
+
+    <!-- The size of a document being posted to SharePoint depends on this setting -->
+    <httpRuntime maxRequestLength="100000" />
+    <trust level="Full" originUrl="" />
+  </system.web>
+</configuration>
+

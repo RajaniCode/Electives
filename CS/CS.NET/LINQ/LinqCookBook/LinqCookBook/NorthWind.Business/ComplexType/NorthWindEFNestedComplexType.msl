@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+	<EntityContainerMapping StorageEntityContainer="dbo"
+							 CdmEntityContainer="NWComplexTypeEntities">
+		<EntitySetMapping Name="Customers">
+			<EntityTypeMapping TypeName="NWNestedComplexTypeModel.Customer">
+				<MappingFragment StoreEntitySet="Customers">
+					<ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+					<ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+					<ComplexProperty Name="Address" TypeName="NWNestedComplexTypeModel.CommonAddress">
+						<ScalarProperty Name="Address" ColumnName="Address" />
+						<ScalarProperty Name="Region" ColumnName="Region" />
+						<ComplexProperty Name="AdditonalInfo"  TypeName="NWNestedComplexTypeModel.Geography">
+							<ScalarProperty Name="City" ColumnName="City" />
+							<ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+							<ScalarProperty Name="Country" ColumnName="Country"/>
+						</ComplexProperty>
+					</ComplexProperty>
+				</MappingFragment>
+			</EntityTypeMapping>
+		</EntitySetMapping>
+		<EntitySetMapping Name="Employees">
+			<EntityTypeMapping TypeName="NWNestedComplexTypeModel.Employee">
+				<MappingFragment StoreEntitySet="Employees">
+					<ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+					<ScalarProperty Name="LastName" ColumnName="LastName" />
+					<ScalarProperty Name="FirstName" ColumnName="FirstName" />
+					<ComplexProperty Name="Address" TypeName="NWNestedComplexTypeModel.CommonAddress">
+						<ScalarProperty Name="Address" ColumnName="Address" />
+						<ScalarProperty Name="Region" ColumnName="Region" />
+						<ComplexProperty Name="AdditonalInfo"  TypeName="NWNestedComplexTypeModel.Geography">
+							<ScalarProperty Name="City" ColumnName="City" />
+							<ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+							<ScalarProperty Name="Country" ColumnName="Country"/>
+						</ComplexProperty>
+					</ComplexProperty>
+				</MappingFragment>
+			</EntityTypeMapping>
+		</EntitySetMapping>
+	</EntityContainerMapping>
+</Mapping>

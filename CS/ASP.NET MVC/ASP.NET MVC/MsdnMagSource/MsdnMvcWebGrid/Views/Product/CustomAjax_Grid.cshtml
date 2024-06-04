@@ -1,0 +1,25 @@
+﻿@model MsdnMvcWebGrid.Models.Product.PagedProductsModel
+@using MsdnMvcWebGrid.Infrastructure;
+@using MsdnMvcWebGrid.Domain;
+
+<div id="grid" class="ajaxGrid">
+
+@{
+    var grid = new WebGrid<Product>(null, rowsPerPage: Model.PageSize, defaultSort: "Name");
+    grid.Bind(Model.Products, rowCount: Model.TotalRows, autoSortAndPage: false);
+    //var grid = Html.ServerPagedGrid(Model.Products, Model.TotalRows, rowsPerPage: Model.PageSize, defaultSort: "Name");
+}
+@grid.GetHtml(columns: grid.Columns(
+        grid.Column("Name", format: @<text>@Html.ActionLink(item.Name, "Details", "Product", new { id = item.ProductId }, null)</text>),
+        grid.Column("ListPrice", header: "List Price", format: @<text>@item.ListPrice.ToString("0.00")</text>)
+        )
+    )
+    <br />
+</div>
+
+<p>
+    Model.Products.Count() = @Model.Products.Count()
+</p>
+<p>
+    Model.TotalRows = @Model.TotalRows
+</p>

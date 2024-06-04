@@ -1,0 +1,117 @@
+﻿<Configuration _locID="16" _locAttrData="ProductName" ProductName="Microsoft BizTalk Server 2006" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" RegistryRoot="Software\Microsoft\BizTalk Server\3.0\" WatsonEventLogSource="BizTalk DW Reporting" WatsonPolicyRegKey="Software\Microsoft\BizTalk Server\3.0\DW" UseSplashScreen="Yes" SplashScreenImg="">
+    <Feature MSIFeatureName="SSOServer,Engine" Name="SSOServer,Engine" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.SSOServerCfg" DependentFeatures="WMI">
+      <UIcontrol _locAttrData="DisplayName" _locID="2" DisplayName="Enterprise SSO" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.SSOControl" Indentation="0" >
+        <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.sso"/>
+      </UIcontrol>
+      <UIcontrol _locAttrData="DisplayName" _locID="15" DisplayName="Enterprise SSO Secret Backup" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.SSOSecretBackupControl" Indentation="0" >
+        <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.sso"/>
+      </UIcontrol>
+    </Feature>
+    <Feature MSIFeatureName="MOT,BusActSvcs,BAMPortal,AdminTools,Development,BizTalkExplorer,HwsWebService" Name="WMI" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.BtsCfg" DependentFeatures="Engine,BTSCfg;EDI;HwsRuntime;HwsWebService;BAMTools;BAMPortal;BusActSvcsTPM" SubscribedFeatures="BAMTools;BAMPortal;HwsRuntime;HwsWebService;EDI;RulesEngine">
+        <UIcontrol _locAttrData="DisplayName" _locID="1" DisplayName="Group" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.GroupControl" Indentation="0" UIDependentOn="SSOServer,Engine">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.group"/>
+        </UIcontrol>
+    </Feature>
+    <Feature MSIFeatureName="Engine" Name="Engine,BTSCfg" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.BtsCfg" DependentFeatures="" AdditionalFeatures="HwsBaseAssemblies;MOT;Engine">
+        <UIcontrol _locAttrData="DisplayName" _locID="3" DisplayName="BizTalk Runtime" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.BTSRuntimeControl" Indentation="0" UIDependentOn="SSOServer,Engine;WMI" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.runtime"/>
+        </UIcontrol>
+    </Feature>
+    <Feature Name="MessageQueuing" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.MSMQTConfig" DependentFeatures="">
+        <UIcontrol _locAttrData="DisplayName" _locID="4" DisplayName="MSMQT" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.MSMQTControl" Indentation="0" UIDependentOn="" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.msmq"/>
+        </UIcontrol>
+    </Feature>
+    <Feature MSIFeatureName="Engine,RulesEngine" Name="RulesEngine" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.RuleEngineConfig" DependentFeatures="">
+        <UIcontrol _locAttrData="DisplayName" _locID="5" DisplayName="Business Rules Engine" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.RulesEngineControl" Indentation="0" UIDependentOn="" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.bre"/>
+        </UIcontrol>
+    </Feature>
+    <Feature Name="EDI" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.EDIConfig" DependentFeatures="">
+        <UIcontrol _locAttrData="DisplayName" _locID="6" DisplayName="EDI" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.EDIControl" Indentation="0" UIDependentOn="WMI" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.edi"/>
+        </UIcontrol>
+    </Feature>
+    <Feature Name="HwsBaseAssemblies" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEbiz.ServerCfg" DependentFeatures="">
+    </Feature>
+    <Feature Name="HwsRuntime" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEbiz.HwsRuntimeCfg" DependentFeatures="" AdditionalFeatures="HwsWMIProvider" SubscribedFeatures="HwsWebService">
+        <UIcontrol _locAttrData="DisplayName" _locID="7" DisplayName="HWS Runtime" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.HWSRuntimeControl" Indentation="1" UIDependentOn="WMI" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.hws"/>
+        </UIcontrol>
+    </Feature>
+    <Feature Name="HwsWebService" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEbiz.HwsWSCfg" DependentFeatures="">
+        <UIcontrol _locAttrData="DisplayName" _locID="8" DisplayName="HWS WebService" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.HWSWebServiceControl" Indentation="1" UIDependentOn="WMI" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.hws"/>
+        </UIcontrol>
+    </Feature>
+    <Feature Name="HwsWMIProvider" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEbiz.HwsWMICfg" DependentFeatures="">
+    </Feature>
+    <Feature Name="MOT" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.BAMConfigWizExt" DependentFeatures="">
+    </Feature>
+    <Feature MSIFeatureName="Development,Engine,BAMTools" Name="BAMTools" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.BAMConfigWizExt" DependentFeatures="" SubscribedFeatures="BAMPortal">
+        <UIcontrol _locAttrData="DisplayName" _locID="9" DisplayName="BAM Tools" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.BAMToolsControl" Indentation="0" UIDependentOn="WMI" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.bam.runtime"/>
+        </UIcontrol>
+        <UIcontrol _locAttrData="DisplayName" _locID="14" DisplayName="BAM Alerts" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.BAMAlertsControl" Indentation="0" UIDependentOn="WMI" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.bam.runtime"/>
+        </UIcontrol>
+    </Feature>
+    <Feature Name="BAMPortal" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEBiz.BAMConfigWizExt" DependentFeatures="">
+        <UIcontrol _locAttrData="DisplayName" _locID="10" DisplayName="BAM Portal" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.BAMPortalControl" Indentation="0" UIDependentOn="WMI" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.bam.portal"/>
+        </UIcontrol>
+    </Feature>
+    <Feature Name="Engine" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEbiz.SeedCfg" DependentFeatures="">
+    </Feature>
+    <Feature MSIFeatureName="BusActSvcsTPM,WSSAdapterWS" Name="WssAdapterWS" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEbiz.WssAdaCfg" DependentFeatures="BusActSvcsTPM">
+        <UIcontrol _locAttrData="DisplayName" _locID="11" DisplayName="SharePoint Adapter" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.WSSAdapterControl" Indentation="0" UIDependentOn="" >
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.wss"/>
+        </UIcontrol>
+    </Feature>
+    <Feature Name="BusActSvcsTPM" ProductCode ="{FFF25E7A-A7F7-4b10-9B70-042A6734D806}" ConfigObjProgID ="MSEbiz.TPMConfig" DependentFeatures="">
+        <UIcontrol _locAttrData="DisplayName" _locID="12" DisplayName="BAS" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.BASControl" Indentation="0" UIDependentOn="WMI;WssAdapterWS">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.bas.general"/>
+        </UIcontrol>
+        <UIcontrol _locAttrData="DisplayName" _locID="13" DisplayName="BAS Security" ComponentID="{F5989876-4B89-4314-9143-5C55CA51F613}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.BASSecurityControl" Indentation="0" UIDependentOn="WMI;WssAdapterWS">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.bas.security"/>
+        </UIcontrol>
+    </Feature>
+    <HelpTopics Collection="ms-help://MS.BTS.2006" Filter="" Topic="ms-help://MS.BTS.2006/BTS06Deploying/html/861a1237-d77a-42db-b563-d83f7930add6.htm">
+        <Dialog id="StartPage">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.defaultconfig"/>
+        </Dialog>
+		<Dialog id="OverviewPage">
+			<HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.overview" />
+		</Dialog>
+        <Dialog id="NTCredentialPage">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.serviceaccounts"/>
+        </Dialog>
+        <Dialog id="SQLPage">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.databaseaccounts"/>
+        </Dialog>
+		<Dialog id="NTServiceView">
+			<HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.serviceaccountsview"/>
+		</Dialog>
+		<Dialog id="SQLView">
+			<HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.databaseview"/>
+		</Dialog>
+        <Dialog id="ReadyToInstallPage">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.summary"/>
+        </Dialog>
+        <Dialog id="ProgressPage">
+				<HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.progress"/>
+		</Dialog>
+        <Dialog id="FinishPage">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.result"/>
+            <ReadmeLink _locAttrData="Text" _locID="2" Type="DExplore" Topic="ms-help://MS.BTS.2006/BTS06GettingStarted/html/7a91a0e4-9b1c-4cd2-a98b-337d6d42b08a.htm" F1Keyword="" Text=""/>
+        </Dialog>
+        <Dialog id="DWFeedbackPage">
+            <HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.feedback"/>
+            <ReadmeLink _locAttrData="Text" _locID="2" Type="EXE" Exe="explorer.exe" CmdLine="&quot;http://go.microsoft.com/fwlink/?LinkId=50280&quot;" Text=""/>
+        </Dialog>
+		<Dialog id="UnconfigurePage">
+			<HelpButton Type="DExplore" Topic="" F1Keyword="bts06.config.wizard.unconfigure"/>
+		</Dialog>
+	</HelpTopics>
+</Configuration>
+    

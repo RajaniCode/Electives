@@ -1,0 +1,60 @@
+﻿body 
+{
+	margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    /* text-align: center; */
+}
+
+.table1
+{
+	width: 200px;
+	height: 100px;
+	border-style: solid;
+	border-color: Black; 
+	border-width: thin;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.table2
+{
+	width: 200px;
+	height: 100px;
+	border-style: solid;
+	border-color: Black; 
+	border-width: thin;
+	margin-left: auto;
+	margin-right: auto;
+	border-collapse: collapse;
+	/* text-align: left; */
+}
+
+.table2td1
+{
+	padding: 0;	
+}
+
+.table3
+{
+	width: 100px;
+	height: 50px;
+	border-style: solid;
+	border-color: Black; 
+	border-width: thin;
+	margin: 0;
+	position: absolute;
+}
+
+/*
+NOTE:
+Win IE5.x doesn't understand margin: auto; 
+But you can use another bug to center table. 
+Win IE5 incorrectly applies text-align to block level children.
+
+Thus body {text-align: center;}
+will center the element in IE5.x and decent browsers. 
+Also use:
+text-align: left;
+in the #main styles to prevent the content of the element being centered.
+*/

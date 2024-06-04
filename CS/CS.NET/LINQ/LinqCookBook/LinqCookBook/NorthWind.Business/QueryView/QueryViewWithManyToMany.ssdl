@@ -1,0 +1,131 @@
+<Schema Namespace="QueryViewWithManyToMany.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+  <EntityContainer Name="QueryViewWithManyToManyStoreContainer">
+    <EntitySet Name="Actors" EntityType="QueryViewWithManyToMany.Store.Actors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Clubs" EntityType="QueryViewWithManyToMany.Store.Clubs" store:Type="Tables" Schema="QueryView" />
+    <EntitySet Name="Members" EntityType="QueryViewWithManyToMany.Store.Members" store:Type="Tables" Schema="QueryView" />
+    <EntitySet Name="Membership" EntityType="QueryViewWithManyToMany.Store.Membership" store:Type="Tables" Schema="QueryView" />
+    <AssociationSet Name="FK_Membership_Clubs" Association="QueryViewWithManyToMany.Store.FK_Membership_Clubs">
+      <End Role="Clubs" EntitySet="Clubs" />
+      <End Role="Membership" EntitySet="Membership" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Membership_Members" Association="QueryViewWithManyToMany.Store.FK_Membership_Members">
+      <End Role="Members" EntitySet="Members" />
+      <End Role="Membership" EntitySet="Membership" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="ActorId" />
+    </Key>
+    <Property Name="ActorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Clubs">
+    <Key>
+      <PropertyRef Name="ClubId" />
+    </Key>
+    <Property Name="ClubId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ClubName" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Members">
+    <Key>
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="MemberId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Membership">
+    <Key>
+      <PropertyRef Name="ClubId" />
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="ClubId" Type="int" Nullable="false" />
+    <Property Name="MemberId" Type="int" Nullable="false" />
+    <Property Name="MemberShipType" Type="char" Nullable="false" MaxLength="1" />
+  </EntityType>
+  <Function Name="InsertClub" IsComposable="false" Schema="dbo">
+    <CommandText>
+				insert into QueryView.Clubs(ClubName) values (@ClubName)
+				select SCOPE_IDENTITY() as ClubId
+			</CommandText>
+    <Parameter Name="ClubName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateClub" IsComposable="false" Schema="dbo">
+    <CommandText>
+				update QueryView.Clubs set ClubName = @ClubName
+			</CommandText>
+    <Parameter Name="ClubName" Type="varchar" Mode="In" />
+    <Parameter Name="ClubId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteClub" IsComposable="false" Schema="dbo">
+    <CommandText>
+				delete QueryView.Clubs where ClubId = @ClubId
+			</CommandText>
+    <Parameter Name="ClubId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertMember" IsComposable="false" Schema="dbo">
+    <CommandText>
+				insert into QueryView.Members(Name) values (@Name)
+				select SCOPE_IDENTITY() as MemberId
+			</CommandText>
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateMember" IsComposable="false" Schema="dbo">
+    <CommandText>
+				update QueryView.Members set Name = @Name
+			</CommandText>
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="MemberId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteMember" IsComposable="false" Schema="dbo">
+    <CommandText>
+				delete QueryView.Members where MemberId = @MemberId
+			</CommandText>
+    <Parameter Name="MemberId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertGoldMembership" IsComposable="false" Schema="dbo">
+    <CommandText>
+				insert into QueryView.Membership values (@ClubId,@MemberId,'G')
+			</CommandText>
+    <Parameter Name="ClubId" Type="int" Mode="In" />
+    <Parameter Name="MemberId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteMembership" IsComposable="false" Schema="dbo">
+    <CommandText>
+				delete QueryView.Membership where ClubId = @ClubId and MemberId = @MemberId
+			</CommandText>
+    <Parameter Name="ClubId" Type="int" />
+    <Parameter Name="MemberId" Type="int" />
+  </Function>
+  <Function Name="InsertPlatiniumMembership" IsComposable="false" Schema="dbo">
+    <CommandText>
+				insert into QueryView.Membership values (@ClubId,@MemberId,'P')
+			</CommandText>
+    <Parameter Name="ClubId" Type="int" Mode="In" />
+    <Parameter Name="MemberId" Type="int" Mode="In" />
+  </Function>
+  <Association Name="FK_Membership_Clubs">
+    <End Role="Clubs" Type="QueryViewWithManyToMany.Store.Clubs" Multiplicity="1" />
+    <End Role="Membership" Type="QueryViewWithManyToMany.Store.Membership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Clubs">
+        <PropertyRef Name="ClubId" />
+      </Principal>
+      <Dependent Role="Membership">
+        <PropertyRef Name="ClubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Membership_Members">
+    <End Role="Members" Type="QueryViewWithManyToMany.Store.Members" Multiplicity="1" />
+    <End Role="Membership" Type="QueryViewWithManyToMany.Store.Membership" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Members">
+        <PropertyRef Name="MemberId" />
+      </Principal>
+      <Dependent Role="Membership">
+        <PropertyRef Name="MemberId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

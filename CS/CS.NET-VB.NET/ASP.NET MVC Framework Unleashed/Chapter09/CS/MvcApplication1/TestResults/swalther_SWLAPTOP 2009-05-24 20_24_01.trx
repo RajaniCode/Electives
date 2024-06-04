@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="5f41076b-8754-4d30-8786-49962ae042f6" name="swalther@SWLAPTOP 2009-05-24 20:24:01" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="2a47f6f3-881d-498b-88cf-aa4b6a41682d">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter09 - Understanding Routing\Code\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-05-24 20_24_01">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter09 - Understanding Routing\Code\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-05-24T20:24:01.8794014-07:00" queuing="2009-05-24T20:24:04.9994214-07:00" start="2009-05-24T20:24:05.2490230-07:00" finish="2009-05-24T20:24:06.0914284-07:00" />
+  <TestDefinitions>
+    <UnitTest name="ProductInsertMatchesPost" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter09 - understanding routing\code\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="b4a8ca0c-aa4a-d2eb-f728-b8a0e7779514">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="e4114a76-59d3-43b0-9d55-1ed5b991122e" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter09 - Understanding Routing\Code\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Routes.RouteTest, MvcApplication1.Tests" name="ProductInsertMatchesPost" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="b4a8ca0c-aa4a-d2eb-f728-b8a0e7779514" executionId="e4114a76-59d3-43b0-9d55-1ed5b991122e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="e4114a76-59d3-43b0-9d55-1ed5b991122e" testId="b4a8ca0c-aa4a-d2eb-f728-b8a0e7779514" testName="ProductInsertMatchesPost" computerName="SWLAPTOP" duration="00:00:00.1151509" startTime="2009-05-24T20:24:05.3270235-07:00" endTime="2009-05-24T20:24:05.9822277-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual failed. Expected:&lt;ProductInsert&gt;. Actual:&lt;Default&gt;. </Message>
+          <StackTrace>   at MvcApplication1.Tests.Routes.RouteTest.ProductInsertMatchesPost() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter09 - Understanding Routing\Code\CS\MvcApplication1\MvcApplication1.Tests\Routes\RouteTest.cs:line 43
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:element name="BizTalkPipelines" type="BizTalkPipelinesType" />
+	<xs:complexType name="BizTalkPipelinesType">
+		<xs:sequence>
+			<xs:element name="Pipeline" type="PipelineType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PipelineType">
+		<xs:sequence>
+			<xs:element name="FullyQualifiedName" type="FullyQualifiedNameType" />
+			<xs:element name="Type" type="PipelineTypeType"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="PipelineNameType" use="required" />
+	</xs:complexType>
+	<xs:simpleType name="PipelineNameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FullyQualifiedNameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PipelineTypeType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="128" />
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

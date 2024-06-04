@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="UpdateEmpDetail">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="name" type="tns:EmpDetails" />
+            <s:element minOccurs="0" maxOccurs="1" name="FID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FDesignation" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EmpDetails">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="EmpFirstName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpMiddleName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpLastName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EmpDesignation" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateEmpDetailResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateEmpDetailResult" type="tns:EmpDetails" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="UpdateEmpDetailSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateEmpDetail" />
+  </wsdl:message>
+  <wsdl:message name="UpdateEmpDetailSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateEmpDetailResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TypeSharingWebService2CSSoap">
+    <wsdl:operation name="UpdateEmpDetail">
+      <wsdl:input message="tns:UpdateEmpDetailSoapIn" />
+      <wsdl:output message="tns:UpdateEmpDetailSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TypeSharingWebService2CSSoap" type="tns:TypeSharingWebService2CSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UpdateEmpDetail">
+      <soap:operation soapAction="http://tempuri.org/UpdateEmpDetail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TypeSharingWebService2CSSoap12" type="tns:TypeSharingWebService2CSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="UpdateEmpDetail">
+      <soap12:operation soapAction="http://tempuri.org/UpdateEmpDetail" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TypeSharingWebService2CS">
+    <wsdl:port name="TypeSharingWebService2CSSoap" binding="tns:TypeSharingWebService2CSSoap">
+      <soap:address location="http://localhost:1056/DataSharingWebService/TypeSharingWebService2CS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TypeSharingWebService2CSSoap12" binding="tns:TypeSharingWebService2CSSoap12">
+      <soap12:address location="http://localhost:1056/DataSharingWebService/TypeSharingWebService2CS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

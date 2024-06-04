@@ -1,0 +1,40 @@
+<p:Activity mc:Ignorable="" x:Class="WF_TransactionScope.WF_TransactionScopeSequence" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:w="clr-namespace:WF_TransactionScope;assembly=WF_TransactionScope" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="billNo" Type="p:InArgument(x:Int32)" />
+    <x:Property Name="patientId" Type="p:InArgument(x:Int32)" />
+    <x:Property Name="patientName" Type="p:InArgument(x:String)" />
+    <x:Property Name="billAmount" Type="p:InArgument(x:Int32)" />
+    <x:Property Name="claimId" Type="p:InArgument(x:Int32)" />
+    <x:Property Name="policyNo" Type="p:InArgument(x:Int32)" />
+    <x:Property Name="policyAmount" Type="p:InArgument(x:Int32)" />
+    <x:Property Name="claimAmount" Type="p:InArgument(x:Int32)" />
+  </x:Members>
+  <p:Sequence sad:XamlDebuggerXmlReader.FileName="G:\VS2010_Practice\WF40\Mahesh_Labs\WF_TransactionScope\WF_TransactionScope\WF_TransactionScopeSequence.xaml">
+    <p:TransactionScopeActivity DisplayName="Data Transaction">
+      <p:Sequence DisplayName="DML Sequence">
+        <p:Sequence.Variables>
+          <p:Variable x:TypeArguments="w:clsDML" Name="objDML" />
+        </p:Sequence.Variables>
+        <p:InvokeMethod DisplayName="Invoke Generate Bill" MethodName="GenerateBill">
+          <p:InvokeMethod.TargetObject>
+            <p:InArgument x:TypeArguments="w:clsDML">[objDML]</p:InArgument>
+          </p:InvokeMethod.TargetObject>
+          <p:InArgument x:TypeArguments="x:Int32">[billNo]</p:InArgument>
+          <p:InArgument x:TypeArguments="x:Int32">[patientId]</p:InArgument>
+          <p:InArgument x:TypeArguments="x:String">[patientName]</p:InArgument>
+          <p:InArgument x:TypeArguments="x:Int32">[billAmount]</p:InArgument>
+        </p:InvokeMethod>
+        <p:InvokeMethod DisplayName="Invoke Submit Claim" MethodName="SubmitClaim">
+          <p:InvokeMethod.TargetObject>
+            <p:InArgument x:TypeArguments="w:clsDML">[objDML]</p:InArgument>
+          </p:InvokeMethod.TargetObject>
+          <p:InArgument x:TypeArguments="x:Int32">[claimId]</p:InArgument>
+          <p:InArgument x:TypeArguments="x:String">[patientName]</p:InArgument>
+          <p:InArgument x:TypeArguments="x:Int32">[policyNo]</p:InArgument>
+          <p:InArgument x:TypeArguments="x:Int32">[policyAmount]</p:InArgument>
+          <p:InArgument x:TypeArguments="x:Int32">[claimAmount]</p:InArgument>
+        </p:InvokeMethod>
+      </p:Sequence>
+    </p:TransactionScopeActivity>
+  </p:Sequence>
+</p:Activity>

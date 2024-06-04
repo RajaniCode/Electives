@@ -1,0 +1,2 @@
+"%CommonProgramFiles%\Enterprise Single Sign-On\ssomanage.exe" -createapps LitwareSSOConfiguration.xml
+..\..\Common\SSOApplicationConfig\bin\BTSScnSSOApplicationConfig.exe -set Litware.B2BHub ConfigProperties DBConn server=(local);Trusted_Connection=yes;database=OrderSystemDB retryCount 3

@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "DynamicDataWebsite", ".", "{21C9F02A-0076-4285-8B34-158E8B0A00EC}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		ProjectReferences = "{F74D6035-A6B6-41AD-A73C-0F2C63932B05}|Domain.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/DynamicDataWebsite"
+		Debug.AspNetCompiler.PhysicalPath = "..\DynamicDataWebsite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\DynamicDataWebsite\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/DynamicDataWebsite"
+		Release.AspNetCompiler.PhysicalPath = "..\DynamicDataWebsite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\DynamicDataWebsite\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "49905"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{F74D6035-A6B6-41AD-A73C-0F2C63932B05}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{21C9F02A-0076-4285-8B34-158E8B0A00EC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C9F02A-0076-4285-8B34-158E8B0A00EC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21C9F02A-0076-4285-8B34-158E8B0A00EC}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{21C9F02A-0076-4285-8B34-158E8B0A00EC}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{F74D6035-A6B6-41AD-A73C-0F2C63932B05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F74D6035-A6B6-41AD-A73C-0F2C63932B05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F74D6035-A6B6-41AD-A73C-0F2C63932B05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F74D6035-A6B6-41AD-A73C-0F2C63932B05}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

@@ -1,0 +1,101 @@
+﻿<Window x:Class="WPF_UsingLinqDataSource.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Window1" Height="632" Width="1113"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:LINQ="clr-namespace:System.Xml.Linq;assembly=System.Xml.Linq" 
+         xmlns:src="clr-namespace:WPF_UsingLinqDataSource">
+    <Window.Resources>
+        <!--The Class for Loading the Xml file using LINQ XML API-->
+        <ObjectDataProvider x:Key="EmpDs"  ObjectType="{x:Type src:CXmlFileLoader}" MethodName="LoadXml">
+            <ObjectDataProvider.MethodParameters>
+                <sys:String>G:\WPF_Techforge\WPF_UsingLinqDataSource\WPF_UsingLinqDataSource\Company.xml</sys:String>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+        
+        <!--Define DataTemplate for Data Filtering-->
+        <DataTemplate x:Key="DtDname">
+            <TextBlock  Text="{Binding Path=Attribute[name].Value}"></TextBlock>
+        </DataTemplate>
+        
+      
+        
+    </Window.Resources>
+    <Grid Height="616"  DataContext="{Binding Source={StaticResource EmpDs}}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="316"></RowDefinition>
+            <RowDefinition Height="316"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Margin="0,0,0,101" Grid.RowSpan="2">
+            <ComboBox Height="23" HorizontalAlignment="Left" 
+                      Margin="12,54,0,0" Name="lstDept" 
+                      VerticalAlignment="Top" 
+                      Width="181" 
+                       ItemsSource="{Binding Path=Elements[Department]}"
+                       ItemTemplate="{StaticResource DtDname}" IsSynchronizedWithCurrentItem="True">
+            </ComboBox>
+            <Label Height="28" HorizontalAlignment="Left" Margin="12,20,0,0" Name="label1" VerticalAlignment="Top" Width="181">Department</Label>
+            <ComboBox Height="23" HorizontalAlignment="Left"
+                      Margin="215,54,0,0" Name="lstCOE" 
+                      VerticalAlignment="Top" Width="181" 
+                       DataContext="{Binding ElementName=lstDept,Path=SelectedItem}"
+                      ItemsSource="{Binding Path=Descendants[COE]}"
+                      ItemTemplate="{StaticResource DtDname}"
+                        IsSynchronizedWithCurrentItem="True">
+            </ComboBox>
+            <Label Height="28" HorizontalAlignment="Left" Margin="215,12,0,0" Name="label2" VerticalAlignment="Top" Width="181">COE Name</Label>
+            <Label Height="28" Margin="416,20,474,0" Name="label3" VerticalAlignment="Top">Employee Name</Label>
+            <ComboBox Height="23" Margin="416,54,474,0" 
+                      Name="lstEmp" 
+                      VerticalAlignment="Top"
+                       DataContext="{Binding ElementName=lstCOE,Path=SelectedItem}"
+                       ItemsSource="{Binding Path=Descendants[Employee]}"
+                       ItemTemplate="{StaticResource DtDname}" IsSynchronizedWithCurrentItem="True"
+                    />
+            <Grid HorizontalAlignment="Right" Margin="0,26.143,14,244.857" Name="grid1" Width="419"  
+                  DataContext="{Binding ElementName=lstEmp,Path=SelectedItem}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="62*" />
+                    <RowDefinition Height="47.536*" />
+                    <RowDefinition Height="171.464*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="212*" />
+                    <ColumnDefinition Width="207*" />
+                </Grid.ColumnDefinitions>
+                
+                <Label Grid.Row="1" Margin="6,9,86,0" Name="label6" Height="65" Grid.RowSpan="2" VerticalAlignment="Top">Emp Name</Label>
+                <TextBox Grid.Column="1" Grid.Row="1" Margin="0,9,26,4.536" Name="txtename" Text="{Binding Path=Attribute[name].Value}"/>
+                <Label Margin="0,3,92,6.509" Name="label7">EmpNo</Label>
+                <TextBox Grid.Column="1" Margin="0,8,34,23" Name="txteno" Text="{Binding Path=Element[no].Value}"/>
+            </Grid>
+            <Grid DataContext="{Binding Source={StaticResource EmpDs}}" Margin="215,83,0,237" HorizontalAlignment="Left" Width="205">
+                <my:DataGrid AutoGenerateColumns="False" Margin="20,19,6,18" 
+                             Name="dgEmp" xmlns:my="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
+                                 ItemsSource="{Binding}">
+                    <my:DataGrid.Columns>
+                        <my:DataGridTextColumn Header="Employee Name" Binding="{Binding  Path=EmpName}"></my:DataGridTextColumn>
+                        <my:DataGridTextColumn Header="Employee No" Binding="{Binding  Path=EmpNo}"></my:DataGridTextColumn>
+                    </my:DataGrid.Columns>
+                </my:DataGrid>
+            </Grid>
+        </Grid>
+      
+        
+    </Grid>
+    
+</Window>  
+    
+    <!--For DataGrid-->
+        <!--DataContext="{Binding Source={StaticResource EmpDs}}"-->
+        <!--  ItemsSource="{Binding Path=Descendants[Employee]}"-->
+        <!--<Grid DataContext="{Binding  Source={StaticResource EmpDs}}" Grid.Row="1" Margin="0,0,23,44">
+            <my:DataGrid AutoGenerateColumns="False"  Margin="149,19,337,18" Name="dgEmp"
+                         xmlns:my="clr-namespace:Microsoft.Windows.Controls;assembly=WPFToolkit"
+                         ItemsSource="{Binding Path=Descendants[Employee]}">
+                <my:DataGrid.Columns>
+                    <my:DataGridTextColumn Header="Employee Name" Binding="{Binding  Path=Attribute[name].Value}"></my:DataGridTextColumn>
+                    <my:DataGridTextColumn Header="Employee No" Binding="{Binding  Path=Element[no].Value}"></my:DataGridTextColumn>
+                </my:DataGrid.Columns>
+            </my:DataGrid>
+        </Grid>-->

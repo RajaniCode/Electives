@@ -1,0 +1,107 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1070"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{CF38321D-C961-40A0-ADF7-A2641B593ED6}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "Getting Started with EDI.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Getting_Started_with_EDI"
+                    AssemblyName = "Session 1"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "NorthwindReq.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Session_1"
+                    Type = "NorthwindReq"
+                />
+                <File
+                    RelPath = "NorthwindReqToX124010850Schema.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Session_1"
+                    Type = "NorthwindReqToX124010850Schema"
+                />
+                <File
+                    RelPath = "OrchestrateContoso850s.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "OrchestrateNorthwindReqs.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "X124010850SchemaToNorthwindReq.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Session_1"
+                    Type = "X124010850SchemaToNorthwindReq"
+                />
+                <File
+                    RelPath = "X124010850SchemaWithoutCodeSets.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Getting_Started_with_EDI"
+                    Type = "X124010850SchemaWithoutCodeSets"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

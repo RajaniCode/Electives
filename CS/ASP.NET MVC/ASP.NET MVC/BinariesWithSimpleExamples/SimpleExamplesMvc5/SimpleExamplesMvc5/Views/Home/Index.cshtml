@@ -1,0 +1,297 @@
+﻿@model SimpleExamples.Models.SimpleControlsViewModel
+@using SimpleExamples.Models 
+@{
+    ViewBag.Title = "Simple Controls";
+    Layout = "~/Views/Shared/_LayoutServer.cshtml";
+}
+
+<h2>Simple Controls</h2>
+<div>
+    @Html.GetTimer(new TimeSpan(0, 0, 1), "ServerTime", "clock")<div id="clock"></div>
+</div>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false, "There are some errors")
+    <fieldset>
+        @{
+            //Get an helper that may to work with the subclass of PersonalInfos
+            var hp = Html.DescendatntCast(m => m.PersonalData).To<PersonalInfosExt>();
+        }
+        <div class="editor-label">
+            @hp.LabelFor(m => m.Name) 
+        </div>
+        <div class="editor-field">
+            @hp.TextBoxFor(m => m.Name) 
+            @hp.ValidationMessageFor(m => m.Name) 
+        </div>
+
+        <div class="editor-label">
+            @hp.LabelFor(m => m.SurName)
+        </div>
+        <div class="editor-field">
+            @hp.TextBoxFor(m => m.SurName)
+            @hp.ValidationMessageFor(m => m.SurName)
+        </div>
+        <div class="editor-label">
+            <strong>
+                With the help of the DescendantCast helper we are able to work with a subclass of the original class PersonalInfos defined in the ViewModel that has
+                one more field: Adress.
+            </strong>
+        </div>
+        <div class="editor-label">
+            @hp.LabelFor(m => m.Adress)
+        </div>
+        <div class="editor-field">
+            @hp.TextBoxFor(m => m.Adress)
+            @hp.ValidationMessageFor(m => m.Adress)
+        </div>
+        <div class="editor-label">
+            @hp.CheckBoxFor(m => m.Female)
+            @hp.LabelFor(m => m.Female)
+        </div>
+        <div class="editor-label">
+            <strong>
+                See below both the use of TypedTextBox and DynamicRangeAttribute.
+                The age has been defined as a float to show number formatting.
+            </strong>
+        </div>
+        <div class="editor-field">
+            @hp.LabelFor(m => m.MinAge) 
+            @hp.TextBoxFor(m => m.MinAge) 
+            @hp.ValidationMessageFor(m => m.MinAge) 
+        </div>
+        <div class="editor-field">
+            @hp.LabelFor(m => m.Age) 
+            @hp.TypedTextBoxFor(m => m.Age, contentAlign: ContentAlign.Right, watermarkCss:"watermark" )
+            @hp.ValidationMessageFor(m => m.Age) 
+        </div>
+        <div class="editor-field">
+            @hp.LabelFor(m => m.MaxAge) 
+            @hp.TextBoxFor(m => m.MaxAge) 
+            @hp.ValidationMessageFor(m => m.MaxAge) 
+        </div>
+        
+        <div>
+            <p></p>
+            <p>
+                <strong>TypedTextBox and TypedEditDisplay supports also Date and Time Fields. Try it!</strong>
+            </p>
+         </div>
+        <div class="editor-field">
+            @hp.TypedTextBoxFor(m => m.BirthDate, "watermark", calendarOptions: new CalendarOptions { GoToCurrent = true })
+            @hp.ValidationMessageFor(m => m.BirthDate)
+        </div>
+        <div>
+            <p></p>
+            <p>
+                <strong>
+                    Now TypedEditDisplay supports also DropDowns. After you have chosen a role, on the input "blur" the DropDown becomes 
+                    normal text. Click on it and DropDown appears again.
+                </strong>
+            </p>
+        </div>
+        <div class="editor-field">
+            @Html.TypedEditDisplayFor(m => m.SingleRole,
+                 ChoiceListHelper.CreateGrouped(SimpleControlsViewModel.AllRoles,
+                                m => m.Code,
+                                m => m.Name,
+                                m => m.GroupCode,
+                                m => m.GroupName,
+                                m => new { style = "color:White; background-color:Black" },
+                                m =>
+                                {
+                                    if (m == null)
+                                        return new
+                                        {
+                                            @class = "watermark"
+                                        };
+                                    else
+                                        return new
+                                        {
+                                            style = m.Code % 2 == 0 ?
+                                                "color:Blue; background-color:White" :
+                                                "color:Red; background-color:White"
+                                        };
+                                }), 
+                  editEnabled: true,
+                  simpleClick: true)
+            @Html.ValidationMessageFor(m => m.SingleRole, "*")
+        </div>
+        <div style="margin: 10px 10px 10px 10px">
+            <strong>
+                RangeAction.Propagate: A minimum distance of four hours is forced. <br />
+                Changing one date the other is changed accordingly to enforce the minimum distance
+            </strong>
+        </div>
+        <div>
+            @{var DTS = Html.DateTimeFor(m => m.Start, DateTime.Now);  }
+            @DTS.Date() 
+            &nbsp; &nbsp; 
+            <span>@DTS.Time(step: 15)</span>
+            &nbsp; 
+            <input id="btnDate" type="button" value="Now" />
+        </div>
+        <script type="text/javascript">
+            $('#btnDate').click(function () {
+               mvcct.widgets.DateTimeInput.setById('@Html.PrefixedId(m => m.Start)', new Date(), null, null);
+            });
+        </script>
+        <div><br /><br /></div>
+        <div>
+            @{var DT = Html.DateTime("Stop", Model.Stop, dateInCalendar: true); }
+            @DT.DateCalendar(
+                inLine: false,
+                calendarOptions: new CalendarOptions
+                {
+                    ChangeYear = true,
+                    ChangeMonth = true
+                })
+
+            &nbsp; &nbsp; 
+            <span>@DT.Time(step: 15)</span>
+        </div>
+        <div>
+            <p></p>
+            <p>
+                <strong>
+                    See below three different options to build the list of selected roles for a user:
+                    Dual Selct Box,  CheckBox List, and Grouped Multiselect.
+                    After a normal single-select to select a single role, with prompt, and required field validation
+                </strong>
+            </p>
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.Roles)
+        </div>
+        <div>
+            @{var roleSelect = Html.DualSelectFor(m => m.Roles,
+                  new ChoiceList<RoleInBlog, int, string>(
+                      SimpleControlsViewModel.AllRoles,
+                      t => t.Code,
+                      t => t.Name));
+            }
+            <table class="centered">
+                <tr>
+                    <td colspan="3">
+                        @roleSelect.ClearSelectionButton("Unselect All")
+                        @roleSelect.UnSelectButton("Unselect")
+                        @roleSelect.SelectButton("Select")
+                        @roleSelect.SelectAllButton("Select All")
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Available Roles
+                    </td>
+                    <td>
+                        Selected Roles
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>
+                        @roleSelect.AvailableItems(new Dictionary<string, object> { { "style", "height:150px; 	width: 	100px;" } })
+                    </td>
+                    <td>
+                        @roleSelect.SelectedItems(new Dictionary<string, object> { { "style", "height:150px; 	width: 	100px;" } })
+                    </td>
+                    <td>
+                        @roleSelect.GoUpButton("Move Up")
+                        @roleSelect.GoDownButton("Move Down")
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            @Html.LabelFor(m => m.Roles1)
+            <table>
+              @Html.CheckBoxListFor(
+                m => m.Roles1,
+                ChoiceListHelper.Create(SimpleControlsViewModel.AllRoles,
+                    m => m.Code,
+                    m => m.Name,
+                    m => new
+                    {
+                    style = m.Code % 2 == 0 ?
+                    "color:Blue; background-color:White" :
+                    "color:Red; background-color:White"
+                    }),
+                true,
+                itemTemplate: _S.L<CheckBoxListItem<int>>(
+                        (x) => string.Format(
+                        "<tr><td>{0}</td><td {2}>{1}</td></tr>",
+                        x.CheckBoxFor(m => m.Selected).ToString(),
+                        x.DisplayFor(m => m.Label).ToString(),
+                        BasicHtmlHelper.GetAttributesString(x.ViewData.Model.LabelAttributes))
+                        ))
+                          
+            </table>
+            
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(m => m.Roles2)
+        </div>
+        <div>
+            @Html.DropDownListFor(m => m.Roles2,
+                new {style="height:100px"},
+                ChoiceListHelper.CreateGrouped(SimpleControlsViewModel.AllRoles,
+                    m => m.Code,
+                    m => m.Name,
+                    m => m.GroupCode,
+                    m => m.GroupName,
+                    m => new {style="color:White; background-color:Black"},
+                    m =>  new { style = m.Code%2 == 0 ?
+                        "color:Blue; background-color:White":
+                        "color:Red; background-color:White"} ))
+            @Html.ValidationMessageFor(m => m.Roles2, "*")
+            
+        </div>
+        <div>
+            <p></p>
+            <p>
+                <strong>Click on the populate button to populate the dropdown via Ajax</strong>
+            </p>
+        </div>
+        <div>
+            <select id="dynamicSelect"> </select>&nbsp;<input id="btnDynamicSelect" type="button" value="Populate dropdown" />
+            <script type="text/javascript">
+                $('#btnDynamicSelect').click(function () {
+                    mvcct.widgets.ajaxDropDown.update('@Url.Action("AvailableRoles", "Home")', $('#dynamicSelect'), 'Choose Role',
+                        function (x) { return x == '' ? 'watermark' : 'normal' },
+                        "inverted",
+                        function (y) { alert("populated dropdown: " + y.attr("id")) });
+                });
+            </script>
+        </div>
+        <div class="editor-label">
+            <p></p>
+            <p>
+                <strong>
+                    Select different content either by pressing Selection Buttons or by using the checkboxes.
+                    See how the content shown changes, and how all selection tools are synchronized
+                </strong>
+            </p>
+        </div>
+        <div>
+            @Html.ViewListFor(m => m.Selection, Html.PrefixedId("choiceTest"), "isChangedToDo")
+            @Html.SelectionButton("choice 1", "choice1", Html.PrefixedId("choiceTest"), Html.PrefixedId("choice1_button"), ManipulationButtonStyle.Link)
+            @Html.SelectionButton("choice 2", "choice2", Html.PrefixedId("choiceTest"), Html.PrefixedId("choice2_button"), ManipulationButtonStyle.Link) 
+            @Html.SelectionButton("choice 3", "choice3", Html.PrefixedId("choiceTest"), Html.PrefixedId("choice3_button"), ManipulationButtonStyle.Link)
+            <input id="Checkbox6" type="checkbox" class='@(Html.PrefixedId("choiceTest_checkbox")+" "+Html.PrefixedId("choice1_checkbox"))' />
+            <input id="Checkbox7" type="checkbox" class='@(Html.PrefixedId("choiceTest_checkbox")+" "+Html.PrefixedId("choice2_checkbox"))' />
+            <input id="Checkbox8" type="checkbox" class='@(Html.PrefixedId("choiceTest_checkbox")+" "+Html.PrefixedId("choice3_checkbox"))' />
+        </div>
+        <div id="fatherChoices">
+            
+            <div id='@Html.PrefixedId("choice1")' class="choiceTest">choice 1</div>
+            
+            <div id='@Html.PrefixedId("choice2")' class="choiceTest">choice 2</div>
+            
+            <div id='@Html.PrefixedId("choice3")' class="choiceTest">choice 3</div>
+            
+        </div>
+        <div style="margin: 10px 10px 10px 10px">
+            <input type="submit" value="Submit" />
+        </div>
+</fieldset>
+}

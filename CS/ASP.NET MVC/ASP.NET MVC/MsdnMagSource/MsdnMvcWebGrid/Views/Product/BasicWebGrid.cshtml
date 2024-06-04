@@ -1,0 +1,34 @@
+﻿@model IEnumerable<MsdnMvcWebGrid.Domain.Product>
+
+@{
+    ViewBag.Title = "Basic Web Grid";
+}
+
+<h2>Basic Web Grid</h2>
+
+
+<div id="grid">
+
+@{
+    var grid = new WebGrid(Model, defaultSort:"Name");
+}
+@* Simple grid *@
+@*@grid.GetHtml()*@
+
+
+@*Grid with simple colunn customisation*@
+@*@grid.GetHtml(columns: grid.Columns(
+        grid.Column("Name"),
+        grid.Column("ListPrice", header:"List Price")
+        )
+    )
+*@
+
+@*Grid with more advanced column customisation*@
+@grid.GetHtml(columns: grid.Columns(
+        grid.Column("Name", format: @<text>@Html.ActionLink((string)item.Name, "Details", "Product", new {id=item.ProductId}, null)</text>),
+        grid.Column("ListPrice", header: "List Price", format: @<text>@item.ListPrice.ToString("0.00")</text>)
+        )
+    )
+
+</div>

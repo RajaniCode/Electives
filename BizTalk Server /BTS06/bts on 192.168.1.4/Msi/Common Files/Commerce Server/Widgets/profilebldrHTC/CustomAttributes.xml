@@ -1,0 +1,15 @@
+﻿<?xml version = '1.0' encoding='utf-8' ?>
+<template>
+   <_locDefinition>
+     <_locDefault _loc="locNone" />
+     <_locTag _loc="locNone" _locAttrData="displayName,description">Property</_locTag>
+     <_locTag _loc="locNone" _locAttrData="displayName,description">Attribute</_locTag>
+   </_locDefinition>
+   <Property xmlns="schemas-microsoft-com:bizdata-profile-schema" isNew="1" name="NewProp%1" displayName="New Property %1" description="" propType="STRING">
+      <Attribute name="MinLength" value="0" displayName="Minimum Length" isNew="1" description="Minimum length of this property value"/>
+      <Attribute name="MaxLength" value="4000" displayName="Maximum Length" isNew="1" description="Maximum length of this property value"/>
+      <Attribute name="MinValue" value="-2147483648" displayName="Minimum Value" isNew="1" description="Minimum value of this property value"/>
+      <Attribute name="MaxValue" value="2147483647" displayName="Maximum Value" isNew="1" description="Maximum value of this property value"/>
+      <Attribute name="IsRestricted" value="0" displayName="Is Property Restricted" isNew="1" description="Indicates that this property requires an elevated priviledge level in order to perform an update."/>
+   </Property>
+</template>

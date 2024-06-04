@@ -1,0 +1,695 @@
+<!- (c) Microsoft Corporation -->
+<HTML DIR="LTR">
+
+<HEAD>
+	<TITLE>C# Add Class Wizard</TITLE>
+	<META NAME="vs_targetSchema" CONTENT="http://schemas.microsoft.com/intellisense/ie5">
+	<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+	<STYLE TYPE="text/css">@import url();</STYLE>
+	<SCRIPT>
+		var strURL = "../../../";
+		strURL += window.external.GetHostLocale();
+		strURL += "/NewStyles.css";
+		document.styleSheets(0).imports(0).href = strURL;
+	</SCRIPT>
+</HEAD>
+
+<BODY BGCOLOR="BUTTONFACE" TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" ONLOAD="InitDocument(document);" ONKEYDOWN="if (!bValidating) OnKey();" ONKEYPRESS="if (!bValidating) OnPress()">
+
+<TABLE CLASS="ONE" HEIGHT="100%" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+<COL WIDTH="178"><COL>
+
+  <!--OPEN OF INTRODUCTORY INFORMATION TABLE//-->
+  <TR VALIGN="TOP">
+	<TD HEIGHT="79" WIDTH="100%" COLSPAN="2">
+	 <TABLE CLASS="TWO" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+	 <COL WIDTH="12"><COL><COL WIDTH="12">
+	  <TR>
+	   <TD VALIGN="TOP" HEIGHT="12" WIDTH="12">
+	  	&nbsp;
+	   </TD>
+  
+	   <TD VALIGN="TOP" HEIGHT="12">
+	  	&nbsp;
+	   </TD>
+  
+	   <TD VALIGN="TOP" HEIGHT="12" WIDTH="12">
+	  	&nbsp;
+	   </TD>
+  
+	   <TD CLASS="IMAGE" VALIGN="BOTTOM" WIDTH="110" ROWSPAN="2">
+		<DIV CLASS="SMALLA" ID="Layer0">
+		 <IMG CLASS="SMALLEST" SRC="../../Images/CsCls.gif" WIDTH="63" HEIGHT="63" ALT="" BORDER="0">
+		</DIV>
+	   </TD>
+
+	   <TD VALIGN="TOP" HEIGHT="12" WIDTH="6" ROWSPAN="2">
+	  	&nbsp;
+	   </TD>
+	  </TR>
+	 
+	  <TR>
+	   <TD VALIGN="TOP" HEIGHT="65" WIDTH="12">
+	  	&nbsp;
+	   </TD>
+	  
+	   <TD VALIGN="TOP" HEIGHT="65">
+		<H4 CLASS="HEAD" ID="HEAD">Inheritance</H4>
+		<P CLASS="SUBHEAD" ID="SUBHEAD">Specifies the interfaces your class will implement.</P>
+	   </TD>
+	  
+	   <TD VALIGN="TOP" HEIGHT="65" WIDTH="12">
+	  	&nbsp;
+	   </TD>
+	  </TR>
+	 
+	  <TR>
+	   <TD VALIGN="TOP" CLASS="RULE" COLSPAN="5" HEIGHT="2">
+		<TABLE BORDER="0" WIDTH="100%" HEIGHT="1" CELLPADDING="0" CELLSPACING="0">
+	  	 <TR VALIGN="TOP">
+	  	  <TD HEIGHT="1" WIDTH="100%" BGCOLOR="BUTTONSHADOW"></TD>
+	  	  <TD HEIGHT="1" WIDTH="1" BGCOLOR="WINDOW"></TD>
+	  	 </TR>
+		</TABLE>
+	   </TD>
+	  </TR>
+	 </TABLE>
+	</TD>
+  </TR>
+  <!--CLOSE OF INTRODUCTORY INFORMATION TABLE//-->
+
+  <!--OPEN OF NAVIGATION, CONTENT, AND BUTTON TABLES//-->
+  <TR VALIGN="TOP">
+	<TD CLASS="Three" VALIGN="TOP" HEIGHT="100%" WIDTH="178">
+	 <TABLE CLASS="fixedSize" HEIGHT="100%" WIDTH="178" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+  	  <TR VALIGN="TOP">
+	   <TD CLASS="threeCustom" VALIGN="TOP" STYLE="BACKGROUND-IMAGE: URL(../../Images/CsClsBg.gif);">
+	   <!--OPEN OF NAVIGATION TABLE//-->
+
+	    <TABLE CLASS="THREE" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+		<COL WIDTH="12"><COL WIDTH="166"><COL WIDTH="1">
+		 <TR>
+	   	  <TD VALIGN="TOP" COLSPAN="3" HEIGHT="12">
+	  		&nbsp;
+		  </TD>
+		 </TR>
+		 <TR>
+	   	  <TD VALIGN="TOP" HEIGHT="100%" WIDTH="12">
+	  		&nbsp;
+		  </TD>
+	   	  <TD VALIGN="TOP" HEIGHT="100%" WIDTH="165">
+	   	  <!--OPEN OF NAVIGATIONAL LINKS//-->
+			
+			<DIV CLASS="LINK">
+			 <TABLE WIDTH="166" HEIGHT="28" BORDER="0" CELLPADDING="0" CELLSPACING="0" CLASS="LINKTEXT">
+			  <TR VALIGN="MIDDLE">
+	  		   <TD WIDTH="162">
+				<SPAN CLASS="ACTIVELINK" ID="Default" TITLE="Specify class and file names." onClick="Next(document, 'Default.htm');" TABINDEX="1">Class Options</SPAN>
+			   </TD>
+	  		   <TD WIDTH="4">
+			  	<IMG SRC="../../Images/spacer.gif" HEIGHT="1" WIDTH="4">
+			   </TD>
+			  </TR>
+			 </TABLE>
+			</DIV>
+			
+			<DIV CLASS="LINK">
+			 <TABLE WIDTH="166" HEIGHT="28" BORDER="0" CELLPADDING="0" CELLSPACING="0" CLASS="LINKTEXT">
+			  <TR VALIGN="MIDDLE">
+	  		   <TD WIDTH="162">
+				<SPAN CLASS="ACTIVELINK" ID="BaseClass" TITLE="" onClick="Next(document, 'BaseClass.htm');" TABINDEX="2">Base Class</SPAN>
+			   </TD>
+	  		   <TD WIDTH="4">
+			  	<IMG SRC="../../Images/spacer.gif" HEIGHT="1" WIDTH="4">
+			   </TD>
+			  </TR>
+			 </TABLE>
+			</DIV>
+		  
+		    <DIV CLASS="LINKSELECTED">
+	 	   	 <SPAN CLASS="VERTLINE1">
+			  <IMG SRC="../../Images/spacer.gif" WIDTH="1" HEIGHT="1" ALT="" BORDER="0">
+			 </SPAN>
+			 <SPAN CLASS="HORILINE1">
+			  <TABLE WIDTH="167" HEIGHT="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+			   <TR VALIGN="TOP">
+			    <TD CLASS="DOTTEDLINE" HEIGHT="1">
+				</TD>
+			   </TR>
+			   <TR VALIGN="TOP">
+			    <TD HEIGHT="100%">
+				 <IMG SRC="../../Images/spacer.gif" WIDTH="1" HEIGHT="28" ALT="" BORDER="0">
+			    </TD>
+			   </TR>
+			   <TR VALIGN="TOP">
+			    <TD CLASS="DOTTEDLINE" HEIGHT="1">
+			    </TD>
+			   </TR>
+			  </TABLE>
+			 </SPAN>
+			 <TABLE WIDTH="160" HEIGHT="28" BORDER="0" CELLPADDING="0" CELLSPACING="0" CLASS="LINKTEXTSELECTED">
+			  <TR VALIGN="MIDDLE">
+			   <TD WIDTH="156">
+				<SPAN ID="Inheritance" TITLE="">Inheritance</SPAN>
+			   </TD>
+			   <TD WIDTH="4">
+				<IMG SRC="../../Images/spacer.gif" HEIGHT="1" WIDTH="4">
+			   </TD>
+			  </TR>
+			 </TABLE>
+			</DIV>
+			
+	   	  <!--CLOSE OF NAVIGATIONAL LINKS//-->
+		  </TD>
+		  <TD WIDTH="1">
+		   <DIV CLASS="VERTLINE">
+			 <IMG SRC="../../Images/spacer.gif" WIDTH="1" HEIGHT="1" ALT="" BORDER="0">
+		   </DIV>
+		  </TD>
+		 </TR>
+		 </TABLE>
+		</TD>
+	   </TR>
+	   </TABLE>
+			
+	   <!--CLOSE OF NAVIGATION TABLE//-->
+	   </TD>
+  
+	   <TD VALIGN="TOP" HEIGHT="100%">
+	   <!--OPEN OF CONTENT AND BUTTON TABLE//-->
+	   
+	   	<TABLE CLASS="ONE" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+		<COL WIDTH="100%">
+		 <TR VALIGN="TOP">
+		  <TD HEIGHT="100%">
+	   	  <!--OPEN OF CONTENT//-->
+		  
+		  	<TABLE CLASS="CONTENT" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+			<COL WIDTH="12"><COL WIDTH="398"><COL WIDTH="12">
+ 			 <TR>
+  			  <TD VALIGN="TOP" HEIGHT="12" COLSPAN="3">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+			 
+ 			 <TR>
+  			  <TD VALIGN="TOP" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+  			  <TD VALIGN="TOP">
+  				<SPAN CLASS="itemTextTop" TITLE="">
+	    	 	 <LABEL FOR="INTERFACE_NAMESPACE" ID="INTERFACE_NAMESPACE_LABEL">Current <U>n</U>amespace:</LABEL>
+				 <BR>
+				 <SELECT CLASS="sideBtnOneCLong" ID="INTERFACE_NAMESPACE" SIZE="1" ACCESSKEY="N" onChange="OnNamespace();">
+				 </SELECT>
+	  			</SPAN>
+  			  </TD>
+  			  <TD VALIGN="TOP" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+			 
+ 			 <TR>
+  			  <TD VALIGN="TOP" HEIGHT="16" COLSPAN="3">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+			 
+ 			 <TR>
+  			  <TD VALIGN="TOP" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+  			  <TD VALIGN="TOP">
+  				<SPAN CLASS="itemText">
+				 <LABEL FOR="INTERFACE_NAME" ID="INTERFACE_NAME_LABEL">Available <U>i</U>nterfaces:</LABEL>
+				 <BR>
+				 <SELECT CLASS="sideBtnOneCLong" SIZE="4" ID="INTERFACE_NAME" ACCESSKEY="I" onDblClick="AddInterface(false);">
+				 </SELECT>
+				</SPAN>
+  			  </TD>
+  			  <TD VALIGN="TOP" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+			 
+ 			 <TR>
+  			  <TD VALIGN="TOP" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+  			  <TD VALIGN="TOP">
+  				<BUTTON ID="AddBtn" CLASS="ButtonClass5" TITLE="Add interface" ACCESSKEY="D" onClick="AddInterface(false);">A<U>d</U>d</BUTTON>
+				<BUTTON ID="AddAllBtn" CLASS="ButtonClass5" TITLE="Add all interfaces" ACCESSKEY="A" onClick="AddInterface(true);">Add <U>a</U>ll</BUTTON>
+				 <SPAN CLASS="Spacer8"></SPAN>
+				<BUTTON ID="RemoveBtn2" CLASS="ButtonClass5" TITLE="Remove interface" ACCESSKEY="R" onClick="RemoveInterface(false);"><U>R</U>emove</BUTTON>
+				<BUTTON ID="RemoveAllBtn" CLASS="ButtonClass5" TITLE="Remove all interfaces" ACCESSKEY="L" onClick="RemoveInterface(true);">Remove a<U>l</U>l</BUTTON>
+  			  </TD>
+  			  <TD VALIGN="TOP" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+			 
+ 			 <TR>
+  			  <TD VALIGN="TOP" HEIGHT="10" COLSPAN="3">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+			 
+ 			 <TR>
+  			  <TD VALIGN="TOP" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+  			  <TD VALIGN="TOP">
+			  	<SPAN CLASS="itemText">
+				 <LABEL FOR="IMPLEMENT_INTERFACE_NAME" ID="IMPLEMENT_INTERFACE_NAME_LABEL">S<U>e</U>lected interfaces:</LABEL>
+				 <BR>
+				 <SELECT CLASS="sideBtnOneCLong" SIZE="4" ID="IMPLEMENT_INTERFACE_NAME" ACCESSKEY="E">
+				 </SELECT>
+				</SPAN>
+  			  </TD>
+  		  	  <TD VALIGN="TOP" WIDTH="12">
+  				&nbsp;
+  		  	  </TD>
+ 		 	 </TR>
+			 
+ 			 <TR>
+  			  <TD VALIGN="TOP" HEIGHT="100%" COLSPAN="3">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+		 	</TABLE>
+			
+	   	  <!--CLOSE OF CONTENT//-->
+		  </TD>
+		 </TR>
+		 <TR VALIGN="BOTTOM">
+		  <TD HEIGHT="48">
+	   	  <!--OPEN OF BUTTON HTML//-->
+		  
+		  	<TABLE HEIGHT="48" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+			<COL WIDTH="12"><COL><COL WIDTH="75"><COL WIDTH="4"><COL WIDTH="75"><COL WIDTH="4"><COL WIDTH="75"><COL WIDTH="12">
+			 <TR>
+  			  <TD VALIGN="TOP" CLASS="RULE" COLSPAN="8" HEIGHT="2">
+				<TABLE BORDER="0" WIDTH="100%" HEIGHT="1" CELLPADDING="0" CELLSPACING="0">
+  	 			 <TR VALIGN="TOP">
+  	  			  <TD HEIGHT="1" WIDTH="100%" BGCOLOR="BUTTONSHADOW"></TD>
+  	  			  <TD HEIGHT="1" WIDTH="1" BGCOLOR="WINDOW"></TD>
+  	 			 </TR>
+				</TABLE>
+  			  </TD>
+ 			  </TR>
+ 
+ 			  <TR>
+  			  <TD VALIGN="TOP" HEIGHT="11" COLSPAN="8">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+ 
+ 			<TR>
+  			  <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+  			  <TD VALIGN="TOP" HEIGHT="23">
+  				&nbsp;
+  			  </TD>
+  			  <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+  				<BUTTON CLASS="BUTTONS" ID="FinishBtn" onClick="OnFinish(document);">Finish</BUTTON>
+  			  </TD>
+  			  <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+  				&nbsp;
+  			  </TD>
+  			  <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+  				<BUTTON CLASS="BUTTONS" ID="CancelBtn" onClick="window.external.Finish(document, 'cancel');">Cancel</BUTTON>
+  			  </TD>
+  			  <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="4">
+  				&nbsp;
+  			  </TD>
+  			  <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="75">
+  				<BUTTON CLASS="BUTTONS" ID="HelpBtn" onClick="window.external.OnHelp('vc.codewiz.class.cs.inheritance');">Help</BUTTON>
+  			  </TD>
+  			  <TD VALIGN="MIDDLE" HEIGHT="23" WIDTH="12">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+ 
+ 			 <TR>
+  			  <TD VALIGN="TOP" HEIGHT="12" COLSPAN="8">
+  				&nbsp;
+  			  </TD>
+ 			 </TR>
+			</TABLE>
+			
+	   	  <!--CLOSE OF BUTTON HTML//-->
+		  </TD>
+		 </TR>
+		</TABLE>
+	
+  	<!--CLOSE OF NAVIGATION, CONTENT, AND BUTTON TABLES//-->
+ 	</TD>
+  </TR>
+</TABLE>
+
+</BODY>
+</HTML>
+
+<SCRIPT LANGUAGE="JSCRIPT">
+
+var tab_array = new Array();
+tab_array[0] = Default;
+tab_array[1] = BaseClass;
+tab_array[2] = Inheritance;
+
+var oInterfaces = document.all.tags("SELECT").item("INTERFACE_NAME");
+var oNamespaces = document.all.tags("SELECT").item("INTERFACE_NAMESPACE");
+var oImplementInterfaces = document.all.tags("SELECT").item("IMPLEMENT_INTERFACE_NAME");
+
+function InitDocument(document)
+{
+	setDirection();
+	if (window.external.FindSymbol("DOCUMENT_FIRST_LOAD"))
+		window.external.SetDefaults(document);
+
+	window.external.Load(document);
+	PopulateNamespaces();
+	OnNamespace();
+	UpdateImplementInterfacesList();
+	ToggleButtons();
+	INTERFACE_NAMESPACE.focus();
+}
+
+function Next(document, linkto)
+{
+	INTERFACE_NAMESPACE.value = INTERFACE_NAMESPACE.options[INTERFACE_NAMESPACE.selectedIndex].text;
+	window.external.AddSymbol("INTERFACE_NAMESPACE", INTERFACE_NAMESPACE.value);
+
+	GetImplementInterfaces();
+	UpdateSymbols();
+	window.external.Next(document, linkto);
+}
+
+function UpdateSymbols()
+{
+	var strInterfaceList = "";
+	var len = oImplementInterfaces.options.length;
+	if(len > 0) 
+	{
+		for(var index=0; index < len; index++)
+		{
+			strInterfaceList += oImplementInterfaces.options[index].value;
+			
+			if(index < (len - 1))
+				strInterfaceList += ", ";	
+		}
+	}
+	window.external.AddSymbol("INTERFACE_LIST_STRING", strInterfaceList);
+}
+
+function OnFinish(document)
+{
+	INTERFACE_NAMESPACE.value = INTERFACE_NAMESPACE.options[INTERFACE_NAMESPACE.selectedIndex].text;
+	AddBases();
+	AddMethodStubs();
+	UpdateSymbols();
+
+	var strBaseClass = window.external.FindSymbol("BASE_CLASS_NAME_STRING");
+	var strInterfacesName = window.external.FindSymbol("INTERFACE_LIST_STRING");
+	if(strBaseClass)
+		if (strInterfacesName)
+			window.external.AddSymbol("BASE_INTERFACE_NAME_STRING", strBaseClass + ", " + strInterfacesName);
+		else
+			window.external.AddSymbol("BASE_INTERFACE_NAME_STRING", strBaseClass);
+	else if (strInterfacesName)
+		window.external.AddSymbol("BASE_INTERFACE_NAME_STRING", " : " + strInterfacesName);
+
+	OnWizFinish(document);
+}
+
+var nIndex;
+var nActualCount;
+var oArrayNS = new ActiveXObject("Scripting.Dictionary") ;
+function PopulateNamespaces()
+{
+	var i;
+	for (i = 0; i < oNamespaces.options.length; i++)
+	{
+		oNamespaces.remove(i);
+		i--;
+	}
+
+	nActualCount = 0;
+	nIndex = 0;
+	oArrayNS.RemoveAll();
+	var oCodeElements = window.external.ProjectObject.CodeModel.CodeElements;
+	for (i = 1; i <= oCodeElements.Count; i++)
+	{
+		var oCodeElement = oCodeElements(i);
+		if (oCodeElement.Kind == vsCMElementNamespace)
+		{
+			PopulateChildNamespaces(oCodeElement, "");
+		}
+	}
+	INTERFACE_NAMESPACE.selectedIndex = nIndex;
+	oInterfaces.selectedIndex = nIndex;
+}
+
+function PopulateChildNamespaces(oNS, strParent) {
+	var oCodeElements = oNS.Members;
+	var i;
+	var bHasInterface = false;
+	var strCodeElement;
+	if(strParent == "")
+		strCodeElement = oNS.Name;
+	else
+		strCodeElement = strParent + "." + oNS.Name;
+		
+	for (i = 1; i <= oCodeElements.Count; i++)
+	{
+		var oCodeElement = oCodeElements(i);
+		if ((oCodeElement.Kind) && (oCodeElement.Kind == vsCMElementNamespace))
+		{
+			PopulateChildNamespaces(oCodeElement, strCodeElement);
+		}
+		if ((oCodeElement.Kind) && (oCodeElement.Kind == vsCMElementInterface)) {
+			bHasInterface = true;
+		}
+	}
+	if(bHasInterface) {
+		var oOption = document.createElement("OPTION");
+		oOption.value = strCodeElement;
+		oOption.text = strCodeElement;
+		oNamespaces.add(oOption);
+		oArrayNS.Add(strCodeElement, oNS);
+		nActualCount++;
+		if (strCodeElement == window.external.FindSymbol("INTERFACE_NAMESPACE"))
+		{
+			nIndex = nActualCount-1;
+			PopulateInterfaces(oCodeElement);
+		}	
+	}
+}
+      
+function PopulateInterfaces(oNamespace)
+{
+	for (l = 0; l < oInterfaces.options.length; l++)
+	{
+		oInterfaces.remove(l);
+		l--;
+	}
+
+	var oMembers = oNamespace.Members;
+	var nActualCount = 0;
+	var aMembers = new Array();
+	for (n = 1; n <= oMembers.Count; n++)
+	{
+		if (oMembers(n).Kind == vsCMElementInterface)
+		{
+			strMember = oMembers(n).Name;
+			aMembers[nActualCount] = strMember;			
+			nActualCount++;
+		}
+	}
+
+	aMembers.sort();
+	for (n = 0; n < nActualCount; n++)
+	{
+		var oOption = document.createElement("OPTION");
+		oOption.value = aMembers[n];
+		oOption.text = aMembers[n];
+		oInterfaces.add(oOption);
+	}
+
+	ToggleButtons();
+}
+
+function AddInterface(bAll)
+{
+	if (oInterfaces.selectedIndex == -1 && !bAll)
+		return;
+	if (bAll)
+	{
+		var len = oInterfaces.options.length;
+		for (i = 0; i < len; i++)
+		{
+			var strInterface = INTERFACE_NAMESPACE.value;
+			if(strInterface)
+				strInterface += "." + oInterfaces.options[i].value;
+			if (IsInImplementList(strInterface))
+				continue;
+
+			var oOption = document.createElement("OPTION");
+			oOption.value = strInterface;
+			oOption.text = strInterface;
+			oImplementInterfaces.add(oOption);
+		}
+	}
+	else
+	{
+		var strInterface = INTERFACE_NAMESPACE.value;
+
+		if(strInterface)
+			strInterface += "." + oInterfaces.options[oInterfaces.selectedIndex].value;
+
+		if (IsInImplementList(strInterface))
+		{
+			L_Err1_Text = "Interface already selected";
+			window.external.ReportError(L_Err1_Text);
+			return;
+		}
+
+		var oOption = document.createElement("OPTION");
+		oOption.value = strInterface;
+		oOption.text = strInterface;
+		oImplementInterfaces.add(oOption);
+	}
+
+	oImplementInterfaces.selectedIndex = oImplementInterfaces.options.length-1;
+	ToggleButtons();
+}
+
+function GetImplementInterfaces()
+{
+	var len = oImplementInterfaces.options.length;
+	var strImplementIfaces = "";
+	for (i = 0; i < len; i++)
+	{
+		strImplementIfaces += oImplementInterfaces.options[i].value;
+		strImplementIfaces += ";"
+	}
+	if(strImplementIfaces != "")
+		window.external.AddSymbol("IMPLEMENT_INTERFACES_LIST", strImplementIfaces);
+}
+
+function UpdateImplementInterfacesList()
+{
+	var strImplementIfaces = 	window.external.FindSymbol("IMPLEMENT_INTERFACES_LIST");
+	if("" == strImplementIfaces)
+		return;
+	var strImplementIfacesList = strImplementIfaces.split(";");
+	for(n = 0; n < strImplementIfacesList.length-1; n++)
+	{
+		var strParam = strImplementIfacesList[n];
+		if(strParam)
+		{
+			var oOption = document.createElement("OPTION");
+			oOption.value = strParam;
+			oOption.text = strParam;
+			oImplementInterfaces.add(oOption);
+		}
+	}
+}
+
+function RemoveInterface(bAll)
+{
+	if (oImplementInterfaces.selectedIndex == -1 && !bAll)
+		return;
+		
+	var len = oImplementInterfaces.options.length;
+	if (bAll)
+	{
+		for (i = 0; i < len; i++)
+		{
+			var Index = oImplementInterfaces.options[i];
+			oImplementInterfaces.options.remove(Index);
+		}
+	}
+	else
+	{
+		var Index = oImplementInterfaces.selectedIndex;
+		oImplementInterfaces.options.remove(Index);
+		if (Index < len -1)
+			oImplementInterfaces.selectedIndex = Index;
+		else
+			oImplementInterfaces.selectedIndex = len -2;
+	}
+
+	ToggleButtons();
+}
+
+function AddBases()
+{
+}
+
+function AddMethodStubs()
+{
+	var strStubs = "";
+	window.external.AddSymbol("METHOD_STUBS", strStubs); 
+}
+
+function CreateStubsForInterface(oInterface)
+{
+	var strInterfaceStubs = "";
+	return strInterfaceStubs;
+}
+
+function IsInImplementList(strInterfaceName)
+{
+	var nLen = oImplementInterfaces.options.length;
+
+	for (n = 0; n < nLen; n++)
+	{
+		var strImplementInterface = oImplementInterfaces.options(n).value;
+		if (strImplementInterface == strInterfaceName)
+			return true;
+	}
+	return false;
+}
+
+function ToggleButtons()
+{
+	AddBtn.disabled = true;
+	AddAllBtn.disabled = true;
+	RemoveBtn2.disabled = true;
+	RemoveAllBtn.disabled = true;
+
+	if (oInterfaces.options.length)
+	{
+		AddBtn.disabled = false;
+		if (oInterfaces.options.length > 1)
+			AddAllBtn.disabled = false;
+	}
+	if (oImplementInterfaces.options.length)
+	{
+		RemoveBtn2.disabled = false;
+		if (oImplementInterfaces.options.length > 1)
+			RemoveAllBtn.disabled = false;
+	}
+}
+
+function OnNamespace()
+{
+	var strNamespace = INTERFACE_NAMESPACE.options[INTERFACE_NAMESPACE.selectedIndex].text;
+	if (oArrayNS.Exists(strNamespace)) {
+		PopulateInterfaces(oArrayNS.Item(strNamespace));
+	}
+}
+
+</SCRIPT>
+<SCRIPT ID="INCLUDE_SCRIPT" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT ID="INCLUDE_COMMON" LANGUAGE="JSCRIPT"></SCRIPT>
+<SCRIPT>
+	var strPath = "../../../";
+	strPath += window.external.GetHostLocale();
+	var strScriptPath = strPath + "/Script.js";
+	var strCommonPath = strPath + "/Common.js";
+	document.scripts("INCLUDE_SCRIPT").src = strScriptPath;
+	document.scripts("INCLUDE_COMMON").src = strCommonPath;
+</SCRIPT>

@@ -1,0 +1,780 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.efNumeric' tagName="efnumeric" lightweight=true>
+	<PUBLIC>
+		<EVENT NAME='onError'		ID='evtError'></EVENT><!-- fired when developer error occurs -->
+		<EVENT NAME='onRequire'		ID='evtRequired'></EVENT>
+		<EVENT NAME='onChange'		ID='evtChange'></EVENT>
+		<EVENT NAME='onValid'		ID='evtValid'></EVENT>
+		<EVENT NAME='onBrowse'		ID='evtBrowse'></EVENT>
+		<EVENT NAME='onBeginChange'	ID='evtBeginChange'></EVENT>
+
+		<METHOD NAME='initialize' />
+		<METHOD NAME='focus'		INTERNALNAME='onFocus' />
+		<METHOD NAME='resetDefault'	INTERNALNAME='ResetDefault' />
+	<!-- UNSUPPORTED: PRIVATE METHODS -->
+		<METHOD NAME='resetReadOnly' />
+
+		<PROPERTY NAME='dirty'		GET='bGetDirty'		/>
+		<PROPERTY NAME='required'	GET='bGetRequired'	/>
+		<PROPERTY NAME='valid'		GET='bGetValid'		/>
+		<PROPERTY NAME='disabled'	GET='bGetDisabled'	PUT='SetDisabled' />
+		<PROPERTY NAME='readonly'	GET='bGetReadonly'	PUT='SetReadonly' />
+		<PROPERTY NAME='value'		GET='sGetData'		PUT='SetData' />
+		<PROPERTY NAME='prompt'		GET='sGetPrompt'	PUT='SetPrompt' />
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_DefaultError_ErrorMessage		= "validation error in numeric"
+		const L_DefaultIntError_ErrorMessage	= "validation error in integer"
+		const L_DefaultFloatError_ErrorMessage	= "validation error in float"
+		const L_DefaultCurError_ErrorMessage	= "validation error in currency"
+		const L_BadFormat_ErrorMessage			= "bad format string: %1"
+		const L_ControlURNandID_ErrorMessage	= "Error in efNumeric with Id: ""%1"""
+		const L_AbortControl_ErrorMessage		= "The control could not load.  Please contact your system administrator"
+		const L_BadSubtype_ErrorMessage			= "Subtype must be one of: 'integer', 'float', 'currency': %1"
+		const L_DefaultNumberPrompt_Text		= "enter a number"
+		const L_ValidationError_ErrorMessage = "Validation error"
+		const L_PickerButtonWidth_Number = 16	'width in pixels of arrow/ellipsis buttons
+
+		dim m_bDirty, m_bDebug, m_bDisabled, m_bReadonly, m_bBrowse, m_bBrowseReadonly, _
+			m_bFieldRequired, m_bValid, m_bRequired, m_bMasterReadOnly, m_bSuppressErrors, _
+			m_fnOnBrowse, m_fnOnChange, m_fnOnRequire, m_fnOnError, m_fnOnValid, _
+			m_nMax, m_nMin, m_elInput, m_elBrowseBtn, m_elPrompt, _
+			m_sType, m_sError, m_sSubtype, m_sCharmask, m_sPrompt, m_sFormat, _
+			m_sDecimal, m_oRegEx, m_sValue, m_sDefault, m_bLoading
+
+		const DEFAULT_FORMAT			= "-1.1"
+		const DEFAULT_INT_CHARMASK		= "^[-]?\d*$"
+		const DEFAULT_FLOAT_CHARMASK	= "^[-]?\d*[.]?\d*$"
+		const DEFAULT_CUR_CHARMASK		= "[-]?\d*[.]?\d*"
+		'button name constants (webdings)
+		const ELLIPSIS = "&hellip;"
+		'keycode constants
+		const KEYCODE_ESC			= 27
+		const KEYCODE_ENTER			= 13
+		const KEYCODE_LEFTPAREN		= 40
+		const KEYCODE_RIGHTPAREN	= 41
+		const KEYCODE_DASH			= 45
+		const KEYCODE_DELETE		= 46
+		const KEYCODE_BACKSPACE		= 8
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		m_bDirty = false			'true if control's value has changed
+		m_bRequired = true			'true if marked required and currently empty
+		m_bValid = false			'true if value is valid
+		m_bSuppressErrors = false	'true supresses validation alert
+		set m_elBrowseBtn = nothing	'holds browse button, if any
+		m_bLoading = true
+
+		sub Initialize(xmlNode, sValue)
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			dim xmlTemp, sTemp, elTable, elRow, elCell, bSuccess
+
+			m_sType = "numeric"
+			element.innerText = ""
+
+			'get event handler function names
+			m_fnOnBrowse = xmlNode.getAttribute("onbrowse")
+			m_fnOnChange = xmlNode.getAttribute("onchange")
+			m_fnOnRequire = xmlNode.getAttribute("onrequire")
+			m_fnOnValid = xmlNode.getAttribute("onvalid")
+			m_fnOnError = xmlNode.getAttribute("onerror")
+			'check if browse enabled
+			sTemp = xmlNode.getAttribute("browse")
+			m_bBrowse = CBool(not isNull(m_fnOnBrowse) or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+			sTemp = xmlNode.getAttribute("browsereadonly")
+			m_bBrowseReadonly = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			'get prompt text
+			set xmlTemp = xmlNode.selectSingleNode("prompt")
+			if not xmlTemp is nothing then
+				m_sPrompt = xmlTemp.text
+			else
+				m_sPrompt = L_DefaultNumberPrompt_Text
+			end if
+
+			'get sub type or default to int
+			m_sSubtype = xmlNode.getAttribute("subtype")
+			if isNull(m_sSubtype) then m_sSubtype = "integer"
+			'get validation error msg
+			if not xmlNode.selectSingleNode("error") is nothing then m_sError = xmlNode.selectSingleNode("error").text
+
+			'get format string and set separator and charmask
+			bSuccess = bGetFormat(xmlNode)
+			if not bSuccess then
+				AbortControl()
+			else
+				set m_oRegEx = New RegExp
+				m_oRegEx.Pattern = m_sCharmask
+				m_oRegEx.IgnoreCase = true
+				m_oRegEx.Global = false
+
+				m_sDefault = xmlNode.getAttribute("default")
+				if sValue = "" and not isNull(m_sDefault) then sValue = m_sDefault
+				sValue = sGetFormattedNumber(sValue)
+				element.title = sValue
+				m_sValue = sValue
+
+				'create container table
+				set elTable = element.appendChild(element.document.createElement("TABLE"))
+				with elTable
+					.style.tableLayout = "fixed"
+					.width = "100%"
+					.cellSpacing = 0
+					.cellPadding = 0
+				end with
+				set elRow = elTable.insertRow()
+				set elCell = elRow.insertCell()
+				elCell.style.padding = 0
+				'create input for displaying value
+				set m_elInput = element.document.createElement("INPUT")
+				m_elInput.type = "text"
+				set m_elInput = elCell.appendChild(m_elInput)
+				with m_elInput
+					.value = sValue
+					.id = "prop_" & element.id
+					.name = element.id
+					.maxlength = len(m_sFormat) + 20
+					.className = "efBorderless"
+					if sValue = "" then .style.display = "none"
+					.attachEvent "onpropertychange", GetRef("onValueChange")
+					.attachEvent "onblur", GetRef("onBlur")
+					.attachEvent "onkeydown", GetRef("onKeyDown")
+					.attachEvent "onkeypress", GetRef("onKeyPress")
+					.attachEvent "onchange", GetRef("onChange")
+				end with
+				'create span for displaying prompt
+				set m_elPrompt = elCell.appendChild(element.document.createElement("DIV"))
+				with m_elPrompt
+					.id = "prompt_" & element.id
+					.innerText = m_sPrompt
+					.title = m_sPrompt
+					if sValue <> "" then .style.display = "none"
+					.className = "efPrompt efBorderless"
+					.nowrap = true
+					.tabindex = 0
+					.attachEvent "onfocus", GetRef("onClickPrompt")
+					.attachEvent "onclick", GetRef("onClickPrompt")
+					element.attachEvent "onfocus", GetRef("onClickPrompt")
+					element.attachEvent "onclick", GetRef("onClickPrompt")
+				end with
+
+				if m_bBrowse then
+					'if browsable then add browse button and attach browse event
+					set elCell = elRow.insertCell()
+					elCell.style.padding = 0
+					elCell.width = L_PickerButtonWidth_Number
+					set m_elBrowseBtn = elCell.appendChild(element.document.createElement("BUTTON"))
+					with m_elBrowseBtn
+						.id = "browse_" & element.id
+						.disabled = true
+						.attachEvent "onclick", GetRef("onBrowseClick")
+						.className = "efEllipsisBtn"
+						.innerHTML = ELLIPSIS
+						.attachEvent "onkeydown", GetRef("onBrowseKeyDown")
+						set xmlTemp = xmlNode.selectSingleNode("browsetooltip")
+						if not xmlTemp is nothing then .title = xmlTemp.text
+					end with
+					if not isNull(m_fnOnBrowse) then element.attachEvent "onbrowse", GetRef("CallBrowseHandler")
+				end if
+
+				'get min and max
+				m_nMax = xmlNode.getAttribute("max")
+				if bIsNumeric(m_nMax) and m_nMax <> "" then
+					m_nMax = CDbl(nGetNumber(m_nMax))
+				else
+					m_nMax = null
+				end if
+				m_nMin = xmlNode.getAttribute("min")
+				if bIsNumeric(m_nMin) and m_nMin <> "" then
+					m_nMin = CDbl(nGetNumber(m_nMin))
+				else
+					m_nMin = null
+				end if
+
+				'get required, readonly, disabled
+				sTemp = xmlNode.getAttribute("required")
+				m_bFieldRequired = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				sTemp = xmlNode.getAttribute("readonly")
+				m_bMasterReadOnly = CBool(m_bBrowseReadonly or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+				readonly = m_bMasterReadOnly
+				sTemp = xmlNode.getAttribute("disabled")
+				disabled = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				'attach event handlers
+				if not isNull(m_fnOnChange) then element.attachEvent "onchange", GetRef("CallChangeHandler")
+				if not isNull(m_fnOnRequire) then element.attachEvent "onrequire", GetRef("CallRequireHandler")
+				if not isNull(m_fnOnValid) then element.attachEvent "onvalid", GetRef("CallValidHandler")
+				if not isNull(m_fnOnError) then element.attachEvent "onerror", GetRef("CallErrorHandler")
+				'fire events and show invalid
+				SetRequired(sValue)
+				SetValid(sValue)
+				ShowInvalid()
+				m_bLoading = false
+			end if
+		end sub
+
+		function bGetFormat(xmlNode)
+			dim xmlFormat, i, sChar, bBadFormat
+			bGetFormat = true
+			set xmlFormat = xmlNode.selectSingleNode("format")
+			if not xmlFormat is nothing then
+				m_sFormat = trim(xmlFormat.text)
+			else
+				m_sFormat = DEFAULT_FORMAT
+			end if
+			select case m_sSubtype
+				case "integer"
+					m_sCharmask = DEFAULT_INT_CHARMASK
+					if m_sError = "" then m_sError = L_DefaultIntError_ErrorMessage
+				case "float"
+					m_sCharmask = DEFAULT_FLOAT_CHARMASK
+					if m_sError = "" then m_sError = L_DefaultFloatError_ErrorMessage
+				case "currency"
+					m_sCharmask = DEFAULT_CUR_CHARMASK
+					if m_sError = "" then m_sError = L_DefaultCurError_ErrorMessage
+				case else
+					'unknown subtype
+					ReportError(sFormatString(L_BadSubtype_ErrorMessage, Array(m_sSubtype)))
+					bGetFormat = false
+			end select
+			'get decimal (next char after first '1')
+			m_sDecimal = Mid(m_sFormat, inStr(m_sFormat, "1") + 1, 1)
+			if m_sDecimal = "" or inStr(m_sFormat, "1") = 0 or _
+				inStr(m_sFormat, m_sDecimal & "1") = 0 then
+				'bad decimal
+				ReportError(sFormatString(L_BadFormat_ErrorMessage, Array(m_sFormat)))
+				bGetFormat = false
+			else
+				bBadFormat = false
+				'make sure format has only allowable characters
+				for i = 1 to len(m_sFormat)
+					sChar = Mid(m_sFormat, i, 1)
+					if inStr("()-1" & m_sDecimal, sChar) = 0 then bBadFormat = true
+				next
+				if bBadFormat then
+					'bad format character
+					ReportError(sFormatString(L_BadFormat_ErrorMessage, Array(m_sFormat)))
+					bGetFormat = false
+				else
+					'create charmask
+					m_sCharmask = m_sFormat
+					'integer has no decimal
+					if m_sSubtype = "integer" then
+						m_sFormat = replace(m_sFormat, m_sDecimal & "1", "")
+						m_sCharmask = replace(m_sCharmask, m_sDecimal & "1", "")
+					end if
+					'minus character(s):
+					if inStr(m_sFormat, "(") then
+						'replace parenthesis
+						m_sCharmask = replace(m_sCharmask, "(", "\(?")
+						m_sCharmask = replace(m_sCharmask, ")", "\)?")
+					else
+						'replace dash and space
+						m_sCharmask = replace(m_sCharmask, " ", "[ ][-]?")
+						m_sCharmask = replace(m_sCharmask, "-", "[-]?")
+					end if
+					'fix decimal character and digits
+					m_sCharmask = replace(m_sCharmask, m_sDecimal, "[" & m_sDecimal & "]?")
+					m_sCharmask = replace(m_sCharmask, "1", "\d*")
+					if m_sSubtype <> "currency" then m_sCharmask = "^" & m_sCharmask & "$"
+				end if
+			end if
+		end function
+
+		function sGetFormattedNumber(sValue)
+			dim sMatches, sMatch
+			sGetFormattedNumber = ""
+			sMatches = ""
+			for each sMatch in m_oRegEx.execute(sValue)
+				sMatches = sMatches & sMatch
+			next
+			if sMatches <> "" then sGetFormattedNumber = sMatches
+		end function
+
+		function sGetNumber(nValue)
+			dim sValue, nFixTemp
+			sGetNumber = ""
+			if nValue = "" then exit function
+			sValue = nValue
+			nFixTemp = Abs(Fix(nValue))
+			if Fix(nValue) <> nValue then
+				sValue = Mid(sValue, inStr(sValue, Cstr(nFixTemp)) + Len(Cstr(nFixTemp)) + 1)
+				sValue = nFixTemp & m_sDecimal & sValue
+			else
+				sValue = nFixTemp
+			end if
+			if nValue < 0 then
+				if instr(m_sFormat, "(") then
+					sValue = "(" & sValue & ")"
+				elseif instr(m_sFormat, "-") = 1  then
+					sValue = "-" & sValue
+				else ' "-" at end
+					sValue = sValue & "-"
+				end if
+			end if
+			sGetNumber = sValue
+		end function
+
+		function nGetNumber(sValue)
+			dim aNum, nRight, nLeft, bHasDecimal, nSign
+			nGetNumber = ""
+			nSign = 1
+			sValue = trim(sValue)
+			if (instr(m_sFormat, "-") = 1 and instr(sValue, "-") = 1) or _
+				(instr(m_sFormat, "-") = len(m_sFormat) and _
+				 instr(sValue, "-") = len(sValue)) then
+				nSign = -1
+				sValue = replace(sValue, "-", "")
+			elseif instr(m_sFormat, "(") = 1 and instr(sValue, "(") = 1 and _
+				instr(m_sFormat, ")") = len(m_sFormat) and _
+				 instr(sValue, ")") = len(sValue) then
+				nSign = -1
+				sValue = mid(sValue, 2, len(sValue) - 2)
+			else
+				if instr(sValue, "(") or instr(sValue, ")") or _
+					instr(sValue, "-") then exit function
+			end if
+			sValue = trim(sValue)
+			if instr(sValue, m_sDecimal) = 1 and len(sValue) = 1 then exit function
+			if instr(m_sFormat, m_sDecimal) = 1 then sValue = "0" & sValue
+			bHasDecimal = cbool(instr(sValue, m_sDecimal))
+			aNum = split(sValue, m_sDecimal)
+			if UBound(aNum) = 1 then
+				nLeft = aNum(0)
+				nRight = anum(1)
+				sValue = "0"
+				if len(nLeft) > 0 then sValue = nLeft
+				if len(nRight) > 0 then
+					sValue = CDbl(sValue) + CDbl(nRight / (10^len(nRight)))
+				end if
+				nGetNumber = CDbl(sValue) * nSign
+			elseif UBound(aNum) = 0 and isNumeric(sValue) then
+				nGetNumber = CDbl(sValue) * nSign
+			end if
+		end function
+
+		function bIsNumeric(sValue)
+			dim bHasDecimal, oMatches, sMatch
+			bIsNumeric = false
+			if isNull(sValue) then exit function
+			sMatch = ""
+			bHasDecimal = cbool(instr(sValue, m_sDecimal))
+			set oMatches = m_oRegEx.execute(sValue)
+			if oMatches.count = 1 and not (bHasDecimal and len(sValue) = 1) then
+				sMatch = oMatches.item(0)
+				bIsNumeric = cbool(cStr(sMatch) = cStr(sValue))
+			end if
+		end function
+
+		sub AbortControl()
+			dim elFont
+			'display error text in element
+			element.innerText = ""
+			set elFont = element.appendChild(element.document.createElement("SPAN"))
+			elFont.style.color = "red"
+			elFont.style.fontWeight = "bold"
+			element.title = L_AbortControl_ErrorMessage
+			elFont.innerText = L_AbortControl_ErrorMessage
+		end sub
+
+		sub ReportError(strMessage)
+			dim evt
+			' Display the message if in debug-mode.
+			strMessage = sFormatString(L_ControlURNandID_ErrorMessage, Array(element.id)) & vbCrLf & vbCrLf & strMessage
+			if m_bDebug = true then alert(strMessage)
+			set evt = createEventObject()
+			evt.setAttribute "error", strMessage
+			evt.setAttribute "type", "error"
+			evtError.fire(evt)
+		end sub
+
+		Function sFormatString(sFormat, aArgs)
+			dim nArg, sNewString
+			'formats strings like C format using numbered arguments (%1, %2, &tc.)
+			'call like: sText = sFormatString(sOriginalText, Array(sArg1, sArg2, ...))
+			sNewString = sFormat
+			for nArg = LBound(aArgs) to UBound(aArgs)
+				sNewString = Replace(sNewString, "%" & nArg + 1, aArgs(nArg))
+			next
+			sFormatString = sNewString
+		End Function
+
+		sub onBrowseKeyDown()
+			dim evt
+			set evt = window.event
+			if not m_bDisabled then
+				if evt.keyCode = KEYCODE_ENTER then
+					'enter same as click item
+					onBrowseClick()
+					evt.returnValue = false
+				end if
+			end if
+		end sub
+
+		sub onBrowseClick()
+			dim evt
+			if not m_bDisabled then
+				'fire browse event
+				set evt = createEventObject()
+				evt.setAttribute "value", m_elInput.value
+				evt.setAttribute "type", "browse"
+				evtBrowse.fire(evt)
+			end if
+		end sub
+
+		sub CallBrowseHandler()
+			if window.event.type <> "browse" then exit sub
+			on error resume next
+			execute("call window." & m_fnOnBrowse)
+			on error goto 0
+		end sub
+
+		sub CallChangeHandler()
+			on error resume next
+			execute("call window." & m_fnOnChange)
+			on error goto 0
+		end sub
+
+		sub CallRequireHandler()
+			on error resume next
+			execute("call window." & m_fnOnRequire)
+			on error goto 0
+		end sub
+
+		sub CallValidHandler()
+			on error resume next
+			execute("call window." & m_fnOnValid)
+			on error goto 0
+		end sub
+
+		sub CallErrorHandler()
+			on error resume next
+			execute("call window." & m_fnOnError)
+			on error goto 0
+		end sub
+
+		sub sGetPrompt(sPrompt)
+			sGetPrompt = m_sPrompt
+		end sub
+
+		sub SetPrompt(sPrompt)
+			m_sPrompt = sPrompt
+		end sub
+
+		sub ShowPrompt()
+			dim nWidth
+			if m_elInput.value = "" and not (m_bReadonly or m_bDisabled) then
+				nWidth = m_elInput.style.pixelWidth
+				m_elPrompt.style.display = "block"
+				if nWidth > 0 then m_elPrompt.style.width = nWidth
+				m_elInput.style.display = "none"
+				ShowInvalid()
+			end if
+		end sub
+
+		sub HidePrompt()
+			if m_elPrompt.style.display <> "none" then
+				m_elPrompt.style.display = "none"
+				m_elInput.style.display = "block"
+			end if
+		end sub
+
+		sub onClickPrompt()
+			HidePrompt()
+			focus()
+		end sub
+
+		function bGetDisabled()
+			bGetDisabled = m_bDisabled
+		end function
+
+		sub SetDisabled(bDisabled)
+			m_bDisabled = bDisabled
+			if not (m_bReadonly or m_bBrowseReadonly) then
+				m_elInput.readonly = m_bDisabled
+				if m_bDisabled then
+					element.style.cursor = "default"
+					m_elInput.style.cursor = "default"
+					m_elInput.tabIndex = -1
+				else
+					element.style.cursor = ""
+					m_elInput.style.cursor = ""
+					m_elInput.tabIndex = 0
+				end if
+			end if
+			if m_bDisabled then
+				SetRequired("__")
+				element.className = element.className & " efDisabled"
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = -1
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "none"
+				end if
+			else
+				if m_bFieldRequired then SetRequired(m_sValue)
+				m_bDirty = false
+				m_bValid = true
+				element.className = replace(element.className, " efDisabled", "")
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = 0
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "block"
+				end if
+			end if
+			if m_bReadonly or m_bDisabled then
+				HidePrompt()
+			else
+				ShowPrompt()
+			end if
+		end sub
+
+		function bGetReadonly()
+			bGetReadonly = m_bReadOnly
+		end function
+
+		sub SetReadonly(bReadOnly)
+			m_bReadonly = bReadOnly
+			m_elInput.readOnly = m_bReadonly
+			if m_bReadonly then
+				if inStr(element.className, "efRead") then
+					if m_bBrowseReadOnly then
+						element.className = replace(element.className, "efReadWrite", "efBrowseReadOnly")
+					else
+						element.className = replace(element.className, "efReadWrite", "efReadOnly")
+					end if
+				else
+					if m_bBrowseReadOnly then
+						element.className = element.className & " efBrowseReadOnly"
+					else
+						element.className = element.className & " efReadOnly"
+					end if
+				end if
+				m_elInput.style.cursor = "default"
+				m_elInput.tabIndex = -1
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = "none"
+					m_elBrowseBtn.tabIndex = -1
+				end if
+			else
+				m_bDirty = false
+				m_bValid = true
+				if inStr(element.className, "efRead") then
+					element.className = replace(element.className, "efReadOnly", "efReadWrite")
+					element.className = replace(element.className, "efBrowseReadOnly", "efReadWrite")
+				else
+					element.className = element.className & " efReadWrite"
+				end if
+				m_elInput.style.cursor = ""
+				m_elInput.tabIndex = 0
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = ""
+					m_elBrowseBtn.tabIndex = 0
+				end if
+			end if
+			if m_bReadonly or m_bDisabled then
+				HidePrompt()
+			else
+				ShowPrompt()
+			end if
+			if m_bBrowse then m_elBrowseBtn.disabled = bReadOnly
+		end sub
+
+		sub ResetReadOnly()
+			SetReadonly(m_bMasterReadOnly)
+		end sub
+
+		function sGetData()
+			sGetData = ""
+			if not isEmpty(m_elInput) then sGetData = m_elInput.value
+		end function
+
+		sub ResetDefault()
+			'reset to default or empty
+			if not isNull(m_sDefault) then
+				SetData(m_sDefault)
+			else
+				SetData("")
+			end if
+			m_bDirty = false
+		end sub
+
+		sub SetData(sValue)
+			dim evt
+			if sValue = m_sValue then exit sub
+			if m_bBrowse then
+				if m_elBrowseBtn.disabled then exit sub
+			end if
+			sValue = trim(sValue)
+			element.title = sValue
+			m_elInput.value = sValue
+			m_sValue = sValue
+			HidePrompt()
+			ShowPrompt()
+			if not (m_bReadonly and not m_bBrowseReadonly) then
+				SetRequired(m_sValue)
+				SetValid(m_sValue)
+				ShowInvalid()
+				if not m_bValid and not m_bSuppressErrors and _
+					not (element.style.display = "none" or _
+					element.parentElement.style.display = "none") then
+					msgbox m_sError, vbOKOnly, L_ValidationError_ErrorMessage
+					m_bSuppressErrors = true
+				end if
+				if m_bValid then
+					m_elInput.value = sGetNumber(nGetNumber(sValue))
+					m_sValue = sValue
+				end if
+			end if
+			if not m_bDisabled then
+				set evt = createEventObject()
+				evt.setAttribute "type", "change"
+				evtChange.fire(evt)
+				m_bDirty = true
+			end if
+		end sub
+
+		sub onKeyDown()
+			dim evt
+			set evt = window.event
+			if not evt.ctrlKey and evt.keyCode > 190 then
+				evt.returnValue = false
+			else
+				window.setTimeout GetRef("fireBeginChange"), 1
+			end if
+		end sub
+
+		sub fireBeginChange()
+			dim evt
+			if m_elInput.value <> m_sValue then
+				m_bDirty = true
+				set evt = createEventObject()
+				evt.setAttribute "type", "beginchange"
+				evtBeginChange.fire(evt)
+			end if
+		end sub
+
+		sub onKeyPress()
+			dim evt
+			if m_bReadOnly or m_bDisabled then exit sub
+			set evt = window.event
+			if evt.altKey then evt.returnValue = false
+			select case evt.keyCode
+				case KEYCODE_ENTER, KEYCODE_ESC
+					'ignore enter & esc
+					evt.returnValue = false
+					evt.cancelBubble = true
+				case KEYCODE_LEFTPAREN, KEYCODE_RIGHTPAREN
+					'allow parenthesis only if in format
+					if inStr(m_sFormat, "(") = 0 then evt.returnValue = false
+				case KEYCODE_DASH
+					'allow dash only if in format
+					if inStr(m_sFormat, "-") = 0 then evt.returnValue = false
+				case asc(m_sDecimal)
+					'allow decimal character for float and currency only
+					if m_sSubtype = "integer" then evt.returnValue = false
+				case else
+					'allow only digits
+					if evt.keyCode < asc("0") or evt.keyCode > asc("9") then
+						evt.returnValue = false
+					end if
+			end select
+		end sub
+
+		sub onValueChange()
+			if window.event.propertyName = "value" then
+				m_bDirty = true
+				element.title = m_elInput.value
+				SetRequired(m_elInput.value)
+				SetValid(m_elInput.value)
+				ShowInvalid()
+			end if
+		end sub
+
+		sub SetRequired(sValue)
+			dim bRequired, evt
+			bRequired = cBool(m_bFieldRequired and sValue = "")
+			if m_bRequired <> bRequired or m_bLoading then
+				m_bRequired = bRequired
+				if element.style.display = "none" or _
+					element.parentElement.style.display = "none" then exit sub
+				set evt = createEventObject()
+				evt.setAttribute "required", m_bRequired
+				evt.setAttribute "type", "require"
+				evtRequired.fire(evt)
+			end if
+		end sub
+
+		function bGetRequired()
+			bGetRequired = m_bRequired
+		end function
+
+		function bGetDirty()
+			bGetDirty = m_bDirty
+		end function
+
+		function bGetValid()
+			bGetValid = m_bValid
+		end function
+
+		sub SetValid(sValue)
+			dim bValid, nNumber, evt
+			bValid = true
+			if sValue <> "" and not m_bDisabled then
+				if bIsNumeric(sValue) then
+					nNumber = nGetNumber(sValue)
+					if nNumber <> "" and (isNull(m_nMin) or m_nMin <= nNumber) and _
+						(isNull(m_nMax) or nNumber <= m_nMax) then
+						bValid = true
+					else
+						bValid = false
+					end if
+				else
+					bValid = false
+				end if
+			end if
+			if m_bValid <> bValid or m_bLoading then
+				m_bValid = bValid
+				if element.style.display = "none" or _
+					element.parentElement.style.display = "none" then exit sub
+				set evt = createEventObject()
+				evt.setAttribute "valid", m_bValid
+				evt.setAttribute "type", "valid"
+				evtValid.fire(evt)
+			end if
+ 		end sub
+
+		sub ShowInvalid()
+ 			if m_bValid and not m_bRequired then
+				element.className = replace(element.className, " efInvalid", "")
+				m_bSuppressErrors = false
+			else
+				element.className = element.className & " efInvalid"
+			end if
+ 		end sub
+
+		sub onFocus()
+			if m_elInput.style.display = "none" then HidePrompt()
+			on error resume next
+			if not m_elInput.readonly and m_elInput.style.display <> "none" then
+				m_elInput.focus()
+			elseif (m_bDisabled or m_bReadonly) and m_bBrowse then
+				if not m_elBrowseBtn.disabled then m_elBrowseBtn.focus()
+			end if
+		end sub
+
+		sub onBlur()
+			ShowPrompt()
+		end sub
+
+		sub onChange()
+			if m_sValue <> m_elInput.value then
+				SetData(m_elInput.value)
+			end if
+		end sub
+	</SCRIPT>
+</PUBLIC:COMPONENT>

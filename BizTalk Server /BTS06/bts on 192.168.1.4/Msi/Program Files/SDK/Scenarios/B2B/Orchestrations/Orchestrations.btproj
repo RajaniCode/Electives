@@ -1,0 +1,162 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1346"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{94404F8D-7671-4DBC-8470-FE6B837D191F}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\Microsoft.Samples.BizTalk.Litware.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.Litware.Orchestrations"
+                    AssemblyName = "Microsoft.Samples.BizTalk.Litware.Orchestrations"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "BTSScn.B2B.Hub"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = "BTSScn.B2B.Hub"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Pipeline.Components"
+                    AssemblyName = "Microsoft.BizTalk.Pipeline.Components"
+                    
+                />
+                <Reference
+                    Name = "Microsoft.Samples.BizTalk.Litware.Maps"
+                    Project = "{E014675C-FB32-472E-B1CE-B59FC334495A}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "Microsoft.Samples.BizTalk.Litware.Schemas"
+                    Project = "{6D7AC1F1-06AC-430E-AC7B-91E0370646A1}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "Microsoft.Samples.BizTalk.Litware.Utilities"
+                    Project = "{E9E8329C-ECE7-452C-B47D-D6C396189140}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "CheckOrderExists.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ConfirmOrderWithBroker.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ConfirmOrderWithVendors.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "EDIXmlToBasket.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GetOrder.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GetProfile.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GetPurchaseOrder.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "GetUserProfile.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "NewOrder.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "UpdateOrder.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "UpdateUserProfileBAS.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web References\TPMAccess\Reference.map"
+                    BuildAction = "None"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess"
+                    Generator = "MSDiscoCodeGenerator"
+                />
+                <File
+                    RelPath = "Web References\TPMAccess\Reference.odx"
+                    DependentUpon = "Reference.map"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web References\TPMAccess\TPMAccess.disco"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Web References\TPMAccess\TPMAccess.wsdl"
+                    BuildAction = "None"
+                />
+                <Folder
+                    RelPath = "Web References\TPMAccess\"
+                    WebReferenceUrl = "http://localhost/TPMAccess/TPMAccess.asmx"
+                    UrlBehavior = "Static"
+                />
+                <Folder
+                    RelPath = "Web References\"
+                    WebReferences = "TRUE"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

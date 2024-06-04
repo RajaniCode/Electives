@@ -1,0 +1,242 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Resources>
+<xmlsource1>
+<addresses> 
+   
+   <address id="1"> 
+      <!--This is the users name-->
+      <name>
+         <first>John</first>
+         <last>Smith</last>
+      </name>       
+      <city>Houston</city>
+      <state>Texas</state>
+      <country>United States</country>
+      <phone type="home">333-300-0300</phone>
+      <phone type="work">333-500-9080</phone>
+      <note><![CDATA[This is a new user]]></note>
+   </address> 
+   
+</addresses>
+
+</xmlsource1>
+
+<xmlsource1_insert_before>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+   
+   <xupdate:insert-before select="/addresses/address[@id = 1]/name/last" >    
+      <xupdate:element name="middle">Lennox</xupdate:element>       
+   </xupdate:insert-before> 
+</xupdate:modifications>
+</xmlsource1_insert_before>
+
+<xmlsource1_insert_after>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:insert-after select="/addresses/address[@id = 1]/phone[@type='home']" >    
+      <xupdate:element name="phone"><xupdate:attribute name="type">cell</xupdate:attribute>490-494-4904</xupdate:element>       
+   </xupdate:insert-after> 
+</xupdate:modifications> 
+</xmlsource1_insert_after>
+
+<xmlsource1_append_element>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:append select="/addresses/address[@id = 1]" >    
+      <xupdate:element name="zip">90200</xupdate:element>       
+   </xupdate:append> 
+</xupdate:modifications> 
+</xmlsource1_append_element>
+
+<xmlsource1_append_attribute>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:append select="/addresses/address[@id = 1]/phone[@type='work']" >    
+      <xupdate:attribute name="extension">223</xupdate:attribute>       
+   </xupdate:append> 
+</xupdate:modifications> 
+</xmlsource1_append_attribute>
+
+<xmlsource1_append_text>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:append select="/addresses/address[@id = 1]/country" >
+      <xupdate:text> of America</xupdate:text>
+   </xupdate:append>
+</xupdate:modifications> 
+</xmlsource1_append_text>
+
+<xmlsource1_append_xml>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:append select="/addresses" >
+      <xupdate:element name="address">
+         <xupdate:attribute name="id">2</xupdate:attribute>
+         <name>
+            <first>Susan</first>
+            <last>Long</last>
+         </name>
+         <city>Tucson</city>
+         <state>Arizona</state>
+         <country>United States</country>
+         <phone type="home">430-304-3040</phone>
+      </xupdate:element>      
+   </xupdate:append>
+</xupdate:modifications> 
+</xmlsource1_append_xml>
+
+<xmlsource1_insert_processing_instruction>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:insert-before select="/addresses">
+      <xupdate:processing-instruction name="cocoon-process">type="xsp"</xupdate:processing-instruction>
+   </xupdate:insert-before>
+</xupdate:modifications> 
+</xmlsource1_insert_processing_instruction>
+
+<xmlsource1_insert_comment>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:insert-before select="/addresses/address[@id = 1]/name">
+      <xupdate:comment>Another comment about the name</xupdate:comment>
+   </xupdate:insert-before>
+</xupdate:modifications>
+</xmlsource1_insert_comment>
+
+<xmlsource1_insert_cdata>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:append select="/addresses/address[@id = 1]" >
+      <xupdate:element name="note"><xupdate:cdata><![CDATA[A simple <b>note</b>]]></xupdate:cdata></xupdate:element>
+   </xupdate:append>
+</xupdate:modifications> 
+</xmlsource1_insert_cdata>
+
+<xmlsource1_update_element>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:update select="/addresses/address[@id = 1]/name/first">Johnathan</xupdate:update>
+</xupdate:modifications> 
+</xmlsource1_update_element>
+
+<xmlsource1_update_attributes>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:update select="/addresses/address[@id = 1]/phone[.='333-300-0300']/@type" >cell</xupdate:update>
+</xupdate:modifications> 
+</xmlsource1_update_attributes>
+
+<xmlsource1_update_comment>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:update select="/addresses/address[@id = 1]/comment()[starts-with(., 'This')]" >This user has a name.</xupdate:update>
+</xupdate:modifications> 
+</xmlsource1_update_comment>
+
+<xmlsource1_update_cdata>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:update select="/addresses/address[@id = 1]/note/text()" ><![CDATA[Just some <i>modified</i> content]]></xupdate:update>
+</xupdate:modifications> 
+</xmlsource1_update_cdata>
+
+<xmlsource1_rename_element>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:rename select="/addresses/address[@id = 1]/note" >comment</xupdate:rename>
+</xupdate:modifications> 
+</xmlsource1_rename_element>
+
+<xmlsource1_rename_attribute>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:rename select="/addresses/address[@id = 1]/phone/@type">location</xupdate:rename>   
+</xupdate:modifications> 
+</xmlsource1_rename_attribute>
+
+<xmlsource1_remove_element>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:remove select="/addresses/address[@id = 1]/phone"/>
+</xupdate:modifications> 
+</xmlsource1_remove_element>
+
+
+<xmlsource1_remove_attribute>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:remove select="/addresses/address[@id = 1]/phone/@type" />
+
+</xupdate:modifications> 
+</xmlsource1_remove_attribute>
+
+<xmlsource1_remove_text>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:remove select="/addresses/address[@id = 1]/country/text()" />
+</xupdate:modifications> 
+
+</xmlsource1_remove_text>
+
+<xmlsource1_remove_comment>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+    <xupdate:remove select="/addresses/address[@id = 1]/comment()[1]" />
+
+</xupdate:modifications> 
+</xmlsource1_remove_comment>
+
+<xmlsource1_remove_cdata>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:remove select="/addresses/address[@id = 1]/note/text()" />
+
+</xupdate:modifications> 
+</xmlsource1_remove_cdata>
+
+<xmlsource1_copy_node>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+   
+   <xupdate:variable name="state" select="/addresses/address[@id = 1]/state"/>
+   <xupdate:insert-after select="/addresses/address[@id = 1]/country">
+      <xupdate:value-of select="$state"/>
+   </xupdate:insert-after>
+</xupdate:modifications> 
+</xmlsource1_copy_node>
+
+<xmlsource1_remove_node>
+<xupdate:modifications version="1.0"
+       xmlns:xupdate="http://www.xmldb.org/xupdate"> 
+
+   <xupdate:variable name="country" select="/addresses/address[@id = 1]/country"/>
+   <xupdate:remove select="/addresses/address[@id = 1]/country"/>
+   <xupdate:insert-before select="/addresses/address[@id = 1]/state">
+      <xupdate:value-of select="$country"/>
+   </xupdate:insert-before>   
+   
+</xupdate:modifications> 
+</xmlsource1_remove_node>
+
+
+</Resources>

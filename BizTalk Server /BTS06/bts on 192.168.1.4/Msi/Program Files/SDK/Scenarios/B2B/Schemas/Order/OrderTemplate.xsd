@@ -1,0 +1,621 @@
+<!--
+<Types><Type Key="Basket" UserTypeName="Basket" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="PurchaseOrder" UserTypeName="PurchaseOrder" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="OrderTemplate" UserTypeName="OrderTemplate" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="OrderForm" UserTypeName="OrderForm" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="LineItem" UserTypeName="LineItem" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="Shipment" UserTypeName="Shipment" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="Payment" UserTypeName="Payment" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="CreditCardPayment" UserTypeName="CreditCardPayment" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="GiftCertificatePayment" UserTypeName="GiftCertificatePayment" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="PurchaseOrderPayment" UserTypeName="PurchaseOrderPayment" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="CashCardPayment" UserTypeName="CashCardPayment" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="OrderAddress" UserTypeName="OrderAddress" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="DiscountApplicationRecord" UserTypeName="DiscountApplicationRecord" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="ShippingDiscountRecord" UserTypeName="ShippingDiscountRecord" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /><Type Key="PromoCodeRecord" UserTypeName="PromoCodeRecord" AssemblyType="GAC" NameSpace="Microsoft.CommerceServer.Runtime.Orders" Assembly="Microsoft.CommerceServer.Runtime, Version=6.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" /></Types>
+-->
+<xs:schema elementFormDefault="qualified"	xmlns:xs="http://www.w3.org/2001/XMLSchema" >
+<xs:element name="OrderTemplate" type="OrderTemplate"/>
+<xs:complexType name="OrderTemplate">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="OrderForms" type="ArrayOfOrderForm"/>
+<xs:element minOccurs="1" maxOccurs="1" name="Addresses" type="ArrayOfOrderAddress"/>
+<xs:element minOccurs="1" maxOccurs="1" name="Payments" type="ArrayOfPayment"/>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="LastModified" type="xs:dateTime"/>
+<xs:attribute name="SubTotal" type="xs:decimal"/>
+<xs:attribute name="Created" type="xs:dateTime"/>
+<xs:attribute name="SoldToAddressID" type="xs:string"/>
+<xs:attribute name="TrackingNumber" type="xs:string"/>
+<xs:attribute name="StatusCode" type="StatusCodes"/>
+<xs:attribute name="Name" type="xs:string"/>
+<xs:attribute name="IsDirty" type="xs:boolean"/>
+<xs:attribute name="BillingCurrency" type="xs:string"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="IsDisposed" type="xs:boolean"/>
+<xs:attribute name="ModifiedBy" type="xs:string"/>
+<xs:attribute name="SoldToID" type="Guid"/>
+<xs:attribute name="HandlingTotal" type="xs:decimal"/>
+<xs:attribute name="ShippingTotal" type="xs:decimal"/>
+<xs:attribute name="LineItemCount" type="xs:int"/>
+<xs:attribute name="Total" type="xs:decimal"/>
+<xs:attribute name="Status" type="xs:string"/>
+<xs:attribute name="TaxTotal" type="xs:decimal"/>
+<xs:attribute name="OrderTemplateID" type="Guid"/>
+<xs:attribute name="SoldToName" type="xs:string"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfOrderForm">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="OrderForm" type="OrderForm" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="OrderForm">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="PromoCodeRecords" type="ArrayOfPromoCodeRecord"/>
+<xs:element minOccurs="1" maxOccurs="1" name="Shipments" type="ArrayOfShipment"/>
+<xs:element minOccurs="1" maxOccurs="1" name="PromoCodes" type="ArrayOfString"/>
+<xs:element minOccurs="1" maxOccurs="1" name="LineItems" type="ArrayOfLineItem"/>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="Status" type="xs:string"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="TaxTotal" type="xs:decimal"/>
+<xs:attribute name="LastModified" type="xs:dateTime"/>
+<xs:attribute name="Created" type="xs:dateTime"/>
+<xs:attribute name="PromoUserIdentity" type="xs:string"/>
+<xs:attribute name="SubTotal" type="xs:decimal"/>
+<xs:attribute name="HandlingTotal" type="xs:decimal"/>
+<xs:attribute name="ShippingTotal" type="xs:decimal"/>
+<xs:attribute name="ModifiedBy" type="xs:string"/>
+<xs:attribute name="BillingAddressID" type="xs:string"/>
+<xs:attribute name="Total" type="xs:decimal"/>
+<xs:attribute name="OrderFormID" type="Guid"/>
+<xs:attribute name="Name" type="xs:string"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfOrderAddress">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="OrderAddress" type="OrderAddress" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="OrderAddress">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="Email" type="xs:string"/>
+<xs:attribute name="State" type="xs:string"/>
+<xs:attribute name="Organization" type="xs:string"/>
+<xs:attribute name="EveningPhoneNumber" type="xs:string"/>
+<xs:attribute name="Country" type="CountryCode"/>
+<xs:attribute name="FaxNumber" type="xs:string"/>
+<xs:attribute name="DaytimePhoneNumber" type="xs:string"/>
+<xs:attribute name="OrderAddressID" type="xs:string"/>
+<xs:attribute name="City" type="xs:string"/>
+<xs:attribute name="RegionName" type="xs:string"/>
+<xs:attribute name="FirstName" type="xs:string"/>
+<xs:attribute name="CountryName" type="xs:string"/>
+<xs:attribute name="RegionCode" type="xs:string"/>
+<xs:attribute name="Line1" type="xs:string"/>
+<xs:attribute name="Line2" type="xs:string"/>
+<xs:attribute name="LastName" type="xs:string"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="AddressType" type="AddressTypes"/>
+<xs:attribute name="PostalCode" type="xs:string"/>
+<xs:attribute name="Name" type="xs:string"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfPayment">
+<xs:choice minOccurs="0" maxOccurs="unbounded">
+<xs:element minOccurs="0" maxOccurs="unbounded" name="CreditCardPayment" type="CreditCardPayment"/>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="CashCardPayment" type="CashCardPayment"/>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="GiftCertificatePayment" type="GiftCertificatePayment"/>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="PurchaseOrderPayment" type="PurchaseOrderPayment"/>
+</xs:choice>
+</xs:complexType>
+<xs:complexType name="CreditCardPayment">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="Status" type="xs:string"/>
+<xs:attribute name="ValidationCode" type="xs:string"/>
+<xs:attribute name="PaymentType" type="PaymentMethodTypes"/>
+<xs:attribute name="AuthorizationCode" type="xs:string"/>
+<xs:attribute name="ExpirationDate" type="xs:dateTime"/>
+<xs:attribute name="ProtectedPaymentType" type="PaymentMethodTypes"/>
+<xs:attribute name="CustomerNameOnPayment" type="xs:string"/>
+<xs:attribute name="PaymentMethodName" type="xs:string"/>
+<xs:attribute name="PaymentMethodID" type="Guid"/>
+<xs:attribute name="DerivedClassName" type="xs:string"/>
+<xs:attribute name="PaymentID" type="Guid"/>
+<xs:attribute name="BillingAddressID" type="xs:string"/>
+<xs:attribute name="Amount" type="xs:decimal"/>
+<xs:attribute name="CreditCardNumber" type="xs:string"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+</xs:complexType>
+<xs:complexType name="CashCardPayment">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="Status" type="xs:string"/>
+<xs:attribute name="PaymentType" type="PaymentMethodTypes"/>
+<xs:attribute name="ProtectedPaymentType" type="PaymentMethodTypes"/>
+<xs:attribute name="CustomerNameOnPayment" type="xs:string"/>
+<xs:attribute name="PaymentMethodName" type="xs:string"/>
+<xs:attribute name="PaymentMethodID" type="Guid"/>
+<xs:attribute name="DerivedClassName" type="xs:string"/>
+<xs:attribute name="CashCardNumber" type="xs:string"/>
+<xs:attribute name="PaymentID" type="Guid"/>
+<xs:attribute name="BillingAddressID" type="xs:string"/>
+<xs:attribute name="Amount" type="xs:decimal"/>
+<xs:attribute name="Pin" type="xs:string"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+</xs:complexType>
+<xs:complexType name="GiftCertificatePayment">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="Status" type="xs:string"/>
+<xs:attribute name="PaymentType" type="PaymentMethodTypes"/>
+<xs:attribute name="AuthorizationCode" type="xs:string"/>
+<xs:attribute name="ExpirationDate" type="xs:dateTime"/>
+<xs:attribute name="ProtectedPaymentType" type="PaymentMethodTypes"/>
+<xs:attribute name="CustomerNameOnPayment" type="xs:string"/>
+<xs:attribute name="PaymentMethodName" type="xs:string"/>
+<xs:attribute name="PaymentMethodID" type="Guid"/>
+<xs:attribute name="DerivedClassName" type="xs:string"/>
+<xs:attribute name="PaymentID" type="Guid"/>
+<xs:attribute name="BillingAddressID" type="xs:string"/>
+<xs:attribute name="Amount" type="xs:decimal"/>
+<xs:attribute name="GiftCertificateNumber" type="xs:string"/>
+<xs:attribute name="Pin" type="xs:string"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+</xs:complexType>
+<xs:complexType name="PurchaseOrderPayment">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="Status" type="xs:string"/>
+<xs:attribute name="PaymentType" type="PaymentMethodTypes"/>
+<xs:attribute name="ProtectedPaymentType" type="PaymentMethodTypes"/>
+<xs:attribute name="CustomerNameOnPayment" type="xs:string"/>
+<xs:attribute name="PurchaseOrderPaymentNumber" type="xs:string"/>
+<xs:attribute name="PaymentMethodName" type="xs:string"/>
+<xs:attribute name="DerivedClassName" type="xs:string"/>
+<xs:attribute name="PaymentID" type="Guid"/>
+<xs:attribute name="BillingAddressID" type="xs:string"/>
+<xs:attribute name="Amount" type="xs:decimal"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="PaymentMethodID" type="Guid"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfPromoCodeRecord">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="PromoCodeRecord" type="PromoCodeRecord" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PromoCodeRecord">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="PromoCode" type="xs:string"/>
+<xs:attribute name="PromoCodeLookupDate" type="xs:dateTime"/>
+<xs:attribute name="PromoCodeStatus" type="PromoCodeState"/>
+<xs:attribute name="PromoCodeDefinitionID" type="xs:int"/>
+<xs:attribute name="PromoCodeReserved" type="xs:boolean"/>
+<xs:attribute name="PromoApplied" type="xs:boolean"/>
+<xs:attribute name="OrderFormID" type="Guid"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfShipment">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Shipment" type="Shipment" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Shipment">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="LineItemIndexes" type="ArrayOfInt32"/>
+<xs:element minOccurs="1" maxOccurs="1" name="ShippingDiscounts" type="ArrayOfShippingDiscountRecord"/>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="ShippingMethodID" type="Guid"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="ShipmentID" type="Guid"/>
+<xs:attribute name="ShipmentTotal" type="xs:decimal"/>
+<xs:attribute name="Status" type="xs:string"/>
+<xs:attribute name="ShipmentTrackingNumber" type="xs:string"/>
+<xs:attribute name="ShippingAddressID" type="xs:string"/>
+<xs:attribute name="OrderFormID" type="Guid"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfLineItem">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="LineItem" type="LineItem" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="LineItem">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="ItemLevelDiscountsApplied" type="ArrayOfDiscountApplicationRecord"/>
+<xs:element minOccurs="1" maxOccurs="1" name="OrderLevelDiscountsApplied" type="ArrayOfDiscountApplicationRecord"/>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="ProductCategory" type="xs:string"/>
+<xs:attribute name="ShippingMethodName" type="xs:string"/>
+<xs:attribute name="Created" type="xs:dateTime"/>
+<xs:attribute name="ProductID" type="xs:string"/>
+<xs:attribute name="PlacedPrice" type="xs:decimal"/>
+<xs:attribute name="Description" type="xs:string"/>
+<xs:attribute name="ProductVariantID" type="xs:string"/>
+<xs:attribute name="InventoryCondition" type="InventoryCondition"/>
+<xs:attribute name="OrderFormID" type="Guid"/>
+<xs:attribute name="ShippingAddressID" type="xs:string"/>
+<xs:attribute name="AllowBackordersAndPreorders" type="xs:boolean"/>
+<xs:attribute name="LastModified" type="xs:dateTime"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="ListPrice" type="xs:decimal"/>
+<xs:attribute name="Quantity" type="xs:decimal"/>
+<xs:attribute name="DisplayName" type="xs:string"/>
+<xs:attribute name="ModifiedBy" type="xs:string"/>
+<xs:attribute name="ProductCatalog" type="xs:string"/>
+<xs:attribute name="ShippingMethodID" type="Guid"/>
+<xs:attribute name="OrderLevelDiscountAmount" type="xs:decimal"/>
+<xs:attribute name="PreorderQuantity" type="xs:decimal"/>
+<xs:attribute name="ExtendedPrice" type="xs:decimal"/>
+<xs:attribute name="Status" type="xs:string"/>
+<xs:attribute name="BackorderQuantity" type="xs:decimal"/>
+<xs:attribute name="LineItemDiscountAmount" type="xs:decimal"/>
+<xs:attribute name="InStockQuantity" type="xs:decimal"/>
+<xs:attribute name="LineItemID" type="Guid"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfShippingDiscountRecord">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="ShippingDiscountRecord" type="ShippingDiscountRecord" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ShippingDiscountRecord">
+<xs:attribute name="DiscountID" type="xs:int"/>
+<xs:attribute name="LastModified" type="xs:dateTime"/>
+<xs:attribute name="Priority" type="xs:int"/>
+<xs:attribute name="DiscountAmount" type="xs:decimal"/>
+<xs:attribute name="DiscountValue" type="xs:decimal"/>
+<xs:attribute name="TypeOfDiscount" type="DiscountType"/>
+<xs:attribute name="BasketDisplayMessage" type="xs:string"/>
+<xs:attribute name="ShipmentID" type="Guid"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="PromoCode" type="xs:string"/>
+<xs:attribute name="DiscountName" type="xs:string"/>
+<xs:attribute name="PromoCodeDefinitionID" type="xs:int"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfDiscountApplicationRecord">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="DiscountApplicationRecord" type="DiscountApplicationRecord" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="DiscountApplicationRecord">
+<xs:sequence>
+<xs:element minOccurs="1" maxOccurs="1" name="WeaklyTypedProperties" type="ArrayOfWeaklyTypedProperties"/>
+</xs:sequence>
+<xs:attribute name="DiscountID" type="xs:int"/>
+<xs:attribute name="LastModified" type="xs:dateTime"/>
+<xs:attribute name="Priority" type="xs:int"/>
+<xs:attribute name="DiscountAmount" type="xs:decimal"/>
+<xs:attribute name="DiscountValue" type="xs:decimal"/>
+<xs:attribute name="TypeOfDiscount" type="DiscountType"/>
+<xs:attribute name="BasketDisplayMessage" type="xs:string"/>
+<xs:attribute name="LineItemID" type="Guid"/>
+<xs:attribute name="PromoCode" type="xs:string"/>
+<xs:attribute name="OrderGroupID" type="Guid"/>
+<xs:attribute name="DiscountName" type="xs:string"/>
+<xs:attribute name="PromoCodeDefinitionID" type="xs:int"/>
+</xs:complexType>
+<xs:complexType name="ArrayOfString">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="String" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ArrayOfInt32">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="Int32" />
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="StatusCodes">
+<xs:list>
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="Basket"/>
+<xs:enumeration value="OrderTemplate"/>
+<xs:enumeration value="PurchaseOrder"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:list>
+</xs:simpleType>
+<xs:simpleType name="CountryCode">
+<xs:restriction base="xs:string">
+<xs:enumeration value="AF"/>
+<xs:enumeration value="AL"/>
+<xs:enumeration value="DZ"/>
+<xs:enumeration value="AS"/>
+<xs:enumeration value="AD"/>
+<xs:enumeration value="AO"/>
+<xs:enumeration value="AI"/>
+<xs:enumeration value="AQ"/>
+<xs:enumeration value="AG"/>
+<xs:enumeration value="AR"/>
+<xs:enumeration value="AM"/>
+<xs:enumeration value="AW"/>
+<xs:enumeration value="AU"/>
+<xs:enumeration value="AT"/>
+<xs:enumeration value="AZ"/>
+<xs:enumeration value="BS"/>
+<xs:enumeration value="BH"/>
+<xs:enumeration value="BD"/>
+<xs:enumeration value="BB"/>
+<xs:enumeration value="BY"/>
+<xs:enumeration value="BE"/>
+<xs:enumeration value="BZ"/>
+<xs:enumeration value="BJ"/>
+<xs:enumeration value="BM"/>
+<xs:enumeration value="BT"/>
+<xs:enumeration value="BO"/>
+<xs:enumeration value="BA"/>
+<xs:enumeration value="BW"/>
+<xs:enumeration value="BV"/>
+<xs:enumeration value="BR"/>
+<xs:enumeration value="IO"/>
+<xs:enumeration value="BN"/>
+<xs:enumeration value="BG"/>
+<xs:enumeration value="BF"/>
+<xs:enumeration value="BI"/>
+<xs:enumeration value="KH"/>
+<xs:enumeration value="CM"/>
+<xs:enumeration value="CA"/>
+<xs:enumeration value="CV"/>
+<xs:enumeration value="KY"/>
+<xs:enumeration value="CF"/>
+<xs:enumeration value="TD"/>
+<xs:enumeration value="CL"/>
+<xs:enumeration value="CN"/>
+<xs:enumeration value="CX"/>
+<xs:enumeration value="CC"/>
+<xs:enumeration value="CO"/>
+<xs:enumeration value="KM"/>
+<xs:enumeration value="CG"/>
+<xs:enumeration value="CD"/>
+<xs:enumeration value="CK"/>
+<xs:enumeration value="CR"/>
+<xs:enumeration value="CI"/>
+<xs:enumeration value="HR"/>
+<xs:enumeration value="CU"/>
+<xs:enumeration value="CY"/>
+<xs:enumeration value="CZ"/>
+<xs:enumeration value="DK"/>
+<xs:enumeration value="DJ"/>
+<xs:enumeration value="DM"/>
+<xs:enumeration value="DO"/>
+<xs:enumeration value="EC"/>
+<xs:enumeration value="EG"/>
+<xs:enumeration value="SV"/>
+<xs:enumeration value="GQ"/>
+<xs:enumeration value="ER"/>
+<xs:enumeration value="EE"/>
+<xs:enumeration value="ET"/>
+<xs:enumeration value="FK"/>
+<xs:enumeration value="FO"/>
+<xs:enumeration value="FJ"/>
+<xs:enumeration value="FI"/>
+<xs:enumeration value="FR"/>
+<xs:enumeration value="GF"/>
+<xs:enumeration value="PF"/>
+<xs:enumeration value="TF"/>
+<xs:enumeration value="GA"/>
+<xs:enumeration value="GM"/>
+<xs:enumeration value="GE"/>
+<xs:enumeration value="DE"/>
+<xs:enumeration value="GH"/>
+<xs:enumeration value="GI"/>
+<xs:enumeration value="GR"/>
+<xs:enumeration value="GL"/>
+<xs:enumeration value="GD"/>
+<xs:enumeration value="GP"/>
+<xs:enumeration value="GU"/>
+<xs:enumeration value="GT"/>
+<xs:enumeration value="GN"/>
+<xs:enumeration value="GW"/>
+<xs:enumeration value="GY"/>
+<xs:enumeration value="HT"/>
+<xs:enumeration value="HM"/>
+<xs:enumeration value="VA"/>
+<xs:enumeration value="HN"/>
+<xs:enumeration value="HK"/>
+<xs:enumeration value="HU"/>
+<xs:enumeration value="IS"/>
+<xs:enumeration value="IN"/>
+<xs:enumeration value="ID"/>
+<xs:enumeration value="IR"/>
+<xs:enumeration value="IQ"/>
+<xs:enumeration value="IE"/>
+<xs:enumeration value="IL"/>
+<xs:enumeration value="IT"/>
+<xs:enumeration value="JM"/>
+<xs:enumeration value="JP"/>
+<xs:enumeration value="JO"/>
+<xs:enumeration value="KZ"/>
+<xs:enumeration value="KE"/>
+<xs:enumeration value="KI"/>
+<xs:enumeration value="KP"/>
+<xs:enumeration value="KR"/>
+<xs:enumeration value="KW"/>
+<xs:enumeration value="KG"/>
+<xs:enumeration value="LA"/>
+<xs:enumeration value="LV"/>
+<xs:enumeration value="LB"/>
+<xs:enumeration value="LS"/>
+<xs:enumeration value="LR"/>
+<xs:enumeration value="LY"/>
+<xs:enumeration value="LI"/>
+<xs:enumeration value="LT"/>
+<xs:enumeration value="LU"/>
+<xs:enumeration value="MO"/>
+<xs:enumeration value="MK"/>
+<xs:enumeration value="MG"/>
+<xs:enumeration value="MW"/>
+<xs:enumeration value="MY"/>
+<xs:enumeration value="MV"/>
+<xs:enumeration value="ML"/>
+<xs:enumeration value="MT"/>
+<xs:enumeration value="MH"/>
+<xs:enumeration value="MQ"/>
+<xs:enumeration value="MR"/>
+<xs:enumeration value="MU"/>
+<xs:enumeration value="YT"/>
+<xs:enumeration value="MX"/>
+<xs:enumeration value="FM"/>
+<xs:enumeration value="MD"/>
+<xs:enumeration value="MC"/>
+<xs:enumeration value="MN"/>
+<xs:enumeration value="MS"/>
+<xs:enumeration value="MA"/>
+<xs:enumeration value="MZ"/>
+<xs:enumeration value="MM"/>
+<xs:enumeration value="NA"/>
+<xs:enumeration value="NR"/>
+<xs:enumeration value="NP"/>
+<xs:enumeration value="NL"/>
+<xs:enumeration value="AN"/>
+<xs:enumeration value="NC"/>
+<xs:enumeration value="NZ"/>
+<xs:enumeration value="NI"/>
+<xs:enumeration value="NE"/>
+<xs:enumeration value="NG"/>
+<xs:enumeration value="NU"/>
+<xs:enumeration value="NF"/>
+<xs:enumeration value="MP"/>
+<xs:enumeration value="NO"/>
+<xs:enumeration value="OM"/>
+<xs:enumeration value="PK"/>
+<xs:enumeration value="PW"/>
+<xs:enumeration value="PS"/>
+<xs:enumeration value="PA"/>
+<xs:enumeration value="PG"/>
+<xs:enumeration value="PY"/>
+<xs:enumeration value="PE"/>
+<xs:enumeration value="PH"/>
+<xs:enumeration value="PN"/>
+<xs:enumeration value="PL"/>
+<xs:enumeration value="PT"/>
+<xs:enumeration value="PR"/>
+<xs:enumeration value="QA"/>
+<xs:enumeration value="RE"/>
+<xs:enumeration value="RO"/>
+<xs:enumeration value="RU"/>
+<xs:enumeration value="RW"/>
+<xs:enumeration value="SH"/>
+<xs:enumeration value="KN"/>
+<xs:enumeration value="LC"/>
+<xs:enumeration value="PM"/>
+<xs:enumeration value="VC"/>
+<xs:enumeration value="WS"/>
+<xs:enumeration value="SM"/>
+<xs:enumeration value="ST"/>
+<xs:enumeration value="SA"/>
+<xs:enumeration value="SN"/>
+<xs:enumeration value="SC"/>
+<xs:enumeration value="SL"/>
+<xs:enumeration value="SG"/>
+<xs:enumeration value="SK"/>
+<xs:enumeration value="SI"/>
+<xs:enumeration value="SB"/>
+<xs:enumeration value="SO"/>
+<xs:enumeration value="ZA"/>
+<xs:enumeration value="GS"/>
+<xs:enumeration value="ES"/>
+<xs:enumeration value="LK"/>
+<xs:enumeration value="SD"/>
+<xs:enumeration value="SR"/>
+<xs:enumeration value="SJ"/>
+<xs:enumeration value="SZ"/>
+<xs:enumeration value="SE"/>
+<xs:enumeration value="CH"/>
+<xs:enumeration value="SY"/>
+<xs:enumeration value="TW"/>
+<xs:enumeration value="TJ"/>
+<xs:enumeration value="TZ"/>
+<xs:enumeration value="TH"/>
+<xs:enumeration value="TL"/>
+<xs:enumeration value="TG"/>
+<xs:enumeration value="TK"/>
+<xs:enumeration value="TO"/>
+<xs:enumeration value="TT"/>
+<xs:enumeration value="TN"/>
+<xs:enumeration value="TR"/>
+<xs:enumeration value="TM"/>
+<xs:enumeration value="TC"/>
+<xs:enumeration value="TV"/>
+<xs:enumeration value="UG"/>
+<xs:enumeration value="UA"/>
+<xs:enumeration value="AE"/>
+<xs:enumeration value="GB"/>
+<xs:enumeration value="US"/>
+<xs:enumeration value="UM"/>
+<xs:enumeration value="UY"/>
+<xs:enumeration value="UZ"/>
+<xs:enumeration value="VU"/>
+<xs:enumeration value="VE"/>
+<xs:enumeration value="VN"/>
+<xs:enumeration value="VG"/>
+<xs:enumeration value="VI"/>
+<xs:enumeration value="WF"/>
+<xs:enumeration value="EH"/>
+<xs:enumeration value="YE"/>
+<xs:enumeration value="YU"/>
+<xs:enumeration value="ZM"/>
+<xs:enumeration value="ZW"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="AddressTypes">
+<xs:list>
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="Billing"/>
+<xs:enumeration value="SoldTo"/>
+<xs:enumeration value="Shipping"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:list>
+</xs:simpleType>
+<xs:simpleType name="PaymentMethodTypes">
+<xs:list>
+<xs:simpleType>
+<xs:restriction base="xs:string">
+<xs:enumeration value="CreditCard"/>
+<xs:enumeration value="GiftCertificate"/>
+<xs:enumeration value="PurchaseOrder"/>
+<xs:enumeration value="CashCard"/>
+<xs:enumeration value="Custom"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:list>
+</xs:simpleType>
+<xs:simpleType name="PromoCodeState">
+<xs:restriction base="xs:string">
+<xs:enumeration value="OK"/>
+<xs:enumeration value="Invalid"/>
+<xs:enumeration value="LimitReached"/>
+<xs:enumeration value="IdentityMismatch"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="InventoryCondition">
+<xs:restriction base="xs:string">
+<xs:enumeration value="InStock"/>
+<xs:enumeration value="OutOfStock"/>
+<xs:enumeration value="Backordered"/>
+<xs:enumeration value="Preordered"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="DiscountType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="CurrencyValue"/>
+<xs:enumeration value="Percentage"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:complexType name="ArrayOfWeaklyTypedProperties">
+<xs:sequence>
+<xs:element minOccurs="0" maxOccurs="unbounded" name="WeaklyTypedProperty" type="WeaklyTypedProperty" />
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="WeaklyTypedProperty">
+<xs:attribute name="Name" type="xs:string"/>
+<xs:attribute name="Type" type="xs:string"/>
+<xs:attribute name="Value" type="xs:string"/>
+</xs:complexType>
+<xs:simpleType name="Char">
+<xs:restriction base="xs:unsignedShort"/>
+</xs:simpleType>
+<xs:simpleType name="Guid">
+<xs:restriction base="xs:string">
+<xs:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"/>
+</xs:restriction></xs:simpleType>
+</xs:schema>

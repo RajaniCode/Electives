@@ -1,0 +1,39 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinqToSQLDistributed", "LinqToSQLDistributed\LinqToSQLDistributed.csproj", "{D01D995C-93E7-49CA-A94E-8B522F3CA5D4}"
+	ProjectSection(ProjectDependencies) = postProject
+		{19DCF285-C0CC-42D5-B74B-3F92B5788F5B} = {19DCF285-C0CC-42D5-B74B-3F92B5788F5B}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfService", "WcfService\WcfService.csproj", "{19DCF285-C0CC-42D5-B74B-3F92B5788F5B}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 3
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = LinqToSQLDistributed\\LinqToSQLDistributed.csproj
+		SccLocalPath1 = .
+		SccProjectFilePathRelativizedFromConnection1 = LinqToSQLDistributed\\
+		SccProjectUniqueName2 = WcfService\\WcfService.csproj
+		SccLocalPath2 = .
+		SccProjectFilePathRelativizedFromConnection2 = WcfService\\
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D01D995C-93E7-49CA-A94E-8B522F3CA5D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D01D995C-93E7-49CA-A94E-8B522F3CA5D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D01D995C-93E7-49CA-A94E-8B522F3CA5D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D01D995C-93E7-49CA-A94E-8B522F3CA5D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19DCF285-C0CC-42D5-B74B-3F92B5788F5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19DCF285-C0CC-42D5-B74B-3F92B5788F5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19DCF285-C0CC-42D5-B74B-3F92B5788F5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19DCF285-C0CC-42D5-B74B-3F92B5788F5B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

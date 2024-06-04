@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="EmpTPHTPT.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="EmpTPHTPTStoreContainer">
+          <EntitySet Name="ClubMembers" EntityType="EmpTPHTPT.Store.ClubMembers" store:Type="Tables" Schema="TBH" />
+          <EntitySet Name="HourlyEmployee" EntityType="EmpTPHTPT.Store.HourlyEmployee" store:Type="Tables" Schema="TBH" />
+          <EntitySet Name="Persons" EntityType="EmpTPHTPT.Store.Persons" store:Type="Tables" Schema="TBH" />
+          <EntitySet Name="SalariedEmployee" EntityType="EmpTPHTPT.Store.SalariedEmployee" store:Type="Tables" Schema="TBH" />
+          <AssociationSet Name="FK_ClubMembers_Persons" Association="EmpTPHTPT.Store.FK_ClubMembers_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="ClubMembers" EntitySet="ClubMembers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_HourlyEmployee_Persons" Association="EmpTPHTPT.Store.FK_HourlyEmployee_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="HourlyEmployee" EntitySet="HourlyEmployee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SalariedEmployee_Persons" Association="EmpTPHTPT.Store.FK_SalariedEmployee_Persons">
+            <End Role="Persons" EntitySet="Persons" />
+            <End Role="SalariedEmployee" EntitySet="SalariedEmployee" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClubMembers">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ClubDiscount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HourlyEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Rate" Type="int" Nullable="false" />
+          <Property Name="Hours" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PersonType" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="LoginAccount" Type="varchar" MaxLength="50" />
+          <Property Name="EmployeeNumber" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SalariedEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" />
+          <Property Name="Salary" Type="decimal" Nullable="false" Precision="7" Scale="2" />
+        </EntityType>
+        <Association Name="FK_ClubMembers_Persons">
+          <End Role="Persons" Type="EmpTPHTPT.Store.Persons" Multiplicity="1" />
+          <End Role="ClubMembers" Type="EmpTPHTPT.Store.ClubMembers" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="ClubMembers">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_HourlyEmployee_Persons">
+          <End Role="Persons" Type="EmpTPHTPT.Store.Persons" Multiplicity="1" />
+          <End Role="HourlyEmployee" Type="EmpTPHTPT.Store.HourlyEmployee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="HourlyEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SalariedEmployee_Persons">
+          <End Role="Persons" Type="EmpTPHTPT.Store.Persons" Multiplicity="1" />
+          <End Role="SalariedEmployee" Type="EmpTPHTPT.Store.SalariedEmployee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Persons">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="SalariedEmployee">
+              <PropertyRef Name="EmployeeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="EmpTPHTPT" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="EmployeeTPHTPT">
+          <EntitySet Name="Persons" EntityType="EmpTPHTPT.Person" />
+          </EntityContainer>
+        <EntityType Name="ClubMember" BaseType="EmpTPHTPT.Customer">
+          <Property Name="ClubDiscount" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HourlyEmployee" BaseType="EmpTPHTPT.Employee">
+          <Property Name="Rate" Type="Int32" Nullable="false" />
+          <Property Name="Hours" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Person" Abstract="true">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="SalariedEmployee" BaseType="EmpTPHTPT.Employee">
+          <Property Name="Salary" Type="Decimal" Nullable="false" Precision="7" Scale="2" />
+        </EntityType>
+        <EntityType Name="Employee" BaseType="EmpTPHTPT.Person" >
+          <Property Name="EmployeeNumber" Type="String" Nullable="true" /></EntityType>
+        <EntityType Name="Customer" BaseType="EmpTPHTPT.Person" Abstract="false" >
+          <Property Name="LoginAccount" Type="String" Nullable="true" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="EmpTPHTPTStoreContainer" CdmEntityContainer="EmployeeTPHTPT">
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="IsTypeOf(EmpTPHTPT.Person)">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EmpTPHTPT.Employee)">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="EmployeeNumber" ColumnName="EmployeeNumber" />
+                <Condition ColumnName="PersonType" Value="E" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(EmpTPHTPT.Customer)">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="LoginAccount" ColumnName="LoginAccount" />
+                <Condition ColumnName="PersonType" Value="C" /></MappingFragment></EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(EmpTPHTPT.HourlyEmployee)">
+              <MappingFragment StoreEntitySet="HourlyEmployee">
+                <ScalarProperty Name="PersonId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+              </MappingFragment>
+            </EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(EmpTPHTPT.SalariedEmployee)">
+              <MappingFragment StoreEntitySet="SalariedEmployee">
+                <ScalarProperty Name="PersonId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+              </MappingFragment>
+            </EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(EmpTPHTPT.ClubMember)">
+              <MappingFragment StoreEntitySet="ClubMembers">
+                <ScalarProperty Name="PersonId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ClubDiscount" ColumnName="ClubDiscount" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="EmployeeTPH">
+        <EntityTypeShape EntityType="EmpTPHTPT.ClubMember" Width="1.5" PointX="1.625" PointY="4.25" Height="1.0992643229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmpTPHTPT.HourlyEmployee" Width="1.5" PointX="3.5" PointY="4.25" Height="1.2636116536458326" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmpTPHTPT.Person" Width="1.5" PointX="3.25" PointY="1.125" Height="1.2636116536458335" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmpTPHTPT.SalariedEmployee" Width="1.5" PointX="5.375" PointY="4.375" Height="1.0992643229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="EmpTPHTPT.Employee" Width="1.5" PointX="4.25" PointY="2.75" Height="1.0992643229166665" />
+        <InheritanceConnector EntityType="EmpTPHTPT.Employee">
+          <ConnectorPoint PointX="4.5" PointY="2.3886116536458335" />
+          <ConnectorPoint PointX="4.5" PointY="2.75" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="EmpTPHTPT.Customer" Width="1.5" PointX="2.25" PointY="2.75" Height="1.0992643229166665" />
+        <InheritanceConnector EntityType="EmpTPHTPT.Customer">
+          <ConnectorPoint PointX="3.5" PointY="2.3886116536458335" />
+          <ConnectorPoint PointX="3.5" PointY="2.75" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="EmpTPHTPT.HourlyEmployee">
+          <ConnectorPoint PointX="4.625" PointY="3.8492643229166665" />
+          <ConnectorPoint PointX="4.625" PointY="4.25" /></InheritanceConnector>
+        <InheritanceConnector EntityType="EmpTPHTPT.SalariedEmployee">
+          <ConnectorPoint PointX="5.5625" PointY="3.8492643229166665" />
+          <ConnectorPoint PointX="5.5625" PointY="4.375" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="EmpTPHTPT.ClubMember">
+          <ConnectorPoint PointX="2.6875" PointY="3.8492643229166665" />
+          <ConnectorPoint PointX="2.6875" PointY="4.25" /></InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

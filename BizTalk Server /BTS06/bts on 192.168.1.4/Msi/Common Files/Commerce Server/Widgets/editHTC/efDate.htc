@@ -1,0 +1,1034 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.efDate' tagName="efdate" lightweight=true>
+	<PUBLIC>
+		<EVENT NAME='onError'		ID='evtError'></EVENT><!-- fired when developer error occurs -->
+		<EVENT NAME='onRequire'		ID='evtRequired'></EVENT>
+		<EVENT NAME='onChange'		ID='evtChange'></EVENT>
+		<EVENT NAME='onValid'		ID='evtValid'></EVENT>
+		<EVENT NAME='onBrowse'		ID='evtBrowse'></EVENT>
+		<EVENT NAME='onBeginChange'	ID='evtBeginChange'></EVENT>
+
+		<METHOD NAME='initialize' />
+		<METHOD NAME='focus'		INTERNALNAME='onFocus' />
+		<METHOD NAME='resetDefault'	INTERNALNAME='ResetDefault' />
+	<!-- UNSUPPORTED: PRIVATE METHODS -->
+		<METHOD NAME='resetReadOnly' />
+
+		<PROPERTY NAME='dirty'		GET='bGetDirty'		/>
+		<PROPERTY NAME='required'	GET='bGetRequired'	/>
+		<PROPERTY NAME='valid'		GET='bGetValid'		/>
+		<PROPERTY NAME='disabled'	GET='bGetDisabled'	PUT='SetDisabled' />
+		<PROPERTY NAME='readonly'	GET='bGetReadonly'	PUT='SetReadonly' />
+		<PROPERTY NAME='value'		GET='sGetData'		PUT='SetData' />
+		<PROPERTY NAME='prompt'		GET='sGetPrompt'	PUT='SetPrompt' />
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_AbortControl_ErrorMessage = "The control could not load.  Please contact your system administrator"
+		const L_ControlURNandID_ErrorMessage = "Error in efDate with Id: ""%1"""
+		const L_FirstDayRange_ErrorMessage = "firstday attribute must be in the range 0(Sun)-6(Sat): %1"
+		const L_BadFormat_ErrorMessage = "invalid format string: %1 (support mm/dd/yyyy, dd/mm/yyyy, yyyy/mm/dd with '/', '-', or '.' as separators)"
+		const L_DefaultError_ErrorMessage = "validation error in date (%1)"
+		const L_DefaultDatePrompt_Text = "enter a date (%1)"
+		const L_ValidationError_ErrorMessage = "Validation error"
+		const L_PickerButtonWidth_Number = 16	'width in pixels of arrow/ellipsis buttons
+
+		dim m_bDirty, m_bDebug, m_bBrowse, m_bDisabled, m_bReadonly, m_bValid, m_bRequired, _
+			m_bMasterReadOnly, m_bFieldRequired, m_bSuppressErrors, m_bBrowseReadonly, _
+			m_elInput, m_elPickerBtn, m_elDropdown, m_elBrowseBtn, m_elCalendar, m_elPrompt, _
+			m_sType, m_sError, m_sFormat, m_sSeparator, m_nMonth, m_nDay, m_nYear, _
+			m_nMax, m_nMin, m_nDayIndex, m_nMonthIndex, m_nYearIndex, m_bLoading, _
+			m_fnOnError, m_fnOnBrowse, m_fnOnChange, m_fnOnRequire, m_fnOnValid, _
+			m_aMonthDays, m_sPrompt, m_sValue, m_sDefault, m_nFirstDay
+
+		const DEFAULT_FORMAT = "mm/dd/yyyy"
+		'button name constants (webdings)
+		const DOWN_ARROW	= 6
+		const ELLIPSIS		= "&hellip;"
+		'keycode constants
+		const KEYCODE_ESC			= 27
+		const KEYCODE_ENTER			= 13
+		const KEYCODE_SPACE			= 32
+		const KEYCODE_LEFT_ARROW	= 37
+		const KEYCODE_UP_ARROW		= 38
+		const KEYCODE_RIGHT_ARROW	= 39
+		const KEYCODE_DOWN_ARROW	= 40
+		const KEYCODE_DELETE		= 46
+		const KEYCODE_BACKSPACE		= 8
+		const KEYCODE_TAB			= 9
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		m_bDirty = false			'true if control's value has changed
+		m_bRequired = true			'true if marked required and currently empty
+		m_bValid = false			'true if value is valid
+		m_bSuppressErrors = false	'true supresses validation alert
+		set m_elBrowseBtn = nothing	'holds browse button, if any
+		m_bLoading = true
+		'array of number of days in each month
+		m_aMonthDays = Array(31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+
+		sub Initialize(xmlNode, sValue)
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			dim xmlTemp, sTemp, dtDate, elTable, elRow, elCell, bSuccess
+
+			m_sType = "date"
+			element.innerText = ""
+
+			'get event handler function names
+			m_fnOnBrowse = xmlNode.getAttribute("onbrowse")
+			m_fnOnChange = xmlNode.getAttribute("onchange")
+			m_fnOnRequire = xmlNode.getAttribute("onrequire")
+			m_fnOnValid = xmlNode.getAttribute("onvalid")
+			m_fnOnError = xmlNode.getAttribute("onerror")
+			'check if browse enabled
+			sTemp = xmlNode.getAttribute("browse")
+			m_bBrowse = CBool(not isNull(m_fnOnBrowse) or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+			sTemp = xmlNode.getAttribute("browsereadonly")
+			m_bBrowseReadonly = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+
+			'get first day of the week (0-sun to 6-sat) for calendar
+			m_nFirstDay = xmlNode.getAttribute("firstday")
+			if isNull(m_nFirstDay) or m_nFirstDay = "" or not isNumeric(m_nFirstDay) then m_nFirstDay = 0
+			m_nFirstDay = cInt(m_nFirstDay)
+			if m_nFirstDay < 0 or m_nFirstDay > 6 then
+				ReportError(sFormatString(L_FirstDayRange_ErrorMessage, Array(m_nFirstDay)))
+				m_nFirstDay = 0
+			end if
+
+			'get format string and set separator and charmask
+			bSuccess = bGetFormat(xmlNode)
+			if not bSuccess then
+				AbortControl()
+			else
+				'get prompt text
+				set xmlTemp = xmlNode.selectSingleNode("prompt")
+				if not xmlTemp is nothing then
+					m_sPrompt = xmlTemp.text
+				else
+					m_sPrompt = sFormatString(L_DefaultDatePrompt_Text, array(m_sFormat))
+				end if
+				'if date invalid then default to today
+				m_sDefault = xmlNode.getAttribute("default")
+				if sValue = "" and not isNull(m_sDefault) then sValue = m_sDefault
+				if not bIsDate(sValue) and sValue <> "" then
+					dtDate = Date()
+					m_nMonth = Month(dtDate)
+					m_nDay = Day(dtDate)
+					m_nYear = Year(dtDate)
+				else
+					m_nMonth = nGetMonth(sValue)
+					m_nDay = nGetDay(sValue)
+					m_nYear = nGetYear(sValue)
+				end if
+				sValue = sGetFormattedDate(m_nYear, m_nMonth, m_nDay)
+				element.title = sValue
+				m_sValue = sValue
+
+				'create container table
+				set elTable = element.appendChild(element.document.createElement("TABLE"))
+				with elTable
+					.style.tableLayout = "fixed"
+					.width = "100%"
+					.cellSpacing = 0
+					.cellPadding = 0
+				end with
+				set elRow = elTable.insertRow()
+				set elCell = elRow.insertCell()
+				elCell.style.padding = 0
+				elCell.vAlign = "top"
+				'create input for displaying value
+				set m_elInput = elCell.appendChild(element.document.createElement("INPUT"))
+				m_elInput.type = "text"
+				with m_elInput
+					.id = "prop_" & element.id
+					.name = element.id
+					.value = sValue
+					.tabIndex = 0
+					if sValue = "" then .style.display = "none"
+					.maxLength = 10
+					.className = "efBorderless"
+					.attachEvent "onpropertychange", GetRef("onValueChange")
+					.attachEvent "onchange", GetRef("onChange")
+					.attachEvent "onblur", GetRef("onBlur")
+					.attachEvent "onclick", GetRef("onAbortDropDown")
+					.attachEvent "onkeydown", GetRef("onKeyDown")
+					.attachEvent "onkeypress", GetRef("onKeyPress")
+				end with
+				'create span for displaying prompt
+				set m_elPrompt = elCell.appendChild(element.document.createElement("DIV"))
+				with m_elPrompt
+					.id = "prompt_" & element.id
+					.innerText = m_sPrompt
+					.title = m_sPrompt
+					if sValue <> "" then .style.display = "none"
+					.className = "efPrompt efBorderless"
+					.nowrap = true
+					.tabindex = 0
+					.attachEvent "onfocus", GetRef("onClickPrompt")
+					.attachEvent "onclick", GetRef("onClickPrompt")
+					element.attachEvent "onfocus", GetRef("onClickPrompt")
+					element.attachEvent "onclick", GetRef("onClickPrompt")
+				end with
+
+				set elCell = elRow.insertCell()
+				elCell.vAlign = "top"
+				elCell.style.padding = 0
+				elCell.width = L_PickerButtonWidth_Number
+				'add down-arrow button for drop-down
+				set m_elPickerBtn = elCell.appendChild(element.document.createElement("BUTTON"))
+				with m_elPickerBtn
+					.className = "efDownBtn"
+					.innerText = DOWN_ARROW
+					.attachEvent "onclick", GetRef("onClick")
+					.attachEvent "onkeydown", GetRef("onKeyDown")
+				end with
+
+				if m_bBrowse then
+					'if browsable then add browse button and attach browse event
+					set elCell = elRow.insertCell()
+					elCell.style.padding = 0
+					elCell.width = L_PickerButtonWidth_Number
+					set m_elBrowseBtn = elCell.appendChild(element.document.createElement("BUTTON"))
+					with m_elBrowseBtn
+						.id = "browse_" & element.id
+						.disabled = true
+						.attachEvent "onclick", GetRef("onBrowseClick")
+						.className = "efEllipsisBtn"
+						.innerHTML = ELLIPSIS
+						.attachEvent "onkeydown", GetRef("onBrowseKeyDown")
+						set xmlTemp = xmlNode.selectSingleNode("browsetooltip")
+						if not xmlTemp is nothing then .title = xmlTemp.text
+					end with
+					if not isNull(m_fnOnBrowse) then element.attachEvent "onbrowse", GetRef("CallBrowseHandler")
+				end if
+
+				'add drop-down div to hold calendar
+				set m_elDropdown = element.appendChild(element.document.createElement("DIV"))
+				with m_elDropdown
+					.id = "dropdown_" & element.id
+					.title = ""
+					.className = "efDropDown efDatePicker"
+					.style.display = "none"
+					.attachEvent "onkeydown", GetRef("onKeyDown")
+				end with
+
+				'add calendar div
+				set m_elCalendar = m_elDropdown.appendChild(element.document.createElement("DIV"))
+				with m_elCalendar
+					.id = "calendar"
+					.style.border = "none"
+					.style.zIndex = "100"
+				end with
+
+				'get validation error msg
+				if not xmlNode.selectSingleNode("error") is nothing then m_sError = xmlNode.selectSingleNode("error").text
+				if m_sError = "" then m_sError = sFormatString(L_DefaultError_ErrorMessage, array(m_sFormat))
+
+				'get min and max
+				m_nMax = xmlNode.getAttribute("max")
+				if bIsDate(m_nMax) and m_nMax <> "" then
+					m_nMax = dtGetDate(m_nMax)
+				else
+					m_nMax = null
+				end if
+				m_nMin = xmlNode.getAttribute("min")
+				if bIsDate(m_nMin) and m_nMin <> "" then
+					m_nMin = dtGetDate(m_nMin)
+				else
+					m_nMin = null
+				end if
+
+				'get required, readonly, disabled
+				sTemp = xmlNode.getAttribute("required")
+				m_bFieldRequired = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				sTemp = xmlNode.getAttribute("readonly")
+				m_bMasterReadOnly = CBool(m_bBrowseReadonly or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+				readonly = m_bMasterReadOnly
+				sTemp = xmlNode.getAttribute("disabled")
+				disabled = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				'attach event handlers
+				if not isNull(m_fnOnChange) then element.attachEvent "onchange", GetRef("CallChangeHandler")
+				if not isNull(m_fnOnRequire) then element.attachEvent "onrequire", GetRef("CallRequireHandler")
+				if not isNull(m_fnOnValid) then element.attachEvent "onvalid", GetRef("CallValidHandler")
+				if not isNull(m_fnOnError) then element.attachEvent "onerror", GetRef("CallErrorHandler")
+				'fire events and show invalid
+				SetRequired(sValue)
+				SetValid(sValue)
+				ShowInvalid()
+				m_bLoading = false
+			end if
+		end sub
+
+		function bGetFormat(xmlNode)
+			dim xmlFormat, i, aFormat, sfirstChar
+			bGetFormat = true
+			set xmlFormat = xmlNode.selectSingleNode("format")
+			m_sFormat = ""
+			if not xmlFormat is nothing then
+				m_sFormat = trim(xmlFormat.text)
+			else
+				m_sFormat = DEFAULT_FORMAT
+			end if
+			'get separator
+			m_sSeparator = ""
+			if inStr(m_sFormat, "/") then
+				m_sSeparator = "/"
+			elseif inStr(m_sFormat, "-") then
+				m_sSeparator = "-"
+			elseif inStr(m_sFormat, ".") then
+				m_sSeparator = "."
+			else
+				'bad separator
+				ReportError(sFormatString(L_BadFormat_ErrorMessage, Array(m_sFormat)))
+				bGetFormat = false
+			end if
+			if m_sSeparator <> "" then
+				'use separator to split format
+				aFormat = split(m_sFormat, m_sSeparator)
+				if Ubound(aFormat) = 2 then
+					m_nDayIndex = -1
+					m_nMonthIndex = -1
+					m_nYearIndex = -1
+					'iterate to find where each part is
+					for i = 0 to 2
+						sfirstChar = LCase(left(aFormat(i), 1))
+						if sfirstChar = "d" then
+							m_nDayIndex = i
+							aFormat(i) = "dd"
+						elseif sfirstChar = "m" then
+							m_nMonthIndex = i
+							aFormat(i) = "mm"
+						elseif sfirstChar = "y" then
+							m_nYearIndex = i
+							aFormat(i) = "yyyy"
+						end if
+					next
+					if m_nDayIndex = -1 or m_nMonthIndex = -1 or m_nYearIndex = -1 or _
+						m_nYearIndex = 1 or m_nMonthIndex = 2 then
+						'bad format (part missing or month or year in wrong place)
+						ReportError(sFormatString(L_BadFormat_ErrorMessage, Array(m_sFormat)))
+						bGetFormat = false
+					else
+						'reassemble format
+						m_sFormat = join(aFormat, m_sSeparator)
+					end if
+				else
+					'bad separator (not three parts)
+					ReportError(sFormatString(L_BadFormat_ErrorMessage, Array(m_sFormat)))
+					bGetFormat = false
+				end if
+			end if
+		end function
+
+		function nGetDay(sValue)
+			dim aDate, nMonth
+			nGetDay = -1
+			if not isNull(sValue) then
+				aDate = split(sValue, m_sSeparator)
+				nMonth = nGetMonth(sValue)
+				if Ubound(aDate) = 2 and nMonth > 0 then
+					if aDate(m_nDayIndex) <> "" and isNumeric(aDate(m_nDayIndex)) then
+						if cLng(aDate(m_nDayIndex)) > 0 and cLng(aDate(m_nDayIndex)) <= m_aMonthDays(nMonth - 1) then
+							nGetDay = cInt(aDate(m_nDayIndex))
+						end if
+					end if
+				end if
+			end if
+		end function
+
+		function nGetMonth(sValue)
+			dim aDate
+			nGetMonth = -1
+			if not isNull(sValue) then
+				aDate = split(sValue, m_sSeparator)
+				if Ubound(aDate) = 2 then
+					if aDate(m_nMonthIndex) <> "" and isNumeric(aDate(m_nMonthIndex)) then
+						if aDate(m_nMonthIndex) > 0 and aDate(m_nMonthIndex) < 13 then nGetMonth = cInt(aDate(m_nMonthIndex))
+					end if
+				end if
+			end if
+		end function
+
+		function nGetYear(sValue)
+			dim aDate, nYear
+			if not m_bDebug then on error resume next
+			nGetYear = -1
+			if not isNull(sValue) then
+				aDate = split(sValue, m_sSeparator)
+				if Ubound(aDate) = 2 then
+					if aDate(m_nYearIndex) <> "" and isNumeric(aDate(m_nYearIndex)) then nYear = cLng(aDate(m_nYearIndex))
+				end if
+				if nYear < 50 then
+					nYear = nYear + 2000
+				elseif nYear < 100 then
+					nYear = nYear + 1900
+				elseif nYear < 1753 or nYear > 3000 then
+					nYear = -1
+				end if
+			end if
+			nGetYear = nYear
+		end function
+
+		function dtGetDate(sValue)
+			dtGetDate = DateSerial(nGetYear(sValue), nGetMonth(sValue), nGetDay(sValue))
+		end function
+
+		function sGetFormattedDate(nYear, nMonth, nDay)
+			dim aDate(2)
+			sGetFormattedDate = ""
+			if nYear > -1 and nMonth > -1 and nDay > -1 then
+				aDate(m_nYearIndex) = nYear
+				aDate(m_nMonthIndex) = nMonth
+				aDate(m_nDayIndex) = nDay
+				sGetFormattedDate = join(aDate, m_sSeparator)
+			end if
+		end function
+
+		function bIsDate(sValue)
+			dim nYear, nMonth, nDay
+			if not m_bDebug then on error resume next
+			bIsDate = true
+
+			nYear = nGetYear(sValue)
+			if nYear < 0 then
+				bIsDate = false
+			else
+				m_aMonthDays(1) = 28
+				If nYear Mod 4 = 0 Then
+					If nYear Mod 100 = 0 Then
+						If nYear Mod 400 = 0 Then
+							'century only a leap year if divisible by 400
+							m_aMonthDays(1) = 29
+						End If
+					Else
+						'non-century divisible by 4 is always a leap year
+						m_aMonthDays(1) = 29
+					End If
+				End If
+			End If
+
+			if bIsDate then
+				nMonth = nGetMonth(sValue)
+				if nMonth < 0 then
+					bIsDate = false
+				else
+					nMonth = cLng(nMonth)
+					if nMonth < 1 or nMonth > 12 then
+						bIsDate = false
+					end if
+				end if
+			end if
+
+			if bIsDate then
+				nDay = nGetDay(sValue)
+				if not isNumeric(nDay) then
+					bIsDate = false
+				else
+					if cLng(nDay) < 1 or cLng(nDay) > m_aMonthDays(nMonth - 1) then
+						bIsDate = false
+					end if
+				end if
+			end if
+		end function
+
+		sub AbortControl()
+			dim elFont
+			'display error text in element
+			element.innerText = ""
+			set elFont = element.appendChild(element.document.createElement("SPAN"))
+			elFont.style.color = "red"
+			elFont.style.fontWeight = "bold"
+			element.title = L_AbortControl_ErrorMessage
+			elFont.innerText = L_AbortControl_ErrorMessage
+		end sub
+
+		function elGetContainer(elElement, sKey, sValue)
+			Dim elTemp, elTemp2
+			set elTemp = elElement
+			set elTemp2 = elElement
+			do while not isNull(elTemp) and (elTemp.tagName <> "BODY")
+				if eval("elTemp." & sKey & " = """ & sValue & """") then
+					set elTemp2 = elTemp
+					set elGetContainer = elTemp2
+					exit function
+				end if
+				set elTemp = elTemp.parentElement
+			loop
+			set elGetContainer = elTemp2
+		end function
+
+		sub ReportError(strMessage)
+			dim evt
+			' Display the message if in debug-mode.
+			strMessage = sFormatString(L_ControlURNandID_ErrorMessage, Array(element.id)) & vbCrLf & vbCrLf & strMessage
+			if m_bDebug = true then alert(strMessage)
+			set evt = createEventObject()
+			evt.setAttribute "error", strMessage
+			evt.setAttribute "type", "error"
+			evtError.fire(evt)
+		end sub
+
+		Function sFormatString(sFormat, aArgs)
+			dim nArg, sNewString
+			'formats strings like C format using numbered arguments (%1, %2, &tc.)
+			'call like: sText = sFormatString(sOriginalText, Array(sArg1, sArg2, ...))
+			sNewString = sFormat
+			for nArg = LBound(aArgs) to UBound(aArgs)
+				sNewString = Replace(sNewString, "%" & nArg + 1, aArgs(nArg))
+			next
+			sFormatString = sNewString
+		End Function
+
+		sub onBrowseKeyDown()
+			dim evt
+			set evt = window.event
+			if not m_bDisabled then
+				if evt.keyCode = KEYCODE_ENTER then
+					'enter same as click item
+					onBrowseClick()
+					evt.returnValue = false
+				end if
+			end if
+		end sub
+
+		sub onBrowseClick()
+			dim evt
+			if not m_bDisabled then
+				'fire browse event
+				set evt = createEventObject()
+				evt.setAttribute "value", m_elInput.value
+				evt.setAttribute "type", "browse"
+				evtBrowse.fire(evt)
+			end if
+		end sub
+
+		sub CallBrowseHandler()
+			if window.event.type <> "browse" then exit sub
+			on error resume next
+			execute("call window." & m_fnOnBrowse)
+			on error goto 0
+		end sub
+
+		sub CallChangeHandler()
+			on error resume next
+			execute("call window." & m_fnOnChange)
+			on error goto 0
+		end sub
+
+		sub CallRequireHandler()
+			on error resume next
+			execute("call window." & m_fnOnRequire)
+			on error goto 0
+		end sub
+
+		sub CallValidHandler()
+			on error resume next
+			execute("call window." & m_fnOnValid)
+			on error goto 0
+		end sub
+
+		sub CallErrorHandler()
+			on error resume next
+			execute("call window." & m_fnOnError)
+			on error goto 0
+		end sub
+
+		sub sGetPrompt(sPrompt)
+			sGetPrompt = m_sPrompt
+		end sub
+
+		sub SetPrompt(sPrompt)
+			m_sPrompt = sPrompt
+		end sub
+
+		sub ShowPrompt()
+			dim nWidth
+			if m_elInput.value = "" and not (m_bReadonly or m_bDisabled) then
+				nWidth = m_elInput.style.pixelWidth
+				m_elPrompt.style.display = "block"
+				if nWidth > 0 then m_elPrompt.style.width = nWidth
+				m_elInput.style.display = "none"
+				ShowInvalid()
+			end if
+		end sub
+
+		sub HidePrompt()
+			if m_elPrompt.style.display <> "none" then
+				m_elPrompt.style.display = "none"
+				m_elInput.style.display = "block"
+			end if
+		end sub
+
+		sub onClickPrompt()
+			HidePrompt()
+			focus()
+		end sub
+
+		sub onKeyDown()
+			if m_bReadOnly or m_bDisabled then exit sub
+			dim evt, elSource, nRow, nCell, elTable
+			set evt = window.event
+			set elSource = evt.srcElement
+			if elSource.tagName = "SELECT" then
+				window.event.cancelBubble = true
+				exit sub
+			end if
+			if window.event.keyCode > 192 then window.event.returnValue = false
+			select case window.event.keyCode
+				case KEYCODE_ESC
+					window.event.returnValue = false
+					window.event.cancelBubble = true
+				case KEYCODE_ENTER
+					if elSource.tagName = "INPUT" or _
+						elSource.tagName = "BUTTON" then
+						onClick()
+					else
+						'enter same as click item
+						elSource.click()
+					end if
+					window.event.returnValue = false
+				case KEYCODE_SPACE
+					if elSource.tagName <> "INPUT" then
+						'enter same as click item
+						elSource.click()
+						focus()
+					end if
+					window.event.returnValue = false
+				case KEYCODE_UP_ARROW
+					if elSource.tagName = "INPUT" or _
+						elSource.tagName = "BUTTON" then
+						'up arrow closes drop-down
+						if m_elDropdown.style.display <> "none" then
+							HideDropDown()
+							focus()
+						end if
+						window.event.returnValue = false
+					elseif elSource.tagName = "TD" then
+						'move a cell up
+						nRow = elSource.parentElement.rowIndex
+						nCell = elSource.cellIndex
+						set elTable = elGetContainer(elSource, "tagName", "TABLE")
+						if nRow > 1 then elTable.rows(nRow - 1).cells(nCell).focus()
+						window.event.returnValue = false
+					end if
+				case KEYCODE_DOWN_ARROW
+					if elSource.tagName = "INPUT" or _
+						elSource.tagName = "BUTTON" then
+						'down arrow opens drop-down
+						if m_elDropdown.style.display = "none" then
+							SetData(m_elInput.value)
+							onClick()
+						end if
+						window.event.returnValue = false
+					elseif elSource.tagName = "TD" then
+						'move a cell down
+						nRow = elSource.parentElement.rowIndex
+						nCell = elSource.cellIndex
+						set elTable = elGetContainer(elSource, "tagName", "TABLE")
+						if nRow < 6 then elTable.rows(nRow + 1).cells(nCell).focus()
+						window.event.returnValue = false
+					end if
+				case KEYCODE_LEFT_ARROW
+					if elSource.tagName = "TD" then
+						'move a cell left
+						nRow = elSource.parentElement.rowIndex
+						nCell = elSource.cellIndex
+						set elTable = elGetContainer(elSource, "tagName", "TABLE")
+						if nCell > 0 then elTable.rows(nRow).cells(nCell - 1).focus()
+						window.event.returnValue = false
+					end if
+				case KEYCODE_RIGHT_ARROW
+					if elSource.tagName = "TD" then
+						'move a cell right
+						nRow = elSource.parentElement.rowIndex
+						nCell = elSource.cellIndex
+						set elTable = elGetContainer(elSource, "tagName", "TABLE")
+						if nCell < 6 then elTable.rows(nRow).cells(nCell + 1).focus()
+						window.event.returnValue = false
+					end if
+				case else
+					window.setTimeout GetRef("fireBeginChange"), 1
+			end select
+		end sub
+
+		sub fireBeginChange()
+			dim evt
+			if m_elInput.value <> m_sValue then
+				m_bDirty = true
+				set evt = createEventObject()
+				evt.setAttribute "type", "beginchange"
+				evtBeginChange.fire(evt)
+			end if
+		end sub
+
+		sub onOutsideClick()
+			if not element.contains(window.event.srcElement) and _
+				m_elDropdown.style.display <> "none" then
+				HideDropDown()
+			end if
+		end sub
+
+		sub onAbortDropDown()
+			if m_elInput.readOnly then exit sub
+			if m_elDropdown.style.display <> "none" then
+				HideDropDown()
+				focus()
+			end if
+		end sub
+
+		sub onClick()
+			if m_elInput.readOnly then exit sub
+			if m_elDropDown.style.display = "none" then
+				ShowDropDown()
+				if m_elCalendar.style.behavior = "" then
+					'attach calendar behavior first time dropped down
+					m_elCalendar.attachEvent "onreadystatechange", GetRef("ShowCalendarEx")
+					m_elCalendar.style.behavior = "url(/widgets/editHTC/calendar.htc)"
+					if m_elCalendar.readystate = "complete" then ShowCalendarEx()
+				else
+					ShowCalendar()
+				end if
+			else
+				HideDropDown()
+				focus()
+			end if
+		end sub
+
+		sub ShowCalendarEx()
+			if m_elCalendar.readystate = "complete" then
+				m_elCalendar.detachEvent "onreadystatechange", GetRef("ShowCalendarEx")
+				ShowCalendar()
+				m_elCalendar.attachEvent "onChange", GetRef("SetDate")
+				ShowDropDown()
+			end if
+		end sub
+
+		sub ShowCalendar()
+			dim nDay, nMonth, nYear, dtDate
+			with m_elCalendar
+				.firstDay = m_nFirstDay
+				if not bIsDate(m_elInput.value) or not m_bValid then
+					dtDate = Date()
+					SetData(sGetFormattedDate(Year(dtDate), Month(dtDate), Day(dtDate)))
+				end if
+				if CInt(m_elCalendar.cday) <> CInt(m_nDay) or _
+					CInt(m_elCalendar.cmonth) <> CInt(m_nMonth) or _
+					CInt(m_elCalendar.cyear) <> CInt(m_nYear) then
+					.setDate CInt(m_nDay), CInt(m_nMonth), CInt(m_nYear)
+				end if
+				.style.top = CInt(m_elDropDown.clientTop + 3)
+				.style.left = CInt(m_elDropDown.clientLeft + 8)
+				.style.display = "block"
+			end with
+		end sub
+
+		sub SetDate()
+			dim  sDate, nDay, nMonth, nYear
+			nDay = m_nDay
+			nMonth = m_nMonth
+			nYear = m_nYear
+			if (CInt(nMonth) = CInt(m_elCalendar.cmonth) and _
+				CInt(nYear) = CInt(m_elCalendar.cyear)) or _
+				CInt(nDay) <> CInt(m_elCalendar.cday) then HideDropDown()
+			sDate = sGetFormattedDate(m_elCalendar.cyear, m_elCalendar.cmonth, m_elCalendar.cday)
+			SetData(sDate)
+		end sub
+
+		sub ShowDropDown()
+			element.document.attachEvent "onclick", GetRef("onOutsideClick")
+			m_elDropDown.style.left = element.clientLeft - 1
+			m_elDropDown.style.width = element.clientWidth
+			m_elDropDown.style.top = element.offsetHeight - 2
+			m_elDropDown.style.display = "block"
+			element.style.zIndex = "99"
+			element.style.position = "relative"
+		end sub
+
+		sub HideDropDown()
+			if m_elDropDown.style.display <> "none" then
+				element.document.detachEvent "onclick", GetRef("onOutsideClick")
+				element.style.zIndex = ""
+				element.style.position = ""
+				m_elDropDown.style.display = "none"
+			end if
+		end sub
+
+		function bGetDisabled()
+			bGetDisabled = m_bDisabled
+		end function
+
+		sub SetDisabled(bDisabled)
+			m_bDisabled = bDisabled
+			if not (m_bReadonly or m_bBrowseReadonly) then
+				m_elInput.readonly = m_bDisabled
+				if m_bDisabled then
+					element.style.cursor = "default"
+					m_elInput.style.cursor = "default"
+					m_elInput.tabIndex = -1
+					m_elPickerBtn.tabIndex = -1
+					m_elPickerBtn.disabled = bDisabled
+				else
+					element.style.cursor = ""
+					m_elInput.style.cursor = ""
+					m_elInput.tabIndex = 0
+					m_elPickerBtn.tabIndex = 0
+					m_elPickerBtn.disabled = bDisabled
+				end if
+			end if
+			if m_bDisabled then
+				SetRequired("__")
+				m_elDropdown.style.display = "none"
+				element.className = element.className & " efDisabled"
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = -1
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "none"
+				end if
+			else
+				if m_bFieldRequired then SetRequired(m_sValue)
+				m_bDirty = false
+				m_bValid = true
+				element.className = replace(element.className, " efDisabled", "")
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = 0
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "block"
+				end if
+			end if
+			if m_bReadonly or m_bDisabled then
+				HidePrompt()
+			end if
+		end sub
+
+		function bGetReadonly()
+			bGetReadonly = m_bReadonly
+		end function
+
+		sub SetReadonly(bReadOnly)
+			m_bReadonly = bReadOnly
+			m_elInput.readOnly = m_bReadonly
+			if m_bReadonly then
+				if inStr(element.className, "efRead") then
+					if m_bBrowseReadOnly then
+						element.className = replace(element.className, "efReadWrite", "efBrowseReadOnly")
+					else
+						element.className = replace(element.className, "efReadWrite", "efReadOnly")
+					end if
+				else
+					if m_bBrowseReadOnly then
+						element.className = element.className & " efBrowseReadOnly"
+					else
+						element.className = element.className & " efReadOnly"
+					end if
+				end if
+				element.style.cursor = "default"
+				m_elInput.style.cursor = "default"
+				m_elInput.tabIndex = -1
+				m_elPickerBtn.style.display = "none"
+				m_elPickerBtn.tabIndex = -1
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = "none"
+					m_elBrowseBtn.tabIndex = -1
+				end if
+			else
+				m_bDirty = false
+				m_bValid = true
+				if inStr(element.className, "efRead") then
+					element.className = replace(element.className, "efReadOnly", "efReadWrite")
+					element.className = replace(element.className, "efBrowseReadOnly", "efReadWrite")
+				else
+					element.className = element.className & " efReadWrite"
+				end if
+				element.style.cursor = ""
+				m_elInput.style.cursor = ""
+				m_elInput.tabIndex = 0
+				m_elPickerBtn.style.display = ""
+				m_elPickerBtn.tabIndex = 0
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = ""
+					m_elBrowseBtn.tabIndex = 0
+					m_elBrowseBtn.disabled = bReadOnly
+				end if
+			end if
+			m_elPickerBtn.disabled = bReadOnly
+			if m_bBrowse then m_elBrowseBtn.disabled = bReadOnly
+			if m_bReadonly or m_bDisabled then
+				HidePrompt()
+			end if
+		end sub
+
+		sub ResetReadOnly()
+			SetReadonly(m_bMasterReadOnly)
+		end sub
+
+		function sGetData()
+			sGetData = ""
+			if not isEmpty(m_elInput) then sGetData = m_elInput.value
+		end function
+
+		sub ResetDefault()
+			'reset to default or empty
+			if not isNull(m_sDefault) then
+				SetData(m_sDefault)
+			else
+				SetData("")
+			end if
+			m_bDirty = false
+		end sub
+
+		sub SetData(sValue)
+			dim evt
+			if sValue = m_sValue then exit sub
+			if m_bBrowse then
+				if m_elBrowseBtn.disabled then exit sub
+			end if
+			sValue = trim(sValue)
+			m_nMonth = nGetMonth(sValue)
+			m_nDay = nGetDay(sValue)
+			m_nYear = nGetYear(sValue)
+			if m_nYear > -1 and m_nDay > -1 and m_nMonth > -1 then
+				if m_nYear < 50 then m_nYear = m_nYear + 2000
+				if m_nYear < 100 then m_nYear = m_nYear + 1900
+			end if
+			sValue = sGetFormattedDate(m_nYear, m_nMonth, m_nDay)
+			m_sValue = sValue
+			m_elInput.value = sValue
+			element.title = sValue
+			HidePrompt()
+			ShowPrompt()
+			if not (m_bReadonly and not m_bBrowseReadonly) then
+				SetRequired(sValue)
+				SetValid(sValue)
+				ShowInvalid()
+				if not m_bValid and not m_bSuppressErrors and m_elDropdown.style.display = "none" and _
+					not (element.style.display = "none" or _
+					element.parentElement.style.display = "none") then
+					msgbox m_sError, vbOKOnly, L_ValidationError_ErrorMessage
+					m_bSuppressErrors = true
+				end if
+			end if
+			if not m_bDisabled then
+				set evt = createEventObject()
+				evt.setAttribute "type", "change"
+				evtChange.fire(evt)
+				m_bDirty = true
+			end if
+		end sub
+
+		sub onKeyPress()
+			dim evt
+			if m_bReadOnly or m_bDisabled then exit sub
+			set evt = window.event
+			if evt.altKey then evt.returnValue = false
+			select case evt.keyCode
+				case KEYCODE_ENTER, asc(m_sSeparator)
+				case else
+					if evt.keyCode < 48 or evt.keyCode > 57 then
+						evt.returnValue = false
+					end if
+			end select
+		end sub
+
+		sub onValueChange()
+			if window.event.propertyName = "value" and (not m_bValid or m_sValue <> m_elInput.value) then
+				m_bDirty = true
+				element.title = m_elInput.value
+				SetRequired(m_elInput.value)
+				SetValid(m_elInput.value)
+				ShowInvalid()
+			end if
+		end sub
+
+		sub SetRequired(sValue)
+			dim bRequired, evt
+			bRequired = cBool(m_bFieldRequired and sValue = "")
+			if m_bRequired <> bRequired or m_bLoading then
+				m_bRequired = bRequired
+				if element.style.display = "none" or _
+					element.parentElement.style.display = "none" then exit sub
+				set evt = createEventObject()
+				evt.setAttribute "required", m_bRequired
+				evt.setAttribute "type", "require"
+				evtRequired.fire(evt)
+			end if
+		end sub
+
+		function bGetRequired()
+			bGetRequired = m_bRequired
+		end function
+
+		function bGetDirty()
+			bGetDirty = m_bDirty
+		end function
+
+		function bGetValid()
+			bGetValid = m_bValid
+		end function
+
+		sub SetValid(sValue)
+			dim bValid, sMatch, sMatches, evt
+			bValid = true
+			if sValue <> "" and not m_bDisabled then
+				if bIsDate(sValue) then
+					if (not isNull(m_nMin) and m_nMin > dtGetDate(sValue)) or _
+						(not isNull(m_nMax) and dtGetDate(sValue) > m_nMax) then
+						bValid = false
+					end if
+				else
+					bValid = false
+				end if
+			end if
+			if m_bValid <> bValid or m_bLoading then
+				m_bValid = bValid
+				if element.style.display = "none" or _
+					element.parentElement.style.display = "none" then exit sub
+				set evt = createEventObject()
+				evt.setAttribute "valid", m_bValid
+				evt.setAttribute "type", "valid"
+				evtValid.fire(evt)
+			end if
+		end sub
+
+		sub ShowInvalid()
+ 			if m_bValid and not m_bRequired then
+				element.className = replace(element.className, " efInvalid", "")
+				m_bSuppressErrors = false
+			else
+				element.className = element.className & " efInvalid"
+			end if
+ 		end sub
+
+		sub onFocus()
+			if window.event.srcElement.tagName = "SELECT" then exit sub
+			on error resume next
+			if not m_elInput.readonly and m_elInput.style.display <> "none" then
+				m_elInput.focus()
+			elseif not m_elPickerBtn.disabled and m_elPickerBtn.style.display <> "none" then
+				m_elPickerBtn.focus()
+			elseif m_bBrowseReadOnly and not m_bDisabled then
+				m_elBrowseBtn.focus()
+			end if
+			on error goto 0
+		end sub
+
+		sub onBlur()
+			if m_sValue <> m_elInput.value then
+				SetData(m_elInput.value)
+			else
+				ShowPrompt()
+			end if
+		end sub
+
+		sub onChange()
+			if m_sValue <> m_elInput.value then
+				SetData(m_elInput.value)
+			end if
+		end sub
+	</SCRIPT>
+</PUBLIC:COMPONENT>

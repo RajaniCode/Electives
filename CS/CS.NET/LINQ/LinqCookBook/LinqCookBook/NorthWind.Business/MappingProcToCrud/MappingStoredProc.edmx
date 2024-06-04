@@ -1,0 +1,606 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+	<!-- EF Runtime content -->
+	<edmx:Runtime>
+		<!-- SSDL content -->
+		<edmx:StorageModels>
+		<Schema Namespace="MappingStoredProcModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="MappingStoredProcModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="MappingStoredProcModel.Store.Categories" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MusicalShow" EntityType="MappingStoredProcModel.Store.MusicalShow" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ProductAdditionalInfo" EntityType="MappingStoredProcModel.Store.ProductAdditionalInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Products" EntityType="MappingStoredProcModel.Store.Products" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Show_Sponsor" EntityType="MappingStoredProcModel.Store.Show_Sponsor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sponsors" EntityType="MappingStoredProcModel.Store.Sponsors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Suppliers" EntityType="MappingStoredProcModel.Store.Suppliers" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ProductAdditionalInfo_Products" Association="MappingStoredProcModel.Store.FK_ProductAdditionalInfo_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="ProductAdditionalInfo" EntitySet="ProductAdditionalInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Categories" Association="MappingStoredProcModel.Store.FK_Products_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Suppliers" Association="MappingStoredProcModel.Store.FK_Products_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Show_Sponsor_MusicalShow" Association="MappingStoredProcModel.Store.FK_Show_Sponsor_MusicalShow">
+            <End Role="MusicalShow" EntitySet="MusicalShow" />
+            <End Role="Show_Sponsor" EntitySet="Show_Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Show_Sponsor_Sponsors" Association="MappingStoredProcModel.Store.FK_Show_Sponsor_Sponsors">
+            <End Role="Sponsors" EntitySet="Sponsors" />
+            <End Role="Show_Sponsor" EntitySet="Show_Sponsor" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="CategoryID" />
+          </Key>
+          <Property Name="CategoryID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CategoryName" Type="nvarchar" Nullable="false" MaxLength="15" />
+          <Property Name="Description" Type="ntext" />
+        </EntityType>
+       
+        <EntityType Name="MusicalShow">
+          <Key>
+            <PropertyRef Name="ShowId" />
+          </Key>
+          <Property Name="ShowId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ShowName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Cost" Type="decimal" Precision="4" Scale="2" />
+        </EntityType>
+        <EntityType Name="ProductAdditionalInfo">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" Nullable="false" />
+          <Property Name="ProductDescription" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="UnitsInStock" Type="int" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductID" />
+          </Key>
+          <Property Name="ProductID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ProductName" Type="nvarchar" Nullable="false" MaxLength="40" />
+          <Property Name="SupplierID" Type="int" />
+          <Property Name="CategoryID" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="money" />
+          <Property Name="Discontinued" Type="bit" />
+        </EntityType>
+        <EntityType Name="Show_Sponsor">
+          <Key>
+            <PropertyRef Name="ShowId" />
+            <PropertyRef Name="SponsorId" />
+          </Key>
+          <Property Name="ShowId" Type="int" Nullable="false" />
+          <Property Name="SponsorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sponsors">
+          <Key>
+            <PropertyRef Name="SponsorId" />
+          </Key>
+          <Property Name="SponsorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="SupplierID" />
+          </Key>
+          <Property Name="SupplierID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="nvarchar" Nullable="false" MaxLength="40" />
+          <Property Name="ContactTitle" Type="nvarchar" MaxLength="30" />
+          <Property Name="Address" Type="nvarchar" MaxLength="60" />
+          <Property Name="City" Type="nvarchar" MaxLength="15" />
+          <Property Name="Region" Type="nvarchar" MaxLength="15" />
+          <Property Name="PostalCode" Type="nvarchar" MaxLength="10" />
+          <Property Name="Country" Type="nvarchar" MaxLength="15" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="24" />
+        </EntityType>
+        <Association Name="FK_ProductAdditionalInfo_Products">
+          <End Role="Products" Type="MappingStoredProcModel.Store.Products" Multiplicity="1" />
+          <End Role="ProductAdditionalInfo" Type="MappingStoredProcModel.Store.ProductAdditionalInfo" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="ProductID" />
+            </Principal>
+            <Dependent Role="ProductAdditionalInfo">
+              <PropertyRef Name="ProductId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Categories">
+          <End Role="Categories" Type="MappingStoredProcModel.Store.Categories" Multiplicity="1" />
+          <End Role="Products" Type="MappingStoredProcModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="CategoryID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Suppliers">
+          <End Role="Suppliers" Type="MappingStoredProcModel.Store.Suppliers" Multiplicity="0..1" />
+          <End Role="Products" Type="MappingStoredProcModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="SupplierID" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="SupplierID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Show_Sponsor_MusicalShow">
+          <End Role="MusicalShow" Type="MappingStoredProcModel.Store.MusicalShow" Multiplicity="1" />
+          <End Role="Show_Sponsor" Type="MappingStoredProcModel.Store.Show_Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusicalShow">
+              <PropertyRef Name="ShowId" />
+            </Principal>
+            <Dependent Role="Show_Sponsor">
+              <PropertyRef Name="ShowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Show_Sponsor_Sponsors">
+          <End Role="Sponsors" Type="MappingStoredProcModel.Store.Sponsors" Multiplicity="1" />
+          <End Role="Show_Sponsor" Type="MappingStoredProcModel.Store.Show_Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sponsors">
+              <PropertyRef Name="SponsorId" />
+            </Principal>
+            <Dependent Role="Show_Sponsor">
+              <PropertyRef Name="SponsorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="DeleteCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="catid" Type="int" Mode="In" />
+        </Function>
+        
+        <Function Name="DeleteProdAddInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prodid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prodid" Type="int" Mode="In" />
+          <Parameter Name="supplierid" Type="int" Mode="In" />
+          <Parameter Name="categoryid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteShow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="showid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="deleteshowsponsor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="showid" Type="int" Mode="In" />
+          <Parameter Name="sponsorid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="DeleteSponsor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="sponsorid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="catname" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="varchar" Mode="In" />
+        </Function>
+        
+        <Function Name="InsertProd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prodname" Type="varchar" Mode="In" />
+          <Parameter Name="unitprice" Type="decimal" Mode="In" />
+          <Parameter Name="catid" Type="int" Mode="In" />
+          <Parameter Name="supppid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertProdAddInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prodid" Type="int" Mode="In" />
+          <Parameter Name="desc" Type="varchar" Mode="In" />
+          <Parameter Name="unitsinstock" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertShow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="cost" Type="decimal" Mode="In" />
+        </Function>
+        <Function Name="insertshowsponsor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="showid" Type="int" Mode="In" />
+          <Parameter Name="sponsorid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertSponsor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="UpdateCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="catid" Type="int" Mode="In" />
+          <Parameter Name="catname" Type="varchar" Mode="In" />
+          <Parameter Name="description" Type="varchar" Mode="In" />
+        </Function>
+        
+        <Function Name="UpdateProdAddInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prodid" Type="int" Mode="In" />
+          <Parameter Name="desc" Type="varchar" Mode="In" />
+          <Parameter Name="unitsinstock" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateProduct" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="prodname" Type="varchar" Mode="In" />
+          <Parameter Name="unitprice" Type="decimal" Mode="In" />
+          <Parameter Name="supplierid" Type="int" Mode="In" />
+          <Parameter Name="categoryid" Type="int" Mode="In" />
+          <Parameter Name="prodid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateShow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="cost" Type="decimal" Mode="In" />
+          <Parameter Name="showid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateSponsor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="phone" Type="varchar" Mode="In" />
+          <Parameter Name="sponsorid" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+		<!-- CSDL content -->
+		<edmx:ConceptualModels>
+			<Schema Namespace="MappingStoredProcModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+				<EntityContainer Name="StoredProcMappingEntities">
+					<EntitySet Name="Categories" EntityType="MappingStoredProcModel.Category" />
+					<EntitySet Name="ProductAdditionalInfo" EntityType="MappingStoredProcModel.ProductAdditionalInfo" />
+					<EntitySet Name="Products" EntityType="MappingStoredProcModel.Product" />
+					<EntitySet Name="Suppliers" EntityType="MappingStoredProcModel.Supplier" />
+					<AssociationSet Name="FK_Products_Categories" Association="MappingStoredProcModel.FK_Products_Categories">
+						<End Role="Category" EntitySet="Categories" />
+						<End Role="Products" EntitySet="Products" />
+					</AssociationSet>
+					<AssociationSet Name="FK_ProductAdditionalInfo_Products" Association="MappingStoredProcModel.FK_ProductAdditionalInfo_Products">
+						<End Role="Products" EntitySet="Products" />
+						<End Role="ProductAdditionalInfo" EntitySet="ProductAdditionalInfo" />
+					</AssociationSet>
+					<AssociationSet Name="FK_Products_Suppliers" Association="MappingStoredProcModel.FK_Products_Suppliers">
+						<End Role="Suppliers" EntitySet="Suppliers" />
+						<End Role="Products" EntitySet="Products" />
+					</AssociationSet>
+          <EntitySet Name="MusicalShow" EntityType="MappingStoredProcModel.MusicalShow" />
+          <EntitySet Name="SponsorSet" EntityType="MappingStoredProcModel.Sponsor" />
+          <AssociationSet Name="Show_Sponsor" Association="MappingStoredProcModel.Show_Sponsor">
+            <End Role="MusicalShow" EntitySet="MusicalShow" />
+            <End Role="Sponsors" EntitySet="SponsorSet" /></AssociationSet>
+       </EntityContainer>
+				<EntityType Name="Category">
+					<Key>
+						<PropertyRef Name="CategoryID" />
+					</Key>
+					<Property Name="CategoryID" Type="Int32" Nullable="false" />
+					<Property Name="CategoryName" Type="String" Nullable="false" MaxLength="15" Unicode="true" FixedLength="false" />
+					<Property Name="Description" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" />
+					<NavigationProperty Name="Products" Relationship="MappingStoredProcModel.FK_Products_Categories" FromRole="Category" ToRole="Products" />
+				</EntityType>
+				<EntityType Name="ProductAdditionalInfo">
+					<Key>
+						<PropertyRef Name="ProductId" />
+					</Key>
+					<Property Name="ProductId" Type="Int32" Nullable="false" />
+					<Property Name="ProductDescription" Type="String" Nullable="false" />
+					<Property Name="UnitsInStock" Type="Int32" Nullable="true" />
+					<NavigationProperty Name="Product" Relationship="MappingStoredProcModel.FK_ProductAdditionalInfo_Products" FromRole="ProductAdditionalInfo" ToRole="Products" />
+				</EntityType>
+				<EntityType Name="Product">
+					<Key>
+						<PropertyRef Name="ProductID" />
+					</Key>
+					<Property Name="ProductID" Type="Int32" Nullable="false" />
+					<Property Name="ProductName" Type="String" Nullable="false" />
+					<Property Name="UnitPrice" Type="Decimal" Nullable="true" />
+					<Property Name="Discontinued" Type="Boolean" Nullable="true" />
+					<NavigationProperty Name="Category" Relationship="MappingStoredProcModel.FK_Products_Categories" FromRole="Products" ToRole="Category" />
+					<NavigationProperty Name="ProductAdditionalInfo" Relationship="MappingStoredProcModel.FK_ProductAdditionalInfo_Products" FromRole="Products" ToRole="ProductAdditionalInfo" />
+					<NavigationProperty Name="Supplier" Relationship="MappingStoredProcModel.FK_Products_Suppliers" FromRole="Products" ToRole="Suppliers" />
+				</EntityType>
+				<EntityType Name="Supplier">
+					<Key>
+						<PropertyRef Name="SupplierID" />
+					</Key>
+					<Property Name="SupplierID" Type="Int32" Nullable="false" />
+					<Property Name="CompanyName" Type="String" Nullable="false" />
+					<Property Name="ContactTitle" Type="String" Nullable="true" />
+					<Property Name="Address" Type="String" Nullable="true" />
+					<Property Name="City" Type="String" Nullable="true" />
+					<Property Name="Region" Type="String" Nullable="true" />
+					<Property Name="PostalCode" Type="String" Nullable="true" />
+					<Property Name="Country" Type="String" Nullable="true" />
+					<Property Name="Phone" Type="String" Nullable="true" />
+					<NavigationProperty Name="Products" Relationship="MappingStoredProcModel.FK_Products_Suppliers" FromRole="Suppliers" ToRole="Products" />
+				</EntityType>
+				<Association Name="FK_Products_Categories">
+					<End Type="MappingStoredProcModel.Category" Role="Category" Multiplicity="1" />
+					<End Type="MappingStoredProcModel.Product" Role="Products" Multiplicity="*" />
+				</Association>
+				<Association Name="FK_ProductAdditionalInfo_Products">
+					<End Type="MappingStoredProcModel.Product" Role="Products" Multiplicity="1" />
+					<End Type="MappingStoredProcModel.ProductAdditionalInfo" Role="ProductAdditionalInfo" Multiplicity="0..1" />
+					<ReferentialConstraint>
+						<Principal Role="Products">
+							<PropertyRef Name="ProductID" />
+						</Principal>
+						<Dependent Role="ProductAdditionalInfo">
+							<PropertyRef Name="ProductId" />
+						</Dependent>
+					</ReferentialConstraint>
+				</Association>
+				<Association Name="FK_Products_Suppliers">
+					<End Type="MappingStoredProcModel.Supplier" Role="Suppliers" Multiplicity="0..1" />
+					<End Type="MappingStoredProcModel.Product" Role="Products" Multiplicity="*" />
+				</Association>
+        <EntityType Name="MusicalShow">
+          <Key>
+            <PropertyRef Name="ShowId" /></Key>
+          <Property Name="ShowId" Type="Int32" Nullable="false" />
+          <Property Name="ShowName" Type="String" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="true" />
+          <NavigationProperty Name="Sponsors" Relationship="MappingStoredProcModel.Show_Sponsor" FromRole="MusicalShow" ToRole="Sponsors" /></EntityType>
+        <EntityType Name="Sponsor">
+          <Key>
+            <PropertyRef Name="SponsorId" /></Key>
+          <Property Name="SponsorId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="true" />
+          <NavigationProperty Name="MusicalShow" Relationship="MappingStoredProcModel.Show_Sponsor" FromRole="Sponsors" ToRole="MusicalShow" /></EntityType>
+        <Association Name="Show_Sponsor">
+          <End Type="MappingStoredProcModel.MusicalShow" Role="MusicalShow" Multiplicity="*" />
+          <End Type="MappingStoredProcModel.Sponsor" Role="Sponsors" Multiplicity="*" /></Association>
+			
+        
+				
+			</Schema>
+		</edmx:ConceptualModels>
+		<!-- C-S mapping content -->
+		<edmx:Mappings>
+			<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+				<EntityContainerMapping StorageEntityContainer="MappingStoredProcModelStoreContainer" CdmEntityContainer="StoredProcMappingEntities">
+					<EntitySetMapping Name="Categories">
+						<EntityTypeMapping TypeName="IsTypeOf(MappingStoredProcModel.Category)">
+							<MappingFragment StoreEntitySet="Categories">
+								<ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+								<ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+								<ScalarProperty Name="Description" ColumnName="Description" />
+							</MappingFragment>
+						</EntityTypeMapping>
+						<EntityTypeMapping TypeName="MappingStoredProcModel.Category">
+							<ModificationFunctionMapping>
+								<InsertFunction  FunctionName="MappingStoredProcModel.Store.InsertCategory">
+									<ScalarProperty Name="CategoryName" ParameterName="catname" />
+									<ScalarProperty Name="Description" ParameterName="description" />
+									<ResultBinding  Name="CategoryID" ColumnName="catid" />
+								</InsertFunction>
+								<UpdateFunction FunctionName="MappingStoredProcModel.Store.UpdateCategory">
+									<ScalarProperty Name="CategoryID" ParameterName="catid" Version="Current" />
+									<ScalarProperty Name="CategoryName" ParameterName="catname" Version="Current" />
+									<ScalarProperty Name="Description" ParameterName="description" Version="Current" />
+								</UpdateFunction>
+								<DeleteFunction FunctionName="MappingStoredProcModel.Store.DeleteCategory" >
+									<ScalarProperty Name="CategoryID" ParameterName="catid" />
+								</DeleteFunction>
+							</ModificationFunctionMapping>
+						</EntityTypeMapping>
+					</EntitySetMapping>
+					<EntitySetMapping Name="ProductAdditionalInfo">
+						<EntityTypeMapping TypeName="IsTypeOf(MappingStoredProcModel.ProductAdditionalInfo)">
+							<MappingFragment StoreEntitySet="ProductAdditionalInfo">
+								<ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+								<ScalarProperty Name="ProductDescription" ColumnName="ProductDescription" />
+								<ScalarProperty Name="ProductId" ColumnName="ProductId" />
+							</MappingFragment>
+						</EntityTypeMapping>
+						<EntityTypeMapping TypeName="MappingStoredProcModel.ProductAdditionalInfo">
+							<ModificationFunctionMapping>
+								<InsertFunction FunctionName="MappingStoredProcModel.Store.InsertProdAddInfo">
+									<ScalarProperty Name="ProductDescription" ParameterName="desc" />
+									<AssociationEnd AssociationSet="FK_ProductAdditionalInfo_Products" From="ProductAdditionalInfo" To="Products">
+										<ScalarProperty Name="ProductID" ParameterName="prodid" />
+									</AssociationEnd>
+									<ScalarProperty Name="UnitsInStock" ParameterName="unitsinstock" />
+								</InsertFunction>
+								<UpdateFunction FunctionName="MappingStoredProcModel.Store.UpdateProdAddInfo">
+									<AssociationEnd AssociationSet="FK_ProductAdditionalInfo_Products" From="ProductAdditionalInfo" To="Products">
+										<ScalarProperty Name="ProductID" ParameterName="prodid" Version="Current" />
+									</AssociationEnd>
+									<ScalarProperty Name="ProductDescription" ParameterName="desc" Version="Current" />
+									<ScalarProperty Name="UnitsInStock" ParameterName="unitsinstock" Version="Current" />
+								</UpdateFunction>
+								<DeleteFunction FunctionName="MappingStoredProcModel.Store.DeleteProdAddInfo" >
+									<AssociationEnd AssociationSet="FK_ProductAdditionalInfo_Products" From="ProductAdditionalInfo" To="Products">
+										<ScalarProperty Name="ProductID" ParameterName="prodid" />
+									</AssociationEnd>
+								</DeleteFunction>
+							</ModificationFunctionMapping>
+						</EntityTypeMapping>
+					</EntitySetMapping>
+					<EntitySetMapping Name="Products">
+						<EntityTypeMapping TypeName="IsTypeOf(MappingStoredProcModel.Product)">
+							<MappingFragment StoreEntitySet="Products">
+								<ScalarProperty Name="Discontinued" ColumnName="Discontinued" />
+								<ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+								<ScalarProperty Name="ProductName" ColumnName="ProductName" />
+								<ScalarProperty Name="ProductID" ColumnName="ProductID" />
+							</MappingFragment>
+						</EntityTypeMapping>
+						<EntityTypeMapping TypeName="MappingStoredProcModel.Product">
+							<ModificationFunctionMapping>
+								<InsertFunction FunctionName="MappingStoredProcModel.Store.InsertProd">
+									<AssociationEnd AssociationSet="FK_Products_Suppliers" From="Products" To="Suppliers">
+										<ScalarProperty Name="SupplierID" ParameterName="supppid" />
+									</AssociationEnd>
+									<AssociationEnd AssociationSet="FK_Products_Categories" From="Products" To="Category">
+										<ScalarProperty Name="CategoryID" ParameterName="catid" />
+									</AssociationEnd>
+									<ScalarProperty Name="ProductName" ParameterName="prodname" />
+									<ScalarProperty Name="UnitPrice" ParameterName="unitprice" />
+									<ResultBinding Name="ProductID" ColumnName="prodid" />
+								</InsertFunction>
+								<UpdateFunction FunctionName="MappingStoredProcModel.Store.UpdateProduct">
+									<ScalarProperty Name="ProductID" ParameterName="prodid" Version="Current" />
+									<AssociationEnd AssociationSet="FK_Products_Categories" From="Products" To="Category">
+										<ScalarProperty Name="CategoryID" ParameterName="categoryid" Version="Current" />
+									</AssociationEnd>
+									<AssociationEnd AssociationSet="FK_Products_Suppliers" From="Products" To="Suppliers">
+										<ScalarProperty Name="SupplierID" ParameterName="supplierid" Version="Current" />
+									</AssociationEnd>
+									<ScalarProperty Name="ProductName" ParameterName="prodname" Version="Current" />
+									<ScalarProperty Name="UnitPrice" ParameterName="unitprice" Version="Current" />
+								</UpdateFunction>
+								<DeleteFunction FunctionName="MappingStoredProcModel.Store.DeleteProduct" >
+									<AssociationEnd AssociationSet="FK_Products_Categories" From="Products" To="Category">
+										<ScalarProperty Name="CategoryID" ParameterName="categoryid" />
+									</AssociationEnd>
+									<AssociationEnd AssociationSet="FK_Products_Suppliers" From="Products" To="Suppliers">
+										<ScalarProperty Name="SupplierID" ParameterName="supplierid" />
+									</AssociationEnd>
+									<ScalarProperty Name="ProductID" ParameterName="prodid" />
+								</DeleteFunction>
+							</ModificationFunctionMapping>
+						</EntityTypeMapping>
+					</EntitySetMapping>
+					<EntitySetMapping Name="Suppliers">
+						<EntityTypeMapping TypeName="IsTypeOf(MappingStoredProcModel.Supplier)">
+							<MappingFragment StoreEntitySet="Suppliers">
+								<ScalarProperty Name="Phone" ColumnName="Phone" />
+								<ScalarProperty Name="Country" ColumnName="Country" />
+								<ScalarProperty Name="PostalCode" ColumnName="PostalCode" />
+								<ScalarProperty Name="Region" ColumnName="Region" />
+								<ScalarProperty Name="City" ColumnName="City" />
+								<ScalarProperty Name="Address" ColumnName="Address" />
+								<ScalarProperty Name="ContactTitle" ColumnName="ContactTitle" />
+								<ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+								<ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+							</MappingFragment>
+						</EntityTypeMapping>
+					</EntitySetMapping>
+					<AssociationSetMapping Name="FK_Products_Categories" TypeName="MappingStoredProcModel.FK_Products_Categories" StoreEntitySet="Products">
+						<EndProperty Name="Products">
+							<ScalarProperty Name="ProductID" ColumnName="ProductID" />
+						</EndProperty>
+						<EndProperty Name="Category">
+							<ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+						</EndProperty>
+					</AssociationSetMapping>
+					<AssociationSetMapping Name="FK_ProductAdditionalInfo_Products" TypeName="MappingStoredProcModel.FK_ProductAdditionalInfo_Products" StoreEntitySet="ProductAdditionalInfo">
+						<EndProperty Name="ProductAdditionalInfo">
+							<ScalarProperty Name="ProductId" ColumnName="ProductId" />
+						</EndProperty>
+						<EndProperty Name="Products">
+							<ScalarProperty Name="ProductID" ColumnName="ProductId" />
+						</EndProperty>
+					</AssociationSetMapping>
+					<AssociationSetMapping Name="FK_Products_Suppliers" TypeName="MappingStoredProcModel.FK_Products_Suppliers" StoreEntitySet="Products">
+						<EndProperty Name="Products">
+							<ScalarProperty Name="ProductID" ColumnName="ProductID" />
+						</EndProperty>
+						<EndProperty Name="Suppliers">
+							<ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+						</EndProperty>
+						<Condition ColumnName="SupplierID" IsNull="false" />
+					</AssociationSetMapping>
+          <EntitySetMapping Name="MusicalShow">
+            <EntityTypeMapping TypeName="IsTypeOf(MappingStoredProcModel.MusicalShow)">
+              <MappingFragment StoreEntitySet="MusicalShow">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="ShowName" ColumnName="ShowName" />
+                <ScalarProperty Name="ShowId" ColumnName="ShowId" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="MappingStoredProcModel.MusicalShow">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="MappingStoredProcModel.Store.InsertShow">
+                  <ScalarProperty Name="ShowName" ParameterName="name" />
+                  <ScalarProperty Name="Cost" ParameterName="cost" />
+                  <ResultBinding Name="ShowId" ColumnName="showid" /></InsertFunction>
+                <UpdateFunction FunctionName="MappingStoredProcModel.Store.UpdateShow">
+                  <ScalarProperty Name="ShowName" ParameterName="name" Version="Current" />
+                  <ScalarProperty Name="ShowId" ParameterName="showid" Version="Current" />
+                  <ScalarProperty Name="Cost" ParameterName="cost" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="MappingStoredProcModel.Store.DeleteShow">
+                  <ScalarProperty Name="ShowId" ParameterName="showid" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SponsorSet">
+            <EntityTypeMapping TypeName="IsTypeOf(MappingStoredProcModel.Sponsor)">
+              <MappingFragment StoreEntitySet="Sponsors">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SponsorId" ColumnName="SponsorId" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="MappingStoredProcModel.Sponsor">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="MappingStoredProcModel.Store.InsertSponsor">
+                  <ScalarProperty Name="Phone" ParameterName="phone" />
+                  <ScalarProperty Name="Name" ParameterName="name" />
+                  <ResultBinding Name="SponsorId" ColumnName="sponsorid" /></InsertFunction>
+                <UpdateFunction FunctionName="MappingStoredProcModel.Store.UpdateSponsor">
+                  <ScalarProperty Name="SponsorId" ParameterName="sponsorid" Version="Current" />
+                  <ScalarProperty Name="Phone" ParameterName="phone" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="name" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="MappingStoredProcModel.Store.DeleteSponsor">
+                  <ScalarProperty Name="SponsorId" ParameterName="sponsorid" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="Show_Sponsor" TypeName="MappingStoredProcModel.Show_Sponsor" StoreEntitySet="Show_Sponsor">
+            <EndProperty Name="Sponsors">
+              <ScalarProperty Name="SponsorId" ColumnName="SponsorId" /></EndProperty>
+            <EndProperty Name="MusicalShow">
+              <ScalarProperty Name="ShowId" ColumnName="ShowId" /></EndProperty>
+			  <ModificationFunctionMapping>
+				  <InsertFunction FunctionName="MappingStoredProcModel.Store.insertshowsponsor">
+					  <EndProperty Name="Sponsors">
+						  <ScalarProperty Name="SponsorId" ParameterName="sponsorid"/>
+					  </EndProperty>
+					  <EndProperty Name="MusicalShow">
+						  <ScalarProperty Name="ShowId" ParameterName="showid"/>
+					  </EndProperty>
+				  </InsertFunction>
+				  <DeleteFunction FunctionName="MappingStoredProcModel.Store.deleteshowsponsor">
+					  <EndProperty Name="Sponsors">
+						  <ScalarProperty Name="SponsorId" ParameterName="sponsorid"/>
+					  </EndProperty>
+					  <EndProperty Name="MusicalShow">
+						  <ScalarProperty Name="ShowId" ParameterName="showid"/>
+					  </EndProperty>
+				  </DeleteFunction>
+			  </ModificationFunctionMapping>
+		  </AssociationSetMapping>
+          
+				</EntityContainerMapping>
+			</Mapping>
+		</edmx:Mappings>
+	</edmx:Runtime>
+	<!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+	<edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+		<edmx:Connection>
+			<DesignerInfoPropertySet>
+				<DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+			</DesignerInfoPropertySet>
+		</edmx:Connection>
+		<edmx:Options>
+			<DesignerInfoPropertySet>
+				<DesignerProperty Name="ValidateOnBuild" Value="true" />
+			</DesignerInfoPropertySet>
+		</edmx:Options>
+		<!-- Diagram content (shape and connector positions) -->
+		<edmx:Diagrams>
+			<Diagram Name="MappingStoredProc">
+				<EntityTypeShape EntityType="MappingStoredProcModel.Category" Width="1.5" PointX="2" PointY="1.625" Height="1.787985026041667" IsExpanded="true" />
+				<EntityTypeShape EntityType="MappingStoredProcModel.ProductAdditionalInfo" Width="1.5" PointX="4" PointY="4.25" Height="1.5923063151041665" IsExpanded="true" />
+				<EntityTypeShape EntityType="MappingStoredProcModel.Product" Width="1.5" PointX="4" PointY="1.5" Height="2.085348307291667" IsExpanded="true" />
+				<EntityTypeShape EntityType="MappingStoredProcModel.Supplier" Width="1.5" PointX="6.125" PointY="1.375" Height="2.9417936197916656" IsExpanded="true" />
+				<AssociationConnector Association="MappingStoredProcModel.FK_Products_Categories" >
+					<ConnectorPoint PointX="3.5" PointY="2.4211531575520837" />
+					<ConnectorPoint PointX="4" PointY="2.4211531575520837" />
+				</AssociationConnector>
+				<AssociationConnector Association="MappingStoredProcModel.FK_ProductAdditionalInfo_Products" >
+					<ConnectorPoint PointX="4.75" PointY="3.585348307291667" />
+					<ConnectorPoint PointX="4.75" PointY="4.25" />
+				</AssociationConnector>
+				<AssociationConnector Association="MappingStoredProcModel.FK_Products_Suppliers" >
+					<ConnectorPoint PointX="6.125" PointY="2.5426741536458337" />
+					<ConnectorPoint PointX="5.5" PointY="2.5426741536458337" />
+				</AssociationConnector>
+        <EntityTypeShape EntityType="MappingStoredProcModel.MusicalShow" Width="1.5" PointX="10.375" PointY="2.125" Height="1.5923063151041665" />
+        <EntityTypeShape EntityType="MappingStoredProcModel.Sponsor" Width="1.5" PointX="12.625" PointY="2.125" Height="1.5923063151041665" />
+        <AssociationConnector Association="MappingStoredProcModel.Show_Sponsor" >
+          <ConnectorPoint PointX="11.875" PointY="2.9211531575520833" />
+          <ConnectorPoint PointX="12.625" PointY="2.9211531575520833" /></AssociationConnector>
+        <EntityTypeShape EntityType="MappingStoredProcModel.Customer" Width="1.5" PointX="9.375" PointY="2" Height="1.9802864583333331" /></Diagram>
+		</edmx:Diagrams>
+	</edmx:Designer>
+</edmx:Edmx>

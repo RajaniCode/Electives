@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SSO>
+  <application name="SSOApp_GroupApp2">
+    <description>A Group Type Affiliate Application for Windows Initiated SSO</description>
+    <contact>someone@companyname.com</contact>
+    <appUserAccount>DomainName\AppUserGroup</appUserAccount>
+    <appAdminAccount>DomainName\AppAdminGroup</appAdminAccount>
+    <field ordinal="0" label="User ID" masked="no" />
+    <field ordinal="1" label="Password" masked="yes" />
+    <flags groupApp="yes" allowTickets="yes" validateTickets="yes" timeoutTickets="yes" enableApp="yes"/>
+  </application>
+</SSO>

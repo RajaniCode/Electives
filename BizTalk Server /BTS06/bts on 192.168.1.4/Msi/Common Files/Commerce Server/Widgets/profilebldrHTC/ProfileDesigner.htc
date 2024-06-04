@@ -1,0 +1,3942 @@
+﻿<PUBLIC:COMPONENT URL='Commerce.ProfileDesigner'>
+
+<PUBLIC:PROPERTY NAME='isDirty' GET='GetIsDirty' PUT='PutIsDirty' />
+
+<PUBLIC:PROPERTY NAME='GetIsDirty' />
+<PUBLIC:PROPERTY NAME='PutIsDirty' />
+
+<PUBLIC:METHOD NAME='CheckValid' />
+<PUBLIC:METHOD NAME='DoApply' />
+<PUBLIC:METHOD NAME='Refresh' />
+
+<PUBLIC:EVENT NAME='onChange' ID='evtChange'></PUBLIC:EVENT>
+<PUBLIC:EVENT NAME='onStatus' ID='evtStatus'></PUBLIC:EVENT>
+
+<PUBLIC:ATTACH EVENT='ondocumentready' FOR='element' ONEVENT='Initialize()' />
+
+<SCRIPT LANGUAGE='VBScript'>
+Option Explicit
+
+' Headers
+Const L_HeaderSiteTerm_Text	= "Site term structure:"
+Const L_HeaderProfile_Text	= "Properties:"
+Const L_ErrorBoxHeader_Text = "Error"
+
+Const L_HeaderProperties_Text = "Detailed Information:"
+Const L_HeaderPropertiesMulti_Text = "Multiple Selection (no detailed information available)"
+Const L_HeaderPropertiesNone_Text = "No Selection"
+' Loading message (during delay)
+Const L_LoadingCustom_Text	= "Loading custom attributes..."
+Const L_LoadingTerms_Text	= "Loading terms..."
+
+' No-op messages
+Const L_Duplicate_Message	= "Cannot move this item.	An item already exists with this name or display name."
+Const L_DispName_Message	= "The item's Display Name must be unique within the item's group."
+Const L_ProgName_Message	= "The item's Name must be unique within the profile."
+Const L_TypeRef_Message		= "The property is not of type Profile or SiteTerm."
+Const L_NoSiteTerms_Message		= "There are no SiteTerms in the profile catalog."
+Const L_CustomAttribFriendly_Message	= "The property is a Join key or a type reference or it is not mapped to data or it is of type Password or it is marked as Encrypted, it cannot be marked as the Friendly Name."
+Const L_CustomAttribDisplay_Message		= "The property is a Join key or a type reference or it is not mapped to data or it is of type Password or it is marked as Encrypted, it cannot be marked as a Display Column."
+Const L_CustomAttribEncryption_Message		= "The custom attribute name EncryptionType is reserved and cannot be used."
+Const L_CustomAttribProp_Message        = "This property has been marked as a friendly name or display column, hence it cannot be of type 'profile' or 'siteterm' or 'password'"
+Const L_CustomAttribKeyType_Message     = "This property has been marked as a friendly name or display column, hence it cannot be marked as a 'JOIN' or 'PRIMARYJOIN'"
+Const L_CustomAttribEncryptedType_Message     = "This property has been marked as a friendly name or display column, hence it cannot be marked as a 'Encrypted'"
+Const L_CustomAttribDisplayValue_Message = "You have to enter a value of 100 or less for the value of this sDisplayColumn custom attribute."
+Const L_ExportedProfileNameLength_Message = "You have marked this property to be exported and the profile name is greater than 57 chars long or the property name is greater than 100 chars long, hence profile object creation in Data Warehouse will fail."
+Const L_CustomAttribDataref_Message = "This property has been marked as a friendly name or a display column, hence it must remain mapped to data."
+Const L_Encrypted_Message = "Changing the encryption type may cause errors. If data has already been saved for this profile, that data may become unusable."
+Const L_Encrypted_DialogTitle = "Encryption Warning"
+' Error messages
+Const L_DocID_ErrorMessage				= "The configuration XML for this element is invalid. The required 'docid' node is missing."
+Const L_SiteTermsID_ErrorMessage		= "The configuration XML for this element is invalid. The required 'sitetermsid' node is missing."
+Const L_CatalogID_ErrorMessage			= "The configuration XML for this element is invalid. The required 'catalogid' node is missing."
+Const L_ProfDesignerNode_ErrorMessage	= "The configuration XML for this element is invalid. The required 'profiledesigner' node is missing."
+Const L_XMLConfig_ErrorMessage			= "No configuration XML for this element is missing (ConfigXML)."
+Const L_LoadFailed_ErrorMessage			= "The Profile Designer failed to load properly."
+Const L_ReqFields_ErrorMessage			= "Some required fields have not been specified."
+Const L_NoTypeRef_ErrorMessage			= "Property changes cannot be saved. Properties of type '%1' must specify a type reference."
+Const L_InvalidEncrypted_ErrorMessage	= "The property is marked as encrypted and does not contain a custom attribute name 'EncryptionType' with a value of '0', '1' or '2'."
+
+' Profile Invalid error messages
+Const L_NoPrimaryKey_ErrorMessage		= "This profile is invalid. No primary key is defined for this profile. Exactly one member must be defined as the primary key."
+Const L_MultiPrimaryKey_ErrorMessage	= "This profile is invalid. More than one primary key exists. Exactly one member must be defined as the primary key."
+Const L_CachedPrimaryKey_ErrorMessage	= "This profile is invalid. Because other properties are mapped to data, the primary key must be mapped to a data member."
+Const L_NoJoinKey_ErrorMessage			= "This profile is invalid. No join key is defined for this profile. Exactly one member must be defined as the join key."
+Const L_MultiJoinKey_ErrorMessage		= "This profile is invalid. More than one join key exists. Exactly one member must be defined as the join key."
+Const L_CachedJoinKey_ErrorMessage		= "This profile is invalid. Because other properties are mapped to data, the join key must be mapped to a data member."
+Const L_NoDTS_ErrorMessage				= "This profile is invalid. When one or more properties are marked as exported, a 'Date and Time' property named 'date_last_changed' must be defined."
+Const L_NoHashKey_ErrorMessage			= "This profile is invalid. No hashing key is defined for this profile. Exactly one member must be defined as the hashing key when partioned data sources are referenced."
+Const L_MultiHashKey_ErrorMessage		= "This profile is invalid. More than one hashing key exists. Exactly one member must be defined as the hashing key when partioned data sources are referenced."
+Const L_InvalidHashKey_ErrorMessage		= "This profile is invalid. A hashing key is defined, and no partitioned data sources exist. A hashing key may be defined only when partitioned data sources are referenced."
+Const L_NoRDNAttr_ErrorMessage			= "This profile is invalid. No RDN attribute is defined for the LDAP data source '%1'. Exactly one member must be defined as the RDN attribute for each LDAP data sources that is referenced."
+Const L_MultiRDNAttr_ErrorMessage		= "This profile is invalid. More than one RDN attribute exists for the data source '%1'. Exactly one member must be defined as the RDN attribute for each LDAP data sources that is referenced."
+Const L_InvalidRDNAttr_ErrorMessage		= "This profile is invalid. The property '%2' is defined as an RDN attribute, but references the non-LDAP data source '%1'. An RDN attribute may be defined only when LDAP data sources are referenced."
+Const L_InvalidDataType_ErrorMessage	= "This property type cannot be mapped to a data member of type '%1'. Data mapping information and some settings may be lost."
+
+' Button text/tooltips/access keys
+Const L_btnApplyDetail_Text		= "Apply"
+Const L_btnApplyDetail_ToolTip	= "Apply changes"
+Const L_btnCancelDetail_Text	= "Cancel"
+Const L_btnCancelDetail_ToolTip	= "Cancel changes"
+Const L_btnAdd_Text				= "Add"
+Const L_btnAdd_ToolTip			= "Add new group or property"
+Const L_btnRemove_Text			= "Remove"
+Const L_btnRemove_ToolTip		= "Remove"
+Const L_btnRemoveMulti_ToolTip	= "Remove selections"
+Const L_btnMoveUp_ToolTip		= "Move selection up within list"
+Const L_btnMoveDown_ToolTip		= "Move selection down within list"
+
+' Key types
+Const L_PrimaryJoin_Text			= "Dual (Primary and Join) Key"
+Const L_PrimaryJoin_AlternativeText	= "Primary+Join Key"
+Const L_Primary_Text				= "Primary Key"
+Const L_Primary_AlternativeText		= "Primary Key"
+Const L_Join_Text					= "Join Key"
+Const L_Join_AlternativeText		= "Join Key"
+Const L_Unique_Text					= "Unique Key"
+Const L_Unique_AlternativeText		= "Unique Key"
+Const L_DeleteKey_ErrorMessage		= "WARNING: The property '%1' is a primary, join, unique, or hashing key in the profile, or is defined as an RDN attribute. If this profile has already been initialized, deleting this key may cause errors."
+Const L_DeleteChildKey_ErrorMessage	= "WARNING: The group '%1' contains a child or descendent node that is a primary, join, unique, or hashing key in the profile, or is defined as an RDN attribute. If this profile has already been initialized, deleting this key may cause errors."
+Const L_HashKey_ErrorMessage		= "The property '%1' is already defined as the hashing key for this profile. A profile may have only one hashing key."
+Const L_DeleteDTS_ErrorMessage		= "The property 'date_last_changed' is required for exporting this profile. If you delete this property, all properties will be marked as not exported."
+Const L_DeleteChildDTS_ErrorMessage	= "A child property named 'date_last_changed' is required for exporting this profile. If you delete this property, all properties will be marked as not exported."
+Const L_DeleteInvalid_ErrorMessage	= "The property '%1' cannot be deleted."
+Const L_DeleteChildInvalid_ErrorMessage	= "The group '%1' cannot be deleted, because it contains a child property, '%2', that cannot be deleted. To delete this group, move the property out of this group, then delete."
+Const L_DeleteSpecial_ErrorMessage		= "The property '%1' cannot be deleted."
+Const L_DeleteChildSpecial_ErrorMessage	= "The group '%1' cannot be deleted, because it contains a child property, '%2', that cannot be deleted."
+Const L_MoveSpecial_ErrorMessage		= "The property '%1' cannot be moved outside of the group '%2'."
+Const L_ChangeKey_ErrorMessage			= "Changing this key type may cause errors. If data has already been saved for this profile, that data may become unusable."
+
+' Attribute groupings
+Const L_AttributesHeader_Text				= "Att&lt;U&gt;r&lt;/U&gt;ibutes"
+Const L_AttributesHeader_Accelerator		= "r"
+Const L_AdvancedHeader_Text					= "Ad&lt;U&gt;v&lt;/U&gt;anced Attributes"
+Const L_AdvancedHeader_Accelerator			= "v"
+Const L_STAttributesHeader_Text				= "Site Term Att&lt;U&gt;r&lt;/U&gt;ibutes"
+Const L_STAttributesHeader_Accelerator		= "r"
+Const L_CustomAttributesHeader_Text			= "C&lt;U&gt;u&lt;/U&gt;stom Attributes"
+Const L_CustomAttributesHeader_Accelerator	= "u"
+Const L_STTermsHeader_Text					= "&lt;U&gt;T&lt;/U&gt;erms"
+Const L_STTermsHeader_Accelerator			= "t"
+
+' For checkboxes (indicates that a check means a 'yes' answer)
+Const L_YesLabel_Text = "Yes"
+
+' Common attribute names/tooltips
+Const L_AllName_Text			= "Name:"
+Const L_AllName_ToolTip			= "Programmatic name"
+Const L_AllDisplayName_Text		= "Display name:"
+Const L_AllDisplayName_ToolTip	= "Localizable name"
+Const L_AllDescription_Text		= "Description:"
+
+' Type-specific attribute tooltips/errors
+Const L_PropDescription_ToolTip			= "Description of property's purpose"
+Const L_GroupDescription_ToolTip		= "Description of group's purpose"
+Const L_SiteTermsDescription_ToolTip	= "Description of site term's purpose"
+Const L_PropName_ErrorMessage			= "Property names may only contain letters, numbers and underscores.  Spaces and punctuation and the use of the double byte character set format are not allowed."
+Const L_GroupName_ErrorMessage			= "Group names may only contain letters, numbers and underscores.  Spaces and punctuation and the use of the double byte character set format are not allowed."
+Const L_SiteTermsName_ErrorMessage		= "Site-Term names may only contain letters, numbers and underscores.  Spaces and punctuation and the use of the double byte character set format are not allowed."
+Const L_SiteTermsNumbers_ErrorMessage	= "This site term may contain only terms with integers for names. The term '%1' is invalid and will be removed."
+Const L_SiteTermsNumbersOverflow_ErrorMessage = "This site term may contain only terms with integers with a value no greater than 2147483648. The term '%1' is invalid and will be removed."
+
+' Other property attribute names/tooltips
+Const L_PropType_Text			= "Type:"
+Const L_PropType_ToolTip		= "Type of data stored"
+Const L_PropRefType_Text		= "Type reference:"
+Const L_PropRefType_ToolTip		= "Set if this property needs a specific site-term or another profile"
+Const L_PropKeyType_Text		= "Key type:"
+Const L_PropKeyType_ToolTip		= "Is this property used to look up profiles?"
+Const L_PropMapToData_Text		= "Map to data:"
+Const L_PropMapToData_ToolTip	= "Location where value is stored"
+Const L_PropIsRequired_Text		= "Required:"
+Const L_PropIsRequired_ToolTip	= "Is this property required?"
+Const L_PropIsEncrypted_Text	= "Encrypted:"
+Const L_PropIsEncrypted_ToolTip	= "Is this property encrypted?"
+Const L_PropActive_Text			= "Active:"
+Const L_PropActive_ToolTip		= "Should this property show up in other Business Desk modules?"
+Const L_PropExported_Text		= "Exported:"
+Const L_PropExported_ToolTip	= "Is this property exported to the data-warehouse?"
+Const L_PropCached_Text			= "Defer cache load:"
+Const L_PropCached_ToolTip		= "Automatically load this property at profile retrieval?"
+Const L_PropMultiValued_Text	= "Multi-valued:"
+Const L_PropMultiValued_ToolTip	= "Is this property a list of values?"
+Const L_PropSearchable_Text		= "Searchable:"
+Const L_PropSearchable_ToolTip	= "Can profiles be searched for using this property?"
+Const L_PropRDN_Text			= "RDN:"
+Const L_PropRDN_ToolTip			= "Is this property the RDN for an LDAP data source?"
+Const L_PropHash_Text			= "Hashing key:"
+Const L_PropHash_ToolTip		= "Is this property a hashing key for a partitioned data source?"
+
+' Custom attributes names/tooltips
+Const L_CustAttrName_Text			= "Name"
+Const L_CustAttrName_ErrorMessage	= "Custom attribute names can only contain alphanumerics and underscores.  Spaces and punctuation and the use of the double byte character set format are not allowed."
+Const L_CustAttrDisplayName_Text	= "Display name"
+Const L_CustAttrDescription_Text	= "Description"
+Const L_CustAttrValue_Text			= "Value"
+Const L_CustAttrValue_ErrorMessage	= "Custom attribute values can only contain alphanumerics and underscores.  Spaces and punctuation and the use of the double byte character set format are not allowed."
+
+' Site terms names/tooltips
+Const L_STTermNames_Text			= "Term name"
+Const L_STTermNames_ErrorMessage	= "Site-term values can only contain alphanumerics and underscores.  Spaces and punctuation and the use of the double byte character set format are not allowed."
+Const L_STTermDisplayNames_Text		= "Display name"
+
+' String prompts
+Const L_EnterString_ToolTip	= "&lt;enter a string&gt;"
+Const L_String_ToolTip		= "&lt;string&gt;"
+
+' Data types
+Const L_TypeString_Text			= "String"
+Const L_TypeLongString_Text		= "Long String"
+Const L_TypeNumbersOnly_Text	= "Number"
+Const L_TypeFloat_Text			= "Decimal"
+Const L_TypeBinary_Text			= "Binary"
+Const L_TypeImage_Text			= "Long Binary"
+Const L_TypeDateTime_Text		= "Date/Time"
+Const L_TypeDate_Text			= "Date"
+Const L_TypeTime_Text			= "Time"
+Const L_TypeCurrency_Text		= "Currency"
+Const L_TypeBool_Text			= "Boolean"
+
+Const L_TypePassword_Text	= "Password"
+Const L_TypeSiteTerm_Text	= "Site Term"
+Const L_TypeProfile_Text	= "Profile"
+
+' Default values for templates
+Const NL_Template_Group_Name_Text		= "NewGroup%1" '%1 gets replaced with a number
+Const L_Template_Group_DisplayName_Text	= "New Group %1"	'Groups
+Const NL_Template_Attr_Name_Text		= "NewAttr%1"		'Attributes
+Const L_Template_Attr_DisplayName_Text	= "New Attribute %1"
+Const NL_Template_Prop_Name_Text		= "NewProp%1"		'Properties
+Const L_Template_Prop_DisplayName_Text	= "New Property %1"
+Const NL_Template_ST_Name_Text			= "NewSiteTerm%1" 'Site Terms
+Const L_Template_ST_DisplayName_Text	= "New Site Term %1"
+Const L_EncryptionType0_Text		= "No Encryption"
+Const L_EncryptionType1_Text		= "One way hash"
+Const L_EncryptionType2_Text		= "Asymmetric encryption"
+
+' Status Message
+Const L_InfoMissing_Message = "Some information is missing or incorrect"
+
+' Message Box
+Const L_DiscardChanges_StaticText	= "You have made changes to the current selection. Do you wish to discard them?"
+Const L_DiscardChanges_DialogTitle	= "Discard Changes?"
+Const L_ApplyChanges_StaticText		= "You have made changes to the current selection. Do you wish to apply them before saving?"
+Const L_ApplyChanges_DialogTitle	= "Apply Changes?"
+const L_TypeRef_DialogTitle			= "Invalid Type Reference Selection"
+const L_CustomeAttrib_DialogTitle	= "Invalid Custom Attribute"
+const L_PropType_DialogTitle        = "Invalid Property Type"
+const L_KeyType_DialogTitle         = "Invalid Key Type"
+Const L_CustomAttriDisplay_DialogTitle = "Invalid Display Column value."
+Const L_Exported_DialogTitle = "Invalid Property Export"
+Const L_Dataref_DialogTitle = "Mapped To Data"
+
+Const WEBDING_UP_ARROW = 5
+Const WEBDING_DN_ARROW = 6
+
+Const vbOKCancel = 1
+Const vbYesNoCancel = 3
+Const vbOK = 1
+Const vbCancel = 2
+Const vbYes = 6
+Const vbNo = 7
+
+' Profile-Schema XML tag-names
+
+Const gc_sDocument	= "Document"
+Const gc_sCatalog	= "Catalog"
+Const gc_sProfile	= "Profile"
+Const gc_sGroup		= "Group"
+Const gc_sProperty	= "Property"
+Const gc_sDataRef	= "DataRef"
+Const gc_sAttribute	= "Attribute"
+Const gc_sDataSource = "DataSource"
+Const gc_sDataObject = "DataObject"
+Const gc_sDataMember = "DataMember"
+Const gc_sEncryptionCA = "encryptiontype"
+
+' Number of child HTCs used by the Profile Designer.
+Const CHILD_HTC_COUNT = 5
+
+' Configuration variables:	(loaded from XML config data-island)
+Dim m_strProfileType, m_strProfileDocID, m_strSiteTermsDocID, m_strCatalogDocID
+Dim m_strHelpPath, m_xmlPDInternalCfg
+
+' XML-island variables (we need this so that they can be referred to in this htc)
+Dim xiProfViewXSL, xiPropertyAttrESCfg, xiGroupAttrESCfg, xiSTPropAttrESCfg, xiProfCustomAttrESCfg
+Dim xiProfCustomAttrDTCfg, xiSiteTermTokenESCfg, xiSiteTermTokenDTCfg, xiAttrData, xiCustomAttrData
+Dim xiProfDesignerConfig, xiNewProfileNodes
+
+' References to UI components:
+Dim m_xmlProfileDoc		' Actual XML document with the profile XML.
+Dim m_xmlSiteTermsDoc	' Actual XML document with site-terms XML.
+Dim m_xmlCatalogDoc		' XML document containing Catalog/Profile List
+Dim m_strProfileName	' This saves the name of the profile
+
+Dim m_divProfileView	' Tree-view of the profile / site-terms document.
+Dim m_divDetailView		' Detail-view area (minus buttons)
+Dim m_divDetailViewBtns	' Detail-view buttns (Apply, Cancel)
+
+Dim m_divPropertyAttrs
+Set m_divPropertyAttrs = Nothing
+
+Dim m_divGroupAttrs
+Set m_divGroupAttrs = Nothing
+
+Dim m_divCustomAttrsES	' Custom-attributes editsheet
+Set m_divCustomAttrsES = Nothing
+
+Dim m_divCustomAttrsDT	' Custom-attributes dynamic-table
+Set m_divCustomAttrsDT = Nothing
+
+Dim m_xmlAttrData
+Dim m_xmlCustomAttrData ' Custom-attributes XML data
+
+Dim m_btnAdd, m_btnRemove, m_btnMoveUp, m_btnMoveDown, m_btnApplyDetail, m_btnCancelDetail
+
+' Internal state-variables:
+Dim m_nChildHTCsReady
+Dim m_bIsDirty			' False => doc not changed; True => doc changed, needs saved.
+Dim m_bInvalidProp		' This property is one of the default, invalid properties
+Dim m_nNewItemID
+Dim m_bESBrowseHandlers	' True => prop-attr onBrowse handlers hooked up.
+Dim m_strLastType		' Last selected property type
+Dim m_strKeyDef			' Last key type
+Dim m_strCurrSelEdit	' Path to current item being edited in attribute-view
+						' pane, or "" if nothing is being edited.
+Dim m_bAttrsChanged		' True => Attrs have been changed by user.
+Dim m_bAddButtons
+Dim m_bExitExported
+Dim m_nEncrypted
+Dim m_bEncrypt
+Dim m_bUpdateEncrypt
+
+
+'	Initialize
+'
+'	Description:
+'		This function performs basic initialization of the Profile-Designer.
+
+Sub Initialize()
+	Dim elDivLayout, elDiv, elDiv2, elTable, elTable2, elRow, elRow2
+	Dim elTHead, elCell, elCell2, elButton, xiConfig, xmlPDConfig
+	
+	m_bUpdateEncrypt = True
+	m_nNewItemID = 0
+	m_bIsDirty = False
+	m_nChildHTCsReady = 0
+	m_bESBrowseHandlers = False
+	m_bAttrsChanged = False
+	m_bInvalidProp = False
+	m_bExitExported = false
+
+	' Copy in HTML layout.
+	Do While element.hasChildNodes		' Clear old contents out.
+		Call element.removeChild(element.childNodes(0))
+	Loop
+	
+	Set xiConfig = element.document.all(element.getAttribute("ConfigXML"))
+	If Not (xiConfig Is Nothing) Then
+		' Got an XML data-island.
+		Set xmlPDConfig = xiConfig.XMLDocument.selectSingleNode("profiledesigner")
+		If Not (xmlPDConfig Is Nothing) Then
+			' check to see if we should add the buttons (ie if they have save permissions)
+			m_bAddButtons = xmlPDConfig.getAttribute("AddButtons")
+			If IsNull(m_bAddButtons) Then
+				m_bAddButtons = True
+			Else
+				m_bAddButtons = False
+			End If
+		End If
+	End If
+
+	Set elDivLayout = element.appendChild(element.document.createElement("DIV"))
+	Set elTable = elDivLayout.appendChild(element.document.createElement("TABLE"))
+	elTable.id = "pdoutertable"
+	Set elRow = elTable.insertRow()
+	elRow.id = "pdheadrow"
+	Set elTHead = elRow.insertCell()
+	With elTHead
+		.id = "thHeader"
+		.align = "left"
+	End With
+	Set elTHead = elRow.insertCell()
+	With elTHead
+		.id = "thHeader2"
+		.align = "left"
+	End With
+
+	Set elRow = elTable.insertRow()
+	Set elCell = elRow.insertCell()
+	Set elDiv = elCell.appendChild(element.document.createElement("DIV"))
+	With elDiv
+		.id = "divProfileView"
+		.setAttribute "Multi", "true"
+		.tabIndex = 0
+	End With
+	Set elCell = elRow.insertCell()
+	elCell.id = "pdright"
+	Set elTable2 = elCell.appendChild(element.document.createElement("TABLE"))
+	elTable2.id = "pdtableright"
+	Set elRow2 = elTable2.insertRow()
+	Set elCell2 = elRow2.insertCell()
+	Set elDiv = elCell2.appendChild(element.document.createElement("DIV"))
+	elDiv.id = "divDetailView"
+	Set elDiv2 = elDiv.appendChild(element.document.createElement("DIV"))
+	With elDiv2
+		.id = "divPropertyAttrs"
+		.style.display = "none"
+	End With
+	Set elDiv2 = elDiv.appendChild(element.document.createElement("DIV"))
+	With elDiv2
+		.id = "divGroupAttrs"
+		.style.display = "none"
+	End With
+	Set elDiv2 = elDiv.appendChild(element.document.createElement("DIV"))
+	With elDiv2
+		.id = "divCustomAttrsES"
+		.style.display = "none"
+	End With
+	Set elRow2 = elTable2.insertRow()
+	elRow2.id = "pddetailbtnrow"
+	Set elCell2 = elRow2.insertCell()
+	Set elDiv = elCell2.appendChild(element.document.createElement("DIV"))
+	With elDiv
+		.id = "divDetailViewBtns"
+		.noWrap = True
+		.style.display = "none"
+	End With
+	
+	
+	If m_bAddButtons Then
+	Set elButton = elDiv.appendchild(element.document.createElement("BUTTON"))
+	With elButton
+		.id = "btnApplyDetail"
+		.disabled = True
+		.innerHTML = L_btnApplyDetail_Text
+		.title = L_btnApplyDetail_ToolTip
+		.tabIndex = 0
+	End With
+	Set elButton = elDiv.appendchild(element.document.createElement("BUTTON"))
+	With elButton
+		.id = "btnCancelDetail"
+		.disabled = True
+		.innerHTML = L_btnCancelDetail_Text
+		.title = L_btnCancelDetail_ToolTip
+		.tabIndex = 0
+	End With
+	Set elRow = elTable.insertRow()
+	elRow.id = "pdbtnrow"
+	Set elCell = elRow.insertCell()
+	elCell.id = "pdouterbtns"
+	elCell.colSpan = 2
+	Set elButton = elCell.appendchild(element.document.createElement("BUTTON"))
+	With elButton
+		.id = "btnAdd"
+		.title = L_btnAdd_ToolTip
+		.innerHTML = L_btnAdd_Text
+		.tabIndex = 0
+	End With
+	Set elButton = elCell.appendchild(element.document.createElement("BUTTON"))
+	With elButton
+		.id = "btnRemove"
+		.disabled = True
+		.innerHTML = L_btnRemove_Text
+		.title = L_btnRemove_Tooltip
+		.tabIndex = 0
+	End With
+	Set elButton = elCell.appendchild(element.document.createElement("BUTTON"))
+	With elButton
+		.id = "btnMoveUp"
+		.disabled = True
+		.title = L_btnMoveUp_ToolTip
+		.tabIndex = 0
+	End With
+	Set elButton = elButton.appendchild(element.document.createElement("SPAN"))
+	elButton.className = "clsArrows"
+	elButton.innerText = WEBDING_UP_ARROW
+	Set elButton = elCell.appendchild(element.document.createElement("BUTTON"))
+	With elButton
+		.id = "btnMoveDown"
+		.disabled = True
+		.title = L_btnMoveDown_ToolTip
+		.tabIndex = 0
+	End With
+	Set elButton = elButton.appendchild(element.document.createElement("SPAN"))
+	elButton.className = "clsArrows"
+	elButton.innerText = WEBDING_DN_ARROW
+	End If
+
+	' XSL to transform profile XML into HTML.	Used by XMLView.htc widget
+	Set xiProfViewXSL = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiProfViewXSL.id = "xiProfViewXSL"
+	xiProfViewXSL.XMLDocument.loadXML "<?xml version='1.0'?>" & _
+			"<xsl:stylesheet xmlns:xsl=""http://www.w3.org/TR/WD-xsl"">" &_
+			"<!-- document root --><xsl:template match=""/"">" &_
+			"<xsl:apply-templates select=""//Profile"" /></xsl:template>" &_
+			"<!-- Profile elements --><xsl:template match=""Profile"">" &_
+			"<DIV ID='xvRoot'><xsl:apply-templates /></DIV></xsl:template>" &_
+			"<!-- Group elements -->" &_
+			"<xsl:template match=""Group[(not(@isDeleted) || @isDeleted != '1')]"">" &_
+			"<DIV CLASS='clsXVGroup' TABINDEX='0'>" &_
+			"<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+			"<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" /></xsl:attribute>" &_
+			"<NOBR><SPAN ID='xvMarker'>4</SPAN><xsl:value-of select=""@displayName"" /></NOBR>" &_
+			"<DIV ID='xvGroup' CLASS='clsXVClosed'><xsl:apply-templates /></DIV></DIV></xsl:template>" &_
+			"<!-- Property elements -->" &_
+			"<xsl:template match=""Property[not(@isDeleted) || @isDeleted != '1']"">" &_
+			"<DIV CLASS='clsXVItem' TABINDEX='0'>" &_
+			"<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+			"<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" /></xsl:attribute>" &_
+			"<NOBR><SPAN ID='xvMarker'><xsl:choose><xsl:when test="".[@keyDef='PRIMARYJOIN']"">" &_
+			"<IMG SRC='/widgets/images/D_key.gif' ALT='" & L_PrimaryJoin_AlternativeText & "'></IMG>" &_
+			"</xsl:when><xsl:when test="".[@keyDef='PRIMARY']"">" &_
+			"<IMG SRC='/widgets/images/P_key.gif' ALT='" & L_Primary_AlternativeText & "'></IMG>" &_
+			"</xsl:when><xsl:when test="".[@keyDef='JOIN']"">" &_
+			"<IMG SRC='/widgets/images/J_key.gif' ALT='" & L_Join_AlternativeText & "'></IMG>" &_
+			"</xsl:when><xsl:when test="".[@keyDef='UNIQUE']"">" &_
+			"<IMG SRC='/widgets/images/U_key.gif' ALT='" & L_Unique_AlternativeText & "'></IMG>" &_
+			"</xsl:when><xsl:otherwise><xsl:comment>foo</xsl:comment></xsl:otherwise></xsl:choose>" &_
+			"</SPAN><xsl:value-of select=""@displayName"" /></NOBR></DIV></xsl:template></xsl:stylesheet>"
+
+	' Profile editsheet config for Property XML elements
+	Set xiPropertyAttrESCfg = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiPropertyAttrESCfg.id = "xiPropertyAttrESCfg"
+	xiPropertyAttrESCfg.XMLDocument.loadXML _
+			"<editsheets><editsheet><global expanded='yes' autogenids='yes'>" &_
+			"<name>" &		L_AttributesHeader_Text & "</name>" &_
+			"<key>" &		L_AttributesHeader_Accelerator & "</key></global>" &_
+			"<fields><text id='name' subtype='short' required='yes' maxlen='128'>" &_
+			"<name>" &		L_AllName_Text & "</name>" &_
+			"<tooltip>" &	L_AllName_ToolTip & "</tooltip>" &_
+			"<charmask>\w+</charmask>" &_
+			"<error>" &		L_PropName_ErrorMessage	& "</error></text>" &_
+			"<text id='displayName' subtype='short' required='yes' maxlen='128'>" &_
+			"<name>" &		L_AllDisplayName_Text & "</name>" &_
+			"<tooltip>" &	L_AllDisplayName_ToolTip & "</tooltip></text>" &_
+			"<text id='description' subtype='short' maxlen='128'>" &_
+			"<name>" &		L_AllDescription_Text & "</name>" &_
+			"<tooltip>" &	L_PropDescription_ToolTip & "</tooltip></text>" &_
+			"<select id='propType'><name>" & L_PropType_Text & "</name>" &_
+			"<tooltip>" &	L_PropType_ToolTip & "</tooltip>" &_
+			"<select id='propType'>" &_
+			"<option value='binary'>" &		L_TypeBinary_Text & "</option>" &_
+			"<option value='bool'>" &		L_TypeBool_Text & "</option>" &_
+			"<option value='currency'>" &	L_TypeCurrency_Text & "</option>" &_
+			"<option value='date'>" &		L_TypeDate_Text & "</option>" &_
+			"<option value='datetime'>" &	L_TypeDateTime_Text & "</option>" &_
+			"<option value='float'>" &		L_TypeFloat_Text & "</option>" &_
+			"<option value='image'>" &		L_TypeImage_Text & "</option>" &_
+			"<option value='longtext'>" &	L_TypeLongString_Text & "</option>" &_
+			"<option value='number'>" &		L_TypeNumbersOnly_Text & "</option>" &_
+			"<option value='password'>" &	L_TypePassword_Text & "</option>" &_
+			"<option value='profile' >" &	L_TypeProfile_Text & "</option>" &_
+			"<option value='siteterm'>" &	L_TypeSiteTerm_Text & "</option>" &_
+			"<option value='string'>" &		L_TypeString_Text & "</option>" &_
+			"<option value='time'>" &		L_TypeTime_Text & "</option></select>" &_
+			"</select><text id='referenceString' hide='yes'/>" &_
+			"<text id='displayRefStr' browsereadonly='yes' subtype='short' browse='yes' maxlen='256'>" &_
+			"<name>" &		L_PropRefType_Text & "</name>" &_
+			"<tooltip>" &	L_PropRefType_ToolTip & "</tooltip></text></fields>" &_
+			"</editsheet><editsheet><global expanded='no' autogenids='yes'>" &_
+			"<name>" &		L_AdvancedHeader_Text & "</name>" &_
+			"<key>" &		L_AdvancedHeader_Accelerator & "</key></global>" &_
+			"<fields><boolean id='isActive'>" &_
+			"<label>" &		L_YesLabel_Text & "</label>" &_
+			"<name>" &		L_PropActive_Text & "</name>" &_
+			"<tooltip>" &	L_PropActive_ToolTip & "</tooltip></boolean>" &_
+			"<text id='dataRef' hide='yes'/>" &_
+			"<text id='displayDataRef' browsereadonly='yes' subtype='short' browse='yes'>" &_
+			"<name>" &		L_PropMapToData_Text & "</name>" &_
+			"<tooltip>" &	L_PropMapToData_ToolTip & "</tooltip></text>" &_
+			"<select id='keyDef' readonly='yes'>" &_
+			"<name>" &		L_PropKeyType_Text & "</name>" &_
+			"<tooltip>" &	L_PropKeyType_ToolTip & "</tooltip>" &_
+			"<select id='keyDef'><option value='' />" &_
+			"<option value='UNIQUE'>" & L_Unique_Text & "</option>" &_
+			"<option value='PRIMARY'>" & L_Primary_Text & "</option>" &_
+			"<option value='JOIN'>" & L_Join_Text & "</option>" &_
+			"<option value='PRIMARYJOIN'>" & L_PrimaryJoin_Text & "</option>" &_
+			"</select></select><boolean id='isRequired' readonly='yes'>" &_
+			"<label>" &		L_YesLabel_Text & "</label>" &_
+			"<name>" &		L_PropIsRequired_Text & "</name>" &_
+			"<tooltip>" &	L_PropIsRequired_ToolTip & "</tooltip></boolean>" &_
+			"<select id='isEncrypted' readonly='yes'>" &_
+			"<name>" & L_PropIsEncrypted_Text & "</name>" &_
+			"<tooltip>" &	L_PropIsEncrypted_ToolTip & "</tooltip>" &_
+			"<select id='isEncrypted'>" &_
+			"<option value='0'>" & L_EncryptionType0_Text & "</option>" &_
+			"<option value='1'>" & L_EncryptionType1_Text & "</option>" &_
+			"<option value='2'>" & L_EncryptionType2_Text & "</option>" &_
+			"</select></select>" & _			
+			"<boolean id='isExported' readonly='yes'>" &_
+			"<label>" &		L_YesLabel_Text & "</label>" &_
+			"<name>" &		L_PropExported_Text & "</name>" &_
+			"<tooltip>" &	L_PropExported_ToolTip & "</tooltip></boolean>" &_
+			"<boolean id='isCached' readonly='yes'>" &_
+			"<label>" &		L_YesLabel_Text & "</label>" &_
+			"<name>" &		L_PropCached_Text & "</name>" &_
+			"<tooltip>" &	L_PropCached_ToolTip & "</tooltip></boolean>" &_
+			"<boolean id='isMultiValued' readonly='yes'>" &_
+			"<label>" &		L_YesLabel_Text & "</label>" &_
+			"<name>" &		L_PropMultiValued_Text & "</name>" &_
+			"<tooltip>" &	L_PropMultiValued_ToolTip & "</tooltip></boolean>" &_
+			"<boolean id='isSearchable' readonly='yes'>" &_
+			"<label>" &		L_YesLabel_Text & "</label>" &_
+			"<name>" &		L_PropSearchable_Text & "</name>" &_
+			"<tooltip>" &	L_PropSearchable_ToolTip & "</tooltip></boolean>" &_
+			"<boolean id='isRDNAttribute' readonly='yes'>" &_
+			"<label>" &		L_YesLabel_Text & "</label>" &_
+			"<name>" &		L_PropRDN_Text & "</name>" &_
+			"<tooltip>" &	L_PropRDN_ToolTip & "</tooltip></boolean>" &_
+			"<boolean id='isHashingKey' readonly='yes'>" &_
+			"<label>" &		L_YesLabel_Text & "</label>" &_
+			"<name>" &		L_PropHash_Text & "</name>" &_
+			"<tooltip>" &	L_PropHash_ToolTip & "</tooltip></boolean>" &_
+			"</fields></editsheet></editsheets>"
+
+	' Profile / Site-Terms editsheet config for Group XML elements
+	Set xiGroupAttrESCfg = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiGroupAttrESCfg.id = "xiGroupAttrESCfg"
+	xiGroupAttrESCfg.XMLDocument.loadXML _
+			"<editsheet><global autogenids='yes' expanded='yes'>" &_
+			"<name>" &		L_AttributesHeader_Text & "</name>" &_
+			"<key>" &		L_AttributesHeader_Accelerator & "</key></global>" &_
+			"<fields><text id='name' subtype='short' required='yes' maxlen='128'>" &_
+			"<name>" &		L_AllName_Text & "</name>" &_
+			"<tooltip>" &	L_AllName_ToolTip & "</tooltip>" &_
+			"<charmask>\w+</charmask>" &_
+			"<error>" &		L_GroupName_ErrorMessage & "</error></text>" &_
+			"<text id='displayName' subtype='short' required='yes' maxlen='128'>" &_
+			"<name>" &		L_AllDisplayName_Text & "</name>" &_
+			"<tooltip>" &	L_AllDisplayName_ToolTip & "</tooltip></text>" &_
+			"<text id='description' subtype='short' maxlen='128'>" &_
+			"<name>" &		L_AllDescription_Text & "</name>" &_
+			"<tooltip>" &	L_GroupDescription_ToolTip & "</tooltip></text>" &_
+			"</fields></editsheet>"
+
+	' Site-Terms editsheet config for Property XML elements
+	Set xiSTPropAttrESCfg = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiSTPropAttrESCfg.id = "xiSTPropAttrESCfg"
+	xiSTPropAttrESCfg.XMLDocument.loadXML _
+			"<editsheet><global autogenids='yes' expanded='yes'>" &_
+			"<name>" &		L_STAttributesHeader_Text & "</name>" &_
+			"<key>" &		L_STAttributesHeader_Accelerator & "</key></global>" &_
+			"<fields><text id='name' subtype='short' required='yes' maxlen='128'>" &_
+			"<name>" &		L_AllName_Text & "</name>" &_
+			"<tooltip>" &	L_AllName_ToolTip& "</tooltip>" &_
+			"<charmask>\w+</charmask>" &_
+			"<error>" &		L_SiteTermsName_ErrorMessage & "</error></text>" &_
+			"<text id='displayName' subtype='short' required='yes' maxlen='128'>" &_
+			"<name>" &		L_AllDisplayName_Text & "</name>" &_
+			"<tooltip>" &	L_AllDisplayName_ToolTip & "</tooltip></text>" &_
+			"<text id='description' subtype='short' maxlen='128'>" &_
+			"<name>" &		L_AllDescription_Text & "</name>" &_
+			"<tooltip>" &	L_SiteTermsDescription_ToolTip & "</tooltip></text>" &_
+			"</fields></editsheet>"
+
+
+	' Profile property custom-attrs edit-sheet / dynamic-table config
+	Set xiProfCustomAttrESCfg = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiProfCustomAttrESCfg.id = "xiProfCustomAttrESCfg"
+	xiProfCustomAttrESCfg.XMLDocument.loadXML _
+			"<editsheet><global autogenids='yes' expanded='no'>" &_
+			"<name>" & L_CustomAttributesHeader_Text & "</name>" &_
+			"<key>" & L_CustomAttributesHeader_Accelerator & "</key></global>" &_
+			"<template register='divCustomAttrsDT'><![CDATA[" &_
+			"<DIV ID='divCustomAttrsDT'>" & L_LoadingCustom_Text & "</DIV>" &_
+			"]]></template></editsheet>"
+
+	Set xiProfCustomAttrDTCfg = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiProfCustomAttrDTCfg.id = "xiProfCustomAttrDTCfg"
+	xiProfCustomAttrDTCfg.XMLDocument.loadXML _
+			"<dynamictable><global uniquekey='yes' keycol='attrName' sortbykey='yes' />" &_
+			"<fields><text id='oldAttrName' subtype='short' hide='yes'/>" &_
+			"<text id='attrName' subtype='short' required='yes' width='30' maxlen='128'>" &_
+			"<name>" &		L_CustAttrName_Text & "</name>" &_
+			"<prompt>" &	L_EnterString_ToolTip & "</prompt>" &_
+			"<charmask>\w+</charmask>" &_
+			"</text>" &_
+			"<text id='attrDisplayName' subtype='short' required='yes' width='30' maxlen='128'>" &_
+			"<name>" &		L_CustAttrDisplayName_Text & "</name>" &_
+			"<prompt>" &	L_EnterString_ToolTip & "</prompt></text>" &_
+			"<text id='attrDescription' subtype='short' required='no' width='30' maxlen='128'>" &_
+			"<name>" &		L_CustAttrDescription_Text & "</name></text>" &_
+			"<text id='attrValue' subtype='short' required='no' width='10' maxlen='255'>" &_
+			"<name>" &		L_CustAttrValue_Text & "</name>" &_
+			"<prompt>" &	L_String_ToolTip & "</prompt>" &_
+			"<charmask>\w+</charmask>" &_
+			"<error>" &		L_CustAttrValue_ErrorMessage & "</error></text>" &_
+			"</fields></dynamictable>"
+
+	' Site-Term token edit-sheet / dynamic-table config
+	Set xiSiteTermTokenESCfg = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiSiteTermTokenESCfg.id = "xiSiteTermTokenESCfg"
+	xiSiteTermTokenESCfg.XMLDocument.loadXML _
+			"<editsheet><global autogenids='yes' expanded='yes'>" &_
+			"<name>" &	L_STTermsHeader_Text & "</name>" &_
+			"<key>" &	L_STTermsHeader_Accelerator & "</key></global>" &_
+			"<template register='divCustomAttrsDT'><![CDATA[" &_
+			"<DIV ID='divCustomAttrsDT'>" & L_LoadingTerms_Text & "</DIV>" &_
+			"]]></template></editsheet>"
+
+	Set xiSiteTermTokenDTCfg = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiSiteTermTokenDTCfg.id = "xiSiteTermTokenDTCfg"
+	xiSiteTermTokenDTCfg.XMLDocument.loadXML _
+			"<dynamictable><global uniquekey='yes' keycol='attrName' />" &_
+			"<fields><text id='oldAttrName' subtype='short' hide='yes'/>" &_
+			"<text id='attrName' subtype='short' required='yes' maxlen='128'>" &_
+			"<name>" &		L_STTermNames_Text& "</name>" &_
+			"<prompt>" &	L_EnterString_ToolTip & "</prompt>" &_
+			"<charmask>[A-Za-z0-9_\x2d]+</charmask>" &_
+			"<error>" &		L_STTermNames_ErrorMessage & "</error></text>" &_
+			"<text id='attrDisplayName' subtype='short' required='yes' maxlen='128'>" &_
+			"<name>" &		L_STTermDisplayNames_Text& "</name>" &_
+			"<prompt>" &	L_EnterString_ToolTip & "</prompt></text>" &_
+			"<text id='attrValue' subtype='short' hide='yes' maxlen='256'/>" &_
+			"</fields></dynamictable>"
+
+	Set xiAttrData = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiAttrData.id = "xiAttrData"
+	xiAttrData.XMLDocument.loadXML "<document><record /></document>"
+
+	elDivLayout.insertAdjacentHTML "beforeEnd", "<XML ID='xiCustomAttrData'><document><record/></document></XML>"
+
+	' Config info to let Profile-Designer switch between
+	' normal profiles and site-term profiles.
+	Set xiProfDesignerConfig = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiProfDesignerConfig.id = "xiProfDesignerConfig"
+	xiProfDesignerConfig.XMLDocument.loadXML _
+			"<pdinternalconfig><profile>" &_
+			"<group esconfigid='xiGroupAttrESCfg' />" &_
+			"<property esconfigid='xiPropertyAttrESCfg' />" &_
+			"<attribute esconfigid='xiProfCustomAttrESCfg' dtconfigid='xiProfCustomAttrDTCfg' />" &_
+			"</profile><siteterm><group esconfigid='xiGroupAttrESCfg' />" &_
+			"<property esconfigid='xiSTPropAttrESCfg' />" &_
+			"<attribute esconfigid='xiSiteTermTokenESCfg' dtconfigid='xiSiteTermTokenDTCfg' />" &_
+			"</siteterm></pdinternalconfig>"
+
+	' Repository of templates to create new schtuff from
+	Set xiNewProfileNodes = elDivLayout.appendChild(element.document.createElement("XML"))
+	xiNewProfileNodes.id = "xiNewProfileNodes"
+	xiNewProfileNodes.XMLDocument.loadXML _
+			"<document><generic>" &_
+			"<Group xmlns=""schemas-microsoft-com:bizdata-profile-schema"" " &_
+			"isNew=""1"" name=""" & NL_Template_Group_Name_Text & """ " &_
+			"displayName=""" & L_Template_Group_DisplayName_Text & """ " &_
+			"description=""""/>" &_
+			"<Attribute xmlns=""schemas-microsoft-com:bizdata-profile-schema"" " &_
+			"isNew=""1"" name=""" & NL_Template_Attr_Name_Text & """ " &_
+			"displayName=""" & L_Template_Attr_DisplayName_Text & """ " &_
+			"description="""" value=""""/></generic><profile>" &_
+			"<Property xmlns=""schemas-microsoft-com:bizdata-profile-schema"" " &_
+			"isNew=""1"" name=""" & NL_Template_Prop_Name_Text & """ " &_
+			"displayName=""" & L_Template_Prop_DisplayName_Text & """ " &_
+			"description="""" propType=""STRING"" referenceString=""""/>" &_
+			"</profile><siteterm>" &_
+			"<Property xmlns=""schemas-microsoft-com:bizdata-profile-schema"" " &_
+			"isNew=""1"" name=""" & NL_Template_ST_Name_Text & """ " &_
+			"displayName=""" & L_Template_ST_DisplayName_Text & """ " &_
+			"description="""" propType=""STRING"" referenceString=""""/>" &_
+			"</siteterm></document>"
+
+	' Now that the layout is in the document, initialize important elements.
+	' If Configure returns False, there was a problem with the config xml
+	If Configure = True Then
+		' Choose the appropriate internal-config XML based on the profile-type.
+		Set m_xmlPDInternalCfg = GetPDInternalCfgXML(m_strProfileType)
+
+		' Get the profile name (this must always be there)
+		m_strProfileName = m_xmlProfileDoc.selectSingleNode("//" & gc_sProfile).getAttribute("name")
+
+		' Profile-View (XMLView HTC):
+		Set m_divProfileView = element.all("divProfileView")
+		m_divProfileView.setAttribute "XMLDataID", m_strProfileDocID
+		m_divProfileView.setAttribute "XSLViewID", element.all("xiProfViewXSL").uniqueID
+		m_divProfileView.attachEvent "onreadystatechange", GetRef("SubHTC_RdyStChgHandler")
+		m_divProfileView.addBehavior("/widgets/profilebldrHTC/XMLView.htc")
+
+		' Property Attributes View (Editsheet HTC #1):
+		Set m_divPropertyAttrs = element.all("divPropertyAttrs")
+		m_divPropertyAttrs.setAttribute "MetaXML", _
+				element.all(GetPDInternalCfgValue("property", "esconfigid")).uniqueID
+		m_divPropertyAttrs.setAttribute "DataXML", element.all("xiAttrData").uniqueID
+		m_divPropertyAttrs.attachEvent "onreadystatechange", GetRef("SubHTC_RdyStChgHandler")
+		m_divPropertyAttrs.addBehavior("/widgets/editHTC/editsheet.htc")
+
+		' Group Attributes View (Editsheet HTC #2):
+		Set m_divGroupAttrs = element.all("divGroupAttrs")
+		m_divGroupAttrs.setAttribute "MetaXML", _
+				element.all(GetPDInternalCfgValue("group", "esconfigid")).uniqueID
+		m_divGroupAttrs.setAttribute "DataXML", element.all("xiAttrData").uniqueID
+		m_divGroupAttrs.attachEvent "onreadystatechange", GetRef("SubHTC_RdyStChgHandler")
+		m_divGroupAttrs.addBehavior("/widgets/editHTC/editsheet.htc")
+
+		' Custom Attributes View (Editsheet HTC #3 / Dynamic Table HTC):
+		Set m_divCustomAttrsES = element.all("divCustomAttrsES")
+		m_divCustomAttrsES.setAttribute "MetaXML", _
+				element.all(GetPDInternalCfgValue("attribute", "esconfigid")).uniqueID
+		m_divCustomAttrsES.setAttribute "DataXML", element.all("xiCustomAttrData").uniqueID
+		m_divCustomAttrsES.attachEvent "onreadystatechange", GetRef("SubHTC_RdyStChgHandler")
+		m_divCustomAttrsES.addBehavior("/widgets/editHTC/editsheet.htc")
+
+		' Do miscellaneous UI init.
+		Set m_xmlAttrData = element.all("xiAttrData").XMLDocument
+		Set m_xmlCustomAttrData = element.all("xiCustomAttrData").XMLDocument
+		Set m_divDetailView = element.all("divDetailView")
+		Set m_divDetailViewBtns = element.all("divDetailViewBtns")
+
+		If m_bAddButtons Then
+			Set m_btnApplyDetail = element.all("btnApplyDetail")
+			m_btnApplyDetail.attachEvent "onclick", GetRef("AttrsView_BtnApplyHandler")
+
+			Set m_btnCancelDetail = element.all("btnCancelDetail")
+			m_btnCancelDetail.attachEvent "onclick", GetRef("AttrsView_BtnCancelHandler")
+
+			Set m_btnAdd = element.all("btnAdd")
+			m_btnAdd.attachEvent "onclick", GetRef("BtnAdd_ClickHandler")
+
+			Set m_btnRemove = element.all("btnRemove")
+			m_btnRemove.attachEvent "onclick", GetRef("BtnRemove_ClickHandler")
+
+			Set m_btnMoveUp = element.all("btnMoveUp")
+			m_btnMoveUp.attachEvent "onclick", GetRef("BtnMoveUp_ClickHandler")
+
+			Set m_btnMoveDown = element.all("btnMoveDown")
+			m_btnMoveDown.attachEvent "onclick", GetRef("BtnMoveDown_ClickHandler")
+		End If 
+		
+		element.all("thHeader2").innerText = L_HeaderPropertiesNone_Text
+		element.all("thHeader").innerText = L_HeaderProfile_Text
+	Else
+		'Could not configure the editor
+		Call ReportStatus(L_LoadFailed_ErrorMessage)
+	End If
+End Sub
+
+Sub ResizeHandler()
+	Dim nDetailViewHeight, nParentHeight, nDetailBtnsHeight
+
+	nDetailViewHeight = m_divDetailView.scrollHeight
+	nDetailBtnsHeight = m_divDetailViewBtns.scrollHeight
+	nParentHeight = m_divDetailView.parentNode.clientHeight
+
+	If nDetailViewHeight + nDetailBtnsHeight > nParentHeight Then
+		' Gotta make the detail-view scroll.
+		m_divDetailView.style.pixelHeight = nParentHeight - nDetailBtnsHeight
+	Else
+		' All of the detail-view can show.
+		m_divDetailView.style.pixelHeight = nDetailViewHeight
+	End If
+End Sub
+
+'	Configure
+'
+'	Description:
+'		This function attempts to configure the Profile-Designer from the
+'		specified XML data-island (whose ID is specified in the ConfigXML
+'		attribute).	On success, the function returns True.	On error, the
+'		function returns False.
+
+Function Configure()
+	Dim xiConfig
+	Dim xmlPDConfig
+	Dim xiDocAttr
+	Dim xmlTemplateParent, xmlTemplate
+	Dim xmlTemplateNode, xmlTemplateNodeParent
+	Dim xmllistAttrs, xmlAttr
+	Dim bSuccess
+	
+	bSuccess = True
+
+	' Get config XML data-island.
+	Set xiConfig = element.document.all(element.getAttribute("ConfigXML"))
+	If Not (xiConfig Is Nothing) Then
+		' Got an XML data-island.
+		Set xmlPDConfig = xiConfig.XMLDocument.selectSingleNode("profiledesigner")
+		If Not (xmlPDConfig Is Nothing) Then
+			' "type" attribute:	Optional.	Specifies whether this is a
+			' normal profile or a site-terms profile.	Defaults to "profile".
+			m_strProfileType = xmlPDConfig.getAttribute("type")
+			If Not IsNull(m_strProfileType) Then
+				m_strProfileType = LCase(m_strProfileType)
+			Else
+				m_strProfileType = ""
+			End If
+			If m_strProfileType <> "siteterm" Then
+				m_strProfileType = "profile"
+			End If
+			
+			' "docid" attribute:	Required.	Specifies the ID of the XML
+			' data-island that contains the profile XML.
+			Set xiDocAttr = Nothing
+			m_strProfileDocID = xmlPDConfig.getAttribute("docid")
+			If IsNull(m_strProfileDocID) Then
+				' ERROR: docid is required
+				MsgBox L_DocID_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+				bSuccess = False
+			Else
+				Set xiDocAttr = element.document.all(m_strProfileDocID)
+				If Not (xiDocAttr Is Nothing) Then
+					Set m_xmlProfileDoc = xiDocAttr.XMLDocument
+				End If
+			End If
+
+			' "sitetermsid" attribute:	Required.	Specifies the ID of the
+			' XML data-island that contains the site-terms XML.
+			Set xiDocAttr = Nothing
+			m_strSiteTermsDocID = xmlPDConfig.getAttribute("sitetermsid")
+			If IsNull(m_strSiteTermsDocID) Then
+				' ERROR: sitetermsid is required
+				MsgBox L_SiteTermsID_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+				bSuccess = False
+			Else
+				Set xiDocAttr = element.document.all(m_strSiteTermsDocID)
+				If Not (xiDocAttr Is Nothing) Then
+					Set m_xmlSiteTermsDoc = xiDocAttr.XMLDocument
+				End If
+			End If
+
+			' "catalogid" attribute:	Required.	Specifies the ID of the
+			' XML data-island that contains the profile list XML.
+			Set xiDocAttr = Nothing
+			m_strCatalogDocID = xmlPDConfig.getAttribute("catalogid")
+			If IsNull(m_strCatalogDocID) Then
+				' ERROR: catalogid is required
+				MsgBox L_CatalogID_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+				bSuccess = False
+			Else
+				Set xiDocAttr = element.document.all(m_strCatalogDocID)
+				If Not (xiDocAttr Is Nothing) Then
+					Set m_xmlCatalogDoc = xiDocAttr.XMLDocument
+				End If
+			End If
+
+			' "helppath" attribute:	Optional.	Specifies the BizDesk root
+			' to use for referencing help topics
+			Set xiDocAttr = xmlPDConfig.selectSingleNode("helppath")
+			If Not xiDocAttr Is Nothing Then m_strHelpPath = xiDocAttr.text
+
+			' "template" attribute: Optional.
+			' Contains Property and/or Group and/or Attribute templates
+			Set xmlTemplateParent = xmlPDConfig.selectSingleNode("template")
+			If Not (xmlTemplateParent Is Nothing) Then
+				' Look for Property template
+				Set xmlTemplate = xmlTemplateParent.selectSingleNode(gc_sProperty)
+				If Not (xmlTemplate Is Nothing) Then
+					'Get current Property template
+					Set xmlTemplateNode = xiNewProfileNodes.XMLDocument.selectSingleNode( _
+							"document/" & m_strProfileType & "/" & gc_sProperty)
+					'Clone the new template and all its children / add it to the template XML
+					Set xmlTemplateNodeParent = xmlTemplateNode.parentNode
+					xmlTemplateNodeParent.appendChild xmlTemplate.cloneNode(True)
+					'Remove the old template node
+					xmlTemplateNodeParent.removeChild xmlTemplateNode
+				End If
+				' Look for Group template
+				Set xmlTemplate = xmlTemplateParent.selectSingleNode(gc_sGroup)
+				If Not (xmlTemplate Is Nothing) Then
+					'Get current profile template
+					Set xmlTemplateNode = xiNewProfileNodes.XMLDocument.selectSingleNode( _
+							"document/generic/" & gc_sGroup)
+					'Clone the new template and all its children / add it to the template XML
+					Set xmlTemplateNodeParent = xmlTemplateNode.parentNode
+					xmlTemplateNodeParent.appendChild xmlTemplate.cloneNode(True)
+					'Remove the old template node
+					xmlTemplateNodeParent.removeChild xmlTemplateNode
+				End If
+				' Look for Attribute template
+				Set xmlTemplate = xmlTemplateParent.selectSingleNode(gc_sAttribute)
+				If Not (xmlTemplate Is Nothing) Then
+					'Get current attribute template
+					Set xmlTemplateNode = xiNewProfileNodes.XMLDocument.selectSingleNode( _
+							"document/generic/" & gc_sAttribute)
+					'Clone the new template / add it to the template XML
+					Set xmlTemplateNodeParent = xmlTemplateNode.parentNode
+					xmlTemplateNodeParent.appendChild xmlTemplate.cloneNode(False)
+					'Remove the old template node
+					xmlTemplateNodeParent.removeChild xmlTemplateNode
+				End If
+			End If
+		Else
+			' Report an error:	No 'profiledesigner' node.
+			MsgBox L_ProfDesignerNode_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+			bSuccess = False
+		End If
+	Else
+		' Report an error:	No XML config data-island.
+		MsgBox L_XMLConfig_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		bSuccess = False
+	End If
+
+	Configure = bSuccess
+End Function
+
+Function GetPDInternalCfgXML(strProfileType)
+	Dim xmlConfig
+
+	Set xmlConfig = xiProfDesignerConfig.XMLDocument
+	Set GetPDInternalCfgXML = _
+			xmlConfig.selectSingleNode("pdinternalconfig/" & m_strProfileType)
+End Function
+
+Function GetPDInternalCfgValue(strNodeType, strValue)
+	Dim xmlNode
+
+	Set xmlNode = m_xmlPDInternalCfg.selectSingleNode(strNodeType)
+	GetPDInternalCfgValue = xmlNode.getAttribute(strValue)
+End Function
+
+' SubHTC_RdyStateChgHandler
+'
+'	Description:
+'		Counts the number of child HTCs that have fully initialized, and when
+'		all child HTCs are initialized, this sub hooks up the appropriate event
+'		handlers.
+
+Sub SubHTC_RdyStChgHandler()
+	Dim elemSrc, elemTemp
+
+	Set elemSrc = window.event.srcElement
+	If elemSrc.readyState = "complete" Then
+		' Unhook ready-state-change event handler.	Bump up ready HTC count.
+		elemSrc.detachEvent "onreadystatechange", GetRef("SubHTC_RdyStChgHandler")
+		m_nChildHTCsReady = m_nChildHTCsReady + 1
+
+		' Special-case:	Custom attributes Edit-Sheet (it has a DynamicTable in it)
+		If elemSrc Is m_divCustomAttrsES Then
+			Set m_divCustomAttrsDT = element.all("divCustomAttrsDT")
+			m_divCustomAttrsDT.setAttribute "MetaXML", _
+					element.all(GetPDInternalCfgValue("attribute", "dtconfigid")).uniqueID
+			m_divCustomAttrsDT.setAttribute "DataXML", element.all("xiCustomAttrData").uniqueID
+			m_divCustomAttrsDT.attachEvent "onreadystatechange", GetRef("SubHTC_RdyStChgHandler")
+			m_divCustomAttrsDT.addBehavior("/widgets/editHTC/dynamictable.htc")
+		End If
+
+		' See if all HTCs are ready.
+		If m_nChildHTCsReady = CHILD_HTC_COUNT Then
+			' We can hook up important event handlers now, since the child
+			' HTCs are fully initialized.
+
+			' Profile View (XMLView HTC):
+			m_divProfileView.attachEvent "onSelectItem", GetRef("ProfView_SelChangedHandler")
+			m_divProfileView.attachEvent "onDeselectItem", GetRef("ProfView_SelChangedHandler")
+
+			' Property-Attributes View (EditSheet HTC):
+			m_divPropertyAttrs.attachEvent "onChange", GetRef("PropAttrsView_ChangeHandler")
+			m_divPropertyAttrs.attachEvent "onRequire", GetRef("PropAttrsView_ValidHandler")
+
+			'Hook up child controls, too
+			m_divPropertyAttrs.field("name").attachEvent "onBeginChange", _
+					GetRef("PropAttrsView_ChangeHandler")
+			m_divPropertyAttrs.field("displayName").attachEvent "onBeginChange", _
+					GetRef("PropAttrsView_ChangeHandler")
+			m_divPropertyAttrs.field("description").attachEvent "onBeginChange", _
+					GetRef("PropAttrsView_ChangeHandler")
+
+			' Group-Attributes View (EditSheet HTC):
+			m_divGroupAttrs.attachEvent "onValid", GetRef("GroupAttrsView_ValidHandler")
+			m_divGroupAttrs.attachEvent "onChange", GetRef("GroupAttrsView_ChangeHandler")
+			m_divGroupAttrs.attachEvent "onRequire", GetRef("GroupAttrsView_ValidHandler")
+			m_divGroupAttrs.field("name").attachEvent "onBeginChange", _
+					GetRef("GroupAttrsView_ChangeHandler")
+			m_divGroupAttrs.field("displayName").attachEvent "onBeginChange", _
+					GetRef("GroupAttrsView_ChangeHandler")
+			m_divGroupAttrs.field("description").attachEvent "onBeginChange", _
+					GetRef("GroupAttrsView_ChangeHandler")
+
+			' Custom-Attributes View (EditSheet HTC):
+			m_divCustomAttrsDT.attachEvent "onChange", GetRef("CustomPropAttrsView_ChangeHandler")
+		End If
+	End If
+End Sub
+
+Function CheckForFriendlyNameOrDisplayColumn()
+	Dim xlAttrs, xmlRecName, xmlRecord, bResult
+	
+	bResult = False
+	
+	Set xlAttrs = m_xmlCustomAttrData.selectNodes("document/record")
+	For Each xmlRecord In xlAttrs
+		Set xmlRecName = xmlRecord.selectSingleNode("attrName")
+		If xmlRecName.text = "sDisplayColumn" Or xmlRecName.text = "sFriendlyName" Then
+			bResult = True
+			Exit For
+		End If
+	Next 
+	
+	CheckForFriendlyNameOrDisplayColumn = bResult
+End Function
+
+Sub CustomPropAttrsView_ChangeHandler()
+	Dim sKeyType, sPropType, xmlDocument, xmlRecord, bChanged, xmlRecordSet
+
+	' check that the custom attribute is valid (cannot set join key or reference property as
+	' friendly name or display column
+	bChanged = true
+	If m_strProfileType = "profile" Then
+	
+		sKeyType = LCase(m_divPropertyAttrs.field("keyDef").value)
+		sPropType = m_divPropertyAttrs.field("referenceString").value
+		Set xmlDocument = m_divCustomAttrsDT.xmlList
+		If sKeyType = "join" Or sKeyType = "primaryjoin" or len(sPropType) > 0 Or _
+			len(m_divPropertyAttrs.field("dataRef").value) = 0 Or _
+			lcase(m_divPropertyAttrs.field("propType").value) = "password"	Or _
+			m_divPropertyAttrs.field("isEncrypted").value > 0 Then
+			' check to see if we have a displaycolumn or friendlyname attribute and remove it if
+			' and give a warning
+			
+			
+			set xmlRecord = xmlDocument.selectSingleNode("record[attrName!value() = 'sFriendlyName']")
+			If Not(xmlRecord is nothing) then
+				xmlDocument.removeChild xmlRecord
+				MsgBox L_CustomAttribFriendly_Message, vbOKOnly, L_ErrorBoxHeader_Text
+
+				bChanged = false
+			End If
+
+			set xmlRecord = xmlDocument.selectSingleNode("record[attrName!value() = 'sDisplayColumn']")
+			If Not(xmlRecord is nothing) then
+				xmlDocument.removeChild xmlRecord
+				MsgBox L_CustomAttribDisplay_Message, vbOKOnly, L_ErrorBoxHeader_Text
+
+				bChanged = false				
+			End If
+			
+		Else
+			set xmlRecord = xmlDocument.selectSingleNode("record[attrName!value() = 'sDisplayColumn']")
+			If Not(xmlRecord is nothing) then 
+			Set xmlRecord = xmlRecord.SelectSingleNode("attrValue")
+				If Not(IsNumeric(xmlRecord.text)) Then
+					MsgBox L_CustomAttribDisplayValue_Message, vbOK, L_ErrorBoxHeader_Text 
+					xmlRecord.text = "100"
+				Else
+					If CInt(xmlRecord.text) > 100 Then
+						MsgBox L_CustomAttribDisplayValue_Message, vbOK, L_ErrorBoxHeader_Text 
+						xmlRecord.text = "100"
+					End If
+				End If
+			End If
+		End If
+		
+		set xmlRecordSet = xmlDocument.selectNodes("//record")
+		For each xmlRecord in xmlRecordSet
+			If lcase(xmlRecord.selectSingleNode("attrName").text) = gc_sEncryptionCA then
+				xmlDocument.removeChild xmlRecord
+				MsgBox L_CustomAttribEncryption_Message, vbOKOnly, L_ErrorBoxHeader_Text
+
+				bChanged = false				
+			End If
+		Next
+	End If
+	if bChanged then
+		m_bAttrsChanged = True
+		Call PropAttrsView_ValidHandler()
+	else
+		' Tell the Dynamic-Table that its underlying XML changed.
+		m_divCustomAttrsDT.reset
+	End If
+End Sub
+
+'	CheckValid()
+'
+'	Description: Checks for all required profile elements and returns
+'		True if all of the following are true:
+'		1. Exactly one member has been defined as the primary key.
+'		2. Exactly one member has been defined as the join key.
+'		3. Exactly one member has been defined as the hashing key (for partitioned sources).
+'		4. Exactly one member has been defined as the RDN attribute (for LDAP sources).
+'		5. Exactly one property exists named 'date_last_changed' (for exported profiles).
+
+Function CheckValid()
+	Dim xmllistKeys, xmlKey, bIsValid, bLDAP, bHash, bIsCached
+	Dim rgsPath, sdDataSources, rgsSources, i, strErr
+
+	'Assume profile is invalid
+	CheckValid = False
+
+	'CACHED PROFILE - Check if any properties are mapped
+	Set xmllistKeys = m_xmlProfileDoc.selectNodes("//" & gc_sDataRef & _
+			"[not(@isDeleted) || @isDeleted != '1']")
+	bIsCached = (xmllistKeys.length = 0)
+
+	'PRIMARY KEY
+	Set xmllistKeys = m_xmlProfileDoc.selectNodes("//" & gc_sProperty & _
+			"[(not(@isDeleted) || @isDeleted != '1') && " & _
+			"(@keyDef='PRIMARY' || @keyDef='PRIMARYJOIN')]")
+	If xmllistKeys.length = 0 Then
+		' Must have one primary key
+		MsgBox L_NoPrimaryKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		Exit Function
+	ElseIf xmllistKeys.length > 1 Then
+		' Cannot have more than one primary key
+		MsgBox L_MultiPrimaryKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		Exit Function
+	ElseIf Not bIsCached Then
+		If Nothing Is xmllistKeys.item(0).selectSingleNode(gc_sDataRef & _
+			"[not(@isDeleted) || @isDeleted != '1']") Then
+			' Primary key must be mapped (non-cached profile)
+			MsgBox L_CachedPrimaryKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Function
+		End If
+	End If
+
+	'JOIN KEY
+	Set xmllistKeys = m_xmlProfileDoc.selectNodes("//" & gc_sProperty & _
+			"[(not(@isDeleted) || @isDeleted != '1') && " & _
+			"(@keyDef='JOIN' || @keyDef='PRIMARYJOIN')]")
+	If xmllistKeys.length = 0 Then
+		' Must have one join key
+		MsgBox L_NoJoinKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		Exit Function
+	ElseIf xmllistKeys.length > 1 Then
+		' Cannot have more than one primary key
+		MsgBox L_MultiJoinKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		Exit Function
+	ElseIf Not bIsCached Then
+		If Nothing Is xmllistKeys.item(0).selectSingleNode(gc_sDataRef & _
+			"[not(@isDeleted) || @isDeleted != '1']") Then
+			' Primary key must be mapped (non-cached profile)
+			MsgBox L_CachedJoinKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Function
+		End If
+	End If
+
+	'DTS - exported profile
+	Set xmllistKeys = m_xmlProfileDoc.selectNodes("//" & gc_sProperty & _
+			"[(not(@isDeleted) || @isDeleted != '1') && " & _
+			"@isExported = '1']")
+	If xmllistKeys.length > 0 Then
+		'This profile has exported properties
+		Set xmllistKeys = m_xmlProfileDoc.selectNodes("//" & gc_sProperty & _
+			"[(not(@isDeleted) || @isDeleted != '1') && " & _
+			"(@name $ieq$ 'date_last_changed')]")
+		If xmllistKeys.length <> 1 Then
+			' Must have this property
+			MsgBox L_NoDTS_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Function
+		End If
+	End If
+
+	'Loop through all data refs
+	Set sdDataSources = CreateObject("Scripting.Dictionary")
+	Set xmllistKeys = m_xmlProfileDoc.selectNodes("//" & gc_sDataRef & _
+			"[not(@isDeleted) || @isDeleted != '1']")
+	For Each xmlKey in xmllistKeys
+		'Get data source
+		rgsPath = Split(xmlKey.getAttribute("idref"), ".")
+		'Check if it's LDAP
+		If Not(Nothing Is m_xmlProfileDoc.selectSingleNode("//" & _
+			gc_sDataSource & "[@name='" & rgsPath(0) & "' && @sourceType='LDAPv3']")) Then
+			bLDAP = True
+			If Not sdDataSources.Exists(rgsPath(0)) Then sdDataSources.Add rgsPath(0), True
+		End If
+		'Check if it's partitioned
+		If Not bHash Then
+			bHash =	Not(Nothing Is m_xmlProfileDoc.selectSingleNode("//" & _
+					gc_sDataSource & "[@name='" & rgsPath(0) & "' && @isPartitioned='1']"))
+		End If
+	Next
+
+	' RDN ATTRIBUTE (LDAP source)
+	Set xmllistKeys = m_xmlProfileDoc.selectNodes("//" & gc_sProperty & _
+			"[not(@isDeleted) || @isDeleted != '1']/" & _
+			gc_sDataRef & "[@isRDNAttribute='1']")
+	' Must have one RDN attribute for each LDAP source
+	For Each xmlKey In xmllistKeys
+		rgsPath = Split(xmlKey.getAttribute("idref"), ".")
+		If Not sdDataSources.Exists(rgsPath(0)) Then
+			' RDN attribute applies to a non-LDAP source
+			strErr = Replace(L_InvalidRDNAttr_ErrorMessage, "%1", rgsPath(0))
+			strErr = Replace(strErr, "%2", GetPathFromProfNode(xmlKey.parentNode))
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Function
+		ElseIf sdDataSources.Item(rgsPath(0)) = False Then
+			' More than one RDN attribute for this data source
+			strErr = Replace(L_MultiRDNAttr_ErrorMessage, "%1", rgsPath(0))
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Function
+		Else
+			' Record that we have an RDN for this source
+			sdDataSources.Item(rgsPath(0)) = False
+		End If
+	Next
+	' Now check for any LDAP sources that do not have an associated RDN
+	rgsSources = sdDataSources.Keys()
+	For i = 0 to uBound(rgsSources)
+		If sdDataSources(rgsSources(0)) = True Then
+			' LDAP source without an RDN
+			strErr = Replace(L_NoRDNAttr_ErrorMessage, "%1", rgsPath(0))
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Function
+		End If
+	Next
+
+	' HASHING KEY (partitioned source)
+	Set xmllistKeys = m_xmlProfileDoc.selectNodes("//" & gc_sProperty & _
+			"[(not(@isDeleted) || @isDeleted != '1') && @isHashingKey='1']")
+	If bHash And xmllistKeys.length = 0 Then
+		' Must have one hashing key
+		MsgBox L_NoHashKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		Exit Function
+	ElseIf bHash And xmllistKeys.length > 1 Then
+		' Cannot have more than one hashing key
+		MsgBox L_MultiHashKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		Exit Function
+	ElseIf Not(bHash) and xmllistKeys.length > 0 Then
+		' Cannot have a hashing key
+		MsgBox L_InvalidHashKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		Exit Function
+	End If
+
+	CheckValid = True
+End Function
+
+Function GetIsDirty()
+	GetIsDirty = m_bIsDirty
+End Function
+
+
+Sub PutIsDirty(bIsDirty)
+	m_bIsDirty = CBool(bIsDirty)
+End Sub
+
+Sub ReportDirtyDoc()
+	m_bIsDirty = True
+	evtChange.fire createEventObject()
+End Sub
+
+'	ReportStatus
+'
+'	Description:
+'		Reports the specified status message in the form of an onStatus event.
+
+Sub ReportStatus(strMessage)
+	Dim objEvent
+
+	Set objEvent = createEventObject()
+	objEvent.setAttribute "statusText", CStr(strMessage)
+	evtStatus.fire objEvent
+End Sub
+
+'	getNextSibling
+'
+'	Description:
+'		Returns the previous sibling xmlItem (or Nothing is this is the first item)
+'
+'	Note:
+'		This function is necessary because the XML DOM has some missing / broken
+'		functionality (node.nextSibling is broken).
+
+Function getNextSibling(xmlItem)
+	Dim xmlNextSibling, xmllistChildren
+
+	If xmlItem Is Nothing Then
+		Set xmlNextSibling = Nothing
+	Else
+		' Get all children of the parent node and iterate through them.
+		Set xmllistChildren = xmlItem.parentNode.childNodes
+		xmllistChildren.reset
+		Do
+			Set xmlNextSibling = xmllistChildren.nextNode()
+		Loop While Not(xmlNextSibling Is Nothing) And _
+			Not(xmlNextSibling Is xmlItem)
+		Set xmlNextSibling = xmllistChildren.nextNode()
+	End If
+
+	Set getNextSibling = xmlNextSibling
+End Function
+
+Sub BtnAdd_ClickHandler()
+	Dim strDlgAction, xmlNewItem, rgstrSelPaths, xmlParentItem
+	Dim xmlPrevSibling, xmlNextSibling, xmllistChildren
+	Dim strName, strDisplayName, sdArgs
+
+	Set sdArgs = CreateObject("Scripting.Dictionary")
+	sdArgs.Add "profileType", m_strProfileType
+	sdArgs.Add "helpPath", m_strHelpPath
+
+	' Find out what the user wants to create, if anything.
+	strDlgAction = window.showModalDialog("/widgets/profilebldrHTC/DlgAddItem.htm", _
+			sdArgs, "help:no;status:no;dialogWidth:300px;dialogHeight:50px")
+
+	' Get a new node of the appropriate type.
+	Set xmlNewItem = Nothing
+	If strDlgAction = "property" Or strDlgAction = "group" Then
+		' User wants to create a new property or group.
+		If strDlgAction = "property" Then
+			strDlgAction = gc_sProperty
+		Elseif strDlgAction = "group" Then
+			strDlgAction = gc_sGroup
+		End If
+		' Figure out where the new node will go.
+		If m_divProfileView.GetSelectedCount() = 1 Then
+			rgstrSelPaths = m_divProfileView.GetSelectedItems()
+			' If a property is selected, create the new item AFTER the property.
+			' If a group is selected, create the new item INSIDE the group, at the end.
+			' item, right after the currently selected item.
+
+			Set xmlPrevSibling = GetProfNodeFromPath(rgstrSelPaths(0))
+			If xmlPrevSibling.tagName = gc_sProperty Then
+				Set xmlParentItem = xmlPrevSibling.parentNode
+			Else
+				' This is a Group.
+				Set xmlParentItem = xmlPrevSibling
+				Set xmlPrevSibling = xmlParentItem.lastChild
+
+				' Make sure the group is expanded in the UI as well.
+				m_divProfileView.ExpandGroupItem rgstrSelPaths(0), True
+			End If
+		Else
+			' Insert the new node into the top level of the profile.
+			Set xmlParentItem = m_xmlProfileDoc.selectSingleNode(gc_sDocument & _
+					"/" & gc_sCatalog & "/" & gc_sProfile)
+			Set xmlPrevSibling = xmlParentItem.lastChild
+		End If
+
+		Set xmlNewItem = getNewProfileItem(strDlgAction, xmlParentItem)
+	End If
+
+	If Not(xmlNewItem Is Nothing) Then
+		' Insert the new node into the profile.	We have to make extra code
+		' to do this because the XML DOM has some missing / broken
+		' functionality.	(node.insertAfter() is missing, node.nextSibling is
+		' broken.)
+
+		Set xmlNextSibling = getNextSibling(xmlPrevSibling)
+
+		If xmlNextSibling Is Nothing Then
+			xmlParentItem.insertBefore xmlNewItem, Nothing
+		Else
+			xmlParentItem.insertBefore xmlNewItem, xmlNextSibling
+		End If
+
+		' Update the UI.
+		m_divProfileView.ClearSelections
+		m_divProfileView.Refresh
+
+		ReportDirtyDoc
+
+		' Select the new item.
+		m_divProfileView.SelectItem GetPathFromProfNode(xmlNewItem), True
+		ProfView_SelChangedHandler
+	End If
+End Sub
+
+'	BtnMoveUp_ClickHandler
+'		--> Handles the click event on BtnMoveUp
+'
+'	Description:
+'		Moves a property or group up one item in the profile view and sets
+'		isNew/isDeleted attributes so that the BDAO will update accordingly.
+'		If the item is the first in a group, the item is moved above that group.
+'		If the previous item is a group and is expanded in the UI, this item
+'		will be moved into that group, otherwise it will be moved above it.
+'
+'	Assumptions:
+'		There must be 1 and only 1 selected item
+'		and it must not be the first item of the profile (see UpdateButtons)
+
+Sub BtnMoveUp_ClickHandler()
+	Dim rgstrItemPaths, xmlItem, xmlNewItem, xmlParentItem, xmlPrevItem
+	Dim xmlDuplicateItem, xmllistChildren, xmlChild, bDeleted
+	Dim bExpand, strNodeName, strErr
+
+	'Get selected item
+	rgstrItemPaths = m_divProfileView.GetSelectedItems()
+	Set xmlItem = GetProfNodeFromPath(rgstrItemPaths(0))
+
+	'FIGURE OUT WHERE THE NODE WILL GO
+	Set xmlParentItem = xmlItem.parentNode
+	Set xmlPrevItem = xmlItem.previousSibling
+	Do While Not xmlPrevItem Is Nothing
+		bDeleted = xmlPrevitem.getAttribute("isDeleted")
+		If IsNull(bDeleted) Or Not bDeleted = 1 Then Exit Do
+		Set xmlPrevItem = xmlPrevItem.previousSibling
+	Loop
+
+	If Not xmlPrevItem Is Nothing Then
+		If Not xmlPrevItem.tagName = gc_sProperty Then
+			If m_divProfileView.IsExpanded(GetPathFromProfNode(xmlPrevItem)) Then
+				'Move the item into the previous group
+				Set xmlParentItem = xmlPrevItem
+				Set xmlPrevItem = Nothing
+			End If
+		End If
+	Else
+		'Move the property outside of the group
+		Set xmlPrevItem = xmlParentItem
+		Set xmlParentItem = xmlParentItem.parentNode
+	End If
+
+	If Not xmlParentItem Is xmlItem.parentNode Then
+		' Attempting to move this property outside the group
+		' Check if this is a special, unmovable property
+		'	UserObject profile - cannot move user_id
+		'	Organization profile - cannot move org_id or name
+		'	TargetingContext profile - cannot move PageGroup
+		strNodeName = xmlItem.getAttribute("name")
+		If (m_strProfileName = "UserObject" And _
+			strNodeName = "user_id") Or _
+			(m_strProfileName = "Organization" And _
+			(strNodeName = "org_id" Or strNodeName = "name")) Or _
+			(m_strProfileName = "TargetingContext" And _
+			(strNodeName = "PageGroup")) Then
+			' User cannot move this property
+			strErr = Replace(L_MoveSpecial_ErrorMessage, "%1", xmlItem.getAttribute("displayName"))
+			strErr = Replace(strErr, "%2", xmlItem.parentNode.getAttribute("displayName"))
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Sub
+		End If
+	End If
+
+	'CHECK FOR DUPLICATES
+	'Check for duplicate node name in destination
+	Set xmlDuplicateItem = xmlParentItem.selectSingleNode( _
+	"*[@displayName = '" & Replace(xmlItem.getAttribute("displayName"), "'", "\'") & "' || @name = '" & xmlItem.getAttribute("name") & "']")
+	If Not xmlDuplicateItem Is Nothing Then
+		If "1" = xmlDuplicateItem.getAttribute("isDeleted") Or _
+		xmlDuplicateItem Is xmlItem Then
+			'Float this deleted item to the top of the group
+			Set xmlChild = xmlParentItem.firstChild
+			xmlParentItem.insertBefore xmlDuplicateItem, xmlChild
+		Else
+			'Don't allow the user to duplicate this item
+			MsgBox L_Duplicate_Message, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Sub
+		End If
+	End If
+
+	'INSERT THIS NODE
+	bExpand = m_divProfileView.IsExpanded(GetPathFromProfNode(xmlItem))
+	If "1" = xmlItem.getAttribute("isNew") Then
+		'Simply move this node
+		Set xmlNewItem = xmlItem.parentNode.removeChild(xmlItem)
+	Else
+		'Make a copy of this node
+		Set xmlNewItem = xmlItem.cloneNode(True)
+		'Set isNew attribute on this node and all descendants
+		xmlNewItem.setAttribute "isNew", "1"
+		xmlNewItem.removeAttribute "isModified"
+		xmlNewItem.removeAttribute "isDeleted"
+		If xmlNewItem.tagName = gc_sGroup Then
+			Set xmllistChildren = xmlNewItem.selectNodes(".//")
+			For Each xmlChild In xmllistChildren
+				If xmlChild.tagName = gc_sGroup OR _
+				xmlChild.tagName = gc_sProperty Then
+					If xmlChild.getAttribute("isDeleted") = "1" Then
+						' Remove this child
+						xmlChild.parentNode.removeChild xmlChild
+					Else
+						xmlChild.setAttribute "isNew", "1"
+						xmlChild.removeAttribute "isModified"
+					End If
+				End If
+			Next
+		End If
+		'Set the old node to deleted
+		DeleteProfileNode(xmlItem)
+	End If
+
+	'Insert the new node into the right place
+	If xmlPrevItem Is Nothing Then
+		Set xmlNewItem = xmlParentItem.insertBefore(xmlNewItem, Nothing)
+	Else
+		Set xmlNewItem = xmlParentItem.insertBefore(xmlNewItem, xmlPrevItem)
+	End If
+
+	' Document is dirty now
+	ReportDirtyDoc
+	'Deselect this item
+	m_divProfileView.SelectItem rgstrItemPaths(0), False
+	' Update the UI
+	m_divProfileView.Refresh
+	' Select the new item
+	m_divProfileView.SelectItem GetPathFromProfNode(xmlNewItem), True
+	'Expand the new item if needed
+	If bExpand Then m_divProfileView.ExpandGroupItem GetPathFromProfNode(xmlNewItem), bExpand
+
+	UpdateButtons
+End Sub
+
+'	BtnMoveDown_ClickHandler
+'		--> Handles the click event on BtnMoveDown
+'
+'	Description:
+'		Moves a property or group down one item in the profile view and sets
+'		isNew/isDeleted attributes so that the BDAO will update accordingly.
+'		If the item is the last in a group, the item is moved below that group.
+'		If the next item is a group and is expanded in the UI, this item
+'		will be moved into that group, otherwise it will be moved below it.
+'
+'	Assumptions:
+'		There must be 1 and only 1 selected item
+'		and it must not be the last item of the profile (see UpdateButtons)
+
+Sub BtnMoveDown_ClickHandler()
+	Dim rgstrItemPaths, xmlItem, xmlNewItem, xmlParentItem, xmlNextItem
+	Dim xmlDuplicateItem, xmllistChildren, xmlChild, bDeleted, bExpand
+	Dim strNodeName, strErr
+
+	'Get selected item
+	rgstrItemPaths = m_divProfileView.GetSelectedItems()
+	Set xmlItem = GetProfNodeFromPath(rgstrItemPaths(0))
+
+	'FIGURE OUT WHERE THE NODE WILL GO
+	Set xmlParentItem = xmlItem.parentNode
+	Set xmlNextItem = getNextSibling(xmlItem)
+
+	If Not xmlNextItem Is Nothing Then
+		If xmlNextItem.tagName = gc_sProperty Then
+			'Move the item within the group
+			Set xmlNextItem = getNextSibling(xmlNextItem)
+		Else
+			If m_divProfileView.IsExpanded(GetPathFromProfNode(xmlNextItem)) Then
+				'Move the item into the next group
+				Set xmlParentItem = xmlNextItem
+				Set xmlNextItem = xmlParentItem.firstChild
+				Do While Not xmlNextItem Is Nothing
+					bDeleted = xmlNextItem.getAttribute("isDeleted")
+					If IsNull(bDeleted) Or Not bDeleted = 1 Then Exit Do
+					Set xmlNextItem = getNextSibling(xmlNextItem)
+				Loop
+			Else
+				'Move the item below the next group
+				Set xmlNextItem = getNextSibling(xmlNextItem)
+			End If
+		End If
+	Else
+		'Move the property outside of the group
+		Set xmlNextItem = getNextSibling(xmlParentItem)
+		Set xmlParentItem = xmlParentItem.parentNode
+	End If
+
+	If Not xmlParentItem Is xmlItem.parentNode Then
+		' Attempting to move this property outside the group
+		' Check if this is a special, unmovable property
+		'	UserObject profile - cannot move user_id
+		'	Organization profile - cannot move org_id or name
+		'	TargetingContext profile - cannot move PageGroup
+		strNodeName = xmlItem.getAttribute("name")
+		If (m_strProfileName = "UserObject" And _
+			strNodeName = "user_id") Or _
+			(m_strProfileName = "Organization" And _
+			(strNodeName = "org_id" Or strNodeName = "name")) Or _
+			(m_strProfileName = "TargetingContext" And _
+			(strNodeName = "PageGroup")) Then
+			' User cannot move this property
+			strErr = Replace(L_MoveSpecial_ErrorMessage, "%1", xmlItem.getAttribute("displayName"))
+			strErr = Replace(strErr, "%2", xmlItem.parentNode.getAttribute("displayName"))
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Sub
+		End If
+	End If
+
+	'CHECK FOR DUPLICATES in destination
+	Set xmlDuplicateItem = xmlParentItem.selectSingleNode( _
+	"*[@displayName = '" & Replace(xmlItem.getAttribute("displayName"), "'", "\'") & "' || @name = '" & xmlItem.getAttribute("name") & "']")
+	If Not xmlDuplicateItem Is Nothing Then
+		If "1" = xmlDuplicateItem.getAttribute("isDeleted") Or _
+		xmlDuplicateItem Is xmlItem Then
+			'Float this deleted item to the top of the group
+			Set xmlChild = xmlParentItem.firstChild
+			xmlParentItem.insertBefore xmlDuplicateItem, xmlChild
+		Else
+			'Don't allow the user to duplicate this item
+			MsgBox L_Duplicate_Message, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Sub
+		End If
+	End If
+
+	'INSERT THIS NODE
+	bExpand = m_divProfileView.IsExpanded(GetPathFromProfNode(xmlItem))
+	If "1" = xmlItem.getAttribute("isNew") Then
+		'Simply move this node
+		Set xmlNewItem = xmlItem.parentNode.removeChild(xmlItem)
+	Else
+		'Make a copy of this node
+		Set xmlNewItem = xmlItem.cloneNode(True)
+		'Set isNew attribute on this node and all descendants
+		xmlNewItem.setAttribute "isNew", "1"
+		xmlNewItem.removeAttribute "isModified"
+		xmlNewItem.removeAttribute "isDeleted"
+		If xmlNewItem.tagName = gc_sGroup Then
+			Set xmllistChildren = xmlNewItem.selectNodes(".//")
+			For Each xmlChild In xmllistChildren
+				If xmlChild.tagName = gc_sGroup OR _
+				xmlChild.tagName = gc_sProperty Then
+					If xmlChild.getAttribute("isDeleted") = "1" Then
+						' Remove this child
+						xmlChild.parentNode.removeChild xmlChild
+					Else
+						xmlChild.setAttribute "isNew", "1"
+						xmlChild.removeAttribute "isModified"
+					End If
+				End If
+			Next
+		End If
+		'Set the old node to deleted
+		DeleteProfileNode(xmlItem)
+	End If
+
+	'Insert the new node into the right place
+	If xmlNextItem Is Nothing Then
+		Set xmlNewItem = xmlParentItem.appendChild(xmlNewItem)
+	Else
+		Set xmlNewItem = xmlParentItem.insertBefore(xmlNewItem, xmlNextItem)
+	End If
+
+	' Document is dirty now
+	ReportDirtyDoc
+	'Deselect this item
+	m_divProfileView.SelectItem rgstrItemPaths(0), False
+	' Update the UI
+	m_divProfileView.Refresh
+	' Select the new item
+	m_divProfileView.SelectItem GetPathFromProfNode(xmlNewItem), True
+	'Expand the item if needed
+	If bExpand Then m_divProfileView.ExpandGroupItem GetPathFromProfNode(xmlNewItem), bExpand
+
+	UpdateButtons
+End Sub
+
+'	getNewProfileItem
+'
+'	Description:
+'		This function returns a new XML node of the proper type, and with the
+'		proper attribute-values for the specified parent-node.	The node is not
+'		actually inserted into the tree at this point, because other
+'		information is necessary for determining exactly where to insert the
+'		node.
+
+Function getNewProfileItem(strItemType, xmlParent)
+	Dim xmlNewItem, i, strName, strDisplayName, xmllistNodes, xmlCatalog, xmlProfile
+
+	' Create the appropriate item first.	Make it from the item-templates.
+	' First, try to find an item specific to the profile-type.	If we don't
+	' have one, try to find a generic one.
+
+	Set xmlNewItem = xiNewProfileNodes.XMLDocument.selectSingleNode("document/" & _
+			m_strProfileType & "/" & strItemType)
+	If xmlNewItem Is Nothing Then
+		Set xmlNewItem = xiNewProfileNodes.XMLDocument.selectSingleNode("document/generic/" & _
+				strItemType)
+	End If
+
+	' Prepare the node for insertion.	This involves giving the node a unique
+	' name, and making a copy of the original node.
+
+	If Not(xmlNewItem Is Nothing) Then
+		' Make a copy of the selected template node to muck with.
+		Set xmlNewItem = xmlNewItem.cloneNode(True)
+
+		' Initialize various attributes on the new node.
+
+		Set xmlCatalog = xmlParent.ownerDocument.selectSingleNode("//" & gc_sCatalog)
+		Set xmlProfile = xmlParent.ownerDocument.selectSingleNode("//" & gc_sProfile)
+
+		' Choose a unique name and display-name for this new node.
+
+		i = 0
+		Do
+			i = i + 1
+			strName = Replace(xmlNewItem.getAttribute("name"), "%1", CStr(i))
+			strDisplayName = Replace(xmlNewItem.getAttribute("displayName"), "%1", CStr(i))
+'---------------
+' Bug 8048, 8608 - Put the commented lines of code back in once the CSOLEDB
+' provider supports property-names that are unique only at the group-level
+' (it currently requires names that are unique at the profile-level).
+
+'			Set xmllistNodes = xmlParent.selectNodes("*[@name='" & _
+'					strName & "' || @displayName='" & strDisplayName & "']")
+			Set xmllistNodes = xmlParent.selectNodes("//*[@name='" & _
+					strName & "' || @displayName='" & strDisplayName & "']")
+'---------------
+		Loop While xmllistNodes.length > 0
+
+		xmlNewItem.setAttribute "name", strName
+		xmlNewItem.setAttribute "displayName", strDisplayName
+	End If
+
+	Set getNewProfileItem = xmlNewItem
+End Function
+
+'	PropAttrsView_MapProperty
+'
+'	Description:
+'		This sub is invoked when the user clicks on the browse button for the
+'		"Map to Data" field of a profile-property.
+
+Sub PropAttrsView_MapProperty()
+	if window.event.type <> "browse" then exit sub
+	Dim sdArgs, strDataSrcPath, strKeyType, elDataMember
+	Dim strMemberAttr, rgstrValues, rgstrSources, strXSL
+
+	' Prepare arguments to pass to the data-source picker dialog.
+	Set sdArgs = CreateObject("Scripting.Dictionary")
+	sdArgs.Add "xmlProfile", m_xmlProfileDoc
+	sdArgs.Add "strDataSrcIDs", m_divPropertyAttrs.field("dataRef").value
+	sdArgs.Add "strPropType", m_divPropertyAttrs.field("propType").value
+	strKeyType = m_divPropertyAttrs.field("keyDef").value
+	sdArgs.Add "bMultiple", (strKeyType = "JOIN" Or _
+			strKeyType = "PRIMARYJOIN")
+	sdArgs.Add "helpPath", m_strHelpPath
+
+	' Find out what the user wants to map to, if anything.
+	strDataSrcPath = window.showModalDialog("/widgets/profilebldrHTC/DlgDataSrcPicker.htm", _
+			sdArgs, "dialogWidth:500px;dialogHeight:350px;help:no;status:no")
+
+	If Not IsNull(strDataSrcPath) Then
+		If CheckForFriendlyNameOrDisplayColumn And len(strDataSrcPath) = 0 Then
+			msgbox L_CustomAttribDataref_Message, VBOK, L_Dataref_DialogTitle
+			Exit Sub
+		End If
+		' New mapping selected.	Update the UI appropriately.
+		m_divPropertyAttrs.field("dataRef").value = strDataSrcPath
+
+		If Not strDataSrcPath = "" Then
+			' We are mapped to a new source. Get first data member element
+			rgstrSources = Split(strDataSrcPath, "|")
+			rgstrValues = Split(rgstrSources(0), ".")
+			strXSL = "//" & gc_sDataObject & "[@name = '" & rgstrValues(uBound(rgstrValues) - 1) & _
+				"']/" & gc_sDataMember & "[@name = '" & rgstrValues(uBound(rgstrValues)) & "']"
+			Set elDataMember = m_xmlProfileDoc.selectSingleNode(strXSL)
+
+			' Set default data
+			If Not elDataMember Is Nothing Then
+				'Primary Key
+				strMemberAttr = elDataMember.getAttribute("isPrimaryKey")
+				If Not IsNull(strMemberAttr) And strMemberAttr = "1" Then
+					If m_divPropertyAttrs.field("keyDef").value = "JOIN" Or _
+						m_divPropertyAttrs.field("keyDef").value = "PRIMARYJOIN" Then
+						m_divPropertyAttrs.field("keyDef").value = "PRIMARYJOIN"
+					Else
+						m_divPropertyAttrs.field("keyDef").value = "PRIMARY"
+					End If
+				End If
+				'Required
+				strMemberAttr = elDataMember.getAttribute("isRequired")
+				If Not IsNull(strMemberAttr) Then
+					m_divPropertyAttrs.field("isRequired").value = strMemberAttr
+				Else
+					m_divPropertyAttrs.field("isRequired").value = "0"
+				End If
+				'Indexed
+				strMemberAttr = elDataMember.getAttribute("isIndexed")
+				If Not IsNull(strMemberAttr) Then
+					m_divPropertyAttrs.field("isSearchable").value = strMemberAttr
+				Else
+					m_divPropertyAttrs.field("isSearchable").value = "0"
+				End If
+			End If
+		End If
+	End If
+	UpdateEncrypted_ReadOnly
+End Sub
+
+Sub PropAttrsView_MapChanged()
+	'The Data Source property has changed
+	Dim strDataSrcPath, strXSL, elemTemp, strType, bHasLDAP, strKeyType
+	Dim elDataParent, rgstrSources, rgstrValues, elDataMember, i
+
+	strDataSrcPath = m_divPropertyAttrs.field("dataRef").value
+
+	' Update other controls
+	If "" = m_divPropertyAttrs.field("dataRef").value Then
+		' The property is not mapped to any data
+		' Set other controls to False
+		m_divPropertyAttrs.field("isRequired").value = "0"
+		m_divPropertyAttrs.field("isEncrypted").value = "0"
+		m_divPropertyAttrs.field("isExported").value = "0"
+		m_divPropertyAttrs.field("isCached").value = "0"
+		m_divPropertyAttrs.field("isSearchable").value = "0"
+		m_divPropertyAttrs.field("isRDNAttribute").value = "0"
+		m_divPropertyAttrs.field("isHashingkey").value = "0"
+
+		' Disable all dependent controls
+		m_divPropertyAttrs.field("isCached").readOnly = True
+		m_divPropertyAttrs.field("isSearchable").readOnly = True
+		m_divPropertyAttrs.field("isRDNAttribute").readOnly = True
+		m_divPropertyAttrs.field("isHashingKey").readOnly = True
+		m_divPropertyAttrs.field("isEncrypted").readOnly = True
+	Else ' We are mapped to some data source
+		' Get first data member element
+		rgstrSources = Split(strDataSrcPath, "|")
+		rgstrValues = Split(rgstrSources(0), ".")
+		strXSL = "//" & gc_sDataObject & "[@name = '" & rgstrValues(uBound(rgstrValues) - 1) & _
+				"']/" & gc_sDataMember & "[@name = '" & rgstrValues(uBound(rgstrValues)) & "']"
+		Set elDataMember = m_xmlProfileDoc.selectSingleNode(strXSL)
+
+		' Enable dependent controls
+		m_divPropertyAttrs.field("isCached").readOnly = False
+		m_divPropertyAttrs.field("isSearchable").readOnly = False
+
+		' Find out what the current type is.
+		Set elemTemp = m_divPropertyAttrs.field("propType")
+		strType = LCase(elemTemp.value)
+		
+		'Enable/Disable dependent controls, too
+		PropAttrsView_KeyDefChanged
+
+		' RDN Attribute (enable only if string AND LDAP source)
+		bHasLDAP = False
+		rgstrSources = Split(strDataSrcPath, "|")
+		For i = 0 to uBound(rgstrSources)
+			rgstrValues = Split(rgstrSources(i), ".")
+			bHasLDAP = bHasLDAP Or _
+				Not(Nothing Is m_xmlProfileDoc.selectSingleNode("//" & _
+				gc_sDataSource & "[@sourceType='LDAPv3']/" & gc_sDataObject & _
+				"[@name = '" & rgstrValues(uBound(rgstrValues) - 1) & "']/" & _
+				gc_sDataMember & "[@name = '" & rgstrValues(uBound(rgstrValues)) & "']"))
+		Next
+		If strType = "string" And bHasLDAP Then
+			m_divPropertyAttrs.field("isRDNAttribute").readOnly = False
+		Else
+			m_divPropertyAttrs.field("isRDNAttribute").readOnly = True
+		End If
+
+		' Hashing Key (enable only if string AND source is partitioned)
+		If (lcase(strType) = "string" Or lcase(strType) = "number")And _
+			Not(Nothing Is m_xmlProfileDoc.selectSingleNode("//" & gc_sDataSource & _
+			"[@isPartitioned='1']")) Then
+			m_divPropertyAttrs.field("isHashingKey").readOnly = False
+		Else
+			m_divPropertyAttrs.field("isHashingKey").readOnly = True
+		End If
+	End If
+
+	PropAttrValsToDisplayVals
+	UpdateRequired_ReadOnly
+	'UpdateMultiValued_ReadOnly
+	UpdateExported_ReadOnly
+	PropAttrsView_MultiValChanged
+	PropAttrsView_SearchableValChanged
+End Sub
+
+' PropAttrsView_SetRefString
+'
+' Description:
+'		This sub is invoked when the user clicks on the browse button for the
+'		"Type Reference:" field of a profile-property.
+
+Sub PropAttrsView_SetRefString()
+	if window.event.type <> "browse" then exit sub
+	Dim strReference, sdArgs, xmlCatalog
+
+	Set sdArgs = CreateObject("Scripting.Dictionary")
+	sdArgs.Add "helpPath", m_strHelpPath
+
+	' Figure out what exactly we need to do for the reference string.
+	strReference = Null
+	Select Case LCase(m_divPropertyAttrs.field("propType").value)
+		Case "siteterm"
+			set xmlCatalog = m_xmlSiteTermsDoc.selectSingleNode("//Catalog/Profile")
+			If xmlCatalog Is Nothing Then
+				MsgBox L_NoSiteTerms_Message, vbOKOnly, L_TypeRef_DialogTitle
+			Else
+				' Show the site-term picker
+				sdArgs.Add "siteTermsDoc", m_xmlSiteTermsDoc
+				strReference = window.showModalDialog("/widgets/profilebldrHTC/DlgSiteTermSel.htm", _
+						sdArgs, "dialogWidth:500px;dialogHeight:350px;help:no;status:no")
+			End If
+		Case "profile"
+			' Show the profile picker
+			sdArgs.Add "catalogDoc", m_xmlCatalogDoc
+			strReference = window.showModalDialog("/widgets/profilebldrHTC/DlgProfileSel.htm", _
+					sdArgs, "dialogWidth:500px;dialogHeight:350px;help:no;status:no")
+		Case else
+			MsgBox L_TypeRef_Message, vbOKOnly, L_TypeRef_DialogTitle
+	End Select
+
+	If Not (isNull(strReference) OR strReference = "") Then
+		m_divPropertyAttrs.field("referenceString").value = strReference
+	End If
+
+	PropAttrValsToDisplayVals
+End Sub
+
+' Takes non-display-friendly properties like "map-to-data" or "type-ref" and
+' creates more display-friendly things to show to the user.
+Sub PropAttrValsToDisplayVals()
+	Dim strValues, strValue, strDisplayVal, strDisplayName, elemType, strType
+	Dim rgstrParts, strXSL, xmlNode, rgstrValues, i, j
+
+	' Translate reference-string to a good display-value.
+	strValue = m_divPropertyAttrs.field("referenceString").value
+	If strValue <> "" Then
+		rgstrParts = Split(strValue, ".")
+
+		' Find out what the current type is.
+		Set elemType = m_divPropertyAttrs.field("propType")
+		strType = LCase(elemType.value)
+
+		If strType = "siteterm" Then
+			strXSL = gc_sDocument & "/" & gc_sCatalog & "/" & gc_sProfile
+			For i = 0 To UBound(rgstrParts)
+				strXSL = strXSL & "/*[@name = '" & rgstrParts(i) & "']"
+			Next
+			Set xmlNode = m_xmlSiteTermsDoc.selectSingleNode(strXSL)
+			If Not(xmlNode Is Nothing) Then
+				strValue = xmlNode.getAttribute("displayName")
+				m_divPropertyAttrs.field("displayRefStr").value = strValue
+			End If
+		ElseIf strType = "profile" Then
+			strXSL = gc_sDocument
+			For i = 0 To UBound(rgstrParts)
+				strXSL = strXSL & "/*[@name = '" & rgstrParts(i) & "']"
+			Next
+			Set xmlNode = m_xmlCatalogDoc.selectSingleNode(strXSL)
+			If Not(xmlNode Is Nothing) Then
+				strValue = xmlNode.getAttribute("displayName")
+				m_divPropertyAttrs.field("displayRefStr").value = strValue
+			End If
+		Else
+			' This is an invalid property so just display it
+			m_divPropertyAttrs.field("displayRefStr").value = strValue
+		End If
+	End If
+
+	' Translate data-mapping string to a good display-value.
+	strValues = m_divPropertyAttrs.field("dataRef").value
+	rgstrValues = Split(strValues, "|")
+
+	strDisplayVal = ""
+	For j = 0 To UBound(rgstrValues)
+		strValue = rgstrValues(j)
+
+		rgstrParts = Split(strValue, ".")
+
+		Set xmlNode = Nothing
+		strDisplayName = ""
+		If UBound(rgstrParts) = 2 Then
+			' Get display name for this data member from the document
+			strXSL = gc_sDocument & "/" & gc_sCatalog & _
+					"/" & gc_sDataSource & "[@name = '" & rgstrParts(0) & "']" & _
+					"/" & gc_sDataObject & "[@name = '" & rgstrParts(1) & "']" & _
+					"/" & gc_sDataMember & "[@name = '" & rgstrParts(2) & "']"
+			Set xmlNode = m_xmlProfileDoc.selectSingleNode(strXSL)
+			If Not xmlNode Is Nothing Then
+				strDisplayName = xmlNode.getAttribute("displayName")
+			End If
+		End If
+
+		' Add a comma to separate multiple values
+		If j <> 0 Then strDisplayVal = strDisplayVal & ", "
+
+		' Make sure that the display name is something
+		' If the query failed, or no display name is available
+		' So just show the programmatic name
+		If strDisplayName = "" Then strDisplayName = rgstrParts(UBound(rgstrParts))
+		strDisplayVal = strDisplayVal & strDisplayName
+	Next
+	m_divPropertyAttrs.field("displayDataRef").value = strDisplayVal
+End Sub
+
+Sub PropAttrsView_HashKeyChanged()
+	Dim isHashingKey, xmllistHashKeys, xmlHashKey, rgstrItemPaths
+	Dim xmlCurrentNode, bHashKeyExists
+	bHashKeyExists = False
+
+	isHashingKey = m_divPropertyAttrs.field("isHashingKey").value
+	If isHashingKey = "1" Then
+		'When the key is checked, we must check required
+		m_divPropertyAttrs.field("isRequired").value = "1"
+		If m_divPropertyAttrs.field("keyDef").value = "" Then
+			m_divPropertyAttrs.field("keyDef").value = "UNIQUE"
+		End If
+	End If
+	UpdateRequired_ReadOnly
+End Sub
+
+Sub PropAttrsView_MultiValChanged()
+	UpdateExported_ReadOnly
+	If m_divPropertyAttrs.field("isMultiValued").value = "1" Then
+		m_divPropertyAttrs.field("isSearchable").ReadOnly = True
+	Else
+		If Not(m_divPropertyAttrs.field("dataRef").value = "") Then
+			m_divPropertyAttrs.field("isSearchable").ReadOnly = False
+		End If
+	End If
+End Sub
+
+Sub PropAttrsView_SearchableValChanged()
+	If m_divPropertyAttrs.field("isSearchable").value = "1" Then
+		m_divPropertyAttrs.field("isMultiValued").ReadOnly = True
+	Else
+		m_divPropertyAttrs.field("isMultiValued").ReadOnly = False
+	End If
+	UpdateEncrypted_ReadOnly
+End Sub
+
+'Sub PropAttrsView_RequiredChanged()
+'	If Not(m_divPropertyAttrs.field("isRequired") is Nothing) Then
+'		If m_divPropertyAttrs.field("isRequired").value = "1" Then
+'			m_divPropertyAttrs.field("isActive").value = "1"
+'			m_divPropertyAttrs.field("isActive").ReadOnly = True
+'		Else
+'			m_divPropertyAttrs.field("isActive").ReadOnly = False
+'		End If
+'	End If
+'End Sub
+
+Sub PropAttrsView_EncryptedChanged()
+	If Not(m_divPropertyAttrs.field("isEncrypted") is Nothing) And m_bUpdateEncrypt Then
+		Dim bDiff
+		If m_nEncrypted = m_divPropertyAttrs.field("isEncrypted").value Then
+			bDiff = False
+		Else
+			bDiff = True
+		End If
+		m_nEncrypted = m_divPropertyAttrs.field("isEncrypted").value
+		If m_nEncrypted = "0" Then
+			m_divPropertyAttrs.field("isExported").ReadOnly = False
+			m_divPropertyAttrs.field("isSearchable").ReadOnly = False
+			m_divPropertyAttrs.field("keydef").ReadOnly = False
+		elseif m_nEncrypted = "1" or m_nEncrypted ="2" Then
+			If CheckForFriendlyNameOrDisplayColumn Then
+				MsgBox L_CustomAttribEncryptedType_Message, vbOK, L_ErrorBoxHeader_Text 
+				m_nEncrypted = 0
+				m_bEncrypt = False
+				m_divPropertyAttrs.field("isEncrypted").value = 0
+				m_bEncrypt = True
+				Exit Sub
+			Else
+				If Not(m_divPropertyAttrs.field("isExported").value = "0") Then
+					m_divPropertyAttrs.field("isExported").value = "0"
+				End If
+				m_divPropertyAttrs.field("isExported").ReadOnly = True	
+				If Not(m_divPropertyAttrs.field("isSearchable").value = "0") Then
+					m_divPropertyAttrs.field("isSearchable").value = "0"
+				End If
+				m_divPropertyAttrs.field("isSearchable").ReadOnly = True	
+				If Not(m_divPropertyAttrs.field("keydef").value = "") Then
+					m_divPropertyAttrs.field("keydef").value = ""
+				End If
+				m_divPropertyAttrs.field("keydef").ReadOnly = True
+			End If
+		End If
+		
+		If m_bEncrypt And bDiff Then
+			MsgBox L_Encrypted_Message, vbOKOnly, L_Encrypted_DialogTitle
+		End If
+	End If
+End Sub
+
+sub PropAttrsView_ExportedChanged()
+	If m_divPropertyAttrs.field("isExported").value = "1" Then
+		If len(m_strProfileName) > 57 Or len(m_divPropertyAttrs.field("name").value) > 100 Then 
+			MsgBox L_ExportedProfileNameLength_Message, vbOK, L_Exported_DialogTitle
+		End If
+	End If
+	UpdateEncrypted_ReadOnly
+End Sub
+
+Sub PropAttrsView_RDNAttrChanged()
+	Dim isRDNAttribute
+
+	isRDNAttribute = m_divPropertyAttrs.field("isRDNAttribute").value
+	If isRDNAttribute = "1" Then
+		'Check Required
+		m_divPropertyAttrs.field("isRequired").value = "1"
+	End If
+	UpdateRequired_ReadOnly
+End Sub
+
+Sub PropAttrsView_KeyDefChanged()
+	Dim strKeyDef, rgstrValues, strValues
+
+	' Get the key-type, and enforce constraints as necessary.
+	strKeyDef = m_divPropertyAttrs.field("keyDef").value
+
+	' Check if we're loading right now
+	If IsNull(m_strKeyDef) Or Not (m_strKeyDef = "Loading") Then
+
+		If strKeyDef = "JOIN" Or strKeyDef = "PRIMARYJOIN" Then
+			If CheckForFriendlyNameOrDisplayColumn Then
+				m_divPropertyAttrs.field("keyDef").value = m_strKeyDef
+				MsgBox L_CustomAttribKeyType_Message, vbOK, L_ErrorBoxHeader_Text 
+				Exit Sub
+			End If
+		End If
+			
+		' Warn user if they changed the key type
+		If Not IsNull(m_strKeyDef) And _
+			Not m_strKeyDef = strKeyDef And _
+			(m_strKeyDef = "PRIMARY" Or _
+			m_strKeyDef = "JOIN" Or _
+			m_strKeyDef = "PRIMARYJOIN" Or _
+			strKeyDef = "PRIMARY" Or _
+			strKeyDef = "JOIN" Or _
+			strKeyDef = "PRIMARYJOIN") Then
+			' Warn the user about this kind of change
+			MsgBox L_ChangeKey_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		End If
+
+		If Not (strKeyDef = "JOIN" Or strKeyDef = "PRIMARYJOIN") Then
+			'We cannot be mapped to multiple data members
+			strValues = m_divPropertyAttrs.field("dataRef").value
+			If Not(strValues = "") Then
+				rgstrValues = Split(strValues, "|")
+				m_divPropertyAttrs.field("dataRef").value = rgstrValues(0)
+				PropAttrValsToDisplayVals
+			End If
+		End If
+
+		' Save off this type
+		m_strKeyDef = strKeyDef
+
+		UpdateRequired_ReadOnly
+		'UpdateMultiValued_ReadOnly
+	End If
+	UpdateEncrypted_ReadOnly
+End Sub
+
+Sub PropAttrsView_TypeChanged()
+	Dim elemTemp, strType, strDataType, rgstrValues, bHasLDAP, bInvalidType
+	Dim rgstrSources, strXSL, strDataSrcPath, xmlDataSrc, i
+
+	' Find out what the current type is.
+	Set elemTemp = m_divPropertyAttrs.field("propType")
+	strType = LCase(elemTemp.value)
+
+	If Not strType = "" Then
+		' make sure that if they have defined this property as sfriendlyname
+		' or sdisplaycolumn, then they cannot change it to profile or siteterm
+		If strType = "profile" Or strType = "siteterm" Or strType = "password" Then
+			If CheckForFriendlyNameOrDisplayColumn Then
+				elemTemp.value = m_strLastType
+				MsgBox L_CustomAttribProp_Message, vbOK, L_ErrorBoxHeader_Text 
+				Exit Sub
+			End If
+		End If
+		
+		strDataSrcPath = m_divPropertyAttrs.field("dataRef").value
+
+		' Enable or disable the ref-str browse-control based on the type.
+		Set elemTemp = m_divPropertyAttrs.field("displayRefStr")
+		m_divPropertyAttrs.field("displayRefStr").value = ""
+		If strType = "profile" Or strType = "siteterm" Or _
+			strType = "reference" Then
+			elemTemp.disabled = False
+		Else
+			elemTemp.disabled = True
+		End If
+
+		If Not strType = m_strLastType Then
+			m_strLastType = strType
+
+			
+			' Reset the type reference value
+			m_divPropertyAttrs.field("referenceString").value = ""
+
+			'Check if property is mapped to data
+			If Not(strDataSrcPath = "") Then
+
+				'Find out data type
+				rgstrSources = Split(strDataSrcPath, "|")
+				rgstrValues = Split(rgstrSources(0), ".")
+				Set xmlDataSrc = m_xmlProfileDoc.selectSingleNode("//" & _
+						gc_sDataSource & "[@name='" & rgstrValues(uBound(rgstrValues) - 2) & "']/" & _
+						gc_sDataObject & "[@name = '" & rgstrValues(uBound(rgstrValues) - 1) & "']/" & _
+						gc_sDataMember & "[@name = '" & rgstrValues(uBound(rgstrValues)) & "']")
+				strDataType = xmlDataSrc.getAttribute("memberType")
+				'Check data type against property type
+				bInvalidType = False
+				Select Case strDataType
+					Case "STRING"
+						If Not (strType = "string" Or _
+							strType = "siteterm" Or strType = "profile" Or _
+							strType = "password" Or strType = "longtext") Then
+							bInvalidType = True
+						End If
+					Case "NUMBER"
+						If Not (strType = "number" Or _
+							strType = "float" Or strType = "currency") Then
+							bInvalidType = True
+						End If
+					Case "BOOL"
+						If Not (strType = "bool") Then
+							bInvalidType = True
+						End If
+					Case "DATETIME"
+						If Not (strType = "date" Or _
+							strType = "time" Or strType = "datetime") Then
+							bInvalidType = True
+						End If
+					Case "TEXT"
+						If Not (strType = "text") Then
+							bInvalidType = True
+						End If
+					Case "BINARY"
+						If Not (strType = "image" Or strType = "binary") Then
+							bInvalidType = True
+						End if
+					Case "IMAGE"
+				End Select
+
+				If bInvalidType Then
+					'The property type and data type do not match
+					' Warn user
+					MsgBox Replace(L_InvalidDataType_ErrorMessage, "%1", strDataType), vbOKOnly, L_ErrorBoxHeader_Text
+					strDataSrcPath = ""
+					m_divPropertyAttrs.field("dataRef").value = ""
+					PropAttrsView_MapChanged
+				End If
+			End If
+		End If
+
+		'Key Type
+		If strType = "string" Or strType = "number" Then
+			m_divPropertyAttrs.field("keyDef").readOnly = False
+		Else
+			m_divPropertyAttrs.field("keyDef").readOnly = True
+			m_divPropertyAttrs.field("keyDef").value = ""
+		End If
+
+		If Not(strDataSrcPath = "") Then
+			' RDN Attribute (enable only if string AND LDAP source)
+			bHasLDAP = False
+			rgstrSources = Split(strDataSrcPath, "|")
+			For i = 0 to uBound(rgstrSources)
+				rgstrValues = Split(rgstrSources(i), ".")
+				bHasLDAP = bHasLDAP Or _
+					Not(Nothing Is m_xmlProfileDoc.selectSingleNode("//" & _
+					gc_sDataSource & "[@sourceType='LDAPv3']/" & gc_sDataObject & _
+					"[@name = '" & rgstrValues(uBound(rgstrValues) - 1) & "']/" & _
+					gc_sDataMember & "[@name = '" & rgstrValues(uBound(rgstrValues)) & "']"))
+			Next
+			If strType = "string" And bHasLDAP Then
+				m_divPropertyAttrs.field("isRDNAttribute").readOnly = False
+			Else
+				m_divPropertyAttrs.field("isRDNAttribute").readOnly = True
+				m_divPropertyAttrs.field("isRDNAttribute").value = "0"
+			End If
+
+			' Hashing Key (enable only if string AND source is partitioned)
+			If (lcase(strType) = "string" or lcase(strType) = "number") And _
+				Not(Nothing Is m_xmlProfileDoc.selectSingleNode("//" & gc_sDataSource & "[@isPartitioned='1']")) Then
+				m_divPropertyAttrs.field("isHashingKey").readOnly = False
+			Else
+				m_divPropertyAttrs.field("isHashingKey").readOnly = True
+				m_divPropertyAttrs.field("isHashingKey").value = "0"
+			End If
+		Else 'Not mapped to a data source
+			m_divPropertyAttrs.field("isHashingKey").readOnly = True
+			m_divPropertyAttrs.field("isHashingKey").value = "0"
+
+			m_divPropertyAttrs.field("isRDNAttribute").readOnly = True
+			m_divPropertyAttrs.field("isRDNAttribute").value = "0"
+		End If
+		'Enable/Disable dependent controls, too
+		PropAttrsView_KeyDefChanged
+	End If
+
+	' Update the isExported option
+	UpdateExported_ReadOnly
+	UpdateEncrypted_ReadOnly
+End Sub
+
+Sub BtnRemove_ClickHandler()
+	Dim sdArgs, rgstrItemPaths, rgxmlItems, oXMLNode, strErr
+	Dim i, xmllistChildren, xmlChild, strNodeName, bDTS
+	Dim strDlgAction		' Contains action to perform, from dialog.
+	bDTS = False
+
+	' Get the string paths to the currently selected items, and resolve them
+	' to the corresponding XML nodes.
+
+	rgstrItemPaths = m_divProfileView.GetSelectedItems()
+	Redim rgxmlItems(UBound(rgstrItemPaths))
+
+	For i = 0 To UBound(rgstrItemPaths)
+		Set rgxmlItems(i) = GetProfNodeFromPath(rgstrItemPaths(i))
+	Next
+
+	For i = 0 To UBound(rgxmlItems)
+		' This test also shows appropriate errors
+		Set oXMLNode = rgxmlItems(i)
+
+		' Get name of this node
+		strNodeName = oXMLNode.getAttribute("name")
+
+		' Check if this is a special, undeletable property
+		'	UserObject profile - cannot delete user_id
+		'	Organization profile - cannot delete org_id or name
+		'	TargetingContext profile - cannot delete PageGroup
+		If (m_strProfileName = "UserObject" And _
+			strNodeName = "user_id") Or _
+			(m_strProfileName = "Organization" And _
+			(strNodeName = "org_id" Or strNodeName = "name")) Or _
+			(m_strProfileName = "TargetingContext" And _
+			(strNodeName = "PageGroup")) Then
+			' User cannot delete this property
+			strErr = Replace(L_DeleteSpecial_ErrorMessage, "%1", oXMLNode.getAttribute("displayName"))
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Sub
+		Else
+			'Check descendants, too
+			If m_strProfileName = "UserObject" Then
+				Set xmllistChildren = oXMLNode.selectNodes(".//" & gc_sProperty & _
+						"[(@name $eq$ 'user_id') && " & _
+						"(not(@isDeleted) || @isDeleted != '1')]")
+			ElseIf m_strProfileName = "Organization" Then
+				Set xmllistChildren = oXMLNode.selectNodes(".//" & gc_sProperty & _
+						"[(@name $eq$ 'org_id' || @name $eq$ 'name') && " & _
+						"(not(@isDeleted) || @isDeleted != '1')]")
+			ElseIf m_strProfileName = "TargetingContext" Then
+				Set xmllistChildren = oXMLNode.selectNodes(".//" & gc_sProperty & _
+						"[@name $eq$ 'PageGroup' && " & _
+						"(not(@isDeleted) || @isDeleted != '1')]")
+			Else
+				Set xmllistChildren = Nothing
+			End If
+			If Not xmllistChildren Is Nothing Then
+				If xmllistChildren.length > 0 Then
+					strErr = Replace(L_DeleteChildSpecial_ErrorMessage, "%1", oXMLNode.getAttribute("displayName"))
+					strErr = Replace(strErr, "%2", xmllistChildren.item(0).getAttribute("displayName"))
+					MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+					Exit Sub
+				End If
+			End If
+		End If
+
+		' Check if this is an invalid, undeletable property
+		If (Not(LCase(oXMLNode.getAttribute("propType")) = "siteterm" Or _
+				LCase(oXMLNode.getAttribute("propType")) = "profile") And _
+				Not(IsNull(oXMLNode.getAttribute("referenceString")) Or _
+				oXMLNode.getAttribute("referenceString") = "")) Then
+			' User cannot delete this property
+			strErr = Replace(L_DeleteInvalid_ErrorMessage, "%1", oXMLNode.getAttribute("displayName"))
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+			Exit Sub
+		Else
+			'Check descendants, too
+			Set xmllistChildren = oXMLNode.selectNodes(".//" & gc_sProperty & _
+					"[not(@propType $ieq$ 'siteterm' || @propType $ieq$ 'profile') && " & _
+					"(@referenceString && @referenceString != '') && " & _
+					"(not(@isDeleted) || @isDeleted != '1')]")
+			If xmllistChildren.length > 0 Then
+				strErr = Replace(L_DeleteChildInvalid_ErrorMessage, "%1", oXMLNode.getAttribute("displayName"))
+				strErr = Replace(strErr, "%2", xmllistChildren.item(0).getAttribute("displayName"))
+				MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+				Exit Sub
+			End If
+		End If
+
+		'Check if this is a key
+		If (IsNull(oXMLNode.getAttribute("keyDef")) Or _
+			oXMLNode.getAttribute("keyDef") = "") And _
+			(IsNull(oXMLNode.getAttribute("isHashingKey")) Or _
+			oXMLNode.getAttribute("isHashingKey") = "0") And _
+			(IsNull(oXMLNode.getAttribute("isRDNAttribute")) Or _
+			oXMLNode.getAttribute("isRDNAttribute") = "0") Then
+			' Check children too (if group)
+			If oXMLNode.tagName = gc_sGroup Then
+				Set xmllistChildren = oXMLNode.selectNodes(".//" & gc_sProperty & _
+					"[((@keyDef && @keyDef != '') || isHashingKey = '1' || isRDNAttribute = '1')&& " & _
+					"(not(@isDeleted) || @isDeleted != '1')]")
+				If xmllistChildren.length > 0 Then
+					'Descendent has key
+					strErr = Replace(L_DeleteChildKey_ErrorMessage, "%1", oXMLNode.getAttribute("displayName"))
+					MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+				End If
+			End If
+		Else
+			strErr = Replace(L_DeleteKey_ErrorMessage, "%1", oXMLNode.getAttribute("displayName"))
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+		End If
+
+		' Check if this is the date_last_changed property
+		If (strNodeName = "date_last_changed") Then
+			'Tell the user what will happen if they continue...
+			' ...but don't let them cancel here (they can cancel later)
+			MsgBox L_DeleteDTS_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+			bDTS = True
+		Else
+			'Check descendants, too
+			Set xmllistChildren = oXMLNode.selectNodes(".//" & gc_sProperty & _
+				"[(@name $ieq$ 'date_last_changed') && " & _
+				"(not(@isDeleted) || @isDeleted != '1')]")
+			If xmllistChildren.length > 0 Then
+				MsgBox L_DeleteChildDTS_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+				bDTS = True
+			End If
+		End If
+	Next
+
+	' Find out if the user REALLY wants to delete these items.
+	Set sdArgs = CreateObject("Scripting.Dictionary")
+	sdArgs.Add "profType", m_strProfileType
+	sdArgs.Add "rgxmlItems", rgxmlItems
+	sdArgs.Add "helpPath", m_strHelpPath
+
+	strDlgAction = window.showModalDialog("/widgets/profilebldrHTC/DlgDeleteItems.htm", _
+			sdArgs, "help:no;status:no;dialogWidth:400px;dialogHeight:100px")
+
+	If strDlgAction = "delete" Then
+		For i = 0 To UBound(rgxmlItems)
+			Set oXMLNode = rgxmlItems(i)
+			DeleteProfileNode oXMLNode 'Delete children too
+		Next
+
+		If bDTS Then
+			'The date_last_changed property was deleted
+			'Mark all properties as not exported
+			Set xmllistChildren = m_xmlProfileDoc.selectNodes( _
+				"//" & gc_sProperty & "[@isExported = '1']")
+			For Each xmlChild in xmllistChildren
+				xmlChild.setAttribute "isExported", "0"
+				If (IsNull(xmlChild.getAttribute("isDeleted")) Or _
+					xmlChild.getAttribute("isDeleted") = "0") And _
+					(IsNull( xmlChild.getAttribute("isNew")) Or _
+					xmlChild.getAttribute("isNew") = "0") Then
+					xmlChild.setAttribute "isModified", "1"
+				End If
+			Next
+		End If
+
+		m_divProfileView.ClearSelections
+
+		' Document is dirty now.
+		ReportDirtyDoc
+
+		' Update the UI since something got deleted.
+		m_divProfileView.Refresh
+		UpdateButtons
+		UpdateAttrInfo
+	End If
+End Sub
+
+'	GetProfNodeFromPath
+'
+'	Description:
+'		This function takes a dot-annotated path to a node in a profile
+'		document, and returns the XML node.	If the node can't be found, the
+'		function returns Nothing.
+
+Function GetProfNodeFromPath(strNodePath)
+	Dim rgstrPathParts, i, strXSL
+
+	' Divide up the path into its component parts.
+	rgstrPathParts = split(strNodePath, ".")
+
+	' Create the XSL string to retrieve the node.
+	strXSL = "//" & gc_sProfile
+
+	For i = LBound(rgstrPathParts) To UBound(rgstrPathParts)
+		strXSL = strXSL & "/*[@name = '" & rgstrPathParts(i) & "' && (not(@isDeleted) || @isDeleted != '1')]"
+	Next
+
+	Set GetProfNodeFromPath = m_xmlProfileDoc.selectSingleNode(strXSL)
+End Function
+
+
+Function GetPathFromProfNode(ByVal xmlNode)
+	Dim strPath
+
+	strPath = ""
+	Do While xmlNode.tagName <> gc_sProfile
+		If strPath = "" Then
+			strPath = xmlNode.getAttribute("name")
+		Else
+			strPath = xmlNode.getAttribute("name") & "." & strPath
+		End If
+
+		Set xmlNode = xmlNode.parentNode
+	Loop
+
+	GetPathFromProfNode = strPath
+End Function
+
+'	DeleteProfileNode
+'
+'	Description:
+'		Performs a delete-node operation on the profile XML document.	This
+'		involves marking existing items (@isNew = '0' or undefined) as deleted,
+'		or actually removing new items (@isNew = '1').	If the passed-in node
+'		is a Group node and bDeep is True, the children of the deleted group
+'		node are moved into the containing group.
+
+Sub DeleteProfileNode(xmlElem)
+	Dim bKillNode, xmlParent, xmllistChildren, xmlChild, i
+
+	Set xmlParent = xmlElem.parentNode
+
+	bKillNode = CanKillProfileNode(xmlElem)
+
+	' Do a deep delete; go through all child nodes and either mark them for
+	' deletion or terminate them outright.
+
+	' Get all descendants of this node.	This does recursion in the
+	' XML DOM object, not in script!	Beautiful.	:)
+	Set xmllistChildren = xmlElem.selectNodes(".//")
+
+	For Each xmlChild In xmllistChildren
+		If CanKillProfileNode(xmlChild) Then
+			xmlChild.parentNode.removeChild(xmlChild)
+		Else
+			xmlChild.setAttribute "isModified", "0"
+			xmlChild.setAttribute "isDeleted", "1"
+		End If
+	Next
+
+	' Finally, remove node.
+	If bKillNode Then
+		' Node is new or moved, so we need to remove it instead of just
+		' marking it as deleted.
+		xmlParent.removeChild xmlElem
+	Else
+		' Mark node as deleted, so that BDAO can take care of it.
+		xmlElem.setAttribute "isModified", "0"
+		xmlElem.setAttribute "isDeleted", "1"
+		' Float this node to the top of the group
+		Set xmlChild = xmlParent.firstChild
+		xmlParent.insertBefore xmlElem, xmlChild
+	End If
+End Sub
+
+'	CanKillProfileNode
+'
+'	Description:
+'		Returns True if this profile node can be killed outright, False if it
+'		must be tagged with isDeleted = 1.	Basically, if a node hasn't been
+'		updated in the database yet, we can delete it.
+
+Function CanKillProfileNode(xmlElem)
+	Dim strIsNew
+
+	strIsNew = xmlElem.getAttribute("isNew")
+	CanKillProfileNode = (Not isNull(strIsNew) And strIsNew = "1")
+End Function
+
+'	Refresh
+'
+'	Description:
+'		This Sub resyncs the Profile-Designer with the current state of the
+'		profile XML document.	It is for situations where the profile XML has
+'		been changed by someone other than the Profile-Designer HTC.
+
+Sub Refresh()
+	' Refresh the profile-view.
+	m_divProfileView.Refresh
+
+	' Refresh the detail-view.
+	UpdateAttrInfo
+
+	' Refresh the buttons.
+	UpdateButtons
+
+	' Work-around for bug #39149: Reset the dirty flag
+	window.setTimeout GetRef("ResetDirty"), 0
+End Sub
+
+Sub ResetDirty()
+	If m_bAddButtons Then
+	m_btnCancelDetail.disabled = True
+	m_btnApplyDetail.disabled = True
+	m_btnAdd.disabled = False
+	m_bAttrsChanged = False
+	End If
+End Sub
+
+'	DoApply
+'
+'	Description:
+'		This function checks if the changes have been applied. If not, it
+'		asks the user if they want to apply changes, then applies them if
+'		necessary.
+'		Return value is False only if user chooses Cancel or the changes
+'		could not be applied.
+
+Function DoApply()
+	Dim retVal, bContinue
+	bContinue = True
+
+	' Check if attribute changes need to be applied
+	If m_bAttrsChanged Then
+		'Ask if user wants to apply changes
+		retVal = MsgBox(L_ApplyChanges_StaticText, vbYesNoCancel, _
+				L_ApplyChanges_DialogTitle )
+		If retVal = vbYes Then
+			'Attempt to apply changes
+			ApplyAttrInfo
+			'Check if the changes were successful
+			If m_bAttrsChanged Then bContinue = False
+		ElseIf retVal = vbCancel Then
+			bContinue = False
+		End If
+	End If
+
+	DoApply = bContinue
+End Function
+
+'	ProfView_SelChangedHandler
+'
+'	Description:
+'		This Sub gets called when the profile-view area files an onSelectItem
+'		event or an onDeselectItem event.	It is responsible for updating the
+'		righthand side of the UI, as well as more mundane tasks like updating
+'		buttons.
+
+Sub ProfView_SelChangedHandler()
+	Dim bChangeSel
+
+	bChangeSel = True
+
+	' If some edits were in progress, show a nag message.	:P
+	If m_bAttrsChanged Then
+		' Some edits in progress.	Should we discard them?
+		If m_bAddButtons Then
+		If vbCancel = MsgBox(L_DiscardChanges_StaticText, vbOKCancel, _
+			L_DiscardChanges_DialogTitle ) Then
+			bChangeSel = False
+		End If
+		End If
+	End If
+
+	' Now change selection or keep the current selection based on the
+	' user's entry.
+
+	If bChangeSel Then
+		' Drive the righthand pane to show the right thing.
+		UpdateAttrInfo
+
+		' Update the buttons in the UI.
+		UpdateButtons
+
+		' Work-around for bug #39149: Reset the dirty flag
+		window.setTimeout GetRef("ResetDirty"), 0
+	Else
+		' Keep the current selection.	These calls will not fire events,
+		' which is GOOD, because otherwise things wouldn't work.
+
+		m_divProfileView.ClearSelections
+		m_divProfileView.SelectItem m_strCurrSelEdit, True
+	End If
+End Sub
+
+'	UpdateAttrInfo
+'
+'	Description:
+'		This Sub is responsible for updating the attribute info view based on
+'		the current selections in the profile-view area.
+
+Sub UpdateAttrInfo()
+	Dim nSelItems, rgstrItemPaths, xmlItem
+
+	' Drive the righthand pane based on what is currently selected.
+	Set xmlItem = Nothing
+	m_strCurrSelEdit = ""
+
+	nSelItems = m_divProfileView.GetSelectedCount()
+
+	If nSelItems = 1 Then
+		' Populate the detail pane with the selected item's data.
+		rgstrItemPaths = m_divProfileView.GetSelectedItems()
+		m_strCurrSelEdit = rgstrItemPaths(0)
+		Set xmlItem = GetProfNodeFromPath(m_strCurrSelEdit)
+		element.all("thHeader2").innerText = L_HeaderProperties_Text
+	ElseIf nSelItems = 0 then
+		element.all("thHeader2").innerText = L_HeaderPropertiesNone_Text
+	Else
+		element.all("thHeader2").innerText = L_HeaderPropertiesMulti_Text
+	End If
+
+	If m_strProfileType = "siteterm" Then
+		element.all("thHeader").innerText = L_HeaderSiteTerm_Text
+	Else
+		element.all("thHeader").innerText = L_HeaderProfile_Text
+	End If
+
+	Call ShowAttributes(xmlItem)
+
+	m_bAttrsChanged = False
+End Sub
+
+'	ShowAttributes
+'
+'	Description:
+'		This Sub takes the passed-in node and shows its attributes in the
+'		detail pane.	It basically shows/hides the appropriate edit-sheets
+'		(Group or Property editsheet), and populates or clears the data.
+'
+'		This sub will need to be updated when we add site-terms support.
+
+Sub ShowAttributes(xmlNode)
+	Dim strDataXML, elemTemp, strVal
+
+	m_bEncrypt = False
+	' Set KeyDef so that it won't raise warnings
+	m_strKeyDef = "Loading"
+	m_divPropertyAttrs.clearAll
+	m_divGroupAttrs.clearAll
+
+	If Not (xmlNode Is Nothing) Then
+		' Show the current attributes of the passed-in XML property node.
+		Select Case xmlNode.tagName
+			Case gc_sProperty
+				m_divGroupAttrs.style.display = "none"
+
+				m_divPropertyAttrs.disableAll False
+				m_divPropertyAttrs.style.display = ""
+
+				m_divCustomAttrsES.disableAll False
+				m_divCustomAttrsES.style.display = ""
+
+				' Populate the standard attribute view.
+				m_bExitExported = true
+				strDataXML = ProfileXML2EditSheetXML(xmlNode)
+				m_xmlAttrData.loadXML strDataXML
+				m_divPropertyAttrs.disableAll False
+				m_divPropertyAttrs.xmlRecord = m_xmlAttrData.selectSingleNode("document/record")
+				'PropAttrsView_RequiredChanged
+				
+				m_bExitExported = false
+				
+				' Look for special, invalid properties
+				m_bInvalidProp = False
+				If m_strProfileType = "profile" Then
+					' Record initial property type
+					m_strLastType = m_divPropertyAttrs.field("propType").value
+					m_bInvalidProp = ( _
+							Not (m_divPropertyAttrs.field("propType").value = "siteterm" Or _
+							m_divPropertyAttrs.field("propType").value = "profile") And _
+							Not (m_divPropertyAttrs.field("referenceString").value = ""))
+					If m_bInvalidProp Then
+						m_divPropertyAttrs.field("propType").disabled = True
+						m_divPropertyAttrs.field("keyDef").disabled = True
+						m_divPropertyAttrs.field("keyDef").value = ""
+					End If
+					UpdateExported_ReadOnly
+				End If
+				
+				' If it hasn't been done yet, hook up event-handlers.
+				If Not(m_bESBrowseHandlers) Then
+						m_bESBrowseHandlers = True
+
+						' Hook up handlers specific to "profile"-type profiles.
+						If m_strProfileType = "profile" Then
+						
+							Set elemTemp = m_divPropertyAttrs.field("displayRefStr")
+							elemTemp.attachEvent "onBrowse", GetRef("PropAttrsView_SetRefString")
+							
+							Set elemTemp = m_divPropertyAttrs.field("displayDataRef")
+							elemTemp.attachEvent "onBrowse", GetRef("PropAttrsView_MapProperty")
+
+							Set elemTemp = m_divPropertyAttrs.field("dataRef")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_MapChanged")
+
+							Set elemTemp = m_divPropertyAttrs.field("propType")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_TypeChanged")
+
+							Set elemTemp = m_divPropertyAttrs.field("keyDef")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_KeyDefChanged")
+
+							Set elemTemp = m_divPropertyAttrs.field("isMultiValued")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_MultiValChanged")
+
+							Set elemTemp = m_divPropertyAttrs.field("isSearchable")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_SearchableValChanged")
+
+							Set elemTemp = m_divPropertyAttrs.field("isRDNAttribute")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_RDNAttrChanged")
+
+							Set elemTemp = m_divPropertyAttrs.field("isHashingKey")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_HashKeyChanged")
+
+							'Set elemTemp = m_divPropertyAttrs.field("isRequired")
+							'elemTemp.attachEvent "onChange", GetRef("PropAttrsView_RequiredChanged")
+							
+							Set elemTemp = m_divPropertyAttrs.field("isEncrypted")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_EncryptedChanged")
+							
+							Set elemTemp = m_divPropertyAttrs.field("isExported")
+							elemTemp.attachEvent "onChange", GetRef("PropAttrsView_ExportedChanged")
+						End If
+				End If
+
+				' Final UI-setup:
+				If m_strProfileType = "profile" Then
+					' Now let the KeyDef be updated
+					m_strKeyDef = Null
+					PropAttrValsToDisplayVals
+					PropAttrsView_TypeChanged
+					PropAttrsView_MapChanged
+					PropAttrsView_EncryptedChanged
+					UpdateExported_ReadOnly
+				End If
+
+				' Make 'name' field read-only if the node isn't new.
+				strVal = xmlNode.getAttribute("isNew")
+				If IsNull(strVal) Or (strVal <> "1") Then
+					m_divPropertyAttrs.field("name").readonly = True
+					m_divPropertyAttrs.field("displayName").focus()
+				Else
+					m_divPropertyAttrs.field("name").readonly = False
+					m_divPropertyAttrs.field("name").focus()
+				End If
+			Case gc_sGroup
+				m_divPropertyAttrs.disableAll True
+				m_divPropertyAttrs.style.display = "none"
+
+				m_divCustomAttrsES.disableAll True
+				m_divCustomAttrsES.style.display = "none"
+
+				m_divGroupAttrs.disableAll False
+				m_divGroupAttrs.style.display = ""
+
+				strDataXML = ProfileXML2EditSheetXML(xmlNode)
+				m_xmlAttrData.loadXML strDataXML
+				m_divGroupAttrs.xmlRecord = m_xmlAttrData.selectSingleNode("document/record")
+
+				' Make 'name' field read-only if the node isn't new.
+				strVal = xmlNode.getAttribute("isNew")
+				If IsNull(strVal) Or (strVal <> "1") Then
+					m_divGroupAttrs.field("name").readonly = True
+					m_divGroupAttrs.field("displayName").focus()
+				Else
+					m_divGroupAttrs.field("name").readonly = False
+					m_divGroupAttrs.field("name").focus()
+				End If
+		End Select
+
+		' Populate the custom attribute view.
+		AttrsToDynTblXML xmlNode
+
+		' Show buttons!
+		If m_bAddButtons Then
+		m_divDetailViewBtns.style.display = ""
+		m_btnApplyDetail.style.display = ""
+		m_btnCancelDetail.style.display = ""
+		End If
+	Else
+		' Nothing passed to this function.	Disable detail pane.
+		m_divPropertyAttrs.style.display = "none"
+		m_divGroupAttrs.style.display = "none"
+		m_divCustomAttrsES.style.display = "none"
+		If m_bAddButtons Then
+		m_divDetailViewBtns.style.display = "none"
+		m_btnApplyDetail.style.display = "none"
+		m_btnCancelDetail.style.display = "none"
+		End If
+		' Set focus to the profile view
+		m_divProfileView.focus()
+	End If
+
+	'reset editsheet dirty flag
+	m_divPropertyAttrs.resetDirty()
+	m_divGroupAttrs.resetDirty()
+
+	If m_bAddButtons Then
+	m_btnApplyDetail.disabled = True
+	m_btnCancelDetail.disabled = True
+	End If
+	m_bEncrypt = True
+End Sub
+
+Sub PropAttrsView_ChangeHandler()
+	m_bAttrsChanged = True
+	Call PropAttrsView_ValidHandler()
+End Sub
+
+Sub PropAttrsView_ValidHandler()
+	Dim bValid
+
+	'Check to see if all the fields are valid
+	bValid = m_divPropertyAttrs.valid And Not m_divPropertyAttrs.required
+
+	If m_bAddButtons Then
+	m_btnApplyDetail.disabled = Not(bValid)
+	
+	If (m_divProfileView.GetSelectedCount() = 0) Then
+		m_btnAdd.disabled = False
+	Else
+		m_btnAdd.disabled = bValid
+	End If
+	m_btnCancelDetail.disabled = False
+	End If
+End Sub
+
+Sub GroupAttrsView_ChangeHandler()
+	m_bAttrsChanged = True
+	Call GroupAttrsView_ValidHandler()
+End Sub
+
+Sub GroupAttrsView_ValidHandler()
+	Dim bValid
+
+	'Check to see if all the fields are valid
+	bValid = m_divGroupAttrs.valid And Not m_divGroupAttrs.required
+
+	If m_bAddButtons Then
+	m_btnApplyDetail.disabled = Not(bValid)
+	m_btnCancelDetail.disabled = False
+	End If
+End Sub
+
+'	ApplyAttrInfo
+'
+'	Description:
+'		This Sub is responsible for applying changes in the attribute info view
+'		to the profile XML document.	Verification is done, and on success, the
+'		profile document is marked as dirty.
+
+Sub ApplyAttrInfo()
+	Dim nSelItems, rgstrItemPaths, xmlItem, xmlNewItem, strItemPath
+	Dim xmlESData, bSuccess, divAttrs, strKeyDef, strPropType
+	Dim bIsProperty, strErr
+		
+	' Get what is currently selected, and apply the current values.
+	Set xmlItem = Nothing
+	nSelItems = m_divProfileView.GetSelectedCount()
+	If nSelItems = 1 Then
+		' Find the selected item, and update its data.
+		rgstrItemPaths = m_divProfileView.GetSelectedItems()
+		Set xmlItem = GetProfNodeFromPath(rgstrItemPaths(0))
+		
+		bIsProperty = FALSE
+		Select Case xmlItem.tagName
+			Case gc_sProperty
+				Set divAttrs = m_divPropertyAttrs
+				bIsProperty = TRUE
+			Case gc_sGroup
+				Set divAttrs = m_divGroupAttrs
+		End Select
+
+		If divAttrs.required Then
+			MsgBox L_ReqFields_ErrorMessage, vbOKOnly, L_ErrorBoxHeader_Text
+		Else
+			
+
+			' If the property is a siteterm or profile then make sure the reference type is set
+			If bIsProperty And Not(m_strProfileType = "siteterm") Then
+				strPropType = LCase(m_divPropertyAttrs.field("propType").value)
+				If (strPropType= "siteterm" Or strPropType = "profile") And _
+					m_divPropertyAttrs.field("referenceString").value = "" Then
+					strErr = Replace(L_NoTypeRef_ErrorMessage, "%1", _
+					m_divPropertyAttrs.field("propType").displayvalue)
+					MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+					Exit Sub
+				End If
+				
+			End If
+
+			Set xmlESData = divAttrs.xmlRecord
+		
+			' Try to update the data.	Deselect / reselect around this operation,
+			' since if the item's name is changed, the XMLView widget could
+			' become confused.
+			m_divProfileView.SelectItem rgstrItemPaths(0), False
+			Set xmlNewItem = EditSheetXML2ProfileXML(xmlESData, xmlItem)
+
+			' If that succeeded, try to update the custom attributes.
+			If Not(xmlNewItem Is Nothing) Then DynTblXMLToAttrs(xmlNewItem)
+
+			' Updates completed.	Or, at least, attempts to update completed.
+			If Not(xmlNewItem Is Nothing) Then
+
+				' If the node isn't new, mark it as modified.
+				If isNull(xmlNewItem.getAttribute("isNew")) Or _
+					xmlNewItem.getAttribute("isNew") <> "1" Then
+					' Not new.	Set modified flag.
+					xmlNewItem.setAttribute "isModified", "1"
+				End If
+
+				' UPDATE THE GLOBAL DOC HERE.
+
+				If m_strProfileType = "profile" Then
+					' Make sure that all parent nodes, up to the Profile node,
+					' are marked with isModified='1'.
+					MarkParentNodes(xmlNewItem)
+				End If
+
+				' Make sure there is only a single primary-key & join key.
+				strKeyDef = xmlNewItem.getAttribute("keyDef")
+				If Not isNull(strKeyDef) Then
+					If strKeyDef = "PRIMARY" Or strKeyDef = "PRIMARYJOIN" Then
+						UpdatePrimaryKeys xmlNewItem
+					End If
+					If strKeyDef = "JOIN" Or strKeyDef = "PRIMARYJOIN" Then
+						UpdateJoinKeys xmlNewItem
+					End If
+				End If
+
+				'Make sure there is no more than one hashing key
+				If xmlNewItem.getAttribute("isHashingKey") = "1" Then
+					UpdateHashKeys xmlNewItem
+				End If
+
+				' Update the profile-view.
+				m_divProfileView.Refresh
+				m_divProfileView.SelectItem GetPathFromProfNode(xmlNewItem), True
+				' Update detail-pane buttons.
+				Dim elemButton
+				For Each elemButton In m_divDetailViewBtns.all.tags("BUTTON")
+					elemButton.disabled = True
+				Next
+
+				' Mark profile as dirty.
+				ReportDirtyDoc
+
+				' Reset dirty flags on the editsheets
+				m_divPropertyAttrs.resetDirty()
+				m_divGroupAttrs.resetDirty()
+				
+				If m_bAddButtons Then
+					m_btnRemove.title = L_btnRemove_ToolTip & " " & xmlNewItem.getAttribute("displayName")
+				End If
+				
+				' Changes were successfully saved.
+				m_bAttrsChanged = False
+			Else
+				' Changes couldn't be saved because something's wrong.	Restore
+				' previous state.
+				m_divProfileView.SelectItem rgstrItemPaths(0), True
+			End If
+			
+		End If
+		
+		
+	End If
+End Sub
+
+'	MarkParentNodes
+'
+'	Description:
+'		This subroutine walks the profile-document from the modified node all
+'		the way back to the profile root, and marks each non-new node as
+'		modified.	The BDAO needs this to take place for some reason.
+
+Sub MarkParentNodes(xmlNewItem)
+	Dim xmlCurr, sIsNew
+
+	Set xmlCurr = xmlNewItem
+	Do
+		Set xmlCurr = xmlCurr.parentNode
+
+		sIsNew = xmlCurr.getAttribute("isNew")
+		If isNull(sIsNew) Then sIsNew = ""
+
+		If Not(sIsNew = "1") Then
+			xmlCurr.setAttribute "isModified", "1"
+		End If
+	Loop While xmlCurr.tagName <> gc_sProfile
+End Sub
+
+'	AttrsView_BtnApplyHandler
+'
+'	Description:
+'		This sub gets called when the user clicks the Cancel button in the
+'		detail view of the Profile-Designer.	It reverts the data back to the
+'		original values.
+
+Sub AttrsView_BtnApplyHandler()
+	ApplyAttrInfo
+	m_btnAdd.disabled = false
+End Sub
+
+'	AttrsView_BtnCancelHandler
+'
+'	Description:
+'		This sub gets called when the user clicks the Cancel button in the
+'		detail view of the Profile-Designer.	It reverts the data back to the
+'		original values.
+
+Sub AttrsView_BtnCancelHandler()
+	UpdateAttrInfo
+	' Update the buttons in the UI.
+	UpdateButtons
+
+	' re-enable the add button - this is not done in UpdateButtons because
+	' we don't want the add button to be enabled while the current selection
+	' is dirty
+	m_btnAdd.disabled = False
+End Sub
+
+'	ProfileXML2EditSheetXML
+'
+'	Description:
+'		Takes an XML node from the profile schema and translates it to the
+'		corresponding editsheet record schema.	This basically involves taking
+'		each attribute of the profile-node, and making the attribute into an
+'		element with the contents being the attribute's value.	(This kind of
+'		transformation is not currently possible in XSL.)
+
+Function ProfileXML2EditSheetXML(xmlProfElem)
+	Dim strESXML		' Editsheet XML
+	Dim xmllistAttrs, xmlAttr, xmllistDRefs, xmlDRef, bFirst, isRDN, encryptedCA, xmlRecordSet, xmlRecord
+	strESXML = ""
+	If Not (xmlProfElem Is Nothing) Then
+		strESXML = "<document><record>"
+		'Reset the dataref value
+		If Not m_divPropertyAttrs.field("dataRef") Is Nothing Then
+			m_divPropertyAttrs.field("dataRef").value = ""
+		End If
+		' Do the easy part of the transformation first.
+		Set xmllistAttrs = xmlProfElem.attributes
+		For Each xmlAttr In xmllistAttrs
+			strESXML = strESXML & "<" & xmlAttr.name & ">"
+			If xmlAttr.name = "isCached" Then
+				'Use inverse
+				If xmlAttr.value = "0" Then
+					strESXML = strESXML & "1"
+				Else
+					strESXML = strESXML & "0"
+				End If
+			Else
+				strESXML = strESXML & xmlAttr.value
+			End If
+			strESXML = strESXML & "</" & xmlAttr.name & ">"
+		Next
+
+		'Boolean values must have explicit defaults
+		If IsNull(xmlProfElem.getAttribute("isActive")) Then
+			strESXML = strESXML & "<isActive>1</isActive>"
+		End If
+		If IsNull(xmlProfElem.getAttribute("isRequired")) Then
+			strESXML = strESXML & "<isRequired>0</isRequired>"
+		End If
+		
+		If IsNull(xmlProfElem.getAttribute("isEncrypted")) Then
+			strESXML = strESXML & "<isEncrypted>0</isEncrypted>"
+		Else
+			' check custom attributes to see which value to display
+			encryptedCA = -1
+			
+			set xmlRecordSet = xmlProfElem.selectNodes("//Property[@name='" & xmlProfElem.getAttribute("name") & "']/Attribute")
+			For each xmlRecord in xmlRecordSet
+				If lcase(xmlRecord.getAttribute("name")) = gc_sEncryptionCA then
+					If xmlRecord.getAttribute("isDeleted") = 1 Then
+						encryptedCA = 0
+					Else
+						encryptedCA = xmlRecord.getAttribute("value")
+					End If
+				End If
+			Next
+			
+			If encryptedCA <= 0 then
+				m_nEncrypted = 0
+			else
+				m_nEncrypted = encryptedCA
+			end if
+			strESXML = strESXML & "<isEncrypted>" & CStr(m_nEncrypted) & "</isEncrypted>"
+		End If
+		
+		
+		If IsNull(xmlProfElem.getAttribute("isExported")) Then
+			strESXML = strESXML & "<isExported>0</isExported>"
+		End If
+		If IsNull(xmlProfElem.getAttribute("isMultiValued")) Then
+			strESXML = strESXML & "<isMultiValued>0</isMultiValued>"
+		End If
+		If IsNull(xmlProfElem.getAttribute("isSearchable")) Then
+			strESXML = strESXML & "<isSearchable>0</isSearchable>"
+		End If
+		If IsNull(xmlProfElem.getAttribute("isHashingKey")) Then
+			strESXML = strESXML & "<isHashingKey>0</isHashingKey>"
+		End If
+		If IsNull(xmlProfElem.getAttribute("isCached")) Then
+			strESXML = strESXML & "<isCached>0</isCached>"
+		End If
+
+		' Now, do any DataRef children.
+		strESXML = strESXML & "<dataRef>"
+		Set xmllistDRefs = xmlProfElem.selectNodes(gc_sDataRef)
+		bFirst = True
+		isRDN = "0"
+		For Each xmlDRef In xmllistDRefs
+			If bFirst Then bFirst = False Else strESXML = strESXML & "|"
+			If xmlDRef.getAttribute("isRDNAttribute") = "1" Then isRDN = "1"
+			strESXML = strESXML & xmlDRef.getAttribute("idref")
+		Next
+		strESXML = strESXML & "</dataRef><isRDNAttribute>" & isRDN & "</isRDNAttribute></record></document>"
+	End If
+
+	ProfileXML2EditSheetXML = strESXML
+End Function
+
+'	EditSheetXML2ProfileXML
+'
+'	Description:
+'		Takes an XML node from the editsheet record schema and translates it to
+'		the corresponding profile schema.	This basically involves taking
+'		each element of the editsheet record and setting the corresponding
+'		profile-node's attribute to the element's text.	(This kind of
+'		transformation is not currently possible in XSL.)
+'
+'		Some important validation is done.	If the translation couldn't take
+'		place; for example, because changes introduce a namespace collision;
+'		the function returns False.	If the translation works fine, the
+'		function returns True.
+'
+'	Return Values:
+'	- On success, the original XML profile-node is replaced, and this
+'		function returns a reference to the new profile XML node containing the
+'		editsheet information.
+'	- On failure, the original node is left intact and Nothing is returned.
+
+Function EditSheetXML2ProfileXML(xmlESRecord, xmlProfElem)
+	Dim xmlParent, xmlProfNode, xmlTempProfElem, bSuccess, xmllistElems, xmlElem
+	Dim strTemp, xmlDataRef, rgstrRefs, rgsPath, i, isRDN, xmlRDN
+	Dim sElemType, nMaxElems
+
+	' Make a clone of the profile-node to work with so that we can do
+	' validation and discard the changes if necessary.
+	Set xmlTempProfElem = xmlProfElem.cloneNode(False)			' Shallow copy.
+
+	' Translate the editsheet record to a profile-node.
+	Set xmllistElems = xmlESRecord.childNodes
+	For Each xmlElem In xmllistElems
+		If 0 = InStr(1, xmlElem.tagname, "_displayname", 1) Then
+			If xmlElem.tagname = "dataRef" Then
+				' Do special processing for dataRef attribute:	Create one or
+				' more DataRef tags from the value of the dataRef value.
+				If xmlElem.text <> "" Then
+					'Get RDN attribute
+					Set xmlRDN = xmlESRecord.SelectSingleNode("isRDNAttribute")
+					isRDN = xmlRDN.text
+					rgstrRefs = Split(xmlElem.text, "|")
+					For i = 0 To UBound(rgstrRefs)
+						Set xmlDataRef = xmlTempProfElem.ownerDocument.createElement(gc_sDataRef)
+						xmlDataRef.setAttribute "idref", rgstrRefs(i)
+						rgsPath = Split(xmlDataRef.getAttribute("idref"), ".")
+						If Not(Nothing Is m_xmlProfileDoc.selectSingleNode("//" & _
+							gc_sDataSource & "[@name='" & rgsPath(0) & _
+							"' && @sourceType='LDAPv3']")) Then
+							' Only set the RDN on LDAP members (this is for join keys)
+							xmlDataRef.setAttribute "isRDNAttribute", isRDN
+						End If
+						xmlTempProfElem.appendChild xmlDataRef
+					Next
+				End If
+			ElseIf xmlElem.tagname = "isEncrypted" Then
+				If xmlElem.text = "0" Then
+					xmlTempProfElem.setAttribute xmlElem.tagName, 0
+				Else
+					xmlTempProfElem.setAttribute xmlElem.tagName, 1
+				End If
+			ElseIf xmlElem.tagName = "isCached" Then
+				'Use inverse value
+				If xmlElem.text = "0" Then
+					xmlTempProfElem.setAttribute xmlElem.tagName, "1"
+				Else
+					xmlTempProfElem.setAttribute xmlElem.tagName, "0"
+				End If
+			ElseIf Not xmlElem.tagName = "isRDNAttribute" Then 'Ignore RDN (used above)
+				' This tag doesn't require special processing.
+				xmlTempProfElem.setAttribute xmlElem.tagName, xmlElem.text
+			End If
+		End If
+	Next
+
+	' Do validation.	This is done by replacing the old element with the temp
+	' element, and then checking for bad things.
+	Set xmlParent = xmlProfElem.parentNode
+	Set xmlProfElem = xmlParent.replaceChild(xmlTempProfElem, xmlProfElem)
+	bSuccess = True
+
+	'Find out what type of element this node is
+	sElemType = xmlTempProfElem.tagName
+
+	'Check for duplicate display name among properties in this group
+	Set xmllistElems = xmlParent.selectNodes("(" & gc_sProperty & "|" & gc_sGroup & _
+			")[(not(@isDeleted) || @isDeleted != '1') && @displayName = '" & _
+			replace(replace(replace(xmlTempProfElem.getAttribute("displayName"), """", "&quot;"), "\", "\\"),"'", "\'") & "'] ")
+	If bSuccess And (xmllistElems.length > 1) Then
+		' Display name isn't unique
+		MsgBox L_DispName_Message, vbOKOnly, L_ErrorBoxHeader_Text
+		bSuccess = False
+	End If
+
+	' Get profile node
+	Set xmlProfNode = xmlTempProfElem.parentNode
+	Do
+		If (xmlProfNode.tagName = gc_sProfile) Or (xmlProfNode.parentNode Is Nothing) Then Exit Do
+		Set xmlProfNode = xmlProfNode.parentNode
+	Loop
+
+	'Check for duplicate names in this profile
+	Set xmllistElems = xmlProfNode.selectNodes("//(" & gc_sProperty & "|" & gc_sGroup & _
+		")[(not(@isDeleted) || @isDeleted != '1') && @name $ieq$ '" & _
+		xmlTempProfElem.getAttribute("name") & "'] ")
+	If bSuccess And (xmllistElems.length > 1) Then
+		' Display name isn't unique
+		MsgBox L_ProgName_Message, vbOKOnly, L_ErrorBoxHeader_Text
+		bSuccess = False
+	End If
+
+	' Finally, if validation passed, we're ready.	(Temp node is already part
+	' of the tree.)	Otherwise, delete the temp node.
+	If bSuccess Then
+		' Validation succeeded.
+		' Copy children of original node to new node, unless they're DataRef
+		' nodes...
+		For Each xmlElem In xmlProfElem.childNodes
+			Set xmlElem = xmlProfElem.removeChild(xmlElem)
+			If xmlElem.tagName <> gc_sDataRef Then xmlTempProfElem.appendChild xmlElem
+		Next
+	Else
+		' Validation failed.	Back out changes.
+		xmlParent.replaceChild xmlProfElem, xmlTempProfElem
+
+		' Report validation failure.
+		ReportStatus L_InfoMissing_Message
+
+		Set xmlTempProfElem = Nothing
+	End If
+
+	' Return result!
+	Set EditSheetXML2ProfileXML = xmlTempProfElem
+End Function
+
+'	UpdatePrimaryKeys
+'
+'	Description:
+'		This sub makes sure that the profile contains only a single property
+'		that is marked as a primary-key property.	The passed-in property is
+'		the one that is maintained as the primary-key; all other primary keys
+'		are demoted to appropriate non-primary key-types.
+
+Sub UpdatePrimaryKeys(xmlNewPK)
+	Dim xmllistPrimaryProps, xmlPrimaryProp, strIsNew, strIsDeleted
+
+	' Get the list of all properties that have some key-type that says they
+	' are primary keys.
+	Set xmllistPrimaryProps = m_xmlProfileDoc.selectNodes( _
+			"//" & gc_sProperty & "[@keyDef='PRIMARY' || @keyDef='PRIMARYJOIN']")
+
+	' Go through each property that is marked as somehow primary.	If the
+	' property isn't the passed-in one, demote its key-type to be non-
+	' primary.
+	For Each xmlPrimaryProp In xmllistPrimaryProps
+		If Not (xmlPrimaryProp Is xmlNewPK) Then
+			If xmlPrimaryProp.getAttribute("keyDef") = "PRIMARY" Then
+				xmlPrimaryProp.setAttribute "keyDef", "UNIQUE"
+			Elseif xmlPrimaryProp.getAttribute("keyDef") = "PRIMARYJOIN" Then
+				xmlPrimaryProp.setAttribute "keyDef", "JOIN"
+			End If
+
+			strIsNew = xmlPrimaryProp.getAttribute("isNew")
+			strIsDeleted = xmlPrimaryProp.getAttribute("isDeleted")
+			If isNull(strIsNew) And isNull(strIsDeleted) Then
+				xmlPrimaryProp.setAttribute "isModified", "1"
+			End If
+		End If
+	Next
+End Sub
+
+'	UpdateJoinKeys
+'
+'	Description:
+'		This sub makes sure that the profile contains only a single property
+'		that is marked as a join-key property.	The passed-in property is
+'		the one that is maintained as the join-key; all other join keys
+'		are demoted to appropriate non-join key-types.
+
+Sub UpdateJoinKeys(xmlNewPK)
+	Dim xmllistJoinProps, xmlJoinProp, strIsNew, strIsDeleted
+
+	' Get the list of all properties that have some key-type that says they
+	' are join keys.
+	Set xmllistJoinProps = m_xmlProfileDoc.selectNodes( _
+			"//" & gc_sProperty & "[@keyDef='JOIN' || @keyDef='PRIMARYJOIN']")
+
+	' Go through each property that is marked as join somehow.	If the
+	' property isn't the passed-in one, demote its key-type to be non-join
+	For Each xmlJoinProp In xmllistJoinProps
+		If Not (xmlJoinProp Is xmlNewPK) Then
+			If xmlJoinProp.getAttribute("keyDef") = "JOIN" Then
+				xmlJoinProp.setAttribute "keyDef", "UNIQUE"
+			Elseif xmlJoinProp.getAttribute("keyDef") = "PRIMARYJOIN" Then
+				xmlJoinProp.setAttribute "keyDef", "PRIMARY"
+			End If
+
+			strIsNew = xmlJoinProp.getAttribute("isNew")
+			strIsDeleted = xmlJoinProp.getAttribute("isDeleted")
+			If isNull(strIsNew) And isNull(strIsDeleted) Then
+				xmlJoinProp.setAttribute "isModified", "1"
+			End If
+		End If
+	Next
+End Sub
+
+'	UpdateHashKeys
+'
+'	Description:
+'		This sub makes sure that the profile contains only a single property
+'		that is marked as a hashing-key property.	The passed-in property is
+'		the one that is maintained as the hashing-key.
+
+Sub UpdateHashKeys(xmlNewPK)
+	Dim xmllistHashKeys, xmlHashKey, strIsNew, strIsDeleted
+
+	' Get the list of all properties that have some key-type that says they
+	' are join keys.
+	Set xmllistHashKeys = m_xmlProfileDoc.selectNodes( _
+			"//" & gc_sProperty & "[@isHashingKey='1']")
+
+	' Go through each property that is marked as join somehow.	If the
+	' property isn't the passed-in one, demote its key-type to be non-join
+	For Each xmlHashKey In xmllistHashKeys
+		If Not (xmlHashKey Is xmlNewPK) Then
+			xmlHashKey.setAttribute "isHashingKey", "0"
+
+			strIsNew = xmlHashKey.getAttribute("isNew")
+			strIsDeleted = xmlHashKey.getAttribute("isDeleted")
+			If isNull(strIsNew) And isNull(strIsDeleted) Then
+				xmlHashKey.setAttribute "isModified", "1"
+			End If
+		End If
+	Next
+End Sub
+
+'	UpdateRequired_ReadOnly
+'
+'	Description:
+'		Sets the ReadOnly attribute of the isRequired field,
+'		based on other fields' values.
+
+Sub UpdateRequired_ReadOnly()
+	Dim strKeyDef, bForceRequired
+	bForceRequired = False
+
+	'Hashing Key forces required
+	bForceRequired = bForceRequired Or (m_divPropertyAttrs.field("isHashingKey").value = "1")
+	'RDN Attribute forces required
+	bForceRequired = bForceRequired Or (m_divPropertyAttrs.field("isRDNAttribute").value = "1")
+
+	'Any keytype forces required
+	strKeyDef = m_divPropertyAttrs.field("keyDef").value
+	bForceRequired = bForceRequired Or _
+			(strKeyDef = "PRIMARY" Or strKeyDef = "JOIN" Or strKeyDef = "UNIQUE" Or strKeyDef = "PRIMARYJOIN")
+
+	If bForceRequired Then
+		m_divPropertyAttrs.field("isRequired").value = 1
+	End If
+	
+	'No source map forces required
+	bForceRequired = bForceRequired Or (m_divPropertyAttrs.field("dataRef").value = "")
+	
+	'Set the state now
+	m_divPropertyAttrs.field("isRequired").ReadOnly = bForceRequired
+
+End Sub
+
+'	UpdateMultiValued_ReadOnly
+'
+'	Description:
+'		Sets the ReadOnly attribute of the isMultiValued field,
+'		based on other fields' values.
+
+Sub UpdateMultiValued_ReadOnly()
+	Dim strKeyDef, bOLEDB, strValue, rgstrValues, rgstrParts, i, bReadOnly
+	bReadOnly = False
+
+	'Any keytype restricts multivalue
+	strKeyDef = m_divPropertyAttrs.field("keyDef").value
+	bReadOnly = (strKeyDef = "PRIMARY" Or strKeyDef = "JOIN" Or strKeyDef = "UNIQUE" Or strKeyDef = "PRIMARYJOIN")
+
+	' OLEDB-ANSI soure type only allows multival strings
+	If Not bReadOnly Then
+		strValue = m_divPropertyAttrs.field("dataRef").value
+		rgstrValues = Split(strValue, "|")
+
+		For i = 0 To UBound(rgstrValues)
+			strValue = rgstrValues(i)
+			rgstrParts = Split(strValue, ".")
+
+			'Check if it's LDAP
+			If Not(Nothing Is m_xmlProfileDoc.selectSingleNode("//" & _
+				gc_sDataSource & "[@name='" & rgstrParts(0) & "' && @sourceType='OLEDB-ANSI']")) Then
+				bOLEDB = True
+				If bOLEDB = True Then Exit For
+			End If
+		Next
+
+		bReadOnly = bReadOnly Or _
+				(bOLEDB And Not (LCase(m_divPropertyAttrs.field("propType").value) = "string" Or _
+				LCase(m_divPropertyAttrs.field("propType").value) = "siteterm" Or _
+				LCase(m_divPropertyAttrs.field("propType").value) = "profile"))
+	End If
+
+	'Set the state now
+	m_divPropertyAttrs.field("isMultiValued").ReadOnly = bReadOnly
+	If bReadOnly Then m_divPropertyAttrs.field("isMultiValued").value = "0"
+End Sub
+
+Sub UpdateEncrypted_ReadOnly()
+	If Not (m_divPropertyAttrs.field("propType").value = "string" Or m_divPropertyAttrs.field("propType").value = "password") Or _
+			m_divPropertyAttrs.field("isExported").value = "1"  Or _
+			Not (m_divPropertyAttrs.field("keyDef").value = "") Or _
+			(m_divPropertyAttrs.field("dataRef").value = "") Or _
+			Not (m_divPropertyAttrs.field("referenceString").value = "") Or _
+			m_divPropertyAttrs.field("isSearchable").value = "1" Then
+		m_divPropertyAttrs.field("isEncrypted").value = "0"
+		m_divPropertyAttrs.field("isEncrypted").ReadOnly = True
+	else
+		m_divPropertyAttrs.field("isEncrypted").ReadOnly = False
+	End If
+End Sub
+
+'	UpdateExported_ReadOnly
+'
+'	Description:
+'		Sets the ReadOnly attribute of the isExported field,
+'		based on other fields' values.
+
+Sub UpdateExported_ReadOnly()
+	If m_bExitExported Then
+		Exit Sub
+	End If
+
+	Dim strKeyDef, bReadOnly
+	bReadOnly = False
+
+	'No source map restricts exported
+	bReadOnly = (m_divPropertyAttrs.field("dataRef").value = "")
+
+	'If type=BOOL and isMultiValued=True then read only
+	bReadOnly = bReadOnly Or _
+			(LCase(m_divPropertyAttrs.field("propType").value) = "bool") And _
+			Not (m_divPropertyAttrs.field("isMultiValued").value = "1")
+
+	'Read only if type = binary, longtext, or password
+	bReadOnly = bReadOnly Or _
+			LCase(m_divPropertyAttrs.field("propType").value) = "binary" Or _
+			LCase(m_divPropertyAttrs.field("propType").value) = "longtext" Or _
+			LCase(m_divPropertyAttrs.field("propType").value) = "image" Or _
+			LCase(m_divPropertyAttrs.field("propType").value) = "password" Or _
+			Not (m_divPropertyAttrs.field("isEncrypted").value = "0")
+
+	'Set the state now
+	m_divPropertyAttrs.field("isExported").ReadOnly = bReadOnly
+	If bReadOnly Then m_divPropertyAttrs.field("isExported").value = "0"
+End Sub
+
+'	AttrsToDynTblXML
+'
+'	Description:
+'		Translates the profile-XML to that consumed by the dynamic-table HTC.
+
+Sub AttrsToDynTblXML(xmlProfNode)
+	Dim xlAttrs, xmlAttrNode, xmllistAttrs, xmlAttr, xmlDocument, xmlRecord
+	Dim xmlOldRecName, xmlRecName, xmlRecDisplayName, xmlRecDescription, xmlRecValue
+
+	m_divCustomAttrsDT.Cleanup
+	Set xmlDocument = m_divCustomAttrsDT.xmlList
+
+	' Prepare the dynamic table XML by removing all current contents.
+	Set xlAttrs = xmlDocument.selectNodes("*")
+	For Each xmlRecord In xlAttrs
+		xmlDocument.removeChild xmlRecord
+	Next
+
+	' Get all the attributes on the profile-node that can actually be
+	' manipulated.	(ie. all nodes that haven't already been deleted)
+	Set xlAttrs = xmlProfNode.selectNodes(gc_sAttribute & _
+			"[not(@isDeleted) || @isDeleted != '1']")
+	If xlAttrs.length > 0 Then
+		For Each xmlAttrNode In xlAttrs
+		
+			If Not (lcase(xmlAttrNode.getAttribute("name")) = gc_sEncryptionCA) Then
+				' Create the necessary elements.
+				Set xmlRecord = xmlDocument.appendChild(xmlDocument.ownerDocument.createElement("record"))
+				Set xmlOldRecName = xmlRecord.appendChild(xmlDocument.ownerDocument.createElement("oldAttrName"))
+				Set xmlRecName = xmlRecord.appendChild(xmlDocument.ownerDocument.createElement("attrName"))
+				Set xmlRecDisplayName = xmlRecord.appendChild(xmlDocument.ownerDocument.createElement("attrDisplayName"))
+				Set xmlRecDescription = xmlRecord.appendChild(xmlDocument.ownerDocument.createElement("attrDescription"))
+				Set xmlRecValue = xmlRecord.appendChild(xmlDocument.ownerDocument.createElement("attrValue"))
+
+				' Fill in the values.
+				xmlOldRecName.text = xmlAttrNode.getAttribute("name")
+				xmlRecName.text = xmlAttrNode.getAttribute("name")
+				' .text can't be Null
+				If Not IsNull(xmlAttrNode.getAttribute("displayName")) Then
+					xmlRecDisplayName.text = xmlAttrNode.getAttribute("displayName")
+				End If
+				If Not IsNull(xmlAttrNode.getAttribute("description")) Then
+					xmlRecDescription.text = xmlAttrNode.getAttribute("description")
+				End If
+				If Not IsNull(xmlAttrNode.getAttribute("value")) Then
+					xmlRecValue.text = xmlAttrNode.getAttribute("value")
+				End If
+
+				' Non-required values might be NULL
+				If IsNull(xmlRecDisplayName.text) Then xmlRecDisplayName.text = ""
+				If IsNull(xmlRecDescription.text) Then xmlRecDescription.text = ""
+			End If
+		Next
+	End If
+
+	' Tell the Dynamic-Table that its underlying XML changed.
+	m_divCustomAttrsDT.reset
+End Sub
+
+'	DynTblXMLToAttrs
+'
+'	Description:
+'		Translates the XML from the dynamic-table HTC to that consumed by the
+'		BDAO.	Updates the passed-in profile-node.
+'
+'	returns true if there were any changes made, false otherwise
+
+Sub DynTblXMLToAttrs(xmlProfNode)
+	Dim xlAttrs, xmlAttrNode, xmlRecord, xmlDocument, strState
+	Dim xmlOldRecName, xmlRecName, xmlRecDisplayName, xmlRecDescription, xmlRecValue
+	Dim bNumbersOnly, strErr, n, bOverflow, xmlRecordSet
+
+	' Iterate through all attribute records in the dynamic-table, performing
+	' the appropriate actions.
+	m_xmlCustomAttrData.loadXML(m_divCustomAttrsDT.xmlList.xml)
+
+	' Don't allow editing of default site terms
+	bNumbersOnly = m_strProfileType = "siteterm" And _
+			(xmlProfNode.getAttribute("name") = "AccountStatus" Or _
+			xmlProfNode.getAttribute("name") = "UserRole" Or _
+			xmlProfNode.getAttribute("name") = "UserType")
+
+	Set xlAttrs = m_xmlCustomAttrData.selectNodes("document/record")
+	Set xmlDocument = xmlProfNode.ownerDocument
+	For Each xmlRecord In xlAttrs
+		
+		Set xmlOldRecName = xmlRecord.selectSingleNode("oldAttrName")
+		Set xmlRecName = xmlRecord.selectSingleNode("attrName")
+		Set xmlRecDisplayName = xmlRecord.selectSingleNode("attrDisplayName")
+		Set xmlRecDescription = xmlRecord.selectSingleNode("attrDescription")
+		Set xmlRecValue = xmlRecord.selectSingleNode("attrValue")
+		If Not(lcase(xmlRecName.text) = gc_sEncryptionCA) Then
+		If bNumbersOnly Then
+			on error resume next
+			n = CLng(xmlRecName.text)
+			If Err.number = 6 Then
+				bOverflow = true
+			ElseIf n > 2147483647 Then
+				bOverflow = true
+			Else
+				bOverflow = false
+			End If
+			on error goto 0
+		End If
+
+		' Make sure that all term names are numbers
+		If bNumbersOnly And Not(IsNumeric(xmlRecName.text)) Then
+			' There is a non-number name
+			strErr = Replace(L_SiteTermsNumbers_ErrorMessage, "%1", xmlRecName.text)
+			MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+			xmlRecord.parentNode.removeChild(xmlRecord)
+		ElseIf bNumbersOnly And bOverflow Then
+			strErr = Replace(L_SiteTermsNumbersOverflow_ErrorMessage, "%1", xmlRecName.text)
+					MsgBox strErr, vbOKOnly, L_ErrorBoxHeader_Text
+					xmlRecord.parentNode.removeChild(xmlRecord)
+		Else
+			strState = xmlRecord.getAttribute("state")
+			If isNull(strState) Then strState = ""
+			If Not(xmlOldRecName Is Nothing) And Not(xmlRecName Is Nothing) And _
+				Not(xmlRecValue Is Nothing) Then
+				' The record actually has all three valid fields.
+
+				If xmlRecName.text = "" Then
+					' This is the dummy record.	Skip it.
+					strState = "dummy"
+				Elseif xmlOldRecName.text = "" Then
+					' No original record name => NEW RECORD.	(This helps catch
+					' the situation where the dummy record given to the DynTbl to
+					' keep it happy is used to create a new attribute; its state
+					' is actually set to "changed", not "new", even though it IS
+					' in fact new.
+					strState = "new"
+				End If
+			End If
+
+			Select Case strState
+				Case "new"
+					' Create a new attribute on the profile-node.
+					Set xmlAttrNode = getNewProfileItem(gc_sAttribute, xmlProfNode)
+
+					xmlAttrNode.setAttribute "name", xmlRecName.text
+					If Not xmlRecDisplayName Is Nothing Then
+						xmlAttrNode.setAttribute "displayName", xmlRecDisplayName.text
+					End If
+					If Not xmlRecDescription Is Nothing Then
+						xmlAttrNode.setAttribute "description", xmlRecDescription.text
+					End If
+					xmlAttrNode.setAttribute "value", xmlRecValue.text
+
+					xmlProfNode.appendChild xmlAttrNode
+
+					' Record that the 'old-name' is now the current name!	Also, mark
+					' the record's state as no longer new so that dupes don't get
+					' created...
+					xmlOldRecName.text = xmlRecName.text
+					xmlRecord.removeAttribute("state")
+				Case "changed"
+					Set xmlAttrNode = xmlProfNode.selectSingleNode(gc_sAttribute & _
+							"[@name='" & xmlOldRecName.text & "']")
+							
+					If (IsNull(xmlAttrNode.GetAttribute("isNew"))) Then
+						' this is an existing attribute so since the name can change, 
+						' we have to mark it as deleted and make a new one
+						xmlAttrNode.setAttribute "isDeleted", "1"
+						
+						' Create a new attribute on the profile-node.
+						Set xmlAttrNode = getNewProfileItem(gc_sAttribute, xmlProfNode)
+
+						xmlAttrNode.setAttribute "name", xmlRecName.text
+						If Not xmlRecDisplayName Is Nothing Then
+							xmlAttrNode.setAttribute "displayName", xmlRecDisplayName.text
+						End If
+						If Not xmlRecDescription Is Nothing Then
+							xmlAttrNode.setAttribute "description", xmlRecDescription.text
+						End If
+						xmlAttrNode.setAttribute "value", xmlRecValue.text
+
+						xmlProfNode.appendChild xmlAttrNode
+
+						' Record that the 'old-name' is now the current name!	Also, mark
+						' the record's state as no longer new so that dupes don't get
+						' created...
+						xmlOldRecName.text = xmlRecName.text
+						xmlRecord.removeAttribute("state")
+					Else
+						' this is a new attribute so just save it as is
+						xmlAttrNode.setAttribute "name", xmlRecName.text
+						If Not xmlRecDisplayName Is Nothing Then
+							xmlAttrNode.setAttribute "displayName", xmlRecDisplayName.text
+						End If
+						If Not xmlRecDescription Is Nothing Then
+							xmlAttrNode.setAttribute "description", xmlRecDescription.text
+						End If
+						xmlAttrNode.setAttribute "value", xmlRecValue.text
+					End If
+				Case "deleted"
+					' Delete an existing attribute on the profile-node.
+					Set xmlAttrNode = xmlProfNode.selectSingleNode(gc_sAttribute & _
+							"[@name='" & xmlOldRecName.text & "']")
+					If Not(xmlAttrNode Is Nothing) Then
+						If Not(isNull(xmlAttrNode.getAttribute("isNew"))) And _
+							xmlAttrNode.getAttribute("isNew") = "1" Then
+							' It's a brand-new (ie. unsaved) node, so just delete it.
+							xmlProfNode.removeChild xmlAttrNode
+						Else
+							' The database thinks this attribute exists, so mark it
+							' as deleted.
+							xmlAttrNode.setAttribute "isDeleted", "1"
+						End If
+					End If
+					xmlRecord.parentNode.removeChild(xmlRecord)
+			End Select
+		End If
+		End If
+	Next
+	
+	Set xmlAttrNode = Nothing
+	Set xmlRecordSet = xmlProfNode.selectNodes(gc_sAttribute)
+	For each xmlRecord in xmlRecordSet
+		If lcase(xmlRecord.GetAttribute("name")) = gc_sEncryptionCA Then
+			Set xmlAttrNode = xmlRecord
+			Exit For
+		End If
+	Next
+	If (m_nEncrypted > 0) Then
+		If (xmlAttrNode is nothing) Then
+			' create a new attribute
+			Set xmlAttrNode = getNewProfileItem(gc_sAttribute, xmlProfNode)
+			xmlAttrNode.setAttribute "name", gc_sEncryptionCA
+			xmlAttrNode.setAttribute "displayName", "Encryption Type"
+			xmlAttrNode.setAttribute "description", "Type of encryption to be used on this property."
+			xmlAttrNode.setAttribute "value", m_nEncrypted
+			xmlAttrNode.setAttribute "isNew", "1"
+			xmlProfNode.appendChild xmlAttrNode
+		Else
+			' modify the existing attribute
+			xmlAttrNode.setAttribute "value", m_nEncrypted
+			If (IsNull(xmlAttrNode.GetAttribute("isNew"))) Then
+				xmlAttrNode.setAttribute "isDeleted", "0"
+				xmlAttrNode.setAttribute "isModified", "1"
+			End If
+		End If
+	Else
+		'remove this custom attribute
+		If Not (xmlAttrNode is nothing) Then
+			If xmlAttrNode.getAttribute("isNew") = "1" Then
+				xmlProfNode.removeChild xmlAttrNode
+			Else
+				xmlAttrNode.setAttribute "isDeleted", "1"
+				xmlAttrNode.setAttribute "isModified", "0"
+			End If
+		End If
+	End If
+
+	' Update the dynamic table's XML
+	AttrsToDynTblXML(xmlProfNode)
+End Sub
+
+Sub UpdateButtons()
+	Dim nSelItems, rgstrItemPaths, xmlItem, xmlFirst
+
+	nSelItems = m_divProfileView.GetSelectedCount()
+	'Set the move up/down buttons to disabled (default)
+	
+	If m_bAddButtons Then
+	m_btnMoveUp.disabled = True
+	m_btnMoveDown.disabled = True
+	End If
+
+	If nSelItems = 0 Then
+		' Disable Remove button.
+		If m_bAddButtons Then
+		m_btnRemove.title = L_btnRemove_ToolTip
+		m_btnRemove.disabled = True
+		End If
+	Else
+		' Enable Remove button.
+		If m_bAddButtons Then
+		m_btnRemove.disabled = False
+		End If
+		
+		' Update Remove button tooltip.
+		If nSelItems = 1 Then
+			rgstrItemPaths = m_divProfileView.GetSelectedItems()
+			' Get currently selected item and use its display-name in the
+			' tooltip.
+
+			Set xmlItem = GetProfNodeFromPath(rgstrItemPaths(0))
+			If m_bAddButtons Then
+			m_btnRemove.title = L_btnRemove_ToolTip & " " & xmlItem.getAttribute("displayName")
+			End If
+			' Enable move up/down buttons
+			If xmlItem.parentNode.tagName = gc_sProfile Then
+				'Check if this is the first/last property
+				If Not xmlItem Is xmlItem.parentNode.firstChild Then
+					Set xmlFirst = xmlItem.parentNode.firstChild
+					
+					Do While "1" = xmlFirst.getAttribute("isDeleted")
+						Set xmlFirst = getNextSibling(xmlFirst)
+					Loop
+					If xmlFirst.tagName = "Attribute" Then
+						Set xmlFirst = getNextSibling(xmlFirst)
+					End If
+					If m_bAddButtons Then
+						If Not xmlItem Is xmlFirst Then 
+							m_btnMoveUp.disabled = False
+						End If
+					End If
+				End If
+				If m_bAddButtons Then
+					If Not xmlItem Is xmlItem.parentNode.lastChild Then
+						m_btnMoveDown.disabled = False
+					End If
+				End If
+			Else
+				If m_bAddButtons Then
+					m_btnMoveUp.disabled = False
+					m_btnMoveDown.disabled = False
+				End If
+			End If
+		Else
+			m_btnRemove.title = L_btnRemoveMulti_ToolTip
+		End If
+	End If
+End Sub
+
+</SCRIPT>
+</PUBLIC:COMPONENT>

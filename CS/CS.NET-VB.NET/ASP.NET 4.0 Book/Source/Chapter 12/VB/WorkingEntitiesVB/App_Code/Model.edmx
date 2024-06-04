@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl" Namespace="Model.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2005">
+        <EntityContainer Name="ModelTargetContainer" >
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntityContainer Name="ModelContainer" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Contacts" EntityType="Model.Contact" />
+          <AssociationSet Name="CustomersContact" Association="Model.CustomersContact">
+            <End Role="Customers" EntitySet="Contacts" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customers" BaseType="Model.Contact">
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Contacts" Relationship="Model.CustomersContact" FromRole="Customers" ToRole="Contact" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Customer" Relationship="Model.CustomersContact" FromRole="Contact" ToRole="Customers" />
+          <Property Type="Int32" Name="CustomersId" Nullable="false" />
+        </EntityType>
+        <Association Name="CustomersContact">
+          <End Type="Model.Customers" Role="Customers" Multiplicity="1" />
+          <End Type="Model.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="CustomersId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Vendor" BaseType="Model.Contact">
+          <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs" Space="C-S">
+        <Alias Key="Model" Value="Model" />
+        <Alias Key="Target" Value="Model.Store" />
+        <EntityContainerMapping CdmEntityContainer="ModelContainer" StorageEntityContainer="ModelTargetContainer">
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model" >
+        <EntityTypeShape EntityType="Model.Customers" Width="1.5" PointX="1.5" PointY="1.125" Height="1.211080729166667" />
+        <EntityTypeShape EntityType="Model.Contact" Width="1.5" PointX="4.375" PointY="1.625" Height="1.211080729166667" />
+        <AssociationConnector Association="Model.CustomersContact">
+          <ConnectorPoint PointX="3" PointY="2.1509814453125" />
+          <ConnectorPoint PointX="4.375" PointY="2.1509814453125" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="Model.Vendor" Width="1.5" PointX="3" PointY="0.5" Height="1.2110807291666668" />
+        <InheritanceConnector EntityType="Model.Customers">
+          <ConnectorPoint PointX="4.375" PointY="1.8997810872395833" />
+          <ConnectorPoint PointX="3" PointY="1.8997810872395833" />
+        </InheritanceConnector>
+        <InheritanceConnector EntityType="Model.Vendor">
+          <ConnectorPoint PointX="5.125" PointY="1.625" />
+          <ConnectorPoint PointX="5.125" PointY="1.1055403645833333" />
+          <ConnectorPoint PointX="4.5" PointY="1.1055403645833333" />
+        </InheritanceConnector>
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SSO>
+  <application name="SSOApp_HostGroupApp1">
+    <description>A Group Type Affiliate Application for Host Initiated SSO associating multiple non-Windows user to a single Windows user account(DomainName\WindowsUserAccount1)</description>
+    <contact>someone@companyname.com</contact>
+    <windowsAccount>DomainName\WindowsUserAccount1</windowsAccount>
+    <appAdminAccount>DomainName\AppAdminGroup_HISSO</appAdminAccount>
+    <field ordinal="0" label="User ID" masked="no" />
+    <field ordinal="1" label="Password" masked="yes" />
+    <flags hostInitiatedSSO="yes" validatePassword="yes" groupApp="yes" enableApp="yes" />
+  </application>
+</SSO>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.microsoft.com/BizTalk/KwTpm" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.microsoft.com/BizTalk/KwTpm">
+      <s:element name="GetPartner">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="partnerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPartnerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPartnerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetOutboxDocumentLibraries">
+        <s:complexType />
+      </s:element>
+      <s:complexType name="BizTalkRegistrationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="BizTalkRegistrationName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="OutboxUrl" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfBizTalkRegistrationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BizTalkRegistrationInfo" nillable="true" type="tns:BizTalkRegistrationInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetOutboxDocumentLibrariesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetOutboxDocumentLibrariesResult" type="tns:ArrayOfBizTalkRegistrationInfo" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePartner">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="partnerXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePartnerResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetParameterValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="serviceName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="serviceLinkTypeName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameterName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partnerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetParameterValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetParameterValueResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStructuredParameterValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="roleLinkTypeFullName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="roleLinkTypeAssemblyStrongName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="parameterSchemaFullName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orchestrationName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="orchestrationAssemblyStrongName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="partnerId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetStructuredParameterValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetStructuredParameterValueResult">
+              <s:complexType mixed="true">
+                <s:sequence>
+                  <s:any />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPartnerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPartner" />
+  </wsdl:message>
+  <wsdl:message name="GetPartnerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPartnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetOutboxDocumentLibrariesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetOutboxDocumentLibraries" />
+  </wsdl:message>
+  <wsdl:message name="GetOutboxDocumentLibrariesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetOutboxDocumentLibrariesResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePartnerSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePartner" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePartnerSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePartnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetParameterValueSoapIn">
+    <wsdl:part name="parameters" element="tns:GetParameterValue" />
+  </wsdl:message>
+  <wsdl:message name="GetParameterValueSoapOut">
+    <wsdl:part name="parameters" element="tns:GetParameterValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetStructuredParameterValueSoapIn">
+    <wsdl:part name="parameters" element="tns:GetStructuredParameterValue" />
+  </wsdl:message>
+  <wsdl:message name="GetStructuredParameterValueSoapOut">
+    <wsdl:part name="parameters" element="tns:GetStructuredParameterValueResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TPPubWSSoap">
+    <wsdl:operation name="GetPartner">
+      <wsdl:input message="tns:GetPartnerSoapIn" />
+      <wsdl:output message="tns:GetPartnerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOutboxDocumentLibraries">
+      <wsdl:input message="tns:GetOutboxDocumentLibrariesSoapIn" />
+      <wsdl:output message="tns:GetOutboxDocumentLibrariesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePartner">
+      <wsdl:input message="tns:UpdatePartnerSoapIn" />
+      <wsdl:output message="tns:UpdatePartnerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetParameterValue">
+      <wsdl:input message="tns:GetParameterValueSoapIn" />
+      <wsdl:output message="tns:GetParameterValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetStructuredParameterValue">
+      <wsdl:input message="tns:GetStructuredParameterValueSoapIn" />
+      <wsdl:output message="tns:GetStructuredParameterValueSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TPPubWSSoap" type="tns:TPPubWSSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPartner">
+      <soap:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetPartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutboxDocumentLibraries">
+      <soap:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetOutboxDocumentLibraries" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePartner">
+      <soap:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/UpdatePartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParameterValue">
+      <soap:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetParameterValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStructuredParameterValue">
+      <soap:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetStructuredParameterValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TPPubWSSoap12" type="tns:TPPubWSSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPartner">
+      <soap12:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetPartner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOutboxDocumentLibraries">
+      <soap12:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetOutboxDocumentLibraries" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePartner">
+      <soap12:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/UpdatePartner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetParameterValue">
+      <soap12:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetParameterValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStructuredParameterValue">
+      <soap12:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetStructuredParameterValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TPPubWS">
+    <wsdl:port name="TPPubWSSoap" binding="tns:TPPubWSSoap">
+      <soap:address location="http://localhost/TPPubWS/TPPubWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TPPubWSSoap12" binding="tns:TPPubWSSoap12">
+      <soap12:address location="http://localhost/TPPubWS/TPPubWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

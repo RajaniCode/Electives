@@ -1,0 +1,990 @@
+BODY {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px
+}
+
+BODY form div {
+    display: none
+}
+
+BODY form table div {
+    display: inline
+}
+
+.header {
+  width: 100%;
+  height: 100%;
+  background-color: white;	
+  border-bottom: 1px solid #ffd275
+}
+
+.mainContentFrame {
+    height: 100%;
+    width: 100%
+}
+
+.banner {
+    color: black;
+    font-size: 8pt;
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-weight: bold;
+    filter: progid:DXImageTransform.Microsoft.Gradient(GradientType=1, StartColorStr='#FFD8D8D8', EndColorStr='#FFFFFFFF');
+    border-bottom: 3px solid #ffd275;
+    height: 32px;
+    vertical-align: middle;
+    padding-left: 8px;
+    text-align: left
+}
+
+.helpLink {
+    font-size: 9pt;
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-weight: bold; 
+    text-align: right;
+    vertical-align: bottom;
+    padding-right: 12px;
+    padding-bottom: 12px
+}
+
+.helpLink a,
+.helpLink a:active,
+.helpLink a:visited {
+    color: black;
+    text-decoration: none
+}
+
+.helpLink a:hover {
+    color: red;
+    text-decoration: underline
+}
+
+.helpLink img {
+    position: relative;
+    top: 4px;
+}
+
+.headerLogo {
+    text-align: right;
+    padding-right: 12px;
+    width: 208px;
+    height: 32px;
+    border-bottom: 3px solid #ffd275
+}
+
+.headerLogo div {
+    background-image: url("../images/WSS_Logo.gif");
+    background-repeat: no-repeat;
+    width: 208px;
+    height: 32px
+}
+
+.headerBand {
+    width: 100%;
+    height: 56px;
+    margin-left: 8px
+}
+
+.headerPageIcon {
+    margin-left: 6px
+}
+
+.headerPageIcon td,
+.headerPageIcon div {
+    display: block;
+    background-image: url("../images/btsSuiteProduction.gif");
+    background-color: transparent;
+    background-repeat: repeat;
+    width: 48px;
+    height: 48px;
+    cursor: hand
+}
+
+.titlearea {
+    font-size: 9pt;
+    font-family: Verdana, Sans-Serif, Tahoma;
+    padding-left: 3px
+}
+
+.pagetitle {
+    font-family: Sans-Serif, Tahoma;
+    font-size: 14pt; 
+    font-weight: bold; 
+    padding-left: 3px
+}
+
+.navbar {
+    height: 100%;
+    width: 150px;
+    background-color: #e1ecfc;
+    border-right: 1px solid #e4e4e4;
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-right: 8px
+}
+
+td.myViewLabel {
+    width: 100%;
+    border-bottom: solid 1px gray;
+    padding-bottom: 2px
+}
+
+.myViewLabel span {
+    width: 100%;
+    font-size: 10pt;
+    font-family: Sans-Serif, Tahoma;
+    font-weight: bold;
+    color: black;
+    text-align: left
+}
+
+.navBarInfoLabel {
+    width: 100%;
+    overflow: visible;
+    padding-left: 6px;
+    white-space: nowrap;
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-size: 10pt;
+    color: #003399
+}
+
+.partialResultsCell {
+    font-family: Tahoma, Verdana, Sans-Serif;
+    font-size: 10pt;
+    padding-top: 8px;
+    padding-bottom: 8px
+}
+
+td.treeViewContainer {
+   position: relative;
+   left: -5px
+}
+
+td.treeNode,
+td.treeNode a {
+    font-family: Tahoma, Verdana, Sans-Serif;
+    font-size: 10pt;
+    color: #003399
+}
+
+td.selectedTreeNode,
+td.selectedTreeNode a {
+    font-weight: bold;
+    color: #003399
+}
+
+td.treeNodeHover,
+td.treeNodeHover a {
+    color: #7f7f7f;
+    text-decoration: underline !important
+}
+
+.content {
+  height: 100%;
+  width: 100%;
+  text-align: left;
+  vertical-align: top;
+  font-family: Verdana, Sans-Serif, Tahoma;
+  font-size: 8pt
+}
+
+.content td {
+  text-align: left;
+  font-family: Verdana, Sans-Serif, Tahoma;
+  font-size: 8pt;
+  padding: 1px 1px 1px 1px
+}
+
+.dialogContent {
+  height: 100%;
+  text-align: left;
+  font-family: Verdana, Sans-Serif, Tahoma;
+  background-color: #F2F2F2;
+  font-size: 8pt
+}
+
+.dialogContent td {
+  text-align: left;
+  font-family: Verdana, Sans-Serif, Tahoma;
+  font-size: 8pt;
+  padding: 1px 1px 1px 1px
+}
+
+.collapsibleSection {    
+    border: 1px solid #003399;
+    margin: 8px 10px 0px 10px
+}
+
+.collapsibleSectionLegend:link,
+.collapsibleSectionLegend:active,
+.collapsibleSectionLegend:visited,
+.collapsibleSectionLegend:hover {
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-size: 10pt;
+    font-weight: bold;
+    font-style: normal;
+    text-decoration: none;
+    color: #003399
+}
+
+.collapsibleSectionContent {
+    width: 100%;
+    margin: 8px 8px 8px 8px
+}
+
+.dividingSection {
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-size: 10pt;
+    font-weight: bold;
+    color: #003399;
+    border: 1px solid gray;
+    padding: 0px 8px 8px 8px;
+    margin-top: 0px;
+    margin-bottom: 4px
+}
+
+.pageLink:active,
+.pageLink:visited,
+.pageLink:link {
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-weight:normal;
+    color: #003399;
+    text-decoration: none
+}
+
+.pageLink:hover {
+    color: Red;
+    text-decoration: underline
+}
+
+td.timeZoneLabel {
+    padding-top: 4px
+}
+
+.searchContainerSizer,
+.valueField {
+    width: 100%
+}
+
+.deleteClauseField {
+    width: 16px
+}
+
+.conjunctionOperatorField {
+     width: 4.5em
+}
+
+.operatorField {
+    width: 15em
+}
+
+.searchPageContainer {
+    width: expression(minWidth = 850, 
+                      containerSize = document.all.searchPageContainer.clientWidth,
+                      (containerSize == minWidth) ? containerSize : (containerSize < minWidth ? (minWidth + "px") : "100%"))
+}
+
+td.toolbarContainer {
+    width: 100%;
+    padding-top: 16px;
+    padding-left: 8px;
+    padding-right: 7px
+}
+
+table.searchToolbar {
+    width: 100%
+}
+
+.searchToolbar td,
+.searchToolbar input {
+    padding: 0px 3px 0px 3px
+}
+
+table.searchRowLimitContainer {
+    margin: 0px 0px 8px 0px
+}
+
+.searchRowLimitContainer select {
+    margin-left: 8px
+}
+
+.columnChooser {
+    width: 100%
+}
+
+.columnChooserLegend td {
+    padding-bottom: 2px
+}
+
+.columnChooserButtons {
+    width: 100%
+}
+
+.columnChooserButtons td input {
+    margin: 2px 3px 3px 3px
+}
+
+td.addSubscriberButton {
+    padding-left: 8px
+}
+
+.listHeader td {
+    text-align: left;
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-size: 9pt;
+    color: #808080;
+    border-bottom: solid 1px #adadad;
+    padding-bottom: 2px
+}
+
+.listHeaderSpacer {
+    height: 6px
+}
+
+.listPager a,
+.listPager a:active,
+.listPager a:link
+.listPager a:visited {
+    color: #003399;
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-size: 9pt;
+    text-decoration: none
+}
+
+.listPager a:hover {
+    text-decoration: underline;
+    color: red
+}
+
+.searchResultHoveredRow td {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    text-align: left;
+    white-space: nowrap;
+    overflow-x: visible;
+    background-color: #eeeeee;
+    cursor: hand
+}
+
+.searchResultRow td {
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 3px;
+    padding-bottom: 3px;
+   
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    
+    text-align: left;
+    white-space: nowrap;
+    overflow-x: visible
+}
+
+.searchErrorTable img {
+ vertical-align: middle;
+ margin-right: 4px
+}
+
+.alertSummaryContainer 
+{
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 8px  8px 24px 8px;
+    border: solid 1px #AAA
+}
+
+.alertSummaryHoveredRow td {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    white-space: nowrap;
+    overflow-x: visible;
+    background-color: #eeeeee;
+    cursor: hand
+}
+
+.alertSummaryHoveredRow td span input {
+    width: 100%;
+    text-align: right
+}
+
+.alertSummaryRow td {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    white-space: nowrap;
+    overflow-x: visible
+}
+
+.alertSummaryRow td span input {
+    width: 100%;
+    text-align: right
+}
+
+.alertSummarySelectedRow td {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    white-space: nowrap;
+    overflow-x: visible;
+    background-color: #d0e3ff;
+    cursor: hand
+}
+
+.alertSummarySelectedRow td span input {
+    width: 100%;
+    text-align: right
+}
+
+.subscriptionRow td {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    white-space: nowrap;
+    overflow-x: visible
+}
+
+.subscriptionSelectedRow td {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    white-space: nowrap;
+    overflow-x: visible;
+    background-color: #d0e3ff;
+    cursor: hand
+}
+
+.subscriptionHoveredRow td {
+    padding-left: 5px;
+    padding-right: 5px;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA;
+    border-top: 1px solid #AAA;
+    white-space: nowrap;
+    overflow-x: visible;
+    background-color: #eeeeee;
+    cursor: hand
+}
+
+.queryClauseListBody td {
+    padding: 3px 3px 3px 3px
+}
+
+.searchTableContainer {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 8px  8px 24px 8px;
+    border: solid 1px #AAA
+}
+
+.gridHeader th { 
+    white-space: nowrap;
+    overflow-x: visible;
+    padding-left: 6px;
+    padding-right: 6px;
+    
+    border-top:1px solid #AAA;
+    border-left: 1px solid #AAA;
+    border-right: 1px solid #AAA
+}
+
+.gridHeader a,
+.gridHeader a:active,
+.gridHeader a:link,
+.gridHeader a:visited {
+    color: #808080;
+    font-family: Verdana, Sans-Serif, Tahoma;
+    text-decoration: none; 
+    font-weight: bold;
+    font-size: 9pt;
+    text-align: center;
+    vertical-align: middle
+}
+
+.gridHeader a:hover {
+    color: red;
+    text-decoration: underline
+}
+
+.searchTable {
+    width: 100%;
+    overflow-y: visible;
+    float: left
+}
+
+.alertSummaryTable {
+    width: 100%;
+    overflow-y: visible;
+    float: left;
+}
+
+.subscriptionSummaryContainer {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+    padding: 8px  8px 24px 8px;
+    border: solid 1px #AAA
+}
+
+.subscriptionTable {
+    width: 100%;
+    overflow-y: visible;
+    float: left
+}
+
+.gridDeleteLink:link,
+.gridDeleteLink:active,
+.gridDeleteLink:visited
+{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-weight: normal;
+    text-decoration: none;
+    text-align: center;
+    color: #003399
+}
+
+.gridDeleteLink:hover
+{
+    color: Red;
+    text-decoration: underline;
+}
+
+.errorFieldMarker { 
+    border: 2px dashed red
+}
+
+.showInlineElement {
+    display: inline
+}
+
+.alertThresholdErrorFieldMarker {
+    border: 2px dashed red
+}
+
+.columnChooserFieldsSpan {
+    border-right: 2px solid white;
+    border-top: 2px solid white;
+    border-bottom: 2px solid white;
+    padding: 0px 0px 0px 0px;		
+    width: 100%
+}
+
+.columnChooserSelectedFieldsSpan {
+    border: 2px solid white;
+    padding: 0px 0px 0px 0px;		
+    width: 100%
+}
+
+.columnChooserFieldsSpanError {
+    border: 2px dashed red;
+    padding: 0px 0px 0px 0px;				
+    width: 100%
+}
+
+.flashKeyFilter {
+    background-color: #e1ecfc
+}
+
+.alertThresholdFlashKeyFilter {
+    background-color: #e1ecfc
+}
+
+table.alertsDetailsTable {
+    width: 100%
+}
+
+.alertDetailNameRow td {
+    padding-top: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding-bottom: 3px
+}
+
+.alertDetailRow td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+}
+
+.alertMessageRow td {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    vertical-align: text-top
+}
+
+.alertMessageRow textarea {
+  font-family: Verdanna, Sans-Serif, Tahoma;
+  font-size: 10pt
+}
+
+td.alertHyperlinkCell {
+    padding-left: 13px;
+    white-space: nowrap
+}
+
+.alertDetailCell input {
+    margin-left: 6px;
+    padding-left: 0px
+}
+
+td.saveAlertButton {
+    text-align: right
+}
+
+.techAssistTable {   
+    width: 100%;
+    margin: 8px 8px 8px 8px
+}
+
+table.advancedQueryTable {
+    width: 100%;
+    overflow: visible;
+    float: left
+}
+
+.advancedQueryTable input {
+    width: 100%
+}
+
+.advancedQueryErrorContainer {
+    width: 100%;
+    margin-top: 0px;
+    padding-top: 0px;
+    margin-bottom: 8px;
+    border-collapse: separate
+}
+
+.advancedQueryErrorIcon {
+    vertical-align: top;
+    width: 16px
+}
+
+td.advancedQueryErrorDetails {
+    width: 100%;
+}
+
+.slicerErrorAsterix {
+    color: red;
+    font-weight: bold
+}
+
+.dimensionsTableContainer {
+    width: 416px;
+    height: 147px;
+    overflow: scroll;
+    display: inline;
+    padding: 8px  8px 24px 8px;
+    margin: 8px 8px 8px 8px;
+    border: solid 1px #AAA
+}
+
+.advancedQueryButtons {
+    width: 100%;
+    margin: 15px 0px 8px 8px;
+    padding: 0px 0px 0px 0px
+}
+
+.subscriptionEditButtons,
+.techAssistButtons {
+    width: 100%;
+    margin: 12px 8px 8px 8px
+}
+
+.advancedQueryButtons td,
+.subscriptionEditButtons td,
+.techAssistButtons td {
+    width: 100%;
+    text-align: right
+}
+
+.advancedQueryButtons input,
+.subscriptionEditButtons input {
+    width: 80px
+}
+
+.advancedQueryButtons div,
+.subscriptionEditButtons div,
+.techAssistButtons div {
+    width: 4px
+}
+
+table.alertTimeWindowTable {
+    width: auto
+}
+
+.alertTimeWindowTable td {
+    padding-right: 16px
+}
+
+td.alertTimeWindowLegendCell {
+    padding-bottom: 3px	
+}
+
+table.alertTimeWindowDurationTable {
+    width: 100%
+}
+
+table.alertTimeWindowDurationTable td {
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px
+}
+
+td.alertTimeWindowSpinCell {
+	width: 120px
+}
+
+td.basedOnDimensionDropDownCell {
+    width: 25em;
+    vertical-align: top
+}
+
+td.timeWindowDurationCell {
+    width: 18em;
+    vertical-align: top
+}
+
+.timeWindowValidatorMessage {
+    display: none
+}
+
+.timeWindowValidatorContainer {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    border-collapse: collapse;
+}
+
+td.timeWindowValidatorErrorIcon {
+    width: 16px;
+    vertical-align: middle;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 7px 0px 0px
+}
+
+.timeWindowValidatorErrorIcon img {
+    position: relative;
+    top: -1px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px
+}
+
+.timeWindowValidatorErrorIcon span {
+    vertical-align: middle;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px
+}
+
+td.timeWindowValidatorErrorDetails {
+    vertical-align: middle;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px
+}
+
+span.noWrapSpan {
+    white-space: nowrap
+}
+
+table.alertThreshold {
+    width: 100%;
+    table-layout: fixed;
+    margin-top: 0px;
+    margin-bottom: 0px
+}
+
+.alertThreshold td {
+    padding-right: 8px
+}
+
+td.alertThresholdMeasureName span {
+     white-space: nowrap;
+     width: 18em
+}
+
+td.alertThresholdOperatorDropCell {
+    width: 100%
+}
+
+.alertThresholdOperatorDropCell select {
+    width: 100%
+}
+
+td.alertThresholdValueInput {
+       width: 300px
+}
+
+td.alertThresholdLegendCell {
+    padding-bottom: 3px;
+    white-space: nowrap
+}
+
+td.alertThresholdAdvancedQuery {
+    text-align: right;
+    padding: 0px 0px 0px 0px;
+    margin: 0px 0px 0px 0px;
+    vertical-align: middle
+}
+
+table.alertSecurity {
+    width: 100%;
+    margin-top: 2px
+}
+
+.subscriptionEditTable {
+    width: 100%;
+    margin: 12px 8px 8px 8px
+}
+
+.subscriptionEditTable input {
+    width: 300px
+}
+
+.subscriptionEditTable select {
+    width: 100%
+}
+
+.subscriptionErrorContainer {
+    width: 100%;
+    margin-top: 0px;
+    padding-top: 0px;
+    margin-bottom: 12px;
+    border-collapse: separate
+}
+
+.subscriptionErrorIcon {
+    vertical-align: top;
+    width: 16px
+}
+
+td.subscriptionErrorDetails {
+    width: 100%;
+}
+
+.techAssistButtons input {
+    width: 140px
+}
+
+.techAssistTable td {
+    width: 100%
+}
+
+.techAssistTable input,
+.techAssistTable textarea {
+    width: 100%;
+    font-size: 9pt;
+    font-family: Verdana, Sans-Serif, Tahoma
+}
+
+td.techAssistDescription {
+    padding-bottom: 8px
+}
+
+td.techAssistErrorCell {
+    padding-bottom: 8px
+}
+
+.techAssistErrorCell img {
+    vertical-align: middle;
+    margin-right: 4px
+}
+
+.detailsMilestonesContainer,
+.detailsDataContainer {
+    border-collapse: collapse
+}
+
+td.detailsLegend {
+    padding-right: 5px;
+    font-weight: bold
+}
+
+.detailsValue {
+     white-space: normal
+}
+
+.detailsRelatedDocuments:active,
+.detailsRelatedDocuments:visited,
+.detailsRelatedDocuments:link,
+.detailsRelatedActivities:active,
+.detailsRelatedActivities:visited,
+.detailsRelatedActivities:link {
+    font-family: Verdana, Sans-Serif, Tahoma;
+    font-weight: normal;
+    color: #003399;
+    text-decoration: none
+}
+
+.detailsRelatedDocuments:hover, 
+.detailsRelatedActivities:hover {
+    color: Red;
+    text-decoration: underline
+}
+
+.relatedActivityMissingIcon {
+    margin-right: 4px;
+    position: relative;
+    top: 3px
+}
+
+table.requestTechAssistContainer {
+    margin: 12px 0px 0px 0px;
+    float: right
+}
+
+.requestTechAssistContainer td {
+    padding-right: 8px
+}
+
+td.fileUploadButton {
+    padding-top: 0px;
+    padding-bottom: 2px;
+    height: 100%
+}
+
+.fileUploadButton input {
+    padding-top: 3px;
+    padding-bottom: 0px;
+    height: 100%;
+    width: 100%
+}
+
+table.errorContainer {
+    width: 100%;
+    margin: 10px 10px 10px 10px;
+    border-collapse: separate
+}
+
+.errorIcon {
+    vertical-align: top;
+    width: 32px
+}
+
+td.errorDetails {
+    width: 100%;
+    padding-left: 8px
+}

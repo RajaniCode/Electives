@@ -1,0 +1,1801 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.DynamicTable' tagname="dynamictable" lightweight=true>
+	<PUBLIC>
+		<!-- ids of xml data and meta-data islands -->
+		<PROPERTY NAME='DataXML' />
+		<PROPERTY NAME='MetaXML' />
+		<!-- read-only scriptable property: returns entire XML data list -->
+		<PROPERTY NAME='xmlList'	Get='xmlGetList' />
+		<!-- read-only scriptable property: no data rows and marked required = true -->
+		<PROPERTY NAME='required'	GET='bGetRequired' />
+		<!-- read-only scriptable property: value changed = true -->
+		<PROPERTY NAME='dirty'		GET='bGetDirty' />
+		<!-- read-only scriptable property: value required = true -->
+		<PROPERTY NAME='required'	GET='bGetRequired' />
+
+		<!-- returns a field control element given the field's ID -->
+		<METHOD NAME='field'		INTERNALNAME='elGetField' />
+		<!-- remove deleted nodes and reset state on all records -->
+		<METHOD NAME='cleanup'		INTERNALNAME='Cleanup' />
+	<!-- UNSUPPORTED: PRIVATE METODS: used internally -->
+		<METHOD NAME='reset' />
+
+		<EVENT NAME='onError'	ID='evtError'></EVENT><!-- fired when developer error occurs -->
+		<EVENT NAME='onChange'	ID='evtChange'></EVENT><!-- fired when field contents change -->
+		<EVENT NAME='onRequire'	ID='evtRequired'></EVENT><!-- fired when field contents change -->
+		<EVENT NAME='onValid'	ID='evtValid'></EVENT><!-- fired when start and end editing -->
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_EditBtn_ToolTip = "Edit the selected row"
+		const L_EditBtn_Button = "Edit"
+		const L_AcceptBtn_ToolTip = "Update the table with this entry"
+		const L_AcceptBtn_Button = "Accept"
+		const L_CancelBtn_ToolTip = "Cancel changes in progress"
+		const L_CancelBtn_Button = "Cancel"
+		const L_NewBtn_ToolTip = "Add a new row"
+		const L_NewBtn_Button = "New"
+		const L_RemoveBtn_ToolTip = "Remove the selected row"
+		const L_RemoveBtn_Button = "Remove"
+		const L_AbortControl_ErrorMessage = "The control could not load.  Please contact your system administrator"
+		const L_ControlURNandID_ErrorMessage = "Error in DynamicTable with id: ""%1"""
+		const L_OneField_ErrorMessage = "more than one field identified by keycol attribute in <global> node: ""%1"""
+		const L_AtLeastOneField_ErrorMessage = "no field node id matches keycol attribute in <global> node: ""%1"""
+		const L_MissingKeyID_ErrorMessage = "required keycol attribute in <global> node missing"
+		const L_MissingID_ErrorMessage = "id not specified for field node"
+		const L_DuplicateID_ErrorMessage = "multiple field nodes with the same id: ""%1"""
+		const L_IDNotFound_ErrorMessage = "element not found in document with id: ""%1"""
+		const L_IDNotUnique_ErrorMessage = "element id not unique in document: ""%1"""
+		const L_KeyHide_ErrorMessage = "the key column cannot be hidden"
+		const L_SortByKeyType_ErrorMessage = "sortbykey option only works for numeric and text types"
+		const L_OverXRequiresNewButton_ErrorMessage = "New button always enabled when overX option set"
+		const L_MetaXMLErrorAtCharLine_ErrorMessage = "MetaXML ""%1"" at char %2 in line %3:"
+		const L_DataXMLErrorAtCharLine_ErrorMessage = "DataXML ""%1"" at char %2 in line %3:"
+		const L_SourceCode_ErrorMessage = "Source code:"
+		const L_AbandonChanges_Message = "Abandon your changes to this item?"
+		const L_AbandonChanges_DialogTitle = "Abandon changes?"
+		const L_RowRequired_ToolTip = "at least one row is required"
+		const L_OverRowKey_Text = "over %1"	'used for key column of overx row
+		const L_ErrorTitle_ErrorMessage = "Error:"
+		const L_DuplicateKey_ErrorMessage = "The value in the first column must be unique."
+		const L_OverXRequired_ErrorMessage = "This row must be filled in completely before clicking accept"
+
+		dim m_bDirty, m_bIsNew, m_bIsEdit, m_nRow, m_bDebug, m_bValid, _
+			m_xmlData, m_xmlDataDoc, m_xmlMetaDoc, m_bEditOverX, m_xmlSortDoc, _
+			m_sKeyId, m_bRequired, m_bEmptyRecordset, m_elFirstControl, _
+			m_elDataTable, m_bUniqueKey, m_nTotalWidth, m_nTotalControls, _
+			m_xmlValues, m_elKeyControl, m_nSelected, m_nHighlighted, m_elEditBtn, _
+			m_elAcceptBtn, m_elCancelBtn, m_elNewBtn, m_elRemoveBtn, m_xmlNewRow, _
+			m_sKeyDataType, m_bOverX, m_bNewButton, m_bRemoveButton, m_nLeftWidth, m_nRightWidth, _
+			m_elLeftCol, m_elRightCol, m_nCombWidth, m_elDragTab, m_mx, m_sDecimal, m_sReplaceDecimal, _
+			m_elHeadTable, m_elControlTable, m_bControlRequired, m_xmlDelDoc, m_xmlRemoved
+
+		'index of key cell (first cell in row after cell containing Required icon)
+		const KEY_CELL = 0
+		'keycode constants
+		const KEYCODE_ENTER			= 13
+		const KEYCODE_UP_ARROW		= 38
+		const KEYCODE_DOWN_ARROW	= 40
+		'special value for key field when the overx mode is used
+		const OVER_FLAG_VALUE = -1
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		m_bValid = true
+		m_bDirty = false	'true if controls value has changed
+		m_bIsNew = false	'true if current record is new
+		m_bIsEdit = false	'true if current record is being edited
+		m_bControlRequired = false	'true if control marked required
+		m_bRequired = false	'true if control marked required and currently has no data rows
+		m_nRow = -1			'current data row; -1 means undefined
+		set m_xmlDataDoc = nothing		'used to hold data document
+		set m_xmlMetaDoc = nothing		'used to hold meta-data document
+		set m_elFirstControl = nothing	'used to hold first visible control element after key
+		set m_xmlDelDoc = CreateObject("MSXML.DOMDocument")			'used to hold
+		set m_xmlRemoved = m_xmlDelDoc.createElement("document")	'  all Removed rows
+		set m_xmlSortDoc = CreateObject("MSXML.DOMDocument")		'used to hold sort transform xsl
+		m_bEmptyRecordset = false	'true if initial recordset is empty
+		m_nHighlighted = -1			'row index of highlighted row
+		m_nSelected = -1			'row index of selected row
+		m_nTotalControls = 0		'count of controls to know when all loaded
+		'm_sReplaceDecimal =	Mid(trim(cStr(1.1)), 2, 1)	'replacement for decimal char when sorting
+		m_sReplaceDecimal =	"."		'replacement for decimal char when sorting
+
+		'the following are used exclusively when loading the XML documents
+		dim m_bMetaXMLReady, m_bDataXMLReady, m_bControlInitialized, m_bControlAborted
+		m_bMetaXMLReady = false			'true when meta-data XML is loaded and parsed
+		m_bDataXMLReady = false			'true when data XML is loaded and parsed
+		m_bControlInitialized = false	'true when all data is loaded initialization has started
+		m_bControlAborted = false		'true when errors have forced the control to abort running
+
+		const READYSTATE_COMPLETE = 4	'constant used to check XML document's readyState
+
+		Initialize()
+
+		sub Initialize()
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			if bIsXMLOK(MetaXML) then
+				'if meta-data XML island looks ok load the XML document
+				LoadXML MetaXML, m_bMetaXMLReady
+				'if data XML island looks ok load the XML document
+				if not m_bControlAborted then LoadXML DataXML, m_bDataXMLReady
+				if not m_bControlAborted and m_bMetaXMLReady and m_bDataXMLReady then
+					'if all XML loaded and no abort errors found, go initialize control
+					InitControl()
+				'else = otherwise InitControl will be run by onXMLReadyStateChange or control was aborted
+				end if
+			end if
+		end sub
+
+		sub LoadXML(sXML, bReady)
+			dim elXML, xmlDoc
+			'when this routine complete either XML is loaded, control aborted or
+			'event attached for async load
+			if bIsXMLOK(sXML) then
+				'get data island element
+				set elXML = element.document.all(sXML)
+				'get XML document
+				set xmlDoc = elXML.xmlDocument
+				'attach onReadyStateChange event for async load of XML
+				elXML.attachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+				'check if already complete
+				if elXML.readyState = "complete" then
+					if xmlDoc.parseError.errorCode = 0 then
+						'readyState is complete and no parse errors
+						bReady = true
+					else
+						'parse errors: detach event, show error, and abort control
+						elXML.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+						ShowXMLError sXML, xmlDoc
+						AbortControl()
+					end if
+				end if
+			end if
+		end sub
+
+		function bIsXMLOK(oXML)
+			dim elXML
+			'when this routine complete we know id is OK and references unique element
+			'otherwise control is aborted after displaying error
+			bIsXMLOK = true
+			if isNull(oXML) then
+				'if id is bad or missing
+				ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(oXML)))
+				AbortControl()
+				bIsXMLOK = false
+			else
+				set elXML = element.document.all(oXML)
+				if elXML is nothing then
+					'if id is not found in the document
+					ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(oXML)))
+					AbortControl()
+					bIsXMLOK = false
+				elseif typename(elXML) = "DispHTMLElementCollection" then
+					'if id is not unique in the document
+					ReportError(sFormatString(L_IDNotUnique_ErrorMessage, Array(oXML)))
+					AbortControl()
+					bIsXMLOK = false
+				end if
+			end if
+		end function
+
+		sub onXMLReadyStateChange
+			dim elSource
+			'this routine completes async load of XML document
+			set elSource = window.event.srcElement
+			if elSource.readyState = "complete" then
+				if elSource.XMLdocument.parseError.errorCode = 0 then
+					'readyState is complete and no parse errors
+					'document is loaded and parsed so detach event
+					elSource.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+					'mark XML source as ready
+					select case elSource.id
+						case MetaXML
+							m_bMetaXMLReady = true
+						case DataXML
+							m_bDataXMLReady = true
+					end select
+				else
+					'parse errors: detach event, show error, and abort control
+					elXML.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+					ShowXMLError sXML, elSource.XMLdocument
+					AbortControl()
+				end if
+			end if
+			if not m_bControlAborted and m_bMetaXMLReady and m_bDataXMLReady then
+				'when all XML loaded, go initialize control
+				InitControl()
+			'else = otherwise wait for next event
+			end if
+		end sub
+
+		sub AbortControl()
+			dim elFont
+			'sets flag for aborted control and displays error text in element
+			m_bControlAborted = true
+			element.innerText = ""
+			set elFont = element.appendChild(element.document.createElement("SPAN"))
+			elFont.style.color = "red"
+			elFont.style.fontWeight = "bold"
+			element.title = L_AbortControl_ErrorMessage
+			elFont.innerText = L_AbortControl_ErrorMessage
+		end sub
+
+		sub InitControl()
+			'ensure InitControl is only run once
+			if m_bControlInitialized then exit sub
+			m_bControlInitialized = true
+
+			dim xml, xmlGlobal, xmlRecord, xmlKeys, xmlKey, xmlValue, xmlRemoved, _
+				xmlOverRecord, xmlTemp, xmlFields, xmlHidden, bSortByKey, bReadOnly, _
+				sKeyType, sID, sType, sPrompt, sLabel, sOverValue, sTemp, _
+				bHide, xmlDoc, i, nWidth, nCell, nLabelCellWidth, nCols, _
+				elCell, elDiv, elLabel, elKeyLabel, elInput, elSpan, elKeySpan, _
+				elContainerTable, elRequiredIcon, elHeadCell, elControlRow, _
+				elLabelRow, elDataRow, elContainerCell, elLabelCells, elControlCells, _
+				elDataCells
+
+			'get documentElement's for metaXML already loaded
+			set m_xmlMetaDoc = element.document.all(MetaXML).xmlDocument.documentElement
+			if m_xmlMetaDoc is nothing then
+				set xmlDoc = CreateObject("MSXML.DOMDocument")
+				xmlDoc.loadXML(element.document.all(MetaXML).innerHTML)
+				set m_xmlMetaDoc = xmlDoc.documentElement
+			end if
+			'get pointer to global node of meta-data
+			set xmlGlobal = m_xmlMetaDoc.selectSingleNode("global")
+			'get pointer to fields node of meta-data
+			set xmlFields = m_xmlMetaDoc.selectSingleNode("fields")
+			'get flags for row is required, unique key constraint,
+			'overx row management, sort by key, showing new & Remove buttons
+			sTemp = xmlGlobal.getAttribute("overx")
+			m_bOverX = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			sTemp = xmlGlobal.getAttribute("required")
+			m_bControlRequired = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			sTemp = xmlGlobal.getAttribute("uniquekey")
+			m_bUniqueKey = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			sTemp = xmlGlobal.getAttribute("sortbykey")
+			bSortByKey = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			sTemp = xmlGlobal.getAttribute("newbutton")
+			m_bNewButton = CBool(not(not isNull(sTemp) and LCase(sTemp) = "no"))
+			if m_bOverX and not m_bNewButton then
+				ReportError(L_OverXRequiresNewButton_ErrorMessage)
+				m_bNewButton = true
+			end if
+			sTemp = xmlGlobal.getAttribute("removebutton")
+			m_bRemoveButton = CBool(not(not isNull(sTemp) and LCase(sTemp) = "no"))
+
+			'get documentElement's for dataXML already loaded
+			set m_xmlData = element.document.all(DataXML).xmlDocument
+			set m_xmlDataDoc = m_xmlData.documentElement
+			if not m_xmlDataDoc.hasChildNodes then m_xmlDataDoc.appendChild(m_xmlData.createElement("record"))
+			if m_xmlDataDoc is nothing then
+				set xmlDoc = CreateObject("MSXML.DOMDocument")
+				xmlDoc.loadXML(element.document.all(DataXML).innerHTML)
+				set m_xmlDataDoc = xmlDoc.documentElement
+			end if
+			'check for recordcount and remove if found
+			m_xmlDataDoc.removeAttribute("recordcount")
+			'remove Removed items from initial data and add to Removed doc, if any
+			set xmlRemoved = m_xmlDataDoc.selectNodes("*[@state $ieq$ 'deleted']")
+			for each xmlRecord in xmlRemoved
+				m_xmlRemoved.appendChild(m_xmlDataDoc.removeChild(xmlRecord))
+			next
+			'format the data for each field node
+			'(only float and select types are formatted)
+			FormatData "fields/*", "id"
+
+			'since XML data binding used we must make sure the data island uses the XML tag
+			if element.document.all(DataXML).tagName = "SCRIPT" then
+				'reset id on original data island
+				element.document.all(DataXML).id = DataXML & "_old"
+				'create new data island using the XML tag
+				element.document.all(DataXML & "_old").insertAdjacentHTML "afterEnd", "<xml id='" & DataXML & "'></xml>"
+				'load the old document into the new island synchronously
+				set xmlDoc = element.document.all(DataXML).XMLDocument
+				xmlDoc.async = false
+				xmlDoc.loadxml(m_xmlDataDoc.xml)
+				set m_xmlDataDoc = xmlDoc.documentElement
+			end if
+
+			'if the data has only one record and there are no child nodes of the
+			'record with text in them then the dataset is empty
+			if not (m_xmlDataDoc.childNodes.length > 1 or _
+				m_xmlDataDoc.selectNodes("record[. != """"]").length > 0) then
+				m_bEmptyRecordset = true
+				'remove empty record: will be added back after sort if new enabled
+				m_xmlDataDoc.removeChild m_xmlDataDoc.firstChild
+				'set required to true since rows empty; if overx then ignore because we
+				'will always have the overx row
+				if m_bControlRequired then m_bRequired = true
+			end if
+
+			element.innerText = ""
+
+			'get key field id
+			m_sKeyId = xmlGlobal.getAttribute("keycol")
+			if isNull(m_sKeyId) or m_sKeyId = "" then
+				'if key field does not have an id report error and abort control
+				ReportError(L_MissingKeyID_ErrorMessage)
+				AbortControl()
+				exit sub
+			end if
+			'query for all field nodes nthat are marked as key
+			set xmlKeys = m_xmlMetaDoc.selectNodes("fields/*[@id $ieq$ '" & m_sKeyId & "']")
+			if xmlKeys.length < 1 then
+				'one and only one field must be marked as the key; report error and abort control
+				ReportError(sFormatString(L_AtLeastOneField_ErrorMessage, Array(m_sKeyId)))
+				AbortControl()
+				exit sub
+			elseif xmlKeys.length > 1 then
+				'one and only one field must be marked as the key; report error and abort control
+				ReportError(sFormatString(L_OneField_ErrorMessage, Array(m_sKeyId)))
+				AbortControl()
+				exit sub
+			else
+				'get the one key field
+				set xmlKey = xmlKeys(0)
+			end if
+
+			sKeyType = xmlKey.nodeName
+			if xmlKey.getAttribute("hide") = "yes" then
+				'key column cannot be hidden
+				ReportError(L_KeyHide_ErrorMessage)
+				xmlKey.removeAttribute("hide")
+			end if
+			if isNull(sKeyType) then sKeyType = "text" 'default type to text
+			m_sDecimal = ""
+			set xmlTemp = xmlKey.selectSingleNode("format")
+			if not xmlTemp is nothing then
+				if inStr(xmlTemp.text, "1") then
+					m_sDecimal = Mid(xmlTemp.text, inStr(xmlTemp.text, "1") + 1, 1)
+					if m_sDecimal = m_sReplaceDecimal then m_sDecimal = ""
+				end if
+			end if
+
+			'create container table (by cloning start of dynatable),
+			'set alignment so buttons are on right
+			set elContainerTable = element.appendChild(element.document.createElement("TABLE"))
+			elContainerTable.cellSpacing = 0
+			elContainerTable.cellPadding = 0
+			elContainerTable.width = "100%"
+			elContainerTable.className = "dtTableStyle"
+			set elContainerCell = elContainerTable.insertRow().insertCell()
+
+			'create head, control, and data tables by cloning start of container table
+			set m_elHeadTable = elContainerTable.cloneNode(true)
+			set m_elControlTable = elContainerTable.cloneNode(true)
+			set m_elDataTable = elContainerTable.cloneNode(true)
+
+			'format container cell and add head table to container table
+			elContainerCell.style.marginTop = "10px"
+			elContainerCell.style.paddingRight = "20px"
+
+			'format head table and start label row
+			set m_elHeadTable = elContainerCell.appendChild(m_elHeadTable)
+			m_elHeadTable.style.borderCollapse = "collapse"
+			m_elHeadTable.style.marginTop = "10px"
+			m_elHeadTable.className = m_elHeadTable.className & " dtHeaderTable"
+			set elLabelRow = m_elHeadTable.rows(0)
+			set elCell = elLabelRow.cells(0)
+			elCell.style.border = "none"
+			elCell.width = 20
+			set elCell = elLabelRow.insertCell()
+			MakeLabelCell elCell, xmlKey, m_sKeyId
+
+			'format control table and start control row
+			set m_elControlTable = elContainerCell.appendChild(m_elControlTable)
+			set elControlRow = m_elControlTable.rows(0)
+			'create required icon cell with required icon if field is marked required
+			set elCell = elControlRow.cells(0)
+			elCell.width = 20
+			set elRequiredIcon = elCell.appendChild(element.document.createElement("IMG"))
+			elRequiredIcon.id = "requiredicon"
+			elRequiredIcon.src = "/widgets/images/required.gif"
+			elRequiredIcon.title = L_RowRequired_ToolTip
+			elRequiredIcon.style.marginLeft = "1px"
+			if not m_bControlRequired then
+				elRequiredIcon.style.visibility = "hidden"
+			end if
+			'create key control cell & add ids, prompt, behavior, event, and formatting
+			set m_elKeyControl = elControlRow.insertCell()
+			MakeControlCell m_elKeyControl, xmlKey, m_sKeyId
+
+			'create second container cell and format it
+			set elContainerCell = elContainerTable.insertRow().insertCell()
+			elContainerCell.style.paddingLeft = "25px"
+
+			'add and format container DIV (scrollable)
+			set elDiv = elContainerCell.appendChild(element.document.createElement("DIV"))
+			elDiv.className = "dtContainer"
+
+			'put data table in container div in container cell & add events for mousing
+			set m_elDataTable = elDiv.appendChild(m_elDataTable)
+			with m_elDataTable
+				.tabIndex = 0
+				.attachEvent "onmouseover", GetRef("onMouseOver")
+				.attachEvent "onmouseout", GetRef("onMouseOut")
+				.attachEvent "onkeydown", GetRef("onKeyDown")
+				.attachEvent "onfocus", GetRef("onDataFocus")
+				.attachEvent "onblur", GetRef("ClearHighlight")
+				.attachEvent "onclick", GetRef("onSelect")
+				.attachEvent "ondblclick", GetRef("onDblClickRow")
+			end with
+			'data row (data table) - note: no first cell for required icon
+			set elDataRow = m_elDataTable.rows(0)
+			elDataRow.classname = "dtDataRow"
+			MakeDataCell elDataRow.cells(0), xmlKey, m_sKeyId
+
+			'this will be used to hold an empty row for creating new records
+			set m_xmlNewRow = m_xmlData.createElement("record")
+			'add a node to new row for key field
+			m_xmlNewRow.appendChild(m_xmlData.createElement(m_sKeyId))
+
+			'get non-key fields in meta-data and loop through all fields
+			set m_xmlValues = m_xmlMetaDoc.selectNodes("fields/*[$not$ @hide $or$ @hide $ine$ 'yes']")
+			nCols = m_xmlValues.length
+			set xmlHidden = m_xmlMetaDoc.selectNodes("fields/*[@hide $ieq$ 'yes']")
+			for i = 0 to xmlHidden.length - 1
+				xmlFields.appendChild(xmlFields.removeChild(xmlHidden(i)))
+			next
+			set m_xmlValues = m_xmlMetaDoc.selectNodes("fields/*[$not$ @id $or$ @id $ine$ '" & m_sKeyId & "']")
+			for each xmlValue in m_xmlValues
+				'check for field id
+				sID = xmlValue.getAttribute("id")
+				if isNull(sId) or sId = "" then
+					'if field does not have an id report error and abort control
+					ReportError(L_MissingID_ErrorMessage)
+					AbortControl()
+					exit sub
+				else
+					'if field id is not unique report error and abort control
+					set xmlTemp = m_xmlMetaDoc.selectNodes("fields/*[@id $ieq$ """ & sId & """]")
+					if xmlTemp.length > 1 then
+						ReportError(sFormatString(L_DuplicateID_ErrorMessage, Array(sId)))
+						AbortControl()
+						exit sub
+					end if
+				end if
+				sTemp = xmlValue.getAttribute("hide")
+				bHide = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				'add field node to new record
+				m_xmlNewRow.appendChild(m_xmlData.createElement(sID))
+
+				'set column spacer tab to grab for column resizing
+				if not bHide and elLabelRow.cells.length < (nCols * 2) - 1 then
+					set elCell = elLabelRow.insertCell()
+					with elCell
+						.style.padding = 0
+						.className = "lsSpacer"
+						.innerHTML = "&nbsp;"
+						.width = 3
+						.style.width = "3px"
+						.attachEvent "onmousedown", GetRef("CaptureMouse")
+					end with
+					set elCell = elControlRow.insertCell()
+					with elCell
+						.style.padding = 0
+						.innerHTML = "&nbsp;"
+						.width = 3
+						.style.width = "3px"
+					end with
+				end if
+
+				'create value label cell
+				MakeLabelCell elLabelRow.insertCell(), xmlValue, sID
+
+				'create field control cell & add ids, prompt, behavior, event, and formatting
+				set elCell = elControlRow.insertCell()
+				elCell.style.padding = 0
+				MakeControlCell elCell, xmlValue, sID
+				'if this is the first visible control besides the key, save it
+				'-used for setting the focus when overx mode and editing overx row
+				if m_elFirstControl is nothing then set m_elFirstControl = elCell
+
+				'create value data cell (for data binding)
+				MakeDataCell elDataRow.insertCell(), xmlValue, sID
+			next
+
+			'add new, edit, Remove, accept, & cancel buttons
+			AddButtons()
+			'if totalwidth <> 100% then calculate percentage of totalwidth
+			if m_nTotalWidth <> 100 then
+				'get pointers to all table cells
+				set elLabelCells = elLabelRow.cells
+				set elControlCells = elControlRow.cells
+				set elDataCells = elDataRow.cells
+				for nCell = 0 to elDataCells.length - 1
+					if not bHasClass(elDataCells(nCell), "efHide") then
+						nLabelCellWidth = elLabelCells(nCell * 2 + 1).width
+						if nLabelCellWidth <> "auto" then
+							'set to percentage of total
+							nLabelCellWidth = Left(nLabelCellWidth, Len(nLabelCellWidth) - 1)
+							nLabelCellWidth = CLng(nLabelCellWidth/m_nTotalWidth * 100) & "%"
+							elLabelCells(nCell * 2 + 1).width = nLabelCellWidth
+							elControlCells(nCell * 2 + 1).width = nLabelCellWidth
+							elDataCells(nCell).width = nLabelCellWidth
+						end if
+					end if
+				next
+			end if
+
+			'set data source for xml data binding and set onclick event handler
+			m_elDataTable.dataSrc = "#" & DataXML
+
+			'setup sort xsl document and sort
+			'(sID is key field and m_sKeyDataType is key field type for XSL)
+			sID = m_sKeyId
+			if bSortByKey then
+				m_sKeyDataType = "string"
+				select case sKeyType
+					case "numeric"
+						select case xmlKey.getAttribute("subtype")
+							case "integer"
+								m_sKeyDataType = "int"
+							case "float", "currency"
+								m_sKeyDataType = "float"
+							case else 'text type
+						end select
+					case "date", "time"
+						'if date or time type then sort as string and report dev error
+						ReportError(sFormatString(L_SortByKeyType_ErrorMessage, Array(m_sKeyId)))
+					case "select"
+						'for select type sort on displayvalue node added by FormatData
+						sID = m_sKeyId & "_displayvalue"
+					case else 'text type
+				end select
+			else
+				'if no sorting then create sort transform with no sort
+				m_sKeyDataType = ""
+			end if
+			m_xmlSortDoc.loadXML sGetSortDoc(sID, m_sKeyDataType)
+			'do initial sort
+			SortList()
+
+			'start up with only new button enabled and nothing selected
+			SetButtons("accept")
+			SetRequired()
+		end sub
+
+		sub MakeLabelCell(elCell, xmlNode, sID)
+			dim elLabel, bHide, sLabel, nWidth, sTemp, xmlTemp
+			'get flag for hidden, and value for label
+			with xmlNode
+				sTemp = .getAttribute("hide")
+				bHide = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				set xmlTemp = .selectSingleNode("name")
+				if xmlTemp is nothing then sLabel = "" else sLabel = xmlTemp.text
+			end with
+			nWidth = nGetWidth(xmlNode)
+
+			if bHide then
+				AddClass elCell, "efHide"
+			else
+				'set width
+				elCell.width = nWidth & "%"
+				m_nTotalWidth = m_nTotalWidth + nWidth
+				elCell.style.Overflow = "hidden"
+				on error resume next
+				elCell.style.textOverflow = "ellipsis"
+				on error goto 0
+			end if
+			'create label and set text and title
+			set elLabel = elCell.appendChild(element.document.createElement("NOBR"))
+			with elLabel
+				.title = sLabel
+				.innerText = sLabel
+			end with
+		end sub
+
+		sub MakeControlCell(elCell, xmlNode, sID)
+			dim sPrompt, sType, sSubType, nWidth, bReadOnly, bHide, sTemp, xmlTemp
+			'get flags for field readonly & hidden, and values for
+			'type, subtype, prompt
+			with xmlNode
+				sTemp = .getAttribute("readonly")
+				bReadOnly = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				sTemp = .getAttribute("hide")
+				bHide = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				sType	= .nodeName
+				if isNull(sType) then sType = "text" 'default type to text
+				sSubType = .getAttribute("subtype")
+				set xmlTemp = .selectSingleNode("prompt")
+				if xmlTemp is nothing then
+					sPrompt = ""
+				else
+					sPrompt = xmlTemp.text
+					if bHide or bReadOnly then sPrompt = ""
+				end if
+			end with
+			nWidth = nGetWidth(xmlNode)
+
+			with elCell
+				.id = sID
+				if sPrompt <> "" then .setAttribute "prompt", sPrompt
+				.attachEvent "onreadystatechange", GetRef("onReadyStateChange")
+				if sType = "text" and sSubType = "long" then
+					'textlong class adds taller height to reduce redraw
+					.className = "efField efTextLong"
+				else
+					.className = "efField ef" & sType
+				end if
+				if bReadOnly then
+					AddClass elCell, "efReadOnly"
+				else
+					AddClass elCell, "efReadWrite"
+				end if
+				if bHide then
+					AddClass elCell, "efHide"
+				else
+					.width = nWidth & "%"
+				end if
+				m_nTotalControls = m_nTotalControls + 1
+			end with
+		end sub
+
+		sub MakeDataCell(elCell, xmlNode, sID)
+			dim elSpan, elNoBr, sType, nWidth, bHide, sTemp, sSubType
+			'get flags for field readonly & hidden, and values for
+			'type, id, label, prompt, and column heading
+			with xmlNode
+				sTemp = .getAttribute("hide")
+				bHide = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				sType = .nodeName
+				sSubType = .getAttribute("subtype")
+			end with
+			nWidth = nGetWidth(xmlNode)
+
+			with elCell
+				.className = "dtCell"
+				if bHide then
+					AddClass elCell, "efHide"
+				else
+					.width = nWidth & "%"
+					.nowrap = true
+					.style.Overflow = "hidden"
+					on error resume next
+					.style.textOverflow = "ellipsis"
+					on error goto 0
+				end if
+			end with
+			set elNoBr = elCell.appendChild(element.document.createElement("NOBR"))
+			set elSpan = elNoBr.appendChild(element.document.createElement("SPAN"))
+			if sSubType = "password" then
+				'if subtype is password then bind to input to hide text
+				elSpan.setAttribute "datafld", sID
+				elSpan.style.display = "none"
+				set elSpan = element.document.createElement("INPUT")
+				elSpan.type = "password"
+				elSpan.id = "_password"
+				elSpan.readonly = true
+				with elSpan.style
+					.backgroundColor = "transparent"
+					.border = "none"
+					.padding = "0"
+					.margin = "0"
+				end with
+				elSpan.setAttribute "datafld", sID
+				set elSpan = elNoBr.appendChild(elSpan)
+			elseif sType = "select" then
+				'if type is select then bind to displayvalue (added to data xml by FormatData)
+				elSpan.setAttribute "datafld", sID & "_displayvalue"
+				set elSpan = elNoBr.appendChild(element.document.createElement("SPAN"))
+				elSpan.setAttribute "datafld", sID
+				elSpan.style.display = "none"
+			else
+				elSpan.setAttribute "datafld", sID
+			end if
+			elCell.insertAdjacentHTML "beforeEnd", "&nbsp;"
+		end sub
+
+		sub AddButtons()
+			dim elTempBtn, elP
+			'create temp button for cloning
+			set elTempBtn = element.document.createElement("BUTTON")
+			elTempBtn.className = "bdbutton dtBtn"
+
+			set elP = element.appendChild(element.document.createElement("P"))
+			with elP.style
+				.marginLeft = "20px"
+				.marginTop = "4px"
+				.whiteSpace = "nowrap"
+			end with
+
+			'create new button; set title, access key, label text, click events
+			set m_elNewBtn = elP.appendChild(elTempBtn.cloneNode(true))
+			with m_elNewBtn
+				.title = L_NewBtn_ToolTip
+				.id = "btnNew"
+				.innerHTML = L_NewBtn_Button
+				.disabled = true
+				.attachEvent "onclick", GetRef("onNew")
+				'hide if disabled
+				if not m_bNewButton then .style.display = "none"
+			end with
+
+			'create edit button; set title, access key, label text, click events
+			set m_elEditBtn = elP.appendChild(elTempBtn.cloneNode(true))
+			with m_elEditBtn
+				.title = L_EditBtn_ToolTip
+				.id = "btnEdit"
+				.innerHTML = L_EditBtn_Button
+				.disabled = true
+				.attachEvent "onclick", GetRef("onEdit")
+				if m_bNewButton then .attachEvent "onclick", GetRef("onBtnClick")
+			end with
+
+			'create Remove button; set title, access key, label text, click events
+			set m_elRemoveBtn = elP.appendChild(elTempBtn.cloneNode(true))
+			with m_elRemoveBtn
+				.title = L_RemoveBtn_ToolTip
+				.id = "btnRemove"
+				.innerHTML = L_RemoveBtn_Button
+				.disabled = true
+				.attachEvent "onclick", GetRef("onRemove")
+				if m_bNewButton then .attachEvent "onclick", GetRef("onBtnClick")
+				'hide if disabled
+				if not m_bRemoveButton then .style.display = "none"
+			end with
+
+			'create Accept button; set title, access key, label text, click events
+			set m_elAcceptBtn = elP.appendChild(elTempBtn.cloneNode(true))
+			with m_elAcceptBtn
+				.title = L_AcceptBtn_ToolTip
+				.id = "btnAccept"
+				.innerHTML = L_AcceptBtn_Button
+				.disabled = true
+				.attachEvent "onclick", GetRef("onAccept")
+				if m_bNewButton then .attachEvent "onclick", GetRef("onBtnClick")
+			end with
+
+			'create cancel button; set title, access key, label text, click events
+			set m_elCancelBtn = elP.appendChild(elTempBtn.cloneNode(true))
+			with m_elCancelBtn
+				.title = L_CancelBtn_ToolTip
+				.id = "btnCancel"
+				.innerHTML = L_CancelBtn_Button
+				.disabled = true
+				.attachEvent "onclick", GetRef("onCancel")
+				if m_bNewButton then .attachEvent "onclick", GetRef("onBtnClick")
+			end with
+		end sub
+
+		Function nGetWidth(xmlNode)
+			dim sWidth, sDefaultWidth
+			'returns positive integer width from attribute
+			'or DEFAULT_WIDTH if missing, non-numeric, or negative
+			sWidth = xmlNode.getAttribute("width")
+			sDefaultWidth = CInt(100/m_xmlMetaDoc.selectNodes("fields/*[$not$ @hide $or$ @hide $ine$ 'yes']").length)
+			if isNull(sWidth) or not isNumeric(sWidth) then sWidth = sDefaultWidth
+			if CInt(sWidth) <= 0 then sWidth = sDefaultWidth
+			xmlNode.setAttribute "width", sWidth
+			nGetWidth = CInt(sWidth)
+		end function
+
+		Function sFormatString(sFormat, aArgs)
+			dim nArg, sNewString
+			'formats strings like C format using numbered arguments (%1, %2, &tc.)
+			'call like: sText = sFormatString(sOriginalText, Array(sArg1, sArg2, ...))
+			sNewString = sFormat
+			for nArg = LBound(aArgs) to UBound(aArgs)
+				sNewString = Replace(sNewString, "%" & nArg + 1, aArgs(nArg))
+			next
+			sFormatString = sNewString
+		End Function
+
+		function bGetRequired()
+			'gets current required state: true if marked as required and currently empty
+			bGetRequired = m_bRequired
+		end function
+
+		function bGetDirty()
+			bGetDirty = m_bDirty
+		end function
+
+		function bGetRequired()
+			bGetRequired = m_bRequired
+		end function
+
+		function elGetField(sID)
+			dim elControl
+			'gets a field element given the ID of the field (id in meta-data)
+			set elControl = element.all(sID)
+			if not elControl is nothing then
+				set elGetField = elControl
+			else
+				'otherwise return null
+				elGetField = null
+			end if
+		end function
+
+		sub onReadyStateChange()
+			dim elSource, sID, xmlNode
+
+			if not m_bDebug then on error resume next
+			'this routine runs for each control at least once - until readyState is complete
+			set elSource = window.event.srcElement
+			if elSource.readyState = "complete" and bHasClass(elSource, "efField") then
+				'if readyState is complete and this is an EditField type control
+				'set event handlers and get ID
+				with elSource
+					.detachEvent "onreadystatechange", GetRef("onReadyStateChange")
+					.attachEvent "onchange", GetRef("onChange")
+					.attachEvent "onrequire", GetRef("EnableAcceptBtn")
+					.attachEvent "onvalid", GetRef("EnableAcceptBtn")
+
+					sID = .getAttribute("id")
+				end with
+
+				'get original field node in meta-data
+				set xmlNode = m_xmlMetaDoc.selectSingleNode("fields/*[@id $ieq$ """ & sID & """]")
+				elSource.initialize xmlNode, ""
+				SetPrompt(elSource)
+
+				'control disabled initially
+				elSource.disabled = true
+				' make sure dirty is not set
+				m_bDirty = false
+				m_nTotalControls = m_nTotalControls - 1
+			end if
+		end sub
+
+		sub ReportError(strMessage)
+			dim evt
+			strMessage = sFormatString(L_ControlURNandID_ErrorMessage, Array(element.id)) & vbCrLf & vbCrLf & strMessage
+			' Display the message if in debug-mode.
+			if m_bDebug = true then alert(strMessage)
+			'set result on error event and then fire it
+			set evt = createEventObject()
+			evt.setAttribute "result", strMessage
+			evt.type = "error"
+			evtError.fire(evt)
+		end sub
+
+		sub ShowXMLError(sType, xml)
+			Dim sBuffer
+			'create xml error text and then call ReportError with it
+			if sType = "meta" then
+				sBuffer = sFormatString(L_MetaXMLErrorAtCharLine_ErrorMessage, Array(metaXML, xml.parseError.linePos, xml.parseError.line))
+			else
+				sBuffer = sFormatString(L_DataXMLErrorAtCharLine_ErrorMessage, Array(dataXML, xml.parseError.linePos, xml.parseError.line))
+			end if
+			sBuffer = sBuffer & vbCrLf & xml.parseError.reason & vbCrLf
+			sBuffer = sBuffer & L_SourceCode_ErrorMessage & vbCrLf
+			sBuffer = sBuffer & xml.parseError.srcText
+			ReportError(sBuffer)
+		end sub
+
+		function xmlPrepareXMLList(xmlList)
+			dim xmlNode, xmlOverRecord, xmlRecord
+			'this routine resets the overx key and adds back Removed records
+			'for when the XML list is passed in onchange event or in the XMLList property
+			if m_bOverX then
+				'set overx flag value (to the special value understood
+				'by shipping object) in key field
+				set xmlOverRecord = xmlList.selectSingleNode("record[" & m_sKeyId & " = " & OVER_FLAG_VALUE & " or @overx $ieq$ 'yes']")
+				set xmlNode = xmlOverRecord.selectSingleNode("*[nodeName() $ieq$ """ & m_sKeyId & """]")
+				xmlNode.text = OVER_FLAG_VALUE
+			end if
+			if m_bIsNew then
+				'if in the middle of an add then cancel it
+				onCancel()
+			end if
+			'add back Removed records
+			for each xmlRecord in m_xmlRemoved.childNodes
+				xmlList.appendChild(xmlRecord.cloneNode(true))
+			next
+			set xmlPrepareXMLList = xmlList
+		end function
+
+		sub fireChange(xmlRecord2)
+			dim evt, xmlList, xmlNode, xmlRecord
+			'clone data list and fix overx value and Removed records
+			set xmlList = xmlPrepareXMLList(m_xmlDataDoc.cloneNode(true))
+			'set XMLList on event and fire it
+			set evt = createEventObject()
+			evt.setAttribute "XMLlist", xmlList
+			evt.setAttribute "XMLrecord", xmlRecord2
+			evt.type = "change"
+			evtChange.fire(evt)
+		end sub
+
+		function elGetContainer(elElement, sKey, sValue)
+			Dim elTemp, elTemp2
+			' returns nothing, self, or first ancester node to match
+			'sKey property/method value
+			set elTemp = elElement
+			set elTemp2 = elElement
+			do while not isNull(elTemp) and not elTemp is nothing and (elTemp.tagName <> "BODY")
+				if eval("elTemp." & sKey & " = """ & sValue & """") then
+					set elTemp2 = elTemp
+					set elGetContainer = elTemp2
+					exit function
+				end if
+				set elTemp = elTemp.parentElement
+			loop
+			set elGetContainer = elTemp2
+		end function
+
+		sub AddClass(elItem, sNewClass)
+			'adds newclass to item's classname if not already there
+			if inStr(elItem.className, sNewClass) then exit sub
+			elItem.className = elItem.className & " " & sNewClass
+		end sub
+
+		sub RemoveClass(elItem, sOldClass)
+			'removes oldclass from the item's classname and also removes extra spaces
+			if inStr(elItem.className, sOldClass) then
+				elItem.className = replace(replace(elItem.className, sOldClass, ""), "  ", " ")
+			end if
+		end sub
+
+		function bHasClass(elItem, sClass)
+			'returns true if item's classname contains class
+			bHasClass = CBool(inStr(LCase(elItem.className), LCase(sClass)))
+		end function
+
+		function xmlGetList()
+			dim xmlList
+			'returns XML list after fixing overx value and adding back Removed rows
+			set xmlList = xmlPrepareXMLList(m_xmlDataDoc)
+			window.setTimeout GetRef("RemoveDeleted"), 1000
+			set xmlGetList = xmlList
+		end function
+
+		sub Reset()
+			if m_nTotalControls > 0 then exit sub	'if not 0 then not all controls loaded
+			'used to Reset the display based on a changed dataset
+			'internal use only: ProfieDesigner uses this for it's embedded DTs
+
+			m_elDataTable.datasrc = ""
+			'clear old selection and highlight
+			ClearAllSelections()
+			m_elDataTable.datasrc = "#" & DataXML
+
+			if m_xmlDataDoc.hasChildNodes then
+			  if m_xmlDataDoc.childNodes.length = 1 and _
+			  	m_xmlDataDoc.selectNodes("record[. != """"]").length = 0 then
+			  	'remove empty record (will be added back by sort)
+			  	m_xmlDataDoc.removeChild m_xmlDataDoc.firstChild
+			  end if
+			end if
+			'set current row to invalid, new to false, set buttons to standard,
+			'clear dirty, sort list and recalc to make sure it redraws correctly
+			m_nRow = -1
+			m_bIsNew = false
+			m_bIsEdit = false
+			SetButtons("accept")
+			ResetInputs()
+			EnableInputs(false)
+			m_bDirty = false
+			SortList()
+			m_bEmptyRecordset = not (m_xmlDataDoc.childNodes.length > 1 or _
+				m_xmlDataDoc.selectNodes("record[. != """"]").length > 0)
+			element.document.recalc(true)
+		end sub
+
+		sub Cleanup()
+			dim xmlRecord
+			for each xmlRecord in m_xmlRemoved.childNodes
+				m_xmlRemoved.removeChild(xmlRecord)
+			next
+			for each xmlRecord in m_xmlDataDoc.selectNodes("record")
+				if xmlRecord.getAttribute("state") <> "deleted" then
+					xmlRecord.setAttribute "state", ""
+				end if
+			next
+			'delay necessary to avoid IE crash bug
+			window.setTimeout GetRef("RemoveDeleted"), 1000
+		end sub
+
+		sub RemoveDeleted()
+			dim xmlRecord
+			for each xmlRecord in m_xmlDataDoc.selectNodes("record")
+				if xmlRecord.getAttribute("state") = "deleted" then
+					m_xmlDataDoc.removeChild(xmlRecord)
+				end if
+			next
+		end sub
+
+		sub SortList()
+			'delay necessary to avoid smearing selection when rebinding data
+			window.setTimeout GetRef("Sort"), 100
+		end sub
+
+		sub Sort()
+			dim elDataTableRows, xmlOverRecord, xmlFirstRecord, xmlRecords, _
+				elRow, xmlLastKeyNode, nRecordsLeft, xmlKeyCol
+
+			'get collections for faster use
+			set elDataTableRows = m_elDataTable.rows
+			set xmlRecords = m_xmlDataDoc.childNodes
+			'get number of records
+			nRecordsLeft = xmlRecords.length
+
+			' save over record if there is one
+			set xmlOverRecord = m_xmlDataDoc.selectSingleNode("record[@overx $ieq$ 'yes']")
+			if m_bOverX then
+				if xmlOverRecord is nothing and m_xmlDataDoc.hasChildNodes then
+					set xmlOverRecord = m_xmlDataDoc.firstChild
+				end if
+				if not xmlOverRecord is nothing then
+					xmlOverRecord.setAttribute "overx", "yes"
+					set xmlOverRecord = m_xmlDataDoc.removeChild(xmlOverRecord)
+					set xmlKeyCol = xmlOverRecord.selectSingleNode("*[nodeName() $ieq$ """ & m_sKeyId & """]")
+				end if
+			end if
+			if m_xmlDataDoc.hasChildNodes then
+				if m_sDecimal <> "" then FixDecimal m_sDecimal, m_sReplaceDecimal
+				'if records remain in document then sort
+				set xmlFirstRecord = m_xmlDataDoc.firstChild
+				'set data type for sort (ensures proper order for other than alpha sorts)
+				if xmlFirstRecord.hasChildNodes then xmlFirstRecord.selectSingleNode("*[nodeName() $ieq$ """ & m_sKeyId & """]").dataType = m_sKeyDataType
+				' sort using XSL transform and sortdoc created earlier
+				m_xmlData.loadxml(m_xmlDataDoc.transformNode(m_xmlSortDoc))
+				'Reset datadoc
+				set m_xmlDataDoc = m_xmlData.documentElement
+				if m_sDecimal <> "" then FixDecimal m_sReplaceDecimal, m_sDecimal
+				if m_bOverX and not xmlOverRecord is nothing then
+					'add back overx record, if any
+					set xmlOverRecord = m_xmlDataDoc.appendChild(xmlOverRecord)
+				end if
+			else
+				'force table to rebind and Reset datadoc
+				if m_bOverX and not xmlOverRecord is nothing then
+					m_xmlData.loadXML "<document>" & xmlOverRecord.xml & "</document>"
+					set m_xmlDataDoc = m_xmlData.documentElement
+				else
+					m_xmlData.loadXML "<document/>"
+					set m_xmlDataDoc = m_xmlData.documentElement
+				end if
+			end if
+			'Reset xmlRecords
+			set xmlRecords = m_xmlDataDoc.childNodes
+			if m_bOverX then
+				if xmlOverRecord is nothing then
+					' create over record if there is none
+					set xmlOverRecord = m_xmlDataDoc.appendChild(m_xmlNewRow.cloneNode(true))
+					xmlOverRecord.setAttribute "overx", "yes"
+					set xmlKeyCol = xmlOverRecord.selectSingleNode("*[nodeName() $ieq$ """ & m_sKeyId & """]")
+					'set key value to "over 0" or use last record's value
+					if nRecordsLeft > 0 then
+						set xmlLastKeyNode = xmlRecords(nRecordsLeft - 1).selectSingleNode("*[nodeName() $ieq$ """ & m_sKeyId & """]")
+						xmlKeyCol.text = sFormatString(L_OverRowKey_Text, Array(xmlLastKeyNode.text))
+					else
+						xmlKeyCol.text = sFormatString(L_OverRowKey_Text, Array(0))
+					end if
+				elseif nRecordsLeft = 1 then
+					'single record that is over record - set to over zero
+					xmlKeyCol.text = sFormatString(L_OverRowKey_Text, Array(0))
+					'force table to rebind
+					m_xmlData.loadXML "<document>" & xmlOverRecord.xml & "</document>"
+					set m_xmlDataDoc = m_xmlData.documentElement
+				elseif nRecordsLeft > 1 then
+					' more than one record with over record - Reset key value
+					set xmlLastKeyNode = xmlRecords(nRecordsLeft - 2).selectSingleNode("*[nodeName() $ieq$ """ & m_sKeyId & """]")
+					if not xmlLastKeyNode is nothing then
+						xmlKeyCol.text = sFormatString(L_OverRowKey_Text, Array(xmlLastKeyNode.text))
+					end if
+				end if
+			end if
+		end sub
+
+		sub FixDecimal(sCurDecimal, sNewDecimal)
+			dim xmlKeyNodes, xmlNode
+			'fixes decimal for sort
+			set xmlKeyNodes = m_xmlDataDoc.selectNodes("//*[nodeName() $ieq$ """ & m_sKeyId & """]")
+			for each xmlNode in xmlKeyNodes
+				xmlNode.text = replace(xmlNode.text, sCurDecimal, sNewDecimal)
+			next
+		end sub
+
+		function sGetSortDoc(sColumn, sType)
+			dim sXSLText
+			'creates string for sort XML document
+			sXSLText = "<document>"
+			if sType = "" then
+				'no sort for type=""
+				sXSLText = sXSLText & "<xsl:for-each select='record' xmlns:xsl='http://www.w3.org/TR/WD-xsl'>"
+			else
+				sXSLText = sXSLText & "<xsl:for-each order-by='+ " & sColumn & "' data-type='" & sType & "' select='record' xmlns:xsl='http://www.w3.org/TR/WD-xsl'>"
+			end if
+			sXSLText = sXSLText & "<record>" & _
+					"<xsl:attribute name='state'><xsl:value-of select='@state'/></xsl:attribute>" & _
+					"<xsl:for-each select='*'>" & _
+					"<xsl:copy><xsl:value-of select='text()'/></xsl:copy>" & _
+					"</xsl:for-each>" & _
+					"</record>" & _
+					"</xsl:for-each>" & _
+					"</document>"
+			sGetSortDoc = sXSLText
+		end function
+
+		sub FormatData(sPath, sKey)
+			dim xmlFormatNodes, xmlFormatNode, sID, sFormat, xmlDataNodes, xmlDataNode
+			'formats date, time, select and float values in dataset using Format()
+			set xmlFormatNodes = m_xmlMetaDoc.selectNodes(sPath & "[nodeName() $ieq$ 'select' $or$ (nodeName() $ieq$ 'select' $and$ @subtype $ieq$ 'float')]")
+			for each xmlFormatNode in xmlFormatNodes
+				sID = xmlFormatNode.getAttribute(sKey)
+				if sID <> "" then
+					set xmlDataNodes = m_xmlDataDoc.selectNodes("record/" & sID)
+					sFormat = xmlFormatNode.nodeName
+					for each xmlDataNode in xmlDataNodes
+						Format xmlDataNode, sFormat
+					next
+				end if
+			next
+		end sub
+
+		sub Format(xmlNode, sFormat)
+			dim sID, xmlItemNode, xmlNewNode, xmlDataNodes, xmlOptions, sYear, sMinute
+			select case sFormat
+				case "numeric"	'float is only numeric formatted
+					if xmlNode.text = "" then exit sub
+					'format float to remove insignificant zeros after decimal
+					if isNumeric(xmlNode.text) then xmlNode.text = CStr(CDbl(xmlNode.text))
+				case "select"
+					'format select by creating displayvalue node and populating it
+					sID = xmlNode.nodeName
+					'only add displayvalue node if not already there
+					set xmlDataNodes = xmlNode.parentNode.selectNodes("*[nodeName() $ieq$ """ & sID & "_displayvalue""]")
+					if xmlDataNodes.length = 0 then
+						'get list items based on id
+						set xmlOptions = m_xmlMetaDoc.selectNodes("fields/select[@id $ieq$ '" & sID & "']/select/option")
+						if xmlOptions.length > 0 then
+							'look in each item for match to current value
+							for each xmlItemNode in xmlOptions
+								if xmlItemNode.getAttribute("value") = xmlNode.text then
+									'found match: create displayvalue node and set its value from item
+									set xmlNewNode = xmlItemNode.ownerDocument.createElement(sID & "_displayvalue")
+									xmlNewNode.text = xmlItemNode.text
+									xmlNode.parentNode.appendChild(xmlNewNode)
+									exit for
+								end if
+							next
+						end if
+					end if
+			end select
+		end sub
+
+		sub CaptureMouse()
+			dim elCells, nCell
+			m_nTotalWidth = 0
+			set elCells = m_elHeadTable.rows(0).cells
+			for nCell = 1 to elCells.length - 1 step 2
+				m_nTotalWidth = m_nTotalWidth + elCells(nCell).clientWidth
+			next
+			'remember mouse X position
+			m_mx = window.event.x
+			'remember tab element, set mouse capture and add handlers
+			set m_elDragTab = window.event.srcElement
+			m_elDragTab.setCapture()
+			m_elDragTab.onmousemove = GetRef("ResizeColumn")
+			m_elDragTab.onmouseup = GetRef("ReleaseMouse")
+			'remember columns to left and right of tab
+			set m_elLeftCol = m_elDragTab.previousSibling
+			set m_elRightCol = m_elDragTab.nextSibling
+			'remember original combined width
+			m_nLeftWidth = m_elLeftCol.clientwidth
+			m_nRightWidth = m_elRightCol.clientwidth
+			m_nCombWidth = m_nLeftWidth + m_nRightWidth
+		end sub
+
+		sub ResizeColumn()
+			dim dx
+			'get delta in mouse X position
+			dx = window.event.x - m_mx
+			'don't move if adjacent cell width will be zero after the move
+			if m_nLeftWidth + dx > 0 and m_nRightWidth - dx > 0 then
+				'adjust adjacent columns by delta X
+				m_elLeftCol.width = (m_nLeftWidth + dx) & "px"
+				m_elRightCol.width = (m_nRightWidth - dx) & "px"
+			elseif dx < 0 then
+				m_elLeftCol.width = "1px"
+				m_elRightCol.width = m_nCombWidth & "px"
+			elseif dx > 0 then
+				m_elLeftCol.width = m_nCombWidth & "px"
+				m_elRightCol.width = "1px"
+			end if
+		end sub
+
+		sub ReleaseMouse()
+			dim elDataCell, elControlCell, nCell
+			'clear handlers and release capture
+			m_elDragTab.onmousemove = null
+			m_elDragTab.onmouseup = null
+			m_elDragTab.releaseCapture()
+			'data table: unbind, adjust cell widths, rebind (remember dynatable has extra tab cells)
+
+			nCell = (m_elLeftCol.cellIndex - 1) / 2
+
+			m_elDataTable.datasrc = ""
+			set m_elDataTable.onreadystatechange = GetRef("CheckTableBinding")
+			set elDataCell = m_elDataTable.rows(0).cells(nCell)
+			set elControlCell = m_elControlTable.rows(0).cells(m_elLeftCol.cellIndex)
+			Convert2PercentWidth m_elLeftCol, elDataCell, elControlCell
+			set elDataCell = m_elDataTable.rows(0).cells(nCell + 1)
+			set elControlCell = m_elControlTable.rows(0).cells(m_elRightCol.cellIndex)
+			Convert2PercentWidth m_elRightCol, elDataCell, elControlCell
+			m_elDataTable.datasrc = "#" & DataXML
+		end sub
+
+		sub Convert2PercentWidth(elHeaderCell, elDataCell, elControlCell)
+			dim nHeadCellWidth
+			nHeadCellWidth = CLng(elHeaderCell.clientWidth/m_nTotalWidth * 100)
+			if nHeadCellWidth = 0 then
+				elDataCell.width = "1px"
+				elControlCell.width = "1px"
+				elHeaderCell.width = "1px"
+			else
+				elDataCell.width = nHeadCellWidth & "%"
+				elControlCell.width = nHeadCellWidth & "%"
+				elHeaderCell.width = nHeadCellWidth & "%"
+			end if
+		end sub
+
+		sub CheckTableBinding()
+			if m_elDataTable.readyState = "complete" then
+				set m_elDataTable.onreadystatechange = nothing
+				if m_nSelected > -1 then SelectRow(m_elDataTable.rows(m_nSelected))
+			end if
+		end sub
+
+		sub EnableAcceptBtn()
+			if m_nTotalControls > 0 then exit sub	'if not 0 then not all controls loaded
+			if m_elCancelBtn.disabled then exit sub
+			dim bInputOK, xmlValue, sID, elControl
+			'checked on each keystroke in a control and also on focus for each control
+			'if any control is currently required or invalid the Accept button
+			'will remain disabled
+			bInputOK = true
+			if m_elKeyControl.style.display <> "none" and not (m_bOverX and m_elKeyControl.readonly) then
+				'true if not currently required and the control value is invalid
+				bInputOK = CBool(not m_elKeyControl.required and m_elKeyControl.valid)
+			end if
+			if bInputOK then
+				for each xmlValue in m_xmlValues
+					'get id control
+					sID = xmlValue.getAttribute("id")
+					set elControl = element.all(sID)
+					if not elControl is nothing and elControl.style.display <> "none" then
+						'true if currently required or invalid
+						if bInputOK then bInputOK = CBool(not elControl.required and elControl.valid)
+					end if
+				next
+			end if
+			if not isEmpty(m_elAcceptBtn) then m_elAcceptBtn.disabled = not bInputOK
+		end sub
+
+		sub onDataFocus()
+			'this highlights the first data row when the focus is set on the datatable
+			if m_elDataTable.rows.length > 0 then HiliteRow(m_elDataTable.rows(0))
+		end sub
+
+		sub onMouseOver()
+			if not m_xmlDataDoc.hasChildNodes then exit sub
+			dim elSourceRow, elSourceCell
+			'highlight row and set tooltip on mouse over
+			set elSourceCell = elGetContainer(window.event.srcElement, "tagName", "TD")
+			set elSourceRow = elGetContainer(window.event.srcElement, "tagName", "TR")
+			HiliteRow(elSourceRow)
+			window.event.cancelBubble = true
+			if elSourceCell.all.tags("TABLE").length = 0 and elSourceCell.all.tags("INPUT").length = 0 then elSourceCell.title = elSourceCell.firstChild.firstChild.innerText
+		end sub
+
+		sub onMouseOut()
+			if not m_xmlDataDoc.hasChildNodes then exit sub
+			dim elSourceRow
+			'unhighlight row on mouse out
+			set elSourceRow = elGetContainer(window.event.srcElement, "tagName", "TR")
+			RestoreRow(elSourceRow)
+			window.event.cancelBubble = true
+		end sub
+
+		sub HiliteRow(elRow)
+			'clear highlight
+			ClearHighlight()
+			'save row index and set row highlight style
+			m_nHighlighted = elRow.rowIndex
+			if not bHasClass(elRow, "lsRowSelected") then
+				AddClass elRow, "lsRowOver"
+			end if
+		end sub
+
+		sub RestoreRow(elRow)
+			'Reset row highlight style
+			if bHasClass(elRow, "lsRowOver") then
+				RemoveClass elRow, "lsRowOver"
+			end if
+		end sub
+
+		sub onBtnClick()
+			'set focus to new button if it is not disabled
+			if not m_elNewBtn.disabled then m_elNewBtn.focus()
+		end sub
+
+		sub onKeyDown()
+			if not m_xmlDataDoc.hasChildNodes then exit sub
+			dim elDataTableRows, evt
+			'this routine controls key commands when focus is on data table
+			set evt = window.event
+			set elDataTableRows = m_elDataTable.rows
+			select case evt.keyCode
+				case KEYCODE_ENTER
+					'enter same as click current highlighed item
+					elDataTableRows(m_nHighlighted).click()
+					evt.returnValue = false
+					evt.cancelBubble = true
+				case KEYCODE_UP_ARROW
+					'move up highlight if not already at first row
+					if m_nHighlighted - 1 >= 0 then
+						HiliteRow(elDataTableRows(m_nHighlighted - 1))
+						elDataTableRows(m_nHighlighted).scrollIntoView(false)
+					end if
+					evt.cancelBubble = true
+					evt.returnValue = false
+				case KEYCODE_DOWN_ARROW
+					'move down highlight if not already at last row
+					if m_nHighlighted + 1 < elDataTableRows.length then
+						HiliteRow(elDataTableRows(m_nHighlighted + 1))
+						elDataTableRows(m_nHighlighted).scrollIntoView(false)
+					end if
+					evt.cancelBubble = true
+					evt.returnValue = false
+				case else
+			end select
+		end sub
+
+		sub onChange()
+			'set dirty flag
+			m_bDirty = true
+			EnableAcceptBtn()
+		end sub
+
+		sub SetButtons(sConfig)
+			select case sConfig
+				case "select"		'all buttons except Accept/cancel enabled
+					m_elNewBtn.disabled = false
+					m_elEditBtn.disabled = false
+					m_elRemoveBtn.disabled = false
+					m_elAcceptBtn.disabled = true
+					m_elCancelBtn.disabled = true
+				case "accept"			'all buttons except new disabled
+					m_elNewBtn.disabled = false
+					m_elEditBtn.disabled = true
+					m_elRemoveBtn.disabled = true
+					m_elAcceptBtn.disabled = true
+					m_elCancelBtn.disabled = true
+				case "new"				'all buttons but cancel disabled
+					m_elNewBtn.disabled = true
+					m_elEditBtn.disabled = true
+					m_elRemoveBtn.disabled = true
+					m_elAcceptBtn.disabled = true
+					m_elCancelBtn.disabled = false
+				case "edit"				'all buttons but Accept/cancel disabled
+					m_elNewBtn.disabled = true
+					m_elEditBtn.disabled = true
+					m_elRemoveBtn.disabled = true
+					m_elAcceptBtn.disabled = false
+					m_elCancelBtn.disabled = false
+				case else
+			end select
+			if m_bOverX and -1 < m_nRow and m_nRow < m_elDataTable.rows.length then
+				'disable Remove button when editing overx row
+				if inStr(m_elDataTable.rows(m_nRow).cells(KEY_CELL).innerText, replace(L_OverRowKey_Text, "%1", "")) then
+					m_elRemoveBtn.disabled = true
+				end if
+			end if
+		end sub
+
+		sub EnableInputs(bEnable)
+			dim xmlValue, elControl
+			if m_nTotalControls > 0 then exit sub
+			'set each control to enable when bEnable is tru
+			m_elKeyControl.disabled = not bEnable
+			for each xmlValue in m_xmlValues
+				element.all(xmlValue.getAttribute("id")).disabled = not bEnable
+			next
+		end sub
+
+		sub SetRequired()
+			dim xmlOverRecord, evt
+			'sets required
+			if m_bControlRequired then 
+				m_bRequired = cbool(not m_xmlDataDoc.hasChildNodes)
+				set xmlOverRecord = m_xmlDataDoc.selectSingleNode("record[@overx $ieq$ 'yes']")
+				if not xmlOverRecord is nothing then
+					if xmlOverRecord.selectNodes("*[. != """"]").length < m_xmlValues.length + 1 then m_bRequired = true
+				end if
+				'fire require event
+				set evt = createEventObject()
+				evt.setAttribute "required", m_bRequired
+				evt.type = "require"
+				evtRequired.fire(evt)
+			end if
+		end sub
+
+		sub SetPrompt(elControl)
+			elControl.value = ""
+		end sub
+
+		sub ResetInputs()
+			dim xmlValue, sID, elControl
+			if m_nTotalControls > 0 then exit sub
+			SetPrompt m_elKeyControl
+			for each xmlValue in m_xmlValues
+				sID = xmlValue.getAttribute("id")
+				set elControl = element.all(sID)
+				'set each control prompt
+				if not elControl is nothing then SetPrompt elControl
+			next
+		end sub
+
+		function bAbandonChanges()
+			dim nResult
+			'show msgbox for abandon changes prompt
+			nResult = msgbox(L_AbandonChanges_Message, vbYesNo, L_AbandonChanges_DialogTitle)
+			'if answer is yes then abandon changes = true
+			bAbandonChanges = Cbool(nResult = vbYes)
+		end function
+
+		function bSetField(sField)
+			dim elControl, xmlNode, xmlRecord
+			bSetField = false
+			set elControl = element.all(sField)
+			'if field is hidden or valid then reset data from control
+			if elControl.parentElement.style.display = "none" or _
+				elControl.valid then
+				'get record and field node
+				set xmlRecord = m_xmlDataDoc.childNodes(m_nRow)
+				set xmlNode = xmlRecord.selectSingleNode("*[nodeName() $ieq$ """ & sField & """]")
+				if xmlNode is nothing then
+					'if node is not found then add it
+					set xmlNode = xmlRecord.appendChild(m_xmlDataDoc.ownerDocument.createElement(sField))
+				end if
+				'set the value and return true
+				xmlNode.text = elControl.value
+				bSetField = true
+			end if
+		end function
+
+		function bSetRow()
+			dim bErrorFound, sErrorText, xmlKey, xmlKeys, sKey, xmlValue, _
+				elKeyCell
+
+			bSetRow = true
+			bErrorFound = false
+			sErrorText = ""
+			sKey = m_elKeyControl.value
+			set elKeyCell = m_elDataTable.rows(m_nRow).cells(KEY_CELL)
+			if m_bUniqueKey then
+				'check for unique key when uniquekey set (and not hidden)
+				'note: select will be displayvalue
+				set xmlKeys = m_xmlDataDoc.selectNodes("record[" & m_sKeyId & " $ieq$ """ & replace(sKey, """", "&quot;") & """]")
+				'if new row or editing and key found is not the current one
+				'then flag error for duplicate
+				if elKeyCell.style.display <> "none" and _
+					((m_bIsNew and xmlKeys.length > 0) or _
+					(not m_bIsNew and xmlKeys.length = 1 and _
+					not m_xmlDataDoc.childNodes(m_nRow) is xmlKeys(0))) then
+					sErrorText = sErrorText & L_DuplicateKey_ErrorMessage & vbCr
+					m_elKeyControl.focus()
+					bErrorFound = true
+				end if
+			end if
+			for each xmlValue in m_xmlValues
+				if bErrorFound then exit for
+				'test and move field value to data
+				bErrorFound = not bSetField(xmlValue.getAttribute("id"))
+				if m_bEditOverX and element.all(xmlValue.getAttribute("id")).value = "" then
+					bErrorFound = true
+					sErrorText = sErrorText & L_OverXRequired_ErrorMessage & vbCr
+				end if
+			next
+			if bErrorFound then
+				'display error(s)
+				if sErrorText <> "" then msgbox sErrorText, vbOKOnly,  L_ErrorTitle_ErrorMessage
+				bSetRow = false
+			else
+				if inStr(elKeyCell.innerText, replace(L_OverRowKey_Text, "%1", "")) then
+					'reset readonly on control
+					m_elKeyControl.resetReadOnly()
+				else
+					'test and move field value to data
+					bErrorFound = not bSetField(m_sKeyId)
+				end if
+			end if
+		end function
+
+		function bChanged()
+			dim xmlValue
+			bChanged = false
+			if element.all(m_sKeyId).dirty then bChanged = true
+			for each xmlValue in m_xmlValues
+				if element.all(xmlValue.getAttribute("id")).dirty then bChanged = true
+			next
+		end function
+
+		sub ResetControls()
+			'clear row index, inputs, and selection
+			m_nRow = -1
+			ClearSelection()
+			'reset buttons and disable controls
+			SetButtons("accept")
+			ResetInputs()
+			EnableInputs(false)
+			'reset new and dirty
+			m_bEditOverX = false
+			m_bIsNew = false
+			m_bIsEdit = false
+		end sub
+
+		sub fireValid()
+			dim evt
+
+			set evt = createEventObject()
+			evt.type = "valid"
+			evt.setAttribute "valid", m_bValid
+			evtValid.fire(evt)
+		end sub
+
+		sub onAccept()
+			dim xmlRecord, xmlRecord2, xmlSelectNode, sID, xmlNode, xmlItemNode, xmlNewNode, _
+				xmlDisplayCol, sListID, n, elControlCells, elCell
+			'Accept button clicked
+			'set row in data from controls (disaplys errors in alerts, if any)
+			if not bChanged then
+				'no fields were changed so just reset controls
+				ResetControls()
+			elseif bSetRow() then
+				'get XMLrecord for current record
+				set xmlRecord = m_xmlDataDoc.childNodes(m_nRow)
+
+				'iterate over select fields and make sure displayvalue node is added and updated with current changes
+				set elControlCells = m_elControlTable.rows(0).cells
+				for n = 1 to elControlCells.length - 1
+					set elCell = elControlCells(n)
+					sID = elCell.id
+					sListID = elCell.getAttribute("selectid")
+					if sListID <> "" then
+						'get select id node in current record
+						set xmlNode = xmlRecord.selectSingleNode("*[nodeName() $ieq$ """ & sID & """]")
+						'get item option node in select list
+						set xmlItemNode = m_xmlMetaDoc.selectSingleNode("//fields/select[@id $ieq$ '" & sID & "']/select[@id $ieq$ '" & sListID & "' $or$ $not$ @id]/option[@value $ieq$ '" & xmlNode.text & "']")
+						'check if displayvalue node already created
+						set xmlDisplayCol = xmlRecord.selectSingleNode("*[nodeName() $ieq$ """ & sID & "_displayvalue""]")
+						if not xmlDisplayCol is nothing then
+							'displaynode already there so update value from option
+							xmlDisplayCol.text = xmlItemNode.text
+						else
+							'displaynode not there so create it, set value from option, and add to record
+							set xmlNewNode = xmlRecord.ownerDocument.createElement(sID & "_displayvalue")
+							xmlNewNode.text = xmlItemNode.text
+							xmlRecord.appendChild(xmlNewNode)
+						end if
+						xmlNode.text = xmlItemNode.getAttribute("value")
+					end if
+				next
+				'as long as the record is not new or Removed change the state to "changed"
+				if isNull(xmlRecord.getAttribute("state")) or xmlRecord.getAttribute("state") = "" then
+					xmlRecord.setAttribute "state", "changed"
+				end if
+				ResetControls()
+				'fire change event and sort list
+				SortList()
+				set xmlRecord2 = xmlRecord.cloneNode(true)
+				fireChange(xmlRecord2)
+				m_bDirty = true
+			end if
+			m_bValid = true
+			SetRequired()
+			fireValid()
+		end sub
+
+		sub onNew()
+			dim xmlRecord
+			'new button clicked
+			if m_xmlDataDoc.childNodes.length > m_elDataTable.rows.length then exit sub
+			' clear old selection
+			ClearSelection()
+			m_bValid = false
+			fireValid()
+			'add new row, set row index, and set new row state
+			m_xmlDataDoc.appendChild(m_xmlNewRow.cloneNode(true))
+			m_nRow = m_xmlDataDoc.childNodes.length - 1
+			set xmlRecord = m_xmlDataDoc.childNodes(m_nRow)
+			xmlRecord.setAttribute "state", "new"
+			'enable controls, reset inputs and select the new row
+			ResetInputs()
+			EnableInputs(true)
+			m_elKeyControl.focus()
+			SelectRow(m_elDataTable.rows(m_nRow))
+			SetButtons("new")
+			'set new and clear dirty
+			m_bIsNew = true
+			m_bDirty = false
+		end sub
+
+		sub onRemove()
+			dim xmlRecord, xmlRecord2, xmlOverRecord
+			'Remove button clicked
+			if m_nRow = -1 then exit sub
+			' clear old selection and highlight
+			ClearSelection()
+			ClearHighlight()
+			'get record from data
+			set xmlRecord = m_xmlDataDoc.childNodes(m_nRow)
+			if xmlRecord.getAttribute("state") = "new" then
+				'really Remove record since it is new this session
+				m_xmlDataDoc.removeChild(xmlRecord)
+			else
+				'mark record as Removed and remove from binding table
+				xmlRecord.setAttribute "state", "deleted"
+				set xmlRecord = m_xmlRemoved.appendChild(m_xmlDataDoc.removeChild(xmlRecord))
+			end if
+			set xmlRecord2 = xmlRecord.cloneNode(true)
+			if m_xmlDataDoc.hasChildNodes then
+				'if not empty dataset reset index & controls and disable controls
+				m_nRow = -1
+				ResetInputs()
+				EnableInputs(false)
+				m_bDirty = false
+			else
+				m_bDirty = true
+			end if
+			SetButtons("accept")
+			'fire change event and sorft list
+			SortList()
+			SetRequired()
+			fireChange(xmlRecord2)
+		end sub
+
+		sub onDblClickRow()
+			dim elRow
+			if not m_xmlDataDoc.hasChildNodes then exit sub
+			if m_bEmptyRecordset and not m_bNewButton then exit sub
+			if m_bIsNew or m_bIsEdit then exit sub
+			set elRow = elGetContainer(window.event.srcElement, "tagName", "TR")
+			ClearSelection()
+			'set selection and enable controls
+			m_nRow = elRow.rowIndex
+			SelectRow(elRow)
+			SetButtons("select")
+
+			onEdit()
+		end sub
+
+		sub onCancel()
+			if m_bIsNew then
+				ClearSelection()
+				'if was creating new then remove new row and selection
+				m_xmlDataDoc.removeChild(m_xmlDataDoc.childNodes(m_nRow))
+				if m_nRow = m_nSelected then m_nSelected = -1
+				m_bIsNew = false
+			end if
+			if m_bEditOverX then
+				m_elKeyControl.resetReadOnly()
+			end if
+			ResetControls()
+			m_bValid = true
+			fireValid()
+		end sub
+
+		sub onEdit()
+			dim elRow, elCell, sDataFld, elControl, elDataSpan
+			set elRow = m_elDataTable.rows(m_nRow)
+			if elRow.cells.length < 2 then exit sub
+			m_bValid = false
+			fireValid()
+
+			if inStr(elRow.cells(KEY_CELL).innerText, replace(L_OverRowKey_Text, "%1", "")) then
+				'if overx row set key to read-only
+				m_elKeyControl.readonly = true
+				m_bEditOverX = true
+			else	'not overx
+				'set key to read-only state defined in meta-data
+				m_elKeyControl.resetReadOnly()
+				m_bEditOverX = false
+			end if
+			'set control values from each cell in row
+			for each elCell in elRow.cells
+				'skip empty first cell
+				if elCell.children.length > 0 then
+					'get data id
+					set elDataSpan = elCell.firstChild.firstChild
+					sDataFld = elDataSpan.getAttribute("DATAFLD")
+					if inStr(sDataFld, "_displayvalue") then
+						set elDataSpan = elCell.firstChild.childNodes(1)
+						sDataFld = elDataSpan.getAttribute("DATAFLD")
+					end if
+					if not isNull(sDataFld) then
+						'get control and set the value
+						set elControl = element.all(sDataFld)
+						if not elControl is nothing then
+							elControl.disabled = false
+							elControl.value = elDataSpan.innerText
+						end if
+					end if
+				end if
+			next
+			EnableInputs(true)
+			if not m_elKeyControl.readonly then
+				'set focus to key control if not readonly
+				m_elKeyControl.focus()
+			else	'otherwise set to first control
+				m_elFirstControl.focus()
+			end if
+			SetButtons("edit")
+
+			'reset new and dirty flgs
+			m_bIsNew = false
+			m_bIsEdit = true
+			m_bDirty = false
+		end sub
+
+		sub SelectRow(elRow)
+			'exit if row is nothing: caused by race condition between sort after Accept and click New
+			if elRow is nothing or not m_xmlDataDoc.hasChildNodes then exit sub
+			'save index of selection
+			m_nSelected = elRow.rowIndex
+			'add selection style to row
+			AddClass elRow, "lsRowSelected"
+		end sub
+
+		sub onSelect()
+			dim elRow
+			'row was clicked
+			if not m_xmlDataDoc.hasChildNodes then exit sub
+			if m_bEmptyRecordset and not m_bNewButton then exit sub
+			if m_bIsNew or m_bIsEdit then exit sub
+			set elRow = elGetContainer(window.event.srcElement, "tagName", "TR")
+			if not m_elDataTable.contains(elRow) then exit sub
+
+			ClearSelection()
+			if m_nRow = elRow.rowIndex then
+				'clear selection and disable controls
+				m_nRow = -1
+				SetButtons("accept")
+			else
+				'set selection and enable controls
+				m_nRow = elRow.rowIndex
+				SelectRow(elRow)
+				SetButtons("select")
+			end if
+		end sub
+
+		sub ClearSelection()
+			if m_nSelected >= 0 and m_nSelected < m_elDataTable.rows.length then
+				'remove selection style from row
+				RemoveClass m_elDataTable.rows(m_nSelected), "lsRowSelected"
+			end if
+			'reset selection index
+			m_nSelected = -1
+		end sub
+
+		sub ClearAllSelections()
+			dim elRow
+			for each elRow in m_elDataTable.rows
+				'remove selection style from row
+				if m_nSelected <> elRow.rowIndex then RemoveClass elRow, "lsRowSelected"
+				RemoveClass elRow, "lsRowOver"
+			next
+			'reset selection and highlight index
+			m_nSelected = -1
+			m_nHighlighted = -1
+		end sub
+
+		sub ClearHighlight()
+			if m_nHighlighted >= 0 and m_nHighlighted < m_elDataTable.rows.length then
+				'remove highlight style from row
+				RemoveClass m_elDataTable.rows(m_nHighlighted), "lsRowOver"
+			end if
+			'reset highlight index
+			m_nHighlighted = -1
+		end sub
+	</SCRIPT>
+</PUBLIC:COMPONENT>

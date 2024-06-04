@@ -1,0 +1,195 @@
+<?xml version="1.0"?>
+
+<!-- ======================================================================================	-->
+<!--                                                                                       	-->
+<!-- Microsoft.Samples.BizTalk.WoodgroveBank.PaymentTracker  							   	-->
+<!-- End to end Service Oriented Scenatio sample for BizTalk Server.                       	-->
+<!--                                                                                       	-->
+<!-- This file represents  configuration store application to store and manage the config  	-->
+<!-- settings of the Service Oriented E2E scenario. 										-->
+<!--                                                                                       	-->
+<!-- Copyright (C) Microsoft Corporation. All rights reserved.                        	-->
+<!-- THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,          	-->
+<!-- EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES      	-->
+<!-- OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.                           	-->
+<!--                                                                                       	-->
+<!-- ======================================================================================	-->
+
+<SSO>
+	<application name="WoodgroveBank.CustomerService">
+	<description>Customer service application demonstrating Service Oriented Architecture</description>
+    <contact>admin@woodgrovebank.com</contact>
+
+	<appUserAccount>
+			<!--	
+				Include the name of the group that is allowed to use this conig application
+				as the value of this element.  In a single server environment, this is typically 
+				BizTalk Application Users, referring to this group in the local machine.  In a multi server
+				environment, this is typically %DomainName%\BizTalk Application Users 
+			-->
+		BizTalk Application Users			
+
+	</appUserAccount>
+
+	<appAdminAccount>
+			<!--	
+					Include the name of the group that is allowed to administer this conig application
+					as the value of this element.  In a single server environment, this is typically
+					BizTalk Server Administrators, referring to this group in the local machine.
+					In a multi server environment, this is typically 
+					%DomainName%\BizTalk Server Administrators
+			-->
+		BizTalk Server Administrators
+
+	</appAdminAccount>
+
+	<!-- The definition of the Configuration store application. 					 -->
+	<!-- 
+		Timeout in milliseconds when interacting with the SAP system using the Adapter 
+	-->
+
+	<field ordinal="0" label="Reserved" masked="no" />
+	<field ordinal="1" label="SAP.Adapter.Timeout" masked="yes" />
+
+	<!-- 
+		Timeout in milliseconds when interacting with the SAP system using the inline approach 
+	-->
+
+	<field ordinal="2" label="SAP.Inline.Timeout" masked="yes" />
+
+	<!-- 
+		SAP Host name when interacting with the SAP system using the inline approach 
+	-->
+
+	<field ordinal="3" label="SAP.Inline.HostName" masked="yes" />
+
+	<!-- 
+		SAP client number when interacting with the SAP system using the inline approach 
+	-->
+
+	<field ordinal="4" label="SAP.Inline.ClientNumber" masked="yes" />
+
+	<!-- 
+		SAP system number when interacting with the SAP system using the inline approach 
+	-->
+
+	<field ordinal="5" label="SAP.Inline.SystemNumber" masked="yes" />
+
+	<!-- 
+		Need the user name and password below until we figure out the SAP adapter issues.   Once it is figured
+		out, we don't need this as we should be able to use the SSO affiliate app and use the mapped user id and
+		password using the sso mappings.  For now use a separate user id and password. 
+		To do - Need to re-adjust the ordinal numbers when fixing this.
+	-->
+
+	<!-- 
+		SAP system user name when interacting with the SAP system using the inline approach 
+	-->
+
+	<field ordinal="6" label="SAP.Inline.UserName" masked="yes" />
+
+	<!-- 
+		SAP system password when interacting with the SAP system using the inline approach 
+	-->
+
+	<field ordinal="7" label="SAP.Inline.Password" masked="yes" />
+
+	<!-- 
+		Timeout in milliseconds when interacting with the pending transactions system using
+		the Adapter 	
+	-->
+
+	<field ordinal="8" label="PendingTransactions.Adapter.Timeout" masked="yes" />
+
+	<!-- 
+		Timeout in milliseconds when interacting with the pending transactions system using
+		the inline approach 	
+	-->
+
+	<field ordinal="9" label="PendingTransactions.Inline.Timeout" masked="yes" />
+
+	<!-- 
+		URL to use when interacting with the pending transactions system using
+		the inline approach 	
+	-->
+
+	<field ordinal="10" label="PendingTransactions.Inline.URL" masked="yes" />
+
+	<!--
+		SSO Affiliate application for the Pending Transactions system when using the inline approach
+	-->
+
+	<field ordinal="11" label="PendingTransactions.Inline.SSOAffiliateApp" masked="yes" />
+
+	<!-- 
+		Timeout in milliseconds when interacting with the payment tracking system using
+		the Adapter 	
+	-->
+
+	<field ordinal="12" label="PaymentTracking.Adapter.Timeout" masked="yes" />
+
+	<!-- 
+		Timeout in milliseconds when interacting with the payment tracking system using
+		the inline approach 	
+	-->
+
+	<field ordinal="13" label="PaymentTracking.Inline.Timeout" masked="yes" />
+
+	<!-- 
+		MQ Series queue managername when interacting with the payment tracking system using
+		the inline approach 	
+	-->
+
+	<field ordinal="14" label="PaymentTracking.Inline.QManager" masked="yes" />
+
+	<!-- 
+		MQ Series channel definition when interacting with the payment tracking system using
+		the inline approach, when the queue manager is remote 	
+	-->
+
+	<field ordinal="15" label="PaymentTracking.Inline.MQChannelDefinition" masked="yes" />
+
+
+	<!-- 
+		MQ Series queue name to send request messages when interacting with the payment tracking system using
+		the inline approach 	
+	-->
+
+	<field ordinal="16" label="PaymentTracking.Inline.RequestQueue" masked="yes" />
+
+	<!-- 
+		MQ Series queue name to receive response messages when interacting with the payment tracking system using
+		the inline approach 	
+	-->
+
+	<field ordinal="17" label="PaymentTracking.Inline.ResponseQueue" masked="yes" />
+
+	<!-- 
+		SSO Affiliate application to map the user ids to when interacting with the payment tracking system using
+		the inline approach 	
+	-->
+
+	<field ordinal="18" label="PaymentTracking.Inline.SSOAffiliateApp" masked="yes" />
+
+	<!--
+		URL for the Stub SAP web service.
+	-->
+
+	<field ordinal="19" label="StubSAPWebService.URL" masked="yes" />
+
+	<!--
+		Type name of the schema for Payment Tracker Receive Pipeline
+
+	-->
+
+	<field ordinal="20" label="PaymentTrackerReceivePipeline.SchemaTypeName" masked ="yes" />
+
+	<!--
+		Type name of the schema for Payment Tracker Send Pipeline
+	-->
+
+	<field ordinal="21" label="PaymentTrackerSendPipeline.SchemaTypeName" masked ="yes" />
+
+    <flags groupApp="no" configStoreApp="yes" allowTickets="no" validateTickets="yes" allowLocalAccounts="yes" timeoutTickets="yes" adminAccountSame="no" enableApp="yes" />
+  </application>
+</SSO>

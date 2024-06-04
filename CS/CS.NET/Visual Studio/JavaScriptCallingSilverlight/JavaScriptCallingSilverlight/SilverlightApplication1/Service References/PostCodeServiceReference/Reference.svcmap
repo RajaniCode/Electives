@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="e164732c-f25e-4920-b0d7-74043a608267" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:49171/PostCodeService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="PostCodeService.wsdl" MetadataType="Wsdl" ID="ac3a4780-82ed-4f79-8e56-692a01797e8a" SourceId="1" SourceUrl="http://localhost:49171/PostCodeService.svc?wsdl" />
+    <MetadataFile FileName="PostCodeService.xsd" MetadataType="Schema" ID="7e485290-df8d-4bcd-ba83-0aa68061a47f" SourceId="1" SourceUrl="http://localhost:49171/PostCodeService.svc?xsd=xsd1" />
+    <MetadataFile FileName="PostCodeService1.wsdl" MetadataType="Wsdl" ID="06afcd31-5778-4316-887f-f54bfc103a43" SourceId="1" SourceUrl="http://localhost:49171/PostCodeService.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="PostCodeService2.xsd" MetadataType="Schema" ID="ea089234-a8a7-4abc-9225-7438a00a2784" SourceId="1" SourceUrl="http://localhost:49171/PostCodeService.svc?xsd=xsd2" />
+    <MetadataFile FileName="PostCodeService.disco" MetadataType="Disco" ID="da1840b6-86e7-4e45-9d51-a6b4baeada82" SourceId="1" SourceUrl="http://localhost:49171/PostCodeService.svc?disco" />
+    <MetadataFile FileName="PostCodeService1.xsd" MetadataType="Schema" ID="c1a8c0fd-f35e-4522-9568-85aa12d9f99c" SourceId="1" SourceUrl="http://localhost:49171/PostCodeService.svc?xsd=xsd0" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

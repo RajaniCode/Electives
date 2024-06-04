@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:element name="BizTalkCertificates" type="BizTalkCertificatesType" />
+	<xs:complexType name="BizTalkCertificatesType">
+		<xs:sequence>
+			<xs:element name="Certificate" type="CertificateType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="CertificateType">
+		<xs:sequence>
+			<xs:element name="LongName" type="CertificateLongNameType" />
+			<xs:element name="ThumbPrint" type="CertificateThumbPrintType"/>
+			<xs:element name="Usage" type="CertificateUsageType"/>
+		</xs:sequence>
+		<xs:attribute name="name" type="CertificateShortNameType" use="required" />
+	</xs:complexType>
+	<xs:simpleType name="CertificateShortNameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CertificateLongNameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CertificateThumbPrintType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="CertificateUsageType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="128" />
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

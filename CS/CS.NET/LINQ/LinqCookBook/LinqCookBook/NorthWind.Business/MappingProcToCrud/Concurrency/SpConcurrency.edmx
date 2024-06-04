@@ -1,0 +1,103 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SpConcurrencyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="SpConcurrencyModelStoreContainer">
+          <EntitySet Name="Authors" EntityType="SpConcurrencyModel.Store.Authors" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Authors">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="AuthorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="BooksPublished" Type="int" Nullable="false" />
+          <Property Name="TimeStamp" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+        </EntityType>
+        <Function Name="DeleteAuthor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="authorid" Type="int" Mode="In" />
+          <Parameter Name="timestamp" Type="timestamp" Mode="In" />
+        </Function>
+        <Function Name="InsertAuthor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="bkpublished" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdateAuthor"  Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="bkpublished" Type="int" Mode="In" />
+          <Parameter Name="timestamp" Type="timestamp" Mode="In" />
+          <Parameter Name="authorid"  Type="int" Mode="In" />
+		<Parameter Name="rowsaffected" Type="int" Mode="Out" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SpConcurrencyModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="SpConcurrency">
+          <EntitySet Name="Authors" EntityType="SpConcurrencyModel.Author" />
+        </EntityContainer>
+        <EntityType Name="Author">
+          <Key>
+            <PropertyRef Name="AuthorId" />
+          </Key>
+          <Property Name="AuthorId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="BooksPublished" Type="Int32" Nullable="false" />
+          <Property Name="TimeStamp" Type="Binary" Nullable="false" MaxLength="8" FixedLength="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="SpConcurrencyModelStoreContainer" CdmEntityContainer="SpConcurrency">
+          <EntitySetMapping Name="Authors">
+            <EntityTypeMapping TypeName="IsTypeOf(SpConcurrencyModel.Author)">
+              <MappingFragment StoreEntitySet="Authors">
+                <ScalarProperty Name="AuthorId" ColumnName="AuthorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="BooksPublished" ColumnName="BooksPublished" />
+                <ScalarProperty Name="TimeStamp" ColumnName="TimeStamp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="SpConcurrencyModel.Author">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SpConcurrencyModel.Store.InsertAuthor">
+                  <ScalarProperty Name="BooksPublished" ParameterName="bkpublished" />
+                  <ScalarProperty Name="Name" ParameterName="name" />
+                  <ResultBinding Name="AuthorId" ColumnName="AuthorId" />
+                  <ResultBinding Name="TimeStamp" ColumnName="TimeStamp" /></InsertFunction>
+                <UpdateFunction RowsAffectedParameter="rowsaffected"  FunctionName="SpConcurrencyModel.Store.UpdateAuthor">
+                  <ScalarProperty Name="BooksPublished" ParameterName="bkpublished" Version="Current" />
+                  <ScalarProperty Name="AuthorId" ParameterName="authorid" Version="Original" />
+                  <ScalarProperty Name="TimeStamp" ParameterName="timestamp" Version="Original" />
+                  <ScalarProperty Name="Name" ParameterName="name" Version="Current" />
+                  <ResultBinding Name="TimeStamp" ColumnName="TimeStamp" /></UpdateFunction>
+                <DeleteFunction FunctionName="SpConcurrencyModel.Store.DeleteAuthor">
+                  <ScalarProperty Name="TimeStamp" ParameterName="timestamp" />
+                  <ScalarProperty Name="AuthorId" ParameterName="authorid" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="SpConcurrency">
+        <EntityTypeShape EntityType="SpConcurrencyModel.Author" Width="1.5" PointX="0.75" PointY="0.75" Height="1.787985026041667" IsExpanded="true" /></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

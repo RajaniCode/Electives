@@ -1,0 +1,115 @@
+<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.4617"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{74B34763-7C50-4331-9A9D-16824AE98475}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\EnvelopeProcessing.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = "Microsoft BizTalk Server 2006 SDK Sample"
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft® BizTalk® Server SDK"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright © Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.EnvelopeProcessing"
+                    AssemblyName = "EnvelopeProcessing"
+                />
+                <Config
+                    Name = "Development"
+		    ApplicationName = "EnvelopeProcessingApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+		    ApplicationName = "EnvelopeProcessingApplication"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Pipeline.Components"
+                    AssemblyName = "Microsoft.BizTalk.Pipeline.Components"
+                    HintPath = "..\..\..\..\..\Pipeline Components\Microsoft.BizTalk.Pipeline.Components.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "EnvReceivePipeline.btp"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.EnvelopeProcessing"
+                    Type = "EnvReceivePipeline"
+                />
+                <File
+                    RelPath = "EnvSendPipeline.btp"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.EnvelopeProcessing"
+                    Type = "EnvSendPipeline"
+                />
+                <File
+                    RelPath = "Header.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.EnvelopeProcessing"
+                    Type = "Header"
+                />
+                <File
+                    RelPath = "PO.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.EnvelopeProcessing"
+                    Type = "PO"
+                />
+                <File
+                    RelPath = "Trailer.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.EnvelopeProcessing"
+                    Type = "Trailer"
+                />
+                <File
+                    RelPath = "XmlEnvelope.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.EnvelopeProcessing"
+                    Type = "XmlEnvelope"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

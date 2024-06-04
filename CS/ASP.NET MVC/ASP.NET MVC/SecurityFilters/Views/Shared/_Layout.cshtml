@@ -1,0 +1,15 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+    <script src="@Url.Content("~/Scripts/jquery-1.4.4.min.js")" type="text/javascript"></script>
+</head>
+
+<body>
+    <strong>@(User.Identity.IsAuthenticated?"Hello " + User.Identity.Name: "You are anonymus user" )</strong>
+    <br />
+    <a href="/Public/Index">Back</a><br />
+    @RenderBody()
+</body>
+</html>

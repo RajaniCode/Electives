@@ -1,0 +1,72 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="ede6a23b-824e-4b39-905b-a001cfa54f93" LowerBound="1.1" HigherBound="24.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.StubSAPWS_" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="MethodMessageType" OID="00000000-0000-0000-0000-000000000000" ParentLink="Module_MessageType">
+            <om:Property Name="Url" Value="http://localhost/Microsoft.Samples.BizTalk.WoodgroveBank.StubSAP/StubSAPWS.asmx" />
+            <om:Property Name="TypeModifier" Value="Public" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.StubSAPWS" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MethodMessageOperation" OID="d232817f-874a-40d7-87cf-8247fba01125" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="GetAccountDetails" />
+                <om:Property Name="OperationDirection" Value="Request" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="GetAccountDetails_request" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="6bd3de0c-d28d-4c48-9983-35b323d6ab8b" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.Reference.BAPI_BANKACCT_GET_DETAIL_Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="BAPI_BANKACCT_GET_DETAIL_Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MethodMessageOperation" OID="1c97656d-257c-4de1-873f-7e2371b7a2c5" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="GetAccountDetails" />
+                <om:Property Name="OperationDirection" Value="Response" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="GetAccountDetails_response" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="bf8d66f7-d94a-493b-9c21-71169a62063d" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.Reference.BAPI_BANKACCT_GET_DETAIL_Response" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="GetAccountDetailsResult" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="TargetXMLNamespaceAttribute" OID="61bbb464-362c-496e-b90e-2d76ba103652" ParentLink="Module_CLRAttribute" LowerBound="2.1" HigherBound="3.1">
+            <om:Property Name="TargetXMLNamespace" Value="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/SAP/" />
+            <om:Property Name="Signal" Value="False" />
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(true)]
+[Microsoft.XLANGs.BaseTypes.TargetXmlNamespaceAttribute("http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/SAP/")]
+module Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.StubSAPWS_
+{
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.StubSAPWS), "GetAccountDetails", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eRequest)]
+    public messagetype GetAccountDetails_request
+    {
+        body Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.Reference.BAPI_BANKACCT_GET_DETAIL_Request BAPI_BANKACCT_GET_DETAIL_Request;
+    };
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.StubSAPWS), "GetAccountDetails", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eResponse)]
+    public messagetype GetAccountDetails_response
+    {
+        body Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.Reference.BAPI_BANKACCT_GET_DETAIL_Response GetAccountDetailsResult;
+    };
+    [Microsoft.XLANGs.BaseTypes.WSDLProxyName(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.StubSAPWS))]
+    public porttype StubSAPWS
+    {
+        requestresponse GetAccountDetails
+        {
+            Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.StubSAPWS_.GetAccountDetails_request, Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Adapter.StubSAPWS.StubSAPWS_.GetAccountDetails_response
+        };
+    };
+}
+

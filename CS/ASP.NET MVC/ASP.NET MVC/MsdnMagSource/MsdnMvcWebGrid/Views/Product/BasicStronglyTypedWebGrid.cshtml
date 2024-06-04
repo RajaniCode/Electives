@@ -1,0 +1,35 @@
+﻿@model IEnumerable<MsdnMvcWebGrid.Domain.Product>
+@using MsdnMvcWebGrid.Infrastructure;
+@using MsdnMvcWebGrid.Domain;
+@{
+    ViewBag.Title = "Basic Strongly-Typed Web Grid";
+}
+
+<h2>Basic Strongly-Typed Web Grid</h2>
+
+
+<div id="grid">
+
+@{
+    //var grid = new WebGrid<Product>(Model);
+    var grid = Html.Grid(Model);
+}
+@* Simple grid *@
+@*@grid.GetHtml()*@
+
+
+@*Grid with simple colunn customisation*@
+@*@grid.GetHtml(columns: grid.Columns(
+        grid.Column("Name"),
+        grid.Column("ListPrice", header:"List Price")
+        )
+    )
+*@
+
+@*Grid with more advanced column customisation*@
+@grid.GetHtml(columns: grid.Columns(
+        grid.Column("Name", format: @<text>@Html.ActionLink(item.Name, "Details", "Product", new { id = item.ProductId }, null)</text>),
+        grid.Column("ListPrice", header: "List Price", format: @<text>@item.ListPrice.ToString("0.00")</text>)
+        )
+    )
+</div>

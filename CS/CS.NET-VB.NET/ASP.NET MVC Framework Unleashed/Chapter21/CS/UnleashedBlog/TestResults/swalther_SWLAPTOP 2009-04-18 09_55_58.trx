@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="ad91bd08-3989-4b9b-b81f-a74c189dc646" name="swalther@SWLAPTOP 2009-04-18 09:55:58" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="fece02a5-11e5-4b93-8a77-897ec71bb271">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\TestResults\swalther_SWLAPTOP 2009-04-18 09_55_58">
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\System.ComponentModel.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\Microsoft.Web.Mvc.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\bin\UnleashedBlog.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="SWLAPTOP" outcome="Error" timestamp="2009-04-18T09:56:23.5592306-07:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <Times creation="2009-04-18T09:55:58.9142306-07:00" queuing="2009-04-18T09:56:02.1492306-07:00" start="2009-04-18T09:56:02.3862306-07:00" finish="2009-04-18T09:56:23.5602306-07:00" />
+  <TestDefinitions>
+    <UnitTest name="BlogEntriesIncludeCommentCount" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="f105bd95-7541-6f56-d4cd-d2831cced14a">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="52b66829-f01c-4901-a7bf-bbd7701d1285" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.CommentControllerTests, UnleashedBlog.Tests" name="BlogEntriesIncludeCommentCount" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="f105bd95-7541-6f56-d4cd-d2831cced14a" executionId="63ba3983-c6fc-49bb-b7e2-bf22fdc45e37" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="63ba3983-c6fc-49bb-b7e2-bf22fdc45e37" testId="f105bd95-7541-6f56-d4cd-d2831cced14a" testName="BlogEntriesIncludeCommentCount" computerName="SWLAPTOP" duration="00:00:21.0420000" startTime="2009-04-18T09:56:02.5182306-07:00" endTime="2009-04-18T09:56:23.5602306-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    </UnitTestResult>
+  </Results>
+</TestRun>

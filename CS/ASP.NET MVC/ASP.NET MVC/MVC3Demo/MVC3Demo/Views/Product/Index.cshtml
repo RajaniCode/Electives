@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Part 2 - MVC 3 Demo ";
+}
+<div style="width: 100%">
+    <div id="ProductListDiv">
+        @{Html.RenderAction("ProductList");}
+    </div>
+    <div id="ProductDetailDiv">
+        @{Html.RenderAction("ProductDetail");}
+    </div>
+</div>
+<script language="javascript" type="text/javascript">
+
+    function onLinkClick(strPrdCode) {
+
+        var product = { 'strPrdCode': strPrdCode };
+
+        $.ajax({
+            type: "POST",
+            cache: false,
+            url: 'Product/ProductDetail',
+            data: product,
+            success: function (data, xhr, settings) {
+
+                $('#ProductDetailDiv').html(data);                
+
+            },
+            error: function (xhr, textStatus, error) {
+
+                $('#ProductDetailDiv').html(textStatus);
+
+            }
+        });
+
+    }
+
+</script>

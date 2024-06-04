@@ -1,0 +1,24 @@
+<p:Activity mc:Ignorable="" x:Class="WCF_ServiceHost.WF_DataService" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:p1="http://schemas.microsoft.com/netfx/2009/xaml/servicemodel" xmlns:p2="http://tempuri.org/" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:w="clr-namespace:WCF_ServiceHost;assembly=WCF_ServiceHost" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <p:Sequence DisplayName="WF_WCFService" sad:XamlDebuggerXmlReader.FileName="G:\VS2010_Practice\WCF\Mahesh_WCF_WF_ServiceHostClient\WCF_ServiceHost\WF_DataService.xaml">
+    <p:Sequence DisplayName="WF_WCFServiceReceiveSendReply">
+      <p:Sequence.Variables>
+        <p:Variable x:TypeArguments="p1:CorrelationHandle" Name="__Handle" />
+        <p:Variable x:TypeArguments="w:clsOutput" Name="DsOp" />
+        <p:Variable x:TypeArguments="w:CDataAccess" Name="objDAL" />
+        <p:Variable x:TypeArguments="w:clsInput" Name="objInput" />
+      </p:Sequence.Variables>
+      <p1:Receive x:Name="__ReferenceID0" CanCreateInstance="True" DisplayName="Receive Input" OperationName="GetData" ServiceContractName="p2:IService" ValueType="w:clsInput">
+        <p1:Receive.AdditionalCorrelations>
+          <p:InArgument x:TypeArguments="p1:CorrelationHandle" x:Key="ChannelBasedCorrelation">[__Handle]</p:InArgument>
+        </p1:Receive.AdditionalCorrelations>
+        <p:OutArgument x:TypeArguments="w:clsInput">[objInput]</p:OutArgument>
+      </p1:Receive>
+      <p:InvokeMethod x:TypeArguments="w:clsOutput" MethodName="RetDs" Result="[DsOp]" TargetType="w:CDataAccess">
+        <p:InArgument x:TypeArguments="w:clsInput">[objInput]</p:InArgument>
+      </p:InvokeMethod>
+      <p1:SendReply Request="{x:Reference __ReferenceID0}" DisplayName="Send Output" ValueType="w:clsOutput">
+        <p:InArgument x:TypeArguments="w:clsOutput">[DsOp]</p:InArgument>
+      </p1:SendReply>
+    </p:Sequence>
+  </p:Sequence>
+</p:Activity>

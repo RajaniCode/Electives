@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PaymentTracker/" xmlns:s1="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.LastPaymentRequest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://Microsoft.Sampsles.BizTalk.WoodgroveBank.Schemas.LastPaymentResponse" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PaymentTracker/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PaymentTracker/">
+      <s:import namespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.LastPaymentRequest" />
+      <s:import namespace="http://Microsoft.Sampsles.BizTalk.WoodgroveBank.Schemas.LastPaymentResponse" />
+      <s:element name="GetLastPayments">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:LastPaymentRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetLastPaymentsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:LastPaymentResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.LastPaymentRequest">
+      <s:element name="LastPaymentRequest" type="s1:LastPaymentRequest" />
+      <s:complexType name="LastPaymentRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="CustomerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Sampsles.BizTalk.WoodgroveBank.Schemas.LastPaymentResponse">
+      <s:element name="LastPaymentResponse" type="s2:LastPaymentResponse" />
+      <s:complexType name="LastPaymentResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ResponseStatus" type="s2:LastPaymentResponseResponseStatus" />
+          <s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Payment" type="s2:LastPaymentResponsePayment" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="CustomerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="LastPaymentResponseResponseStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Error" type="s2:LastPaymentResponseResponseStatusError" />
+        </s:sequence>
+        <s:attribute name="Result" type="s:string" />
+      </s:complexType>
+      <s:complexType name="LastPaymentResponseResponseStatusError">
+        <s:attribute name="ErrorNumber" type="s:string" />
+        <s:attribute name="ErrorDescription" type="s:string" />
+        <s:attribute name="ErrorSource" type="s:string" />
+      </s:complexType>
+      <s:complexType name="LastPaymentResponsePayment">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="DateLastPayment" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="AmountLastPayment" type="s:decimal" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetLastPaymentsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetLastPayments" />
+  </wsdl:message>
+  <wsdl:message name="GetLastPaymentsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetLastPaymentsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="StubPaymentTrackerWebServiceSoap">
+    <wsdl:operation name="GetLastPayments">
+      <wsdl:input message="tns:GetLastPaymentsSoapIn" />
+      <wsdl:output message="tns:GetLastPaymentsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StubPaymentTrackerWebServiceSoap" type="tns:StubPaymentTrackerWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetLastPayments">
+      <soap:operation soapAction="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PaymentTracker/GetLastPayments" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="StubPaymentTrackerWebServiceSoap12" type="tns:StubPaymentTrackerWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetLastPayments">
+      <soap12:operation soapAction="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PaymentTracker/GetLastPayments" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StubPaymentTrackerWebService">
+    <wsdl:port name="StubPaymentTrackerWebServiceSoap" binding="tns:StubPaymentTrackerWebServiceSoap">
+      <soap:address location="http://localhost:4020/PaymentTrack/StubPmntTrckWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="StubPaymentTrackerWebServiceSoap12" binding="tns:StubPaymentTrackerWebServiceSoap12">
+      <soap12:address location="http://localhost:4020/PaymentTrack/StubPmntTrckWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

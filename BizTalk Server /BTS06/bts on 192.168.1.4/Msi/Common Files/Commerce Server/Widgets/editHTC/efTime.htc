@@ -1,0 +1,584 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.efTime' tagName="eftime" lightweight=true>
+	<PUBLIC>
+		<EVENT NAME='onError'		ID='evtError'></EVENT><!-- fired when developer error occurs -->
+		<EVENT NAME='onRequire'		ID='evtRequired'></EVENT>
+		<EVENT NAME='onChange'		ID='evtChange'></EVENT>
+		<EVENT NAME='onValid'		ID='evtValid'></EVENT>
+		<EVENT NAME='onBrowse'		ID='evtBrowse'></EVENT>
+		<EVENT NAME='onBeginChange'	ID='evtBeginChange'></EVENT>
+
+		<METHOD NAME='initialize' />
+		<METHOD NAME='focus'		INTERNALNAME='onFocus' />
+		<METHOD NAME='resetDefault'	INTERNALNAME='ResetDefault' />
+	<!-- UNSUPPORTED: PRIVATE METHODS -->
+		<METHOD NAME='resetReadOnly' />
+
+		<PROPERTY NAME='dirty'		GET='bGetDirty'		/>
+		<PROPERTY NAME='required'	GET='bGetRequired'	/>
+		<PROPERTY NAME='valid'		GET='bGetValid'		/>
+		<PROPERTY NAME='disabled'	GET='bGetDisabled'	PUT='SetDisabled' />
+		<PROPERTY NAME='readonly'	GET='bGetReadonly'	PUT='SetReadonly' />
+		<PROPERTY NAME='value'		GET='sGetData'		PUT='SetData' />
+		<PROPERTY NAME='prompt'		GET='sGetPrompt'	PUT='SetPrompt' />
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_DefaultError_ErrorMessage	= "validation error in time (hh:mm - 24hr)"
+		const L_DefaultTimePrompt_Text		= "enter a time (hh:mm)"
+		const L_ValidationError_ErrorMessage = "Validation error"
+		const L_PickerButtonWidth_Number = 16	'width in pixels of arrow/ellipsis buttons
+
+		dim m_bDirty, m_bDebug, m_bDisabled, m_bReadonly, m_bBrowse, m_bBrowseReadonly, _
+			m_bValid, m_bFieldRequired, m_bRequired, m_bMasterReadOnly, m_bSuppressErrors, _
+			m_fnOnError, m_fnOnBrowse, m_fnOnChange, m_fnOnRequire, m_fnOnValid, _
+			m_sType, m_sError, m_sPrompt, m_nMinMinutes, m_nMaxMinutes, _
+			m_elInput, m_elBrowseBtn, m_elPrompt, m_sValue, m_sDefault, m_bLoading
+
+		'button name constants (webdings)
+		const ELLIPSIS = "&hellip;"
+		'keycode constants
+		const KEYCODE_ESC		= 27
+		const KEYCODE_ENTER		= 13
+		const KEYCODE_DELETE	= 46
+		const KEYCODE_BACKSPACE	= 8
+
+		const CHAR_COLON = ":"
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		m_bDirty = false			'true if control's value has changed
+		m_bRequired = true			'true if marked required and currently empty
+		m_bValid = false			'true if value is valid
+		m_bSuppressErrors = false	'true supresses validation alert
+		set m_elBrowseBtn = nothing	'holds browse button, if any
+		m_bLoading = true
+
+		sub Initialize(xmlNode, sValue)
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			dim xmlTemp, sTemp, elTable, elRow, elCell, aTimeParts, nMax, nMin
+
+			m_sType = "time"
+			element.innerText = ""
+
+			'get event handler function names
+			m_fnOnBrowse = xmlNode.getAttribute("onbrowse")
+			m_fnOnChange = xmlNode.getAttribute("onchange")
+			m_fnOnRequire = xmlNode.getAttribute("onrequire")
+			m_fnOnValid = xmlNode.getAttribute("onvalid")
+			m_fnOnError = xmlNode.getAttribute("onerror")
+			'check if browse enabled
+			sTemp = xmlNode.getAttribute("browse")
+			m_bBrowse = CBool(not isNull(m_fnOnBrowse) or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+			sTemp = xmlNode.getAttribute("browsereadonly")
+			m_bBrowseReadonly = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			'get prompt text
+			set xmlTemp = xmlNode.selectSingleNode("prompt")
+			if not xmlTemp is nothing then
+				m_sPrompt = xmlTemp.text
+			else
+				m_sPrompt = L_DefaultTimePrompt_Text
+			end if
+
+			m_sDefault = xmlNode.getAttribute("default")
+			if sValue = "" and not isNull(m_sDefault) then sValue = m_sDefault
+
+			'default invalid to now
+			if not bIsTime(sValue) and sValue <> "" then sValue = Hour(Now()) & CHAR_COLON & Minute(Now())
+			if sValue <> "" then sValue = sGetFormattedTime(sValue)
+			element.title = sValue
+			m_sValue = sValue
+
+			'create container table
+			set elTable = element.appendChild(element.document.createElement("TABLE"))
+			with elTable
+				.style.tableLayout = "fixed"
+				.width = "100%"
+				.cellSpacing = 0
+				.cellPadding = 0
+			end with
+			set elRow = elTable.insertRow()
+			set elCell = elRow.insertCell()
+			elCell.style.padding = 0
+			'create input for displaying value
+			set m_elInput = element.document.createElement("INPUT")
+			m_elInput.type = "text"
+			set m_elInput = elCell.appendChild(m_elInput)
+			with m_elInput
+				.value = sValue
+				.id = "prop_" & element.id
+				.name = element.id
+				.maxLength = 8
+				.className = "efBorderless"
+				if sValue = "" then .style.display = "none"
+				.attachEvent "onpropertychange", GetRef("onValueChange")
+				.attachEvent "onblur", GetRef("onBlur")
+				.attachEvent "onkeydown", GetRef("onKeyDown")
+				.attachEvent "onkeypress", GetRef("onKeyPress")
+				.attachEvent "onchange", GetRef("onChange")
+			end with
+			'create span for displaying prompt
+			set m_elPrompt = elCell.appendChild(element.document.createElement("DIV"))
+			with m_elPrompt
+				.id = "prompt_" & element.id
+				.innerText = m_sPrompt
+				.title = m_sPrompt
+				if sValue <> "" then .style.display = "none"
+				.className = "efPrompt efBorderless"
+				.nowrap = true
+				.tabindex = 0
+				.attachEvent "onfocus", GetRef("onClickPrompt")
+				.attachEvent "onclick", GetRef("onClickPrompt")
+				element.attachEvent "onfocus", GetRef("onClickPrompt")
+				element.attachEvent "onclick", GetRef("onClickPrompt")
+			end with
+
+			if m_bBrowse then
+				'if browsable then add browse button and attach browse event
+				set elCell = elRow.insertCell()
+				elCell.style.padding = 0
+				elCell.width = L_PickerButtonWidth_Number
+				set m_elBrowseBtn = element.appendChild(element.document.createElement("BUTTON"))
+				with m_elBrowseBtn
+					.id = "browse_" & element.id
+					.disabled = true
+					.attachEvent "onclick", GetRef("onBrowseClick")
+					.className = "efEllipsisBtn"
+					.innerHTML = ELLIPSIS
+					.attachEvent "onkeydown", GetRef("onBrowseKeyDown")
+					set xmlTemp = xmlNode.selectSingleNode("browsetooltip")
+					if not xmlTemp is nothing then .title = xmlTemp.text
+				end with
+				if not isNull(m_fnOnBrowse) then element.attachEvent "onbrowse", GetRef("CallBrowseHandler")
+			end if
+
+			'get validation error msg, charmask, and min & max
+			if not xmlNode.selectSingleNode("error") is nothing then m_sError = xmlNode.selectSingleNode("error").text
+			if m_sError = "" then m_sError = L_DefaultError_ErrorMessage
+			nMin = xmlNode.getAttribute("min")
+			m_nMinMinutes = 0
+			if not(isNull(nMin) or nMin = "" or not bIsTime(nMin)) then
+				nMin = sGetFormattedTime(nMin)
+				aTimeParts = split(nMin, CHAR_COLON)
+				if UBOUND(aTimeParts) = 1 then m_nMinMinutes = (CInt(aTimeParts(0)) * 60) + CInt(aTimeParts(1))
+			end if
+			nMax = xmlNode.getAttribute("max")
+			m_nMaxMinutes = 23 * 60 + 59
+			if not(isNull(nMax) or nMax = "" or not bIsTime(nMax)) then
+				nMax = sGetFormattedTime(nMax)
+				aTimeParts = split(nMax, CHAR_COLON)
+				if UBOUND(aTimeParts) = 1 then m_nMaxMinutes = (CInt(aTimeParts(0)) * 60) + CInt(aTimeParts(1))
+			end if
+
+			'get required, readonly, disabled
+			sTemp = xmlNode.getAttribute("required")
+			m_bFieldRequired = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			sTemp = xmlNode.getAttribute("readonly")
+			m_bMasterReadOnly = CBool(m_bBrowseReadonly or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+			readonly = m_bMasterReadOnly
+			sTemp = xmlNode.getAttribute("disabled")
+			disabled = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			'attach event handlers
+			if not isNull(m_fnOnChange) then element.attachEvent "onchange", GetRef("CallChangeHandler")
+			if not isNull(m_fnOnRequire) then element.attachEvent "onrequire", GetRef("CallRequireHandler")
+			if not isNull(m_fnOnValid) then element.attachEvent "onvalid", GetRef("CallValidHandler")
+			if not isNull(m_fnOnError) then element.attachEvent "onerror", GetRef("CallErrorHandler")
+			'fire events and show invalid
+			SetRequired(sValue)
+			SetValid(sValue)
+			ShowInvalid()
+			m_bLoading = false
+		end sub
+
+		function sGetFormattedTime(sValue)
+			dim sMinute, dtTime
+			dtTime = dtGetTimeValue(sValue)
+			sMinute = Minute(dtTime)
+			if sMinute < 10 then sMinute = "0" & sMinute
+			sGetFormattedTime = Hour(dtTime) & CHAR_COLON & sMinute
+		end function
+
+		function dtGetTimeValue(sValue)
+			dim aTimeParts
+			aTimeParts = split(sValue, CHAR_COLON)
+			dtGetTimeValue = TimeSerial(CInt(aTimeParts(0)), CInt(aTimeParts(1)), 0)
+		end function
+
+		sub onBrowseKeyDown()
+			dim evt
+			set evt = window.event
+			if not m_bDisabled then
+				if evt.keyCode = KEYCODE_ENTER then
+					'enter same as click item
+					onBrowseClick()
+					evt.returnValue = false
+				end if
+			end if
+		end sub
+
+		sub onBrowseClick()
+			dim evt
+			if not m_bDisabled then
+				'fire browse event
+				set evt = createEventObject()
+				evt.setAttribute "value", m_elInput.value
+				evt.setAttribute "type", "browse"
+				evtBrowse.fire(evt)
+			end if
+		end sub
+
+		sub CallBrowseHandler()
+			if window.event.type <> "browse" then exit sub
+			on error resume next
+			execute("call window." & m_fnOnBrowse)
+			on error goto 0
+		end sub
+
+		sub CallChangeHandler()
+			on error resume next
+			execute("call window." & m_fnOnChange)
+			on error goto 0
+		end sub
+
+		sub CallRequireHandler()
+			on error resume next
+			execute("call window." & m_fnOnRequire)
+			on error goto 0
+		end sub
+
+		sub CallValidHandler()
+			on error resume next
+			execute("call window." & m_fnOnValid)
+			on error goto 0
+		end sub
+
+		sub CallErrorHandler()
+			on error resume next
+			execute("call window." & m_fnOnError)
+			on error goto 0
+		end sub
+
+		sub sGetPrompt(sPrompt)
+			sGetPrompt = m_sPrompt
+		end sub
+
+		sub SetPrompt(sPrompt)
+			m_sPrompt = sPrompt
+		end sub
+
+		sub ShowPrompt()
+			dim nWidth
+			if m_elInput.value = "" and not (m_bReadonly or m_bDisabled) then
+				nWidth = m_elInput.style.pixelWidth
+				m_elPrompt.style.display = "block"
+				if nWidth > 0 then m_elPrompt.style.width = nWidth
+				m_elInput.style.display = "none"
+				ShowInvalid()
+			end if
+		end sub
+
+		sub HidePrompt()
+			if m_elPrompt.style.display <> "none" then
+				m_elPrompt.style.display = "none"
+				m_elInput.style.display = "block"
+			end if
+		end sub
+
+		sub onClickPrompt()
+			HidePrompt()
+			focus()
+		end sub
+
+		function bGetDisabled()
+			bGetDisabled = m_bDisabled
+		end function
+
+		sub SetDisabled(bDisabled)
+			m_bDisabled = bDisabled
+			if not (m_bReadonly or m_bBrowseReadonly) then
+				m_elInput.readonly = m_bDisabled
+				if m_bDisabled then
+					element.style.cursor = "default"
+					m_elInput.style.cursor = "default"
+					m_elInput.tabIndex = -1
+				else
+					element.style.cursor = ""
+					m_elInput.style.cursor = ""
+					m_elInput.tabIndex = 0
+				end if
+			end if
+			if m_bDisabled then
+				SetRequired("__")
+				element.className = element.className & " efDisabled"
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = -1
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "none"
+				end if
+			else
+				if m_bFieldRequired then SetRequired(m_sValue)
+				m_bDirty = false
+				m_bValid = true
+				element.className = replace(element.className, " efDisabled", "")
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = 0
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "block"
+				end if
+			end if
+			if m_bReadonly or m_bDisabled then
+				HidePrompt()
+			end if
+		end sub
+
+		function bGetReadonly()
+			bGetReadonly = m_bReadOnly
+		end function
+
+		sub SetReadonly(bReadOnly)
+			m_bReadOnly = bReadOnly
+			m_elInput.readOnly = m_bReadOnly
+			if m_bReadOnly then
+				if inStr(element.className, "efRead") then
+					if m_bBrowseReadOnly then
+						element.className = replace(element.className, "efReadWrite", "efBrowseReadOnly")
+					else
+						element.className = replace(element.className, "efReadWrite", "efReadOnly")
+					end if
+				else
+					if m_bBrowseReadOnly then
+						element.className = element.className & " efBrowseReadOnly"
+					else
+						element.className = element.className & " efReadOnly"
+					end if
+				end if
+				m_elInput.style.cursor = "default"
+				m_elInput.tabIndex = -1
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = "none"
+					m_elBrowseBtn.tabIndex = -1
+				end if
+			else
+				m_bDirty = false
+				m_bValid = true
+				if inStr(element.className, "efRead") then
+					element.className = replace(element.className, "efReadOnly", "efReadWrite")
+					element.className = replace(element.className, "efBrowseReadOnly", "efReadWrite")
+				else
+					element.className = element.className & " efReadWrite"
+				end if
+				m_elInput.style.cursor = ""
+				m_elInput.tabIndex = 0
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = ""
+					m_elBrowseBtn.tabIndex = 0
+				end if
+			end if
+			if m_bBrowse then m_elBrowseBtn.disabled = bReadOnly
+			if m_bReadonly or m_bDisabled then
+				HidePrompt()
+			end if
+		end sub
+
+		sub ResetReadOnly()
+			SetReadonly(m_bMasterReadOnly)
+		end sub
+
+		function sGetData()
+			sGetData = ""
+			if not isEmpty(m_elInput) then sGetData = m_elInput.value
+		end function
+
+		sub ResetDefault()
+			'reset to default or empty
+			if not isNull(m_sDefault) then
+				SetData(m_sDefault)
+			else
+				SetData("")
+			end if
+			m_bDirty = false
+		end sub
+
+		sub SetData(sValue)
+			dim evt
+			if sValue = m_sValue then exit sub
+			if m_bBrowse then
+				if m_elBrowseBtn.disabled then exit sub
+			end if
+			sValue = trim(sValue)
+			if sValue <> "" and bIsTime(sValue) then sValue = sGetFormattedTime(sValue)
+			element.title = sValue
+			m_elInput.value = sValue
+			m_sValue = sValue
+			HidePrompt()
+			ShowPrompt()
+			if not (m_bReadonly and not m_bBrowseReadonly) then
+				SetRequired(sValue)
+				SetValid(sValue)
+				ShowInvalid()
+				if not m_bValid and not m_bSuppressErrors and _
+					not (element.style.display = "none" or _
+					element.parentElement.style.display = "none") then
+					msgbox m_sError, vbOKOnly, L_ValidationError_ErrorMessage
+					m_bSuppressErrors = true
+				end if
+			end if
+			if not m_bDisabled then
+				set evt = createEventObject()
+				evt.setAttribute "type", "change"
+				evtChange.fire(evt)
+				m_bDirty = true
+			end if
+		end sub
+
+		function bIsTime(sValue)
+			dim aTimeParts
+			bIsTime = false
+			if sValue <> "" then
+				aTimeParts = split(sValue, CHAR_COLON)
+				if UBOUND(aTimeParts) = 1 then
+					if isNumeric(aTimeParts(0)) and isNumeric(aTimeParts(1)) then
+						if (aTimeParts(0) >= 0 and aTimeParts(0) <= 23) and _
+							(aTimeParts(1) >= 0 and aTimeParts(1) <= 59) then
+							bIsTime = true
+						end if
+					end if
+				end if
+			end if
+		end function
+
+		sub onKeyDown()
+			dim evt
+			set evt = window.event
+			if not evt.ctrlKey and evt.keyCode > 190 then
+				evt.returnValue = false
+			else
+				window.setTimeout GetRef("fireBeginChange"), 1
+			end if
+		end sub
+
+		sub fireBeginChange()
+			dim evt
+			if m_elInput.value <> m_sValue then
+				m_bDirty = true
+				set evt = createEventObject()
+				evt.setAttribute "type", "beginchange"
+				evtBeginChange.fire(evt)
+			end if
+		end sub
+
+		sub onKeyPress()
+			dim evt
+			if m_bReadOnly or m_bDisabled then exit sub
+			set evt = window.event
+			if evt.altKey then evt.returnValue = false
+			select case evt.keyCode
+				case KEYCODE_ENTER, KEYCODE_ESC
+					'ignore enter & esc
+					evt.returnValue = false
+					evt.cancelBubble = true
+				case Asc(CHAR_COLON)
+					'allow colon
+				case else
+					'allow only digits
+					if evt.keyCode < asc("0") or evt.keyCode > asc("9") then
+						evt.returnValue = false
+					end if
+			end select
+		end sub
+
+		sub onValueChange()
+			if window.event.propertyName = "value" then
+				m_bDirty = true
+				element.title = m_elInput.value
+				SetRequired(m_elInput.value)
+				SetValid(m_elInput.value)
+				ShowInvalid()
+			end if
+		end sub
+
+		sub SetRequired(sValue)
+			dim bRequired, evt
+			bRequired = cBool(m_bFieldRequired and sValue = "")
+			if m_bRequired <> bRequired or m_bLoading then
+				m_bRequired = bRequired
+				if element.style.display = "none" or _
+					element.parentElement.style.display = "none" then exit sub
+				set evt = createEventObject()
+				evt.setAttribute "required", m_bRequired
+				evt.setAttribute "type", "require"
+				evtRequired.fire(evt)
+			end if
+		end sub
+
+		function bGetRequired()
+			bGetRequired = m_bRequired
+		end function
+
+		function bGetDirty()
+			bGetDirty = m_bDirty
+		end function
+
+		function bGetValid()
+			bGetValid = m_bValid
+		end function
+
+		sub SetValid(sValue)
+			dim bValid, nValueMinutes, aTimeParts, evt
+			bValid = true
+			if sValue <> "" and not m_bDisabled then
+				if bIsTime(sValue) then
+					aTimeParts = split(sValue, CHAR_COLON)
+					nValueMinutes = (CInt(aTimeParts(0)) * 60) + CInt(aTimeParts(1))
+					if m_nMinMinutes > nValueMinutes then bValid = false
+					if nValueMinutes > m_nMaxMinutes then bValid = false
+				else
+					bValid = false
+				end if
+			end if
+			if m_bValid <> bValid or m_bLoading then
+				m_bValid = bValid
+				if element.style.display = "none" or _
+					element.parentElement.style.display = "none" then exit sub
+				set evt = createEventObject()
+				evt.setAttribute "valid", m_bValid
+				evt.setAttribute "type", "valid"
+				evtValid.fire(evt)
+			end if
+		end sub
+
+		sub ShowInvalid()
+ 			if m_bValid and not m_bRequired then
+				element.className = replace(element.className, " efInvalid", "")
+				m_bSuppressErrors = false
+			else
+				element.className = element.className & " efInvalid"
+			end if
+ 		end sub
+
+		sub onFocus()
+			if m_elInput.style.display = "none" then HidePrompt()
+			on error resume next
+			if not m_elInput.readonly and m_elInput.style.display <> "none" then
+				m_elInput.focus()
+			elseif (m_bDisabled or m_bReadonly) and m_bBrowse then
+				if not m_elBrowseBtn.disabled then m_elBrowseBtn.focus()
+			end if
+		end sub
+
+		sub onBlur()
+			ShowPrompt()
+		end sub
+
+		sub onChange()
+			if m_sValue <> m_elInput.value then
+				SetData(m_elInput.value)
+			end if
+		end sub
+	</SCRIPT>
+</PUBLIC:COMPONENT>

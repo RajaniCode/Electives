@@ -1,0 +1,215 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SPMpInhModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="SPMpInhModelStoreContainer">
+          <EntitySet Name="People" EntityType="SPMpInhModel.Store.People" store:Type="Tables" Schema="SPIH" />
+        </EntityContainer>
+        <EntityType Name="People">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="HireDate" Type="date" />
+          <Property Name="EnrollmentDate" Type="date" />
+          <Property Name="SpecialNeeds" Type="varchar" MaxLength="50" />
+          <Property Name="Category" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="DeletePeople" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" 
+				  ParameterTypeSemantics="AllowImplicitConversion" Schema="SPIH">
+          <Parameter Name="personid" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertPeople" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" 
+				  ParameterTypeSemantics="AllowImplicitConversion" Schema="SPIH">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="hiredate" Type="date" Mode="In" />
+          <Parameter Name="enrollmentdate" Type="date" Mode="In" />
+          <Parameter Name="specialneeds" Type="varchar" Mode="In" />
+          <Parameter Name="category" Type="int" Mode="In" />
+        </Function>
+        <Function Name="UpdatePeople" Aggregate="false" BuiltIn="false" NiladicFunction="false" 
+				  IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="SPIH">
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="hiredate" Type="date" Mode="In" />
+          <Parameter Name="enrollmentdate" Type="date" Mode="In" />
+          <Parameter Name="specialneeds" Type="varchar" Mode="In" />
+          <Parameter Name="personid" Type="int" Mode="In" />
+        </Function>
+		<Function Name="InsertStudent" IsComposable="false">
+			<CommandText>
+				exec [SPIH].InsertPeople @name = @name,@enrollmentdate = @enrollmentdate,@category = 1
+			</CommandText>
+			<Parameter Name="name" Type="varchar" Mode="In" />
+			<Parameter Name="enrollmentdate" Type="date" Mode="In" />
+		</Function>
+		<Function Name="UpdateStudent" IsComposable="false">
+			<CommandText>
+				exec SPIH.[UpdatePeople]@name = @name,@enrollmentdate = @enrollmentdate,@personid = @personid
+			</CommandText>
+			<Parameter Name="name" Type="varchar" Mode="In" />
+			<Parameter Name="enrollmentdate" Type="date" Mode="In" />
+			<Parameter Name="personid" Type="int" Mode="In" />
+		</Function>
+		<Function Name="InsertSpecialStudent" IsComposable="false">
+			<CommandText>
+				exec SPIH.InsertPeople
+				@name = @name,@enrollmentdate = @enrollmentdate,@specialneeds = @specialneeds,@category = 3
+			</CommandText>
+			<Parameter Name="name" Type="varchar" Mode="In" />
+			<Parameter Name="enrollmentdate" Type="date" Mode="In" />
+			<Parameter Name="specialneeds" Type="varchar" Mode="In" />
+		</Function>
+		<Function Name="UpdateSpecialStudent" IsComposable="false">
+			<CommandText>
+				exec SPIH.UpdatePeople
+				@name = @name,@enrollmentdate = @enrollmentdate,@specialneeds = @specialneeds,@category = 3,@personid = @personid
+			</CommandText>
+			<Parameter Name="name" Type="varchar" Mode="In" />
+			<Parameter Name="enrollmentdate" Type="date" Mode="In" />
+			<Parameter Name="specialneeds" Type="varchar" Mode="In" />
+			<Parameter Name="personid" Type="int" Mode="In" />
+		</Function>
+		<Function Name="InsertEmployee" IsComposable="false">
+			<CommandText>
+				exec SPIH.InsertPeople
+				@name = @name,@hiredate = @hiredate,@category = 2
+			</CommandText>
+			<Parameter Name="name" Type="varchar" Mode="In" />
+			<Parameter Name="hiredate" Type="date" Mode="In" />
+		</Function>
+		<Function Name="UpdateEmployee" IsComposable="false">
+			<CommandText>
+				exec SPIH.UpdatePeople
+				@name = @name,@hiredate = @hiredate,@category = 2,@personid = @personid
+			</CommandText>
+			<Parameter Name="name" Type="varchar" Mode="In" />
+			<Parameter Name="hiredate" Type="date" Mode="In" />
+			<Parameter Name="personid" Type="int" Mode="In" />
+		</Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SPMpInhModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="SPInhMapping">
+          <EntitySet Name="Persons" EntityType="SPMpInhModel.Person" />
+        </EntityContainer>
+        <EntityType Name="Person" Abstract="true">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Student" BaseType="SPMpInhModel.Person" >
+          <Property Name="EnrollmentDate" Type="DateTime" Nullable="true" /></EntityType>
+        <EntityType Name="Employee" BaseType="SPMpInhModel.Person" >
+          <Property Name="HireDate" Type="DateTime" Nullable="true" /></EntityType>
+        <EntityType Name="SpecialStudent" BaseType="SPMpInhModel.Student" >
+          <Property Name="SpecialNeeds" Type="String" Nullable="true" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="SPMpInhModelStoreContainer" CdmEntityContainer="SPInhMapping">
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="IsTypeOf(SPMpInhModel.Person)">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SPMpInhModel.Employee)">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <Condition ColumnName="Category" Value="2" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMpInhModel.Student">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
+                <Condition ColumnName="Category" Value="1" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SPMpInhModel.SpecialStudent)">
+              <MappingFragment StoreEntitySet="People">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="SpecialNeeds" ColumnName="SpecialNeeds" />
+                <Condition ColumnName="Category" Value="3" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMpInhModel.Student">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMpInhModel.Store.InsertStudent">
+                  <ScalarProperty Name="Name" ParameterName="name" />
+                  <ScalarProperty Name="EnrollmentDate" ParameterName="enrollmentdate" />
+                  <ResultBinding Name="PersonId" ColumnName="personid" /></InsertFunction>
+                <UpdateFunction FunctionName="SPMpInhModel.Store.UpdateStudent">
+                  <ScalarProperty Name="PersonId" ParameterName="personid" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="name" Version="Current" />
+                  <ScalarProperty Name="EnrollmentDate" ParameterName="enrollmentdate" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="SPMpInhModel.Store.DeletePeople" >
+                  <ScalarProperty Name="PersonId" ParameterName="personid" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMpInhModel.Employee">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMpInhModel.Store.InsertEmployee">
+                  <ScalarProperty Name="Name" ParameterName="name" />
+                  <ScalarProperty Name="HireDate" ParameterName="hiredate" />
+                  <ResultBinding Name="PersonId" ColumnName="personid" /></InsertFunction>
+                <UpdateFunction FunctionName="SPMpInhModel.Store.UpdateEmployee">
+                  <ScalarProperty Name="PersonId" ParameterName="personid" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="name" Version="Current" />
+                  <ScalarProperty Name="HireDate" ParameterName="hiredate" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="SPMpInhModel.Store.DeletePeople" >
+                  <ScalarProperty Name="PersonId" ParameterName="personid" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping>
+            <EntityTypeMapping TypeName="SPMpInhModel.SpecialStudent">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="SPMpInhModel.Store.InsertSpecialStudent">
+                  <ScalarProperty Name="EnrollmentDate" ParameterName="enrollmentdate" />
+                  <ScalarProperty Name="Name" ParameterName="name" />
+                  <ScalarProperty Name="SpecialNeeds" ParameterName="specialneeds" />
+                  <ResultBinding Name="PersonId" ColumnName="personid" /></InsertFunction>
+                <UpdateFunction FunctionName="SPMpInhModel.Store.UpdateSpecialStudent">
+                  <ScalarProperty Name="PersonId" ParameterName="personid" Version="Current" />
+                  <ScalarProperty Name="EnrollmentDate" ParameterName="enrollmentdate" Version="Current" />
+                  <ScalarProperty Name="Name" ParameterName="name" Version="Current" />
+                  <ScalarProperty Name="SpecialNeeds" ParameterName="specialneeds" Version="Current" /></UpdateFunction>
+                <DeleteFunction FunctionName="SPMpInhModel.Store.DeletePeople" >
+                  <ScalarProperty Name="PersonId" ParameterName="personid" /></DeleteFunction></ModificationFunctionMapping></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="ProcMappingToInheritance">
+        <EntityTypeShape EntityType="SPMpInhModel.Person" Width="1.5" PointX="3.375" PointY="1.25" Height="1.4033821614583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="SPMpInhModel.Student" Width="1.5" PointX="2.375" PointY="3.125" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="SPMpInhModel.Student">
+          <ConnectorPoint PointX="3.625" PointY="2.6533821614583331" />
+          <ConnectorPoint PointX="3.625" PointY="3.125" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="SPMpInhModel.Employee" Width="1.5" PointX="5.375" PointY="2.25" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="SPMpInhModel.Employee" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.875" PointY="2.4516910807291667" />
+          <ConnectorPoint PointX="5.375" PointY="2.4516910807291667" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="SPMpInhModel.SpecialStudent" Width="1.5" PointX="3.125" PointY="5.125" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="SPMpInhModel.SpecialStudent">
+          <ConnectorPoint PointX="3.5" PointY="4.3360807291666665" />
+          <ConnectorPoint PointX="3.5" PointY="5.125" /></InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

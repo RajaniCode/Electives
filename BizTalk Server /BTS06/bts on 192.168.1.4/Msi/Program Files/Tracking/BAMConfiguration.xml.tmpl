@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BAMConfiguration xmlns="http://schemas.microsoft.com/BizTalkServer/2004/10/BAM">
+	<GlobalProperty Name="BAMVRoot"></GlobalProperty>
+  <GlobalProperty Name="MaxAlertableActivityViews">49</GlobalProperty>
+  
+	<DeploymentUnit Name="PrimaryImportDatabase">
+		<Property Name="ServerName"></Property>
+		<Property Name="DatabaseName"></Property>
+	</DeploymentUnit>
+	<DeploymentUnit Name="StarSchemaDatabase">
+		<Property Name="ServerName"></Property>
+		<Property Name="DatabaseName"></Property>
+	</DeploymentUnit>
+	<DeploymentUnit Name="AnalysisDatabase">
+		<Property Name="ServerName"></Property>
+		<Property Name="DatabaseName"></Property>
+	</DeploymentUnit>
+	<DeploymentUnit Name="ArchivingDatabase">
+		<Property Name="ServerName"></Property>
+		<Property Name="DatabaseName"></Property>
+	</DeploymentUnit>
+
+	<DeploymentUnit Name="CubeUpdateDTS">
+		<Property Name="ConnectionTimeOut">120</Property>
+		<Property Name="UseEncryption">0</Property>
+	</DeploymentUnit>
+	<DeploymentUnit Name="DataMaintenanceDTS">
+		<Property Name="ConnectionTimeOut">120</Property>
+		<Property Name="UseEncryption">0</Property>
+	</DeploymentUnit>
+	
+	<DeploymentUnit Name="Alert">
+    <Property Name="DBServer"/>
+    <Property Name="ApplicationDatabaseName"/>
+    <Property Name="InstanceDatabaseName"/>
+    <Property Name="GeneratorServerName"/>
+    <Property Name="ProviderServerName"/>
+    <Property Name="DistributorServerName"/>
+    <Property Name="SmtpServerName"/>
+    <Property Name="AlertMailFrom">BizTalkBAM@microsoft.com</Property>
+    <Property Name="FileDropUNC"/>
+  </DeploymentUnit>
+</BAMConfiguration>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="4425fb1b-2a02-4d08-b9ab-e95f6af018f8" name="swalther@SWLAPTOP 2009-04-25 11:06:21" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="106bdcef-bd06-4d81-9b35-f3095fa49fbc">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-04-25 11_06_21">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-04-25T11:06:21.1285813-07:00" queuing="2009-04-25T11:06:24.1875813-07:00" start="2009-04-25T11:06:24.4985813-07:00" finish="2009-04-25T11:06:25.6165813-07:00" />
+  <TestDefinitions>
+    <UnitTest name="TimeIsCached" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="2e3844dc-38d1-82e4-677e-ecb80876652e">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="3d5ae109-4845-4f7c-b27a-5f5e06f1be87" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Controllers.SimpleControllerTests, MvcApplication1.Tests" name="TimeIsCached" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="2e3844dc-38d1-82e4-677e-ecb80876652e" executionId="3d5ae109-4845-4f7c-b27a-5f5e06f1be87" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="3d5ae109-4845-4f7c-b27a-5f5e06f1be87" testId="2e3844dc-38d1-82e4-677e-ecb80876652e" testName="TimeIsCached" computerName="SWLAPTOP" duration="00:00:00.1385314" startTime="2009-04-25T11:06:24.6115813-07:00" endTime="2009-04-25T11:06:25.4025813-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method MvcApplication1.Tests.Controllers.SimpleControllerTests.TimeIsCached threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at MvcApplication1.Tests.Controllers.SimpleControllerTests.TimeIsCached() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\CS\MvcApplication1\MvcApplication1.Tests\Controllers\SimpleControllerTests.cs:line 16
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

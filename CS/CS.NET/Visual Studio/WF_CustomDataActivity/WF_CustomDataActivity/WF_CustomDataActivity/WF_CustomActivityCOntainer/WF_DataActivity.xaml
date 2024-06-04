@@ -1,0 +1,11 @@
+<p:Activity mc:Ignorable="" x:Class="WF_CustomActivityCOntainer.WF_DataActivity" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities/design" xmlns:__WF_DataActivity="clr-namespace:WF_CustomActivityCOntainer;" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:p="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:sad="clr-namespace:System.Activities.Debugger;assembly=System.Activities" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:w="clr-namespace:WF_CustomDataActivity;assembly=WF_CustomDataActivity" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="dbServerName" Type="p:InArgument(x:String)" />
+    <x:Property Name="dbName" Type="p:InArgument(x:String)" />
+    <x:Property Name="tbName" Type="p:InArgument(x:String)" />
+    <x:Property Name="oDs" Type="p:OutArgument(sd:DataSet)" />
+  </x:Members>
+  <p:Sequence sad:XamlDebuggerXmlReader.FileName="G:\VS2010_Practice\WF40\Mahesh_Labs\UnSUccessfulDemos\WF_CustomDataActivity\WF_CustomActivityCOntainer\WF_DataActivity.xaml">
+    <w:GetAllDataActivity DbName="[dbName]" DbServerName="[dbServerName]" Ds="[oDs]" TbName="[tbName]" />
+  </p:Sequence>
+</p:Activity>

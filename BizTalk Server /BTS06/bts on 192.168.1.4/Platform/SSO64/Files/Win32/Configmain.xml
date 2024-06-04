@@ -1,0 +1,9 @@
+﻿<Configuration ProductCode ="{090D78E5-2436-4D97-9754-BE669158BEAF}" RegistryRoot="Software\Microsoft\ENTSSO\" WatsonPolicyRegKey="" UseDefaultConfig="No">
+    <Feature MSIFeatureName="Server" Name="Server" ProductCode ="{090D78E5-2436-4D97-9754-BE669158BEAF}" ConfigObjProgID ="MSEBiz.SSOServerCfg" DependentFeatures="">
+        <UIcontrol _locAttrData="DisplayName" _locID="2" DisplayName="Enterprise SSO" ComponentID="{6AD5CF46-D0D9-4C6F-9385-2AE536723EE5}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.SSOControl" Indentation="0" >            
+        </UIcontrol>
+      <UIcontrol _locAttrData="DisplayName" _locID="15" DisplayName="Enterprise SSO Secret Backup" ComponentID="{6AD5CF46-D0D9-4C6F-9385-2AE536723EE5}" AssemblyName="FeatureControls.dll" RegKey="" ClassName="Microsoft.BizTalk.Configuration.SSOSecretBackupControl" Indentation="0" >        
+      </UIcontrol>
+    </Feature>
+</Configuration>
+    

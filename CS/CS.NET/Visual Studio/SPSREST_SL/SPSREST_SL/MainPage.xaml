@@ -1,0 +1,49 @@
+﻿<UserControl xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"  x:Class="SPSREST_SL.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="400" d:DesignWidth="300">
+
+    <Grid x:Name="LayoutRoot" Background="Black">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="55*" />
+            <RowDefinition Height="342*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
+            <TextBlock Text="Country" Foreground="Yellow" Height="20" Width="50" FontWeight="Bold"/>
+            <TextBox x:Name="txtCountry" Height="30" Width="100"/>
+            <Button x:Name="btnSearch" Content="Search" Height="30" Width="45" Click="btnSearch_Click"/>
+            <Button x:Name="btnOOB" Content="Write To Excel" Height="30" Width="100" Click="btnOOB_Click"/>
+        </StackPanel>
+        <Border BorderBrush="Black" BorderThickness="1" Height="450" Width="300" x:Name="listBorder" Grid.Row="1">
+            <ListBox Height="355" VerticalAlignment="Top" Width="300" x:Name="lstAllCustomers">
+                <ListBox.Background>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF05134B" Offset="0"/>
+                        <GradientStop Color="#FF252B45" Offset="1"/>
+                    </LinearGradientBrush>
+                </ListBox.Background>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Border BorderBrush="Yellow" BorderThickness="4" CornerRadius="7" Background="Black" Width="290">
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Foreground="Yellow" FontWeight="Bold" x:Name="tblCustomerID" Text="{Binding CustomerID}"/>
+                                <TextBlock Foreground="Yellow" FontWeight="Bold" x:Name="tblCustomerName" Text="{Binding CustomerName}"/>
+                                <TextBlock Foreground="Yellow" FontWeight="Bold" x:Name="tblCustomerCity" Text="{Binding City}"/>
+                            </StackPanel>
+                        </Border>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <!--<my:DataGrid Grid.Row="1" AutoGenerateColumns="False" HorizontalAlignment="Left"  Name="dgCustomersList" VerticalAlignment="Top" Height="345" Width="300">
+            <my:DataGrid.Columns>
+            <my:DataGridTextColumn CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto" Binding="{Binding CustomerID}" />
+            <my:DataGridTextColumn CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto" Binding="{Binding CustomerName}" />
+            <my:DataGridTextColumn CanUserReorder="True" CanUserResize="True" CanUserSort="True" Width="Auto" Binding="{Binding City}" />
+            </my:DataGrid.Columns>
+        </my:DataGrid>-->
+    </Grid>
+</UserControl>

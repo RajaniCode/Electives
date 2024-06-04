@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="Silverlight.Com.View.Client.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="600" d:DesignWidth="988" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+
+    <Grid x:Name="LayoutRoot" Background="White" Width="988">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="466*" />
+            <ColumnDefinition Width="522*" />
+        </Grid.ColumnDefinitions>
+        <Grid Height="403" HorizontalAlignment="Left" Margin="12,41,0,0" Name="grdAllEmp" VerticalAlignment="Top" Width="426" />
+        <Button Content="All Employees" Height="23" HorizontalAlignment="Left" Margin="12,12,0,0" Name="btnAllEmployees" VerticalAlignment="Top" Width="426" Click="btnAllEmployees_Click" />
+        <Button Content="Create Employee" Grid.Column="1" Height="26" HorizontalAlignment="Left" Margin="10,10,0,0" Name="btnCreateEmployee" VerticalAlignment="Top" Width="479" Click="btnCreateEmployee_Click" />
+        <Grid Grid.Column="1" Height="394" HorizontalAlignment="Left" Margin="20,50,0,0" Name="grdNewEmp" VerticalAlignment="Top" Width="489" />
+    </Grid>
+</UserControl>

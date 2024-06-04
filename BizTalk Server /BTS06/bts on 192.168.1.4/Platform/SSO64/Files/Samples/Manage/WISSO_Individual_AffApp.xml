@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SSO>
+  <application name="SSOApplication1">
+    <description>An Individual Type Affiliate Application for Windows Initiated SSO</description>
+    <contact>someone@companyname.com</contact>
+    <appUserAccount>DomainName\AppUserGroup_WISSO</appUserAccount>
+    <appAdminAccount>DomainName\AppAdminGroup_WISSO</appAdminAccount>
+    <field ordinal="0" label="User ID" masked="no" />
+    <field ordinal="1" label="Password" masked="yes" />
+    <flags enableApp="yes" disableCredCache="no" adminAccountSame="no"/>
+  </application>
+</SSO>

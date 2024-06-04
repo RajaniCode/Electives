@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="SILV_TargetNullValues.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+     xmlns:src="clr-namespace:SILV_TargetNullValues"         
+    mc:Ignorable="d"
+    d:DesignHeight="532" d:DesignWidth="868" 
+             xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+
+    <UserControl.Resources>
+        <src:EmployeeCollection x:Key="EmpCol"></src:EmployeeCollection>
+    </UserControl.Resources>
+        <Grid x:Name="LayoutRoot" Background="White" Width="750" Height="371"
+           DataContext="{Binding Source={StaticResource EmpCol}}">
+        <TextBlock Height="41" HorizontalAlignment="Left" Margin="80,12,0,0" 
+                   Name="textBlock1" Text="Employee Information System"
+                   VerticalAlignment="Top" Width="452" FontWeight="ExtraBold"
+                   FontSize="25" TextAlignment="Center">
+        </TextBlock>
+
+     
+            <sdk:DataGrid AutoGenerateColumns="False" Height="277" HorizontalAlignment="Left" 
+                      Margin="22,62,0,0" Name="dataGrid1" VerticalAlignment="Top" Width="707"
+                       ItemsSource="{Binding}">
+            <sdk:DataGrid.Columns>
+                <sdk:DataGridTextColumn Width="100" Header="EmpNo" Binding="{Binding EmpNo}"></sdk:DataGridTextColumn>
+                <sdk:DataGridTextColumn Width="140" Header="EmpName" Binding="{Binding EmpName}"></sdk:DataGridTextColumn>
+                <sdk:DataGridTextColumn Width="140" Header="DeptName" Binding="{Binding DeptName,TargetNullValue='Not Specified'}"></sdk:DataGridTextColumn>
+                <sdk:DataGridTextColumn Width="120" Header="Designation" Binding="{Binding Designation,TargetNullValue='Not Specified'}"></sdk:DataGridTextColumn>
+                <sdk:DataGridTextColumn Width="100" Header="Salary" Binding="{Binding Salary,TargetNullValue='Not Specified',StringFormat=C}"></sdk:DataGridTextColumn>
+                <sdk:DataGridTextColumn Width="100" Header="Experience" Binding="{Binding Experience,FallbackValue='Not Available'}"></sdk:DataGridTextColumn>
+            </sdk:DataGrid.Columns>
+        </sdk:DataGrid>
+    </Grid>
+</UserControl>

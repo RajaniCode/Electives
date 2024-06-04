@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="fad109a6-02a5-46f2-9b89-d63cf450c7ad" name="swalther@SWLAPTOP 2009-04-18 14:48:08" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="828dac51-3c7b-45df-a177-d49b57671304">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\VB\TestResults\swalther_SWLAPTOP 2009-04-18 14_48_08">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\VB\UnleashedBlog\bin\UnleashedBlog.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Error">
+    <Counters total="1" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="1" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="SWLAPTOP" outcome="Warning" timestamp="2009-04-18T14:48:10.2937173-07:00">
+        <Text>The process cannot access the file 'C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\VB\TestResults\swalther_SWLAPTOP 2009-04-18 14_48_08\Out\UnleashedBlog.dll' because it is being used by another process.</Text>
+        <Exception>System.IO.IOException: The process cannot access the file 'C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\VB\TestResults\swalther_SWLAPTOP 2009-04-18 14_48_08\Out\UnleashedBlog.dll' because it is being used by another process.
+
+Server stack trace: 
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at Microsoft.VisualStudio.TestTools.Common.QTFileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, IQTFileStreamCallback callback)
+   at Microsoft.VisualStudio.TestTools.Common.FileCopyService.OpenQTFile(String fileNameAndPath)
+   at System.Runtime.Remoting.Messaging.StackBuilderSink._PrivateProcessMessage(IntPtr md, Object[] args, Object server, Int32 methodPtr, Boolean fExecuteInContext, Object[]&amp; outArgs)
+   at System.Runtime.Remoting.Messaging.StackBuilderSink.PrivateProcessMessage(RuntimeMethodHandle md, Object[] args, Object server, Int32 methodPtr, Boolean fExecuteInContext, Object[]&amp; outArgs)
+   at System.Runtime.Remoting.Messaging.StackBuilderSink.SyncProcessMessage(IMessage msg, Int32 methodPtr, Boolean fExecuteInContext)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData&amp; msgData, Int32 type)
+   at Microsoft.VisualStudio.TestTools.Common.FileCopyService.OpenQTFile(String fileNameAndPath)
+   at Microsoft.VisualStudio.TestTools.Execution.DeploymentQueue.CopyFiles(DeploymentJob job)
+   at Microsoft.VisualStudio.TestTools.Execution.DeploymentQueue.DeploymentQueueThread()</Exception>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <Times creation="2009-04-18T14:48:08.1196377-07:00" queuing="2009-04-18T14:48:10.0122249-07:00" start="2009-04-18T14:48:08.1196377-07:00" finish="2009-04-18T14:48:10.2987083-07:00" />
+  <TestDefinitions>
+    <UnitTest name="IndexReturnsBlogEntryByName" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\vb\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="4d187e8f-0397-8aa2-e993-61c2514155aa">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1adb0185-44b4-4d2f-9b44-8527eabbf3c4" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\VB\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntryByName" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="4d187e8f-0397-8aa2-e993-61c2514155aa" executionId="91ed55df-a97a-4039-a4cd-387f74df8caa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="91ed55df-a97a-4039-a4cd-387f74df8caa" testId="4d187e8f-0397-8aa2-e993-61c2514155aa" testName="IndexReturnsBlogEntryByName" computerName="SWLAPTOP" duration="00:00:00" startTime="0001-01-01T00:00:00.0000000-08:00" endTime="0001-01-01T00:00:00.0000000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,42 @@
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+  <EntityContainerMapping StorageEntityContainer="SpMappComplexTypeStoreContainer" CdmEntityContainer="SpMappComplex">
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="IsTypeOf(SpMappComplexType.Customers)">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+          <ComplexProperty Name="Address" TypeName="SpMappComplexType.CAddress">
+            <ScalarProperty Name="StreetAddress" ColumnName="Address" />
+            <ScalarProperty Name="City" ColumnName="City" />
+            <ScalarProperty Name="Zip" ColumnName="Zip" />
+          </ComplexProperty>
+        </MappingFragment>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="SpMappComplexType.Customers">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="SpMappComplexType.Store.InsertCustomer">
+            <ComplexProperty Name="Address" TypeName="SpMappComplexType.CAddress">
+              <ScalarProperty Name="StreetAddress" ParameterName="Address" />
+              <ScalarProperty Name="City" ParameterName="City" />
+              <ScalarProperty Name="Zip" ParameterName="Zip" />
+            </ComplexProperty>
+            <ScalarProperty Name="ContactName" ParameterName="ContactName" />
+            <ScalarProperty Name="CustomerID" ParameterName="CustomerID" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="SpMappComplexType.Store.UpdateCustomer">
+            <ComplexProperty Name="Address" TypeName="SpMappComplexType.CAddress">
+              <ScalarProperty Name="StreetAddress" ParameterName="Address" Version="Current" />
+              <ScalarProperty Name="City" ParameterName="City" Version="Current" />
+              <ScalarProperty Name="Zip" ParameterName="Zip" Version="Current" />
+            </ComplexProperty>
+            <ScalarProperty Name="ContactName" ParameterName="ContactName" Version="Current" />
+            <ScalarProperty Name="CustomerID" ParameterName="CustomerID" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="SpMappComplexType.Store.DeleteCustomer">
+            <ScalarProperty Name="CustomerID" ParameterName="customerid" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

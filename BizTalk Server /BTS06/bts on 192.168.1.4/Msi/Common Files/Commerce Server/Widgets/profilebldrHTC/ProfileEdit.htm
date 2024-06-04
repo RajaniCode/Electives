@@ -1,0 +1,27 @@
+﻿<HTML>
+<HEAD>
+<LINK REL='stylesheet' TYPE='text/css' HREF='/widgets/Bizdesk.css' ID='mainstylesheet'>
+<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=utf-8'>
+</HEAD>
+<BODY ID="profileedithtm">
+
+<!-- The Data-Source Mapper MMC puts the profile XML into here. -->
+<XML ID="xmlProfile"></XML>
+
+<!-- The Data-Source Mapper MMC puts the site-terms XML into here. -->
+<XML ID="xmlSiteTerms"></XML>
+
+<!-- The Data-Source Mapper MMC puts the catalog XML into here. -->
+<XML ID="xmlCatalog"></XML>
+
+<!-- The Data-Source Mapper MMC attaches the ProfileDesigner HTC here. -->
+<DIV ID="divEditor" ConfigXML="xmlPDConfig" STYLE="height:100%"></DIV>
+
+<!-- XML config info for the Profile-Designer -->
+<XML ID="xmlPDConfig">
+  <?xml version="1.0" ?>
+  <profiledesigner docid="xmlProfile" sitetermsid="xmlSiteTerms" catalogid="xmlCatalog" />
+</XML>
+
+</BODY>
+</HTML>

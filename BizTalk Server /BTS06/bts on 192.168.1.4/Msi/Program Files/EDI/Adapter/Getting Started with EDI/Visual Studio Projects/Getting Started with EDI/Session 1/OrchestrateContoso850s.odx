@@ -1,0 +1,169 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="4f480701-50f2-49fb-943d-519cee903814" LowerBound="1.1" HigherBound="35.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="Getting_Started_with_EDI" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="ServiceDeclaration" OID="c06979ff-6d71-4836-8b1b-1400f379237f" ParentLink="Module_ServiceDeclaration" LowerBound="11.1" HigherBound="34.1">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="OrchestrateContoso850s" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="ServiceBody" OID="df99eca2-d723-4cd0-9a0c-64339f59b146" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="1b921432-95e7-4704-9015-fba9faa0b35a" ParentLink="ServiceBody_Statement" LowerBound="22.1" HigherBound="24.1">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="Receive850" />
+                    <om:Property Name="MessageName" Value="Source" />
+                    <om:Property Name="OperationName" Value="Operation_1" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Receive_1" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="Construct" OID="5a8ba763-2fac-4707-bf22-b2cc7cfc73d5" ParentLink="ServiceBody_Statement" LowerBound="24.1" HigherBound="30.1">
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ConstructMessage_1" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="Transform" OID="f263b2b3-d9b4-4ec8-8ffa-5f938d5550d0" ParentLink="ComplexStatement_Statement" LowerBound="27.1" HigherBound="29.1">
+                        <om:Property Name="ClassName" Value="Session_1.X124010850SchemaToNorthwindReq" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Transform_1" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="MessagePartRef" OID="a2abe6de-6d8f-43b6-a228-2a2bc184d8f6" ParentLink="Transform_InputMessagePartRef" LowerBound="28.80" HigherBound="28.86">
+                            <om:Property Name="MessageRef" Value="Source" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_1" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="MessagePartRef" OID="98091ed4-ca34-4499-91db-16c9ac9c18b4" ParentLink="Transform_OutputMessagePartRef" LowerBound="28.28" HigherBound="28.34">
+                            <om:Property Name="MessageRef" Value="Target" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_2" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="MessageRef" OID="528dfc05-55a3-426a-819d-9da9a42d0856" ParentLink="Construct_MessageRef" LowerBound="25.23" HigherBound="25.29">
+                        <om:Property Name="Ref" Value="Target" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="Send" OID="eb03989a-f121-4437-9563-d6c90baa1b95" ParentLink="ServiceBody_Statement" LowerBound="30.1" HigherBound="32.1">
+                    <om:Property Name="PortName" Value="SendNorthwindReq" />
+                    <om:Property Name="MessageName" Value="Target" />
+                    <om:Property Name="OperationName" Value="Operation_1" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Send_1" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="0cf371fc-f240-4b33-a268-77938b9152d5" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="14.1" HigherBound="16.1">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Right" />
+                <om:Property Name="PortIndex" Value="1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Getting_Started_with_EDI.PortType_1" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SendNorthwindReq" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="LogicalBindingAttribute" OID="2e503193-d9cf-4622-86e5-0679a9fd7270" ParentLink="PortDeclaration_CLRAttribute" LowerBound="14.1" HigherBound="15.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="365dbcbe-6853-44c8-a402-8249b61e11fe" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="16.1" HigherBound="18.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="-1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Getting_Started_with_EDI.PortType_3" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Receive850" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="5d78bdfb-a056-4614-a2b2-c68bf4ebc5b5" ParentLink="PortDeclaration_CLRAttribute" LowerBound="16.1" HigherBound="17.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="d0c82b24-533a-479b-83f4-3b5d355f9653" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="18.1" HigherBound="19.1">
+                <om:Property Name="Type" Value="Getting_Started_with_EDI.X124010850SchemaWithoutCodeSets" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Source" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="f6e123d7-a35c-45a0-8ded-6ba1093032e7" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="19.1" HigherBound="20.1">
+                <om:Property Name="Type" Value="Session_1.NorthwindReq" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Target" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="99aa038d-7be4-4a2a-8808-b6607937f9fb" ParentLink="Module_PortType" LowerBound="4.1" HigherBound="11.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PortType_3" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="53b9d413-c244-4b4c-ba4c-e2bb0095e2ca" ParentLink="PortType_OperationDeclaration" LowerBound="6.1" HigherBound="10.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Operation_1" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="1e0fc215-f5e2-41a7-abbf-50682090e317" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="8.13" HigherBound="8.44">
+                    <om:Property Name="Ref" Value="Getting_Started_with_EDI.X124010850SchemaWithoutCodeSets" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+module Getting_Started_with_EDI
+{
+    internal porttype PortType_3
+    {
+        oneway Operation_1
+        {
+            X124010850SchemaWithoutCodeSets
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    private service OrchestrateContoso850s
+    {
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses PortType_1 SendNorthwindReq;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port implements PortType_3 Receive850;
+        message X124010850SchemaWithoutCodeSets Source;
+        message Session_1.NorthwindReq Target;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("1b921432-95e7-4704-9015-fba9faa0b35a")]
+            activate receive (Receive850.Operation_1, Source);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("5a8ba763-2fac-4707-bf22-b2cc7cfc73d5")]
+            construct Target
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("f263b2b3-d9b4-4ec8-8ffa-5f938d5550d0")]
+                transform (Target) = Session_1.X124010850SchemaToNorthwindReq (Source);
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("eb03989a-f121-4437-9563-d6c90baa1b95")]
+            send (SendNorthwindReq.Operation_1, Target);
+        }
+    }
+}
+

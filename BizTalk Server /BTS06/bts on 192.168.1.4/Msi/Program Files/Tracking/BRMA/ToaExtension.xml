@@ -1,0 +1,31 @@
+<?xml version="1.0" standalone="yes"?>
+<Extension>
+  <xs:schema id="Extension" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xs:element name="Extension" msdata:IsDataSet="true">
+      <xs:complexType>
+        <xs:choice maxOccurs="unbounded">
+          <xs:element name="InstanceActivity">
+			<xs:complexType>
+			  <xs:sequence>
+				<xs:element name="SvcClassId" type="xs:string" minOccurs="0" /> 
+				<xs:element name="DllPath" type="xs:string" minOccurs="0" /> 
+				<xs:element name="ActiveXClsid" type="xs:string" minOccurs="0" /> 
+				<xs:element name="ClassType" type="xs:string" minOccurs="0" /> 
+				<xs:element name="ConfigString" type="xs:string" minOccurs="0" /> 
+				<xs:element name="CAB" type="xs:string" minOccurs="0" /> 
+			  </xs:sequence>
+			</xs:complexType>
+		  </xs:element>
+        </xs:choice>
+      </xs:complexType>
+    </xs:element>
+  </xs:schema>
+  <InstanceActivity>
+    <SvcClassId>226FC6B9-0416-47A4-A8E8-4721F1DB1A1B</SvcClassId> 
+    <DllPath></DllPath> 
+    <ActiveXClsid>DC615974-9A2E-4efe-B032-9AA9B172E0E9</ActiveXClsid> 
+    <ClassType></ClassType> 
+    <ConfigString></ConfigString> 
+    <CAB /> 
+  </InstanceActivity>
+</Extension>

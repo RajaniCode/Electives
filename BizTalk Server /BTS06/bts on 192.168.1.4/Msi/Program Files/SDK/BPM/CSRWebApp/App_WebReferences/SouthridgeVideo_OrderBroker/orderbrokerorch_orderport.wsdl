@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Microsoft.Samples.BizTalk.SouthridgeVideo" xmlns:s1="http://Microsoft.Samples.BizTalk.SouthridgeVideo.Schemas.CSR_OrderRequest.v1" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://Microsoft.Samples.BizTalk.SouthridgeVideo" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">BizTalk assembly "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBroker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=XXXXXXXXXXXXXXXX" published web service.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.SouthridgeVideo">
+      <s:import namespace="http://Microsoft.Samples.BizTalk.SouthridgeVideo.Schemas.CSR_OrderRequest.v1" />
+      <s:element name="SubmitOrder">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:CSR_OrderRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.SouthridgeVideo.Schemas.CSR_OrderRequest.v1">
+      <s:element name="CSR_OrderRequest">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Header">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ReqId" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="Timestamp" type="s:dateTime" />
+                  <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="RequestType" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="SourceSystem" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Error" type="s:string" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="RequestHeader">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="CRN" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ORN" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="ORNSeq" type="s:int" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="OrdDate" type="s:date" />
+                  <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="OrdTypeCode" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="OrdStatus" type="s:string" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="RequestInfo" nillable="true">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="CS_RepId" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="CS_Office" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="CS_Notes" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="Address1" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="Address2" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="City" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="State" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="Zip" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="ContactName" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="ContactPhone" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="WorkOrderType" nillable="true" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="StartDate" nillable="true" type="s:date" />
+                  <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="CompletionDate" nillable="true" type="s:date" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="SubmitOrderSoapIn">
+    <wsdl:part name="parameters" element="tns:SubmitOrder" />
+  </wsdl:message>
+  <wsdl:portType name="Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap">
+    <wsdl:operation name="SubmitOrder">
+      <wsdl:input message="tns:SubmitOrderSoapIn" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap" type="tns:Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitOrder">
+      <soap:operation soapAction="http://Microsoft.Samples.BizTalk.SouthridgeVideo/Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPort/SubmitOrder" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap12" type="tns:Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="SubmitOrder">
+      <soap12:operation soapAction="http://Microsoft.Samples.BizTalk.SouthridgeVideo/Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPort/SubmitOrder" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPort">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">BizTalk assembly "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBroker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=XXXXXXXXXXXXXXXX" published web service.</wsdl:documentation>
+    <wsdl:port name="Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap" binding="tns:Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap">
+      <soap:address location="http://localhost/BTSScn.BPM.OrderBroker_Proxy/OrderBrokerOrch_OrderPort.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap12" binding="tns:Microsoft_Samples_BizTalk_SouthridgeVideo_OrderBroker_OrderBrokerOrch_OrderPortSoap12">
+      <soap12:address location="http://localhost/BTSScn.BPM.OrderBroker_Proxy/OrderBrokerOrch_OrderPort.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

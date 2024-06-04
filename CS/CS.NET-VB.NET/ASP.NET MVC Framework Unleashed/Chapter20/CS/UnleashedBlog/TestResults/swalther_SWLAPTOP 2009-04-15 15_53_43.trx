@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="fe9dfe3f-c2d4-4660-a82e-345e07b00ea0" name="swalther@SWLAPTOP 2009-04-15 15:53:43" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="48adc810-354e-4765-87f2-db0db653b844">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\TestResults\swalther_SWLAPTOP 2009-04-15 15_53_43">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog\bin\UnleashedBlog.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\System.ComponentModel.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\Microsoft.Web.Mvc.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-04-15T15:53:43.2068162-07:00" queuing="2009-04-15T15:53:44.8668162-07:00" start="2009-04-15T15:53:45.1708162-07:00" finish="2009-04-15T15:54:08.3408162-07:00" />
+  <TestDefinitions>
+    <UnitTest name="IndexReturnsBlogEntriesInOrderOfDatePublished" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="5d35c690-5b4b-4b1a-8ffd-0ba47ecf355d" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesInOrderOfDatePublished" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c" executionId="5d35c690-5b4b-4b1a-8ffd-0ba47ecf355d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="5d35c690-5b4b-4b1a-8ffd-0ba47ecf355d" testId="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c" testName="IndexReturnsBlogEntriesInOrderOfDatePublished" computerName="SWLAPTOP" duration="00:00:22.3511895" startTime="2009-04-15T15:53:45.2808162-07:00" endTime="2009-04-15T15:54:08.2408162-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreSame failed. </Message>
+          <StackTrace>   at UnleashedBlog.Tests.Controllers.BlogControllerTests.IndexReturnsBlogEntriesInOrderOfDatePublished() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 214
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

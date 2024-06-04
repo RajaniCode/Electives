@@ -1,0 +1,11 @@
+Use Northwind
+GO
+
+CREATE TRIGGER trEmployees_IU
+ON dbo.Employees
+FOR INSERT, UPDATE
+AS
+	UPDATE Employees SET LastUpdateDateTime = getdate() 
+	FROM Employees INNER JOIN inserted ON Employees.EmployeeID = inserted.EmployeeID 
+
+

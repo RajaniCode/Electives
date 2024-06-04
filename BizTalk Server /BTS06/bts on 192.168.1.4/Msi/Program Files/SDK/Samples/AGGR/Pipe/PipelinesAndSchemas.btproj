@@ -1,0 +1,107 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.7256"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{48956EF6-1CEE-4B1E-AE72-5BE5806BC114}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\Aggregator.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Aggregator.PipelinesAndSchemas"
+                    AssemblyName = "Aggregator.PipelinesAndSchemas"
+                />
+                <Config
+                    Name = "Development"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Pipeline.Components"
+                    AssemblyName = "Microsoft.BizTalk.Pipeline.Components"
+                    HintPath = "..\..\..\..\Program Files\Microsoft BizTalk Server 2006\Pipeline Components\Microsoft.BizTalk.Pipeline.Components.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "FFReceivePipeline.btp"
+                    BuildAction = "Compile"
+                    Namespace = "Aggregator.PipelinesAndSchemas"
+                    Type = "FFReceivePipeline"
+                />
+                <File
+                    RelPath = "Invoice.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Aggregator.PipelinesAndSchemas"
+                    Type = "Invoice"
+                />
+                <File
+                    RelPath = "InvoiceEnvelope.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Aggregator.PipelinesAndSchemas"
+                    Type = "InvoiceEnvelope"
+                />
+                <File
+                    RelPath = "PropertySchema.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Aggregator.PipelinesAndSchemas.PropertySchema"
+                    Type = "PropertySchema"
+                />
+                <File
+                    RelPath = "XMLAggregatingPipeline.btp"
+                    BuildAction = "Compile"
+                    Namespace = "Aggregator.PipelinesAndSchemas"
+                    Type = "XMLAggregatingPipeline"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

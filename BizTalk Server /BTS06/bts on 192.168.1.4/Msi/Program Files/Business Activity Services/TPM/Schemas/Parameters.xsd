@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm"
+                  elementFormDefault="qualified"
+                  xmlns="http://www.microsoft.com/BizTalk/KwTpm"
+                  xmlns:mstns="http://www.microsoft.com/BizTalk/KwTpm"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Parameters" type="ParametersType"/>
+	<xs:complexType name="ParametersType">
+		<xs:sequence>
+			<xs:element name="ParameterName" type="ParameterNameType" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ParameterNameType">
+		<xs:restriction base="xs:token">
+			<xs:minLength value="1" />
+			<xs:maxLength value="128" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

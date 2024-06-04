@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="a0b5557c-847e-4ce5-94b9-4d6d75e31831" name="swalther@SWLAPTOP 2009-04-17 14:13:38" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="cefb0c3d-cbad-4ba6-9617-f3dbc258cf18">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\TestResults\swalther_SWLAPTOP 2009-04-17 14_13_38">
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\System.ComponentModel.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\Microsoft.Web.Mvc.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\bin\UnleashedBlog.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-04-17T14:13:38.4274894-07:00" queuing="2009-04-17T14:13:39.6177274-07:00" start="2009-04-17T14:13:40.1448328-07:00" finish="2009-04-17T14:13:41.2120462-07:00" />
+  <TestDefinitions>
+    <UnitTest name="CommentsOrderByDatePublished" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="2b554b65-d428-b46a-3b63-7b2c9ff5e4df">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="35a74e3b-851c-4a64-9f97-89d596a7b6f3" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.CommentControllerTests, UnleashedBlog.Tests" name="CommentsOrderByDatePublished" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="2b554b65-d428-b46a-3b63-7b2c9ff5e4df" executionId="35a74e3b-851c-4a64-9f97-89d596a7b6f3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="35a74e3b-851c-4a64-9f97-89d596a7b6f3" testId="2b554b65-d428-b46a-3b63-7b2c9ff5e4df" testName="CommentsOrderByDatePublished" computerName="SWLAPTOP" duration="00:00:00.1726245" startTime="2009-04-17T14:13:40.1898418-07:00" endTime="2009-04-17T14:13:41.1670372-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreSame failed. </Message>
+          <StackTrace>   at UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentsOrderByDatePublished() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\CommentControllerTests.cs:line 57
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

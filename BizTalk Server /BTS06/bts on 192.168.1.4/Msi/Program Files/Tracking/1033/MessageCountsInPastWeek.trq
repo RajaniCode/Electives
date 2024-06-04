@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAnyType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <anyType xsi:type="xsd:string">1</anyType>
+  <anyType _locID="1" xsi:type="xsd:string">Message count in past week</anyType>
+  <anyType xsi:type="xsd:string">QueryBuilder.htm?View=2</anyType>
+  <anyType xsi:type="xsd:string">
+-- Copyright (c) Microsoft Corporation.  All rights reserved.
+--
+-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
+-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
+-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
+-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE 
+-- AND INFORMATION REMAINS WITH THE USER.  
+
+-- Retrieve count of all messages (both internal and external) received, sent and failed in past week
+-- Note: Joins are used for localized strings only
+-- Variable for period of time to retrieve data --
+DECLARE @Timestamp as DATETIME
+SET @Timestamp= GETUTCDATE() - 7  -- local time converted to UTC
+
+DECLARE @MessageFailures as INT
+DECLARE @MessagesSent as INT
+DECLARE @MessagesReceived as INT
+
+-- Count Failures--
+SELECT @MessageFailures=COUNT(*) 
+FROM [dbo].[dtav_MessageFacts] mf WITH (READPAST)
+JOIN [dbo].[dta_MessageStatus] st WITH (READPAST) ON st.strStatus = mf.[Event/Direction]
+WHERE 
+     st.nMessageStatusId = 5 
+    AND [Event/Timestamp] &gt; @Timestamp
+
+-- Count Sends --
+SELECT @MessagesSent=COUNT(*) 
+FROM [dbo].[dtav_MessageFacts] mf WITH (READPAST)
+JOIN [dbo].[dta_MessageStatus] st WITH (READPAST) ON st.strStatus = mf.[Event/Direction]
+WHERE 
+     st.nMessageStatusId = 1 
+    AND [Event/Timestamp] &gt; @Timestamp
+
+-- Count Receives--
+SELECT @MessagesReceived=COUNT(*) 
+FROM [dbo].[dtav_MessageFacts] mf WITH (READPAST)
+JOIN [dbo].[dta_MessageStatus] st WITH (READPAST) ON st.strStatus = mf.[Event/Direction]
+WHERE 
+     st.nMessageStatusId = 0 
+    AND [Event/Timestamp] &gt; @Timestamp
+
+-- Print Results --
+SELECT 
+     @MessagesReceived as "Messages Received", 
+     @MessagesSent as "Messages Sent",
+     @MessageFailures as "Message Transmission Failures"
+</anyType>
+  <anyType xsi:type="xsd:string">1</anyType>
+  <anyType xsi:type="xsd:string">&lt;xml xmlns:x="urn:schemas-microsoft-com:office:excel"&gt;
+ &lt;x:PivotTable&gt;
+  &lt;x:OWCVersion&gt;10.0.0.5605         &lt;/x:OWCVersion&gt;
+  &lt;x:NoDisplayToolbar/&gt;
+  &lt;x:DisplayScreenTips/&gt;
+  &lt;x:CubeProvider&gt;msolap.2&lt;/x:CubeProvider&gt;
+  &lt;x:CacheDetails/&gt;
+  &lt;x:Name&gt;Result list&lt;/x:Name&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Messages Received&lt;/x:Name&gt;
+   &lt;x:DataType&gt;Integer&lt;/x:DataType&gt;
+   &lt;x:PLDataOrientation/&gt;
+   &lt;x:EncodedType&gt;adInteger&lt;/x:EncodedType&gt;
+   &lt;x:CompareOrderedMembersBy&gt;UniqueName&lt;/x:CompareOrderedMembersBy&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Messages Sent&lt;/x:Name&gt;
+   &lt;x:DataType&gt;Integer&lt;/x:DataType&gt;
+   &lt;x:PLDataOrientation/&gt;
+   &lt;x:PLPosition&gt;2&lt;/x:PLPosition&gt;
+   &lt;x:EncodedType&gt;adInteger&lt;/x:EncodedType&gt;
+   &lt;x:CompareOrderedMembersBy&gt;UniqueName&lt;/x:CompareOrderedMembersBy&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Message Transmission Failures&lt;/x:Name&gt;
+   &lt;x:DataType&gt;Integer&lt;/x:DataType&gt;
+   &lt;x:PLDataOrientation/&gt;
+   &lt;x:PLPosition&gt;3&lt;/x:PLPosition&gt;
+   &lt;x:EncodedType&gt;adInteger&lt;/x:EncodedType&gt;
+   &lt;x:CompareOrderedMembersBy&gt;UniqueName&lt;/x:CompareOrderedMembersBy&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Data&lt;/x:Name&gt;
+   &lt;x:Orientation&gt;Column&lt;/x:Orientation&gt;
+   &lt;x:Position&gt;-1&lt;/x:Position&gt;
+   &lt;x:DataField/&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotData&gt;
+   &lt;x:Top&gt;0&lt;/x:Top&gt;
+   &lt;x:TopOffset&gt;0&lt;/x:TopOffset&gt;
+   &lt;x:Left&gt;0&lt;/x:Left&gt;
+   &lt;x:LeftOffset&gt;0&lt;/x:LeftOffset&gt;
+   &lt;x:SeqNum&gt;310&lt;/x:SeqNum&gt;
+   &lt;x:Expanded/&gt;
+  &lt;/x:PivotData&gt;
+  &lt;x:PivotView&gt;
+   &lt;x:Label&gt;
+    &lt;x:Caption&gt;Result list&lt;/x:Caption&gt;
+    &lt;x:NotVisible/&gt;
+   &lt;/x:Label&gt;
+   &lt;x:AllowEdits&gt;false&lt;/x:AllowEdits&gt;
+   &lt;x:AllowAdditions&gt;false&lt;/x:AllowAdditions&gt;
+   &lt;x:AllowDeletions&gt;false&lt;/x:AllowDeletions&gt;
+  &lt;/x:PivotView&gt;
+  &lt;x:PivotAxis&gt;
+   &lt;x:Orientation&gt;Filter&lt;/x:Orientation&gt;
+   &lt;x:Label&gt;
+    &lt;x:Caption&gt;Drop Filter Fields Here&lt;/x:Caption&gt;
+    &lt;x:NotVisible/&gt;
+   &lt;/x:Label&gt;
+  &lt;/x:PivotAxis&gt;
+  &lt;x:PivotAxis&gt;
+   &lt;x:Orientation&gt;Row&lt;/x:Orientation&gt;
+   &lt;x:Label&gt;
+    &lt;x:Caption&gt;Drop Row Fields Here&lt;/x:Caption&gt;
+    &lt;x:NotVisible/&gt;
+   &lt;/x:Label&gt;
+  &lt;/x:PivotAxis&gt;
+  &lt;x:PivotAxis&gt;
+   &lt;x:Orientation&gt;Column&lt;/x:Orientation&gt;
+   &lt;x:Label&gt;
+    &lt;x:Caption&gt;Drop Column Fields Here&lt;/x:Caption&gt;
+    &lt;x:NotVisible/&gt;
+   &lt;/x:Label&gt;
+  &lt;/x:PivotAxis&gt;
+ &lt;/x:PivotTable&gt;
+&lt;/xml&gt;</anyType>
+</ArrayOfAnyType>

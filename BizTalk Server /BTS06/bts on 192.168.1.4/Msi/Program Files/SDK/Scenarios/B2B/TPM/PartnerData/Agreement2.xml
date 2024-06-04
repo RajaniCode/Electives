@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><?mso-infoPathSolution href="http://localhost/sites/BASSite/Templates/Agreement.xsn" name="urn:schemas-microsoft-com:office:infopath:Agreement:http---www-microsoft-com-BizTalk-KwTpm" solutionVersion="1.0.0.567" language="en-us" productVersion="11.0.6357" PIVersion="1.0.0.0" ?><?mso-application progid="InfoPath.Document"?><?ms-tpmIsNew value=True?><?ms-tpm url=http://localhost/TPPubWS/TPPubWS.asmx?><?ms-tpmgmtws url=http://localhost/TPMgmtWS/TPMgmtWS.asmx?><?srvLCID 1033?><?ms-tpmGroupId value=Agreements?><ns1:Agreement schemaVersion="1.0" lastModified="2000-12-31T23:59:59" xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm" xmlns:ns2="http://www.microsoft.com/BizTalk/KwTpm" xmlns:ns3="http://www.microsoft.com/BizTalk/KwTpm" xmlns:b="urn:schemas-microsoft-com:BizTalkServer" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns4="http://www.microsoft.com/BizTalk/KwTpm" xmlns:xhtml="http://www.w3.org/1999/xhtml"><ns1:AgreementId>TestPartner2</ns1:AgreementId><ns1:FriendlyNames><ns1:FriendlyName></ns1:FriendlyName></ns1:FriendlyNames><ns1:Description>Agreement between MyProfile and TestPartner2</ns1:Description><ns1:AgreementDate>2005-03-28</ns1:AgreementDate><ns1:Self><ns1:PartnerId>MyProfile</ns1:PartnerId><ns1:IsGroup>false</ns1:IsGroup><AddendumRoles xmlns="http://www.microsoft.com/BizTalk/KwTpm"><AddendumRole><AddendumId>GetOrderLinkType</AddendumId><RoleId>RequestRole</RoleId></AddendumRole><AddendumRole><AddendumId>GetPartnerProfileLinkType</AddendumId><RoleId>RequestRole</RoleId></AddendumRole><AddendumRole><AddendumId>UpdatePORoleLinkType</AddendumId><RoleId>RequestRole</RoleId></AddendumRole><AddendumRole><AddendumId>UserProfileLinkType</AddendumId><RoleId>UpdateProfile_Role</RoleId></AddendumRole></AddendumRoles></ns1:Self><ns1:Partners><ns1:PartnerInfo><ns1:PartnerId>TestPartner2</ns1:PartnerId><ns1:IsGroup>false</ns1:IsGroup><AddendumRoles xmlns="http://www.microsoft.com/BizTalk/KwTpm"><AddendumRole><AddendumId>BrokerLinkType</AddendumId><RoleId>ContactBroker_Role</RoleId></AddendumRole><AddendumRole><AddendumId>VendorLinkType</AddendumId><RoleId>ContactVendor_Role</RoleId></AddendumRole><AddendumRole><AddendumId>GetOrderLinkType</AddendumId><RoleId>ResponseRole</RoleId></AddendumRole><AddendumRole><AddendumId>GetPartnerProfileLinkType</AddendumId><RoleId>ResponseRole</RoleId></AddendumRole><AddendumRole><AddendumId>UserProfileLinkType</AddendumId><RoleId>UpdateStatus_Role</RoleId></AddendumRole></AddendumRoles></ns1:PartnerInfo></ns1:Partners><ns1:Addendums><ns1:Addendum><ns1:AddendumId>BrokerLinkType</ns1:AddendumId><ns1:Description></ns1:Description><ns1:BusinessProcess><ns1:ServiceLinkName>Microsoft.Samples.BizTalk.Litware.Orchestrations.BrokerLinkType</ns1:ServiceLinkName><ServiceLinkAssemblySN xmlns="http://www.microsoft.com/BizTalk/KwTpm">Microsoft.Samples.BizTalk.Litware.Orchestrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08dc8532a421f9f5</ServiceLinkAssemblySN><ns1:BusinessProcessName>Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithBroker</ns1:BusinessProcessName><ns1:Description></ns1:Description><ns1:DefinitionSource>Microsoft.Samples.BizTalk.Litware.Orchestrations</ns1:DefinitionSource></ns1:BusinessProcess><ns1:Roles><Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>ContactBroker_Role</RoleId><Description/><DefinitionSource>Used</DefinitionSource></Role></ns1:Roles></ns1:Addendum><ns1:Addendum>
+									<ns1:AddendumId>VendorLinkType</ns1:AddendumId>
+									<ns1:Description></ns1:Description>
+									<ns1:BusinessProcess>
+										<ns1:ServiceLinkName>Microsoft.Samples.BizTalk.Litware.Orchestrations.VendorLinkType</ns1:ServiceLinkName>
+										<ns1:ServiceLinkAssemblySN>Microsoft.Samples.BizTalk.Litware.Orchestrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08dc8532a421f9f5</ns1:ServiceLinkAssemblySN>
+										<ns1:BusinessProcessName>Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithVendors</ns1:BusinessProcessName>
+										<ns1:Description></ns1:Description>
+										<ns1:DefinitionSource>Microsoft.Samples.BizTalk.Litware.Orchestrations</ns1:DefinitionSource>
+									</ns1:BusinessProcess>
+									<ns1:Roles>
+										<Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>ContactVendor_Role</RoleId><Description/><DefinitionSource>Used</DefinitionSource></Role>
+									</ns1:Roles>
+								</ns1:Addendum><ns1:Addendum>
+									<ns1:AddendumId>GetOrderLinkType</ns1:AddendumId>
+									<ns1:Description></ns1:Description>
+									<ns1:BusinessProcess>
+										<ns1:ServiceLinkName>Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrderLinkType</ns1:ServiceLinkName>
+										<ns1:ServiceLinkAssemblySN>Microsoft.Samples.BizTalk.Litware.Orchestrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08dc8532a421f9f5</ns1:ServiceLinkAssemblySN>
+										<ns1:BusinessProcessName>Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrder</ns1:BusinessProcessName>
+										<ns1:Description></ns1:Description>
+										<ns1:DefinitionSource>Microsoft.Samples.BizTalk.Litware.Orchestrations</ns1:DefinitionSource>
+									</ns1:BusinessProcess>
+									<ns1:Roles>
+										<Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>ResponseRole</RoleId><Description/><DefinitionSource>Used</DefinitionSource></Role>
+									<Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>RequestRole</RoleId><Description/><DefinitionSource>Implemented</DefinitionSource></Role></ns1:Roles>
+								</ns1:Addendum><ns1:Addendum>
+									<ns1:AddendumId>GetPartnerProfileLinkType</ns1:AddendumId>
+									<ns1:Description></ns1:Description>
+									<ns1:BusinessProcess>
+										<ns1:ServiceLinkName>Microsoft.Samples.BizTalk.Litware.Orchestrations.GetPartnerProfileLinkType</ns1:ServiceLinkName>
+										<ns1:ServiceLinkAssemblySN>Microsoft.Samples.BizTalk.Litware.Orchestrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08dc8532a421f9f5</ns1:ServiceLinkAssemblySN>
+										<ns1:BusinessProcessName>Microsoft.Samples.BizTalk.Litware.Orchestrations.GetProfile</ns1:BusinessProcessName>
+										<ns1:Description></ns1:Description>
+										<ns1:DefinitionSource>Microsoft.Samples.BizTalk.Litware.Orchestrations</ns1:DefinitionSource>
+									</ns1:BusinessProcess>
+									<ns1:Roles>
+										<Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>ResponseRole</RoleId><Description/><DefinitionSource>Used</DefinitionSource></Role>
+									<Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>RequestRole</RoleId><Description/><DefinitionSource>Implemented</DefinitionSource></Role></ns1:Roles>
+								</ns1:Addendum><ns1:Addendum>
+									<ns1:AddendumId>UpdatePORoleLinkType</ns1:AddendumId>
+									<ns1:Description></ns1:Description>
+									<ns1:BusinessProcess>
+										<ns1:ServiceLinkName>Microsoft.Samples.BizTalk.Litware.Orchestrations.UpdatePORoleLinkType</ns1:ServiceLinkName>
+										<ns1:ServiceLinkAssemblySN>Microsoft.Samples.BizTalk.Litware.Orchestrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08dc8532a421f9f5</ns1:ServiceLinkAssemblySN>
+										<ns1:BusinessProcessName>Microsoft.Samples.BizTalk.Litware.Orchestrations.UpdateOrder</ns1:BusinessProcessName>
+										<ns1:Description></ns1:Description>
+										<ns1:DefinitionSource>Microsoft.Samples.BizTalk.Litware.Orchestrations</ns1:DefinitionSource>
+									</ns1:BusinessProcess>
+									<ns1:Roles>
+										<Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>RequestRole</RoleId><Description/><DefinitionSource>Implemented</DefinitionSource></Role>
+									</ns1:Roles>
+								</ns1:Addendum><ns1:Addendum>
+									<ns1:AddendumId>UserProfileLinkType</ns1:AddendumId>
+									<ns1:Description></ns1:Description>
+									<ns1:BusinessProcess>
+										<ns1:ServiceLinkName>Microsoft.Samples.BizTalk.Litware.Orchestrations.UserProfileLinkType</ns1:ServiceLinkName>
+										<ns1:ServiceLinkAssemblySN>Microsoft.Samples.BizTalk.Litware.Orchestrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=08dc8532a421f9f5</ns1:ServiceLinkAssemblySN>
+										<ns1:BusinessProcessName>Microsoft.Samples.BizTalk.Litware.Orchestrations.UpdateUserProfileBAS</ns1:BusinessProcessName>
+										<ns1:Description></ns1:Description>
+										<ns1:DefinitionSource>Microsoft.Samples.BizTalk.Litware.Orchestrations</ns1:DefinitionSource>
+									</ns1:BusinessProcess>
+									<ns1:Roles>
+										<Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>UpdateStatus_Role</RoleId><Description/><DefinitionSource>Used</DefinitionSource></Role>
+									<Role xmlns="http://www.microsoft.com/BizTalk/KwTpm"><RoleId>UpdateProfile_Role</RoleId><Description/><DefinitionSource>Implemented</DefinitionSource></Role></ns1:Roles>
+								</ns1:Addendum></ns1:Addendums><ns1:LegalTerms></ns1:LegalTerms><ns1:Status>0</ns1:Status></ns1:Agreement>

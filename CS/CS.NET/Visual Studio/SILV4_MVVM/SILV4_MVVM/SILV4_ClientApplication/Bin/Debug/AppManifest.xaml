@@ -1,0 +1,10 @@
+﻿<Deployment xmlns="http://schemas.microsoft.com/client/2007/deployment" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" EntryPointAssembly="SILV4_ClientApplication" EntryPointType="SILV4_ClientApplication.App" RuntimeVersion="4.0.50303.0">
+  <Deployment.Parts>
+    <AssemblyPart x:Name="SILV4_ClientApplication" Source="SILV4_ClientApplication.dll" />
+    <AssemblyPart x:Name="Silv4.Company.View.ModelVew" Source="Silv4.Company.View.ModelVew.dll" />
+    <AssemblyPart x:Name="System.ComponentModel.DataAnnotations" Source="System.ComponentModel.DataAnnotations.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Data" Source="System.Windows.Controls.Data.dll" />
+    <AssemblyPart x:Name="System.Windows.Controls.Data.Input" Source="System.Windows.Controls.Data.Input.dll" />
+    <AssemblyPart x:Name="System.Windows.Data" Source="System.Windows.Data.dll" />
+  </Deployment.Parts>
+</Deployment>

@@ -1,0 +1,1101 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.EditSheet' tagName="editsheet" lightweight=true>
+	<PUBLIC>
+		<!-- ids of xml data and meta-data islands -->
+		<PROPERTY NAME='DataXML' />
+		<PROPERTY NAME='MetaXML' />
+		<!-- read-only scriptable property: empty and marked required = true -->
+		<PROPERTY NAME='required'	GET='bGetRequired' />
+		<!-- read-only scriptable property: valid or empty = true -->
+		<PROPERTY NAME='valid'		GET='bGetValid' />
+		<!-- read-only scriptable property: data changed in any field = true -->
+		<PROPERTY NAME='dirty'		GET='bGetDirty' />
+
+	<!-- UNSUPPORTED: PRIVATE PROPERTIES: used by ListEditor and ProfileDesigner -->
+		<!-- require autogenids to be set -->
+		<PROPERTY NAME='xmlRecord'	GET='xmlGetRecord'		PUT='SetRecord' />
+
+		<!-- returns a field control element given the field's ID -->
+		<METHOD NAME='field'		INTERNALNAME='elGetField' />
+		<!-- hides/shows individual field -->
+		<METHOD NAME='hidden'		INTERNALNAME='bGetHide'/>
+		<METHOD NAME='hide'			INTERNALNAME='Hide'/>
+		<METHOD NAME='show'			INTERNALNAME='Show' />
+		<!-- sets focus to first field in ES -->
+		<METHOD NAME='focus' />
+		<!-- resets default value in every field in ES -->
+		<METHOD NAME='resetDefault'	INTERNALNAME='ResetDefault' />
+		<!-- clears dity bit for ES -->
+		<METHOD NAME='resetDirty'	INTERNALNAME='ResetDirty' />
+
+	<!-- UNSUPPORTED: PRIVATE METHODS: used by ListEditor and ProfileDesigner -->
+		<METHOD NAME='disableAll' />
+		<METHOD NAME='clearAll' />
+
+		<EVENT NAME='onError'	ID='evtError'></EVENT><!-- fired when error occurs -->
+		<EVENT NAME='onChange'	ID='evtChange'></EVENT><!-- fired when field contents change -->
+		<EVENT NAME='onRequire'	ID='evtRequired'></EVENT><!-- fired when field contents change -->
+		<EVENT NAME='onValid'	ID='evtValid'></EVENT><!-- fired when field validity changes -->
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_AbortControl_ErrorMessage = "The control could not load.  Please contact your system administrator"
+		const L_ControlURNandID_ErrorMessage = "Error in EditSheet with id: ""%1"""
+		const L_ExpandCollapse_ToolTip = "Expand/collapse group"
+		const L_GroupRequired_ToolTip = "One or more fields in this group require a value to be entered"
+		const L_GroupInvalid_ToolTip = "One or more fields in this group require an invalid value to be corrected"
+		const L_LoadingProperty_Text = "loading property..."
+		const L_FieldRequired_ToolTip = "A value must be entered for this field"
+		const L_IDNotFound_ErrorMessage = "element not found in document with id: ""%1"""
+		const L_IDNotUnique_ErrorMessage = "element id not unique in document: ""%1"""
+		const L_MetaXMLErrorAtCharLine_ErrorMessage = "MetaXML ""%1"" at char %2 in line %3:"
+		const L_DataXMLErrorAtCharLine_ErrorMessage = "DataXML ""%1"" at char %2 in line %3:"
+		const L_SourceCode_ErrorMessage = "Source code:"
+		const L_NameOrKeyRequired_ErrorMessage = "<global> node requires <name> and <key> subnodes when title='yes' (default)"
+
+		dim m_xmlDataDoc, m_xmlMetaDoc, m_xmlMetaTemplate, _
+			m_sGroupID, m_xmlMetaGroups, m_xmlMetaGlobal, m_xmlMetaFields, _
+			m_bDirty, m_bDebug, m_dSubControls, m_dControlGroups, m_dValid, m_bValid, m_bFocusSet, _
+			m_dRequired, m_bRequired, m_bLock, m_bAutoGenIDs, m_elFocusCell
+
+		'webding constants for arrows in ES title
+		const RIGHT_ARROW	= 4
+		const DOWN_ARROW	= 6
+		'keycode constants
+		const KEYCODE_ENTER	= 13
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		m_bDirty = false		'true if controls value has changed
+		m_bRequired = false		'true if all fields in ES are marked required and currently empty
+		m_bValid = true			'true if all fields in ES are valid
+		m_bLock = false			'when set to true all controls will load empty and disabled
+		m_bAutoGenIDs = false	'when true unique ids will be generated for each field;
+								'used when within another control: ListEditor, ProfileDesigner
+		m_bFocusSet = false		'used to identify that the focus should be set on the first control when loaded
+		set m_xmlDataDoc = nothing	'used to hold data document
+		set m_xmlMetaDoc = nothing	'used to hold meta-data document
+		set m_elFocusCell = nothing	'used to hold first visible control for setting focus
+		set m_dValid = CreateObject("Scripting.Dictionary")			'holds current valid state for each field
+		set m_dControlGroups = CreateObject("Scripting.Dictionary")	'holds current groupid for each field
+		set m_dRequired = CreateObject("Scripting.Dictionary")		'holds current required state for each field marked as required
+		set m_dSubControls = CreateObject("Scripting.Dictionary")	'hold pointers to all controls in ES for use with private methods
+
+		'the following are used exclusively when loading the XML documents
+		dim m_bMetaXMLReady, m_bDataXMLReady, m_bControlInitialized, m_bControlAborted
+		m_bMetaXMLReady = false			'true when meta-data XML is loaded and parsed
+		m_bDataXMLReady = false			'true when data XML is loaded and parsed
+		m_bControlInitialized = false	'true when all data is loaded initialization has started
+		m_bControlAborted = false		'true when errors have forced the control to abort running
+
+		const READYSTATE_COMPLETE = 4	'constant used to check XML document's readyState
+
+		Initialize()
+
+		sub Initialize()
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			if bIsXMLOK(MetaXML) then
+				'if meta-data XML island looks ok load the XML document
+				LoadXML MetaXML, m_bMetaXMLReady
+				'if data XML island looks ok load the XML document
+				if not m_bControlAborted then LoadXML DataXML, m_bDataXMLReady
+				if not m_bControlAborted and m_bMetaXMLReady and m_bDataXMLReady then
+					'if all XML loaded and no abort errors found, go initialize control
+					InitControl()
+				'else = otherwise InitControl will be run by onXMLReadyStateChange or control was aborted
+				end if
+			end if
+		end sub
+
+		sub LoadXML(sXML, bReady)
+			dim elXML, xmlDoc
+			'when this routine complete either XML is loaded, control aborted or
+			'event attached for async load
+			if bIsXMLOK(sXML) then
+				'get data island element
+				set elXML = element.document.all(sXML)
+				'get XML document
+				set xmlDoc = elXML.xmlDocument
+				'attach onReadyStateChange event for async load of XML
+				elXML.attachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+				'check if already complete
+				if elXML.readyState = "complete" then
+					if xmlDoc.parseError.errorCode = 0 then
+						'readyState is complete and no parse errors
+						bReady = true
+					else
+						'parse errors: detach event, show error, and abort control
+						elXML.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+						ShowXMLError sXML, xmlDoc
+						AbortControl()
+					end if
+				end if
+			end if
+		end sub
+
+		function bIsXMLOK(oXML)
+			dim elXML
+			'when this routine complete we know id is OK and references unique element
+			'otherwise control is aborted after displaying error
+			bIsXMLOK = true
+			set elXML = element.document.all(oXML)
+			if isNull(oXML) then
+				'if id is bad or missing
+				ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(oXML)))
+				AbortControl()
+				bIsXMLOK = false
+			elseif elXML is nothing then
+				'if id is not found in the document
+				ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(oXML)))
+				AbortControl()
+				bIsXMLOK = false
+			elseif typename(elXML) = "DispHTMLElementCollection" then
+				'if id is not unique in the document
+				ReportError(sFormatString(L_IDNotUnique_ErrorMessage, Array(oXML)))
+				AbortControl()
+				bIsXMLOK = false
+			end if
+		end function
+
+		sub onXMLReadyStateChange
+			dim elSource
+			'this routine completes async load of XML document
+			set elSource = window.event.srcElement
+			if elSource.readyState = "complete" then
+				if elSource.XMLdocument.parseError.errorCode = 0 then
+					'readyState is complete and no parse errors
+					'document is loaded and parsed so detach event
+					elSource.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+					'mark XML source as ready
+					select case elSource.id
+						case MetaXML
+							m_bMetaXMLReady = true
+						case DataXML
+							m_bDataXMLReady = true
+					end select
+				else
+					'parse errors: detach event, show error, and abort control
+					elXML.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+					ShowXMLError sXML, elSource.XMLdocument
+					AbortControl()
+				end if
+			end if
+			if not m_bControlAborted and m_bMetaXMLReady and m_bDataXMLReady then
+				'when all XML loaded, go initialize control
+				InitControl()
+			'else = otherwise wait for next event
+			end if
+		end sub
+
+		sub AbortControl()
+			dim elFont
+			'sets flag for aborted control and displays error text in element
+			m_bControlAborted = true
+			element.innerText = ""
+			set elFont = element.appendChild(element.document.createElement("SPAN"))
+			elFont.style.color = "red"
+			elFont.style.fontWeight = "bold"
+			element.title = L_AbortControl_ErrorMessage
+			elFont.innerText = L_AbortControl_ErrorMessage
+		end sub
+
+		sub InitControl()
+			dim xmlGlobals, sTemp, xmlDoc
+
+			'ensure InitControl is only run once
+			if m_bControlInitialized then exit sub
+			m_bControlInitialized = true
+
+			'get documentElement's for XML already loaded
+			set m_xmlMetaDoc = element.document.all(MetaXML).xmlDocument.documentElement
+			if m_xmlMetaDoc is nothing then
+				'workwround code:
+				set xmlDoc = CreateObject("MSXML.DOMDocument")
+				xmlDoc.loadXML(element.document.all(MetaXML).innerHTML)
+				set m_xmlMetaDoc = xmlDoc.documentElement
+			end if
+			set m_xmlDataDoc = element.document.all(DataXML).xmlDocument.documentElement
+			if m_xmlDataDoc is nothing then
+				'workwround code:
+				set xmlDoc = CreateObject("MSXML.DOMDocument")
+				xmlDoc.loadXML(element.document.all(DataXML).innerHTML)
+				set m_xmlDataDoc = xmlDoc.documentElement
+			end if
+			if not m_xmlDataDoc.hasChildNodes then m_xmlDataDoc.appendChild(m_xmlDataDoc.ownerDocument.createElement("record"))
+
+			'clear innerText (should be faster than innerHTML)
+			element.innerText = ""
+			set xmlGlobals = m_xmlMetaDoc.selectNodes("global")
+			if xmlGlobals.length = 1 then
+				set m_xmlMetaGlobal = xmlGlobals(0)
+				'one global tag means there is only one group in this ES
+				'set lock and autogen flags (Note: lock/autogen can only be set when one group in ES)
+				sTemp = m_xmlMetaGlobal.getAttribute("lock")
+				m_bLock = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				sTemp = m_xmlMetaGlobal.getAttribute("autogenids")
+				m_bAutoGenIDs = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				SetGroup(m_xmlMetaGlobal.parentNode)
+			else
+				'more than one global tag means there are multiple groups in this ES
+				'get collection of ES group meta-data nodes and iterate over all of them
+				set m_xmlMetaGroups = m_xmlMetaDoc.childNodes
+				SetGroups()
+			end if
+		end sub
+
+		sub SetGroups()
+			dim xmlGroup, sTemp
+			'iterate over each ES group and create each in turn
+			for each xmlGroup in m_xmlMetaGroups
+				set m_xmlMetaGlobal = xmlGroup.selectSingleNode("global")
+				'set autogen flags
+				sTemp = m_xmlMetaGlobal.getAttribute("autogenids")
+				if not m_bAutoGenIDs then m_bAutoGenIDs = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				SetGroup(xmlGroup)
+				'give up if fatal error occurs in group
+				if m_bControlAborted then exit for
+			next
+		end sub
+
+		sub SetGroup(xmlGroup)
+			dim elEditSheet, elEditSheetGroup, sTemp
+
+			'get field and template nodes
+			set m_xmlMetaFields = xmlGroup.selectSingleNode("fields")
+			set m_xmlMetaTemplate = xmlGroup.selectSingleNode("template")
+
+			'create group id, set it on meta node and create group
+			m_sGroupID = element.document.uniqueID
+			xmlGroup.setAttribute "groupID", m_sGroupID
+
+			'create ES DIV and format
+			set elEditSheet = element.appendChild(element.document.createElement("DIV"))
+			elEditSheet.setAttribute "name", "bdeditgroup"
+			elEditSheet.className = "esContainer esExpanded"
+
+			'create ES group DIV and format
+			set elEditSheetGroup = element.document.createElement("DIV")
+			elEditSheetGroup.className = "esEditgroup"
+
+			'see if title is to be displayed
+			sTemp = m_xmlMetaGlobal.getAttribute("title")
+			if isNull(sTemp) or LCase(sTemp) = "yes" then
+				'add ES title
+				AddEditSheetGroupTitle elEditSheet, elEditSheetGroup
+			else
+				'fix formatting for no title
+				elEditSheetGroup.style.padding = 0
+				elEditSheetGroup.style.margin = 0
+				elEditSheet.style.border = "none"
+			end if
+			if m_bControlAborted then exit sub
+			set elEditSheetGroup = elEditSheet.appendChild(elEditSheetGroup)
+
+			if not m_xmlMetaTemplate is nothing then
+				'add template to group - no way around it, must use innerHTML
+				elEditSheetGroup.innerHTML = m_xmlMetaTemplate.text
+
+				'initialize subcontrols listed in fields attribute
+				sTemp = m_xmlMetaTemplate.getAttribute("fields")
+				if not isNull(sTemp) and sTemp <> "" then InitSubControls(sTemp)
+
+				'register subcontrols listed in register attribute
+				sTemp = m_xmlMetaTemplate.getAttribute("register")
+				if not isNull(sTemp) and sTemp <> "" then RegisterSubControls(sTemp)
+			elseif not m_xmlMetaFields is nothing then
+				'create table for ES standard layout
+				AddStandardTable(elEditSheetGroup)
+			end if
+		end sub
+
+		sub AddStandardTable(elEditSheetGroup)
+			dim elTable, elImage, elTD, elTH, xmlMetaNode, sTemp, xmlTemp, bFieldHidden, _
+				bFieldRequired, sID, elCell, elRow, sType, sName, sToolTip, _
+				nMinlength, sReadOnly, sDisabled
+
+			set elTable = element.document.createElement("TABLE")
+			elTable.cellPadding = 0
+			elTable.cellSpacing = 4
+			elTable.className = "esTableStyle"
+			elTable.width = "95%"
+
+			'create required image that can be cloned
+			set elImage = element.document.createElement("IMG")
+			with elImage
+				.style.visibility = "hidden"
+				.src = "/widgets/images/required.gif"
+				.align = "absmiddle"
+				.border = 0
+				.title = L_FieldRequired_ToolTip
+				.style.visibility = ""
+			end with
+
+			' create template cells for cloning
+			set elTD = element.document.createElement("TD")
+			set elTH = elTD.cloneNode(true)
+			elTH.className = "esLabelCell"
+
+			'iterate over field nodes and create a row for each one
+			for each xmlMetaNode in m_xmlMetaFields.childNodes
+				'default type to text
+				sType = xmlMetaNode.nodeName
+				if isNull(sType) or sType = "" then sType = "text"
+				'set flags for field hidden, required
+				sTemp = xmlMetaNode.getAttribute("hide")
+				bFieldHidden = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				if sType = "text" then
+					'treat text field as required if minlen > 0
+					nMinlength = xmlMetaNode.getAttribute("minlen")
+					if isNull(nMinlength) or nMinlength = "" then
+					elseif not isNumeric(nMinlength) or nMinlength <= 0 then
+					else
+						xmlMetaNode.setAttribute "required", "yes"
+					end if
+				end if
+				sTemp = xmlMetaNode.getAttribute("required")
+				bFieldRequired = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+				sID = xmlMetaNode.getAttribute("id")
+				'get name and tooltip nodes
+				sName = ""
+				set xmlTemp = xmlMetaNode.selectSingleNode("name")
+				if not xmlTemp is nothing then sName = xmlTemp.text
+				sTooltip = ""
+				set xmlTemp = xmlMetaNode.selectSingleNode("tooltip")
+				if not xmlTemp is nothing then sTooltip = xmlTemp.text
+
+				'insert row and hide if hidden
+				set elRow = elTable.insertRow()
+				if bFieldHidden then
+					elRow.style.display = "none"
+				end if
+
+				'create required icon cell
+				set elCell = elRow.insertCell()
+				elCell.className = "reqIcon"
+				if bFieldRequired then
+					'add required icon
+					elCell.appendChild(elImage.cloneNode(true))
+					elCell.style.verticalAlign = "top"
+				end if
+				if (sType = "boolean" or sType = "select") _
+					and bFieldRequired then
+					'boolean and select fields should not be set required
+					xmlMetaNode.removeAttribute("required")
+					bFieldRequired = false
+				end if
+
+				'add label cell
+				set elCell = elRow.appendChild(elTH.cloneNode(true))
+				elCell.title = sTooltip
+				elCell.nowrap = true
+				elCell.innerHTML = sName
+
+				'add control cell
+				set elCell = elRow.appendChild(elTD.cloneNode(true))
+				elCell.style.padding = "0"
+				set elCell = elCell.appendChild(element.document.createElement("SPAN"))
+				elCell.innerHTML = L_LoadingProperty_Text
+				elCell.attachEvent "onreadystatechange", GetRef("onReadyStateChange")
+				elCell.setAttribute "groupid", m_sGroupID
+				elCell.style.width = "100%"
+				with elCell
+					if m_bAutoGenIDs then
+						'if autogen ids then get unique id
+						.setAttribute "id", element.document.UniqueID
+						'add to subcontrols dict for private method use
+						m_dSubControls.add sID, elCell
+					else
+						'add id based on ID
+						.setAttribute "id", sID
+						m_dSubControls.add sID, elCell
+					end if
+					.setAttribute "id", sID
+					if sType = "text" and xmlMetaNode.getAttribute("subtype") = "long" then
+						'textlong class adds taller height to reduce redraw
+						.className = "esDataCell efTextLong"
+					else
+						.className = "esDataCell ef" & sType
+					end if
+				end with
+				sReadOnly =  xmlMetaNode.getAttribute("readonly")
+				sDisabled =  xmlMetaNode.getAttribute("disabled")
+				if not bFieldHidden and _
+					not (not isNull(sReadOnly) and sReadOnly = "yes") and _
+					not (not isNull(sDisabled) and sDisabled = "yes") and _
+					m_elFocusCell is nothing then
+					'set first non-hidden row control cell as focus row
+					set m_elFocusCell = elCell
+				end if
+			next
+			elEditSheetGroup.appendChild(elTable)
+			'dump template elements
+			set elTD = nothing
+			set elTH = nothing
+			set elImage = nothing
+		end sub
+
+		sub AddEditSheetGroupTitle(elEditSheet, elEditSheetGroup)
+			dim xmlName, xmlKey, sTemp, bCollapsed, elEditSheetTitleBar, elGroupIcon, _
+				elImage, elExpandIcon, elEditSheetTitle
+			'create title
+
+			'create required image that can be cloned
+			set elImage = element.document.createElement("IMG")
+			with elImage
+				.style.visibility = "hidden"
+				.src = "/widgets/images/required.gif"
+				.align = "absmiddle"
+				.border = 0
+			end with
+
+			'get name and key nodes
+			set xmlName = m_xmlMetaGlobal.selectSingleNode("name")
+			set xmlKey = m_xmlMetaGlobal.selectSingleNode("key")
+			if xmlName is nothing or xmlKey is nothing then
+				'if name or key not found then report error and abort control
+				ReportError(L_NameOrKeyRequired_ErrorMessage)
+				AbortControl()
+				exit sub
+			end if
+
+			'add group title bar text, required icon, arrow, access key, and click event handler
+			set elEditSheetTitleBar = elEditSheet.appendChild(element.document.createElement("SPAN"))
+			elEditSheetTitleBar.className = "esEditbar"
+			elEditSheetTitleBar.attachEvent "onclick", GetRef("onClick")
+
+			'add group invalid icon
+			set elGroupIcon = elEditSheetTitleBar.appendChild(elImage.cloneNode(true))
+			with elGroupIcon
+				.id = "invalid_" & m_sGroupID
+				.src = "/widgets/images/invalid.gif"
+				.hspace = 5
+				.title = L_GroupInvalid_ToolTip
+				.align = "right"
+				.style.marginTop = "2px"
+			end with
+
+			'add group required icon
+			set elGroupIcon = elEditSheetTitleBar.appendChild(elImage.cloneNode(true))
+			with elGroupIcon
+				.id = "required_" & m_sGroupID
+				.hspace = 5
+				.title = L_GroupRequired_ToolTip
+				.align = "right"
+				.style.marginTop = "2px"
+			end with
+
+			'create expand icon (webding)
+			set elExpandIcon = elEditSheetTitleBar.appendChild(element.document.createElement("SPAN"))
+			elExpandIcon.id = "ExpandIcon"
+			elExpandIcon.className = "bdexpandicon"
+			elExpandIcon.title = L_ExpandCollapse_ToolTip
+			elExpandIcon.innerText = DOWN_ARROW
+
+			'is group collapsed?
+			sTemp = m_xmlMetaGlobal.getAttribute("expanded")
+			bCollapsed	= CBool(not isNull(sTemp) and LCase(sTemp) = "no")
+			if bCollapsed then
+				elEditSheet.className = replace(elEditSheet.className, "esExpanded", "esCollapsed")
+				elExpandIcon.innerText = RIGHT_ARROW
+			end if
+
+			'add title with title text and accesskey
+			set elEditSheetTitle = elEditSheetTitleBar.appendChild(element.document.createElement("DIV"))
+			with elEditSheetTitle
+				.className = "esEdittitle"
+				.tabindex = "0"
+				.nowrap = true
+				.innerHTML = xmlName.text
+				.accesskey = xmlKey.text
+				.attachEvent "onkeydown", GetRef("onKeyDown")
+			end with
+			elEditSheetTitleBar.title = elEditSheetTitle.innerText
+		end sub
+
+		sub onReadyStateChange()
+			dim elSource, sID, sGroupID, sValue, xmlMetaNode, xmlDataNode, _
+				bFieldRequired, elGroupIcon
+
+			if not m_bDebug then on error resume next
+			'this routine runs for each control at least once - until readyState is complete
+			set elSource = window.event.srcElement
+			if elSource.readyState = "complete" and _
+				(bHasClass(elSource, "esDataCell") or bHasClass(elSource, "efField")) then
+				'if readyState is complete and this is an field type control
+				'set event handlers
+				elSource.detachEvent "onreadystatechange", GetRef("onReadyStateChange")
+				elSource.attachEvent "onchange", GetRef("onChange")
+				elSource.attachEvent "onbeginchange", GetRef("onChange")
+				'get ID and groupID
+				sID = elSource.id
+				sGroupID = elSource.getAttribute("groupID")
+				'get group icon
+				set elGroupIcon = element.all("required_" & sGroupID)
+				'get meta node for field
+				set xmlMetaNode = m_xmlMetaDoc.selectSingleNode("//*[@groupID $ieq$ '" & sGroupID & "']/fields/*[@id = '" & sID & "']")
+				'add to valid dict
+				'add valid setting to dict using correct id depending on autogenids flag
+				elSource.attachEvent "onvalid", GetRef("onEvent")
+				m_dValid.add elSource.id, true
+				m_dControlGroups.Add elSource.id, elSource.getAttribute("groupid")
+				'check if field required
+				bFieldRequired = CBool(not isNull(xmlMetaNode.getAttribute("required")) and LCase(xmlMetaNode.getAttribute("required")) = "yes")
+				if m_bLock then
+					'if lock then we are within another control: ListEditor or ProfileDesigner
+					'initialize control as empty and disabled
+					elSource.initialize xmlMetaNode, ""
+					elSource.disabled = true
+					elSource.className = Replace(elSource.className, "efReadWrite", "efReadOnly")
+					elSource.value = ""
+					m_bDirty = false
+					'ignore select which always has valid value
+					if bFieldRequired then
+						'field is required so attach event handler
+						elSource.attachEvent "onRequire", GetRef("onEvent")
+						'add current required value of false to required dict using correct id
+						m_dRequired.add elSource.id, false
+					end if
+				else
+					'not locked so get value from data, if any
+					set xmlDataNode = m_xmlDataDoc.firstChild.selectSingleNode("./*[nodeName() $ieq$ """ & sID & """]")
+					if not xmlDataNode is nothing then
+						sValue = xmlDataNode.text
+					else
+						sValue = ""
+					end if
+					'initialize control with data value
+					elSource.initialize xmlMetaNode, sValue
+					'ignore select which always has valid value
+					if bFieldRequired then
+						'field is required so attach event handler
+						elSource.attachEvent "onRequire", GetRef("onEvent")
+						if sValue = "" then
+							'set group required to true since at least one field is set to true
+							m_bRequired = true
+							'add current required value to required dict
+							m_dRequired.add elSource.id, true
+							'make group required icon visible
+							if not elGroupIcon is nothing and _
+								m_bRequired then elGroupIcon.style.visibility = "visible"
+						else
+							'add current required value to required dict
+							m_dRequired.add elSource.id, false
+						end if
+						'fire required event
+						FireRequired(m_bRequired)
+					end if
+					on error resume next
+					'turn off errors because may be disabled or hidden
+					if elSource is m_elFocusCell and m_bFocusSet then m_elFocusCell.focus()
+					on error goto 0
+				end if
+			end if
+		end sub
+
+		sub FireRequired(bRequired)
+			dim evt
+			'fire required event
+			set evt = createEventObject()
+			evt.setAttribute "required", bRequired
+			evt.setAttribute "type", "require"
+			evtRequired.fire(evt)
+		end sub
+
+		sub FireValid(bValid)
+			dim evt
+			'fire valid event
+			set evt = createEventObject()
+			evt.setAttribute "valid", bValid
+			evt.setAttribute "type", "valid"
+			evtValid.fire(evt)
+		end sub
+
+		sub InitSubControls(sFields)
+			dim aFields, sID, elControl, xmlMetaNode, sType, sReadOnly, _
+				nMinlength, sDisabled, bFieldHidden
+			'initialize all subcontrols in sFields string (space delimited)
+			aFields = split(sFields)
+			for each sID in aFields
+				if sID <> "" then
+					'get control and meta node, if possible
+					set elControl = element.all(sID)
+					set xmlMetaNode = m_xmlMetaDoc.selectSingleNode("//fields/*[@id = '" & sID & "']")
+					if not elControl is nothing and not xmlMetaNode is nothing then
+						elControl.attachEvent "onreadystatechange", GetRef("onReadyStateChange")
+						elControl.setAttribute "groupid", m_sGroupID
+						if m_bAutoGenIDs then
+							'if autogen ids then get uniqu id
+							elControl.setAttribute "id", element.document.UniqueID
+							'add to subcontrols dict for private method use
+							m_dSubControls.add sID, elControl
+						else
+							'add id based on ID
+							elControl.setAttribute "id", sID
+							m_dSubControls.add sID, elControl
+						end if
+						sType = xmlMetaNode.nodeName
+						if sType = "boolean" or sType = "select" or bFieldHidden then xmlMetaNode.removeAttribute("required")
+						if sType = "text" then
+							nMinlength = xmlMetaNode.getAttribute("minlen")
+							if isNull(nMinlength) or nMinlength = "" then
+							elseif not isNumeric(nMinlength) or nMinlength <= 0 then
+							else
+								'treat as required if minlen > 0
+								xmlMetaNode.setAttribute "required", "yes"
+							end if
+						end if
+						if sType = "text" and xmlMetaNode.getAttribute("subtype") = "long" then
+							'textlong class adds taller height to reduce redraw
+							elControl.className = "efField efTextLong"
+						else
+							elControl.className = "efField ef" & sType
+						end if
+						bFieldHidden = cBool(not isNull(xmlMetaNode.getAttribute("hide")) and xmlMetaNode.getAttribute("hide") = "yes")
+						'hide if hidden
+						if bFieldHidden then elControl.style.display = "none"
+						sReadOnly = xmlMetaNode.getAttribute("readonly")
+						sDisabled = xmlMetaNode.getAttribute("disabled")
+						if not bFieldHidden and _
+							not (not isNull(sReadOnly) and sReadOnly = "yes") and _
+							not (not isNull(sDisabled) and sDisabled = "yes") and _
+							m_elFocusCell is nothing then
+							'set first non-hidden row control cell as focus row
+							set m_elFocusCell = elControl
+						end if
+					end if
+				end if
+			next
+		end sub
+
+		sub RegisterSubControls(sRegister)
+			dim aRegister, sID, elControl
+			'register all subcontrols in sRegister string (space delimited)
+			'thus the require and change events can be bubbled from arbitrary controls
+			aRegister = split(sRegister)
+			for each sID in aRegister
+				sID = replace(sID, ",", "")
+				if sID <> "" then
+					'get control, if possible
+					set elControl = element.all(sID)
+					if not elControl is nothing then
+						'add  groupid to control element and add to required & group dicts
+						elControl.setAttribute "groupId", m_sGroupID
+						m_dControlGroups.Add sID, m_sGroupID
+						if elControl.tagName = "SELECT" or elControl.tagName = "INPUT" or elControl.tagName = "TEXTAREA" then
+							'just attach change event to html controls
+							elControl.attachEvent "onchange", GetRef("onChange")
+						else
+							'attach event to register control when loaded
+							if elControl.readystate <> "complete" then
+								elControl.attachEvent "onreadystatechange", GetRef("RegisterSubControl")
+							else
+								RegisterSubControl2(elControl)
+							end if
+						end if
+					end if
+				end if
+			next
+		end sub
+
+		sub RegisterSubControl()
+			dim elSource
+			'when an unknown control registered in a template group is complete this routine
+			'will attach the valid and require handlers
+			set elSource = window.event.srcElement
+			if elSource.readyState = "complete" then
+				elSource.detachEvent "onreadystatechange", GetRef("RegisterSubControl")
+				RegisterSubControl2(elSource)
+			end if
+		end sub
+
+		sub RegisterSubControl2(elSource)
+			elSource.attachEvent "onchange", GetRef("onChange")
+			elSource.attachEvent "onbeginchange", GetRef("onChange")
+			elSource.attachEvent "onrequire", GetRef("onEvent")
+			elSource.attachEvent "onvalid", GetRef("onEvent")
+			on error resume next
+			dim b
+			b = elSource.required
+			if err.number = 0 and typename(b) = "Boolean" and not elSource.disabled then
+				m_dRequired.add elSource.id, b
+				SetRequired elSource, b
+			else
+				m_dRequired.add elSource.id, false
+				SetRequired elSource, false
+			end if
+			err.clear
+			b = elSource.valid
+			if err.number = 0 and typename(b) = "Boolean" and not elSource.disabled then
+				m_dValid.add elSource.id, b
+				SetValid elSource, b
+			else
+				m_dValid.add elSource.id, true
+				SetValid elSource, true
+			end if
+		end sub
+
+		Function sFormatString(sFormat, aArgs)
+			dim nArg, sNewString
+			'formats strings like C format using numbered arguments (%1, %2, &tc.)
+			'call like: sText = sFormatString(sOriginalText, Array(sArg1, sArg2, ...))
+			sNewString = sFormat
+			for nArg = LBound(aArgs) to UBound(aArgs)
+				sNewString = Replace(sNewString, "%" & nArg + 1, aArgs(nArg))
+			next
+			sFormatString = sNewString
+		End Function
+
+		sub ReportError(strMessage)
+			dim evt
+			strMessage = sFormatString(L_ControlURNandID_ErrorMessage, Array(element.id)) & vbCrLf & vbCrLf & strMessage
+			' Display the message if in debug-mode.
+			if m_bDebug = true then alert(strMessage)
+			set evt = createEventObject()
+			evt.setAttribute "error", strMessage
+			evt.setAttribute "type", "error"
+			evtError.fire(evt)
+		end sub
+
+		sub ShowXMLError(sType, xml)
+			Dim sBuffer
+			'create xml error text and then call ReportError with it
+			if sType = "meta" then
+				sBuffer = sFormatString(L_MetaXMLErrorAtCharLine_ErrorMessage, Array(metaXML, xml.parseError.linePos, xml.parseError.line))
+			else
+				sBuffer = sFormatString(L_DataXMLErrorAtCharLine_ErrorMessage, Array(dataXML, xml.parseError.linePos, xml.parseError.line))
+			end if
+			sBuffer = sBuffer & vbCrLf & xml.parseError.reason & vbCrLf
+			sBuffer = sBuffer & L_SourceCode_ErrorMessage & vbCrLf
+			sBuffer = sBuffer & xml.parseError.srcText
+			ReportError(sBuffer)
+		end sub
+
+		function elGetContainer(elElement, sKey, sValue)
+			Dim elTemp, elTemp2
+			' returns nothing, self, or first ancester node to match
+			'sKey property/method value
+			set elTemp = elElement
+			set elTemp2 = elElement
+			do while not isNull(elTemp) and not elTemp is nothing and (elTemp.tagName <> "BODY")
+				if eval("elTemp." & sKey & " = """ & sValue & """") then
+					set elTemp2 = elTemp
+					set elGetContainer = elTemp2
+					exit function
+				end if
+				set elTemp = elTemp.parentElement
+			loop
+			set elGetContainer = elTemp2
+		end function
+
+		sub ReplaceClass(elItem, sOldClass, sNewClass)
+			'replaces contains oldclass with newclass in item's classname
+			elItem.className = replace(elItem.className, sOldClass, sNewClass)
+		end sub
+
+		function bHasClass(elItem, sClass)
+			'returns true if item's classname contains class
+			bHasClass = CBool(inStr(elItem.className, sClass))
+		end function
+
+		sub onKeyDown()
+			dim evt
+			'make enter work the same as click on title bar
+			set evt = window.event
+			if evt.keyCode = KEYCODE_ENTER then
+				' enter same as click on title
+				evt.srcElement.click()
+				evt.returnValue = false
+			end if
+		end sub
+
+		sub onChange()
+			dim evt
+			if not m_bDirty then
+				'set dirty and fire change event
+				m_bDirty = true
+				set evt = createEventObject()
+				evt.setAttribute "type", "change"
+				evtChange.fire(evt)
+			end if
+		end sub
+
+		sub onEvent()
+			if window.event.type = "require" then
+				SetRequired window.event.srcElement, window.event.required
+			elseif window.event.type = "valid" then
+				SetValid window.event.srcElement, window.event.valid
+			end if
+		end sub
+
+		sub SetRequired(elSource, bRequired)
+			dim elGroupIcon, sID, _
+				sGroupID, bGroupRequired
+			on error resume next
+			sID = elSource.id
+			sGroupID = elSource.getAttribute("groupID")
+			set elGroupIcon = element.all("required_" & sGroupID)
+			if not isNull(sID) then
+				m_dRequired(sID) = bRequired
+				m_bRequired = false
+				bGroupRequired = false
+				for each sID in m_dRequired
+					if not isNull(sID) and m_dRequired(sID) then
+						'make EditSheet required if any field in EditSheet is required
+						m_bRequired = true
+						if m_dControlGroups(sID) = sGroupID then
+							'make group required if any field in group is required
+							bGroupRequired = true
+							if not elGroupIcon is nothing then
+								elGroupIcon.style.visibility = "visible"
+							end if
+						end if
+					end if
+				next
+				'if no fields in group required hide group icon
+				if not elGroupIcon is nothing and not bGroupRequired then
+					elGroupIcon.style.visibility = "hidden"
+				end if
+				FireRequired(m_bRequired)
+			end if
+		end sub
+
+		sub SetValid(elSource, bValid)
+			dim elGroupIcon, sID, _
+				sGroupID, bGroupValid
+			on error resume next
+			sID = elSource.id
+			sGroupID = elSource.getAttribute("groupID")
+			set elGroupIcon = element.all("invalid_" & sGroupID)
+			if not isNull(sID) then
+				m_dValid(sID) = bValid
+				m_bValid = true
+				bGroupValid = true
+				for each sID in m_dValid
+					if not isNull(sID) and not m_dValid(sID) then
+						'make EditSheet invalid if any field in EditSheet is invalid
+						m_bValid = false
+						if m_dControlGroups(sID) = sGroupID then
+							'make group invalid if any field in group is invalid
+							bGroupValid = false
+							if not elGroupIcon is nothing then
+								elGroupIcon.style.visibility = "visible"
+							end if
+						end if
+					end if
+				next
+				'if no fields in group invalid hide group icon
+				if not elGroupIcon is nothing and bGroupValid then
+					elGroupIcon.style.visibility = "hidden"
+				end if
+				FireValid(m_bValid)
+			end if
+		end sub
+
+		sub onClick()
+			dim elSource, elExpandIcon
+			'get the container group
+			set elSource = elGetContainer(window.event.srcElement, "getAttribute(""NAME"")", "bdeditgroup")
+			if isNull(elSource) then exit sub
+			'get first expand icon (if nested ESs in this group)
+			set elExpandIcon = elSource.all.ExpandIcon
+			if inStr(typename(elExpandIcon), "Collection") > 0 then set elExpandIcon = elExpandIcon(0)
+			if bHasClass(elSource, "esCollapsed") then
+				'collapsed; so expand group
+				ReplaceClass elSource, "esCollapsed", "esExpanded"
+				elExpandIcon.innerText = DOWN_ARROW
+				elSource.scrollIntoView(true)
+			elseif bHasClass(elSource, "esExpanded") then
+				'expanded; so collapse group
+				ReplaceClass elSource, "esExpanded", "esCollapsed"
+				elExpandIcon.innerText = RIGHT_ARROW
+			end if
+		end sub
+
+		sub Focus()
+			'set focus on first visible control if any
+			on error resume next
+			if not m_elFocusCell is nothing then m_elFocusCell.focus()
+			m_bFocusSet = true
+		end sub
+
+		function xmlGetRecord()
+			dim xmlData, xmlRecord, sID, xmlNode, xmlNewNode
+			'create a new document with one record
+			set xmlData = CreateObject("MSXML.DOMDocument")
+			set xmlData.documentElement = xmlData.createElement("record")
+			set xmlRecord = xmlData.documentElement
+			'append a new node to the record for each subcontrol value
+			for each sID in m_dSubControls
+				if not isEmpty(m_dSubControls(sID)) then
+					'append the node
+					set xmlNode = xmlRecord.appendChild(xmlData.createElement(sID))
+					if inStr(m_dSubControls(sID).className, "efselect") then
+						'for select node also create matching displayvalue node
+						set xmlNewNode = xmlNode.ownerDocument.createElement(sID & "_displayvalue")
+						xmlNewNode.text = m_dSubControls(sID).displayvalue
+						set xmlNewNode = xmlNode.parentNode.appendChild(xmlNewNode)
+					end if
+					'set current value in the new node
+					on error resume next
+					xmlNode.text = m_dSubControls(sID).value
+					on error goto 0
+				end if
+			next
+			'return newly created record
+			set xmlGetRecord = xmlRecord
+		end function
+
+		sub SetRecord(xmlRecord)
+			dim xmlNode
+			if xmlRecord is nothing then exit sub
+			m_bRequired = false
+			'set the subcontrol value to the node's text for each node in the data
+			for each xmlNode in xmlRecord.childNodes
+				if not isEmpty(m_dSubControls(xmlNode.nodeName)) then
+					m_dSubControls(xmlNode.nodeName).value = xmlNode.text
+					'if the text is empty then set group required, also mark item in required with new state
+					if xmlNode.text = "" then
+						if not isEmpty(m_dRequired(xmlNode.nodeName)) then
+							'only set require if control is in required dict
+							setRequired m_dSubControls(xmlNode.nodeName), m_dSubControls(xmlNode.nodeName).required
+						end if
+					else
+						if not isEmpty(m_dRequired(xmlNode.nodeName)) then m_dRequired(xmlNode.nodeName) = false
+					end if
+				end if
+			next
+			'reset dirty flag and fire required event with new state
+			m_bDirty = false
+			FireRequired(m_bRequired)
+		end sub
+
+		sub DisableAll(bDisable)
+			dim sSubControl, elSubcontrol, sReqID
+			'disable/enable each subcontrol based on bDisable
+			on error resume next
+			for each sSubControl in m_dSubControls
+				if not isEmpty(m_dSubControls(sSubControl)) then
+					set elSubcontrol = m_dSubControls(sSubControl)
+					'disable/enable subcontrol based on bDisable
+					elSubcontrol.disabled = bDisable
+					'fix formatting for control based on bDisable
+					if bDisable then
+						ReplaceClass elSubcontrol, "efReadWrite", "efReadOnly"
+					else
+						if elSubcontrol.readonly then
+							ReplaceClass elSubcontrol, "efReadWrite", "efReadOnly"
+						else
+							ReplaceClass elSubcontrol, "efReadOnly", "efReadWrite"
+						end if
+						'fire required anmd valid events based on each control
+						setRequired elSubcontrol, elSubcontrol.required
+						setValid elSubcontrol, elSubcontrol.valid
+					end if
+				end if
+			next
+			m_bDirty = false
+		end sub
+
+		sub ClearAll()
+			dim sSubControl
+			'set all subcontrol values to empty string
+			for each sSubControl in m_dSubControls
+				if not isEmpty(m_dSubControls(sSubControl)) then
+					m_dSubControls(sSubControl).setAttribute "value", ""
+				end if
+			next
+			m_bDirty = false
+		end sub
+
+		sub ResetDirty()
+			m_bDirty = false
+		end sub
+
+		sub ResetDefault()
+			dim xmlFieldNode, elSubControl
+			'set all subcontrol values to empty string or defaults if set
+			for each xmlFieldNode in m_xmlMetaDoc.selectNodes("//fields/*[@id $ne$ '']")
+				set elSubControl = element.all(xmlFieldNode.getAttribute("id"))
+				if not isEmpty(elSubControl) then
+					elSubControl.resetDefault()
+				end if
+			next
+			m_bDirty = false
+		end sub
+
+		function elGetField(sID)
+			dim elControl
+			'gets a field element given the ID of the field (id in meta-data)
+			if not isEmpty(m_dSubControls(sID)) then
+				'from subcontrol dict if aurogenids set
+				set elControl = m_dSubControls(sID)
+			else
+				'from naming convention if not
+				set elControl = element.all(sID)
+			end if
+			'return element or null if not found
+			if not elControl is nothing then
+				set elGetField = elControl
+			else
+				set elGetField = nothing
+			end if
+		end function
+
+		sub Hide(sID)
+			SetHide sID, true
+		end sub
+
+		sub Show(sID)
+			SetHide sID, false
+		end sub
+
+		sub SetHide(sID, bHide)
+			dim elSubcontrol, elRow
+			set elSubcontrol = elGetField(sID)
+			set elRow = elSubcontrol.parentElement.parentElement
+			if elRow.tagName <> "TR" then exit sub
+			if bHide then
+				elRow.style.display = "none"
+				'pretend hidden fields are not required and valid
+				setRequired elSubcontrol, false
+				setValid elSubcontrol, true
+			else
+				elRow.style.display = "block"
+				'reset required and valid for field when showing
+				setRequired elSubcontrol, elSubcontrol.required
+				setValid elSubcontrol, elSubcontrol.valid
+			end if
+		end sub
+
+		function bGetHide(sID)
+			dim elRow
+			set elRow = elGetField(sID).parentElement.parentElement
+			if elRow.tagName <> "TR" then exit function
+			if elRow.style.display = "none" then
+				bGetHide = true
+			else
+				bGetHide = false
+			end if
+		end function
+
+		function bGetDirty()
+			'get dirty state
+			bGetDirty = m_bDirty
+		end function
+
+		function bGetRequired()
+			'get required state
+			bGetRequired = m_bRequired
+		end function
+
+		function bGetValid()
+			'get valid state
+			bGetValid = m_bValid
+		end function
+	</SCRIPT>
+</PUBLIC:COMPONENT>

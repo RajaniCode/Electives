@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="3a23a1e9-fc6a-4470-8e79-2e4147411ad7" name="swalther@SWLAPTOP 2009-02-24 10:18:33" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Local Test Run" id="6dc16b7c-7cab-48b5-9232-85d908d632fa">
+    <Description>This is a default test run configuration for a local test run.</Description>
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\TestResults\swalther_SWLAPTOP 2009-02-24 10_18_33">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository\bin\Debug\GenericRepository.dll" />
+    </Deployment>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="3" executed="3" passed="3" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-02-24T10:18:33.3810000-08:00" queuing="2009-02-24T10:18:34.5800000-08:00" start="2009-02-24T10:18:34.7830000-08:00" finish="2009-02-24T10:18:35.5980000-08:00" />
+  <TestDefinitions>
+    <UnitTest name="IdentityIncrements" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\commoncode\genericrepository\genericrepository.tests\bin\debug\genericrepository.tests.dll" id="a3bb9cda-e3d0-d7c1-329a-9b01ff46ea5c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="0dc35abf-1976-4c64-9e76-e93e266d181e" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository.Tests\bin\Debug\GenericRepository.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="GenericRepository.Tests.FakeGenericRepositoryTests.InsertTests, GenericRepository.Tests" name="IdentityIncrements" />
+    </UnitTest>
+    <UnitTest name="InsertIncrementsId" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\commoncode\genericrepository\genericrepository.tests\bin\debug\genericrepository.tests.dll" id="040209d1-e85c-52d8-f936-b4d861f2e936">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="dc78f3c4-6aff-49a6-86ba-de1732375004" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository.Tests\bin\Debug\GenericRepository.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="GenericRepository.Tests.MemoryDatabaseTests.InsertTests, GenericRepository.Tests" name="InsertIncrementsId" />
+    </UnitTest>
+    <UnitTest name="AfterFirstInsertIdIs1" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\commoncode\genericrepository\genericrepository.tests\bin\debug\genericrepository.tests.dll" id="dcce2324-4851-1198-b92d-3d92c9786d3c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="bf95653a-8aee-40d6-ac25-79c48e9009b4" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository.Tests\bin\Debug\GenericRepository.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="GenericRepository.Tests.MemoryDatabaseTests.InsertTests, GenericRepository.Tests" name="AfterFirstInsertIdIs1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="040209d1-e85c-52d8-f936-b4d861f2e936" executionId="dc78f3c4-6aff-49a6-86ba-de1732375004" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a3bb9cda-e3d0-d7c1-329a-9b01ff46ea5c" executionId="0dc35abf-1976-4c64-9e76-e93e266d181e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dcce2324-4851-1198-b92d-3d92c9786d3c" executionId="bf95653a-8aee-40d6-ac25-79c48e9009b4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="dc78f3c4-6aff-49a6-86ba-de1732375004" testId="040209d1-e85c-52d8-f936-b4d861f2e936" testName="InsertIncrementsId" computerName="SWLAPTOP" duration="00:00:00.0387971" startTime="2009-02-24T10:18:34.8900000-08:00" endTime="2009-02-24T10:18:35.4810000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0dc35abf-1976-4c64-9e76-e93e266d181e" testId="a3bb9cda-e3d0-d7c1-329a-9b01ff46ea5c" testName="IdentityIncrements" computerName="SWLAPTOP" duration="00:00:00.0006799" startTime="2009-02-24T10:18:35.4870000-08:00" endTime="2009-02-24T10:18:35.4920000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bf95653a-8aee-40d6-ac25-79c48e9009b4" testId="dcce2324-4851-1198-b92d-3d92c9786d3c" testName="AfterFirstInsertIdIs1" computerName="SWLAPTOP" duration="00:00:00.0006824" startTime="2009-02-24T10:18:35.4980000-08:00" endTime="2009-02-24T10:18:35.5020000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

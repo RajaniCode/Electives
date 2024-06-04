@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="6a99a7fd-f783-49a0-bcf6-a905e3d85856" name="swalther@SWLAPTOP 2009-05-02 20:00:31" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="84485033-8626-4c88-abdf-b23134d29b87">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-05-02 20_00_31">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-05-02T20:00:31.3280275-07:00" queuing="2009-05-02T20:00:32.8891836-07:00" start="2009-05-02T20:00:33.1662113-07:00" finish="2009-05-02T20:00:33.9572904-07:00" />
+  <TestDefinitions>
+    <UnitTest name="JillCanAccessSuperSecrets" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter12 - authenticating users\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="65fab5fa-5fd6-16b7-e7ab-9d608189f2b1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="057207c4-5ced-4f5d-aa37-6b2a92c39aa7" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Controllers.CompanyControllerTests, MvcApplication1.Tests" name="JillCanAccessSuperSecrets" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="65fab5fa-5fd6-16b7-e7ab-9d608189f2b1" executionId="057207c4-5ced-4f5d-aa37-6b2a92c39aa7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="057207c4-5ced-4f5d-aa37-6b2a92c39aa7" testId="65fab5fa-5fd6-16b7-e7ab-9d608189f2b1" testName="JillCanAccessSuperSecrets" computerName="SWLAPTOP" duration="00:00:00.0870411" startTime="2009-05-02T20:00:33.2812228-07:00" endTime="2009-05-02T20:00:33.8682815-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual failed. Expected:&lt;Jack, Jill&gt;. Actual:&lt;Jack,Jill&gt;. </Message>
+          <StackTrace>   at MvcApplication1.Tests.Controllers.CompanyControllerTests.JillCanAccessSuperSecrets() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1.Tests\Controllers\CompanyControllerTests.cs:line 23
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

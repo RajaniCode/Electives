@@ -1,0 +1,18 @@
+<Schema Namespace="SpMappComplexType" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+  <EntityContainer Name="SpMappComplex">
+    <EntitySet Name="Customers" EntityType="SpMappComplexType.Customers" />
+  </EntityContainer>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="String" Nullable="false" MaxLength="5" Unicode="true" FixedLength="true" />
+    <Property Name="ContactName" Type="String" MaxLength="30" Unicode="true" FixedLength="false" />
+    <Property Name="Address" Type="Self.CAddress" Nullable="false" />
+  </EntityType>
+  <ComplexType Name="CAddress">
+    <Property Name="StreetAddress" Type="String" />
+    <Property Name="City" Type="String" />
+    <Property Name="Zip" Type="String" />
+  </ComplexType>
+</Schema>

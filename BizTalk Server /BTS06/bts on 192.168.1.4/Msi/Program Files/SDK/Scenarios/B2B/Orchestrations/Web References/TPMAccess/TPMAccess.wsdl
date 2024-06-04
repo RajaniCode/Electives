@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://TPMAccess/WS/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://TPMAccess/WS/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://TPMAccess/WS/">
+      <s:element name="GetPartner">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="partnerID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPartnerResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPartnerResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePartner">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="partnerXml" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdatePartnerResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPartnerSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPartner" />
+  </wsdl:message>
+  <wsdl:message name="GetPartnerSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPartnerResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePartnerSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdatePartner" />
+  </wsdl:message>
+  <wsdl:message name="UpdatePartnerSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdatePartnerResponse" />
+  </wsdl:message>
+  <wsdl:portType name="TPMAccessSoap">
+    <wsdl:operation name="GetPartner">
+      <wsdl:input message="tns:GetPartnerSoapIn" />
+      <wsdl:output message="tns:GetPartnerSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePartner">
+      <wsdl:input message="tns:UpdatePartnerSoapIn" />
+      <wsdl:output message="tns:UpdatePartnerSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="TPMAccessSoap" type="tns:TPMAccessSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="GetPartner">
+      <soap:operation soapAction="http://TPMAccess/WS/GetPartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePartner">
+      <soap:operation soapAction="http://TPMAccess/WS/UpdatePartner" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="TPMAccessSoap12" type="tns:TPMAccessSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="GetPartner">
+      <soap12:operation soapAction="http://TPMAccess/WS/GetPartner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePartner">
+      <soap12:operation soapAction="http://TPMAccess/WS/UpdatePartner" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="TPMAccess">
+    <wsdl:port name="TPMAccessSoap" binding="tns:TPMAccessSoap">
+      <soap:address location="http://localhost/TPMAccess/TPMAccess.asmx" />
+    </wsdl:port>
+    <wsdl:port name="TPMAccessSoap12" binding="tns:TPMAccessSoap12">
+      <soap12:address location="http://localhost/TPMAccess/TPMAccess.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

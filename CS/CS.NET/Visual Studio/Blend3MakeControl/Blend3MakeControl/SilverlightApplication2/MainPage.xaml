@@ -1,0 +1,43 @@
+﻿<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    xmlns:vsm="clr-namespace:System.Windows;assembly=System.Windows" x:Class="SilverlightApplication2.MainPage" 
+    Width="400" Height="300">
+	<UserControl.Resources>
+		<Style x:Key="TriangleButton" TargetType="Button">
+			<Setter Property="Template">
+				<Setter.Value>
+					<ControlTemplate TargetType="Button">
+						<Grid>
+							<vsm:VisualStateManager.VisualStateGroups>
+								<vsm:VisualStateGroup x:Name="CommonStates">
+									<vsm:VisualState x:Name="MouseOver">
+										<Storyboard>
+											<ColorAnimationUsingKeyFrames BeginTime="00:00:00" Duration="00:00:00.0010000" Storyboard.TargetName="path" Storyboard.TargetProperty="(Shape.Fill).(SolidColorBrush.Color)">
+												<EasingColorKeyFrame KeyTime="00:00:00" Value="#FF811F1F"/>
+											</ColorAnimationUsingKeyFrames>
+										</Storyboard>
+									</vsm:VisualState>
+									<vsm:VisualState x:Name="Normal"/>
+									<vsm:VisualState x:Name="Pressed"/>
+									<vsm:VisualState x:Name="Disabled"/>
+								</vsm:VisualStateGroup>
+								<vsm:VisualStateGroup x:Name="FocusStates">
+									<vsm:VisualState x:Name="Unfocused"/>
+									<vsm:VisualState x:Name="Focused"/>
+								</vsm:VisualStateGroup>
+							</vsm:VisualStateManager.VisualStateGroups>
+							<Path x:Name="path" Fill="#FFFFFFFF" Stretch="Fill" Stroke="#FF000000" UseLayoutRounding="False" Data="M175,42 C154.84358,76.643852 129.4223,108.96282 109,143 C100.23428,157.60954 76.329567,164.35216 73,181 C123.14343,181 172.40096,173 223,173 C244.95552,173 267.68301,174 289,174 C275.23547,160.23549 258.71286,148.34511 246,132 C232.79173,115.01795 221.1515,96.359283 209,79 C198.97539,64.679131 189.01268,53.012688 176,40 C175.66667,40.666668 175.33333,41.333332 175,42 z"/>
+							<ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+						</Grid>
+					</ControlTemplate>
+				</Setter.Value>
+			</Setter>
+		</Style>
+	</UserControl.Resources>
+    <Grid x:Name="LayoutRoot" Background="White">
+
+    	<Button Margin="73,40,110,118" Style="{StaticResource TriangleButton}" Content="Button" Click="Button_Click"/>
+
+    </Grid>
+</UserControl>

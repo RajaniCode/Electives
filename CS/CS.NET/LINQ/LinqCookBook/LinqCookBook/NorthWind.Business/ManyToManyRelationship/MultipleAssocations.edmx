@@ -1,0 +1,210 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MultipleAssociationsModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="MultipleAssociationsModelStoreContainer">
+          <EntitySet Name="Actors" EntityType="MultipleAssociationsModel.Store.Actors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Movies" EntityType="MultipleAssociationsModel.Store.Movies" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MoviesWithLeadingActor" EntityType="MultipleAssociationsModel.Store.MoviesWithLeadingActor" store:Type="Views" store:Schema="dbo" store:Name="MoviesWithLeadingActor">
+            <DefiningQuery>SELECT 
+      [MoviesWithLeadingActor].[ActorId] AS [ActorId], 
+      [MoviesWithLeadingActor].[MovieId] AS [MovieId]
+      FROM [dbo].[MoviesWithLeadingActor] AS [MoviesWithLeadingActor]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MoviesWithSupportingActor" EntityType="MultipleAssociationsModel.Store.MoviesWithSupportingActor" store:Type="Views" store:Schema="dbo" store:Name="MoviesWithSupportingActor">
+            <DefiningQuery>SELECT 
+      [MoviesWithSupportingActor].[ActorId] AS [ActorId], 
+      [MoviesWithSupportingActor].[MovieId] AS [MovieId]
+      FROM [dbo].[MoviesWithSupportingActor] AS [MoviesWithSupportingActor]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Ecommerce.dbo.MoviesWithLeadingActor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="MoviesWithLeadingActor">
+          <Key>
+            <PropertyRef Name="ActorId" />
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="ActorId" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+      warning 6002: The table/view 'Ecommerce.dbo.MoviesWithSupportingActor' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.
+      -->
+        <EntityType Name="MoviesWithSupportingActor">
+          <Key>
+            <PropertyRef Name="ActorId" />
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="ActorId" Type="int" Nullable="false" />
+          <Property Name="MovieId" Type="int" Nullable="false" />
+        </EntityType>
+        <Function Name="deleteActor_Movies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActorId" Type="int" Mode="In" />
+          <Parameter Name="MovieId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertLeadingActor_Movies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <CommandText>
+            exec dbo.InsertActor_Movies @ActorId = @ActorId,@MovieId = @MovieId,@IsLeadingRole = 1
+          </CommandText>
+          <Parameter Name="ActorId" Type="int" Mode="In" />
+          <Parameter Name="MovieId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertSupporingActor_Movies" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <CommandText>
+            exec dbo.InsertActor_Movies @ActorId = @ActorId,@MovieId = @MovieId,@IsLeadingRole = 0
+          </CommandText>
+          <Parameter Name="ActorId" Type="int" Mode="In" />
+          <Parameter Name="MovieId" Type="int" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MultipleAssociationsModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="MultipleAssocationsEntities">
+          <EntitySet Name="Actors" EntityType="MultipleAssociationsModel.Actors" />
+          <EntitySet Name="Movies" EntityType="MultipleAssociationsModel.Movies" />
+          <AssociationSet Name="ActorsMovies" Association="MultipleAssociationsModel.ActorsMovies">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="Movies" EntitySet="Movies" /></AssociationSet>
+          <AssociationSet Name="ActorsMovies1" Association="MultipleAssociationsModel.ActorsMovies1">
+            <End Role="Actors" EntitySet="Actors" />
+            <End Role="Movies" EntitySet="Movies" /></AssociationSet></EntityContainer>
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="MoviesWithLeadingActor" Relationship="MultipleAssociationsModel.ActorsMovies" FromRole="Actors" ToRole="Movies" />
+          <NavigationProperty Name="MoviesWithSupportingRole" Relationship="MultipleAssociationsModel.ActorsMovies1" FromRole="Actors" ToRole="Movies" /></EntityType>
+        <EntityType Name="Movies">
+          <Key>
+            <PropertyRef Name="MovieId" />
+          </Key>
+          <Property Name="MovieId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="LeadingActors" Relationship="MultipleAssociationsModel.ActorsMovies" FromRole="Movies" ToRole="Actors" />
+          <NavigationProperty Name="SupportingActors" Relationship="MultipleAssociationsModel.ActorsMovies1" FromRole="Movies" ToRole="Actors" /></EntityType>
+        <Association Name="ActorsMovies">
+          <End Type="MultipleAssociationsModel.Actors" Role="Actors" Multiplicity="*" />
+          <End Type="MultipleAssociationsModel.Movies" Role="Movies" Multiplicity="*" /></Association>
+        <Association Name="ActorsMovies1">
+          <End Type="MultipleAssociationsModel.Actors" Role="Actors" Multiplicity="*" />
+          <End Type="MultipleAssociationsModel.Movies" Role="Movies" Multiplicity="*" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="MultipleAssociationsModelStoreContainer" CdmEntityContainer="MultipleAssocationsEntities">
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="IsTypeOf(MultipleAssociationsModel.Actors)">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movies">
+            <EntityTypeMapping TypeName="IsTypeOf(MultipleAssociationsModel.Movies)">
+              <MappingFragment StoreEntitySet="Movies">
+                <ScalarProperty Name="MovieId" ColumnName="MovieId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="ActorsMovies" TypeName="MultipleAssociationsModel.ActorsMovies" StoreEntitySet="MoviesWithLeadingActor">
+            <EndProperty Name="Movies">
+              <ScalarProperty Name="MovieId" ColumnName="MovieId" /></EndProperty>
+            <EndProperty Name="Actors">
+              <ScalarProperty Name="ActorId" ColumnName="ActorId" /></EndProperty>
+            <ModificationFunctionMapping>
+              <InsertFunction FunctionName="MultipleAssociationsModel.Store.InsertLeadingActor_Movies" >
+                <EndProperty Name="Movies">
+                  <ScalarProperty Name="MovieId"  ParameterName="MovieId" />
+                </EndProperty>
+                <EndProperty Name="Actors">
+                  <ScalarProperty Name="ActorId" ParameterName="ActorId" />
+                </EndProperty>
+              </InsertFunction>
+              <DeleteFunction FunctionName="MultipleAssociationsModel.Store.deleteActor_Movies">
+                <EndProperty Name="Movies">
+                  <ScalarProperty Name="MovieId"  ParameterName="MovieId" />
+                </EndProperty>
+                <EndProperty Name="Actors">
+                  <ScalarProperty Name="ActorId" ParameterName="ActorId" />
+                </EndProperty>
+              </DeleteFunction>
+            </ModificationFunctionMapping>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="ActorsMovies1" TypeName="MultipleAssociationsModel.ActorsMovies1" StoreEntitySet="MoviesWithSupportingActor">
+            <EndProperty Name="Movies">
+              <ScalarProperty Name="MovieId" ColumnName="MovieId" /></EndProperty>
+            <EndProperty Name="Actors">
+              <ScalarProperty Name="ActorId" ColumnName="ActorId" /></EndProperty>
+            <ModificationFunctionMapping>
+              <InsertFunction FunctionName="MultipleAssociationsModel.Store.InsertSupporingActor_Movies" >
+                <EndProperty Name="Movies">
+                  <ScalarProperty Name="MovieId"  ParameterName="MovieId" />
+                </EndProperty>
+                <EndProperty Name="Actors">
+                  <ScalarProperty Name="ActorId" ParameterName="ActorId" />
+                </EndProperty>
+              </InsertFunction>
+              <DeleteFunction FunctionName="MultipleAssociationsModel.Store.deleteActor_Movies">
+                <EndProperty Name="Movies">
+                  <ScalarProperty Name="MovieId"  ParameterName="MovieId" />
+                </EndProperty>
+                <EndProperty Name="Actors">
+                  <ScalarProperty Name="ActorId" ParameterName="ActorId" />
+                </EndProperty>
+              </DeleteFunction>
+            </ModificationFunctionMapping>
+          </AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="MultipleAssocations">
+        <EntityTypeShape EntityType="MultipleAssociationsModel.Actors" Width="1.5" PointX="1.125" PointY="0.625" Height="1.2636116536458335" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultipleAssociationsModel.Movies" Width="1.5" PointX="1.125" PointY="2.75" Height="1.427958984375" IsExpanded="true" />
+        <AssociationConnector Association="MultipleAssociationsModel.ActorsMovies">
+          <ConnectorPoint PointX="1.875" PointY="2.052958984375" />
+          <ConnectorPoint PointX="1.875" PointY="2.75" /></AssociationConnector>
+        <AssociationConnector Association="MultipleAssociationsModel.ActorsMovies1">
+          <ConnectorPoint PointX="2.3125" PointY="2.052958984375" />
+          <ConnectorPoint PointX="2.3125" PointY="2.75" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

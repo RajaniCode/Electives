@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Database Name="Ecommerce" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+	<Table Name="dbo.Book">
+		<Type Name="Book">
+			<Column  Name="BookId" Type="System.Int32" Member="BookId" IsPrimaryKey="true" IsDbGenerated="true"/>
+			<Column Name="BookAuthor" Type="System.String" Member="BookAuthor" />
+			<Column  Name="Type" Type="System.Int32" Member="Type" IsDiscriminator="true" />
+			<Type Name="TecnnicalBook" InheritanceCode="1" IsInheritanceDefault="true">
+				<Column Name="Technology" Type="System.String" Member="Technology" />
+				<Type Name="CertificationBook" InheritanceCode="2">
+					<Column Name="Exam" Type="System.String" Member="Exam"/>
+				</Type>
+			</Type>
+			<Type Name="CookingBook" InheritanceCode="3">
+				<Column Name="ReceipesAvailable" Type="System.Boolean" Member="ReceipesAvailable"/>
+			</Type>
+			<Type Name="Novel" InheritanceCode="4">
+				<Column Name="TrueStory" Type="System.Boolean" Member="TrueStory"/>
+			</Type>
+			
+		</Type>
+	</Table>
+</Database>
+
+

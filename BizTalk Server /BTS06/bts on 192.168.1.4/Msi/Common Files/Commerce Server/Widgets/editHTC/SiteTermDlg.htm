@@ -1,0 +1,97 @@
+﻿<HTML>
+<HEAD>
+	<TITLE id=L_ChooseSiteTerms_HTMLTitle>Choose Site-Terms</TITLE>
+	<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=utf-8'>
+	<LINK REL='stylesheet' TYPE='text/css' HREF='/widgets/bizdesk.css' ID='mainstylesheet'>
+	<SCRIPT LANGUAGE='VBScript'>
+
+		Option  Explicit
+
+		dim xmlSelected, sSelected
+
+		xmlSelected = null
+
+		sub initSiteTermList()
+			dim objArgs, xmlSiteTermList, xmlNode
+
+			set objArgs = window.dialogArguments
+
+			set xmlSiteTermList = objArgs.Item("SiteTermNode")
+			sSelected = objArgs.Item("Selected")
+
+			if typename(xmlSiteTermList) = "IXMLDOMNode" then
+				xmlSiteTermList.setAttribute "skip", "yes"
+				for each xmlNode in xmlSiteTermList.childNodes
+					xmlNode.setAttribute "caption", xmlNode.getAttribute("displayName")
+				next
+				sitetermslist.innerHTML = "<xml id='tvlist'>" & xmlSiteTermList.xml & "</xml>"
+				tvSiteTermList.className = "treeView"
+			end if
+
+			' Make things look pretty.
+			onWndResize()
+		end sub
+
+		sub onBtnOK()
+			dim xmlNode
+			set xmlNode = xmlSelected.cloneNode(true)
+			xmlNode.removeAttribute "caption"
+			window.returnValue = xmlNode
+			window.close()
+		end sub
+
+		sub onBtnCancel()
+			window.returnValue = empty
+			window.close()
+		end sub
+
+		sub onWndResize()
+			labelContainer.firstChild.style.width = tvSiteTermList.clientWidth
+		end sub
+
+		sub selectStart()
+			if tvSiteTermList.readyState = "complete" and not isEmpty(sSelected) then tvSiteTermList.selectNode(sSelected)
+		end sub
+
+		sub onSiteTermSelect()
+			set xmlSelected = window.event.xmlItem
+			btnOK.disabled = CBool(isNull(xmlSelected))
+		end sub
+
+		sub onSiteTermExecute()
+			onSiteTermSelect()
+			onBtnOK()
+		end sub
+	</SCRIPT>
+</HEAD>
+<BODY STYLE='MARGIN: 0px; PADDING: 10px'
+	LANGUAGE='VBScript' onload='initSiteTermList()'>
+
+<div ID='sitetermslist'></div>
+
+<DIV STYLE='PADDING-BOTTOM: 4px'>
+	<LABEL ID=L_ChooseSiteTerm_Text FOR='tvSiteTermList'>Choose a site-term from the list:</LABEL>
+</DIV>
+
+<DIV ID="labelContainer" CLASS='clsQueryBldr' STYLE='PADDING: 0'>
+	<DIV ID='L_SiteTermTokens_Text' STYLE='WIDTH: 100%; MARGIN: 0; PADDING: 0; WIDTH: 150px; BORDER: thin outset #cccccc'>Site-Term Tokens</DIV>
+	<DIV ID='tvSiteTermList' DATAXML='tvlist'
+		STYLE='WIDTH: 100%; HEIGHT: 120px; BACKGROUND: white'
+		LANGUAGE='VBScript'
+		ONITEMSELECT='onSiteTermSelect()'
+		ONITEMEXECUTE='onSiteTermExecute()'
+		ONRESIZE='onWndResize()'
+		ONREADYSTATECHANGE='selectStart()'>
+	</DIV>
+</DIV>
+
+<DIV ALIGN='right' STYLE='PADDING-TOP: 10px'>
+	<BUTTON id=btnOK DISABLED STYLE='WIDTH: 60px'
+		LANGUAGE='VBScript' onclick='onBtnOK()'><ID ID='L_BtnOK_Button'>OK</ID></BUTTON>
+	<SPAN STYLE='WIDTH: 2px; MARGIN: 0px; PADDING: 0px'></SPAN>
+	<BUTTON id=btnCancel STYLE='WIDTH: 60px'
+		LANGUAGE='VBScript' onclick='onBtnCancel()'><ID ID='L_BtnCancel_Button'>Cancel</ID></BUTTON>
+</DIV>
+
+</BODY>
+</HTML>

@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="utf-16"?>
+<xs:schema id="sso" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xs:element name="sso" msdata:IsDataSet="true">
+    <xs:complexType>
+      <xs:choice maxOccurs="unbounded">
+        <xs:element name="adapter">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="description" type="xs:string" minOccurs="0" msdata:Ordinal="0" />
+              <xs:element name="computer" type="xs:string" minOccurs="0" msdata:Ordinal="1" />
+              <xs:element name="appUserAccount" type="xs:string" minOccurs="0" msdata:Ordinal="2" />
+              <xs:element name="appAdminAccount" type="xs:string" minOccurs="0" msdata:Ordinal="3" />
+              <xs:element name="properties" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="file" type="xs:string" />
+                  <xs:attribute name="localize" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+              <xs:element name="flags" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:attribute name="syncFromAdapter" type="xs:string" />
+                  <xs:attribute name="verifyOldPassword" type="xs:string" />
+                  <xs:attribute name="changeWindowsPassword" type="xs:string" />
+                  <xs:attribute name="syncToAdapter" type="xs:string" />
+                  <xs:attribute name="sendOldPassword" type="xs:string" />
+		  <xs:attribute name="groupAdapter" type="xs:string" />
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+            <xs:attribute name="name" type="xs:string" />
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,110 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.4145"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{EDA104DF-43A2-4519-A027-09E69C160328}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\cbr.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = "Microsoft BizTalk Server 2006 SDK Sample"
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft® BizTalk® Server SDK"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright © Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "CBRSample"
+                    AssemblyName = "CBRSample"
+                />
+                <Config
+                    Name = "Development"
+		    ApplicationName = "CBRApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+		    ApplicationName = "CBRApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "CBRInput2CANMap.btm"
+                    BuildAction = "Compile"
+                    Namespace = "CBRSample"
+                    Type = "CBRInput2CANMap"
+                />
+                <File
+                    RelPath = "CBRInput2USMap.btm"
+                    BuildAction = "Compile"
+                    Namespace = "CBRSample"
+                    Type = "CBRInput2USMap"
+                />
+                <File
+                    RelPath = "CBRInputSchema.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CBRSample"
+                    Type = "CBRInputSchema"
+                />
+                <File
+                    RelPath = "CBROutputSchemaCAN.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CBRSample"
+                    Type = "CBROutputSchemaCAN"
+                />
+                <File
+                    RelPath = "CBROutputSchemaUS.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CBRSample"
+                    Type = "CBROutputSchemaUS"
+                />
+                <File
+                    RelPath = "CBRPromotedPropertySchema.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CBRSample"
+                    Type = "CBRPromotedPropertySchema"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

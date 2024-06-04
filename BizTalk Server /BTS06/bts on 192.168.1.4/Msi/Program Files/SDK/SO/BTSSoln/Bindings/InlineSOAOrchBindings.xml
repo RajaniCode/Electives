@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BindingInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Assembly="Microsoft.BizTalk.Deployment, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.0.1.0" BindingStatus="FullyBound" BoundEndpoints="3" TotalEndpoints="3">
+  <ModuleRefCollection>
+    <ModuleRef Name="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Inline" Version="1.0.0.0" Culture="neutral" PublicKeyToken="a1054514fc67bded" FullName="">
+      <Services>
+        <Service Name="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Inline.CustomerService">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Inline.CustomerServiceNativeRequestResponse">
+          <Ports>
+            <Port Name="CustomerServicePort" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="InlineSOAWebServicePort" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Inline.CustomerServiceReceiveSend">
+          <Ports>
+            <Port Name="RequestInputPort" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="InlineSOAMQReceivePort" />
+            </Port>
+            <Port Name="ResponseOutputPort" Modifier="1" BindingOption="1">
+              <SendPortRef Name="InlineSOAMQSendPort" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+      </Services>
+    </ModuleRef>
+  </ModuleRefCollection>
+  <SendPortCollection>
+    <SendPort Name="InlineSOAMQSendPort" IsStatic="true" IsTwoWay="false">
+      <Description >This is the send port through which the inline version of the scneario sends the response message back to the client(who sent the request in the first place), when driven through MQSeries queues.</Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" />
+      <PrimaryTransport>
+        <Address>MQS://__MQ_SERVER_NAME__/__MQ_QMANAGER_NAME__/InlineSOAOutputQueue</Address>
+        <TransportType Name="MQSeries" Capabilities="15627" ConfigurationClsid="b0942470-a5a1-45af-8d01-27481b306441" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;AdapterConfig vt="8"&gt;&amp;lt;Config xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&amp;gt;&amp;lt;uri&amp;gt;MQS://__MQ_SERVER_NAME__/__MQ_QMANAGER_NAME__/InlineSOAOutputQueue&amp;lt;/uri&amp;gt;&amp;lt;queueDetails&amp;gt;__MQ_SERVER_NAME__/__MQ_QMANAGER_NAME__/InlineSOAOutputQueue&amp;lt;/queueDetails&amp;gt;&amp;lt;transactionSupported&amp;gt;yes&amp;lt;/transactionSupported&amp;gt;&amp;lt;dataConversion&amp;gt;no&amp;lt;/dataConversion&amp;gt;&amp;lt;segmentationAllowed&amp;gt;no&amp;lt;/segmentationAllowed&amp;gt;&amp;lt;fragmentationSize&amp;gt;500&amp;lt;/fragmentationSize&amp;gt;&amp;lt;ordered&amp;gt;no&amp;lt;/ordered&amp;gt;&amp;lt;/Config&amp;gt;&lt;/AdapterConfig&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2005-03-20T00:00:00.0000000-08:00</FromTime>
+        <ToTime>2005-03-20T23:59:59.0000000-08:00</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2005-02-02T00:00:00.0000000-08:00</FromTime>
+        <ToTime>2005-02-02T23:59:59.0000000-08:00</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+      </SecondaryTransport>
+      <ReceivePipelineData xsi:nil="true" />
+      <Tracking>0</Tracking>
+      <Filter />
+      <Transforms />
+    </SendPort>
+  </SendPortCollection>
+  <DistributionListCollection />
+  <ReceivePortCollection>
+    <ReceivePort Name="InlineSOAWebServicePort" IsTwoWay="true">
+      <Description>This receive port receives the web service requests to the scenario from the client, for the inline version of the scenario.</Description>
+      <ReceiveLocations>
+        <ReceiveLocation Name="InlineSOAWebServiceURL">
+          <Description>This receive location receives the Web service requests to the scenario from the client, for the inline version of the scenario.  This location corresponds to the IIS virtual forlder where the proxy for the inline version of the orchestration is kept.</Description>
+          <Address>/Microsoft.Samples.BizTalk.WoodgroveBank.OrchProxy.Inline/CustomerServicePort.asmx</Address>
+          <PublicAddress/>
+          <Primary>true</Primary>
+          <ReceiveLocationTransportType Name="SOAP" Capabilities="899" ConfigurationClsid="7e104b2f-003c-4d9f-a6a5-168f727289f0" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;UseSSO vt="11"&gt;-1&lt;/UseSSO&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLReceive" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLReceive, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" />
+          <ReceivePipelineData xsi:nil="true" />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="BizTalkServerIsolatedHost">
+            <TransportType Name="SOAP" Capabilities="899" ConfigurationClsid="7e104b2f-003c-4d9f-a6a5-168f727289f0" />
+          </ReceiveHandler>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" />
+      <SendPipelineData xsi:nil="true" />
+      <Authentication>0</Authentication>
+      <Tracking>0</Tracking>
+      <Transforms />
+      <OutboundTransforms />
+    </ReceivePort>
+    <ReceivePort Name="InlineSOAMQReceivePort" IsTwoWay="false">
+      <Description>This is the receive port to accept requests from the client when driving the inline version of the scenario through MQ Series.</Description>
+      <ReceiveLocations>
+        <Description>This receive location corresponds to the MQSeries Queue that the client uses to send the requests to the inline version of the scenario.</Description>
+        <ReceiveLocation Name="InlineSOAInputQueue">
+          <Address>MQS://__MQ_SERVER_NAME__/__MQ_QMANAGER_NAME__/InlineSOAInputQueue</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationTransportType Name="MQSeries" Capabilities="15627" ConfigurationClsid="b0942470-a5a1-45af-8d01-27481b306441" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;AdapterConfig vt="8"&gt;&amp;lt;Config xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&amp;gt;&amp;lt;uri&amp;gt;MQS://__MQ_SERVER_NAME__/__MQ_QMANAGER_NAME__/InlineSOAInputQueue&amp;lt;/uri&amp;gt;&amp;lt;queueDetails&amp;gt;__MQ_SERVER_NAME__/__MQ_QMANAGER_NAME__/InlineSOAInputQueue&amp;lt;/queueDetails&amp;gt;&amp;lt;transactionSupported&amp;gt;yes&amp;lt;/transactionSupported&amp;gt;&amp;lt;dataOffsetForHeaders&amp;gt;yes&amp;lt;/dataOffsetForHeaders&amp;gt;&amp;lt;pollingInterval&amp;gt;1&amp;lt;/pollingInterval&amp;gt;&amp;lt;pollingUnit&amp;gt;seconds&amp;lt;/pollingUnit&amp;gt;&amp;lt;maximumBatchSize&amp;gt;100&amp;lt;/maximumBatchSize&amp;gt;&amp;lt;maximumNumberOfMessages&amp;gt;100&amp;lt;/maximumNumberOfMessages&amp;gt;&amp;lt;threadCount&amp;gt;2&amp;lt;/threadCount&amp;gt;&amp;lt;fragmentationSize&amp;gt;500&amp;lt;/fragmentationSize&amp;gt;&amp;lt;characterSet&amp;gt;none&amp;lt;/characterSet&amp;gt;&amp;lt;errorThreshold&amp;gt;10&amp;lt;/errorThreshold&amp;gt;&amp;lt;segmentation&amp;gt;none&amp;lt;/segmentation&amp;gt;&amp;lt;ordered&amp;gt;no&amp;lt;/ordered&amp;gt;&amp;lt;/Config&amp;gt;&lt;/AdapterConfig&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="Microsoft.Samples.BizTalk.WoodgroveBank.InputPipelines.IVRInputPipeline" FullyQualifiedName="Microsoft.Samples.BizTalk.WoodgroveBank.InputPipelines.IVRInputPipeline, Microsoft.Samples.BizTalk.WoodgroveBank.InputPipelines, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1054514fc67bded" Type="1" />
+          <ReceivePipelineData xsi:nil="true" />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="BizTalkServerApplication">
+            <TransportType Name="MQSeries" Capabilities="15627" ConfigurationClsid="b0942470-a5a1-45af-8d01-27481b306441" />
+          </ReceiveHandler>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      <SendPipelineData xsi:nil="true" />
+      <Authentication>0</Authentication>
+      <Tracking>0</Tracking>
+      <Transforms />
+    </ReceivePort>
+  </ReceivePortCollection>
+  <PartyCollection />
+</BindingInfo>

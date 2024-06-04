@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="c1972e13-5a8b-44e8-a467-dc032c46cf95" name="swalther@SWLAPTOP 2009-05-24 22:07:28" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="3f80bc23-3450-498e-a1e9-40ca58efa95c">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-05-24 22_07_28">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-05-24T22:07:28.6768652-07:00" queuing="2009-05-24T22:07:31.6564843-07:00" start="2009-05-24T22:07:31.9060859-07:00" finish="2009-05-24T22:07:32.9044923-07:00" />
+  <TestDefinitions>
+    <UnitTest name="IndexRetrievesMovieFromCache" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="8531c232-3f36-6d28-c3f7-bdf8c824fec6">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="47a42efa-4784-409a-9ebd-f349014ed317" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.SimpleMovieControllerTests, MvcApplication1.Tests" name="IndexRetrievesMovieFromCache" />
+    </UnitTest>
+    <UnitTest name="IndexAddsMoviesToCache" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="1b44ecd8-65a2-4bed-0b5e-1e90d89e8896">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="d41f0f67-b3f0-4515-9b5d-5687c1a0c9cb" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.SimpleMovieControllerTests, MvcApplication1.Tests" name="IndexAddsMoviesToCache" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="1b44ecd8-65a2-4bed-0b5e-1e90d89e8896" executionId="d41f0f67-b3f0-4515-9b5d-5687c1a0c9cb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8531c232-3f36-6d28-c3f7-bdf8c824fec6" executionId="47a42efa-4784-409a-9ebd-f349014ed317" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="d41f0f67-b3f0-4515-9b5d-5687c1a0c9cb" testId="1b44ecd8-65a2-4bed-0b5e-1e90d89e8896" testName="IndexAddsMoviesToCache" computerName="SWLAPTOP" duration="00:00:00.2672171" startTime="2009-05-24T22:07:31.9840864-07:00" endTime="2009-05-24T22:07:32.8108917-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="47a42efa-4784-409a-9ebd-f349014ed317" testId="8531c232-3f36-6d28-c3f7-bdf8c824fec6" testName="IndexRetrievesMovieFromCache" computerName="SWLAPTOP" duration="00:00:00.0042154" startTime="2009-05-24T22:07:32.8264918-07:00" endTime="2009-05-24T22:07:32.8264918-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

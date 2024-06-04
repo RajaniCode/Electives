@@ -1,0 +1,16 @@
+﻿<h2>
+    Months in Year</h2>
+<select id="SelectDay">
+    {#foreach $T.MonthsInYear as data}
+    <option value="{$T.data.Value}">{$T.data.Text}</option>
+    {#/for}
+</select>
+<br />
+<h2>
+    Environment Variables</h2>
+    <table>
+    {#foreach $T.EnvironmentVariables as data}
+        <tr><td>{$T.data.Value}</td><td>{$T.data.Text}</td></tr>
+    {#/for}
+    </table>
+</select>

@@ -1,0 +1,530 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.Calendar' tagName="calendar" lightweight=true>
+
+	<PUBLIC>
+		<PROPERTY NAME="cday"			GET="iGetDay"		PUT="PutDay">
+		<PROPERTY NAME="cmonth"			GET="iGetMonth"		PUT="PutMonth">
+		<PROPERTY NAME="cyear"			GET="iGetYear"		PUT="PutYear">
+		<PROPERTY NAME="firstDay"		GET="iGetFirstDay"	PUT="PutFirstDay">
+
+		<METHOD NAME='setDate'	INTERNALNAME='setDate' />
+
+		<EVENT NAME='onChange'	ID='evtChange'></EVENT>
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE="VBScript">
+		option explicit
+
+		'define all localizable strings
+		const L_MonthJan_text = "January"
+		const L_MonthFeb_text = "February"
+		const L_MonthMar_text = "March"
+		const L_MonthApr_text = "April"
+		const L_MonthMay_text = "May"
+		const L_MonthJun_text = "June"
+		const L_MonthJul_text = "July"
+		const L_MonthAug_text = "August"
+		const L_MonthSep_text = "September"
+		const L_MonthOct_text = "October"
+		const L_MonthNov_text = "November"
+		const L_MonthDec_text = "December"
+		const L_DaySun_text = "S"
+		const L_DayMon_text = "M"
+		const L_DayTue_text = "T"
+		const L_DayWed_text = "W"
+		const L_DayThu_text = "T"
+		const L_DayFri_text = "F"
+		const L_DaySat_text = "S"
+
+		dim m_iDay, m_iMonth, m_iYear, m_iFirstDay, m_iMinYear, m_iMaxYear, m_iStartDayIndex, _
+			m_aDayNames, m_aMonthNames, m_aMonthDays, m_aDayCell(49), m_elCurrentDayCell, _
+			m_elContainerTable, m_elDayTable, m_elDayTitleRow, m_elYearSelect, m_elMonthSelect, _
+			m_bLoading, m_bDebug
+
+		m_bDebug = false
+		set m_elContainerTable	= nothing	' The container table
+		set m_elDayTable		= nothing	' The table containing days
+		set m_elDayTitleRow		= nothing	' The table row containing days of the week
+		set m_elYearSelect		= nothing	' The year select control
+		set m_elMonthSelect		= nothing	' The month select control
+		set m_elCurrentDayCell	= nothing	' The cell for the currently selected day
+		m_iStartDayIndex		= 0			' The index in m_aDayCell for the first day of the month
+		m_bLoading				= true		' Flag for if the behavior is loading
+		m_iMinYear				= 1975		' Minimum year (1 is the lowest possible value)
+		m_iMaxYear				= 2012		' Maximum year
+
+		Initialize()
+
+		sub Initialize()
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			element.attachEvent "onreadystatechange", GetRef("OnReadyStateChange")
+
+			m_aMonthNames = Array(L_MonthJan_text, L_MonthFeb_text, L_MonthMar_text, _
+								L_MonthApr_text, L_MonthMay_text, L_MonthJun_text, _
+								L_MonthJul_text, L_MonthAug_text, L_MonthSep_text, _
+								L_MonthOct_text, L_MonthNov_text, L_MonthDec_text )
+
+			m_aDayNames = Array( L_DaySun_text,  L_DayMon_text, L_DayTue_text, L_DayWed_text, _
+								L_DayThu_text, L_DayFri_text, L_DaySat_text )
+
+			m_aMonthDays = Array(31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31)
+
+			m_iFirstDay = 0		'0=Sunday, 1=Monday, etc.
+
+			' Load the property values defined on the element to replace defaults
+			GetPropertyDefaults()
+
+			' Insert the HTML elements needed for the calendar display
+			CreateCalendarHTML()
+
+			' Fill in the days of the week
+			UpdateDayTitles()
+
+			' Build the month select control
+			BuildMonthSelect()
+
+			' Build the year select control
+			if m_iYear < m_iMinYear then m_iMinYear = m_iYear
+			if m_iYear > m_iMaxYear then m_iMaxYear = m_iYear
+			BuildYearSelect()
+
+			' Fill in the cells with the days of the month and set style values
+			FillInCells()
+		end sub
+
+		function iGetDay()
+			iGetDay = m_iDay
+		end function
+
+		sub PutDay(iDay)
+			if m_bLoading then exit sub  ' exit if the behavior is loading
+
+			iDay = CInt(iDay)
+			if not isNumeric(iDay) then Err.raise 450
+
+			SetDate iDay, m_iMonth, m_iYear
+		end sub
+
+		function iGetMonth()
+			iGetMonth = m_iMonth
+		end function
+
+		sub PutMonth(iMonth)
+			if m_bLoading then exit sub  ' exit if the behavior is loading
+
+			iMonth = CInt(iMonth)
+			if not isNumeric(iMonth) then Err.raise 450
+
+			SetDate m_iDay, iMonth, m_iYear
+		end sub
+
+		function iGetYear()
+			iGetYear = m_iYear
+		end function
+
+		sub PutYear(iYear)
+			if m_bLoading then exit sub  ' exit if the behavior is loading
+
+			iYear = CInt(iYear)
+			if not isNumeric(iYear) then Err.raise 450
+
+			SetDate m_iDay, m_iMonth, iYear
+		end sub
+
+		function iGetFirstDay()
+			iGetFirstDay = m_iFirstDay
+		end function
+
+		sub PutFirstDay(iFirstDay)
+			if m_bLoading then exit sub  ' exit if the behavior is loading
+			'set first day of week
+			if iFirstDay < 0 or iFirstDay > 6 then Err.raise 450
+			if m_iFirstDay = iFirstDay then exit sub
+			m_iFirstDay = iFirstDay
+
+			UpdateDayTitles()
+			FillInCells()
+		end sub
+
+		sub CreateCalendarHTML()
+			dim iRow, iCell, m_elContainerTable, elRow, elCell, elNoBR
+
+			element.innerText = ""
+			'create container table
+			set m_elContainerTable = element.appendChild(element.document.createElement("TABLE"))
+			m_elContainerTable.className = "WholeCalendar"
+			set elRow = m_elContainerTable.insertRow()
+			set elCell = elRow.insertCell()
+			elCell.className = "DateControls"
+			'create month and year selects inside a NOBR element
+			set elNoBR = elCell.appendChild(element.document.createElement("NOBR"))
+			set m_elMonthSelect = elNoBR.appendChild(element.document.createElement("SELECT"))
+			set m_elYearSelect = elNoBR.appendChild(m_elMonthSelect.cloneNode(true))
+			set elRow = m_elContainerTable.insertRow()
+			set elCell = elRow.insertCell()
+			elCell.colSpan = 2
+			'create day cell table
+			set m_elDayTable = elCell.appendChild(element.document.createElement("TABLE"))
+			m_elDayTable.className = "CalTable"
+			m_elDayTable.attachEvent "onclick", GetRef("OnClick")
+			for iRow = 0 to 6
+				set elRow = m_elDayTable.insertRow()
+				set elCell = elRow.insertCell()
+				if iRow = 0 then
+					'first row of day cell table is for weekday titles
+					set m_elDayTitleRow = elRow
+					elCell.className = "DayTitle"
+				else
+					'day cells are tabable
+					elCell.tabIndex = 0
+				end if
+				for iCell = 0 to 5
+					elRow.appendChild(elCell.cloneNode(true))
+				next
+			next
+
+			'save cells in day cell array for easy access
+			for iRow = 1 to 6
+				for iCell = 0 to 6
+					set m_aDayCell(((iRow - 1) * 7) + iCell) = m_elDayTable.rows(iRow).cells(iCell)
+				next
+			next
+		end sub
+
+		sub GetPropertyDefaults()
+			dim dtDate
+
+			'default to todays date
+			dtDate = Date()
+			m_iDay = Day(dtDate)
+			m_iMonth = Month(dtDate)
+			m_iYear = Year(dtDate)
+
+			'get year (0-50 is 2000-2050 and 51-99 is 1951-1999)
+
+			if cyear then
+				if isNumeric(cyear) then
+					m_iYear = CInt(cyear)
+				end if
+				if m_iYear < 50 then
+					m_iYear = m_iYear + 2000
+				elseif m_iYear < 100 then
+					m_iYear = m_iYear + 1900
+				elseif m_iYear < 1753 or m_iYear > 3000 then
+					m_iYear = Year(dtDate)
+				end if
+			end if
+			'set feb number-of-days-in-month range for leap years
+			CheckLeapYear(m_iYear)
+
+			'get month (constrain to 1-12)
+			if cmonth then
+				if isNumeric(cmonth) then
+					m_iMonth = CInt(cmonth)
+				end if
+				if m_iMonth < 1 then m_iMonth = 1
+				if m_iMonth > 12 then m_iMonth = 12
+			end if
+
+			'get month (constrain to 1-number of days in that month)
+			if cday then
+				if isNumeric(cday) then
+					m_iDay = CInt(cday)
+				end if
+				if m_iDay < 1 then m_iDay = 1
+				if m_iDay > m_aMonthDays(m_iMonth - 1) then m_iDay = m_aMonthDays(m_iMonth - 1)
+			end if
+
+			'get first day of week if 0-6 (otherwise use default)
+			if firstDay then
+				if firstDay >= 0 and _
+					firstDay <= 6 then
+					m_iFirstDay = firstDay
+				end if
+			end if
+		end sub
+
+		sub SetDate(iDay, iMonth, iYear)
+			dim evt
+			iDay = CInt(iDay)
+			iMonth = CInt(iMonth)
+			iYear = CInt(iYear)
+			'if new year then set constraints
+			if m_iYear <> iYear then
+				if iYear < 50 then
+					iYear = iYear + 2000
+				elseif iYear < 100 then
+					iYear = iYear + 1900
+				elseif iYear < 1753 or iYear > 3000 then
+					iYear = Year(Date())
+				end if
+				CheckLeapYear(iYear)
+			end if
+
+			'set month constraints
+			if iMonth < 1 then iMonth = 1
+			if iMonth > 12 then iMonth = 12
+
+			'set day constraints
+			if iDay < 1 then iDay = 1
+			if iDay > m_aMonthDays(iMonth - 1) then iDay = m_aMonthDays(iMonth - 1)
+
+			'change day if new
+			if m_iDay <> iDay then
+				m_iDay = iDay
+			end if
+			if m_iYear = iYear and m_iMonth = iMonth then
+				'same month calendar; just new day so change selection
+				m_elCurrentDayCell.className = "Day"
+				set m_elCurrentDayCell = m_aDayCell(m_iStartDayIndex + iDay - 1)
+				m_elCurrentDayCell.className = "DaySelected"
+			else
+				'change year and update select (rebuilds select if outside current range)
+				if m_iYear <> iYear then
+					m_iYear = iYear
+					UpdateYearSelect()
+				end if
+
+				'change month and update select
+				if m_iMonth <> iMonth then
+					m_iMonth = iMonth
+					UpdateMonthSelect()
+				end if
+
+				'fill in cells and select day
+				FillInCells()
+			end if
+
+			'fire change event
+			set evt = createEventObject()
+			evt.type = "change"
+			evtChange.fire(evt)
+		end sub
+
+		sub UpdateDayTitles()
+			dim iCell, i
+			'set day of week titles on init and when first day of week changes
+			iCell = 0
+
+			'change titles
+			for i = m_iFirstDay to 6
+				m_elDayTitleRow.cells(iCell).innerText = m_aDayNames(i)
+				iCell = iCell + 1
+			next
+			for i = 0 to m_iFirstDay - 1
+				m_elDayTitleRow.cells(iCell).innerText = m_aDayNames(i)
+				iCell = iCell + 1
+			next
+		end sub
+
+		sub UpdateMonthSelect()
+			m_elMonthSelect.options( m_iMonth - 1 ).selected = true
+		end sub
+
+		sub BuildMonthSelect()
+			dim elNewMonthSelect, i, elOption
+			'build month select on init
+
+			'create new select
+			set elNewMonthSelect = element.document.createElement("SELECT")
+			elNewMonthSelect.id = "calmonth"
+			m_elMonthSelect.parentElement.replaceChild elNewMonthSelect, m_elMonthSelect
+			set m_elMonthSelect = elNewMonthSelect
+
+			'fill month options
+			for i = 0 to 11
+				set elOption = element.document.createElement("OPTION")
+				elOption.text = m_aMonthNames(i)
+				m_elMonthSelect.options.add(elOption)
+			next
+
+			'select current month and add onChange event handler
+			m_elMonthSelect.options( m_iMonth - 1 ).selected = true
+			m_elMonthSelect.attachEvent "onchange", GetRef("MonthSelectOnChange")
+		end sub
+
+		sub MonthSelectOnChange()
+			dim iMonth
+			'set date with new month
+			iMonth = m_elMonthSelect.selectedIndex + 1
+			SetDate m_iDay, iMonth, m_iYear
+		end sub
+
+		sub UpdateYearSelect()
+			'if year outside year min/max range then need to rebuild
+			if m_iYear < m_iMinYear then
+				m_iMinYear = m_iYear
+				BuildYearSelect()
+			elseif m_iYear > m_iMaxYear then
+				m_iMaxYear = m_iYear
+				BuildYearSelect()
+			else
+				m_elYearSelect.options( m_iYear - m_iMinYear ).selected = true
+			end if
+		end sub
+
+		sub BuildYearSelect()
+			dim elNewYearSelect, i , elOption
+			'build year select on init and when new year is outside select range
+
+			'create new year select
+			set elNewYearSelect = element.document.createElement("SELECT")
+			elNewYearSelect.id = "calyear"
+			m_elYearSelect.parentElement.replaceChild elNewYearSelect, m_elYearSelect
+			set m_elYearSelect = elNewYearSelect
+
+			'fill year options
+			for i = m_iMinYear to m_iMaxYear
+				set elOption = element.document.createElement("OPTION")
+				elOption.text = i
+				m_elYearSelect.options.add(elOption)
+			next
+
+			'select current year and add onChange event handler
+			m_elYearSelect.options( m_iYear - m_iMinYear ).selected = true
+			m_elYearSelect.attachEvent "onchange", GetRef("YearSelectOnChange")
+		end sub
+
+		sub YearSelectOnChange()
+			dim iYear
+			'set date with new year
+			iYear = m_elYearSelect.selectedIndex + m_iMinYear
+			SetDate m_iDay, m_iMonth, iYear
+		end sub
+
+		sub CheckLeapYear(iYear)
+			'default to non-leap year
+			m_aMonthDays(1) = 28
+			If iYear Mod 4 = 0 Then
+				If iYear Mod 100 = 0 Then
+					If iYear Mod 400 = 0 Then
+						'century only a leap year if divisible by 400
+						m_aMonthDays(1) = 29
+					End If
+				Else
+					'non-century divisible by 4 is always a leap year
+					m_aMonthDays(1) = 29
+				End If
+			End If
+		end sub
+
+		sub FillInCells()
+			dim iStartDay, iDayCell, iLastMonthIndex, iNextMonthIndex, iLastMonthDays, _
+				iLastMonthYear, iLastMonth, iNextMonthYear, iNextMonth, _
+				iLastMonthTotalDays, dtDate, i
+			iDayCell = 0
+
+			'set feb number-days-in-month for leap years
+			CheckLeapYear(m_iYear)
+
+			'get last month number-of-days-in-month, month index, and year
+			if m_iMonth - 1 = 0 then
+				iLastMonthDays = m_aMonthDays( 11 )
+			else
+				iLastMonthDays = m_aMonthDays( m_iMonth - 2 )
+			end if
+			if m_iMonth = 1 then
+				iLastMonthYear = m_iYear - 1
+			else
+				iLastMonthYear = m_iYear
+			end if
+			if m_iMonth = 1 then
+				iLastMonth = 12
+			else
+				iLastMonth = m_iMonth - 1
+			end if
+
+			'get next month index and year
+			if m_iMonth = 12 then
+				iNextMonth = 1
+			else
+				iNextMonth = m_iMonth + 1
+			end if
+			if m_iMonth = 12 then
+				iNextMonthYear = m_iYear + 1
+			else
+				iNextMonthYear = m_iYear
+			end if
+
+			'get start day for current month days
+			dtDate = DateSerial(m_iYear, m_iMonth, 1)
+			iStartDay = Weekday(dtDate, m_iFirstDay + 1)
+			if iStartDay < 1 then iStartDay = iStartDay + 7
+			'now get start day in last month to complete first week
+			iStartDay = iLastMonthDays - iStartDay + 2
+
+			'fill days for last of last month
+			for i = iStartDay to iLastMonthDays
+				'set day text and offday style
+				with m_aDayCell(iDayCell)
+					.innerText = i
+					if .className <> "OffDay" then
+						.className = "OffDay"
+					end if
+				end with
+
+				call SetDayExpandos(iDayCell, i, iLastMonth, iLastMonthYear)
+				iDayCell = iDayCell + 1
+			next
+
+			'save start day index
+			m_iStartDayIndex = iDayCell
+
+			for i = 1 to m_aMonthDays(m_iMonth - 1)
+				'set day text and day style
+				with m_aDayCell(iDayCell)
+					.innerText = i
+					if m_iDay = i then
+						'mark day as selected if matches
+						set m_elCurrentDayCell = m_aDayCell(iDayCell)
+						.className = "DaySelected"
+					else
+						if .className <> "Day" then
+							.className = "Day"
+						end if
+					end if
+				end with
+
+				call SetDayExpandos(iDayCell, i, m_iMonth, m_iYear)
+				iDayCell = iDayCell + 1
+			next
+
+			i = 1
+			for iDayCell = iDayCell to 41
+				'set day text and offday style
+				with m_aDayCell(iDayCell)
+					.innerText = i
+					if .className <> "OffDay" then
+						.className = "OffDay"
+					end if
+				end with
+
+				call SetDayExpandos(iDayCell, i, iNextMonth, iNextMonthYear)
+				i = i + 1
+			next
+		end sub
+
+		sub SetDayExpandos(iDayCell, iDay, iMonth, iYear)
+			'set expando properties on day cell
+			m_aDayCell(iDayCell).setAttribute "day", iDay
+			m_aDayCell(iDayCell).setAttribute "month", iMonth
+			m_aDayCell(iDayCell).setAttribute "year", iYear
+		end sub
+
+		sub OnClick()
+			dim elSource
+			set elSource = window.event.srcElement
+
+			'if day cell and not day of week title cell then select the day
+			if elSource.tagName = "TD" and m_elDayTable.contains(elSource) and _
+				not m_elDayTitleRow.contains(elSource) then
+				SetDate elSource.getAttribute("day"), elSource.getAttribute("month"), elSource.getAttribute("year")
+			end if
+		end sub
+
+		sub OnReadyStateChange()
+			m_bLoading = CBool(readyState <> "complete")
+		end sub
+	</SCRIPT>
+</PUBLIC:COMPONENT>

@@ -1,0 +1,14 @@
+﻿<sso>
+	<application name="SouthridgeVideo.CableOrder">
+		<description>SouthridgeVideo CableOrder config store app</description>
+		<contact>admin@southridgevideo.com</contact>
+		<userGroup>BizTalk Application Users</userGroup>
+		<appAdminAccount>BizTalk Server Administrators</appAdminAccount>
+		<field ordinal="0" label="reserved" masked="no" />
+		<field ordinal="1" label="CableProvisioningSystemLocation" masked="no" />
+		<field ordinal="2" label="TotalStages" masked="no" />
+        <field ordinal="3" label="CacheRefreshInterval" masked="no" />
+		<flags groupApp="no" configStoreApp="yes" allowTickets="no" validateTickets="yes" allowLocalAccounts="yes" timeoutTickets="yes" adminAccountSame="no" enableApp="yes" />
+	</application>
+</sso>
+

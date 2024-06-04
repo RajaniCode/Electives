@@ -1,0 +1,9 @@
+md C:\Litware\BrokerUpdate
+md C:\Litware\BrokerNew
+md C:\Litware\UpdateUserBASRL
+md C:\Litware\GetOrder
+md C:\Litware\GetProfile
+md C:\Litware\EDIIn
+md C:\Litware\Vendor1
+md C:\Litware\Vendor2
+md C:\Litware\EDIOut

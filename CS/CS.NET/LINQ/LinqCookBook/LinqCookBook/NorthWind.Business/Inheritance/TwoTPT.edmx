@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="TwoTPTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="TwoTPTModelStoreContainer">
+          <EntitySet Name="Company" EntityType="TwoTPTModel.Store.Company" store:Type="Tables" Schema="tpt" />
+          <EntitySet Name="Contact" EntityType="TwoTPTModel.Store.Contact" store:Type="Tables" Schema="tpt" />
+          <EntitySet Name="GunSmith" EntityType="TwoTPTModel.Store.GunSmith" store:Type="Tables" Schema="tpt" />
+          <EntitySet Name="Location" EntityType="TwoTPTModel.Store.Location" store:Type="Tables" Schema="tpt" />
+          <AssociationSet Name="FK_Company_Location" Association="TwoTPTModel.Store.FK_Company_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GunSmith_Company" Association="TwoTPTModel.Store.FK_GunSmith_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="GunSmith" EntitySet="GunSmith" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GunSmith_Contact" Association="TwoTPTModel.Store.FK_GunSmith_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="GunSmith" EntitySet="GunSmith" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GunSmith">
+          <Key>
+            <PropertyRef Name="GunSmithId" />
+          </Key>
+          <Property Name="GunSmithId" Type="int" Nullable="false" />
+          <Property Name="IsCertified" Type="bit" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Company_Location">
+          <End Role="Location" Type="TwoTPTModel.Store.Location" Multiplicity="1" />
+          <End Role="Company" Type="TwoTPTModel.Store.Company" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GunSmith_Company">
+          <End Role="Company" Type="TwoTPTModel.Store.Company" Multiplicity="1" />
+          <End Role="GunSmith" Type="TwoTPTModel.Store.GunSmith" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="GunSmith">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GunSmith_Contact">
+          <End Role="Contact" Type="TwoTPTModel.Store.Contact" Multiplicity="1" />
+          <End Role="GunSmith" Type="TwoTPTModel.Store.GunSmith" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="GunSmith">
+              <PropertyRef Name="GunSmithId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TwoTPTModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="TwoTPTEntities">
+          <EntitySet Name="Contact" EntityType="TwoTPTModel.Contact" />
+          <EntitySet Name="Location" EntityType="TwoTPTModel.Location" />
+          <AssociationSet Name="FK_GunSmith_Company" Association="TwoTPTModel.FK_GunSmith_Company">
+            <End Role="Company" EntitySet="Location" />
+            <End Role="GunSmith" EntitySet="Contact" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company" BaseType="TwoTPTModel.Location">
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="GunSmith" Relationship="TwoTPTModel.FK_GunSmith_Company" FromRole="Company" ToRole="GunSmith" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="GunSmith" BaseType="TwoTPTModel.Contact">
+          <Property Name="IsCertified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="TwoTPTModel.FK_GunSmith_Company" FromRole="GunSmith" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_GunSmith_Company">
+          <End Role="Company" Type="TwoTPTModel.Company" Multiplicity="1" />
+          <End Role="GunSmith" Type="TwoTPTModel.GunSmith" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="TwoTPTModelStoreContainer" CdmEntityContainer="TwoTPTEntities">
+          <EntitySetMapping Name="Contact">
+            <EntityTypeMapping TypeName="IsTypeOf(TwoTPTModel.Contact)">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          <EntityTypeMapping TypeName="IsTypeOf(TwoTPTModel.GunSmith)">
+              <MappingFragment StoreEntitySet="GunSmith">
+                <ScalarProperty Name="ContactId" ColumnName="GunSmithId" />
+                <ScalarProperty Name="IsCertified" ColumnName="IsCertified" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="IsTypeOf(TwoTPTModel.Location)">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          <EntityTypeMapping TypeName="IsTypeOf(TwoTPTModel.Company)">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="LocationId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_GunSmith_Company" TypeName="TwoTPTModel.FK_GunSmith_Company" StoreEntitySet="GunSmith">
+            <EndProperty Name="GunSmith">
+              <ScalarProperty Name="ContactId" ColumnName="GunSmithId" /></EndProperty>
+            <EndProperty Name="Company">
+              <ScalarProperty Name="LocationId" ColumnName="CompanyId" /></EndProperty>
+            </AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="TwoTPT">
+        <EntityTypeShape EntityType="TwoTPTModel.Company" Width="1.5" PointX="1.125" PointY="3.125" Height="1.2636116536458335" IsExpanded="true" />
+        <EntityTypeShape EntityType="TwoTPTModel.Contact" Width="1.5" PointX="3.875" PointY="0.75" Height="1.4279589843749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="TwoTPTModel.GunSmith" Width="1.5" PointX="3.875" PointY="3.25" Height="1.2636116536458335" IsExpanded="true" />
+        <EntityTypeShape EntityType="TwoTPTModel.Location" Width="1.5" PointX="1.125" PointY="0.875" Height="1.5923063151041672" IsExpanded="true" />
+        <AssociationConnector Association="TwoTPTModel.FK_GunSmith_Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.625" PointY="3.8193058268229167" />
+          <ConnectorPoint PointX="3.875" PointY="3.8193058268229167" /></AssociationConnector>
+        <InheritanceConnector EntityType="TwoTPTModel.GunSmith">
+          <ConnectorPoint PointX="4.625" PointY="2.1779589843749996" />
+          <ConnectorPoint PointX="4.625" PointY="3.25" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="TwoTPTModel.Company">
+          <ConnectorPoint PointX="1.875" PointY="2.302958984375" />
+          <ConnectorPoint PointX="1.875" PointY="3.125" /></InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

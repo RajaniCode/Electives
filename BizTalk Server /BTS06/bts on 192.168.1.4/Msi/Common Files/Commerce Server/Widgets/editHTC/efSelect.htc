@@ -1,0 +1,957 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.efSelect' tagName="efselect" lightweight=true>
+	<PUBLIC>
+		<EVENT NAME='onError'		ID='evtError'></EVENT><!-- fired when developer error occurs -->
+		<EVENT NAME='onChange'		ID='evtChange'></EVENT>
+		<EVENT NAME='onBrowse'		ID='evtBrowse'></EVENT>
+		<EVENT NAME='onValid'		ID='evtValid'></EVENT>
+		<EVENT NAME='onBeginChange'	ID='evtBeginChange'></EVENT>
+
+		<METHOD NAME='initialize' />
+		<METHOD NAME='focus'		INTERNALNAME='onFocus' />
+		<METHOD NAME='resetDefault'	INTERNALNAME='ResetDefault' />
+		<METHOD NAME='reload'		INTERNALNAME='Reload' />
+		<METHOD NAME='addItem'		INTERNALNAME='AddItem' />
+		<METHOD NAME='removeItem'	INTERNALNAME='RemoveItem' />
+	<!-- UNSUPPORTED: PRIVATE METHODS -->
+		<METHOD NAME='resetReadOnly' />
+
+		<PROPERTY NAME='dirty'			GET='bGetDirty'		/>
+		<PROPERTY NAME='required'		GET='bGetRequired'	/>
+		<PROPERTY NAME='valid'			GET='bGetValid'		/>
+		<PROPERTY NAME='displayvalue'	GET='sGetLabel'		/>
+		<PROPERTY NAME='selected'		GET='elGetSelected'	/>
+		<PROPERTY NAME='options'		GET='elGetOptions'	/>
+		<PROPERTY NAME='disabled'		GET='bGetDisabled'	PUT='SetDisabled' />
+		<PROPERTY NAME='readonly'		GET='bGetReadonly'	PUT='SetReadonly' />
+		<PROPERTY NAME='value'			GET='sGetData'		PUT='SetData' />
+		<PROPERTY NAME='prompt'			GET='sGetPrompt'	PUT='SetPrompt' />
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_DefaultSelectPrompt_Text = "select one"
+		const L_MultilingualIcon_ToolTip = "Multilingual text entry field"
+		const L_PickerButtonWidth_Number = 16	'width in pixels of arrow/ellipsis buttons
+
+		dim m_bDirty, m_bDebug, m_bDisabled, m_bReadonly, m_bValid, m_bBrowseReadonly, _
+			m_bFieldRequired, m_bMasterReadOnly, m_bRequired, m_bBrowse, m_bPromptOption, _
+			m_xmlNode, m_xmlSelectDoc, m_fnOnError, m_fnOnBrowse, m_fnOnChange, m_fnOnValid, _
+			m_elPickerBtn, m_elLabel, m_elHidden, m_elDropdown, m_elOptions, m_elPrompt, _
+			m_elActiveItem, m_elSelectedItem, m_elBrowseBtn, m_sType, m_sPrompt, m_sDefault, _
+			m_xmlTransformDoc, m_bMultiLing, m_bShowHTMLOpt
+
+		'button name constants (webdings)
+		const DOWN_ARROW	= 6
+		const ELLIPSIS		= "&hellip;"
+		'keycode constants
+		const KEYCODE_ENTER			= 13
+		const KEYCODE_UP_ARROW		= 38
+		const KEYCODE_DOWN_ARROW	= 40
+		const KEYCODE_TAB			= 9
+		const KEYCODE_ESC			= 27
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		m_bDirty = false			'true if control's value has changed
+		m_bRequired = false			'always false for select
+		m_bValid = false 			'true if value is valid selection in list
+		set m_elBrowseBtn = nothing	'holds browse button, if any
+		set m_elActiveItem = nothing	'active item highlighted in open list
+		set m_elSelectedItem = nothing	'currently selected item
+		set m_xmlTransformDoc = CreateObject("MSXML.DOMDocument")	'used to hold transform xsl
+
+		sub Initialize(xmlNode, sValue)
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			dim xmlTemp, xmlSelectedItem, elOption, elSpan, sTemp, _
+				elTable, elRow, elCell, xmlPromptOption, elImg
+
+			m_xmlTransformDoc.loadXML GetTransformXSL()
+			m_sType = "select"
+			element.innerText = ""
+			element.setAttribute "selectid", element.id
+			'save xml node for reloading
+			set m_xmlNode = xmlNode
+			element.attachEvent "onkeydown", GetRef("onKeyDown")
+			element.attachEvent "onfocus", GetRef("onFocus")
+
+			'get event handler function names
+			m_fnOnBrowse = xmlNode.getAttribute("onbrowse")
+			m_fnOnChange = xmlNode.getAttribute("onchange")
+			m_fnOnValid = xmlNode.getAttribute("onvalid")
+			m_fnOnError = xmlNode.getAttribute("onerror")
+			'attach event handlers
+			if not isNull(m_fnOnChange) then element.attachEvent "onchange", GetRef("CallChangeHandler")
+			if not isNull(m_fnOnValid) then element.attachEvent "onvalid", GetRef("CallValidHandler")
+			if not isNull(m_fnOnError) then element.attachEvent "onerror", GetRef("CallErrorHandler")
+
+			'check if browse enabled
+			sTemp = xmlNode.getAttribute("browse")
+			m_bBrowse = CBool(not isNull(m_fnOnBrowse) or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+			sTemp = xmlNode.getAttribute("browsereadonly")
+			m_bBrowseReadonly = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			set xmlTemp = xmlNode.selectSingleNode("prompt")
+			sTemp = xmlNode.getAttribute("promptoption")
+			m_bPromptOption = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			sTemp = xmlNode.getAttribute("multilingual")
+			m_bMultiLing = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			sTemp = xmlNode.getAttribute("htmloptions")
+			m_bShowHTMLOpt = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			'get prompt text
+			if not xmlTemp is nothing then
+				m_sPrompt = xmlTemp.text
+			else
+				m_sPrompt = L_DefaultSelectPrompt_Text
+			end if
+
+			m_sDefault = xmlNode.getAttribute("default")
+			if sValue = "" and not isNull(m_sDefault) then sValue = m_sDefault
+
+			'create multilingual icon
+			if m_bMultiLing then
+				set elImg = element.insertAdjacentElement("afterEnd", element.document.createElement("IMG"))
+				elImg.src = "/widgets/images/world.gif"
+				elImg.title = L_MultilingualIcon_ToolTip
+				elImg.align = "absmiddle"
+				elImg.style.position = "absolute"
+				elImg.style.marginTop = "1px"
+				elImg.style.marginLeft = "-17px"
+				element.style.marginRight = "18px"
+			end if
+
+			'create container table
+			set elTable = element.appendChild(element.document.createElement("TABLE"))
+			with elTable
+				.style.tableLayout = "fixed"
+				.width = "100%"
+				.cellSpacing = 0
+				.cellPadding = 0
+			end with
+			set elRow = elTable.insertRow()
+			set elCell = elRow.insertCell()
+			elCell.style.padding = 0
+			'create input for displaying displayvalue
+			set m_elLabel = elCell.appendChild(element.document.createElement("DIV"))
+			with m_elLabel
+				.id = "label_" & element.id
+				.className = "efLabel efBorderless"
+				.nowrap = true
+				.style.cursor = "hand"
+				.style.Overflow = "hidden"
+				on error resume next
+				.style.textOverflow = "ellipsis"
+				on error goto 0
+				if sValue = "" then .style.display = "none"
+				.attachEvent "onmousedown", GetRef("onMouseDown")
+			end with
+			'create span for displaying prompt
+			set m_elPrompt = elCell.appendChild(element.document.createElement("DIV"))
+			with m_elPrompt
+				.id = "prompt_" & element.id
+				.innerText = m_sPrompt
+				.title = m_sPrompt
+				if sValue <> "" then .style.display = "none"
+				.style.cursor = "hand"
+				.className = "efPrompt efBorderless"
+				.nowrap = true
+				.attachEvent "onclick", GetRef("onClickPrompt")
+			end with
+
+			set elCell = elRow.insertCell()
+			elCell.style.padding = 0
+			elCell.width = L_PickerButtonWidth_Number
+			'add down-arrow button for drop-down
+			set m_elPickerBtn = elCell.appendChild(element.document.createElement("BUTTON"))
+			with m_elPickerBtn
+				.id = "prop_" & element.id
+				.className = "efDownBtn"
+				.innerText = DOWN_ARROW
+				.attachEvent "onmousedown", GetRef("onMouseDown")
+				.attachEvent "onfocus", GetRef("onBtnFocus")
+				.attachEvent "onblur", GetRef("onBtnBlur")
+			end with
+
+			if m_bBrowse then
+				'if browsable then add browse button and attach browse event
+				set xmlTemp = xmlNode.selectSingleNode("browsetooltip")
+				set elCell = elRow.insertCell()
+				elCell.width = L_PickerButtonWidth_Number
+				elCell.style.padding = 0
+				set m_elBrowseBtn = elCell.appendChild(element.document.createElement("BUTTON"))
+				with m_elBrowseBtn
+					.id = "browse_" & element.id
+					.disabled = true
+					.attachEvent "onclick", GetRef("onBrowseClick")
+					.className = "efEllipsisBtn"
+					.innerHTML = ELLIPSIS
+					.attachEvent "onkeydown", GetRef("onBrowseKeyDown")
+					set xmlTemp = xmlNode.selectSingleNode("browsetooltip")
+					if not xmlTemp is nothing then .title = xmlTemp.text
+				end with
+				if not isNull(m_fnOnBrowse) then element.attachEvent "onbrowse", GetRef("CallBrowseHandler")
+			end if
+
+			'create hidden input for underlying value
+			set m_elHidden = element.document.createElement("INPUT")
+			m_elHidden.type = "hidden"
+			with m_elHidden
+				.id = "hidden_" & element.id
+				.name = element.id
+				.value = sValue
+			end with
+			set m_elHidden = element.appendChild(m_elHidden)
+
+			'get selected item and set value with it
+			set m_xmlSelectDoc = xmlNode.selectSingleNode("select")
+			set xmlSelectedItem = m_xmlSelectDoc.selectSingleNode("option[@value$ieq$'" & replace(sValue, "'", "\'") & "']")
+			if not xmlSelectedItem is nothing then
+				if m_bShowHTMLOpt then
+					m_elLabel.innerHTML = xmlSelectedItem.text
+				else
+					m_elLabel.innerText = xmlSelectedItem.text
+				end if
+				m_elHidden.value = xmlSelectedItem.getAttribute("value")
+			end if
+			element.title = trim(m_elLabel.innerText)
+
+			'create drop-down div, position, and then attach event handlers
+			set m_elDropdown = element.appendChild(element.document.createElement("DIV"))
+			with m_elDropdown
+				.id = "dropdown_" & element.id
+				.title = ""
+				if m_xmlSelectDoc.childNodes.length > 7 then
+					.className = "efDropDown efSelectScroll"
+				else
+					.className = "efDropDown"
+				end if
+				.style.display = "none"
+				.style.overflowX = "hidden"
+				.attachEvent "onmouseup", GetRef("onMouseDown")
+				.attachEvent "onmouseover", GetRef("onMouseOver")
+				.attachEvent "onmouseout", GetRef("onMouseOut")
+			end with
+
+			'add prompt option if needed
+			if m_bPromptOption then
+				set xmlPromptOption = m_xmlSelectDoc.insertBefore(m_xmlSelectDoc.ownerDocument.createElement("option"), m_xmlSelectDoc.firstChild)
+				xmlPromptOption.setAttribute "value", "__promptoption"
+				xmlPromptOption.text = m_sPrompt
+			end if
+			'fill drop-down and select selected item
+			FillDropDown()
+			SetSelected(sValue)
+
+			'get readonly and disabled
+			sTemp = xmlNode.getAttribute("readonly")
+			m_bMasterReadOnly = CBool(m_bBrowseReadonly or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+			readonly = m_bMasterReadOnly
+			sTemp = xmlNode.getAttribute("disabled")
+			disabled = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+		end sub
+
+		sub FillDropDown()
+			dim elOption
+			m_elDropdown.innerHTML = m_xmlSelectDoc.transformNode(m_xmlTransformDoc)
+			set m_elOptions = m_elDropdown.children
+			for each elOption in m_elOptions
+				'focus/blue must be attached directly to menu item
+				elOption.attachEvent "onfocus", GetRef("onMouseOver")
+				elOption.attachEvent "onblur", GetRef("onMouseOut")
+				if m_bShowHTMLOpt then elOption.innerHTML = elOption.innerText
+				elOption.title = trim(elOption.innerText)
+				elOption.style.Overflow = "hidden"
+				on error resume next
+				elOption.style.textOverflow = "ellipsis"
+				on error goto 0
+			next
+			set m_elSelectedItem = m_elDropdown.firstChild
+		end sub
+
+		function elGetContainer(elElement, sKey, sValue)
+			Dim elTemp, elTemp2
+			set elTemp = elElement
+			set elTemp2 = elElement
+			do while not isNull(elTemp) and (elTemp.tagName <> "BODY")
+				if eval("elTemp." & sKey & " = """ & sValue & """") then
+					set elTemp2 = elTemp
+					set elGetContainer = elTemp2
+					exit function
+				end if
+				set elTemp = elTemp.parentElement
+			loop
+			set elGetContainer = elTemp2
+		end function
+
+		sub onBrowseKeyDown()
+			dim evt
+			set evt = window.event
+			if not m_bDisabled then
+				if evt.keyCode = KEYCODE_ENTER then
+					'enter same as click item
+					onBrowseClick()
+					evt.returnValue = false
+				end if
+			end if
+		end sub
+
+		sub onBrowseClick()
+			dim evt
+			if not m_bDisabled then
+				'fire browse event
+				set evt = createEventObject()
+				evt.setAttribute "value", m_elHidden.value
+				evt.setAttribute "displayvalue", m_elLabel.innerText
+				evt.type = "browse"
+				evtBrowse.fire(evt)
+			end if
+			HideMenu()
+		end sub
+
+		sub CallBrowseHandler()
+			if window.event.type <> "browse" then exit sub
+			on error resume next
+			execute("call window." & m_fnOnBrowse)
+			on error goto 0
+		end sub
+
+		sub CallChangeHandler()
+			on error resume next
+			execute("call window." & m_fnOnChange)
+			on error goto 0
+		end sub
+
+		sub CallValidHandler()
+			on error resume next
+			execute("call window." & m_fnOnValid)
+			on error goto 0
+		end sub
+
+		sub CallErrorHandler()
+			on error resume next
+			execute("call window." & m_fnOnError)
+			on error goto 0
+		end sub
+
+		sub Reload(sNewID)
+			dim xmlDocument, xmlNewSelectDoc
+			'reload select list from new meta node
+			set xmlDocument = CreateObject("MSXML.DOMDocument")
+			xmlDocument.loadXML(m_xmlNode.ownerDocument.xml)
+			set xmlNewSelectDoc = xmlDocument.selectSingleNode("//select/select[@id $ieq$ '" & replace(sNewID, "'", "\'") & "']")
+			if not xmlNewSelectDoc is nothing then
+				set m_xmlSelectDoc = xmlNewSelectDoc
+				'make list scrollable if more than 7 items
+				if m_xmlSelectDoc.childNodes.length > 7 then
+					if not inStr(m_elDropdown.className, "efSelectScroll") then m_elDropdown.className = m_elDropdown.className & " efSelectScroll"
+				else
+					m_elDropdown.className = replace(m_elDropdown.className, " efSelectScroll", "")
+				end if
+				'clear active and selected nodes
+				set m_elActiveItem = nothing
+				set m_elSelectedItem = nothing
+				'fill drop down and set selection to empty id (if any - if not shows prompt)
+				FillDropDown()
+				SetData("")
+			end if
+			element.setAttribute "selectid", sNewID
+		end sub
+
+		sub AddItem(sValue, sDisplayValue)
+			dim xmlDoc, xmlOption, elOption
+
+			set xmlOption = m_xmlSelectDoc.selectSingleNode("option[@value $ieq$ '" & replace(sValue, "'", "\'") & "']")
+			if not xmlOption is nothing then
+				'item already in list so exit without adding
+				exit sub
+			else
+				'add an option to the metadata
+				set xmlDoc = m_xmlSelectDoc.ownerDocument
+				set xmlOption = m_xmlSelectDoc.appendChild(xmlDoc.createElement("option"))
+				xmlOption.setAttribute "value", sValue
+				xmlOption.text = sDisplayValue
+				'add an option to the dropdown list
+				set elOption = m_elDropdown.appendChild(element.document.createElement("DIV"))
+				with elOption
+					.attachEvent "onfocus", GetRef("onMouseOver")
+					.attachEvent "onblur", GetRef("onMouseOut")
+					.className = "efOption"
+					.tabIndex = 0
+					.setAttribute "name", "option"
+					.setAttribute "value", sValue
+					.setAttribute "title", sDisplayValue
+					if m_bShowHTMLOpt then
+						.innerHTML = sDisplayValue
+					else
+						.innerText = sDisplayValue
+					end if
+					.title = trim(.innerText)
+					.style.Overflow = "hidden"
+					on error resume next
+					.style.textOverflow = "ellipsis"
+				end with
+				if sValue = m_elHidden.value and sValue <> "" then SelectItem(elOption)
+			end if
+		end sub
+
+		sub RemoveItem(sValue)
+			dim xmlOption, elOption
+			'remove option from the meta data
+			set xmlOption = m_xmlSelectDoc.selectSingleNode("option[@value $ieq$ '" & replace(sValue, "'", "\'") & "']")
+			if xmlOption is nothing Then
+				if sValue <> "" then exit sub
+			else
+				m_xmlSelectDoc.removeChild(xmlOption)
+			end if
+			'remove option from the dropdown list
+			for each elOption in m_elDropdown.children
+				if LCase(elOption.getAttribute("value")) = LCase(sValue) then
+					if m_elSelectedItem is elOption then set m_elSelectedItem = nothing
+					m_elDropdown.removeChild(elOption)
+					exit for
+				end if
+			next
+		end sub
+
+		sub onOutsideClick()
+			if not element.contains(window.event.srcElement) then
+				HideMenu()
+			end if
+		end sub
+
+		sub onMouseDown()
+			if not m_bReadOnly and not m_bDisabled then
+				ToggleMenu(elGetContainer(window.event.srcElement, "getAttribute(""name"")", "option"))
+			end if
+		end sub
+
+		sub ToggleMenu(elSource)
+			if m_elDropdown.style.display = "none" then
+				OpenMenu()
+			else
+				HideMenu()
+				on error resume next
+				m_elPickerBtn.focus()
+				on error goto 0
+				if elSource.tagName = "SPAN" then
+					'source was prompt; select first item
+					SelectItem(m_elDropdown.firstChild)
+				elseif elSource.getAttribute("name") = "option" then
+					'source was menu option
+					SelectItem(elSource)
+				end if
+			end if
+		end sub
+
+		sub SelectItem(elSource)
+			dim evt, bValid
+			'select item, set value and tooltip, and fire event
+			set m_elSelectedItem = elSource
+			if m_bShowHTMLOpt then
+				m_elLabel.innerHTML = m_elSelectedItem.innerHTML
+			else
+				m_elLabel.innerText = m_elSelectedItem.innerText
+			end if
+			element.title = trim(m_elSelectedItem.innerText)
+			m_elHidden.value = m_elSelectedItem.getAttribute("value")
+			bValid = m_bValid
+			SetValid(true)
+			'only set dirty if it is valid or valid changed
+			if m_bValid <> bValid or m_bValid then m_bDirty = true
+			set evt = createEventObject()
+			evt.type = "beginchange"
+			evtBeginChange.fire(evt)
+			fireOnChange()
+		end sub
+
+		sub fireOnChange()
+			dim evt
+			set evt = createEventObject()
+			evt.type = "change"
+			evtChange.fire(evt)
+		end sub
+
+		sub onMouseOver()
+			dim elSource
+			'highlight item
+			set elSource = window.event.srcElement
+			if elSource.getAttribute("name") <> "option" then exit sub
+			if m_elDropdown.style.display <> "none" then
+				if not m_elActiveItem is nothing then
+					m_elActiveItem.className = Replace(m_elActiveItem.className, " efOptionSelect", "")
+				end if
+				if elSource.getAttribute("name") = "option" then
+					set m_elActiveItem = elSource
+					m_elActiveItem.className = m_elActiveItem.className & " efOptionSelect"
+				end if
+			end if
+			window.event.cancelBubble = true
+		end sub
+
+		sub onMouseOut()
+			dim elSource
+			'unhighlight item
+			set elSource = window.event.srcElement
+			if elSource.getAttribute("name") <> "option" then exit sub
+			if m_elDropdown.style.display <> "none" then
+				if not m_elActiveItem is nothing then
+					m_elActiveItem.className = Replace(m_elActiveItem.className, " efOptionSelect", "")
+				end if
+			end if
+			window.event.cancelBubble = true
+		end sub
+
+		sub OpenMenu()
+			dim elOption
+			if m_elPickerBtn.disabled then exit sub
+			'set so click outside will close menu
+			element.document.attachEvent "onclick", GetRef("onOutsideClick")
+			'if more than 7 items in list make it scrollable
+			if m_xmlSelectDoc.childNodes.length > 7 then
+				if not inStr(m_elDropdown.className, "efSelectScroll") then m_elDropdown.className = m_elDropdown.className & " efSelectScroll"
+			else
+				m_elDropdown.className = replace(m_elDropdown.className, " efSelectScroll", "")
+			end if
+			'display drop-down and set focus on selected item
+			m_elDropDown.style.left = element.clientLeft - 1
+			if element.clientWidth < 100 then
+				m_elDropDown.style.width = "100px"
+			else
+				m_elDropDown.style.width = element.clientWidth
+			end if
+			m_elDropDown.style.top = element.offsetHeight - 2
+			element.style.zIndex = "99"
+			element.style.position = "relative"
+			m_elDropdown.style.display = "block"
+			if not m_elSelectedItem is nothing then
+				if m_elSelectedItem.getAttribute("value") <> m_elHidden.value then
+					set m_elOptions = m_elDropdown.children
+					for each elOption in m_elOptions
+						if elOption.innerText= m_elHidden.value then
+							set m_elSelectedItem = elOption
+							exit for
+						end if
+					next
+				end if
+				m_elSelectedItem.focus()
+			end if
+		end sub
+
+		sub HideMenu()
+			element.document.detachEvent "onclick", GetRef("onOutsideClick")
+			element.style.zIndex = ""
+			element.style.position = ""
+			m_elDropdown.style.display = "none"
+		end sub
+
+		sub onKeyDown()
+			dim evt, elSource, i, elSiblings, elOption, sKey, sStartChar
+
+			if m_bReadOnly or m_bDisabled then exit sub
+			set evt = window.event
+			set elSource = elGetContainer(evt.srcElement, "tagName", "DIV")
+			select case evt.keyCode
+				case KEYCODE_ESC
+					if m_elDropdown.style.display <> "none" then
+						'if drop-down displayed then hide it and focus on button
+						HideMenu()
+						on error resume next
+						m_elPickerBtn.focus()
+						on error goto 0
+					end if
+					evt.returnValue = false
+					evt.cancelBubble = true
+				case KEYCODE_ENTER
+					if not elSource is nothing then
+						'enter same as click item
+						ToggleMenu(elSource)
+						evt.returnValue = false
+						evt.cancelBubble = true
+					end if
+				case KEYCODE_UP_ARROW
+					'if menu closed use selected item as current item
+					if not m_elSelectedItem is nothing then
+						if m_elDropdown.style.display = "none" then set elSource = m_elSelectedItem
+						if not m_bValid then
+							value = m_elSelectedItem.getAttribute("value")
+							HidePrompt()
+						else
+							'search parents children for current item
+							set elSiblings = elSource.parentElement.children
+							'do nothing for first item (i = 0)
+							for i = 1 to elSiblings.length - 1
+								'found current item
+								if elSiblings(i) is elSource then
+									if m_elDropdown.style.display <> "none" then
+										'if menu open change focus in list -note: does not change selection, yet
+										elSiblings(i - 1).focus()
+									else
+										'change selection in place when menu closed
+										SelectItem(elSiblings(i - 1))
+									end if
+									exit for
+								end if
+							next
+						end if
+					end if
+					evt.returnValue = false
+					evt.cancelBubble = true
+				case KEYCODE_DOWN_ARROW
+					'if menu closed use selected item as current item
+					if not m_elSelectedItem is nothing then
+						if m_elDropdown.style.display = "none" then set elSource = m_elSelectedItem
+						if not m_bValid then
+							value = m_elSelectedItem.getAttribute("value")
+							HidePrompt()
+						else
+							set elSiblings = elSource.parentElement.children
+							'if current item is last in list hide the menu
+							if not elSiblings(elSiblings.length - 1) is elSource then
+								'do nothing for last item (i = elSiblings.length - 1)
+								for i = 0 to elSiblings.length - 2
+									'found current item
+									if elSiblings(i) is elSource then
+										if m_elDropdown.style.display <> "none" then
+											'if menu open change focus in list -note: does not change selection, yet
+											elSiblings(i + 1).focus()
+										else
+											'change selection in place when menu closed
+											SelectItem(elSiblings(i + 1))
+										end if
+										exit for
+									end if
+								next
+							end if
+						end if
+					end if
+					evt.returnValue = false
+					evt.cancelBubble = true
+				case KEYCODE_TAB
+					if m_elDropdown.style.display <> "none" then
+						'if drop-down displayed then hide it and focus on button
+						HideMenu()
+						on error resume next
+						m_elPickerBtn.focus()
+						on error goto 0
+						evt.returnValue = false
+						evt.cancelBubble = true
+					end if
+				case else
+					if evt.keyCode > 32 and not evt.altKey then
+						sKey = UCase(Chr(evt.keyCode))
+						for each elOption in m_elOptions
+							if len(elOption.innerText) > 0 then
+								sStartChar = UCase(Left(elOption.innerText, 1))
+								if sStartChar = " " then sStartChar = UCase(mid(elOption.innerText, 2, 1))
+								if sStartChar = sKey then
+									SelectItem(elOption)
+									HidePrompt()
+									On Error Resume Next
+									if m_elDropdown.style.display <> "none" then m_elSelectedItem.focus()
+									exit sub
+								elseif sStartChar > sKey then
+									if not elOption is m_elOptions(0) then
+										SelectItem(elOption.previousSibling)
+									else
+										SelectItem(elOption)
+									end if
+									HidePrompt()
+									On Error Resume Next
+									if m_elDropdown.style.display <> "none" then m_elSelectedItem.focus()
+									exit sub
+								end if
+							end if
+						next
+						if m_elOptions.length > 0 then
+							if not (m_elOptions.length = 1 and len(m_elOptions(0).innerText) = 0) then SelectItem(m_elOptions(m_elOptions.length - 1))
+						end if
+					end if
+			end select
+		end sub
+
+		sub onBtnFocus()
+			SetSelected(m_elHidden.value)
+			m_elLabel.className = "selected"
+			element.style.backgroundcolor = m_elLabel.currentStyle.backgroundcolor
+		end sub
+
+		sub onBtnBlur()
+			m_elLabel.className = ""
+			element.style.backgroundcolor = ""
+		end sub
+
+		sub SetSelected(sValue)
+			dim xmlNode, elOption
+
+			set xmlNode = m_xmlSelectDoc.selectSingleNode("option[@value $ieq$ '" & replace(sValue, "'", "\'") & "']")
+			if not m_xmlSelectDoc.hasChildNodes then m_xmlSelectDoc.appendChild(m_xmlSelectDoc.ownerDocument.createElement("option"))
+			if not xmlNode is nothing then
+				'treat prompt option as invalid and show prompt
+				if xmlNode.getAttribute("value") <> "__promptoption" then
+					m_elHidden.value = xmlNode.getAttribute("value")
+					if m_bShowHTMLOpt then
+						m_elLabel.innerHTML = xmlNode.text
+					else
+						m_elLabel.innerText = xmlNode.text
+					end if
+					element.title = trim(m_elLabel.innerText)
+					set m_elOptions = m_elDropdown.children
+					for each elOption in m_elOptions
+						if elOption.getAttribute("value") = m_elHidden.value then
+							set m_elSelectedItem = elOption
+							exit for
+						end if
+					next
+					SetValid(true)
+					HidePrompt()
+				else
+					ClearSelection()
+				end if
+			else
+				ClearSelection()
+			end if
+		end sub
+
+		sub ClearSelection()
+			m_elHidden.value = ""
+			m_elLabel.innerHTML = ""
+			element.title = ""
+			SetValid(false)
+			ShowPrompt()
+		end sub
+
+		sub sGetPrompt(sPrompt)
+			sGetPrompt = m_sPrompt
+		end sub
+
+		sub SetPrompt(sPrompt)
+			m_sPrompt = sPrompt
+		end sub
+
+		sub ShowPrompt()
+			dim nWidth
+			if not m_bValid and not (m_bReadonly or m_bDisabled) then
+				nWidth = m_elLabel.style.pixelWidth
+				m_elPrompt.style.display = "block"
+				if nWidth > 0 then m_elPrompt.style.width = nWidth
+				m_elLabel.style.display = "none"
+				element.className = element.className & " efInvalid"
+			end if
+		end sub
+
+		sub HidePrompt()
+			if m_elPrompt.style.display <> "none" then
+				element.style.backgroundColor = ""
+				m_elPrompt.style.display = "none"
+				m_elLabel.style.display = "block"
+				element.className = replace(element.className, " efInvalid", "")
+			end if
+		end sub
+
+		sub onClickPrompt()
+			OpenMenu()
+		end sub
+
+		function bGetDisabled()
+			bGetDisabled = m_bDisabled
+		end function
+
+		sub SetDisabled(bDisabled)
+			dim xmlOption
+			m_bDisabled = bDisabled
+			if not m_bReadonly or m_bBrowseReadonly then
+				if m_bDisabled then
+					element.style.cursor = "default"
+					m_elLabel.style.cursor = "default"
+					m_elPickerBtn.disabled = bDisabled
+				else
+					element.style.cursor = "hand"
+					m_elLabel.style.cursor = "hand"
+					m_elPickerBtn.disabled = bDisabled
+				end if
+			end if
+			if m_bDisabled then
+				HideMenu()
+				element.className = element.className & " efDisabled"
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = -1
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "none"
+				end if
+			else
+				m_bDirty = false
+				element.className = replace(element.className, " efDisabled", "")
+				set xmlOption = m_xmlSelectDoc.selectSingleNode("option[@value $ieq$ '" & replace(m_elHidden.value, "'", "\'") & "']")
+				if xmlOption is nothing then
+					m_bValid = false
+					ShowPrompt()
+				else
+					m_bValid = true
+				end if
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = 0
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "block"
+				end if
+			end if
+			if m_bReadonly or m_bDisabled then
+				HidePrompt()
+			end if
+		end sub
+
+		function bGetReadonly()
+			bGetReadonly = m_bReadonly
+		end function
+
+		sub SetReadonly(bReadOnly)
+			dim xmlOption
+			m_bReadonly = bReadOnly
+			m_elPickerBtn.disabled = m_bReadonly
+			if m_bReadonly then
+				if inStr(element.className, "efRead") then
+					if m_bBrowseReadOnly then
+						element.className = replace(element.className, "efReadWrite", "efBrowseReadOnly")
+					else
+						element.className = replace(element.className, "efReadWrite", "efReadOnly")
+					end if
+				else
+					if m_bBrowseReadOnly then
+						element.className = element.className & " efBrowseReadOnly"
+					else
+						element.className = element.className & " efReadOnly"
+					end if
+				end if
+				element.style.cursor = "default"
+				m_elLabel.style.cursor = "default"
+				m_elPickerBtn.style.display = "none"
+				m_elPickerBtn.tabIndex = -1
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = "none"
+					m_elBrowseBtn.tabIndex = -1
+				end if
+			else
+				m_bDirty = false
+				if inStr(element.className, "efRead") then
+					element.className = replace(element.className, "efReadOnly", "efReadWrite")
+					element.className = replace(element.className, "efBrowseReadOnly", "efReadWrite")
+				else
+					element.className = element.className & " efReadWrite"
+				end if
+				element.style.cursor = "hand"
+				m_elLabel.style.cursor = "hand"
+				m_elPickerBtn.style.display = ""
+				m_elPickerBtn.tabIndex = 0
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = ""
+					m_elBrowseBtn.tabIndex = 0
+				end if
+			end if
+			m_elPickerBtn.disabled = bReadOnly
+			if m_bBrowse then m_elBrowseBtn.disabled = bReadOnly
+			if m_bReadonly or m_bDisabled then
+				HidePrompt()
+			end if
+			set xmlOption = m_xmlSelectDoc.selectSingleNode("option[@value $ieq$ '" & replace(m_elHidden.value, "'", "\'") & "']")
+			if xmlOption is nothing then
+				m_bValid = false
+				ShowPrompt()
+			else
+				m_bValid = true
+			end if
+		end sub
+
+		sub ResetReadOnly()
+			SetReadonly(m_bMasterReadOnly)
+		end sub
+
+		function sGetLabel()
+			sGetLabel = ""
+			if not isEmpty(m_elLabel) then sGetLabel = m_elLabel.innerText
+		end function
+
+		function elGetSelected()
+			set elGetSelected = m_elSelectedItem
+		end function
+
+		function elGetOptions()
+			set elGetOptions = m_elDropdown.children
+		end function
+
+		function sGetData()
+			sGetData = ""
+			if not isEmpty(m_elHidden) then sGetData = m_elHidden.value
+		end function
+
+		sub ResetDefault()
+			'reset to default or empty
+			if not isNull(m_sDefault) then
+				SetData(m_sDefault)
+			else
+				SetData("")
+			end if
+			m_bDirty = false
+		end sub
+
+		sub SetData(sValue)
+			dim evt
+			if sValue = m_elHidden.value and sValue <> "" then exit sub
+			if m_bBrowse then
+				if m_elBrowseBtn.disabled then exit sub
+			end if
+			SetSelected(sValue)
+			if not m_bDisabled then
+				set evt = createEventObject()
+				evt.type = "beginchange"
+				evtBeginChange.fire(evt)
+				fireOnChange()
+				m_bDirty = true
+			end if
+		end sub
+
+		function bGetRequired()
+			bGetRequired = m_bRequired
+		end function
+
+		function bGetValid()
+			bGetValid = m_bValid
+		end function
+
+		function bGetDirty()
+			bGetDirty = m_bDirty
+		end function
+
+		sub SetValid(bValid)
+			dim evt
+			if m_bDisabled then exit sub
+			m_bValid = bValid
+			if element.style.display = "none" or _
+				element.parentElement.style.display = "none" then exit sub
+			set evt = createEventObject()
+			evt.setAttribute "valid", m_bValid
+			evt.type = "valid"
+			evtValid.fire(evt)
+		end sub
+
+		sub onFocus()
+			if m_ellabel.style.display = "none" then HidePrompt()
+			on error resume next
+			if (m_bDisabled or m_bReadonly) and m_bBrowse then
+				if not m_elBrowseBtn.disabled then m_elBrowseBtn.focus()
+			end if
+			if not m_bDisabled and not m_bReadonly then
+				m_elPickerBtn.focus()
+			end if
+		end sub
+
+		function GetTransformXSL()
+			GetTransformXSL =	"<xsl:template match='select' xmlns:xsl='http://www.w3.org/TR/WD-xsl'>" & _
+								"<xsl:for-each match='option'>" & _
+								"<DIV class='efOption' tabIndex='0' name='option' nowrap='" & CStr(True) & "'><xsl:attribute name='value'><xsl:value-of select='@value'/></xsl:attribute><xsl:attribute name='title'><xsl:value-of select='text()'/></xsl:attribute><xsl:value-of select='text()'/></DIV>" & _
+								"</xsl:for-each>" & _
+								"</xsl:template>"
+		end function
+	</SCRIPT>
+</PUBLIC:COMPONENT>

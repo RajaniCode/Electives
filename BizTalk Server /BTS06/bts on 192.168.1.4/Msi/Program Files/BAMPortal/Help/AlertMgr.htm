@@ -1,0 +1,738 @@
+﻿<html DIR="LTR" xmlns:tool="http://www.microsoft.com/tooltip" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ddue="http://ddue.schemas.microsoft.com/authoring/2003/5" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+  <head>
+    <META HTTP-EQUIV="Content-Type" CONTENT="text/html; CHARSET=utf-8" />
+    <META NAME="save" CONTENT="history" />
+    <title>Alert Manager</title>
+    
+ <Style TYPE="text/css">
+
+body
+{
+    background: #FFFFFF;
+    color: #000000;
+    font-family:    Verdana;
+    font-size: medium;
+    font-style: normal;
+    font-weight: normal;
+    margin-top: 0;
+    margin-bottom:  0;
+    margin-left:    0;
+    margin-right:   0;
+    width:  100%;
+}
+
+div.#mainSection
+{
+    font-size: 70%;
+    width: 100%;
+    padding-left:    10;
+    margin-right: 10;
+}
+
+div.#mainBody
+{
+    font-size: 90%;
+    margin-top: 10;
+    padding-bottom: 20;
+}
+
+div.#header
+{
+    background-color: #D2D2D2;
+    padding-top:    0;
+    padding-bottom: 0;
+    padding-left:   10;
+    padding-right:  0;
+    width:          100%;
+}
+
+div.#header table
+{
+    border-bottom-color: #C8CDDE;
+    border-bottom-style: solid;
+    border-bottom-width: 1;
+    width:  100%;
+}
+
+span.#runningHeaderText
+{
+    color: #003399;
+    font-size: 90%;
+}
+
+span.#nsrTitle
+{
+/*    color: #003399;*/
+    font-size: 120%;
+    font-weight: 600;
+}
+
+div.#header table td
+{
+    color: #000000;
+    font-size: 70%;
+    margin-top: 0;
+    margin-bottom:  0;
+    padding-right: 20;
+}
+
+div.#header table tr.#headerTableRow3 td
+{
+    padding-bottom: 2;
+    padding-top: 5;
+}
+
+div.#header table.#bottomTable
+{
+    border-top-color: #FFFFFF;
+    border-top-style: solid;
+    border-top-width: 1;
+    text-align: left;
+}
+
+div.#footer
+{
+    font-size: 90%;
+    margin-top: 0;
+    margin-bottom:  0;
+    margin-left:    -5;
+    margin-right:   0;
+    padding-top:    2;
+    padding-bottom: 2;
+    padding-left:   0;
+    padding-right:  0;
+    width:  100%;
+}
+
+hr.#footerHR
+{
+    border-bottom-color: #EEEEFF;
+    border-bottom-style: solid;
+    border-bottom-width: 1;
+    border-top-color: C8CDDE;
+    border-top-style: solid;
+    border-top-width: 1;
+    height: 3;
+    color: #D2D2D2;
+}
+
+div.section
+{
+    padding-top:    2;
+    padding-bottom: 2;
+    padding-right:  15;
+    width:  100%;
+}
+
+.heading
+{
+    color:          #000000;
+    font-weight:    bold;
+    margin-top:     18;
+    margin-bottom:  8;
+}
+
+h1.heading
+{
+    color: #000000;
+    font-size:  150%;
+}
+
+.subHeading
+{
+    color:          #000000;
+    font-weight:    bold;
+    font-size:      150%;
+    margin-bottom:  4;
+}
+
+h2.subHeading
+{
+    color:          #000000;
+    font-weight:    bold;
+    font-size:      130%;
+}
+h3.subHeading
+{
+    color:  #000000;
+    font-size: 125%;
+    font-weight: bold;
+}
+
+h4.subHeading
+{
+    color: #000000;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+h4.procedureHeading
+{
+    color: #000080;
+    font-size: 110%;
+    font-weight: bold;
+}
+
+h5.subHeading
+{
+    color: #000000;
+    font-size: 100%;
+    font-weight: bold;
+}
+
+img
+{
+    padding-bottom: 10;
+}
+
+img.toggle
+{
+    border: 0;
+    margin-right: 5;
+    padding-bottom: 10;
+}
+
+img.copyCodeImage
+{
+    border: 0;
+    margin: 1;
+    margin-right: 3;
+    padding-bottom: 10;
+}
+
+img.downloadCodeImage
+{
+    border: 0;
+    margin-right: 3;
+    padding-bottom: 10;
+}
+
+img.viewCodeImage
+{
+    border: 0;
+    margin-right: 3;
+    padding-bottom: 10;
+}
+
+img.note
+{
+    border: 0;
+    margin-right: 3;
+    padding-bottom: 10;
+}
+
+img.#membersOptionsFilterImage
+{
+    border: 0;
+    margin-left: 10;
+    vertical-align: middle;
+    padding-bottom: 10;
+}
+
+img.#toggleAllImage
+{
+    margin-left: 4;
+    vertical-align: middle;
+    padding-bottom: 10;
+}
+
+div.#mainSection table
+{
+    border: 0;
+    font-size: 100%;
+    width:  100%;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+
+div.#mainSection table tr
+{
+    vertical-align: top;
+}
+
+div.#mainSection table th
+{
+    text-align: left;
+    background: #D8D8D8;
+    border-bottom-color: #D8D8D8;
+    border-bottom-style: solid;
+    border-bottom-width: 1;
+    color: #000000;
+    padding-left: 5;
+    padding-right: 5;
+}
+
+div.#mainSection table td
+{
+    background: #F2F2F2;
+    border-top-color: #D8D8D8;
+    border-top-style: solid;
+    border-top-width: 1;
+    padding-left: 5;
+    padding-right: 5;
+}
+
+div.#mainSection table td.imageCell
+{
+    white-space: nowrap;
+}
+
+div.code
+{
+	width: 98%;
+}
+
+div.code table
+{
+    border: 0;
+    font-size: 95%;
+    margin-bottom: 5;
+    width: 100%
+}
+
+div.code table th
+{   
+    text-align: left;
+    background: #D8D8D8;
+    border-bottom-color: #D8D8D8;
+    border-bottom-style: solid;
+    border-bottom-width: 1;
+    color: #000000;
+    font-weight: bold;
+    padding-left: 5;
+    padding-right: 5;
+}
+
+div.code table td
+{
+    background: #CCCCCC;
+    border-top-color: #D8D8D8;
+    border-top-style: solid;
+    border-top-width: 1;
+    padding-left: 5;
+    padding-right: 5;
+    padding-top: 5;
+}
+
+div.alert
+{
+	margin-left: 10;
+	width: 98%;
+}
+
+div.alert table
+{
+    border: 1;
+    font-size: 100%;
+    width:  100%;
+    border: solid 1 #DEDFEF;
+}
+
+div.alert table th
+{
+    text-align: left;
+    background: #D8D8D8;
+    border-bottom-width: 0;
+    color: #000000;
+    padding-left: 5;
+    padding-right: 5;
+    border: solid 1 #DEDFEF;
+}
+
+div.alert table td
+{
+    background: #FFFFFF;
+    border-top-color: #D8D8D8;
+    border-top-style: solid;
+    border-top-width: 1;
+    padding-left: 5;
+    padding-right: 5;
+    border: solid 1 #DEDFEF;
+}
+
+span.copyCode
+{
+    color: #0000ff;
+    font-size: 90%;
+    font-weight: normal;
+    cursor: hand;
+    float: right;
+    display: inline;
+    text-align: right;
+}
+
+.downloadCode
+{
+    color: #0000ff;
+    font-size: 90%;
+    font-weight: normal;
+    cursor: hand;
+}
+
+.viewCode
+{
+    color: #0000ff;
+    font-size: 90%;
+    font-weight: normal;
+    cursor: hand;
+}
+
+div.code pre
+{
+    font-family:    Monospace, Courier New, Courier;
+    font-size: 105%;
+    color:  #000000;
+}
+
+code
+{
+    font-family:    Monospace, Courier New, Courier;
+    font-size: 105%;
+    color:  #000000;
+}
+
+dl
+{
+    margin-top: 0;
+    padding-left:   1;
+}
+
+dd
+{
+    margin-bottom:  0;
+    margin-left:    0;
+    padding-left:   20;
+}
+
+dd p
+{
+    margin-top: 5;
+}
+
+ul
+{
+    margin-left: 17;
+    list-style-type: disc;
+}
+
+ul ul
+{
+    margin-bottom: 4;
+    margin-left: 17;
+    margin-top: 3;
+    list-style-type: disc;
+}
+
+ol
+{
+    margin-left: 24;
+    list-style-type: decimal;
+}
+
+ol ol
+{
+    margin-left: 24;
+    margin-top: 3;
+    list-style-type: lower-alpha;
+}
+
+li
+{
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-left: 5;
+}
+
+p
+{
+    margin-bottom: 15;
+}
+
+.tip
+{
+    color:  #0000FF;
+    font-style: italic;
+    cursor:hand;
+    text-decoration:underline;
+}
+
+.math
+{
+    font-family: Times New Roman;
+    font-size: 125%
+}
+.sourceCodeList
+{
+    font-family: Verdana;
+    font-size: 90%; 
+}
+
+pre.viewCode
+{
+    width: 100%;
+    overflow: auto;
+}
+
+li:hover table, li.over table
+{
+    background-color: #C0C0C0;
+}
+
+li:hover ul, li.over ul
+{ 
+    background-color: #d2d2d2;
+    border: 1px solid #000;
+    display: block;
+}
+
+</style>
+  </head>
+  <body>
+    <!--Topic built:3/8/2006-->
+
+    <div id="header">
+      <table width="100%" id="topTable">
+        <tr>
+          <td align="left">
+            <span id="nsrTitle">Alert Manager</span>
+          </td>
+          
+              
+        </tr>
+      </table>
+      </div>
+    <div id="mainSection">
+      <div id="mainBody">
+
+        <font color="DarkGray"></font><p />
+        <span id="changeHistory">
+        </span>
+    <p>The alert manager allows you to view available alerts, edit alert details, and subscribe to alerts.</p>
+  <h1 class="heading">Alert summary</h1><div id="sectionSection0" class="section"><content xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">
+      <p xmlns="">The <b>Alert Summary</b> area of the content frame displays a list of the configured alerts. The summary grid contains information about the alert. Clicking a row in the alert summary loads the details of the alert in the Alert Details area of the content frame. You can use this information to determine if the alert meets your needs and if you want subscribe to it. If you are an alert owner you can edit the alert and save it. The following table lists general information about the alert.</p>
+      <h3 class="subHeading" xmlns=""></h3><table width="100%" cellspacing="0" cellpadding="0" border="1" style="background-color: #CCCCCC;" xmlns=""><tr>
+            <th>
+              Summary Column
+            </th>
+            <th>
+              Contents
+            </th>
+          </tr><tr>
+          <td>
+            <p>Name</p>
+          </td>
+          <td>
+            <p>The name of the alert.  </p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Type</p>
+          </td>
+          <td>
+            <p>This can be either Aggregate or Individual.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Enabled</p>
+          </td>
+          <td>
+            <p>Indicates whether the alert is active and can be raised.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Priority</p>
+          </td>
+          <td>
+            <p>Indicates the severity of the issue the alert is reporting. </p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Security</p>
+          </td>
+          <td>
+            <p>An alert is either public or private. Public alerts can be subscribed to by any user. Private alerts can only be subscribed to by alert owners. </p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Created By</p>
+          </td>
+          <td>
+            <p>The user who created the alert.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Created Date</p>
+          </td>
+          <td>
+            <p>The date and time the alert was created.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Last Modified Date</p>
+          </td>
+          <td>
+            <p>The date and time the alert was last saved.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Is Owner</p>
+          </td>
+          <td>
+            <p>Indicates whether you are an owner of this alert.</p>
+          </td>
+        </tr></table>
+    </content></div><h1 class="heading">Alert details</h1><div id="sectionSection1" class="section"><content xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">
+      <p xmlns="">The <b>Alert Details</b> area of the Alert Management content frame provides details about the alert. You can use this information to decide if the alert meets your needs. You can also modify the alert from this area. The following table describes the details of an alert.</p>
+      <h3 class="subHeading" xmlns=""></h3><table width="100%" cellspacing="0" cellpadding="0" border="1" style="background-color: #CCCCCC;" xmlns=""><tr>
+            <th>
+              Field Name
+            </th>
+            <th>
+              Contents
+            </th>
+          </tr><tr>
+          <td>
+            <p>Name</p>
+          </td>
+          <td>
+            <p>The name of the alert. The name of the alert is used as the subject of alerts delivered in e-mail and as the file name for alerts delivered as a file.</p>
+            <div class="alert"><table width="100%" cellspacing="0" cellpadding="0"><tr><th align="left">Note: </th></tr><tr><td>
+              Names are limited to 256 characters and can not contain the following characters, ~!@#$%^&amp;amp;*();  <p></p>
+            </td></tr></table><p></p></div>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Message</p>
+          </td>
+          <td>
+            <p>The text of the message that will be delivered with the alert.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Priority</p>
+          </td>
+          <td>
+            <p>Indicates the severity of the issue the alert is reporting. The priority levels are high, medium, and low. For alerts delivered by e-mail this sets the importance flag on the e-mail message.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Owners</p>
+          </td>
+          <td>
+            <p>The owner of the alert. The default value for the owner is the same as the creator of the alert. Multiple owners are entered as a semi-colon delimited list.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Threshold area</p>
+          </td>
+          <td>
+            <p>This area of the alert details is only present for aggregation alerts.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Count(Aggregation alert only)</p>
+          </td>
+          <td>
+            <p>A drop-down list of comparison operations. </p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Value(Aggregation alert only)</p>
+          </td>
+          <td>
+            <p>The threshold value to which the comparison applies. The alert is sent only when the value meets the comparison criteria. The alert will not be sent again if monitoring has been reset by the condition no longer being true. An example is where the alert is set such that an order amount of greater than $1,000 is reported. As long as the order amount stays above $1,000 the alert is not sent again. If the order amount falls below $1,000 and then rises above it again, the alert is sent again.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Advanced Query Button</p>
+          </td>
+          <td>
+            <p>Open the Advanced Query Editor dialog box. The Advance Query Editor uses multidimensional expressions to define the query. This is an advanced feature and should only be used by experienced users. For more information about the multidimensional expressions query language, see Chapter 25, "Multidimensional Expressions" in the OLE DB Programmer's Reference on MSDN at http://go.microsoft.com/fwlink/?LinkId=58869. </p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Restrict search to the last area</p>
+          </td>
+          <td>
+            <p>This area of the alert details is only present for aggregation alerts. If the check box is selected the alert is delivered only if the threshold value is reached during the specified time period. If the checkbox is not selected, the alert is delivered when the threshold is reached, regardless of the time period involved. By default the check box is selected when there are time dimensions defined. If there are no time dimensions defined this option is not available.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Based on Dimension(Aggregation alert only)</p>
+          </td>
+          <td>
+            <p>Specifies a time dimension across which BAM monitors for the threshold value to be reached.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Duration(Aggregation alert only)</p>
+          </td>
+          <td>
+            <p>A two-part field in which there is a text field that contains a numerical value and a drop-down list specifying the units. The value of the duration must be greater than zero and equal to or less than the duration set on the aggregation when it was created.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Alert Security Area</p>
+          </td>
+          <td>
+            <p>The security setting area.</p>
+          </td>
+        </tr><tr>
+          <td>
+            <p>Allow others to see this alert and subscribe to it</p>
+          </td>
+          <td>
+            <p>A check box, that when selected, allows users with permissions to the underlying view to see and subscribe to the alert. Users can remove themselves as a subscriber at any time. Owners of the alert and Database Owners can remove a subscriber at any time.</p>
+          </td>
+        </tr></table>
+    </content><sections xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">
+      <h3 class="subHeading" xmlns="">Subscriptions</h3><div class="subSection" xmlns=""><content xmlns="http://ddue.schemas.microsoft.com/authoring/2003/5">
+          <p xmlns="">The Subscriptions area of the Alert Management content frame allows you to subscribe to an alert. The following table lists the information you must supply to subscribe to an alert. </p>
+          <h3 class="subHeading" xmlns=""></h3><table width="100%" cellspacing="0" cellpadding="0" border="1" style="background-color: #CCCCCC;" xmlns=""><tr>
+                <th>
+                  Field Name
+                </th>
+                <th>
+                  Contents
+                </th>
+              </tr><tr>
+              <td>
+                <p>User Name</p>
+              </td>
+              <td>
+                <p>The alias of the user that is subscribing to the alert. This value is automatically set to the current user.</p>
+              </td>
+            </tr><tr>
+              <td>
+                <p>Transport</p>
+              </td>
+              <td>
+                <p>Indicates how the alert is delivered. The delivery methods are e-mail or a file.</p>
+              </td>
+            </tr><tr>
+              <td>
+                <p>Address</p>
+              </td>
+              <td>
+                <p>Indicates where the alert will be delivered. This is an e-mail address for e-mail transport or a system-defined file location for a transport method of file. When there are multiple e-mail subscribers to an alert, a single e-mail message is sent to all subscribers allowing any subscriber to reply to all the subscribers and inform them of the resolution.</p>
+              </td>
+            </tr><tr>
+              <td>
+                <p>Add Subscriber Button</p>
+              </td>
+              <td>
+                <p>Opens the Add Subscriber dialog box.</p>
+              </td>
+            </tr></table>
+        </content></div>
+    </sections></div><!--[if gte IE 5]>
+			<tool:tip element="seeAlsoToolTip" avoidmouse="false"/><tool:tip element="languageFilterToolTip" avoidmouse="false"/><tool:tip element="roleInfoSpan" avoidmouse="false"/>
+		<![endif]--></div>
+      <div id="footer">
+        © 2006 Microsoft Corporation. All rights reserved.</a>
+      </div>
+    </div>
+  </body>
+</html>

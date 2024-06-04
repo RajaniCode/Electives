@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="bd2f5708-172b-4fe5-ae11-b68ac54b25cb" name="swalther@SWLAPTOP 2009-03-03 10:03:05" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="0a4605a7-510d-43f8-ac4e-79d04ea6e873">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter06 - Understanding HTML Helpers\Code\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-03-03 10_03_05">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter06 - Understanding HTML Helpers\Code\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-03-03T10:03:05.9718334-08:00" queuing="2009-03-03T10:03:07.4070334-08:00" start="2009-03-03T10:03:07.6566334-08:00" finish="2009-03-03T10:03:08.4834334-08:00" />
+  <TestDefinitions>
+    <UnitTest name="SecondPageSelected" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter06 - understanding html helpers\code\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="bfb47f5d-aa98-c1fc-7070-4d6187bc6dac">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="777ac102-13a0-4f7f-8929-74a01d4e0f92" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter06 - Understanding HTML Helpers\Code\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Helpers.DataGridHelperTests, MvcApplication1.Tests" name="SecondPageSelected" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="bfb47f5d-aa98-c1fc-7070-4d6187bc6dac" executionId="777ac102-13a0-4f7f-8929-74a01d4e0f92" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="777ac102-13a0-4f7f-8929-74a01d4e0f92" testId="bfb47f5d-aa98-c1fc-7070-4d6187bc6dac" testName="SecondPageSelected" computerName="SWLAPTOP" duration="00:00:00.1212098" startTime="2009-03-03T10:03:07.7502334-08:00" endTime="2009-03-03T10:03:08.4366334-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>StringAssert.Contains failed. String '&lt;table&gt;
+	&lt;thead&gt;
+		&lt;tr&gt;
+			&lt;th&gt;&lt;a href=""&gt;Id&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href=""&gt;Name&lt;/a&gt;&lt;/th&gt;&lt;th&gt;&lt;a href=""&gt;Price&lt;/a&gt;&lt;/th&gt;
+		&lt;/tr&gt;
+	&lt;/thead&gt;&lt;tbody&gt;
+		&lt;tr&gt;
+			&lt;td&gt;2&lt;/td&gt;&lt;td&gt;Product 2&lt;/td&gt;&lt;td&gt;3&lt;/td&gt;
+		&lt;/tr&gt;&lt;tr&gt;
+			&lt;td&gt;3&lt;/td&gt;&lt;td&gt;Product 3&lt;/td&gt;&lt;td&gt;2&lt;/td&gt;
+		&lt;/tr&gt;&lt;tr&gt;
+			&lt;td colspan="3"&gt;&lt;a href=""&gt;1&lt;/a&gt;&amp;nbsp;&lt;strong&gt;2&lt;/strong&gt;&amp;nbsp;&lt;a href=""&gt;3&lt;/a&gt;&amp;nbsp;&lt;/td&gt;
+		&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;' does not contain string '&lt;strong&gt;23&lt;/strong&gt;'. .</Message>
+          <StackTrace>   at MvcApplication1.Tests.Helpers.DataGridHelperTests.SecondPageSelected() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter06 - Understanding HTML Helpers\Code\CS\MvcApplication1\MvcApplication1.Tests\Helpers\DataGridHelperTests.cs:line 44
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

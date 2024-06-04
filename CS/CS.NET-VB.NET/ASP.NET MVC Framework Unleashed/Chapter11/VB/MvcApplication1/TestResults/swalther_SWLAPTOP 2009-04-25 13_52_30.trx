@@ -1,0 +1,389 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="ad817d65-e366-433d-8cca-a6dfec4dc01c" name="swalther@SWLAPTOP 2009-04-25 13:52:30" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="b932fe92-2789-4620-8bb4-f582fd853097">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-04-25 13_52_30">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="28" executed="28" passed="28" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-04-25T13:52:30.8757505-07:00" queuing="2009-04-25T13:52:32.3127505-07:00" start="2009-04-25T13:52:32.5967505-07:00" finish="2009-04-25T13:52:34.2897505-07:00" />
+  <TestDefinitions>
+    <UnitTest name="RegisterPostReturnsViewIfNewPasswordDoesNotMatchConfirmPassword" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="3e5ce089-d9b3-a562-7245-0258f75f1ce4">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="0db9a8e4-7aa2-441c-bb4d-91d11e11ecf7" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="RegisterPostReturnsViewIfNewPasswordDoesNotMatchConfirmPassword" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordSuccess" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="1d05c884-6989-a90f-bec1-9646af62660e">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="0b946ed5-8e38-48a6-b8d1-b026ebd51b9d" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ChangePasswordSuccess" />
+    </UnitTest>
+    <UnitTest name="LoginPostReturnsViewIfPasswordNotSpecified" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="805cca92-f868-00d7-4f79-91b650f49c2e">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="eab5ac20-0ca6-41ed-8399-75e84101d2ed" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="LoginPostReturnsViewIfPasswordNotSpecified" />
+    </UnitTest>
+    <UnitTest name="IndexRetrievesMovieFromCache" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="8531c232-3f36-6d28-c3f7-bdf8c824fec6">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="60c11245-190d-4c03-9666-161b1d10b366" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.SimpleMovieControllerTests, MvcApplication1.Tests" name="IndexRetrievesMovieFromCache" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordPostReturnsViewIfCurrentPasswordNotSpecified" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="fef46445-334b-60f5-796d-54dc572bf60b">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="68e7c4b2-772b-4667-b81b-231f5393285a" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ChangePasswordPostReturnsViewIfCurrentPasswordNotSpecified" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordGetReturnsView" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="9b71f843-de34-d902-743e-9ae7738adbce">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="2b276f12-e672-42e4-90f1-87632da5f2e2" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ChangePasswordGetReturnsView" />
+    </UnitTest>
+    <UnitTest name="ConstructorSetsPropertiesToDefaultValues" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="d99ab20f-3321-dd14-17dc-1767d8b7df0e">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="541ccb2e-2229-40d4-b438-93758375ca82" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ConstructorSetsPropertiesToDefaultValues" />
+    </UnitTest>
+    <UnitTest name="IndexAddsMoviesToCache" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="1b44ecd8-65a2-4bed-0b5e-1e90d89e8896">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6f93d984-c918-4bf4-be2f-ae4344c0012c" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.SimpleMovieControllerTests, MvcApplication1.Tests" name="IndexAddsMoviesToCache" />
+    </UnitTest>
+    <UnitTest name="LoginPostReturnsViewIfUsernameOrPasswordIsIncorrect" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="00ea5fac-2b09-d602-9397-2f4d0e881b62">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="2771a17f-6db8-4bf2-8f33-1e54eda33d22" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="LoginPostReturnsViewIfUsernameOrPasswordIsIncorrect" />
+    </UnitTest>
+    <UnitTest name="LoginGet" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="565100ab-7c3e-7bb5-ad92-12b195f92f4a">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="c388c01f-f627-47df-aa30-77f74bad1888" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="LoginGet" />
+    </UnitTest>
+    <UnitTest name="RegisterPostReturnsViewIfEmailNotSpecified" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="936e2432-61b4-151f-4b71-660595ab93d1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1d2df5d2-8b09-4aeb-8afc-ccd84c61949c" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="RegisterPostReturnsViewIfEmailNotSpecified" />
+    </UnitTest>
+    <UnitTest name="LoginPostRedirectsToReturnUrlIfLoginSuccessfulAndReturnUrlGiven" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="2bd4db97-938b-bc7c-9f96-2e0524c781e1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="3dbb657e-6e7f-4ccc-95a4-eeaada34ec3a" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="LoginPostRedirectsToReturnUrlIfLoginSuccessfulAndReturnUrlGiven" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordPostReturnsViewIfNewPasswordIsTooShort" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="39354425-2da1-8f60-7909-4a4851f9e520">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="98da350f-a03e-4395-af62-d41b3dd6d7af" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ChangePasswordPostReturnsViewIfNewPasswordIsTooShort" />
+    </UnitTest>
+    <UnitTest name="LoginPostReturnsViewIfUsernameNotSpecified" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="d8a57955-2031-7761-265b-afb8a35e658c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="345968a4-cad1-491c-a7f8-7739fea70b98" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="LoginPostReturnsViewIfUsernameNotSpecified" />
+    </UnitTest>
+    <UnitTest name="LogOff" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="7a43e370-da46-f962-399c-99097b036bec">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="192efda7-a6c6-4f87-aff5-4814c797a983" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="LogOff" />
+    </UnitTest>
+    <UnitTest name="RegisterPostReturnsViewIfPasswordIsTooShort" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="2ac230b4-0f6c-047f-c27e-06d4f0e94ca0">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6cfe4b8f-b4a8-4cd7-bba2-e0cdea424080" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="RegisterPostReturnsViewIfPasswordIsTooShort" />
+    </UnitTest>
+    <UnitTest name="LoginPostRedirectsHomeIfLoginSuccessfulButNoReturnUrlGiven" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="cbddc9b8-a8ce-280d-8aa4-e6c9021bdc2e">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a4df7755-64d4-4b5f-a49d-e654fc0ea293" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="LoginPostRedirectsHomeIfLoginSuccessfulButNoReturnUrlGiven" />
+    </UnitTest>
+    <UnitTest name="RegisterPostReturnsViewIfUsernameNotSpecified" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="736d5758-a5ab-1cfd-7e38-ade06a46d4db">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="9dffe3bb-70b8-47b1-b881-ec08ccede04b" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="RegisterPostReturnsViewIfUsernameNotSpecified" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordPostReturnsViewIfNewPasswordIsNothing" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="b4082959-81fc-6a54-05c9-08d08bae15c5">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="4cba00ea-a3d6-4a2c-8d08-53768a62bcb2" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ChangePasswordPostReturnsViewIfNewPasswordIsNothing" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordPostReturnsViewIfProviderRejectsPassword" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="6c326838-8120-9a32-a63a-7e1a206e9dc4">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="77addf4f-92e6-4791-bd44-0348132207cf" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ChangePasswordPostReturnsViewIfProviderRejectsPassword" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordPostReturnsViewIfNewPasswordDoesNotMatchConfirmPassword" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="3f54d0ba-f92d-0fdc-2601-46fa082ffd01">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="7759f286-cb0a-4501-a3be-d4f46ce934fa" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ChangePasswordPostReturnsViewIfNewPasswordDoesNotMatchConfirmPassword" />
+    </UnitTest>
+    <UnitTest name="RegisterPostReturnsViewIfRegistrationFails" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="10560c36-6c20-f064-d572-fc78fdcadc13">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="f277bdf1-21b6-49de-ba3a-f17bde0c872f" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="RegisterPostReturnsViewIfRegistrationFails" />
+    </UnitTest>
+    <UnitTest name="ConstructorSetsProperties" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="adf2178a-040c-56e1-9e50-2d3a5675cdca">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1b4aae97-5646-45f6-96f9-4fe69293f9a0" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ConstructorSetsProperties" />
+    </UnitTest>
+    <UnitTest name="RegisterPostReturnsViewIfPasswordIsNothing" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="55a10668-537a-3d59-5ff2-169b72ec0a08">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1e4d9e58-2fb1-4200-810c-9b0c19f03791" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="RegisterPostReturnsViewIfPasswordIsNothing" />
+    </UnitTest>
+    <UnitTest name="TimeIsCached" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="be767d3d-8f35-a51e-4f9f-276e515e7422">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="20a3f260-689c-4cd5-8617-6e2f0048d3cf" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.SimpleControllerTests, MvcApplication1.Tests" name="TimeIsCached" />
+    </UnitTest>
+    <UnitTest name="RegisterPostRedirectsHomeIfRegistrationSuccessful" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="6adf0474-54d1-e260-5bf3-53052c7e6588">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="854fca28-9671-4c47-8740-ab2010914614" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="RegisterPostRedirectsHomeIfRegistrationSuccessful" />
+    </UnitTest>
+    <UnitTest name="ChangePasswordPostRedirectsOnSuccess" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="935ff67c-8ab2-26e0-1d50-83bbb6efc06b">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="ed368516-2f49-4b71-b4d6-860a48c830a3" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="ChangePasswordPostRedirectsOnSuccess" />
+    </UnitTest>
+    <UnitTest name="RegisterGet" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter11 - better performance with caching\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="c7788098-799a-3b2e-46e6-9fbbac923989">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6cefc1d1-185f-4716-be17-082ea26a3142" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter11 - Better Performance with Caching\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.AccountControllerTest, MvcApplication1.Tests" name="RegisterGet" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="00ea5fac-2b09-d602-9397-2f4d0e881b62" executionId="2771a17f-6db8-4bf2-8f33-1e54eda33d22" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="10560c36-6c20-f064-d572-fc78fdcadc13" executionId="f277bdf1-21b6-49de-ba3a-f17bde0c872f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1b44ecd8-65a2-4bed-0b5e-1e90d89e8896" executionId="6f93d984-c918-4bf4-be2f-ae4344c0012c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d05c884-6989-a90f-bec1-9646af62660e" executionId="0b946ed5-8e38-48a6-b8d1-b026ebd51b9d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2ac230b4-0f6c-047f-c27e-06d4f0e94ca0" executionId="6cfe4b8f-b4a8-4cd7-bba2-e0cdea424080" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2bd4db97-938b-bc7c-9f96-2e0524c781e1" executionId="3dbb657e-6e7f-4ccc-95a4-eeaada34ec3a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="39354425-2da1-8f60-7909-4a4851f9e520" executionId="98da350f-a03e-4395-af62-d41b3dd6d7af" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3e5ce089-d9b3-a562-7245-0258f75f1ce4" executionId="0db9a8e4-7aa2-441c-bb4d-91d11e11ecf7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3f54d0ba-f92d-0fdc-2601-46fa082ffd01" executionId="7759f286-cb0a-4501-a3be-d4f46ce934fa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="55a10668-537a-3d59-5ff2-169b72ec0a08" executionId="1e4d9e58-2fb1-4200-810c-9b0c19f03791" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="565100ab-7c3e-7bb5-ad92-12b195f92f4a" executionId="c388c01f-f627-47df-aa30-77f74bad1888" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6adf0474-54d1-e260-5bf3-53052c7e6588" executionId="854fca28-9671-4c47-8740-ab2010914614" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c326838-8120-9a32-a63a-7e1a206e9dc4" executionId="77addf4f-92e6-4791-bd44-0348132207cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="736d5758-a5ab-1cfd-7e38-ade06a46d4db" executionId="9dffe3bb-70b8-47b1-b881-ec08ccede04b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7a43e370-da46-f962-399c-99097b036bec" executionId="192efda7-a6c6-4f87-aff5-4814c797a983" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="805cca92-f868-00d7-4f79-91b650f49c2e" executionId="eab5ac20-0ca6-41ed-8399-75e84101d2ed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8531c232-3f36-6d28-c3f7-bdf8c824fec6" executionId="60c11245-190d-4c03-9666-161b1d10b366" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="935ff67c-8ab2-26e0-1d50-83bbb6efc06b" executionId="ed368516-2f49-4b71-b4d6-860a48c830a3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="936e2432-61b4-151f-4b71-660595ab93d1" executionId="1d2df5d2-8b09-4aeb-8afc-ccd84c61949c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9b71f843-de34-d902-743e-9ae7738adbce" executionId="2b276f12-e672-42e4-90f1-87632da5f2e2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="adf2178a-040c-56e1-9e50-2d3a5675cdca" executionId="1b4aae97-5646-45f6-96f9-4fe69293f9a0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b4082959-81fc-6a54-05c9-08d08bae15c5" executionId="4cba00ea-a3d6-4a2c-8d08-53768a62bcb2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="be767d3d-8f35-a51e-4f9f-276e515e7422" executionId="20a3f260-689c-4cd5-8617-6e2f0048d3cf" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c7788098-799a-3b2e-46e6-9fbbac923989" executionId="6cefc1d1-185f-4716-be17-082ea26a3142" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cbddc9b8-a8ce-280d-8aa4-e6c9021bdc2e" executionId="a4df7755-64d4-4b5f-a49d-e654fc0ea293" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d8a57955-2031-7761-265b-afb8a35e658c" executionId="345968a4-cad1-491c-a7f8-7739fea70b98" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d99ab20f-3321-dd14-17dc-1767d8b7df0e" executionId="541ccb2e-2229-40d4-b438-93758375ca82" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fef46445-334b-60f5-796d-54dc572bf60b" executionId="68e7c4b2-772b-4667-b81b-231f5393285a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="2771a17f-6db8-4bf2-8f33-1e54eda33d22" testId="00ea5fac-2b09-d602-9397-2f4d0e881b62" testName="LoginPostReturnsViewIfUsernameOrPasswordIsIncorrect" computerName="SWLAPTOP" duration="00:00:00.1377752" startTime="2009-04-25T13:52:32.6647505-07:00" endTime="2009-04-25T13:52:33.3637505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f277bdf1-21b6-49de-ba3a-f17bde0c872f" testId="10560c36-6c20-f064-d572-fc78fdcadc13" testName="RegisterPostReturnsViewIfRegistrationFails" computerName="SWLAPTOP" duration="00:00:00.0752868" startTime="2009-04-25T13:52:33.3697505-07:00" endTime="2009-04-25T13:52:33.4497505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6f93d984-c918-4bf4-be2f-ae4344c0012c" testId="1b44ecd8-65a2-4bed-0b5e-1e90d89e8896" testName="IndexAddsMoviesToCache" computerName="SWLAPTOP" duration="00:00:00.0913956" startTime="2009-04-25T13:52:33.4557505-07:00" endTime="2009-04-25T13:52:33.5517505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0b946ed5-8e38-48a6-b8d1-b026ebd51b9d" testId="1d05c884-6989-a90f-bec1-9646af62660e" testName="ChangePasswordSuccess" computerName="SWLAPTOP" duration="00:00:00.0005821" startTime="2009-04-25T13:52:33.5567505-07:00" endTime="2009-04-25T13:52:33.5857505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6cfe4b8f-b4a8-4cd7-bba2-e0cdea424080" testId="2ac230b4-0f6c-047f-c27e-06d4f0e94ca0" testName="RegisterPostReturnsViewIfPasswordIsTooShort" computerName="SWLAPTOP" duration="00:00:00.0005562" startTime="2009-04-25T13:52:33.5917505-07:00" endTime="2009-04-25T13:52:33.5957505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3dbb657e-6e7f-4ccc-95a4-eeaada34ec3a" testId="2bd4db97-938b-bc7c-9f96-2e0524c781e1" testName="LoginPostRedirectsToReturnUrlIfLoginSuccessfulAndReturnUrlGiven" computerName="SWLAPTOP" duration="00:00:00.0005942" startTime="2009-04-25T13:52:33.6017505-07:00" endTime="2009-04-25T13:52:33.6067505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="98da350f-a03e-4395-af62-d41b3dd6d7af" testId="39354425-2da1-8f60-7909-4a4851f9e520" testName="ChangePasswordPostReturnsViewIfNewPasswordIsTooShort" computerName="SWLAPTOP" duration="00:00:00.0176097" startTime="2009-04-25T13:52:33.6277505-07:00" endTime="2009-04-25T13:52:33.6487505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0db9a8e4-7aa2-441c-bb4d-91d11e11ecf7" testId="3e5ce089-d9b3-a562-7245-0258f75f1ce4" testName="RegisterPostReturnsViewIfNewPasswordDoesNotMatchConfirmPassword" computerName="SWLAPTOP" duration="00:00:00.0005365" startTime="2009-04-25T13:52:33.6577505-07:00" endTime="2009-04-25T13:52:33.6607505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7759f286-cb0a-4501-a3be-d4f46ce934fa" testId="3f54d0ba-f92d-0fdc-2601-46fa082ffd01" testName="ChangePasswordPostReturnsViewIfNewPasswordDoesNotMatchConfirmPassword" computerName="SWLAPTOP" duration="00:00:00.0005165" startTime="2009-04-25T13:52:33.6677505-07:00" endTime="2009-04-25T13:52:33.6707505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1e4d9e58-2fb1-4200-810c-9b0c19f03791" testId="55a10668-537a-3d59-5ff2-169b72ec0a08" testName="RegisterPostReturnsViewIfPasswordIsNothing" computerName="SWLAPTOP" duration="00:00:00.0005090" startTime="2009-04-25T13:52:33.6767505-07:00" endTime="2009-04-25T13:52:33.6807505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c388c01f-f627-47df-aa30-77f74bad1888" testId="565100ab-7c3e-7bb5-ad92-12b195f92f4a" testName="LoginGet" computerName="SWLAPTOP" duration="00:00:00.0003962" startTime="2009-04-25T13:52:33.6857505-07:00" endTime="2009-04-25T13:52:33.6897505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="854fca28-9671-4c47-8740-ab2010914614" testId="6adf0474-54d1-e260-5bf3-53052c7e6588" testName="RegisterPostRedirectsHomeIfRegistrationSuccessful" computerName="SWLAPTOP" duration="00:00:00.0005490" startTime="2009-04-25T13:52:33.6957505-07:00" endTime="2009-04-25T13:52:33.6997505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="77addf4f-92e6-4791-bd44-0348132207cf" testId="6c326838-8120-9a32-a63a-7e1a206e9dc4" testName="ChangePasswordPostReturnsViewIfProviderRejectsPassword" computerName="SWLAPTOP" duration="00:00:00.0015725" startTime="2009-04-25T13:52:33.7067505-07:00" endTime="2009-04-25T13:52:33.7117505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9dffe3bb-70b8-47b1-b881-ec08ccede04b" testId="736d5758-a5ab-1cfd-7e38-ade06a46d4db" testName="RegisterPostReturnsViewIfUsernameNotSpecified" computerName="SWLAPTOP" duration="00:00:00.0005280" startTime="2009-04-25T13:52:33.7167505-07:00" endTime="2009-04-25T13:52:33.7207505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="192efda7-a6c6-4f87-aff5-4814c797a983" testId="7a43e370-da46-f962-399c-99097b036bec" testName="LogOff" computerName="SWLAPTOP" duration="00:00:00.0005683" startTime="2009-04-25T13:52:33.7257505-07:00" endTime="2009-04-25T13:52:33.7297505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="eab5ac20-0ca6-41ed-8399-75e84101d2ed" testId="805cca92-f868-00d7-4f79-91b650f49c2e" testName="LoginPostReturnsViewIfPasswordNotSpecified" computerName="SWLAPTOP" duration="00:00:00.0004547" startTime="2009-04-25T13:52:33.7347505-07:00" endTime="2009-04-25T13:52:33.7387505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="60c11245-190d-4c03-9666-161b1d10b366" testId="8531c232-3f36-6d28-c3f7-bdf8c824fec6" testName="IndexRetrievesMovieFromCache" computerName="SWLAPTOP" duration="00:00:00.0058077" startTime="2009-04-25T13:52:33.7437505-07:00" endTime="2009-04-25T13:52:33.7527505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ed368516-2f49-4b71-b4d6-860a48c830a3" testId="935ff67c-8ab2-26e0-1d50-83bbb6efc06b" testName="ChangePasswordPostRedirectsOnSuccess" computerName="SWLAPTOP" duration="00:00:00.0003716" startTime="2009-04-25T13:52:33.7587505-07:00" endTime="2009-04-25T13:52:33.7617505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1d2df5d2-8b09-4aeb-8afc-ccd84c61949c" testId="936e2432-61b4-151f-4b71-660595ab93d1" testName="RegisterPostReturnsViewIfEmailNotSpecified" computerName="SWLAPTOP" duration="00:00:00.0005289" startTime="2009-04-25T13:52:33.7677505-07:00" endTime="2009-04-25T13:52:33.7717505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2b276f12-e672-42e4-90f1-87632da5f2e2" testId="9b71f843-de34-d902-743e-9ae7738adbce" testName="ChangePasswordGetReturnsView" computerName="SWLAPTOP" duration="00:00:00.0005650" startTime="2009-04-25T13:52:33.7777505-07:00" endTime="2009-04-25T13:52:33.7837505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1b4aae97-5646-45f6-96f9-4fe69293f9a0" testId="adf2178a-040c-56e1-9e50-2d3a5675cdca" testName="ConstructorSetsProperties" computerName="SWLAPTOP" duration="00:00:00.3253699" startTime="2009-04-25T13:52:33.7967505-07:00" endTime="2009-04-25T13:52:34.1267505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="4cba00ea-a3d6-4a2c-8d08-53768a62bcb2" testId="b4082959-81fc-6a54-05c9-08d08bae15c5" testName="ChangePasswordPostReturnsViewIfNewPasswordIsNothing" computerName="SWLAPTOP" duration="00:00:00.0005314" startTime="2009-04-25T13:52:34.1337505-07:00" endTime="2009-04-25T13:52:34.1377505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="20a3f260-689c-4cd5-8617-6e2f0048d3cf" testId="be767d3d-8f35-a51e-4f9f-276e515e7422" testName="TimeIsCached" computerName="SWLAPTOP" duration="00:00:00.0021942" startTime="2009-04-25T13:52:34.1437505-07:00" endTime="2009-04-25T13:52:34.1487505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6cefc1d1-185f-4716-be17-082ea26a3142" testId="c7788098-799a-3b2e-46e6-9fbbac923989" testName="RegisterGet" computerName="SWLAPTOP" duration="00:00:00.0005402" startTime="2009-04-25T13:52:34.1537505-07:00" endTime="2009-04-25T13:52:34.1577505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a4df7755-64d4-4b5f-a49d-e654fc0ea293" testId="cbddc9b8-a8ce-280d-8aa4-e6c9021bdc2e" testName="LoginPostRedirectsHomeIfLoginSuccessfulButNoReturnUrlGiven" computerName="SWLAPTOP" duration="00:00:00.0004383" startTime="2009-04-25T13:52:34.1637505-07:00" endTime="2009-04-25T13:52:34.1677505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="345968a4-cad1-491c-a7f8-7739fea70b98" testId="d8a57955-2031-7761-265b-afb8a35e658c" testName="LoginPostReturnsViewIfUsernameNotSpecified" computerName="SWLAPTOP" duration="00:00:00.0004782" startTime="2009-04-25T13:52:34.1797505-07:00" endTime="2009-04-25T13:52:34.1847505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="541ccb2e-2229-40d4-b438-93758375ca82" testId="d99ab20f-3321-dd14-17dc-1767d8b7df0e" testName="ConstructorSetsPropertiesToDefaultValues" computerName="SWLAPTOP" duration="00:00:00.0005199" startTime="2009-04-25T13:52:34.1897505-07:00" endTime="2009-04-25T13:52:34.1937505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="68e7c4b2-772b-4667-b81b-231f5393285a" testId="fef46445-334b-60f5-796d-54dc572bf60b" testName="ChangePasswordPostReturnsViewIfCurrentPasswordNotSpecified" computerName="SWLAPTOP" duration="00:00:00.0005448" startTime="2009-04-25T13:52:34.1987505-07:00" endTime="2009-04-25T13:52:34.2027505-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

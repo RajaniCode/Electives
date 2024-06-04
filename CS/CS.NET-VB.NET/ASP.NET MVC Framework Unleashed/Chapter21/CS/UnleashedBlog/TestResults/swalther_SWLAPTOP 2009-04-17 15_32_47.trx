@@ -1,0 +1,573 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="fae416e3-220b-4c0f-80aa-b20d5a6eea00" name="swalther@SWLAPTOP 2009-04-17 15:32:47" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="12724acc-8286-4e01-803c-86392e0af04b">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\TestResults\swalther_SWLAPTOP 2009-04-17 15_32_47">
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\System.ComponentModel.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\Microsoft.Web.Mvc.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\bin\UnleashedBlog.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="30" executed="30" passed="9" error="0" failed="21" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-04-17T15:32:47.2532109-07:00" queuing="2009-04-17T15:32:49.9587519-07:00" start="2009-04-17T15:32:50.4048411-07:00" finish="2009-04-17T15:32:52.0251651-07:00" />
+  <TestDefinitions>
+    <UnitTest name="CreateAuthorRequired" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="88d6b3d7-c726-3482-5ec7-08b88224478b">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6456e747-34d1-4376-8535-2561443a8656" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateAuthorRequired" />
+    </UnitTest>
+    <UnitTest name="CreateNameIsValid" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="a371d235-dc0b-4d12-d600-db6e161b5338">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6834781c-ebc8-4b75-a661-c8bdcb242ab3" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateNameIsValid" />
+    </UnitTest>
+    <UnitTest name="Index_AjaxReturnsPartialViewResult" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="43fdb3cc-cecc-6727-01d8-c4f4a6a733fb">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6563dafd-25e3-4e7b-bfa1-1444c2d56c23" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="Index_AjaxReturnsPartialViewResult" />
+    </UnitTest>
+    <UnitTest name="CreateAndThenGetComment" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="5cb39aef-5354-413d-6ecc-e0645219f5fb">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="c60791a7-8c7b-486e-8d20-bfb791aecb44" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.CommentControllerTests, UnleashedBlog.Tests" name="CreateAndThenGetComment" />
+    </UnitTest>
+    <UnitTest name="ShowNewBlogEntries" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="9a1a712c-80f0-6dd6-fcde-89e2b48a68f1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="3cc7d9f4-92e5-4814-8ac7-2c46788813ee" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="ShowNewBlogEntries" />
+    </UnitTest>
+    <UnitTest name="Index_AjaxReturnsPartialViewResult" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="7397d620-77fa-41fe-b949-c2dcd25b4dfe">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="2f108c99-8ce2-4904-b6f8-364881e96559" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="Index_AjaxReturnsPartialViewResult" />
+    </UnitTest>
+    <UnitTest name="CreateDescriptionRequired" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="c39aa5b2-e929-e6d4-9610-9ef0ebea5f52">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="3a13966b-e79a-470a-ab33-3bdb88029398" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateDescriptionRequired" />
+    </UnitTest>
+    <UnitTest name="CreateTextRequired" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="393de100-2b43-659f-e85a-377c33ec1014">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="22f28e94-f9f5-4cb0-a846-b1206d9d8935" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateTextRequired" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesInOrderOfDatePublished" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="46ab8fa0-b23c-4a03-8f14-bbc66aaf4928" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesInOrderOfDatePublished" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesByYear" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="8575298e-a3af-44da-f02a-80c71bfa25b2">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1643a449-81e5-4c8f-bbfc-11d860184b50" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByYear" />
+    </UnitTest>
+    <UnitTest name="CommentMustHaveText" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="0f006d5f-852b-6ae2-6afe-48fbbcee99b0">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="0e5cba56-0b02-4a3e-a5ba-f3d5cd49b783" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.CommentControllerTests, UnleashedBlog.Tests" name="CommentMustHaveText" />
+    </UnitTest>
+    <UnitTest name="CommentMustHaveName" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="1d55d646-9bfd-d91d-36d4-6d210b31003b">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6a8158b1-1525-45db-9089-7c95d9656be6" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.CommentControllerTests, UnleashedBlog.Tests" name="CommentMustHaveName" />
+    </UnitTest>
+    <UnitTest name="BlogEntriesIncludeCommentCount" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="f105bd95-7541-6f56-d4cd-d2831cced14a">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="7ea7f185-4bcf-4eaf-ad6c-8c4000c9f14d" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.CommentControllerTests, UnleashedBlog.Tests" name="BlogEntriesIncludeCommentCount" />
+    </UnitTest>
+    <UnitTest name="CreateTitleRequired" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="026d23a0-0f2f-e420-eb4a-d0257988d821">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="741dca71-a118-4397-87c1-60515e32e926" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateTitleRequired" />
+    </UnitTest>
+    <UnitTest name="CreateTitleMaximumLength500" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="816fee86-e4c6-f66a-8367-34afbe81dea1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="06a201cb-ecb3-4a53-aba9-a02b34e3bf87" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateTitleMaximumLength500" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntryByName" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="9cd2d8b0-5e13-5da4-773b-45607ed534f2">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a7a45279-b1f1-4ba2-b172-056f8bb7dd96" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntryByName" />
+    </UnitTest>
+    <UnitTest name="CreateBlogEntry" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="cddc7caf-da78-b76d-6452-22ab4badf897">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="cd75ecde-ec51-4d2d-b478-6b191d4c1c74" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateBlogEntry" />
+    </UnitTest>
+    <UnitTest name="CreateNameFromTitle" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="b978bd0a-bc7a-0cab-0427-0737a45fcbe6">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="d15ae2a0-d13a-46e6-bbc5-991c21919be2" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateNameFromTitle" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsLessThan6BlogEntries" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="8d70758f-3c97-3a4e-1b0e-531880b8fed6">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="49bb38a8-5138-46ec-b733-d86674eb6fb6" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexReturnsLessThan6BlogEntries" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonthDay" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="2b21ad28-1d0b-ac19-85ec-db7aaf58c558">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a2835fa0-80b4-4233-81a7-a8c0460569ff" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonthDay" />
+    </UnitTest>
+    <UnitTest name="CommentsOrderByDatePublished" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="2b554b65-d428-b46a-3b63-7b2c9ff5e4df">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="008d8911-0724-41a2-95d4-7518250d25e7" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.CommentControllerTests, UnleashedBlog.Tests" name="CommentsOrderByDatePublished" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonthDayName" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="a4e681db-28c1-5812-ac7f-21097a8a356c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="0634d315-6723-47cb-948f-2369bd5267cd" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonthDayName" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsPagedListForPage" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="bb2c80e7-902a-25e8-8499-75000ac0f166">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="628dc777-d44d-4ee3-9205-19d4c70a7afc" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexReturnsPagedListForPage" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonth" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="3d109e96-d6b0-e1f2-4592-7f307cb1809f">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="58ee0a4b-df69-4fa7-8b94-18593a27e189" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonth" />
+    </UnitTest>
+    <UnitTest name="IndexAcceptsPage" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="f57dcbe0-c07d-72e8-a818-e9a18b364894">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1fdebdbc-e892-4da2-b5b9-0a789701521a" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexAcceptsPage" />
+    </UnitTest>
+    <UnitTest name="CommentMustHaveTitle" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="8e360cfd-b17d-d4b1-db67-0651bc9a24e9">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="853323d9-49d9-4f8d-baea-2c38052e497b" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.CommentControllerTests, UnleashedBlog.Tests" name="CommentMustHaveTitle" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesByDay" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="8db8b103-f679-e45e-c57f-eaad82eb12aa">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="d016a1c5-59a8-4565-a4c3-80f9f45ffdfa" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByDay" />
+    </UnitTest>
+    <UnitTest name="ArchiveYear" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="2974ea07-7de4-4e6c-4a19-e3002dba59a1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="9e914fc3-f335-40ba-ab8c-8f11b45f7657" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="ArchiveYear" />
+    </UnitTest>
+    <UnitTest name="DefaultRoute" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="61b7311d-ab65-b688-47ad-3f6effc369f9">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="00c8f3e2-afdc-4cfc-a28e-1b1512202339" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="DefaultRoute" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesByMonth" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter21 - adding comments and tags\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="ff1c42f4-0f67-ac38-b2f5-2a2b13f18f3b">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="99e7ad8d-6db0-423b-87b9-0663ffd1550c" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByMonth" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="026d23a0-0f2f-e420-eb4a-d0257988d821" executionId="741dca71-a118-4397-87c1-60515e32e926" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0f006d5f-852b-6ae2-6afe-48fbbcee99b0" executionId="0e5cba56-0b02-4a3e-a5ba-f3d5cd49b783" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="1d55d646-9bfd-d91d-36d4-6d210b31003b" executionId="6a8158b1-1525-45db-9089-7c95d9656be6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2974ea07-7de4-4e6c-4a19-e3002dba59a1" executionId="9e914fc3-f335-40ba-ab8c-8f11b45f7657" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2b21ad28-1d0b-ac19-85ec-db7aaf58c558" executionId="a2835fa0-80b4-4233-81a7-a8c0460569ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2b554b65-d428-b46a-3b63-7b2c9ff5e4df" executionId="008d8911-0724-41a2-95d4-7518250d25e7" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="393de100-2b43-659f-e85a-377c33ec1014" executionId="22f28e94-f9f5-4cb0-a846-b1206d9d8935" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3d109e96-d6b0-e1f2-4592-7f307cb1809f" executionId="58ee0a4b-df69-4fa7-8b94-18593a27e189" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="43fdb3cc-cecc-6727-01d8-c4f4a6a733fb" executionId="6563dafd-25e3-4e7b-bfa1-1444c2d56c23" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5cb39aef-5354-413d-6ecc-e0645219f5fb" executionId="c60791a7-8c7b-486e-8d20-bfb791aecb44" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="61b7311d-ab65-b688-47ad-3f6effc369f9" executionId="00c8f3e2-afdc-4cfc-a28e-1b1512202339" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7397d620-77fa-41fe-b949-c2dcd25b4dfe" executionId="2f108c99-8ce2-4904-b6f8-364881e96559" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="816fee86-e4c6-f66a-8367-34afbe81dea1" executionId="06a201cb-ecb3-4a53-aba9-a02b34e3bf87" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8575298e-a3af-44da-f02a-80c71bfa25b2" executionId="1643a449-81e5-4c8f-bbfc-11d860184b50" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="88d6b3d7-c726-3482-5ec7-08b88224478b" executionId="6456e747-34d1-4376-8535-2561443a8656" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8d70758f-3c97-3a4e-1b0e-531880b8fed6" executionId="49bb38a8-5138-46ec-b733-d86674eb6fb6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8db8b103-f679-e45e-c57f-eaad82eb12aa" executionId="d016a1c5-59a8-4565-a4c3-80f9f45ffdfa" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8e360cfd-b17d-d4b1-db67-0651bc9a24e9" executionId="853323d9-49d9-4f8d-baea-2c38052e497b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a1a712c-80f0-6dd6-fcde-89e2b48a68f1" executionId="3cc7d9f4-92e5-4814-8ac7-2c46788813ee" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9cd2d8b0-5e13-5da4-773b-45607ed534f2" executionId="a7a45279-b1f1-4ba2-b172-056f8bb7dd96" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c" executionId="46ab8fa0-b23c-4a03-8f14-bbc66aaf4928" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a371d235-dc0b-4d12-d600-db6e161b5338" executionId="6834781c-ebc8-4b75-a661-c8bdcb242ab3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a4e681db-28c1-5812-ac7f-21097a8a356c" executionId="0634d315-6723-47cb-948f-2369bd5267cd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b978bd0a-bc7a-0cab-0427-0737a45fcbe6" executionId="d15ae2a0-d13a-46e6-bbc5-991c21919be2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bb2c80e7-902a-25e8-8499-75000ac0f166" executionId="628dc777-d44d-4ee3-9205-19d4c70a7afc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c39aa5b2-e929-e6d4-9610-9ef0ebea5f52" executionId="3a13966b-e79a-470a-ab33-3bdb88029398" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cddc7caf-da78-b76d-6452-22ab4badf897" executionId="cd75ecde-ec51-4d2d-b478-6b191d4c1c74" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f105bd95-7541-6f56-d4cd-d2831cced14a" executionId="7ea7f185-4bcf-4eaf-ad6c-8c4000c9f14d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f57dcbe0-c07d-72e8-a818-e9a18b364894" executionId="1fdebdbc-e892-4da2-b5b9-0a789701521a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ff1c42f4-0f67-ac38-b2f5-2a2b13f18f3b" executionId="99e7ad8d-6db0-423b-87b9-0663ffd1550c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="741dca71-a118-4397-87c1-60515e32e926" testId="026d23a0-0f2f-e420-eb4a-d0257988d821" testName="CreateTitleRequired" computerName="SWLAPTOP" duration="00:00:00.0678284" startTime="2009-04-17T15:32:50.5108623-07:00" endTime="2009-04-17T15:32:51.1159833-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateTitleRequired threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateTitleRequired() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 78
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0e5cba56-0b02-4a3e-a5ba-f3d5cd49b783" testId="0f006d5f-852b-6ae2-6afe-48fbbcee99b0" testName="CommentMustHaveText" computerName="SWLAPTOP" duration="00:00:00.0212892" startTime="2009-04-17T15:32:51.1669935-07:00" endTime="2009-04-17T15:32:51.2040009-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentMustHaveText threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.TestHelpers.CreateBlogEntry(ControllerFactory controllerFactory) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\TestHelpers.cs:line 50
+   at UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentMustHaveText() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\CommentControllerTests.cs:line 137
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6a8158b1-1525-45db-9089-7c95d9656be6" testId="1d55d646-9bfd-d91d-36d4-6d210b31003b" testName="CommentMustHaveName" computerName="SWLAPTOP" duration="00:00:00.0130480" startTime="2009-04-17T15:32:51.2180037-07:00" endTime="2009-04-17T15:32:51.2470095-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentMustHaveName threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.TestHelpers.CreateBlogEntry(ControllerFactory controllerFactory) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\TestHelpers.cs:line 50
+   at UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentMustHaveName() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\CommentControllerTests.cs:line 119
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9e914fc3-f335-40ba-ab8c-8f11b45f7657" testId="2974ea07-7de4-4e6c-4a19-e3002dba59a1" testName="ArchiveYear" computerName="SWLAPTOP" duration="00:00:00.0546735" startTime="2009-04-17T15:32:51.2630127-07:00" endTime="2009-04-17T15:32:51.3220245-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a2835fa0-80b4-4233-81a7-a8c0460569ff" testId="2b21ad28-1d0b-ac19-85ec-db7aaf58c558" testName="ArchiveYearMonthDay" computerName="SWLAPTOP" duration="00:00:00.0009054" startTime="2009-04-17T15:32:51.3300261-07:00" endTime="2009-04-17T15:32:51.3360273-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="008d8911-0724-41a2-95d4-7518250d25e7" testId="2b554b65-d428-b46a-3b63-7b2c9ff5e4df" testName="CommentsOrderByDatePublished" computerName="SWLAPTOP" duration="00:00:00.0106595" startTime="2009-04-17T15:32:51.3420285-07:00" endTime="2009-04-17T15:32:51.3570315-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentsOrderByDatePublished threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.TestHelpers.CreateBlogEntry(ControllerFactory controllerFactory) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\TestHelpers.cs:line 50
+   at UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentsOrderByDatePublished() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\CommentControllerTests.cs:line 54
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="22f28e94-f9f5-4cb0-a846-b1206d9d8935" testId="393de100-2b43-659f-e85a-377c33ec1014" testName="CreateTextRequired" computerName="SWLAPTOP" duration="00:00:00.0086486" startTime="2009-04-17T15:32:51.3670335-07:00" endTime="2009-04-17T15:32:51.3830367-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateTextRequired threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateTextRequired() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 131
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="58ee0a4b-df69-4fa7-8b94-18593a27e189" testId="3d109e96-d6b0-e1f2-4592-7f307cb1809f" testName="ArchiveYearMonth" computerName="SWLAPTOP" duration="00:00:00.0008212" startTime="2009-04-17T15:32:51.3990399-07:00" endTime="2009-04-17T15:32:51.4070415-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6563dafd-25e3-4e7b-bfa1-1444c2d56c23" testId="43fdb3cc-cecc-6727-01d8-c4f4a6a733fb" testName="Index_AjaxReturnsPartialViewResult" computerName="SWLAPTOP" duration="00:00:00.0364142" startTime="2009-04-17T15:32:51.4160433-07:00" endTime="2009-04-17T15:32:51.4560513-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c60791a7-8c7b-486e-8d20-bfb791aecb44" testId="5cb39aef-5354-413d-6ecc-e0645219f5fb" testName="CreateAndThenGetComment" computerName="SWLAPTOP" duration="00:00:00.0090712" startTime="2009-04-17T15:32:51.4620525-07:00" endTime="2009-04-17T15:32:51.4740549-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.CommentControllerTests.CreateAndThenGetComment threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.TestHelpers.CreateBlogEntry(ControllerFactory controllerFactory) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\TestHelpers.cs:line 50
+   at UnleashedBlog.Tests.Controllers.CommentControllerTests.CreateAndThenGetComment() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\CommentControllerTests.cs:line 35
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="00c8f3e2-afdc-4cfc-a28e-1b1512202339" testId="61b7311d-ab65-b688-47ad-3f6effc369f9" testName="DefaultRoute" computerName="SWLAPTOP" duration="00:00:00.0006621" startTime="2009-04-17T15:32:51.4840569-07:00" endTime="2009-04-17T15:32:51.4890579-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2f108c99-8ce2-4904-b6f8-364881e96559" testId="7397d620-77fa-41fe-b949-c2dcd25b4dfe" testName="Index_AjaxReturnsPartialViewResult" computerName="SWLAPTOP" duration="00:00:00.0170563" startTime="2009-04-17T15:32:51.4960593-07:00" endTime="2009-04-17T15:32:51.5170635-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="06a201cb-ecb3-4a53-aba9-a02b34e3bf87" testId="816fee86-e4c6-f66a-8367-34afbe81dea1" testName="CreateTitleMaximumLength500" computerName="SWLAPTOP" duration="00:00:00.0086981" startTime="2009-04-17T15:32:51.5240649-07:00" endTime="2009-04-17T15:32:51.5360673-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateTitleMaximumLength500 threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateTitleMaximumLength500() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 148
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1643a449-81e5-4c8f-bbfc-11d860184b50" testId="8575298e-a3af-44da-f02a-80c71bfa25b2" testName="IndexReturnsBlogEntriesByYear" computerName="SWLAPTOP" duration="00:00:00.0095137" startTime="2009-04-17T15:32:51.5440689-07:00" endTime="2009-04-17T15:32:51.5570715-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.ArchiveControllerTests.IndexReturnsBlogEntriesByYear threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.ArchiveControllerTests.IndexReturnsBlogEntriesByYear() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\ArchiveControllerTests.cs:line 40
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6456e747-34d1-4376-8535-2561443a8656" testId="88d6b3d7-c726-3482-5ec7-08b88224478b" testName="CreateAuthorRequired" computerName="SWLAPTOP" duration="00:00:00.0087189" startTime="2009-04-17T15:32:51.5660733-07:00" endTime="2009-04-17T15:32:51.5800761-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateAuthorRequired threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 53
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateAuthorRequired() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 96
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="49bb38a8-5138-46ec-b733-d86674eb6fb6" testId="8d70758f-3c97-3a4e-1b0e-531880b8fed6" testName="IndexReturnsLessThan6BlogEntries" computerName="SWLAPTOP" duration="00:00:00.0099400" startTime="2009-04-17T15:32:51.5860773-07:00" endTime="2009-04-17T15:32:51.6000801-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.IndexReturnsLessThan6BlogEntries threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.TestHelpers.CreateBlogEntries(BlogController controller, Int32 count) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\TestHelpers.cs:line 25
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.IndexReturnsLessThan6BlogEntries() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 249
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d016a1c5-59a8-4565-a4c3-80f9f45ffdfa" testId="8db8b103-f679-e45e-c57f-eaad82eb12aa" testName="IndexReturnsBlogEntriesByDay" computerName="SWLAPTOP" duration="00:00:00.0088324" startTime="2009-04-17T15:32:51.6060813-07:00" endTime="2009-04-17T15:32:51.6180837-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.ArchiveControllerTests.IndexReturnsBlogEntriesByDay threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.ArchiveControllerTests.IndexReturnsBlogEntriesByDay() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\ArchiveControllerTests.cs:line 82
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="853323d9-49d9-4f8d-baea-2c38052e497b" testId="8e360cfd-b17d-d4b1-db67-0651bc9a24e9" testName="CommentMustHaveTitle" computerName="SWLAPTOP" duration="00:00:00.0086138" startTime="2009-04-17T15:32:51.6420885-07:00" endTime="2009-04-17T15:32:51.6550911-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentMustHaveTitle threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.TestHelpers.CreateBlogEntry(ControllerFactory controllerFactory) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\TestHelpers.cs:line 50
+   at UnleashedBlog.Tests.Controllers.CommentControllerTests.CommentMustHaveTitle() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\CommentControllerTests.cs:line 101
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3cc7d9f4-92e5-4814-8ac7-2c46788813ee" testId="9a1a712c-80f0-6dd6-fcde-89e2b48a68f1" testName="ShowNewBlogEntries" computerName="SWLAPTOP" duration="00:00:00.0091624" startTime="2009-04-17T15:32:51.6600921-07:00" endTime="2009-04-17T15:32:51.6720945-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a7a45279-b1f1-4ba2-b172-056f8bb7dd96" testId="9cd2d8b0-5e13-5da4-773b-45607ed534f2" testName="IndexReturnsBlogEntryByName" computerName="SWLAPTOP" duration="00:00:00.0085341" startTime="2009-04-17T15:32:51.6790959-07:00" endTime="2009-04-17T15:32:51.6910983-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.ArchiveControllerTests.IndexReturnsBlogEntryByName threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.ArchiveControllerTests.IndexReturnsBlogEntryByName() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\ArchiveControllerTests.cs:line 102
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="46ab8fa0-b23c-4a03-8f14-bbc66aaf4928" testId="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c" testName="IndexReturnsBlogEntriesInOrderOfDatePublished" computerName="SWLAPTOP" duration="00:00:00.0088782" startTime="2009-04-17T15:32:51.6960993-07:00" endTime="2009-04-17T15:32:51.7091019-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.IndexReturnsBlogEntriesInOrderOfDatePublished threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.IndexReturnsBlogEntriesInOrderOfDatePublished() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 267
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6834781c-ebc8-4b75-a661-c8bdcb242ab3" testId="a371d235-dc0b-4d12-d600-db6e161b5338" testName="CreateNameIsValid" computerName="SWLAPTOP" duration="00:00:00.0093259" startTime="2009-04-17T15:32:51.7151031-07:00" endTime="2009-04-17T15:32:51.7271055-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateNameIsValid threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateNameIsValid() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 167
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0634d315-6723-47cb-948f-2369bd5267cd" testId="a4e681db-28c1-5812-ac7f-21097a8a356c" testName="ArchiveYearMonthDayName" computerName="SWLAPTOP" duration="00:00:00.0009754" startTime="2009-04-17T15:32:51.7331067-07:00" endTime="2009-04-17T15:32:51.7381077-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d15ae2a0-d13a-46e6-bbc5-991c21919be2" testId="b978bd0a-bc7a-0cab-0427-0737a45fcbe6" testName="CreateNameFromTitle" computerName="SWLAPTOP" duration="00:00:00.0113721" startTime="2009-04-17T15:32:51.7491099-07:00" endTime="2009-04-17T15:32:51.7791159-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateNameFromTitle threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateNameFromTitle() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 198
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="628dc777-d44d-4ee3-9205-19d4c70a7afc" testId="bb2c80e7-902a-25e8-8499-75000ac0f166" testName="IndexReturnsPagedListForPage" computerName="SWLAPTOP" duration="00:00:00.0092391" startTime="2009-04-17T15:32:51.7891179-07:00" endTime="2009-04-17T15:32:51.8211243-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.IndexReturnsPagedListForPage threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.TestHelpers.CreateBlogEntries(BlogController controller, Int32 count) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\TestHelpers.cs:line 25
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.IndexReturnsPagedListForPage() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 231
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="3a13966b-e79a-470a-ab33-3bdb88029398" testId="c39aa5b2-e929-e6d4-9610-9ef0ebea5f52" testName="CreateDescriptionRequired" computerName="SWLAPTOP" duration="00:00:00.0088673" startTime="2009-04-17T15:32:51.8291259-07:00" endTime="2009-04-17T15:32:51.8421285-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateDescriptionRequired threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateDescriptionRequired() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 113
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="cd75ecde-ec51-4d2d-b478-6b191d4c1c74" testId="cddc7caf-da78-b76d-6452-22ab4badf897" testName="CreateBlogEntry" computerName="SWLAPTOP" duration="00:00:00.0090290" startTime="2009-04-17T15:32:51.8511303-07:00" endTime="2009-04-17T15:32:51.8641329-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateBlogEntry threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.BlogControllerTests.CreateBlogEntry() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.cs:line 54
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7ea7f185-4bcf-4eaf-ad6c-8c4000c9f14d" testId="f105bd95-7541-6f56-d4cd-d2831cced14a" testName="BlogEntriesIncludeCommentCount" computerName="SWLAPTOP" duration="00:00:00.0095443" startTime="2009-04-17T15:32:51.8731347-07:00" endTime="2009-04-17T15:32:51.8861373-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.CommentControllerTests.BlogEntriesIncludeCommentCount threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.TestHelpers.CreateBlogEntry(ControllerFactory controllerFactory) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\TestHelpers.cs:line 50
+   at UnleashedBlog.Tests.Controllers.CommentControllerTests.BlogEntriesIncludeCommentCount() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\CommentControllerTests.cs:line 76
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="1fdebdbc-e892-4da2-b5b9-0a789701521a" testId="f57dcbe0-c07d-72e8-a818-e9a18b364894" testName="IndexAcceptsPage" computerName="SWLAPTOP" duration="00:00:00.0080920" startTime="2009-04-17T15:32:51.8951391-07:00" endTime="2009-04-17T15:32:51.9071415-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="99e7ad8d-6db0-423b-87b9-0663ffd1550c" testId="ff1c42f4-0f67-ac38-b2f5-2a2b13f18f3b" testName="IndexReturnsBlogEntriesByMonth" computerName="SWLAPTOP" duration="00:00:00.0092881" startTime="2009-04-17T15:32:51.9141429-07:00" endTime="2009-04-17T15:32:51.9271455-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Controllers.ArchiveControllerTests.IndexReturnsBlogEntriesByMonth threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.Models.BlogService.CreateBlogEntry(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Models\BlogService.cs:line 51
+   at UnleashedBlog.Controllers.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 44
+   at UnleashedBlog.Tests.Controllers.ArchiveControllerTests.IndexReturnsBlogEntriesByMonth() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter21 - Adding Comments and Tags\CS\UnleashedBlog\UnleashedBlog.Tests\Controllers\ArchiveControllerTests.cs:line 61
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

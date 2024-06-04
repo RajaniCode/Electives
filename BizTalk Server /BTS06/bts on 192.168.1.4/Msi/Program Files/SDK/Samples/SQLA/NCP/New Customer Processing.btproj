@@ -1,0 +1,114 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.4817"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{364815E2-1EAF-4594-8D3B-EC10F596B9D2}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\key.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "New_Customer_Processing"
+                    AssemblyName = "New Customer Processing"
+                />
+                <Config
+                    Name = "Development"
+		    ApplicationName = "SQLAdapterApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+		    ApplicationName = "SQLAdapterApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "BizTalk Orchestration.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "InputSQLService.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "New_Customer_Processing"
+                    Type = "SQLService"
+                />
+                <File
+                    RelPath = "PropertySchema.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "New_Customer_Processing.PropertySchema"
+                    Type = "PropertySchema"
+                />
+                <File
+                    RelPath = "SQLService.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "New_Customer_Processing"
+                    Type = "SQLService1"
+                />
+                <File
+                    RelPath = "Transform_SPROCCall.btm"
+                    BuildAction = "Compile"
+                    Namespace = "New_Customer_Processing"
+                    Type = "Transform_2"
+                />
+                <File
+                    RelPath = "Transform_UpdateGram.btm"
+                    BuildAction = "Compile"
+                    Namespace = "New_Customer_Processing"
+                    Type = "Transform_1"
+                />
+                <File
+                    RelPath = "UpdateCustomersService.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "New_Customer_Processing"
+                    Type = "UpdateCustomersService"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

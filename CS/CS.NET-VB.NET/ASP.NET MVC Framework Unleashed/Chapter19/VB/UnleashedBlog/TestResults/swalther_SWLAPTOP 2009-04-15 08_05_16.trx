@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="7fbe37c4-e565-42bc-813d-57dd086e13e5" name="swalther@SWLAPTOP 2009-04-15 08:05:16" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="b61e1d39-ee71-4782-aff7-6a5bde643e09">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\TestResults\swalther_SWLAPTOP 2009-04-15 08_05_16">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog\bin\UnleashedBlog.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="12" executed="12" passed="7" error="0" failed="5" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-04-15T08:05:16.7295079-07:00" queuing="2009-04-15T08:05:17.9785079-07:00" start="2009-04-15T08:05:18.2525079-07:00" finish="2009-04-15T08:05:19.2245079-07:00" />
+  <TestDefinitions>
+    <UnitTest name="IndexReturnsBlogEntriesByYear" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="6c8c66f0-684e-7c39-5959-1c504aed450a">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="d15cff8c-573d-4fd7-bc8a-e14c7c32cb51" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByYear" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesByDay" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="af204010-4a90-5f4e-550f-6c15b2bce1f7">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="05e57f7d-a691-45e1-94a7-50de621c2569" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByDay" />
+    </UnitTest>
+    <UnitTest name="CreateTitleRequired" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="2b8a9527-ef33-89d0-311f-70824e8a073e">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="ec7fc3c1-6ea7-4b4e-a4d3-1ab19ef2777e" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.BlogControllerTests, UnleashedBlog.Tests" name="CreateTitleRequired" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntryByName" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="4d187e8f-0397-8aa2-e993-61c2514155aa">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="5ebb7332-0300-4670-a603-d6d8665f333c" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntryByName" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonth" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="355130d8-598a-83c1-df35-ebf160d85abc">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="9cc38db5-71f9-4452-81a0-551e40c93921" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonth" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesByMonth" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="3bb81d9b-0fca-a52c-f916-bc086d10bc1e">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="aa092791-4481-402e-b5cf-5d92e08e2141" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByMonth" />
+    </UnitTest>
+    <UnitTest name="CreateBlogEntry" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="53abb6ba-e0eb-c900-8e80-8a422fd5dcfa">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="5095c3a0-7c6b-4537-a757-12a477741fca" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.BlogControllerTests, UnleashedBlog.Tests" name="CreateBlogEntry" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonthDayName" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="df07a596-7e6d-c02e-823f-fe7062312347">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="b9fec9e4-1600-45ec-b476-596bedbadd13" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonthDayName" />
+    </UnitTest>
+    <UnitTest name="DefaultRoute" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="be9839c3-6da0-3afa-1128-5cf4d1a20fa9">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="ac8e9d1c-fa57-4051-955f-196ea461d12b" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.RouteTests, UnleashedBlog.Tests" name="DefaultRoute" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonthDay" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="bc759681-b9de-918d-c7be-b64f31944942">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="fabee04a-536b-4a0b-9df4-907845ca0091" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonthDay" />
+    </UnitTest>
+    <UnitTest name="ArchiveYear" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="34bf8981-8595-fbb9-702b-14c78eb42274">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="dc1340fa-b295-4004-b559-74c4af2876ff" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.RouteTests, UnleashedBlog.Tests" name="ArchiveYear" />
+    </UnitTest>
+    <UnitTest name="ShowNewBlogEntries" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter19 - adding validation\vb\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="9d685191-81df-c621-a3ae-5e9f3eb979d1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="0f8d83fc-b457-4601-ac94-267348cc0979" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.BlogControllerTests, UnleashedBlog.Tests" name="ShowNewBlogEntries" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="2b8a9527-ef33-89d0-311f-70824e8a073e" executionId="ec7fc3c1-6ea7-4b4e-a4d3-1ab19ef2777e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="34bf8981-8595-fbb9-702b-14c78eb42274" executionId="dc1340fa-b295-4004-b559-74c4af2876ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="355130d8-598a-83c1-df35-ebf160d85abc" executionId="9cc38db5-71f9-4452-81a0-551e40c93921" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3bb81d9b-0fca-a52c-f916-bc086d10bc1e" executionId="aa092791-4481-402e-b5cf-5d92e08e2141" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="4d187e8f-0397-8aa2-e993-61c2514155aa" executionId="5ebb7332-0300-4670-a603-d6d8665f333c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="53abb6ba-e0eb-c900-8e80-8a422fd5dcfa" executionId="5095c3a0-7c6b-4537-a757-12a477741fca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c8c66f0-684e-7c39-5959-1c504aed450a" executionId="d15cff8c-573d-4fd7-bc8a-e14c7c32cb51" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9d685191-81df-c621-a3ae-5e9f3eb979d1" executionId="0f8d83fc-b457-4601-ac94-267348cc0979" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="af204010-4a90-5f4e-550f-6c15b2bce1f7" executionId="05e57f7d-a691-45e1-94a7-50de621c2569" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bc759681-b9de-918d-c7be-b64f31944942" executionId="fabee04a-536b-4a0b-9df4-907845ca0091" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="be9839c3-6da0-3afa-1128-5cf4d1a20fa9" executionId="ac8e9d1c-fa57-4051-955f-196ea461d12b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="df07a596-7e6d-c02e-823f-fe7062312347" executionId="b9fec9e4-1600-45ec-b476-596bedbadd13" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="ec7fc3c1-6ea7-4b4e-a4d3-1ab19ef2777e" testId="2b8a9527-ef33-89d0-311f-70824e8a073e" testName="CreateTitleRequired" computerName="SWLAPTOP" duration="00:00:00.0126285" startTime="2009-04-15T08:05:18.3245079-07:00" endTime="2009-04-15T08:05:18.9035079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="dc1340fa-b295-4004-b559-74c4af2876ff" testId="34bf8981-8595-fbb9-702b-14c78eb42274" testName="ArchiveYear" computerName="SWLAPTOP" duration="00:00:00.0459452" startTime="2009-04-15T08:05:18.9095079-07:00" endTime="2009-04-15T08:05:18.9645079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="9cc38db5-71f9-4452-81a0-551e40c93921" testId="355130d8-598a-83c1-df35-ebf160d85abc" testName="ArchiveYearMonth" computerName="SWLAPTOP" duration="00:00:00.0007541" startTime="2009-04-15T08:05:18.9705079-07:00" endTime="2009-04-15T08:05:18.9745079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="aa092791-4481-402e-b5cf-5d92e08e2141" testId="3bb81d9b-0fca-a52c-f916-bc086d10bc1e" testName="IndexReturnsBlogEntriesByMonth" computerName="SWLAPTOP" duration="00:00:00.0217868" startTime="2009-04-15T08:05:18.9795079-07:00" endTime="2009-04-15T08:05:19.0045079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.ArchiveControllerTests.IndexReturnsBlogEntriesByMonth threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog\Controllers\BlogController.vb:line 29
+   at UnleashedBlog.Tests.ArchiveControllerTests.IndexReturnsBlogEntriesByMonth() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\Controllers\ArchiveControllerTests.vb:line 36
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="5ebb7332-0300-4670-a603-d6d8665f333c" testId="4d187e8f-0397-8aa2-e993-61c2514155aa" testName="IndexReturnsBlogEntryByName" computerName="SWLAPTOP" duration="00:00:00.0089823" startTime="2009-04-15T08:05:19.0135079-07:00" endTime="2009-04-15T08:05:19.0255079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.ArchiveControllerTests.IndexReturnsBlogEntryByName threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog\Controllers\BlogController.vb:line 29
+   at UnleashedBlog.Tests.ArchiveControllerTests.IndexReturnsBlogEntryByName() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\Controllers\ArchiveControllerTests.vb:line 75
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="5095c3a0-7c6b-4537-a757-12a477741fca" testId="53abb6ba-e0eb-c900-8e80-8a422fd5dcfa" testName="CreateBlogEntry" computerName="SWLAPTOP" duration="00:00:00.0085492" startTime="2009-04-15T08:05:19.0385079-07:00" endTime="2009-04-15T08:05:19.0505079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.BlogControllerTests.CreateBlogEntry threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog\Controllers\BlogController.vb:line 29
+   at UnleashedBlog.Tests.BlogControllerTests.CreateBlogEntry() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\Controllers\BlogControllerTests.vb:line 31
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="d15cff8c-573d-4fd7-bc8a-e14c7c32cb51" testId="6c8c66f0-684e-7c39-5959-1c504aed450a" testName="IndexReturnsBlogEntriesByYear" computerName="SWLAPTOP" duration="00:00:00.0087249" startTime="2009-04-15T08:05:19.0585079-07:00" endTime="2009-04-15T08:05:19.0705079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.ArchiveControllerTests.IndexReturnsBlogEntriesByYear threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog\Controllers\BlogController.vb:line 29
+   at UnleashedBlog.Tests.ArchiveControllerTests.IndexReturnsBlogEntriesByYear() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\Controllers\ArchiveControllerTests.vb:line 15
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="0f8d83fc-b457-4601-ac94-267348cc0979" testId="9d685191-81df-c621-a3ae-5e9f3eb979d1" testName="ShowNewBlogEntries" computerName="SWLAPTOP" duration="00:00:00.0017499" startTime="2009-04-15T08:05:19.0795079-07:00" endTime="2009-04-15T08:05:19.0845079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="05e57f7d-a691-45e1-94a7-50de621c2569" testId="af204010-4a90-5f4e-550f-6c15b2bce1f7" testName="IndexReturnsBlogEntriesByDay" computerName="SWLAPTOP" duration="00:00:00.0088146" startTime="2009-04-15T08:05:19.0905079-07:00" endTime="2009-04-15T08:05:19.1025079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.ArchiveControllerTests.IndexReturnsBlogEntriesByDay threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at UnleashedBlog.BlogController.Create(BlogEntry blogEntryToCreate) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog\Controllers\BlogController.vb:line 29
+   at UnleashedBlog.Tests.ArchiveControllerTests.IndexReturnsBlogEntriesByDay() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter19 - Adding Validation\VB\UnleashedBlog\UnleashedBlog.Tests\Controllers\ArchiveControllerTests.vb:line 56
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="fabee04a-536b-4a0b-9df4-907845ca0091" testId="bc759681-b9de-918d-c7be-b64f31944942" testName="ArchiveYearMonthDay" computerName="SWLAPTOP" duration="00:00:00.0009146" startTime="2009-04-15T08:05:19.1105079-07:00" endTime="2009-04-15T08:05:19.1145079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ac8e9d1c-fa57-4051-955f-196ea461d12b" testId="be9839c3-6da0-3afa-1128-5cf4d1a20fa9" testName="DefaultRoute" computerName="SWLAPTOP" duration="00:00:00.0006294" startTime="2009-04-15T08:05:19.1215079-07:00" endTime="2009-04-15T08:05:19.1255079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b9fec9e4-1600-45ec-b476-596bedbadd13" testId="df07a596-7e6d-c02e-823f-fe7062312347" testName="ArchiveYearMonthDayName" computerName="SWLAPTOP" duration="00:00:00.0008712" startTime="2009-04-15T08:05:19.1305079-07:00" endTime="2009-04-15T08:05:19.1345079-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,110 @@
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+  <EntityContainerMapping StorageEntityContainer="InhQVLocationModelStoreContainer" CdmEntityContainer="InhQVLocation">
+    <EntitySetMapping Name="Locations">
+      <QueryView>
+              select value
+              case
+              when (el.LocationId is not null) then
+              InhQVLocationModel.EventLocation(l.LocationId,l.Address,el.LocationName)
+              when (gc.ClubId  is not null) then
+              InhQVLocationModel.GunClub(l.LocationId,l.Address,gc.ClubName)
+              when (range.RangeId is not null) then
+              InhQVLocationModel.ShootingRange(l.LocationId,l.Address,range.RangeName)
+              END
+              from InhQVLocationModelStoreContainer.Locations as l
+              left join InhQVLocationModelStoreContainer.EventLocation as el on l.LocationId = el.LocationId
+              left join InhQVLocationModelStoreContainer.GunClubs as gc on l.LocationId = gc.ClubId
+              left join InhQVLocationModelStoreContainer.ShootingRange as range on l.LocationId = range.RangeId
+            </QueryView>
+      <QueryView TypeName="IsTypeOf(InhQVLocationModel.EventLocation)">
+				  select value
+				  InhQVLocationModel.EventLocation(l.LocationId,l.Address,el.LocationName)
+				  from InhQVLocationModelStoreContainer.Locations as l
+				  left join InhQVLocationModelStoreContainer.EventLocation as el on l.LocationId = el.LocationId
+			  </QueryView>
+      <QueryView TypeName="IsTypeOf(InhQVLocationModel.GunClub)">
+				  select value
+				  InhQVLocationModel.GunClub(l.LocationId,l.Address,gc.ClubName)
+				  from InhQVLocationModelStoreContainer.Locations as l
+				  left join InhQVLocationModelStoreContainer.GunClubs as gc on l.LocationId = gc.ClubId
+			  </QueryView>
+      <QueryView TypeName="IsTypeOf(InhQVLocationModel.ShootingRange)">
+				  select value
+				  InhQVLocationModel.ShootingRange(l.LocationId,l.Address,range.RangeName)
+				  from InhQVLocationModelStoreContainer.Locations as l
+				  left join InhQVLocationModelStoreContainer.ShootingRange as range on l.LocationId = range.RangeId
+			  </QueryView>
+      <QueryView TypeName="IsTypeOf(InhQVLocationModel.Organization)">
+				  select value
+				  case
+				  when (gc.ClubId  is not null) then
+				  InhQVLocationModel.GunClub(l.LocationId,l.Address,gc.ClubName)
+				  when (range.RangeId is not null) then
+				  InhQVLocationModel.ShootingRange(l.LocationId,l.Address,range.RangeName)
+				  END
+				  from InhQVLocationModelStoreContainer.Locations as l
+				  left join InhQVLocationModelStoreContainer.GunClubs as gc on l.LocationId = gc.ClubId
+				  left join InhQVLocationModelStoreContainer.ShootingRange as range on l.LocationId = range.RangeId
+			  </QueryView>
+      <EntityTypeMapping TypeName="InhQVLocationModel.EventLocation">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="InhQVLocationModel.Store.InsertEvent">
+            <ScalarProperty Name="LocationName" ParameterName="LocationName" />
+            <ScalarProperty Name="Address" ParameterName="Address" />
+            <ResultBinding Name="LocationId" ColumnName="LocationId" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="InhQVLocationModel.Store.UpdateEvent">
+            <ScalarProperty Name="LocationName" ParameterName="LocationName" Version="Current" />
+            <ScalarProperty Name="Address" ParameterName="Address" Version="Current" />
+            <ScalarProperty Name="LocationId" ParameterName="LocationId" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="InhQVLocationModel.Store.DeleteEvent">
+            <ScalarProperty Name="LocationId" ParameterName="LocationId" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="InhQVLocationModel.GunClub">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="InhQVLocationModel.Store.InsertClub">
+            <ScalarProperty Name="ClubName" ParameterName="ClubName" />
+            <ScalarProperty Name="Address" ParameterName="Address" />
+            <ResultBinding Name="LocationId" ColumnName="LocationId" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="InhQVLocationModel.Store.UpdateClub">
+            <ScalarProperty Name="ClubName" ParameterName="ClubName" Version="Current" />
+            <ScalarProperty Name="Address" ParameterName="Address" Version="Current" />
+            <ScalarProperty Name="LocationId" ParameterName="LocationId" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="InhQVLocationModel.Store.DeleteClub">
+            <ScalarProperty Name="LocationId" ParameterName="LocationId" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+      <EntityTypeMapping TypeName="InhQVLocationModel.ShootingRange">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="InhQVLocationModel.Store.InsertRange">
+            <ScalarProperty Name="RangeName" ParameterName="RangeName" />
+            <ScalarProperty Name="Address" ParameterName="Address" />
+            <ResultBinding Name="LocationId" ColumnName="LocationId" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="InhQVLocationModel.Store.UpdateRange">
+            <ScalarProperty Name="RangeName" ParameterName="RangeName" Version="Current" />
+            <ScalarProperty Name="Address" ParameterName="Address" Version="Current" />
+            <ScalarProperty Name="LocationId" ParameterName="LocationId" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="InhQVLocationModel.Store.DeleteRange">
+            <ScalarProperty Name="LocationId" ParameterName="LocationId" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Actors">
+      <EntityTypeMapping TypeName="IsTypeOf(InhQVLocationModel.Actors)">
+        <MappingFragment StoreEntitySet="Actors">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

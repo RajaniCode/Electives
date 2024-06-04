@@ -1,0 +1,463 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ManyToManyModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="ManyToManyModelStoreContainer">
+          <EntitySet Name="Clubs" EntityType="ManyToManyModel.Store.Clubs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Courses" EntityType="ManyToManyModel.Store.Courses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employee" EntityType="ManyToManyModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Members" EntityType="ManyToManyModel.Store.Members" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MemberShip" EntityType="ManyToManyModel.Store.MemberShip" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="MusicalShow" EntityType="ManyToManyModel.Store.MusicalShow" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Show_Sponsor" EntityType="ManyToManyModel.Store.Show_Sponsor" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sponsors" EntityType="ManyToManyModel.Store.Sponsors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StudentCourse" EntityType="ManyToManyModel.Store.StudentCourse" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Students" EntityType="ManyToManyModel.Store.Students" store:Type="Tables" Schema="dbo" />
+			<EntitySet Name="ClubMember" EntityType="Self.ClubMember">
+				<DefiningQuery>
+					SELECT ClubId,MemberId from MemberShip
+				</DefiningQuery>
+			</EntitySet>
+          <AssociationSet Name="FK_MemberShip_Clubs" Association="ManyToManyModel.Store.FK_MemberShip_Clubs">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="MemberShip" EntitySet="MemberShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MemberShip_Members" Association="ManyToManyModel.Store.FK_MemberShip_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberShip" EntitySet="MemberShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Show_Sponsor_MusicalShow" Association="ManyToManyModel.Store.FK_Show_Sponsor_MusicalShow">
+            <End Role="MusicalShow" EntitySet="MusicalShow" />
+            <End Role="Show_Sponsor" EntitySet="Show_Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Show_Sponsor_Sponsors" Association="ManyToManyModel.Store.FK_Show_Sponsor_Sponsors">
+            <End Role="Sponsors" EntitySet="Sponsors" />
+            <End Role="Show_Sponsor" EntitySet="Show_Sponsor" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Courses" Association="ManyToManyModel.Store.FK_StudentCourse_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Students" Association="ManyToManyModel.Store.FK_StudentCourse_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+        </EntityContainer>
+		<EntityType Name="ClubMember">
+			<Key>
+				<PropertyRef Name="ClubId" />
+				<PropertyRef Name="MemberId" />
+			</Key>
+			<Property Name="ClubId" Type="int" Nullable="false" />
+			<Property Name="MemberId" Type="int" Nullable="false" />
+		</EntityType>
+        <EntityType Name="Clubs">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClubName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="MemberShip">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="MemberDues" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="MusicalShow">
+          <Key>
+            <PropertyRef Name="ShowId" />
+          </Key>
+          <Property Name="ShowId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ShowName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Cost" Type="decimal" Precision="4" Scale="2" />
+        </EntityType>
+        <EntityType Name="Show_Sponsor">
+          <Key>
+            <PropertyRef Name="ShowId" />
+            <PropertyRef Name="SponsorId" />
+          </Key>
+          <Property Name="ShowId" Type="int" Nullable="false" />
+          <Property Name="SponsorId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Sponsors">
+          <Key>
+            <PropertyRef Name="SponsorId" />
+          </Key>
+          <Property Name="SponsorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Phone" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StudentCourse">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_MemberShip_Clubs">
+          <End Role="Clubs" Type="ManyToManyModel.Store.Clubs" Multiplicity="1" />
+          <End Role="MemberShip" Type="ManyToManyModel.Store.MemberShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="MemberShip">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MemberShip_Members">
+          <End Role="Members" Type="ManyToManyModel.Store.Members" Multiplicity="1" />
+          <End Role="MemberShip" Type="ManyToManyModel.Store.MemberShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="MemberShip">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Show_Sponsor_MusicalShow">
+          <End Role="MusicalShow" Type="ManyToManyModel.Store.MusicalShow" Multiplicity="1" />
+          <End Role="Show_Sponsor" Type="ManyToManyModel.Store.Show_Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MusicalShow">
+              <PropertyRef Name="ShowId" />
+            </Principal>
+            <Dependent Role="Show_Sponsor">
+              <PropertyRef Name="ShowId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Show_Sponsor_Sponsors">
+          <End Role="Sponsors" Type="ManyToManyModel.Store.Sponsors" Multiplicity="1" />
+          <End Role="Show_Sponsor" Type="ManyToManyModel.Store.Show_Sponsor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sponsors">
+              <PropertyRef Name="SponsorId" />
+            </Principal>
+            <Dependent Role="Show_Sponsor">
+              <PropertyRef Name="SponsorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Courses">
+          <End Role="Courses" Type="ManyToManyModel.Store.Courses" Multiplicity="1" />
+          <End Role="StudentCourse" Type="ManyToManyModel.Store.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Students">
+          <End Role="Students" Type="ManyToManyModel.Store.Students" Multiplicity="1" />
+          <End Role="StudentCourse" Type="ManyToManyModel.Store.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ManyToManyModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="ManyToManyEntities">
+          <EntitySet Name="MusicalShows" EntityType="ManyToManyModel.MusicalShow" />
+          <EntitySet Name="Sponsors" EntityType="ManyToManyModel.Sponsor" />
+          <AssociationSet Name="Show_Sponsor" Association="ManyToManyModel.Show_Sponsor">
+            <End Role="MusicalShow" EntitySet="MusicalShows" />
+            <End Role="Sponsors" EntitySet="Sponsors" /></AssociationSet>
+          <EntitySet Name="CourseSet" EntityType="ManyToManyModel.Course" />
+          <EntitySet Name="Students" EntityType="ManyToManyModel.Student" />
+          <EntitySet Name="StudentCourse" EntityType="ManyToManyModel.StudentCourse" />
+          <AssociationSet Name="CourseStudentCourse" Association="ManyToManyModel.CourseStudentCourse">
+            <End Role="Course" EntitySet="CourseSet" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" /></AssociationSet>
+          <AssociationSet Name="StudentStudentCourse" Association="ManyToManyModel.StudentStudentCourse">
+            <End Role="Student" EntitySet="Students" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" /></AssociationSet>
+          <EntitySet Name="ClubSet" EntityType="ManyToManyModel.Club" />
+          <EntitySet Name="Members" EntityType="ManyToManyModel.Members" />
+          <EntitySet Name="MemberShip" EntityType="ManyToManyModel.MemberShip" />
+          <AssociationSet Name="FK_MemberShip_Clubs" Association="ManyToManyModel.FK_MemberShip_Clubs">
+            <End Role="Clubs" EntitySet="ClubSet" />
+            <End Role="MemberShip" EntitySet="MemberShip" /></AssociationSet>
+          <AssociationSet Name="FK_MemberShip_Members" Association="ManyToManyModel.FK_MemberShip_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="MemberShip" EntitySet="MemberShip" /></AssociationSet>
+          <AssociationSet Name="ClubMembers" Association="ManyToManyModel.ClubMembers">
+            <End Role="Club" EntitySet="ClubSet" />
+            <End Role="Members" EntitySet="Members" /></AssociationSet></EntityContainer>
+        <EntityType Name="MusicalShow">
+          <Key>
+            <PropertyRef Name="ShowId" /></Key>
+          <Property Name="ShowId" Type="Int32" Nullable="false" />
+          <Property Name="ShowName" Type="String" Nullable="false" />
+          <Property Name="Cost" Type="Decimal" Nullable="true" />
+          <NavigationProperty Name="Sponsors" Relationship="ManyToManyModel.Show_Sponsor" FromRole="MusicalShow" ToRole="Sponsors" /></EntityType>
+        <EntityType Name="Sponsor">
+          <Key>
+            <PropertyRef Name="SponsorId" /></Key>
+          <Property Name="SponsorId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Phone" Type="String" Nullable="true" />
+          <NavigationProperty Name="MusicalShows" Relationship="ManyToManyModel.Show_Sponsor" FromRole="Sponsors" ToRole="MusicalShow" /></EntityType>
+        <Association Name="Show_Sponsor">
+          <End Type="ManyToManyModel.MusicalShow" Role="MusicalShow" Multiplicity="*" />
+          <End Type="ManyToManyModel.Sponsor" Role="Sponsors" Multiplicity="*" /></Association>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" /></Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="CourseName" Type="String" Nullable="false" />
+          <NavigationProperty Name="StudentCourses" Relationship="ManyToManyModel.CourseStudentCourse" FromRole="Course" ToRole="StudentCourse" />
+          </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" /></Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="StudentCourse" Relationship="ManyToManyModel.StudentStudentCourse" FromRole="Student" ToRole="StudentCourse" />
+          </EntityType>
+        <EntityType Name="StudentCourse" >
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="CourseId" /></Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Course" Relationship="ManyToManyModel.CourseStudentCourse" FromRole="StudentCourse" ToRole="Course" />
+          <NavigationProperty Name="Student" Relationship="ManyToManyModel.StudentStudentCourse" FromRole="StudentCourse" ToRole="Student" /></EntityType>
+        <Association Name="CourseStudentCourse">
+          <End Type="ManyToManyModel.Course" Role="Course" Multiplicity="1" />
+          <End Type="ManyToManyModel.StudentCourse" Role="StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" /></Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="CourseId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="StudentStudentCourse">
+          <End Type="ManyToManyModel.Student" Role="Student" Multiplicity="1" />
+          <End Type="ManyToManyModel.StudentCourse" Role="StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" /></Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="StudentId" /></Dependent></ReferentialConstraint></Association>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubId" /></Key>
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="ClubName" Type="String" Nullable="false" />
+          <NavigationProperty Name="MemberShip" Relationship="ManyToManyModel.FK_MemberShip_Clubs" FromRole="Clubs" ToRole="MemberShip" />
+          <NavigationProperty Name="Members" Relationship="ManyToManyModel.ClubMembers" FromRole="Club" ToRole="Members" /></EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberId" /></Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="MemberShip" Relationship="ManyToManyModel.FK_MemberShip_Members" FromRole="Members" ToRole="MemberShip" />
+          <NavigationProperty Name="Clubs" Relationship="ManyToManyModel.ClubMembers" FromRole="Members" ToRole="Club" /></EntityType>
+        <EntityType Name="MemberShip">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="MemberId" /></Key>
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="MemberDues" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Clubs" Relationship="ManyToManyModel.FK_MemberShip_Clubs" FromRole="MemberShip" ToRole="Clubs" />
+          <NavigationProperty Name="Members" Relationship="ManyToManyModel.FK_MemberShip_Members" FromRole="MemberShip" ToRole="Members" /></EntityType>
+        <Association Name="FK_MemberShip_Clubs">
+          <End Type="ManyToManyModel.Club" Role="Clubs" Multiplicity="1" />
+          <End Type="ManyToManyModel.MemberShip" Role="MemberShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" /></Principal>
+            <Dependent Role="MemberShip">
+              <PropertyRef Name="ClubId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="FK_MemberShip_Members">
+          <End Type="ManyToManyModel.Members" Role="Members" Multiplicity="1" />
+          <End Type="ManyToManyModel.MemberShip" Role="MemberShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" /></Principal>
+            <Dependent Role="MemberShip">
+              <PropertyRef Name="MemberId" /></Dependent></ReferentialConstraint></Association>
+        <Association Name="ClubMembers">
+          <End Type="ManyToManyModel.Club" Role="Club" Multiplicity="*" />
+          <End Type="ManyToManyModel.Members" Role="Members" Multiplicity="*" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="ManyToManyModelStoreContainer" CdmEntityContainer="ManyToManyEntities">
+          <EntitySetMapping Name="MusicalShows">
+            <EntityTypeMapping TypeName="IsTypeOf(ManyToManyModel.MusicalShow)">
+              <MappingFragment StoreEntitySet="MusicalShow">
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+                <ScalarProperty Name="ShowName" ColumnName="ShowName" />
+                <ScalarProperty Name="ShowId" ColumnName="ShowId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Sponsors">
+            <EntityTypeMapping TypeName="IsTypeOf(ManyToManyModel.Sponsor)">
+              <MappingFragment StoreEntitySet="Sponsors">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="SponsorId" ColumnName="SponsorId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="Show_Sponsor" TypeName="ManyToManyModel.Show_Sponsor" StoreEntitySet="Show_Sponsor">
+            <EndProperty Name="Sponsors">
+              <ScalarProperty Name="SponsorId" ColumnName="SponsorId" /></EndProperty>
+            <EndProperty Name="MusicalShow">
+              <ScalarProperty Name="ShowId" ColumnName="ShowId" /></EndProperty></AssociationSetMapping>
+          <EntitySetMapping Name="CourseSet">
+            <EntityTypeMapping TypeName="IsTypeOf(ManyToManyModel.Course)">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="IsTypeOf(ManyToManyModel.Student)">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="CourseStudentCourse" TypeName="ManyToManyModel.CourseStudentCourse" StoreEntitySet="StudentCourse">
+            <EndProperty Name="StudentCourse">
+              <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              <ScalarProperty Name="StudentId" ColumnName="StudentId" /></EndProperty>
+            <EndProperty Name="Course">
+              <ScalarProperty Name="CourseId" ColumnName="CourseId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="StudentStudentCourse" TypeName="ManyToManyModel.StudentStudentCourse" StoreEntitySet="StudentCourse">
+            <EndProperty Name="StudentCourse">
+              <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+              <ScalarProperty Name="StudentId" ColumnName="StudentId" /></EndProperty>
+            <EndProperty Name="Student">
+              <ScalarProperty Name="StudentId" ColumnName="StudentId" /></EndProperty></AssociationSetMapping>
+          <EntitySetMapping Name="StudentCourse">
+            <EntityTypeMapping TypeName="IsTypeOf(ManyToManyModel.StudentCourse)">
+              <MappingFragment StoreEntitySet="StudentCourse">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ClubSet">
+            <EntityTypeMapping TypeName="IsTypeOf(ManyToManyModel.Club)">
+              <MappingFragment StoreEntitySet="Clubs">
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Members">
+            <EntityTypeMapping TypeName="IsTypeOf(ManyToManyModel.Members)">
+              <MappingFragment StoreEntitySet="Members">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="MemberShip">
+            <EntityTypeMapping TypeName="IsTypeOf(ManyToManyModel.MemberShip)">
+              <MappingFragment StoreEntitySet="MemberShip">
+                <ScalarProperty Name="MemberDues" ColumnName="MemberDues" />
+                <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+                <ScalarProperty Name="ClubId" ColumnName="ClubId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_MemberShip_Clubs" TypeName="ManyToManyModel.FK_MemberShip_Clubs" StoreEntitySet="MemberShip">
+            <EndProperty Name="MemberShip">
+              <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              <ScalarProperty Name="ClubId" ColumnName="ClubId" /></EndProperty>
+            <EndProperty Name="Clubs">
+              <ScalarProperty Name="ClubId" ColumnName="ClubId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="FK_MemberShip_Members" TypeName="ManyToManyModel.FK_MemberShip_Members" StoreEntitySet="MemberShip">
+            <EndProperty Name="MemberShip">
+              <ScalarProperty Name="MemberId" ColumnName="MemberId" />
+              <ScalarProperty Name="ClubId" ColumnName="ClubId" /></EndProperty>
+            <EndProperty Name="Members">
+              <ScalarProperty Name="MemberId" ColumnName="MemberId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="ClubMembers" TypeName="ManyToManyModel.ClubMembers" StoreEntitySet="ClubMember">
+            <EndProperty Name="Members">
+              <ScalarProperty Name="MemberId" ColumnName="MemberId" /></EndProperty>
+            <EndProperty Name="Club">
+              <ScalarProperty Name="ClubId" ColumnName="ClubId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="ManyToManyExample">
+        <EntityTypeShape EntityType="ManyToManyModel.MusicalShow" Width="1.5" PointX="1.125" PointY="0.75" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="ManyToManyModel.Sponsor" Width="1.5" PointX="3.375" PointY="0.75" Height="1.7879850260416674" />
+        <AssociationConnector Association="ManyToManyModel.Show_Sponsor" >
+          <ConnectorPoint PointX="2.625" PointY="1.6439925130208337" />
+          <ConnectorPoint PointX="3.375" PointY="1.6439925130208337" /></AssociationConnector>
+        <EntityTypeShape EntityType="ManyToManyModel.Course" Width="1.5" PointX="5.25" PointY="0.625" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="ManyToManyModel.Student" Width="1.5" PointX="9.875" PointY="0.5" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="ManyToManyModel.StudentCourse" Width="1.5" PointX="7.375" PointY="0.625" Height="1.7879850260416657" />
+        <AssociationConnector Association="ManyToManyModel.CourseStudentCourse">
+          <ConnectorPoint PointX="6.75" PointY="1.5189925130208328" />
+          <ConnectorPoint PointX="7.375" PointY="1.5189925130208328" /></AssociationConnector>
+        <AssociationConnector Association="ManyToManyModel.StudentStudentCourse">
+          <ConnectorPoint PointX="9.875" PointY="1.4564925130208333" />
+          <ConnectorPoint PointX="8.875" PointY="1.4564925130208333" /></AssociationConnector>
+        <EntityTypeShape EntityType="ManyToManyModel.Club" Width="1.5" PointX="2" PointY="4" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="ManyToManyModel.Members" Width="1.5" PointX="2" PointY="6.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="ManyToManyModel.MemberShip" Width="1.5" PointX="4.375" PointY="5.125" Height="1.9802864583333335" />
+        <AssociationConnector Association="ManyToManyModel.FK_MemberShip_Clubs" >
+          <ConnectorPoint PointX="3.5" PointY="5.360341796875" />
+          <ConnectorPoint PointX="4.375" PointY="5.360341796875" />
+          </AssociationConnector>
+        <AssociationConnector Association="ManyToManyModel.FK_MemberShip_Members" ManuallyRouted="false" >
+          <ConnectorPoint PointX="3.5" PointY="6.9276432291666667" />
+          <ConnectorPoint PointX="4.375" PointY="6.9276432291666667" />
+          </AssociationConnector>
+        <AssociationConnector Association="ManyToManyModel.ClubMembers">
+          <ConnectorPoint PointX="2.75" PointY="5.59568359375" />
+          <ConnectorPoint PointX="2.75" PointY="6.75" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

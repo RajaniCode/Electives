@@ -1,0 +1,91 @@
+USE Northwind
+GO
+
+CREATE PROCEDURE dbo.prGet_Employees
+AS
+	SELECT	EmployeeID,
+			FirstName,
+			LastName,
+			Title,
+			BirthDate,
+			HireDate,
+			Extension,
+			LastUpdateDateTime
+	FROM	Employees
+	RETURN 
+GO
+
+
+CREATE PROCEDURE dbo.prUpdate_Employee
+	@EmployeeID INT,
+	@LastUpdateDateTime DATETIME,
+	@FirstName NVARCHAR(10),
+	@LastName NVARCHAR(20),
+	@Title NVARCHAR(30),
+	@BirthDate DATETIME,
+	@HireDate DATETIME,
+	@Extension NVARCHAR(4),
+	@NewLastUpdateDateTime DATETIME OUTPUT	
+AS
+	UPDATE	Employees
+	SET		FirstName = @FirstName,
+			LastName = @LastName,
+			Title = @Title,
+			BirthDate = @BirthDate,
+			HireDate = @HireDate,
+			Extension = @Extension
+	WHERE	EmployeeID = @EmployeeID
+	  AND	LastUpdateDateTime = @LastUpdateDateTime
+	  
+	IF @@ROWCOUNT = 1
+		SELECT	@NewLastUpdateDateTime = LastUpdateDateTime 
+		FROM	Employees 
+		WHERE	EmployeeID = @EmployeeID
+
+	RETURN 
+GO
+
+CREATE PROCEDURE dbo.prUpdate_EmployeeViaLastInWins
+	@EmployeeID INT,
+	@LastUpdateDateTime DATETIME,
+	@FirstName NVARCHAR(10),
+	@LastName NVARCHAR(20),
+	@Title NVARCHAR(30),
+	@BirthDate DATETIME,
+	@HireDate DATETIME,
+	@Extension NVARCHAR(4),
+	@NewLastUpdateDateTime DATETIME OUTPUT	
+AS
+	SET @NewLastUpdateDateTime = getdate()
+	
+	UPDATE	Employees
+	SET		FirstName = @FirstName,
+			LastName = @LastName,
+			Title = @Title,
+			BirthDate = @BirthDate,
+			HireDate = @HireDate,
+			Extension = @Extension,
+			LastUpdateDateTime = @NewLastUpdateDateTime
+	WHERE	EmployeeID = @EmployeeID
+	 
+	IF @@ROWCOUNT = 0
+		SET @NewLastUpdateDateTime = @LastUpdateDateTime
+
+	RETURN 
+GO
+
+CREATE PROCEDURE dbo.prGet_Employee
+	@EmployeeID INT
+AS
+	SELECT	EmployeeID,
+			FirstName,
+			LastName,
+			Title,
+			BirthDate,
+			HireDate,
+			Extension,
+			LastUpdateDateTime
+	FROM	Employees
+	WHERE	EmployeeID = @EmployeeID
+	RETURN 
+GO

@@ -1,0 +1,48 @@
+<Schema Namespace="QueryViewWithManyToMany" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+  <EntityContainer Name="QueryViewMM">
+    <EntitySet Name="Clubs" EntityType="QueryViewWithManyToMany.Club" />
+    <EntitySet Name="Members" EntityType="QueryViewWithManyToMany.Member" />
+    <AssociationSet Name="Gold" Association="QueryViewWithManyToMany.Gold">
+      <End Role="Clubs" EntitySet="Clubs" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <AssociationSet Name="Platinium" Association="QueryViewWithManyToMany.Platinium">
+      <End Role="Clubs" EntitySet="Clubs" />
+      <End Role="Members" EntitySet="Members" />
+    </AssociationSet>
+    <EntitySet Name="Actors" EntityType="QueryViewWithManyToMany.Actors" />
+  </EntityContainer>
+  <EntityType Name="Club">
+    <Key>
+      <PropertyRef Name="ClubId" />
+    </Key>
+    <Property Name="ClubId" Type="Int32" Nullable="false" />
+    <Property Name="ClubName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="GoldMembers" Relationship="QueryViewWithManyToMany.Gold" FromRole="Clubs" ToRole="Members" />
+    <NavigationProperty Name="PlatiniumMembers" Relationship="QueryViewWithManyToMany.Platinium" FromRole="Clubs" ToRole="Members" />
+  </EntityType>
+  <EntityType Name="Member">
+    <Key>
+      <PropertyRef Name="MemberId" />
+    </Key>
+    <Property Name="MemberId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+    <NavigationProperty Name="GoldClubs" Relationship="QueryViewWithManyToMany.Gold" FromRole="Members" ToRole="Clubs" />
+    <NavigationProperty Name="PlatiniumClubs" Relationship="QueryViewWithManyToMany.Platinium" FromRole="Members" ToRole="Clubs" />
+  </EntityType>
+  <Association Name="Gold">
+    <End Type="QueryViewWithManyToMany.Club" Role="Clubs" Multiplicity="*" />
+    <End Type="QueryViewWithManyToMany.Member" Role="Members" Multiplicity="*" />
+  </Association>
+  <Association Name="Platinium">
+    <End Type="QueryViewWithManyToMany.Club" Role="Clubs" Multiplicity="*" />
+    <End Type="QueryViewWithManyToMany.Member" Role="Members" Multiplicity="*" />
+  </Association>
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="ActorId" />
+    </Key>
+    <Property Name="ActorId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" />
+  </EntityType>
+</Schema>

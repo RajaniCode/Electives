@@ -1,0 +1,30 @@
+﻿@model AjaxUpdatesDemo.Models.DemoModel
+           
+ @{Html.EnableUnobtrusiveJavaScript(true);}
+    @{Html.EnableClientValidation();}
+@using (Ajax.BeginForm("PartialData", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "POST", OnComplete = " alert('Ajax success');" }))
+{
+    <div id="dvUpdate">
+        @Html.ValidationSummary(false)
+
+        <table>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m.userName)
+                    @Html.ValidationMessageFor(m => m.userName)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    @Html.TextBoxFor(m => m.address)
+                    @Html.ValidationMessageFor(m => m.address)
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Submit"  />
+                </td>
+            </tr>
+        </table>
+    </div>
+}

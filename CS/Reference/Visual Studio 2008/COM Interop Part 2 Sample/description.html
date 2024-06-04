@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>Yield 範例</title>
+    <link href="description/Galleries.css" type="text/css" rel="Stylesheet" /><link href="description/Layout.css" type="text/css" rel="Stylesheet" /><link href="description/Brand.css" type="text/css" rel="Stylesheet" />
+    <link href="description/iframedescription.css" rel="Stylesheet" type="text/css" />
+    <script src="description/offline.js" type="text/javascript"></script>
+    <style type="text/css">
+        #projectInfo {
+            overflow: auto;
+        }
+        #longDesc {
+            clear:both;
+            margin: 25px 0 10px 0;
+        }
+
+        #SampleIndexList{
+        margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="offlineDescription">
+        <div id="projectInfo">
+            <div class="section">
+                    <div class="itemBarLong tagsContainer">
+                        <label for="技術">技術</label>
+                        <div id="技術">
+                            .NET Framework
+                        </div>
+                    </div>
+                    <div class="itemBarLong tagsContainer">
+                        <label for="主題">主題</label>
+                        <div id="主題">
+                            Language Samples, Yield Keyword
+                        </div>
+                    </div>
+                <div class="itemBar">
+                    <label for="LastUpdated">上次更新日期</label>
+                    <div id="LastUpdated">2011/11/28</div>
+                </div>
+                <div class="itemBarLong">
+                    <label for="License">授權</label>
+                    <div id="License">
+                        <a href="license.rtf">MS-LPL</a></div>
+                </div>
+            </div>
+        </div>
+        
+                   
+<script type="text/javascript">
+    function initializePage() {
+        var otherTabClass = 'otherTab';
+        var hiddenPreClass = 'hidden';
+
+        var htmlDecode = function(encodedData) {
+            var decodedData = "";
+            if (encodedData) {
+                var div = document.createElement('div');
+                div.innerHTML = encodedData;
+                decodedData = div.firstChild.nodeValue.replace( /\\r\\n/ig , '\r\n');
+            }
+            return decodedData;
+        };
+                
+        Galleries.iterateElem(Galleries.findElem(null, 'div', 'scriptcode'), function (index, scriptBlock) {
+            var titleElem = Galleries.findElem(scriptBlock, 'div', 'title')[0];
+            var labelElems = Galleries.findElem(titleElem, 'span');
+            if (labelElems.length == 0) {
+                labelElems = titleElem;
+            }
+            var languageSpans = Galleries.findElem(scriptBlock, 'span', 'hidden');
+            var pres = Galleries.findElem(scriptBlock, 'pre');
+            if (languageSpans.length > 0 && pres.length > 1) {
+                Galleries.iterateElem(labelElems, function(index, elem) {
+                    var codePre = pres[index];
+                    var labelSpan = elem;
+                    var languageSpan = languageSpans[index];
+                            
+                    elem.code = codePre.innerHTML.replace( /(\r(\n)?)|((\r)?\n)/ig , '\\r\\n');
+                            
+                    codePre.className = codePre.className.replace(hiddenPreClass, '');
+                            
+                    languageSpan.parentNode.removeChild(languageSpan);
+                });
+
+                pres = Galleries.findElem(scriptBlock, 'pre');
+                Galleries.iterateElem(labelElems, function(index, elem) {
+                    var codePre = pres[index];
+                    var labelSpan = elem;
+                    if (index == 0) {
+                        scriptBlock.activeTab = 0;
+                    }
+                    else {
+                        labelSpan.className += otherTabClass;
+                        codePre.className += hiddenPreClass;
+                    }
+                    Galleries.attachEventHandler(labelSpan, 'click', function(e) {
+                        var activeTab = scriptBlock.activeTab;
+                        labelElems[activeTab].className += otherTabClass;
+                        pres[activeTab].className += hiddenPreClass;
+
+                        codePre.className = codePre.className.replace(hiddenPreClass, '');
+                        labelSpan.className = labelSpan.className.replace(otherTabClass, '');
+                        scriptBlock.activeTab = index;
+                    });
+                });
+
+                var preview = Galleries.findElem(scriptBlock, 'div', 'preview');
+                if (preview.length == 0) {
+                    preview.push(pres[pres.length - 1]);
+                }
+                Galleries.iterateElem(preview, function(index, elem) {
+                    elem.parentNode.removeChild(elem);
+                });
+
+                if (window.clipboardData && clipboardData.setData) {
+                    var copyLink = document.createElement('a');
+                    copyLink.href = 'javascript:void(0);';
+                    copyLink.className = 'copyCode';
+                    copyLink.innerHTML = '複製程式碼';
+                    Galleries.attachEventHandler(copyLink, 'click', function (e) {
+                        clipboardData.setData("Text", htmlDecode(labelElems[scriptBlock.activeTab].code));
+                        return false;
+                    });
+                    scriptBlock.insertBefore(copyLink, scriptBlock.childNodes[0]);
+                }
+            }
+        });
+    }
+
+    Galleries.onWindowLoad(function(){
+        initializePage();
+    });
+
+</script>
+<div id="longDesc">
+    
+<h1>
+<h1>Yield 範例</h1>
+<div id="mainSection">
+<div id="mainBody">
+<div id="allHistory" class="saveHistory"></div>
+<p></p>
+<p>這個範例介紹如何建立會實作 <b>IEnumerable&lt;int&gt;</b> 和 <b>yield</b> 關鍵字的清單類別，該類別會啟用在清單內容上進行
+<b>foreach</b> 反覆運算。範例中會定義兩個屬性，分別會傳回奇數及偶數。</p>
+<div class="alert">
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<th align="left">安全性注意事項</th>
+</tr>
+<tr>
+<td>
+<p>這個程式碼範例僅供概念說明之用，同時因為範例中的程式碼撰寫並沒有周全地顧及所有安全性問題，所以本範例不適用於實際執行的應用程式或網站中。如果使用者擅自將範例程式碼用於其他意圖而導致連帶事件或重大損害時，Microsoft 將不承擔任何責任。</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 class="heading">若要在 Visual Studio 中建置和執行 Yield 程式碼範例</h1>
+<div id="procedureSection1" class="section">
+<ul>
+<li>
+<p>在 [<b>偵錯</b>] 功能表上，按一下 [<b>啟動但不偵錯</b>]。</p>
+</li></ul>
+</div>
+<h1 class="heading">若要從命令列建置和執行 Yield 程式碼範例</h1>
+<div id="procedureSection2" class="section">
+<ol>
+<li>
+<p>使用<b>變更目錄 (cd)</b> 命令變更到 Yield 目錄。</p>
+</li><li>
+<p>輸入下列命令︰</p>
+<div class="code"><span>
+<table width="100%" cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td colspan="2">
+<pre>csc Yield.cs
+Yield</pre>
+</td>
+</tr>
+</tbody>
+</table>
+</span></div>
+</li></ol>
+</div>
+</div>
+<div id="footer">
+<div class="footerLine"></div>
+若要提出建議或者回報 [說明] 或本產品其他功能的錯誤，請前往<a href="http://go.microsoft.com/fwlink/?LinkId=9790442">意見網站</a>。
+</div>
+</div>
+</h1>
+
+</div>
+
+
+    </div>
+</body>
+</html>

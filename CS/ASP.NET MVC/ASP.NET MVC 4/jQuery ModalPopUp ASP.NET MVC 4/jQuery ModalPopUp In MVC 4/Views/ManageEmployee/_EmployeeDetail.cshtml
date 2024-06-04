@@ -1,0 +1,41 @@
+﻿@model jQuery_ModalPopUp_In_MVC_4.Models.EmployeeModel
+@{
+    Layout = null;
+}
+@using (@Html.BeginForm())
+{
+    <fieldset>
+        <legend>EmployeeModel</legend>
+
+        <table>
+            <tr>
+                <td><b>@Html.DisplayNameFor(model => model.Emp_ID)</b></td>
+                <td>@Html.DisplayFor(model => model.Emp_ID)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.DisplayNameFor(model => model.Name)</b></td>
+                <td>@Html.DisplayFor(model => model.Name)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.DisplayNameFor(model => model.Dept)</b></td>
+                <td>@Html.DisplayFor(model => model.Dept)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.DisplayNameFor(model => model.City)</b></td>
+                <td>@Html.DisplayFor(model => model.City)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.DisplayNameFor(model => model.State)</b></td>
+                <td>@Html.DisplayFor(model => model.State)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.DisplayNameFor(model => model.Country)</b></td>
+                <td>@Html.DisplayFor(model => model.Country)</td>
+            </tr>
+            <tr>
+                <td><b>@Html.DisplayNameFor(model => model.Mobile)</b></td>
+                <td>@Html.DisplayFor(model => model.Mobile)</td>
+            </tr>
+        </table>
+    </fieldset>
+}

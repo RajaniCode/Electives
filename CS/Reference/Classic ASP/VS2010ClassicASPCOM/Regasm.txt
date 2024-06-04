@@ -1,0 +1,30 @@
+Regasm [Your DLL Path] /codebase
+
+
+Regasm C:\Users\rsomaskandan\Desktop\ClassASPCOM\ClassASPCOM\bin\Debug\ClassASPCOM.dll /codebase
+
+
+http://10.239.40.136:1422/DoDirectPayment.asp?paymentType=Sale
+
+
+
+Regasm C:\Users\rsomaskandan\Desktop\VS2010ClassicASPCOM\ClassLibraryClassicASPCOM\bin\Debug\ClassLibraryClassicASPCOM.dll /codebase
+
+
+Regasm ClassLibraryClassicASPCOM.dll /codebase
+
+sn -Vr ClassLibraryClassicASPCOM.dll
+
+
+gacutil/i ClassLibraryClassicASPCOM.dll
+
+Regasm ClassicASPCOM.dll /codebase
+
+
+sn -Vr ClassicASPCOM.dll
+
+
+gacutil/i ClassicASPCOM.dll
+
+
+regsvr32 C:\Windows\SysWOW64\ClassicASPCOM.dll

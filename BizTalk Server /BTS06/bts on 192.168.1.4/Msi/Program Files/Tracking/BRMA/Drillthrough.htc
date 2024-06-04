@@ -1,0 +1,1559 @@
+<script language=JScript>
+// Copyright (c) Microsoft Corporation.  All rights reserved.
+// 
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
+// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
+// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE 
+// AND INFORMATION REMAINS WITH THE USER.
+</script>
+
+<public:component>
+
+
+<public:attach event='onreadystatechange' onevent='init()'/>
+<public:attach event='onbeforeunload' for='window' onevent='shutdown()'/>
+
+<public:property name='Drillthrough' get='getDrillthrough'>
+<public:event id="evLayout" name="OnNewDrillthroughPivotTable"/>
+
+<script language=JScript>
+
+var dt;
+var constants;
+var winChild;
+var nWaitCount;
+var aLocVals;
+var MAX_WAIT_COUNT = 20;
+
+
+// Loc strings
+var oNavCtrl = new ActiveXObject("Microsoft.BizTalk.Tracking.CollapsibleCtrl");
+var L_Err1_ErrorMessage = oNavCtrl.GetResourceString("L_Err1_ErrorMessage");//"Selection contains multiple aggregates. Could not perform drillthrough.";
+var L_Err2_ErrorMessage = oNavCtrl.GetResourceString("L_Err2_ErrorMessage");//"Drillthrough error. Number of tuples expected (%1) differs from the number created (%2).";
+var L_Err3_ErrorMessage = oNavCtrl.GetResourceString("L_Err3_ErrorMessage");//"Drillthrough does not support totals.";
+var L_Err4_ErrorMessage = oNavCtrl.GetResourceString("L_Err4_ErrorMessage");//"A large number of records exist for this aggregate. \nOnly the first %1 records will be displayed. \nIn addition, there is an upper limit of %2 records per filter axis tuple.";
+var L_Err5_ErrorMessage = oNavCtrl.GetResourceString("L_Err5_ErrorMessage");//"A large number of records exist for this aggregate. \nOnly the first %1 records will be displayed.";
+var L_Err6_ErrorMessage = oNavCtrl.GetResourceString("L_Err6_ErrorMessage");//"A large number of records exist for this aggregate. \nOnly the first %1 records per filter axis tuple will be displayed.";
+var L_Err7_ErrorMessage = oNavCtrl.GetResourceString("L_Err7_ErrorMessage");//"No members found.";
+var L_Err8_ErrorMessage = oNavCtrl.GetResourceString("L_Err8_ErrorMessage");//"Could not get detail records for this aggregate.  \nMake sure that permissions to obtain drillthrough records are set properly on the OLAP server.";
+var L_Err9_ErrorMessage = oNavCtrl.GetResourceString("L_Err9_ErrorMessage");//"Attempted drillthrough is too finely detailed, and will take too long to complete.  \nRemove some filtered items from your current view.";
+var L_Status1_StatusBar = oNavCtrl.GetResourceString("L_Status1_StatusBar");//"Getting detail information.  Please wait...";
+var L_Title_Text = oNavCtrl.GetResourceString("L_Title_Text");//"Result list for ( %1 ) %2 matches.";
+
+
+function sFormatString(sFormat, aArgs)	// Used for localization
+	{
+	var nArg;
+   var sFind;
+   var sReplace;
+   
+   for (nArg=0; nArg<aArgs.length; nArg++)
+		{
+			sFind = nArg + 1;
+			sFind = "%" + sFind;
+			sReplace = aArgs[nArg];
+			sFormat = sFormat.replace(sFind, sReplace);
+		}
+		return sFormat;
+	}
+
+function init()
+	{
+	constants = new DrillthroughConstants();
+	dt = new Drillthrough();
+	}	
+
+function shutdown()
+	{
+	dt = null;
+	constants = null;
+	element.clearAttributes();
+	}
+
+function getDrillthrough()
+	{
+	return dt;
+	}
+
+// Drillthrough Constants object to hold some constants for drillthrough operations
+function DrillthroughConstants()
+	{
+	this.plDrillthroughViewModeNone = 0;
+	this.plDrillthroughViewModeSpawn = 1;
+	this.plDrillthroughViewModeOriginal = 2;
+	}
+
+// Drillthrough object: the core object for supporting drillthrough
+function Drillthrough()
+	{
+
+	var paggMain;
+	var pt;
+	var me = this; // cache the scope.  when calling methods inside, this points to the function instance
+				  // e.g., inside SetAggregate "this" is a pointer to SetAggregate, not Drillthrough.
+	
+
+	var iPivotVersion;
+				  
+	if (element != null) { pt = element; iPivotVersion = pt.MajorVersion; }  // if this code is running as part of an HTC, then element should be a PT obj.
+
+	// declare public items for this object.
+	this.Constants = constants;
+	
+	this.Data = null;
+	
+	this.UserInterface = new DrillthroughUI(pt, this);
+	this.UserInterface.ShowToolbarButtons();
+
+	this.ObjectName = "Drillthrough";
+	
+	this.SetAggregate = SetAggregate;
+	this.GetAggregate = GetAggregate;
+	this.SetPivotTable = SetPivotTable;
+	this.GetPivotTable = GetPivotTable;
+
+	this.MaxDrillthroughSets = 100;
+	this.MaxDrillthroughRecords = 25000;
+	this.MaxDrillthroughRecordsPerSet = 5000;
+ 
+	this.ShowTotalMaxWarning = false;
+	this.ShowIndividualMaxWarning = false;
+
+	this.CurrentRowCount = 0;
+
+	// set aggregate function.  This will create a DrillthrouhgData (.Data) object that hangs off the drillthrough object.  Note
+	// that if the process of building a drillthrough data object fails (e.g., too many drillthrough sets created), .Data == null.
+	function SetAggregate(paggIn)
+		{
+		paggMain = paggIn;
+		DoDrillthrough(paggIn);
+		}
+	
+	function GetAggregate()
+		{
+		return paggMain;
+		}
+
+	function SetPivotTable(ptIn)
+		{
+		pt = ptIn;
+		}
+
+	function GetPivotTable()
+		{
+		return pt;
+		}
+	
+	
+	function DoDrillthrough(pagg)
+		{
+	 	var dtsarr;
+		var sTemp;
+		var adors;
+
+		me.Data = new DrillthroughData(pt, pagg);
+
+		// verification code: if we couldn't build the drillthrough sets for some reason (e.g., too many returned), just
+		// cancel the whole drillthrough and set drillthrough data to null.
+		if (me.Data.Sets == null)
+			me.Data = null;
+	
+		}
+	
+	}
+
+
+// Drillthrough UI object contains methods and properties for configuring the user interface of drillthrough.
+function DrillthroughUI(ptIn, dtObjIn)
+	{
+	var dt = dtObjIn;
+	var pt = ptIn;
+	var ptconst = ptIn.Constants;  
+	var paggCur; 
+	var me = this;
+	var sxmlPreDrillState;
+	var fPivotTableIsDrilled = false;
+	var iPivotVersion;
+	
+	var fmarrMappings = new Array();
+
+	var iViewMode = 1;
+
+	var iTBR_DEFAULT_c = 0;
+	var iTBR_SEPERATOR_c = 3;
+	var iTBR_MENUBUTTON_c = 5;
+
+	var sSTATUSSTRING_c = L_Status1_StatusBar;
+
+	var btnShowDetails;
+	var btnHideDetails;
+
+	var fShowingDetails = false;
+	
+	this.InvokeViaDoubleClick = true;
+	this.InvokeViaContextMenu = true;
+	
+	
+	this.ProvidesPivotLayout = true;
+	
+	this.AddFieldMapping = AddFieldMapping;
+	this.AggregatedViewXML = "";
+	
+	this.ExecuteDrillthrough = ExecuteDrillthrough;
+
+	this.GetViewMode = GetViewMode;
+	this.SetViewMode = SetViewMode;
+
+	this.ShowMaxRecordWarning = true;
+
+	this.ShowToolbarButtons = showToolbarButtons;
+	
+	ptIn.attachEvent("DblClick", ptDoubleClick);
+	ptIn.attachEvent("BeforeContextMenu", ptBeforeContextMenu);
+	ptIn.attachEvent("CommandExecute", ptCommandExecute);
+
+	iPivotVersion = ptIn.MajorVersion;
+
+	var me = this;
+
+	// code to add drillthrough buttons on the pivot toolbar
+	function showToolbarButtons()
+		{
+		var i, iIndex, iNumButtons;
+		var btnTemp;
+		var il;
+		var varrButtonKey;
+		var toolbar;
+
+		toolbar = pt.Toolbar;
+
+		btnTemp = toolbar.Buttons("owc12096");  // look for the hide details button.
+
+		if (btnTemp == null)
+			return;
+
+		btnTemp.Visible = false;
+
+		btnTemp = toolbar.Buttons("owc12095");  // look for the show details button.
+
+		if (btnTemp == null)
+			return;
+
+		btnTemp.Visible = false;
+
+		iNumButtons = toolbar.Buttons.Count;
+
+		if (btnHideDetails == null)
+			{
+			// get the drillthrough hide details button if it exists
+			try
+				{
+				btnHideDetails = toolbar.Buttons("drillthrough1");
+				}
+			// otherwise, create a new one.
+			catch (e)
+				{
+				btnHideDetails = toolbar.Buttons.Add(btnTemp.Index, "drillthrough1", "", iTBR_DEFAULT_c, "owc12096");
+				}
+			}
+
+		if (btnShowDetails == null)
+			{
+			// get the drillthrough show details button if it exists
+			try
+				{
+				btnShowDetails = toolbar.Buttons("drillthrough2")
+				}
+			// otherwise, create a new one.
+			catch(e)
+				{
+				btnShowDetails = toolbar.Buttons.Add(btnTemp.Index + 1, "drillthrough2", "", iTBR_DEFAULT_c, "owc12095");
+				}
+			}
+
+		// hide details is only shown if we are not spawning new windows and we are drilled in.  In other words, in not-spawn
+		// mode the Show Details button acts sort of like a toggle.
+		if (iViewMode == constants.plDrillthroughViewModeOriginal && fShowingDetails)
+			btnHideDetails.Visible = true;
+		else
+			btnHideDetails.Visible = false;
+		}
+
+
+	function GetViewMode()
+		{
+		return iViewMode;
+		}
+
+	// note: this takes one of three constants defined in the DrillthroughConstants object
+	// constants.plDrillthroughViewModeOriginal -- show drillthrough operations in the original pivottable
+	// constants.plDrillthroughViewModeSpawn -- show drillthrough operations in a new window with a PivotTable
+	// constants.plDrillthroughViewModeNone -- don't show any UI from within this HTC to handle drillthrough.  Assumably
+	// 									  the developer will handle doing something smart for drillthrough
+	function SetViewMode(iIn)
+		{
+		iViewMode = iIn;
+
+		if (btnHideDetails != null)
+			{
+			if (iViewMode == constants.plDrillthroughViewModeOriginal && fShowingDetails)
+				btnHideDetails.Visible = true;
+			else
+				btnHideDetails.Visible = false;
+			}
+		}
+	
+	function GetMapping(sSourceName)
+		{
+		var i;
+
+		for (i=0; i<fmarrMappings.length; i++)
+			{
+ 			if (fmarrMappings[i].SourceName == sSourceName)
+				return fmarrMappings[i];
+			}
+
+		return null
+		}
+
+	// Field mappings allow friendlier behavior for drillthrough including a friendly caption for 
+	// the field name returned from drillthrough and a suggested axis to put the field on by default.
+	function AddFieldMapping(sSourceName, sCaption, iDefaultAxis)
+		{
+		var fmarrNew;
+		var i;
+		
+		fmarrNew = new Array(fmarrMappings.length+1);
+
+		for (i=0; i<fmarrMappings.length; i++)
+			fmarrNew[i] = fmarrMappings[i];
+
+		i = fmarrMappings.length;
+		fmarrNew[i] = new FieldMapping();
+
+		fmarrMappings = fmarrNew;
+
+		if (arguments.length >= 1)
+			fmarrNew[i].SourceName = sSourceName;
+
+		if (arguments.length >= 2)
+			fmarrNew[i].Caption = sCaption;
+
+		if (arguments.length >= 3)
+			fmarrNew[i].DefaultAxis = iDefaultAxis;
+
+		return fmarrMappings[i];
+		}
+
+	// this is event code that looks to see if drillthrough toolbar buttons or context menu items are fired.
+	function ptCommandExecute(vCommand, fSucceeded)
+		{
+		var dtContext = window.document.all(this.uniqueID).Drillthrough; // hacky but this seems to be the only way to do it.
+																// standard behavior context (e.g., this == this HTML element)
+																// does not seem to apply, so we need to crawl through
+																// the object model.
+		var pta = dtContext.GetPivotTable();
+
+		if (vCommand == "mnuDrillthrough" || vCommand == "drillthrough2")
+			{
+			if (pta.Selection != null)
+ 				if (pta.SelectionType == "PivotAggregates")
+  					if (pta.Selection.Count == 1)
+ 						dtContext.UserInterface.ExecuteDrillthrough(pta.Selection(0));
+ 			}
+		else if (vCommand == "mnuDrillthroughReturn"  || vCommand == "drillthrough1")
+			{
+			if (dtContext.UserInterface.AggregatedViewXML != null)
+				{
+				// switch which button is shown
+				btnShowDetails.Visible = true;
+				btnHideDetails.Visible = false;
+
+				// blast in the PivotTable XMLData which represents the last view of data
+				pta.XMLData = dtContext.UserInterface.AggregatedViewXML;
+				fPivotTableIsDrilled = false;
+				fShowingDetails = false;
+				}
+			}
+
+		}
+
+	// trap the display of the context menu before it shows so we can add our own custom items
+	function ptBeforeContextMenu(iX, iY, mnu, fCancel)
+		{
+		var sarrNewMenu;
+
+		var vbarrMenu = new VBArray(mnu.Value);	// PT Context menus are VB Safe Arrays which JScript does not handle natively.
+		var sarrMenu = vbarrMenu.toArray();		// use a JScript object to convert the VB array to a JScript array.
+												
+		
+		var vbarrMenuItem;
+		var sarrMenuItem;
+
+		var i;
+		var iOffset;
+		var sMenuSummary;
+
+		if (pt.SelectionType == "PivotAggregates" || fPivotTableIsDrilled)
+			{
+			// If the PivotTable is drilled in, then do some work to add a ubiquitous "Return to Aggregated View" option.
+			if (fPivotTableIsDrilled)
+				{
+				// make sure that we are dealing with a right click menu, and not some menu that is shown when a 
+				// toolbar button is clicked or a right click submenu is shown.
+				if (menuContainsCommand(sarrMenu, "12102"))		// if this is the calculated total context menu, 
+					return;										// return.
+				
+				if (menuContainsCommand(sarrMenu, "12005"))		// if this is the autocalc context menu, 
+					return;										// return.
+				
+				if (menuContainsCommand(sarrMenu, "12135"))		// if this is the Show as % menu, 
+					return;										// return.
+
+				if (menuContainsCommand(sarrMenu, "1121"))		// if this is the top N/bottom N filter menu, 
+					return;										// return.
+		
+				// add a new menu item plus a space for our divider
+				sarrNewMenu = new Array(sarrMenu.length+2);
+				sarrNewMenu[0] = new Array("&Return to Aggregated View", "mnuDrillthroughReturn");
+				sarrNewMenu[1] = null;
+				iOffset=2;
+				}
+			else
+				{
+				// don't allocate any more space in the new menu that we will build because we are not adding any
+				// new items, just replacing some.
+				sarrNewMenu = new Array(sarrMenu.length);
+				iOffset=0;
+				}
+
+			for (i=0; i<sarrMenu.length; i++)
+				{
+
+				if (sarrMenu[i] != null)
+					{
+					vbarrMenuItem = new VBArray(sarrMenu[i]);
+					sarrMenuItem = vbarrMenuItem.toArray();
+
+					if (sarrMenuItem[1] == 12095 && !fPivotTableIsDrilled)
+						{
+						// replace the existing ShowDetails item with our own.
+						sarrNewMenu[i + iOffset] = new Array("S&how Details", "mnuDrillthrough");						
+						}
+					else 
+						{
+						// for all other menu items, just copy them
+						sarrNewMenu[i + iOffset] = sarrMenuItem;
+						}
+					}
+				else 
+					{
+					// copy the context menu seperators (nulls)
+					sarrNewMenu[i + iOffset] = null;
+					}
+				}
+			mnu.Value = sarrNewMenu;
+			}
+
+		}
+	// a helper function used to detect if certain command identifiers are seen in the context menu 
+	// passed into BeforContextMenu.  Note that this code assumes that sarrMenu when passed in has been
+	// converted to a JScript array.	
+	function menuContainsCommand(sarrMenu, vCommandID)
+		{
+		var vbarrMenuItem;
+		var sarrMenuItem;
+		var i;
+		
+		for (i=0; i<sarrMenu.length; i++)
+			{
+			
+			if (sarrMenu[i] != null)
+				{
+				vbarrMenuItem = new VBArray(sarrMenu[i]);
+				sarrMenuItem = vbarrMenuItem.toArray();
+				
+				if (sarrMenuItem[1] == vCommandID)
+					return true;
+				}
+			}
+		
+		return false;
+		}
+	function ptDoubleClick()
+		{
+
+		// the scoping on this function (when called back via PT event) is very strange.  
+		// this == the PivotTable, not the DrillthroughUI object like you might expect.
+		// So, we have to do some goofy resolution to get back to our parent DrillthroughUI object.
+		// note that if you call functions on the DUI object scoping returns to 'normal' in that this == a DUI obj.
+		var dtContext = window.document.all(this.uniqueID).Drillthrough; // hacky but this seems to be the only way to do it.
+		var pta= dtContext.GetPivotTable();
+
+		if (dtContext.UserInterface.InvokeViaDoubleClick)
+			{
+
+			if (pta.SelectionType == "PivotAggregates")
+				{
+ 				if (pta.Selection.Count == 1)
+					{
+					dtContext.UserInterface.ExecuteDrillthrough(pta.Selection(0));
+					}
+				else
+					// should never get in this situation, but you never know...
+					alert(L_Err1_ErrorMessage);
+				}
+			}
+		}
+
+	function ExecuteDrillthrough(paggIn)
+		{
+		var oEvent;
+		var ptSpawn;
+		
+ 		if (arguments.length > 0) 
+			paggCur = paggIn;
+
+		// note the cursor will only show the hour glass if the mouse is not over the pt when the setaggregate call kicks in
+		// thus, for the most part fiddling with style.cursor is useless.
+		if (window.document.body.style.cursor != "wait")
+			{
+			window.document.body.style.cursor = "wait";
+						
+			if (iViewMode == constants.plDrillthroughViewModeOriginal) // no need to put the status string in the parent window if we are spawning a child. (it has its own statusbar.)
+					window.status = sSTATUSSTRING_c;
+			
+			window.setTimeout("window.document.all(\""+pt.uniqueID+"\").Drillthrough.UserInterface.ExecuteDrillthrough()", 1);
+			return;
+			}
+			
+		dt.SetAggregate(paggCur);
+
+		// if the drillthrough attempt failed, bail.		
+		if (dt.Data == null)
+			return;
+
+		window.document.body.style.cursor = "auto";
+
+		if (iViewMode == constants.plDrillthroughViewModeOriginal)
+			{
+			// fire our OnNewDrillthroughPivotTable event so that if someone wants to take over laying out of the 
+			// drillthrough PivotTable they can do so.
+		
+			oEvent = createEventObject();
+			oEvent.PivotTable = element;
+			evLayout.fire(oEvent);
+
+			if (this.ProvidesPivotLayout)
+				{
+				this.AggregatedViewXML = pt.XMLData;
+				if (setupPivotTable(element) == false)
+					{
+					return; 
+					}
+				else
+					{
+
+					fPivotTableIsDrilled = true;
+
+					btnShowDetails.Visible = false;
+					btnHideDetails.Visible = true;
+					
+					fShowingDetails = true;
+					}
+				}
+
+			// blank out the "Getting Pivot Data" status message.
+			window.status = " ";
+			}
+		else if (iViewMode == constants.plDrillthroughViewModeSpawn)
+			{
+			spawnPivotTable();
+  			}
+		else
+			window.status = window.defaultStatus;
+		}
+
+	// this function gets a string which describes the current drillthrough.  Used in the titlebar of the spawned window.
+	function GetDrillthroughDescription()
+		{
+		var sDescrip;
+		var tupCore;
+		var varLocVals;
+		
+		// for all the core members (i.e., fields which are not filtered, add their values to the drillthrough description)
+		tupCore = dt.Data.CoreTuple;
+ 		
+		for (i=0; i<tupCore.Members.length; i++)
+			{
+			sDescrip = sDescrip + tupCore.Members[i].Caption;
+			if (i < tupCore.Members.length - 1)
+				{
+				sDescrip = sDescrip + ", ";
+				}
+			}
+		
+		varLocVals = new Array(sDescrip, dt.GetAggregate().Text );
+		sDescrip = 	sFormatString(L_Title_Text, varLocVals);
+
+		return sDescrip;
+		}
+
+	function spawnPivotTable()
+		{
+		// use a blank HTM file (rather than about:blank) because that will force it to be in the correct domain for IE5 browsers.
+		// use a timer to workaround squirrelly issues where sometimes you'd get random alerts because apparently the spawned
+		// browser isn't quite ready after window.open.
+		
+		//winChild = window.open("drillthrough.aspx", "datawin", "directories=no,height=400,width=500,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no");
+		winChild = window;
+		
+		//nWaitCount = MAX_WAIT_COUNT;
+		//window.setTimeout(spawnContinue, 300);
+		spawnContinue();
+		}
+
+	function spawnContinue()
+		{
+		var objPT;
+		var divMessage;
+		var tblFrame;
+		var trTemp;
+		var tdTemp;
+
+		objPT = winChild.document.all("ptable1");
+		if (objPT == null)
+		{
+			if (--nWaitCount > 0)
+				window.setTimeout(spawnContinue, 300);
+			else
+				alert("Timeout");
+			
+			return;
+		}
+
+		// catch errors in the case the window has disappeared. (user has used [X] button to close the spawned window)
+		try
+			{
+			divMessage = winChild.document.all("divStatusMessage");
+			divMessage.innerText = sSTATUSSTRING_c;
+
+			oEvent = createEventObject();
+			oEvent.PivotTable = objPT;
+			evLayout.fire(oEvent);
+
+			if (me.ProvidesPivotLayout)
+				{
+				objPT.ActiveView.TitleBar.Caption = GetDrillthroughDescription();
+
+				if (setupPivotTable(objPT) == false)
+					{
+					winChild.close();
+					winChild = null;
+					return;
+					}
+				}
+
+			oEvent = createEventObject();
+			oEvent.PivotTable = null;
+			evLayout.fire(oEvent);
+
+			winChild.document.all.divStatusMessage.style.display = "none";
+			winChild.document.all.divStatusMessage.parentElement.style.height = "0px";
+			winChild.document.body.style.cursor = "auto";
+			winChild.status = winChild.defaultStatus;
+			}
+		catch (e)
+			{
+			// don't do anything -- we're just trapping errors in case the user closes the spawned browser in the middle
+			// of us doing some work on it.
+			}
+		}
+
+	function setupPivotTable(ptMe)
+		{
+		var iNumGroups;
+		var fm;
+		var fs;
+		var axis;
+		var i;
+		var rs;
+
+		// get the recordset which represents this drillthrough.  Note this operation may take a lot of time.
+		rs = dt.Data.GetRecordset();
+		
+		if (rs == null)
+			return false;
+
+		// Note if the pt is not connected (i.e., the spawn window case) the pt will error.  This was the only easy way to deal 
+		// with that.
+		try
+			{
+			ptMe.ActiveView.AutoLayout();
+ 			}
+		catch (e)
+			{
+
+			}
+
+		try 
+			{
+			ptMe.DataSource = rs;
+			ptMe.DataMember = "";
+			}
+		catch (e)
+			{
+			return false;
+			}
+			
+		iNumGroups = dt.Data.Groups.length;
+
+ 		for (i=0; i<ptMe.ActiveView.FieldSets.Count; i++)
+			{
+			// for all of the groups which were filtered in the original pivottable, put their drillthrough values on the filter axis
+			// that way the user knows a bit more about the data set they are working with and can do further filtering if 
+			// desired.
+			if (i<iNumGroups)				
+				axis = ptMe.ActiveView.FilterAxis;
+			else
+				axis = ptMe.ActiveView.DataAxis;
+
+			fs = ptMe.ActiveView.FieldSets(i);
+
+			if (fs.Type != ptMe.Constants.plFieldSetTypeTime) 	// don't do anything with autogenerated time hierarchies;
+				{												// we'll just add the original hierarchy
+				fm = GetMapping(fs.Name)
+					
+				if (fm!= null)
+					{
+					switch(fm.DefaultAxis)
+						{
+						case 1:
+							axis = ptMe.ActiveView.FilterAxis;
+						break;
+							
+						case 2:
+							axis = ptMe.ActiveView.RowAxis;
+						break;
+							
+						case 3:
+							axis = ptMe.ActiveView.ColumnAxis;
+						break;
+
+						case 4:
+							axis = ptMe.ActiveView.DataAxis;
+						break;
+						}
+						
+					fs.Fields(0).Caption = fm.Caption;
+					}
+						
+				axis.InsertFieldSet(fs);
+				}
+			}
+
+
+		return true;
+		}
+	}
+
+// this object is the workhorse of our drillthrough.  It represents the internal and external data structures which represent the
+// drillthrough.
+function DrillthroughData(ptIn, paggIn)
+	{
+	var pt = ptIn;
+	var ptconst = ptIn.Constants;  
+	var me = this;
+	
+
+	var paggMain;
+	var mfmarrMembers;
+	var iNumMFMembers;
+
+	var mfmgarrGroups;
+	var iNumMFGroups;
+	var mfmgarrGroupsSized;
+	
+	var iCurGroupIndex;
+	var tupCore;
+
+	/* definitions
+		 core member:		constant member that always appears in any tuple.  If Aggregate's row axis member is only
+							[USA].[OR].[Corvalis] with no filtering, then Corvalis is a core member in that is should always
+							appear in any tuple we create for a drillthrough set.
+		 multifilter members:  if the user has filtered on an axis, these are the members that are included.  So if I remove
+		 				    "Corvalis" from OR, then there are 10 multifiltermembers for OR (all cities - corvalis).
+		 				    the implication here is thus we would need to create 10 drillthrough sets (one for each city)
+		 multifilter groups:    essentially, any fieldset where the user has done any mutlifilter on.
+		 drillthrough set:	a set of detail records that corresponds to one tuple.  The number of drillthrough sets created
+		 					should be either 1 (if no multifilters) or the multiplication of the count of multifilter members
+		 					by each multifilter group.
+	 */
+
+	// these constants are here because there are no dynamic array primitives in JS.
+	var iMAXMULTIFILTERMEMBERS_c = 800; // number of maximum filter members
+													// note it could be very easy to get an explosive number of multifltermembers
+													// say, if you have a fieldset with X members, and you exclude one member
+													// then you will X-1 multifiltermembers.
+													// thus, this constant should == the number of members we expect to see in any
+													// fieldset.
+	var iMAXMULTIFILTERGROUPS_c = 100;  // number of filter groups.  This should equal the max number of fieldsets expected
+
+	var iMAXCOREMEMBERS_c = 100;		   // number of core members.  Since you can only have at most one core member per
+													// fieldset, this should == the max number of fieldsets expected.
+	this.ObjectName = "DrillthroughData";
+
+	this.SetAggregate = SetAggregate;
+	this.GetAggregate = GetAggregate;
+
+	this.GetRecordset = GetRecordset;
+
+	this.Sets = null;
+	this.Groups = null;
+	this.CoreTuple = null;
+	
+	var vFirstMemberFound;
+
+	var dtsarrDrillthroughSets;
+	var rsMaster;
+	var adVarChar_c = 200; // import an ADODB constant here.	
+
+	if (arguments.length > 1) 
+		SetAggregate(paggIn);
+
+	function GetDrillthroughGroups()
+		{
+		return mfmgarrGroups;
+		}
+	
+	function init()
+		{
+		// Using fixed size arrays which is not optimal.
+		mfmarrMembers = new Array(iMAXMULTIFILTERMEMBERS_c);
+		mfmgarrGroups = new Array(iMAXMULTIFILTERGROUPS_c);
+
+		tupCore = new Tuple();
+		this.CoreTuple = tupCore;
+		
+		iNumMFGroups = 0;
+		iNumMFMembers = 0;
+
+ 		rsMaster = null;
+		}
+	
+	function GetAggregate()
+		{
+		return paggMain;
+		}
+	
+	function SetAggregate(pagg)
+		{
+		if (paggMain != pagg)
+			{
+			paggMain = pagg;
+			BuildDrillthroughSets(pagg);
+			}
+		}
+
+	function BuildDrillthroughSets(pagg)
+		{
+		var pcell;
+		var dts;
+		var i, j, iNumSets, iCurSet;
+		var sCoreMDXWhereClause, sMDX;
+		
+		var iCurDepth;
+		var iCurDepthInv;
+		var iCurTuple;
+		var tuparrTuples;
+		var iNumMembersThisLevel;
+		var iarrGroupFirstMember;
+		var iMemberOffset;
+		var memTemp;
+		var pfu;
+		var pfs;
+		init();
+		
+		pcell = pagg.Cell;
+
+		if (pcell.ColumnMember != null)
+			{
+			memTemp = pcell.ColumnMember
+			if (memTemp != null)
+				HandleGroupAxisFromMember(memTemp);
+			}
+
+		if (pcell.RowMember != null)
+			{
+			memTemp = pcell.RowMember;
+			if (memTemp != null)
+				HandleGroupAxisFromMember(memTemp);
+			}
+			
+		with (element.ActiveView)
+			{
+			for (i=0; i<FilterAxis.FieldSets.Count; i++)
+				{
+				HandleFieldSet(FilterAxis.FieldSets(i), FilterAxis.FieldSets(i).Member);
+				}
+			}
+
+		sMDX = 	"DRILLTHROUGH\n";
+		sMDX = sMDX + "SELECT FROM [" + element.DataMember + "]\n";
+		sMDX = sMDX + "WHERE (" + GetTupleMDX(tupCore); 
+
+		// if we have no multiselects going on, then we should just build one set with the core MDX
+		if (iNumMFMembers == 0) 
+			{
+			iNumSets = 1;
+
+			dtsarrDrillthroughSets = new Array(iNumSets);
+			
+			dts = new DrillthroughSet();
+			dts.MDX = sMDX + ")";
+
+			dtsarrDrillthroughSets[0] = dts;
+			}
+		
+		// if we have only one MFGroup, then we don't need to deal with cross product shenanigans
+		else if (iNumMFGroups == 1)
+			{
+			iNumSets = mfmgarrGroups[0].NumMultiFilterMembers;
+
+			// check to make sure we don't try to request too many drillthrough sets
+			if (iNumSets > dt.MaxDrillthroughSets)
+				{
+				alert(L_Err9_ErrorMessage);
+				me.Sets = null;
+				return;
+				}
+
+			dtsarrDrillthroughSets = new Array(iNumSets);
+
+			for (i=0; i<iNumMFMembers; i++)
+				{
+				dts = new DrillthroughSet();
+				dts.MDX = sMDX + ", " + mfmarrMembers[i].Member.UniqueName + ")";
+				
+				dts.Tuple = new Tuple();
+				AddTupleMember(dts.Tuple, mfmarrMembers[i].Member);
+				
+				dtsarrDrillthroughSets[i] = dts;
+				}
+			}
+		
+		// if we have >1 MF group, then we need to create crossproduct sets
+		// e.g., we have two MF groups: Time and Gender.  So we need NumGenderMembers X NumTimeMembers sets.
+		// {([Gender].[M], [Time].[1997].[Q1]), ([Gender].[F], [Time].[1997].[Q1]), ([Gender].[M], [Time].[1997].[Q2]) ...
+		else
+			{
+			iNumSets = 1;
+			iCurSet = 0;
+			iarrGroupFirstMember = new Array(iNumMFGroups);
+			j = 0;
+			for (i=0; i<iNumMFGroups; i++)
+				{
+				iNumSets = iNumSets * mfmgarrGroups[i].NumMultiFilterMembers;
+				
+				while (mfmarrMembers[j].Group != mfmgarrGroups[i]) { j++; }
+
+				iarrGroupFirstMember[i] = j;
+				}
+
+			// check to make sure we don't try to request too many drillthrough sets
+			if (iNumSets > dt.MaxDrillthroughSets)
+				{
+				alert(L_Err9_ErrorMessage);
+				me.Sets = null;
+				return;
+				}
+
+			dtsarrDrillthroughSets = new Array(iNumSets);
+
+			tuparrTuples = new Array(iNumMFGroups);
+			iCurDepth = iNumMFGroups -1;
+			iCurDepthInv = 0;
+
+			// start at the rightmost set in the level and generate a tuple of size 1.
+			// then, move to the left by one, and create a tuple of size 2, merging in the members at the current level
+			// with the tuple created at size 1.
+			// REPEAT until we have gotten tuples of the right size.
+			
+			while (iCurDepth >= 0) 
+				{
+				iNumMembersThisLevel = mfmgarrGroups[iCurDepth].NumMultiFilterMembers;
+				iMemberOffset = iarrGroupFirstMember[iCurDepth];
+				if (iCurDepthInv == 0)
+					{
+					tuparrTuples[iCurDepth] = new Array(iNumMembersThisLevel);
+					
+					for (i=0; i<iNumMembersThisLevel; i++)
+						{
+						tuparrTuples[iCurDepth][i] = new Tuple();
+						// alert("ADDTUPLE TO OUTER: " + mfmarrMembers[i+iMemberOffset].Member.UniqueName);
+						AddTupleMember(tuparrTuples[iCurDepth][i], mfmarrMembers[i+iMemberOffset].Member);
+						}
+					}
+				else 
+					{
+					iCurTuple = 0;
+					tuparrTuples[iCurDepth] = new Array(iNumMembersThisLevel * tuparrTuples[iCurDepth+1].length);
+					for (i=0; i<iNumMembersThisLevel; i++)
+						{
+						for (j=0; j<tuparrTuples[iCurDepth+1].length; j++)
+							{
+							// alert("ADDTUPLE TO INNER: " + mfmarrMembers[i+iMemberOffset].Member.UniqueName + "|" + tuparrTuples[iCurDepth+1][j].Members.length);
+							tuparrTuples[iCurDepth][iCurTuple] = new Tuple(iCurDepthInv+1);
+
+							MergeTupleAndMember(tuparrTuples[iCurDepth][iCurTuple], tuparrTuples[iCurDepth+1][j], mfmarrMembers[i+iMemberOffset].Member);
+							iCurTuple++;
+							}
+						}
+					}
+				
+				iCurDepth--;
+				iCurDepthInv++;
+				}
+
+			if (iNumSets != tuparrTuples[0].length)
+				{
+				aLocVals = new Array("" + iNumSets + "", "" + tuparrTuples[0].length + "");
+				alert(sFormatString(L_Err2_ErrorMessage, aLocVals));
+				}
+			else
+				{
+
+				for (i=0; i<tuparrTuples[0].length; i++) 
+					{
+					dtsarrDrillthroughSets[i] = new DrillthroughSet();
+					dtsarrDrillthroughSets[i].MDX = sMDX + ", " + GetTupleMDX(tuparrTuples[0][i]) + ")";
+					dtsarrDrillthroughSets[i].Tuple = tuparrTuples[0][i];
+					}
+				}
+			}
+
+		// mfmgarrGroups is an arbitrarily huge array, where mfmgarrGroups.length doesn't mean anything.  For the sake of 
+		// developers accessing this array, create a new dynamic array that is properly sized.
+		mfmgarrGroupsSized = new Array(iNumMFGroups);
+		
+		for (i=0; i<iNumMFGroups; i++)
+			mfmgarrGroupsSized[i] = mfmgarrGroups[i];
+		
+		me.Sets = dtsarrDrillthroughSets;
+		me.Groups = mfmgarrGroupsSized;
+		me.CoreTuple = tupCore;
+		}
+
+	// because of a limitation with PT architecture when you get a member via Cell.ColumnMember.SourceMember it has a child
+	// count of 0 (when their should be children.  This is an easy workaround to get a version of the member with children.
+	function TrulyGetMember(groupmemIn)
+		{
+		var memTemp;
+		var sTemp;
+
+		if (groupmemIn.IsTotal)
+			{
+			alert(L_Err3_ErrorMessage);
+			return null;
+			}
+		
+		try 
+			{
+			memTemp = groupmemIn.SourceMember;
+			sTemp = memTemp.Path(ptconst.plFindFormatPathName);
+			return memTemp.Field.FieldSet.FindMember(sTemp, ptconst.plFindFormatPathName)
+			}
+		catch (e)
+			{
+			return null;
+			}
+		}
+
+
+	// this function basically says if we've created a master recordset before, then just return it.  Otherwise, do all the work
+	// to build it from scratch (BuildMasterRecordset) which can be an expensive operation.
+	function GetRecordset()
+		{
+
+		if (me.Sets == null)
+			return null;
+			
+		if (rsMaster == null) 
+			BuildMasterRecordset();
+
+ 		return rsMaster;
+		}
+
+	function BuildMasterRecordset()
+		{
+		var i, rsTemp, j=0;
+		var winTemp;
+		var sNames;
+		var sName;
+		
+		dt.ShowTotalMaxWarning = false;
+		dt.ShowIndividualMaxWarning = false;
+		
+		dt.CurrentRowCount = 0;
+		// we are assuming for now that BuildDrillthroughSets has been called before this.
+		
+		if (dtsarrDrillthroughSets.length == 1)
+			{
+			rsMaster = dtsarrDrillthroughSets[0].GetRecordset();
+			}
+		else 
+			{
+			rsMaster = new ActiveXObject("ADODB.Recordset");
+			sNames = "";
+			
+			// first, get all the unique fieldset names in our groups.  We tack this on so that the user can filter out
+			// because chances are, if they are using multifilter then they will have a ton o' records.
+			for (i=0; i<iNumMFGroups; i++)
+				{
+				rsMaster.Fields.Append(mfmgarrGroups[i].FieldSet.Name, adVarChar_c, 100);
+				}
+			
+			// now tack on the Drillthrough schema.
+			rsTemp = dtsarrDrillthroughSets[0].GetRecordset(); // schema wise, all dtsarrDrillthroughSets rs's are the same so just get the first one.
+			for (i=0; i<rsTemp.Fields.Count; i++)
+				{
+				sName = rsTemp.Fields(i).Name
+				j=0;
+				while (sNames.indexOf("|" + sName + "|") >= 0)
+					{
+					sName = rsTemp.Fields(i).Name + j;
+					j++;
+					}
+					
+				sNames = sNames + "|" + sName + "|";
+				rsMaster.Fields.Append(sName, rsTemp.Fields(i).Type, rsTemp.Fields(i).DefinedSize, rsTemp.Fields(i).Attributes);				
+				}
+
+			// go through each of the recordsets returned per set and loop through and copy the data into our master recordset.
+			rsMaster.Open();
+			for (i=0; i<dtsarrDrillthroughSets.length; i++)
+				{
+				rsTemp = dtsarrDrillthroughSets[i].GetRecordset();
+
+				if (rsTemp != null)
+					{
+					// prolly a better way to check for no records then try catch
+					try
+						{
+						rsTemp.MoveFirst();
+						}
+					catch(e)
+						{
+						// alert("THIS RECORD APPEARS TO HAVE NO RECORDS: " + dtsarrDrillthroughSets[i].MDX);
+						}
+
+					while (!rsTemp.EOF)
+						{
+						rsMaster.AddNew();
+
+						for (j=0; j<iNumMFGroups; j++)
+							{
+							
+							rsMaster.Fields(j).Value = dtsarrDrillthroughSets[i].Tuple.Members[j].Caption;
+							}
+						
+						for (j=0; j<rsTemp.Fields.Count; j++)
+							{
+							rsMaster.Fields(j+iNumMFGroups).Value = rsTemp.Fields(j).Value;
+							}
+						rsTemp.MoveNext();
+						}
+					
+					rsMaster.UpdateBatch();
+					}
+				}
+
+			}
+			
+		// do warning checks
+		if (dt.UserInterface.ShowMaxRecordWarning)
+			{
+			if (winChild != null && dt.UserInterface.GetViewMode() == constants.plDrillthroughViewModeSpawn)
+				winTemp = winChild
+			else
+				winTemp = window;
+
+			// try/catch in case the user has closed the window while we were off doing drillthrough
+			try
+				{
+				if (dt.ShowTotalMaxWarning && dt.ShowIndividualMaxWarning)
+					{
+					aLocVals = new Array("" + dt.MaxDrillthroughRecords + "", "" + dt.MaxDrillthroughRecordsPerSet + "");
+					winTemp.alert(sFormatString(L_Err4_ErrorMessage, aLocVals));
+					}
+				else if (dt.ShowTotalMaxWarning)
+					{
+					aLocVals = new Array("" + dt.MaxDrillthroughRecords + "");
+					winTemp.alert(sFormatString(L_Err5_ErrorMessage, aLocVals));
+					}
+				else if (dt.ShowIndividualMaxWarning)
+					{
+					aLocVals = new Array("" + dt.MaxDrillthroughRecordsPerSet + "");
+					winTemp.alert(sFormatString(L_Err6_ErrorMessage, aLocVals));
+					}
+				}
+			catch (e)
+				{
+
+				}
+			}
+		}
+	function HandleGroupAxisFromMember(memStart)
+		{
+		var memCur, pfsCur = null, memStart, i, pfu, memTemp;
+
+		if (memStart == null)
+			return;
+
+		memCur = memStart;
+
+		if (memCur.IsTotal)
+			{
+			pfsCur = memCur.Field.FieldSet;
+			memCur = memCur.ParentMember;
+
+			// crawl amongst the peer elements that constitute this total.
+			pfu = pfsCur.CreateFilterUpdate;
+			
+			// clear the global var which controls whether we find only one member or not.
+			vFirstMemberFound = null;
+			iCurGroupIndex = -1;
+
+			// add all the members which constitute this table.
+			for (i=0; i<memCur.ChildMembers.Count; i++)
+				{
+				memTemp = memCur.ChildMembers(i);
+
+				if (!memTemp.IsTotal)
+					HandleFieldSet(pfsCur, TrulyGetMember(memTemp), pfu);
+				}
+
+			// if we only looked at one member, then we can add this member to the core tuple rather then creating 
+			// seperate sets to represent this item.
+			if (vFirstMemberFound!=null)
+				{
+				if (vFirstMemberFound.UniqueName != null)
+					{
+					AddTupleMember(tupCore, vFirstMemberFound);
+					}
+				}
+			}
+
+		// crawl up the member hierarchy
+		while (memCur.Field != null)
+			{
+			// if we see a member that belongs to a fieldset we haven't dealt with before, process it.
+			if (pfsCur != memCur.Field.FieldSet)
+				{
+				pfsCur = memCur.Field.FieldSet;
+				HandleFieldSet(pfsCur, TrulyGetMember(memCur));
+				}
+			memCur = memCur.ParentMember;
+			}
+
+
+		}
+
+	// HandleFieldSet
+	// This function takes a member in the fieldset and will recursively look around in the fieldset to see what is filtered and what
+	// is not.  Based on that, it will either add a core tuple member (if only one item is part of the filter) or a drillthrough set
+	// (if the user has performed a multifilter.)
+	function HandleFieldSet(pfs, memRoot, pfu)
+		{
+		// pfu should only be set when we internally recurse!
+		var i, pfu, pfs;
+
+
+		// NOTE: FilterUpdates are hidden object model.  This means they are not fully supported (though sometimes quite
+		// handy!).  
+		if (arguments.length == 2)
+			{
+			pfu = pfs.CreateFilterUpdate;
+			vFirstMemberFound = null;
+			iCurGroupIndex = -1;
+			}
+
+		switch (pfu.StateOf(memRoot))
+			{
+			case ptconst.plMemberStateChecked:
+				if (vFirstMemberFound == null)
+					{
+					// this is the first checked member we've found in this fieldset.
+					// store the unique name in a string.
+					
+					// as we recurse, one of two things will happen:
+					//  . no other members will be found, in which this case becomese a "core" member (there is only 1)
+					//  . we find other related members.  This gets first member gets added to a collection of members
+					//    for this group by which we will do multiple drillthrough statements.
+					vFirstMemberFound = memRoot;
+					}
+				else 
+					{
+
+					// if we've found the second Member that is filtered in this hierarchy, then convert from 
+					// plans to build only one member via vFirstMemberFound to plans to record multiple members
+					// via the mfm arrays
+					if (vFirstMemberFound.UniqueName != null)
+						{
+						iCurGroupIndex = iNumMFGroups;
+
+						mfmgarrGroups[iCurGroupIndex] = new MultiFilterMemberGroup();
+						mfmgarrGroups[iCurGroupIndex].FieldSet = pfs;
+
+						iNumMFGroups++;
+
+						mfmarrMembers[iNumMFMembers] = new MultiFilterMember();
+						mfmarrMembers[iNumMFMembers].Member = vFirstMemberFound;
+						mfmarrMembers[iNumMFMembers].Group = mfmgarrGroups[iCurGroupIndex];
+						mfmgarrGroups[iCurGroupIndex].NumMultiFilterMembers++;
+						iNumMFMembers++;
+
+						vFirstMemberFound = "MULTI";
+						}
+
+					mfmarrMembers[iNumMFMembers] = new MultiFilterMember();
+					mfmarrMembers[iNumMFMembers].Member = memRoot;
+					mfmarrMembers[iNumMFMembers].Group = mfmgarrGroups[iCurGroupIndex];
+					mfmgarrGroups[iCurGroupIndex].NumMultiFilterMembers++;
+					iNumMFMembers++
+					}
+
+			break;
+
+			case ptconst.plMemberStateGray:
+				// this item is ambiguous, so recurse downward and look at the child members.
+				for (i=0; i<memRoot.ChildMembers.Count; i++)
+					{
+					HandleFieldSet(pfs, memRoot.ChildMembers(i), pfu);
+					}
+			break;
+
+			case ptconst.plMemberStateClear:
+				return;
+			break;
+			}
+
+		// we're all done recursing and are back at the root
+		if (arguments.length == 2)
+			{
+			// did we only find one checked member? if so, record that as a core member.
+			if (vFirstMemberFound!=null)
+				{
+				if (vFirstMemberFound.UniqueName != null)
+					{
+					AddTupleMember(tupCore, vFirstMemberFound);
+					}
+				}
+			else 
+				{
+				alert(L_Err7_ErrorMessage);
+				}
+			}
+
+		}
+
+
+	}
+
+function FieldMapping()
+	{
+	this.SourceName = "";
+	this.Caption = "";
+	this.DefaultAxis = 0;
+	}
+function DrillthroughSet()
+	{
+	this.MDX = ""
+	this.Tuple = null;
+	this.Recordset = null;
+	this.GetRecordset = getRecordset;
+
+	// this is the code that actually does the calling out to PivotTable services to get the drillthrough data.
+	function getRecordset()
+		{
+		var sMDX;
+		var iMax;
+		var iNumRecords;
+		var fUsingOverallLimit = true;
+		var winTemp;
+
+		if (this.Recordset != null)
+			return this.Recordset;
+		
+		rs = new ActiveXObject("ADODB.Recordset");
+		rs.ActiveConnection = element.Connection;
+
+		sMDX = this.MDX;
+
+
+		// do some limits checking and make sure we set MAXROWS in the drillthrough call to return only the max number of
+		// rows.
+		if (dt.MaxDrillthroughRecords < 1)			// if the user has set maxdrillthorugh to 0, assume they don't want a limit.
+			iMax = -1;
+		else
+			iMax = (dt.MaxDrillthroughRecords - dt.CurrentRowCount);
+
+		if (iMax < 0 || (dt.MaxDrillthroughRecordsPerSet >= 0 && dt.MaxDrillthroughRecordsPerSet < iMax))
+			{
+			iMax = dt.MaxDrillthroughRecordsPerSet;
+			fUsingOverallLimit = false;
+			}
+			
+		if (iMax > 0)
+			{
+			sMDX = sMDX.replace("DRILLTHROUGH", "DRILLTHROUGH MAXROWS " + String(iMax));
+ 			}
+		else if (iMax == 0)
+			{
+			this.Recordset = null;
+			return null;
+			}
+		
+		// alert(sMDX)
+
+		rs.Source = sMDX;
+
+		try
+			{
+			rs.Open();
+			}
+		catch (e)
+			{
+			// uhoh, something went wrong when talking to PivotTable services.  As the alert says, it might be some sort
+			// of security error (e.g., by default, only OLAP administrators have permission to do drillthrough).  Or perhaps
+			// drillthrough is not enabled/setup right in the cube.  
+
+			// figure out which window to show this alert from.
+			if (winChild != null && dt.UserInterface.GetViewMode() == constants.plDrillthroughViewModeSpawn)
+				winTemp = winChild
+			else
+				winTemp = window;
+				
+			winTemp.alert(L_Err8_ErrorMessage);
+			return null;
+			}
+		
+		iNumRecords = rs.RecordCount;
+		
+		dt.CurrentRowCount = dt.CurrentRowCount + iNumRecords;
+		
+		if (iNumRecords == iMax)
+			{
+			// set a flag so that we show a warning later on when we are done collecting our recordset.
+			if (fUsingOverallLimit)
+				dt.ShowTotalMaxWarning = true;
+			else
+				dt.ShowIndividualMaxWarning = true;
+			}
+		
+		this.Recordset = rs;
+		
+		return rs;
+		}
+	}
+
+
+function MultiFilterMember()
+	{
+	this.Member = null;
+	this.Group = null;
+	}
+
+function MultiFilterMemberGroup()
+	{
+	this.FieldSet = null;
+	this.NumMultiFilterMembers = 0;
+	}
+	
+// note that there are a few functions beneath the Tuple object declaration that pertain to tuples -- I decided not to add these
+// functions to the tuple object because they add overhead per tuple object instance, and since there could be a lot of tuple
+// objects floating around, I decided to make this less object oriented then I would like it.  Thus, tuple essentially represents
+// an array of members which is fairly simple.
+ function Tuple(iTupleSizeIn)
+	{
+	this.Members = null;
+
+	if (arguments.length > 0) 
+		{
+		this.Members = new Array(iTupleSizeIn);
+		}
+	}
+function MergeTupleAndMember(tupSource, tupIn)
+	{
+	var i, j;
+	var memarr = tupSource.Members;
+			
+	for (i=0; i<tupIn.Members.length; i++)
+		{
+		memarr[i] = tupIn.Members[i];
+		}
+	
+	// fill the gap with passed in members.  
+	// Will fail if size of tuple in + num members passed in != tuple size.
+	j = 2;
+	for (i=tupIn.Members.length; i<memarr.length; i++)
+		{
+		memarr[i] = arguments[j];
+		j++;
+		}
+	}
+
+function AddTupleMember(tupSource, memIn)
+	{
+	var memarrOld = tupSource.Members;
+	var memarrNew;
+	var i;
+	if (memarrOld == null)
+		{
+		memarrNew = new Array(1);
+		memarrNew[0] = memIn;
+			
+		tupSource.Members = memarrNew;
+		
+		return;
+		}
+		
+	memarrNew = new Array(memarrOld.length + 1);
+	
+	for (i=0; i<memarrOld.length; i++)
+		{
+		memarrNew[i] = memarrOld[i];
+		}
+		
+	memarrNew[memarrNew.length-1] = memIn;
+
+	tupSource.Members = memarrNew;
+	}
+
+// returns a comma seperated list of all the members that make up this tuple, suitable for tacking onto an MDX string
+function GetTupleMDX(tupIn)
+	{
+	var sTupleMDX = "";
+	var i, iLen;
+
+	if (tupIn.Members == null)
+ 		return "";
+
+ 	iLen = tupIn.Members.length;
+
+	for (i=0; i<iLen; i++)
+		{
+		sTupleMDX = sTupleMDX + tupIn.Members[i].UniqueName;
+		if (i < iLen - 1)
+			{
+			sTupleMDX = sTupleMDX + ", ";
+			}
+		}
+
+ 	return sTupleMDX;
+	}
+
+</script>
+
+</public:component>

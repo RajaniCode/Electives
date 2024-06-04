@@ -1,0 +1,25 @@
+<!-- This file is used with the "ssops -create" command to create the prototype adapter named "PSAdapter02". This adapter receives password change from SSO Services and sends the password change to a Non-Windows system. SSO Services receives the Windows user password change from the domain controller. -->
+
+<sso>
+
+	<adapter name="PSAdapter02">
+
+		<description>A Password Sync Adapter to send the password change to a Non-Windows system.</description>
+
+		<computer>COMPUTERNAME.DOMAIN.COM</computer>
+
+		<appUserAccount>DomainName\PwdSyncUserGroup2</appUserAccount>
+
+		<appAdminAccount>DomainName\PwdSyncAdminGroup2</appAdminAccount>
+
+		<properties file="Properties_PSA2.xml" localize="yes"/>
+
+		<flags 
+			syncFromAdapter="no"
+			verifyOldPassword="no"
+			changeWindowsPassword="no"
+			syncToAdapter="yes"
+			sendOldPassword="no"
+		/>
+	</adapter>
+</sso>

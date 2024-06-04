@@ -1,0 +1,57 @@
+﻿<phoneNavigation:PhoneApplicationPage 
+    x:Class="WP7_SimpleDatabinding.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phoneNavigation="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Navigation"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="480" d:DesignHeight="800"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}">
+
+    <phoneNavigation:PhoneApplicationPage.Resources>
+        <DataTemplate x:Key="EmpDs">
+            <Grid Width="360">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                    <ColumnDefinition Width="90"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="{Binding EmpNo}" Grid.Column="0" Height="25"/>
+                <TextBlock Text="{Binding EmpName}" Grid.Column="1" Height="25"/>
+                <TextBlock Text="{Binding Salary}" Grid.Column="2" Height="25"/>
+            </Grid>
+        </DataTemplate>
+    </phoneNavigation:PhoneApplicationPage.Resources>
+    
+    <Grid x:Name="LayoutRoot" Background="{StaticResource PhoneBackgroundBrush}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!--TitleGrid is the name of the application and page title-->
+        <Grid x:Name="TitleGrid" Grid.Row="0">
+            <TextBlock Text="MY APPLICATION" x:Name="textBlockPageTitle" Style="{StaticResource PhoneTextPageTitle1Style}"/>
+            <TextBlock Text="page title" x:Name="textBlockListTitle" Style="{StaticResource PhoneTextPageTitle2Style}"/>
+        </Grid>
+
+        <!--ContentGrid is empty. Place new content here-->
+        <Grid x:Name="ContentGrid" Grid.Row="1">
+            <Button Content="Load Data" Height="59" HorizontalAlignment="Left" Margin="76,44,0,0" Name="button1" VerticalAlignment="Top" Width="243" Foreground="#FF1937FF" Background="#FFA80000" Click="button1_Click" />
+            <ListBox Height="354" HorizontalAlignment="Left"
+                     Margin="11,149,0,0" Name="lstEmployees" VerticalAlignment="Top" Width="404"
+                      ItemsSource="{Binding}"
+                      ItemTemplate="{StaticResource EmpDs}">
+                <ListBox.Projection>
+                    <PlaneProjection x:Name="listProjection"></PlaneProjection>
+                </ListBox.Projection>
+            </ListBox>
+            <Slider Height="24" HorizontalAlignment="Left" Margin="20,546,0,0" Name="sliderX" VerticalAlignment="Top" Width="397" Maximum="360" ValueChanged="sliderX_ValueChanged" />
+            <Slider Height="330" HorizontalAlignment="Left" Margin="442,161,0,0" Name="sliderY" VerticalAlignment="Top" Width="14" Orientation="Vertical" Maximum="360" ValueChanged="sliderY_ValueChanged" />
+        </Grid>
+    </Grid>
+    
+</phoneNavigation:PhoneApplicationPage>

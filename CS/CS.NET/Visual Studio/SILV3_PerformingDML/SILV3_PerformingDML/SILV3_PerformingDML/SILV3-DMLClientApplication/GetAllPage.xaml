@@ -1,0 +1,21 @@
+﻿<UserControl xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"  x:Class="SILV3_DMLClientApplication.GetAllPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="400" Height="300" Loaded="UserControl_Loaded">
+    <Grid x:Name="LayoutRoot" Background="White">
+            <data:DataGrid x:Name="dgEmp"
+                            AutoGenerateColumns="False" >
+            <data:DataGrid.Columns>
+                <data:DataGridTextColumn Binding="{Binding EmpNo}" Header="EmpNo" Width="80"></data:DataGridTextColumn>
+                <data:DataGridTextColumn Binding="{Binding EmpName}" Header="EmpName" Width="150"></data:DataGridTextColumn>
+                <data:DataGridTextColumn Binding="{Binding Salary}" Header="Salary" Width="80"></data:DataGridTextColumn>
+                <data:DataGridTextColumn Binding="{Binding DeptNo}" Header="DeptNo" Width="80"></data:DataGridTextColumn>
+            </data:DataGrid.Columns>
+        </data:DataGrid>
+
+        <data:DataPager x:Name="dtPager" DisplayMode="FirstLastPreviousNextNumeric" 
+                               AutoEllipsis="True"
+                               PageSize="3"
+                               Source="{Binding ItemsSource,ElementName=dgEmp}" IsEnabled="True"></data:DataPager>
+    </Grid>
+</UserControl>

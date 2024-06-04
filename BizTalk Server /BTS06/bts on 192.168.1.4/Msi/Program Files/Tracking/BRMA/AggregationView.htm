@@ -1,0 +1,268 @@
+<!-- Copyright (c) Microsoft Corporation.  All rights reserved. -->
+<!--  --> 
+<!-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, -->  
+<!-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED -->  
+<!-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. -->  
+<!-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE -->  
+<!-- AND INFORMATION REMAINS WITH THE USER. --> 
+<!--  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<link rel="Configuration" href="HATcfg.xml"/>
+		<META content="Microsoft Visual Studio 7.0" name="GENERATOR">
+		<META content="C#" name="CODE_LANGUAGE">
+		<META content="JavaScript" name="vs_defaultClientScript">
+		<META content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+		<LINK id="brma_ss" href="default.css" type="text/css" rel="stylesheet"> 
+		<script language="JavaScript" src="CommonUtils.js"></script>
+		<script language="JavaScript" src="resultsutil.js"></script>
+		<script language="VBScript" src="CommonUtils.vbs"></script> 
+		<script language="JavaScript">
+		var sQNamespace="";
+		var ErrMsg="";
+		var oNavCtrl;
+		HelpTopic = "cshidServiceMetricsView"; // Set ID of the help topic for this page
+	
+		function PageLoad()
+		{
+			oNavCtrl = document.CollapsibleCtrl;
+			var Cube = oNavCtrl.GetViewParameter("cube");
+			if("MessageMetrics" == Cube)
+			{
+				HelpTopic = "cshidMessageMetricsView";
+			}
+
+			try
+			{
+				// Initialize strings
+				var title = oNavCtrl.GetWebPageResourceString("title_AggregationView");
+				ChangeTitle(title);
+
+				PivotTableHeader.innerHTML = oNavCtrl.GetWebPageResourceString("msg_ToAccessViews");
+				DrillThroughHeader.innerText = oNavCtrl.GetWebPageResourceString("msg_ToAccessCaseListDblClick");
+				ops_err_AggregationViewNotAvailalbe.innerText = oNavCtrl.GetWebPageResourceString("ops_err_AggregationViewNotAvailalbe");
+				oNavCtrl.LoadConfig();
+			}
+			catch(e)
+			{
+				var sErrMsg = oNavCtrl.GetWebPageResourceString("err_GenericError") + "\n";
+				sErrMsg += e.description;
+				alertErr(sErrMsg);
+				return;
+			}
+			
+			{
+				var svrName = oNavCtrl.AnalysisServer;
+				var dbName = oNavCtrl.AnalysisDatabase;
+				if("" == svrName || "" == dbName)
+				{
+					divShow("OlapNotConfigured");
+					return;
+				}
+			}
+						
+			sQNamespace=Cube;
+			
+			if(Cube.length > 0)
+			{
+				var sCubeName = Cube; 
+				var sCubeFriendlyName = Cube;
+			
+				if (sCubeName.length > 0)
+				{
+					InitCube(sCubeName, sCubeFriendlyName);
+	
+					divShow("Drill");
+					//document.all("ptable").DisplayFieldList=true;
+				}
+			}
+			
+			document.ptable.AutoFit=true;
+		}
+		
+		function PageUnload()
+		{
+			try
+			{
+				document.ScriptEventBroadcaster.Dispose();
+			}
+			catch(e)
+			{
+				var sErrMsg = oNavCtrl.GetWebPageResourceString("err_GenericError") + "\n";
+				sErrMsg += e.description;
+				alertErr(sErrMsg);
+			}
+		}
+	
+		var attached=false;
+
+		function OnDrillThrough()
+		{
+			var pt = document.ptable1;
+			if(attached==false)
+			{
+				pt.attachEvent("BeforeContextMenu", caselist_BeforeContextMenu);
+//				pt.attachEvent("CommandExecute", caselist_CommandExecute);
+				attached=true;
+			}
+			SetPtableView();
+			
+			divShow("Case");
+			var IsLiveMode = (1 == document.CollapsibleCtrl.DataType);
+
+			//show pivot table field list
+			//document.all("ptable").DisplayFieldList=true;
+		if(null == window.event.PivotTable)
+			OnDrillThroughCompleted();
+		}
+		
+		function OnDrillThroughCompleted()
+		{
+			DoPivotTableLayout();
+
+			//scroll to the bottom to show the newly opened pivot table
+			window.scrollTo(0,document.body.scrollHeight);
+		}
+		
+		function InitCube(sCube, sCubeFriendlyName)
+		{
+			var pt;
+			var sRowDim;
+			var sColDim;
+			
+			if("ServiceMetrics" == sCube)//Resources.GetDbString("CUBE_SERVICE_FACTS");
+			{
+				sRowDim = "Services";//Resources.GetDbString("DIM_SERVICE");
+				sColDim = "Service State";//"<%= this.SvcColDimension %>";
+			}
+			else
+				if("MessageMetrics" == sCube)//Resources.GetDbString("CUBE_MESSAGE_FACTS");
+				{
+					sRowDim = "Services";//Resources.GetDbString("DIM_SERVICES");
+					sColDim = "Direction";//Resources.GetDbString("DIM_DIRECTION");
+				}
+				else
+				{
+					sRowDim = "Processes";//Resources.GetDbString("DIM_PROCESSES");;
+					sColDim = "ProcessState";//Resources.GetDbString("DIM_PROCSTATE");
+				}
+			var sTotal = "Count";//Resources.GetDbString("TTL_COUNT");
+			
+			try
+			{
+				pt = document.ptable;
+				
+				pt.ConnectionString = oNavCtrl.OLAPConnStr;
+				
+				pt.DataMember = sCube;
+							
+				var pview = pt.ActiveView;
+				pview.AutoLayout();
+
+				pview.TitleBar.Caption = sCubeFriendlyName;
+				pt.Drillthrough.UserInterface.SetViewMode(pt.Drillthrough.Constants.plDrillthroughViewModeSpawn);
+				
+				var rowItem=null;
+				if (sRowDim.length > 0)
+				{
+					try{rowItem=pview.FieldSets(sRowDim);}
+					catch(e){rowItem=null;}
+				}
+				if(rowItem!=null)
+					pview.RowAxis.InsertFieldSet(rowItem);
+				else
+					pview.RowAxis.InsertFieldSet(pview.FieldSets(0));
+
+				var colItem=null;
+				if (sColDim.length > 0)
+				{
+					try{colItem=pview.FieldSets(sColDim);}
+					catch(e){colItem=null;}
+				}
+				if(colItem!=null)
+					pview.ColumnAxis.InsertFieldSet(colItem);
+				else
+					pview.ColumnAxis.InsertFieldSet(pview.FieldSets(1));
+
+				var totalItem=null;
+				if (sTotal.length > 0)
+				{
+					try{totalItem=pview.Totals(sTotal);}
+					catch(e){totalItem=null;}
+				}
+				if(totalItem!=null)
+					pview.DataAxis.InsertTotal(totalItem);
+				else
+					pview.DataAxis.InsertTotal(pview.Totals(0));
+			}
+			catch(e)
+			{
+				var errMsg = oNavCtrl.GetWebPageResourceString("err_InitializingPT");
+				errMsg += "\n" + e.description + "\n";
+				errMsg += oNavCtrl.GetWebPageResourceString("err_MostLikelyWrongCube");
+				alertErr(errMsg);
+			}	
+		}
+
+		</SCRIPT>
+		
+		<SCRIPT language="JavaScript" for="ScriptEventBroadcaster" Event="ShowHelp">
+			ShowPageHelp();
+		</SCRIPT>
+		
+		<STYLE> .ptDrillThrough { BEHAVIOR: url(Drillthrough.htc) }
+		</STYLE>
+	</HEAD>
+	
+	<BODY onload="PageLoad();" onunload="PageUnload();" MS_POSITIONING="GridLayout" STYLE="background-color:#ffffff;">
+		<FORM id="AggregationView" method="post" RUNAT="server" STYLE="background-color:#ffffff;"> 
+		<!-- buttons for communication between Hat Application and IE. -->
+		<INPUT type="button" ID="HelpBtn" style="DISPLAY:none;" onclick='ShowPageHelp();'>
+
+			<DIV id="OlapNotConfigured" style="DISPLAY:none;">
+				<A ID="ops_err_AggregationViewNotAvailalbe"></A>
+			</DIV>
+
+			<DIV id="Drill" style="DISPLAY: none; FONT-SIZE: 80%; FONT-FAMILY:MS Shell Dlg;">&nbsp;
+				<A ID="DrillThroughHeader">&nbsp;</A>
+				<BR>
+				<OBJECT class="ptDrillThrough" id="ptable" height="220" width="100%" classid="clsid:0002E55A-0000-0000-C000-000000000046" name="ptable" VIEWASTEXT OnNewDrillthroughPivotTable="OnDrillThrough();">
+					<PARAM NAME="XMLData" VALUE='<xml xmlns:x="urn:schemas-microsoft-com:office:excel">&#13;&#10; <x:PivotTable>&#13;&#10;  <x:OWCVersion>10.0.0.3409         </x:OWCVersion>&#13;&#10;  <x:DisplayScreenTips/>&#13;&#10;  <x:NoAutoFit/>&#13;&#10;  <x:Height>220</x:Height>&#13;&#10;  <x:Width>769</x:Width>&#13;&#10;  <x:CubeProvider>msolap.2</x:CubeProvider>&#13;&#10;  <x:CacheDetails/>&#13;&#10;  <x:PivotView>&#13;&#10;   <x:IsNotFiltered/>&#13;&#10;  </x:PivotView>&#13;&#10; </x:PivotTable>&#13;&#10;</xml>'>
+				</OBJECT>
+			</DIV>
+			<BR>
+			<DIV id="Case" style="DISPLAY: none; FONT-SIZE: 80%; FONT-FAMILY:MS Shell Dlg;">
+				<hr>
+				<BR>
+				<A ID="PivotTableHeader">&nbsp;</A>
+				<BR>
+				<OBJECT id="ptable1" height="300" width="100%" classid="clsid:0002E55A-0000-0000-C000-000000000046" name="ptable1" VIEWASTEXT>
+					<PARAM NAME="XMLData" VALUE='<xml xmlns:x="urn:schemas-microsoft-com:office:excel">&#13;&#10; <x:PivotTable>&#13;&#10;  <x:OWCVersion>10.0.0.3409         </x:OWCVersion>&#13;&#10;  <x:NoDisplayToolbar/>&#13;&#10;  <x:DisplayScreenTips/>&#13;&#10;  <x:NoAutoFit/>&#13;&#10;  <x:Height>300</x:Height>&#13;&#10;  <x:Width>769</x:Width>&#13;&#10;  <x:CubeProvider>msolap.2</x:CubeProvider>&#13;&#10;  <x:DisplayFieldList/>&#13;&#10;  <x:CacheDetails/>&#13;&#10; </x:PivotTable>&#13;&#10;</xml>'>
+					<param name="AutoFit" value="true">
+					<param name="DisplayToolbar" value="false">
+					<param name="DisplayPropertyToolbox" value="false">
+					<param name="DisplayFieldList" value="false">
+				</OBJECT>
+			</DIV>
+			<DIV id="Util" style="DISPLAY: none">
+				<OBJECT id="DbUtil" data="data:application/x-oleobject;base64,IGkzJfkDzxGP0ACqAGhvEzwhRE9DVFlQRSBIVE1MIFBVQkxJQyAiLS8vVzNDLy9EVEQgSFRNTCA0LjAgVHJhbnNpdGlvbmFsLy9FTiI+DQo8SFRNTD48SEVBRD4NCjxNRVRBIGh0dHAtZXF1aXY9Q29udGVudC1UeXBlIGNvbnRlbnQ9InRleHQvaHRtbDsgY2hhcnNldD13aW5kb3dzLTEyNTIiPg0KPE1FVEEgY29udGVudD0iTVNIVE1MIDYuMDAuMjcxNi4yMjAwIiBuYW1lPUdFTkVSQVRPUj48L0hFQUQ+DQo8Qk9EWT4NCjxQPiZuYnNwOzwvUD48L0JPRFk+PC9IVE1MPg0K" classid="clsid:60F98CD2-48B2-4e9a-96B3-946FB1EE7978" VIEWASTEXT>
+				</OBJECT>
+			</DIV>
+			<DIV id="divStatusMessage" style="FONT-SIZE: 8pt; VERTICAL-ALIGN: bottom; FONT-FAMILY:MS Shell Dlg;"></DIV>
+			<DIV id="HelperObjectsDiv" style="DISPLAY: none">
+				<OBJECT id="Admin" classid="clsid:124B0FB8-DF1E-46b0-97B1-FD698C35C497" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="Help" classid="clsid:DAC40761-C9C8-4653-AB49-C4D4AE4FF042" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="CollapsibleCtrl" CLASSID="clsid:12BBC156-5455-4a61-8DC8-82F56838CB99" VIEWASTEXT>
+				</OBJECT>
+
+				<OBJECT id="ScriptEventBroadcaster" CLASSID="clsid:1708739A-1EBE-4c62-9B7E-2FA131FFCB5C" VIEWASTEXT>
+				</OBJECT>
+			</DIV>
+		</FORM>
+	</BODY>
+</HTML>

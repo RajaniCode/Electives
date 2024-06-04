@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://Microsoft.Samples.BizTalk.ConsumeWebService/webservices/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://Microsoft.Samples.BizTalk.ConsumeWebService/webservices/" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.ConsumeWebService/webservices/">
+      <s:element name="submitPO">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PODocument" type="s0:InboundPO" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="InboundPO">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="PO_Num" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Date" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="submitPOResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="submitPOResult" type="s0:Invoice" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Invoice">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="InvoiceNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </types>
+  <message name="submitPOSoapIn">
+    <part name="parameters" element="s0:submitPO" />
+  </message>
+  <message name="submitPOSoapOut">
+    <part name="parameters" element="s0:submitPOResponse" />
+  </message>
+  <portType name="POWebServiceSoap">
+    <operation name="submitPO">
+      <input message="s0:submitPOSoapIn" />
+      <output message="s0:submitPOSoapOut" />
+    </operation>
+  </portType>
+  <binding name="POWebServiceSoap" type="s0:POWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="submitPO">
+      <soap:operation soapAction="http://Microsoft.Samples.BizTalk.ConsumeWebService/webservices/submitPO" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="POWebService">
+    <port name="POWebServiceSoap" binding="s0:POWebServiceSoap">
+      <soap:address location="http://localhost/POWebService/SubmitPOService.asmx" />
+    </port>
+  </service>
+</definitions>

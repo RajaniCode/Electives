@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="MyMediaPlayerAppVB.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="600" d:DesignWidth="600">
+
+    <Grid x:Name="LayoutRoot" Background="SteelBlue" DataContext="{Binding}">
+        <Border BorderBrush="Yellow" BorderThickness="3"/>
+        <TextBlock Text="My Media Player" HorizontalAlignment="Center" FontWeight="Bold"
+ 		FontSize="24" Margin="0,10,0,0" Foreground="Yellow"/>
+        <Button x:Name="play" Height="50"   Width="50" Content="Play" Margin="0,0,100,425"
+ 		Background="Yellow" Click="mediaPlay"/>
+        <Button x:Name="pause" Height="50"   Width="50" Content="Pause" Margin="0,0,0,425"
+ 		Background="Yellow" Click="mediaPause"/>
+        <Button x:Name="stop" Height="50"   Width="50" Content="Stop" Margin="100,0,0,425"
+ 		Background="Yellow" Click="mediaStop"/>
+        <Border Height="425" Width="525" BorderBrush="Yellow" BorderThickness="3"
+ 		Margin="0,100,0,0"/>
+        <MediaElement x:Name="mediaEle" Height="400" Width="500" Margin="0,100,0,0" Source="Wildlife.wmv" 
+                      Stretch="UniformToFill" Volume="0.75" AutoPlay="False"
+ 		Balance="1" MediaOpened="mediaOpen" MediaFailed="mediaError"/>
+        <TextBlock x:Name="errorText" Text="" Height="50" Width="100"
+ 		Foreground="Yellow"/>
+        <TextBlock x:Name="mediaFile" Height="50" Width="200" Foreground="Yellow"
+ 		Text="Media File: " Margin="0,565,0,0" FontWeight="Bold"/>
+        <TextBlock x:Name="duration" Height="50" Width="200" Foreground="Yellow"
+ 		Text="Total Time: " Margin="400,565,0,0" FontWeight="Bold"/>
+    </Grid>
+</UserControl>

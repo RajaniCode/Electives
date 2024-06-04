@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:tns="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.LastPaymentRequest" elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.LastPaymentRequest" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="LastPaymentRequest" nillable="true" type="tns:LastPaymentRequest" />
+  <xs:complexType name="LastPaymentRequest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CustomerName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

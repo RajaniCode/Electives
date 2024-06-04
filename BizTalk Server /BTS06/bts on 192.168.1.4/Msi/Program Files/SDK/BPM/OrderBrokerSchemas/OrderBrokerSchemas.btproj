@@ -1,0 +1,97 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1377"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{4C85F6F7-04D5-427B-B3F5-0F0CB0F21397}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\Microsoft.Samples.BizTalk.SouthridgeVideo.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft BizTalk (TM) Server 2006"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright (c) Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBrokerSchemas"
+                    AssemblyName = "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBrokerSchemas"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "BTSScn.BPM.OrderBrokerApp"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = "BTSScn.BPM.OrderBrokerApp"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Schemas"
+                    Project = "{0C4BE102-D0AF-4AB6-95A4-EC306CE611A3}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "CSR_OrderRequest.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBrokerSchemas"
+                    Type = "CSR_OrderRequestSchema"
+                />
+                <File
+                    RelPath = "Servicing_OrderRequest.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBrokerSchemas"
+                    Type = "Servicing_OrderRequestSchema"
+                />
+                <File
+                    RelPath = "SQLHistoryInsert.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.SouthridgeVideo.OrderBrokerSchemas"
+                    Type = "SQLHistoryInsertSchema"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

@@ -1,0 +1,286 @@
+﻿<HTML>
+<HEAD>
+<TITLE ID='L_Delete_DialogTitle'>Delete</TITLE>
+<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=utf-8'>
+<LINK REL='stylesheet' TYPE='text/css' HREF='/widgets/bizdesk.css' ID='mainstylesheet'>
+
+<SCRIPT LANGUAGE='VBScript'>
+Option Explicit
+
+Const L_ProfileProps_Text = "properties"
+Const L_SiteTermProps_Text = "site-terms"
+
+Const L_ProfilePropsCap_Text = "Properties"
+Const L_SiteTermPropsCap_Text = "Site-Terms"
+
+Const L_InvalidArg_ErrorMessage = "Error:  Invalid argument passed to DlgDeleteItems.htm."
+
+Const L_P1G0_Text = "Delete %1?"
+Const L_P0G1_Text = "Delete %1 and all contained items?"
+Const L_PNG0_Text = "Delete the selected %2:  %1"
+Const L_P0GN_Text = "Delete the selected groups:  %1"
+
+Const L_PNGN_Text       = "You have selected multiple items to delete:"
+Const L_GroupHead_Text  = "Groups:"
+Const L_VarHead_Text    = "%3:"
+Const L_Delete_Text     = "Delete these items?"
+
+Const L_Yes_Button = "OK"
+Const L_No_Button = "Cancel"
+Const L_Help_Button = "Help"
+
+
+Dim g_nProps
+Dim g_nGroups
+
+Dim g_strRetVal
+Dim winHelpWindow
+Dim g_strHelpPath
+
+'----------------------------------------------------------------------------
+' initDialog
+'
+' Description:
+'     Sets up the dialog with the appropriate display info given the
+'     passed-in arguments.
+'----------------------------------------------------------------------------
+Sub initDialog()
+    Dim sdArgs
+    Dim rgxmlItems
+    Dim strProfType
+    Dim rgstrArgs(3)
+    Dim i
+    
+    Dim elDiv
+    Dim elTable
+    Dim elRow
+    Dim elCell
+    Dim elSpan
+    Dim elButton
+
+    g_strRetVal = ""
+
+    ' Add HTML programmatically
+    
+    ' 1 property, 0 groups
+    Set elDiv = document.createElement("DIV")
+      document.body.insertAdjacentElement "beforeEnd", elDiv
+      With elDiv
+        .id = "divP1G0"
+        .style.display = "none"
+        .innerText = L_P1G0_Text
+      End With
+
+    ' 0 properties, 1 group
+    Set elDiv = document.createElement("DIV")
+      document.body.insertAdjacentElement "beforeEnd", elDiv
+      With elDiv
+        .id = "divP0G1"
+        .style.display = "none"
+        .innerText = L_P0G1_Text
+      End With
+ 
+    ' N properties, 0 groups
+    Set elDiv = document.createElement("DIV")
+      document.body.insertAdjacentElement "beforeEnd", elDiv
+      With elDiv
+        .id = "divPNG0"
+        .style.display = "none"
+        .innerText = L_PNG0_Text
+      End With
+        
+    ' 0 properties, N groups
+    Set elDiv = document.createElement("DIV")
+      document.body.insertAdjacentElement "beforeEnd", elDiv
+      With elDiv
+        .id = "divP0GN"
+        .style.display = "none"
+        .innerText = L_P0GN_Text
+      End With
+
+    ' N properties, N groups
+    Set elDiv = document.createElement("DIV")
+      document.body.insertAdjacentElement "beforeEnd", elDiv
+      With elDiv
+        .id = "divPNGN"
+        .style.display = "none"
+        .innerText = L_PNGN_Text
+      End With
+      elDiv.appendChild(document.createElement("BR"))
+        Set elTable = elDiv.appendChild(document.createElement("TABLE"))
+          Set elRow = elTable.insertRow()
+            Set elCell = elRow.insertCell()
+              elCell.innerText = L_GroupHead_Text
+            Set elCell = elRow.insertCell()
+              elCell.innerText = "%1"
+          Set elRow = elTable.insertRow()
+            Set elCell = elRow.insertCell()
+              elCell.innerText = L_VarHead_Text
+            Set elCell = elRow.insertCell()
+              elCell.innerText = "%2"
+      elDiv.appendChild(document.createElement("BR"))
+      Set elSpan = elDiv.appendChild(document.createElement("SPAN"))
+        elSpan.innerText = L_Delete_Text
+
+    ' Buttons
+    Set elDiv = document.createElement("DIV")
+      document.body.insertAdjacentElement "beforeEnd", elDiv
+      With elDiv
+        .align = "right"
+        .style.paddingTop = "16px"
+      End With
+      Set elButton = elDiv.appendChild(document.createElement("BUTTON"))
+        With elButton
+          .id = "btnYes"
+          .onclick = GetRef("onYesBtnClicked")
+          .style.width = "80px"
+          .innerText = L_Yes_Button
+        End With
+      Set elButton = elDiv.appendChild(document.createElement("BUTTON"))
+        With elButton
+          .id = "btnNo"
+          .onclick = GetRef("onNoBtnClicked")
+          .style.width = "80px"
+          .innerText = L_No_Button
+        End With
+      Set elButton = elDiv.appendChild(document.createElement("BUTTON"))
+        With elButton
+          .id = "btnHelp"
+          .onclick = GetRef("onHelpBtnClicked")
+          .style.width = "80px"
+          .innerText = L_Help_Button
+        End With
+
+         
+    ' Get list of XML nodes for deletion.
+    Set sdArgs = window.dialogArguments
+    strProfType = sdArgs.Item("profType")
+    rgxmlItems = sdArgs.Item("rgxmlItems")
+    g_strHelpPath = sdArgs.Item("helpPath") 
+    
+    If g_strHelpPath = "" Then
+        ' Hide the help button
+        btnHelp.style.display = "none"
+    End If
+    
+    If strProfType = "siteterm" Then
+        g_strHelpPath = g_strHelpPath & "docs/default.asp?helptopic=cs_bd_usersgrps_MGAV.htm"
+    Else
+		    g_strHelpPath = g_strHelpPath & "docs/default.asp?helptopic=cs_bd_usersgrps_UNOC.htm"
+    End If
+
+    ' Figure out how many are Properties and how many are Groups.
+    g_nProps = 0
+    g_nGroups = 0
+    For i = 0 To UBound(rgxmlItems)
+        Select Case rgxmlItems(i).tagName
+        Case "Property"
+            g_nProps = g_nProps + 1
+        Case "Group"
+            g_nGroups = g_nGroups + 1
+        End Select
+    Next
+
+    If g_nProps = 1 And g_nGroups = 0 Then
+        ' Single property being deleted.
+
+        rgstrArgs(0) = rgxmlItems(0).getAttribute("displayName")
+        divP1G0.innerHTML = sFormatString(divP1G0.innerHTML, rgstrArgs)
+        divP1G0.style.display = ""
+
+    Elseif g_nProps = 0 And g_nGroups = 1 Then
+        ' Single group being deleted.
+
+        rgstrArgs(0) = rgxmlItems(0).getAttribute("displayName")
+        divP0G1.innerHTML = sFormatString(divP0G1.innerHTML, rgstrArgs)
+        divP0G1.style.display = ""
+
+    Elseif g_nProps > 1 And g_nGroups = 0 Then
+        ' Multiple properties being deleted.
+
+        rgstrArgs(0) = g_nProps
+        If strProfType = "siteterm" Then
+            rgstrArgs(1) = L_SiteTermProps_Text
+        Else
+            rgstrArgs(1) = L_ProfileProps_Text
+        End If
+
+        divPNG0.innerHTML = sFormatString(divPNG0.innerHTML, rgstrArgs)
+        divPNG0.style.display = ""
+
+    Elseif g_nProps = 0 And g_nGroups > 1 Then
+        ' Multiple groups being deleted.
+
+        rgstrArgs(0) = g_nGroups
+        divP0GN.innerHTML = sFormatString(divP0GN.innerHTML, rgstrArgs)
+        divP0GN.style.display = ""
+
+    Elseif g_nProps >= 1 And g_nGroups >= 1 Then
+        ' Mixture of properties and groups being deleted.
+
+        rgstrArgs(0) = g_nGroups
+        rgstrArgs(1) = g_nProps
+        If strProfType = "siteterm" Then
+            rgstrArgs(2) = L_SiteTermPropsCap_Text
+        Else
+            rgstrArgs(2) = L_ProfilePropsCap_Text
+        End If
+
+        divPNGN.innerHTML = sFormatString(divPNGN.innerHTML, rgstrArgs)
+        divPNGN.style.display = ""
+        
+    Else
+        ' No properties and no groups to delete?!
+        alert L_InvalidArg_ErrorMessage
+    End If
+
+    ' This is such a dirty trick -- resizeTo won't work, though.
+    window.dialogWidth = CStr(document.body.scrollWidth + 28) & "px"
+    window.dialogHeight = CStr(document.body.scrollHeight + 28) & "px"
+End Sub
+
+
+Function sFormatString(sFormat, aArgs)
+	dim nArg
+	for nArg = LBound(aArgs) to UBound(aArgs)
+		sFormat = Replace(sFormat, "%" & nArg + 1, aArgs(nArg))
+	next
+	sFormatString = sFormat
+End Function
+
+
+' Handler for "Yes" button onClick event.  Causes window to fire the
+' onUnload event.
+Sub onYesBtnClicked()
+    g_strRetVal = "delete"
+    window.close
+End Sub
+
+
+' Handler for "No" button onClick event.  Causes window to fire the
+' onUnload event.
+Sub onNoBtnClicked()
+    g_strRetVal = ""
+    window.close
+End Sub
+
+Sub onHelpBtnClicked()
+	if typename(winHelpWindow) = "HTMLWindow2" then winHelpWindow.close
+		set winHelpWindow = window.open(g_strHelpPath, "winHelpWindow", _
+						 "height=500,width=700,status=no,toolbar=yes,menubar:no,resizable=yes")
+End Sub
+
+' Handler for the window's onUnload event.
+Sub closeDialog()
+    window.returnValue = g_strRetVal
+End Sub
+
+
+</SCRIPT>
+
+</HEAD>
+
+<BODY STYLE='margin:0px;padding:16px;overflow:hidden' onload='initDialog()' onunload='closeDialog()'>
+
+</BODY>
+</HTML>

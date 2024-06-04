@@ -1,0 +1,81 @@
+<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.4634"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{4D9BE62E-C822-4006-84AC-A5D903BEE3DF}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\..\PartyResolution.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = "Microsoft BizTalk Server 2006 SDK Sample"
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft® BizTalk® Server SDK"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright © Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.ProjectSchema"
+                    AssemblyName = "ProjectSchema"
+                />
+                <Config
+                    Name = "Development"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Pipeline.Components"
+                    AssemblyName = "Microsoft.BizTalk.Pipeline.Components"
+                    HintPath = "..\..\..\..\..\..\Pipeline Components\Microsoft.BizTalk.Pipeline.Components.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "MimePartyResReceivePipeline.btp"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ProjectSchema"
+                    Type = "MimePartyResReceivePipeline"
+                />
+                <File
+                    RelPath = "MimePartyResSendPipeline.btp"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ProjectSchema"
+                    Type = "MimePartyResSendPipeline"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

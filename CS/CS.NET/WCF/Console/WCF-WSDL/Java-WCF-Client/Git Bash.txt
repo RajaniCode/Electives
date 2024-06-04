@@ -1,0 +1,52 @@
+
+# Git Bash
+
+Aspire@Acer MINGW64 /
+$ cd "E:\Working\CS\WCF\Console\WCF-WSDL"
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL
+$ csc WCFService.cs
+Microsoft (R) Visual C# Compiler version 1.3.1.60621
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL
+$ ./WCFService
+http://localhost:8000/WCFService.svc?wsdl
+Press ENTER to close
+
+
+# Git Bash
+
+Aspire@Acer MINGW64 /
+$ cd "E:\Working\CS\WCF\Console\WCF-WSDL\Java-WCF-Client"
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL/Java-WCF-Client
+$ mkdir src
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL/Java-WCF-Client
+$ cd src
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL/Java-WCF-Client/src
+$ touch WCFService.xml
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL/Java-WCF-Client/src
+$ wsimport -extension -keep -Xnocompile -b WCFService.xml http://localhost:8000/WCFService.svc?wsdl
+parsing WSDL...
+
+
+
+Generating code...
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL/Java-WCF-Client/src
+$ mkdir client
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL/Java-WCF-Client/src
+$ touch client/JavaWCFClient.java
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL/Java-WCF-Client/src
+$ javac "client\JavaWCFClient.java"
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-WSDL/Java-WCF-Client/src
+$ java client.JavaWCFClient
+WCF Service: Java WCF Client

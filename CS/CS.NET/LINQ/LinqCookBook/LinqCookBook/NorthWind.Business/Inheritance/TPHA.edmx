@@ -1,0 +1,220 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="TPHAModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="TPHAModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="TPHAModel.Store.Customer" store:Type="Tables" Schema="tph" />
+          <EntitySet Name="Type" EntityType="TPHAModel.Store.Type" store:Type="Tables" Schema="tph" />
+          <AssociationSet Name="FK_Customer_Type" Association="TPHAModel.Store.FK_Customer_Type">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Type1" Association="TPHAModel.Store.FK_Customer_Type1">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_Type2" Association="TPHAModel.Store.FK_Customer_Type2">
+            <End Role="Type" EntitySet="Type" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CustomerType" Type="int" Nullable="false" />
+          <Property Name="IndustryType" Type="int" Nullable="false" />
+          <Property Name="LeadType" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Type">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Value" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Customer_Type">
+          <End Role="Type" Type="TPHAModel.Store.Type" Multiplicity="1" />
+          <End Role="Customer" Type="TPHAModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="CustomerType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Type1">
+          <End Role="Type" Type="TPHAModel.Store.Type" Multiplicity="1" />
+          <End Role="Customer" Type="TPHAModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="IndustryType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_Type2">
+          <End Role="Type" Type="TPHAModel.Store.Type" Multiplicity="1" />
+          <End Role="Customer" Type="TPHAModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type">
+              <PropertyRef Name="TypeId" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="LeadType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="TPHAModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="TPHAEntities">
+          <EntitySet Name="Customers" EntityType="TPHAModel.Customer" />
+          <EntitySet Name="Types" EntityType="TPHAModel.Type" />
+          <AssociationSet Name="CustomerLeadType" Association="TPHAModel.CustomerLeadType">
+            <End Role="Customer" EntitySet="Customers" />
+            <End Role="LeadType" EntitySet="Types" /></AssociationSet>
+          <AssociationSet Name="IndustryTypeCustomer" Association="TPHAModel.IndustryTypeCustomer">
+            <End Role="IndustryType" EntitySet="Types" />
+            <End Role="Customer" EntitySet="Customers" /></AssociationSet>
+          <AssociationSet Name="CustomerTypeCustomer" Association="TPHAModel.CustomerTypeCustomer">
+            <End Role="CustomerType" EntitySet="Types" />
+            <End Role="Customer" EntitySet="Customers" /></AssociationSet></EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="LeadType" Relationship="TPHAModel.CustomerLeadType" FromRole="Customer" ToRole="LeadType" />
+          <NavigationProperty Name="IndustryType" Relationship="TPHAModel.IndustryTypeCustomer" FromRole="Customer" ToRole="IndustryType" />
+          <NavigationProperty Name="CustomerType" Relationship="TPHAModel.CustomerTypeCustomer" FromRole="Customer" ToRole="CustomerType" /></EntityType>
+        <EntityType Name="Type" Abstract="true">
+          <Key>
+            <PropertyRef Name="TypeId" />
+          </Key>
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          </EntityType>
+        <EntityType Name="CustomerType" BaseType="TPHAModel.Type" >
+          <NavigationProperty Name="Customers" Relationship="TPHAModel.CustomerTypeCustomer" FromRole="CustomerType" ToRole="Customer" /></EntityType>
+        <EntityType Name="IndustryType" BaseType="TPHAModel.Type" >
+          <NavigationProperty Name="Customers" Relationship="TPHAModel.IndustryTypeCustomer" FromRole="IndustryType" ToRole="Customer" /></EntityType>
+        <EntityType Name="LeadType" BaseType="TPHAModel.Type" >
+          <NavigationProperty Name="Customers" Relationship="TPHAModel.CustomerLeadType" FromRole="LeadType" ToRole="Customer" /></EntityType>
+        <Association Name="CustomerLeadType">
+          <End Type="TPHAModel.Customer" Role="Customer" Multiplicity="*" />
+          <End Type="TPHAModel.LeadType" Role="LeadType" Multiplicity="1" /></Association>
+        <Association Name="IndustryTypeCustomer">
+          <End Type="TPHAModel.IndustryType" Role="IndustryType" Multiplicity="1" />
+          <End Type="TPHAModel.Customer" Role="Customer" Multiplicity="*" /></Association>
+        <Association Name="CustomerTypeCustomer">
+          <End Type="TPHAModel.CustomerType" Role="CustomerType" Multiplicity="1" />
+          <End Type="TPHAModel.Customer" Role="Customer" Multiplicity="*" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="TPHAModelStoreContainer" CdmEntityContainer="TPHAEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="IsTypeOf(TPHAModel.Customer)">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Types">
+            <EntityTypeMapping TypeName="IsTypeOf(TPHAModel.Type)">
+              <MappingFragment StoreEntitySet="Type">
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TPHAModel.LeadType)">
+              <MappingFragment StoreEntitySet="Type" >
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <Condition ColumnName="Name" Value="LeadSource" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TPHAModel.IndustryType)">
+              <MappingFragment StoreEntitySet="Type" >
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <Condition ColumnName="Name" Value="IndustryType" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(TPHAModel.CustomerType)">
+              <MappingFragment StoreEntitySet="Type" >
+                <ScalarProperty Name="TypeId" ColumnName="TypeId" />
+                <Condition ColumnName="Name" Value="CustomerType" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="CustomerLeadType" TypeName="TPHAModel.CustomerLeadType" StoreEntitySet="Customer">
+            <EndProperty Name="LeadType">
+              <ScalarProperty Name="TypeId" ColumnName="LeadType" /></EndProperty>
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="CustomerId" ColumnName="CustomerId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="IndustryTypeCustomer" TypeName="TPHAModel.IndustryTypeCustomer" StoreEntitySet="Customer">
+            <EndProperty Name="IndustryType">
+              <ScalarProperty Name="TypeId" ColumnName="IndustryType" /></EndProperty>
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="CustomerId" ColumnName="CustomerId" /></EndProperty></AssociationSetMapping>
+          <AssociationSetMapping Name="CustomerTypeCustomer" TypeName="TPHAModel.CustomerTypeCustomer" StoreEntitySet="Customer">
+            <EndProperty Name="CustomerType">
+              <ScalarProperty Name="TypeId" ColumnName="CustomerType" /></EndProperty>
+            <EndProperty Name="Customer">
+              <ScalarProperty Name="CustomerId" ColumnName="CustomerId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="TPHA">
+        <EntityTypeShape EntityType="TPHAModel.Customer" Width="1.5" PointX="5.625" PointY="5.25" Height="1.9802864583333326" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPHAModel.Type" Width="1.5" PointX="5.75" PointY="1.125" Height="1.4033821614583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="TPHAModel.CustomerType" Width="1.5" PointX="7.75" PointY="3.25" Height="1.018779296875" />
+        <InheritanceConnector EntityType="TPHAModel.CustomerType">
+          <ConnectorPoint PointX="7.25" PointY="1.8266910807291665" />
+          <ConnectorPoint PointX="8.5" PointY="1.8266910807291665" />
+          <ConnectorPoint PointX="8.5" PointY="3.25" /></InheritanceConnector>
+        <EntityTypeShape EntityType="TPHAModel.IndustryType" Width="1.5" PointX="5.75" PointY="3.25" Height="1.018779296875" />
+        <EntityTypeShape EntityType="TPHAModel.LeadType" Width="1.5" PointX="3.875" PointY="3.25" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="TPHAModel.IndustryType">
+          <ConnectorPoint PointX="6.5" PointY="2.5283821614583331" />
+          <ConnectorPoint PointX="6.5" PointY="3.25" /></InheritanceConnector>
+        <InheritanceConnector EntityType="TPHAModel.LeadType">
+          <ConnectorPoint PointX="5.75" PointY="1.8266910807291665" />
+          <ConnectorPoint PointX="4.625" PointY="1.8266910807291665" />
+          <ConnectorPoint PointX="4.625" PointY="3.25" />
+          </InheritanceConnector>
+        <AssociationConnector Association="TPHAModel.CustomerLeadType">
+          <ConnectorPoint PointX="5.625" PointY="6.2401432291666659" />
+          <ConnectorPoint PointX="4.625" PointY="6.2401432291666659" />
+          <ConnectorPoint PointX="4.625" PointY="4.4610807291666665" /></AssociationConnector>
+        <AssociationConnector Association="TPHAModel.IndustryTypeCustomer">
+          <ConnectorPoint PointX="6.4375" PointY="4.4610807291666665" />
+          <ConnectorPoint PointX="6.4375" PointY="5.25" /></AssociationConnector>
+        <AssociationConnector Association="TPHAModel.CustomerTypeCustomer">
+          <ConnectorPoint PointX="8.5" PointY="4.4610807291666665" />
+          <ConnectorPoint PointX="8.5" PointY="6.2401432291666659" />
+          <ConnectorPoint PointX="7.125" PointY="6.2401432291666659" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

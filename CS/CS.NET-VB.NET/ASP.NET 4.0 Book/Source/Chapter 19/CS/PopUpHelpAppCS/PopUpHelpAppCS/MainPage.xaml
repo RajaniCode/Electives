@@ -1,0 +1,81 @@
+﻿<UserControl xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"  x:Class="PopUpHelpAppCS.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="400" d:DesignWidth="750" Foreground="Yellow">
+
+    <Grid x:Name="LayoutRoot" Background="Black">
+        <TextBlock Text="Silverlight 3 Controls" Margin="10,10,0,0"
+ 		HorizontalAlignment="Center"/>
+        <TextBlock Text="TextBox" Margin="50,65,0,0"/>
+        <TextBox Text="This is a TextBox control" Margin="200,65,200,305" Foreground="Red"
+ 		MouseEnter="showTextPopup" MouseLeave="hideTextPopup"/>
+        <Popup x:Name="popup1" HorizontalOffset="400" VerticalOffset="75">
+            <Popup.Child>
+                <Button Background="Green" VerticalAlignment="Top" MaxWidth="200" 
+ 			FontWeight="Bold" Foreground="DarkBlue" IsEnabled="False">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text ="The TextBox control allows you 
+ 						to display text or retrieve text from user. In 
+ 						Silverlight 2, the TextBox control can display 
+ 						text in multiple lines and wrap text around the 
+ 						control." TextWrapping="Wrap"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Popup.Child>
+        </Popup>
+        <TextBlock Text="ListBox" Margin="50,145,0,0"/>
+        <ListBox Height="58" Margin="200,0,200,75" Foreground="Red"
+ 			MouseEnter="showListPopup" MouseLeave="hideListPopup" FontSize="11">
+            <ListBoxItem Content="Silverlight 1.0"/>
+            <ListBoxItem Content="Silverlight 2.0 Beta 1"/>
+            <ListBoxItem Content="Silverlight 2.0 Beta 2"/>
+            <ListBoxItem Content="Silverlight 3.0"/>
+        </ListBox>
+        <Popup x:Name="popup2" HorizontalOffset="400" VerticalOffset="150">
+            <Popup.Child>
+                <Button Background="Green" VerticalAlignment="Top" MaxWidth="200" 
+ 				FontWeight="Bold" Foreground="DarkBlue" IsEnabled="False">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text ="The ListBox control allows you 
+ 						to display a list of items" 
+ 						TextWrapping="Wrap"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Popup.Child>
+        </Popup>
+        <TextBlock Text="Calendar" Margin="50,225,0,0"/>
+        <my:Calendar DisplayMode="Year" IsTodayHighlighted="True"
+ 			SelectionMode="SingleDate" Margin="0,200,150,0" Foreground="Red"
+ 			MouseEnter="showCalendarPopup" MouseLeave="hideCalendarPopup"/>
+        <Popup x:Name="popup3" HorizontalOffset="400" VerticalOffset="225">
+            <Popup.Child>
+                <Button Background="Green" VerticalAlignment="Top" MaxWidth="200" 
+ 				FontWeight="Bold" Foreground="DarkBlue" IsEnabled="False">
+                    <Button.ContentTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text ="The Calendar control provides 
+ 						you the facility to select a particular date from 
+ 						the visible month or year. You can switch between 
+ 						months, years, or decades by using scroll 
+ 						arrows." TextWrapping="Wrap"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </Button.ContentTemplate>
+                </Button>
+            </Popup.Child>
+        </Popup>
+    </Grid>
+</UserControl>
+

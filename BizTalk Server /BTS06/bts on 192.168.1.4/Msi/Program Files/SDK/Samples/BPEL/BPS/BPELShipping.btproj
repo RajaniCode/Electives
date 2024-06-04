@@ -1,0 +1,127 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.4901"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{AEB046BA-4B77-45DD-9B51-6B1EFE42DBE3}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\..\BPELShipping.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "BPELShipping"
+                    AssemblyName = "BPELShipping"
+                />
+                <Config
+                    Name = "Development"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "ShippingSchemas"
+                    AssemblyName = "ShippingSchemas"
+                    HintPath = "..\..\ShipperProcess\ShippingSchemas\bin\Development\ShippingSchemas.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "Invoice2Ack.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BPELShipping"
+                    Type = "Invoice2Ack"
+                />
+                <File
+                    RelPath = "Order2FinalConfirmation.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BPELShipping"
+                    Type = "Order2FinalConfirmation"
+                />
+                <File
+                    RelPath = "Order2OrderAck.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BPELShipping"
+                    Type = "Order2OrderAck"
+                />
+                <File
+                    RelPath = "Order2OrderNack.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BPELShipping"
+                    Type = "Order2OrderNack"
+                />
+                <File
+                    RelPath = "Order2ShipHistory.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BPELShipping"
+                    Type = "Order2ShipHistory"
+                />
+                <File
+                    RelPath = "Order2ShipRequest.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BPELShipping"
+                    Type = "Order2ShipRequest"
+                />
+                <File
+                    RelPath = "OrderShipping.wsdl.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "OrderShippingProcess.bpel.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ShipHistory2Completed.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BPELShipping"
+                    Type = "ShipHistory2Completed"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

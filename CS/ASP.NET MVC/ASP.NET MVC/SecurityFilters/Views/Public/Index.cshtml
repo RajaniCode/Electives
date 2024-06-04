@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<h2>Public pages</h2>
+<a href="/Public/Home">Home</a>
+<a href="/Public/Dashboard">Dashboard</a>
+<a href="/Public/Login">Login</a>
+
+
+<h2>Registered pages</h2>
+<a href="/Registered/Index">Index</a>
+<a href="/Registered/Home">Home</a>
+<a href="/Registered/Dashboard">Dashboard</a>
+<a href="/Registered/MyAge">My age</a>
+<a href="/Registered/Profile">Profile</a>
+
+<h2>Admin pages</h2>
+<a href="/Admin/Index">Index</a>
+<a href="/Admin/Home">Home</a>
+<a href="/Admin/Dashboard">Dashboard</a>
+
+<h2>Other pages</h2>
+<a href="/Admin/Denied">Denied to all</a>
+
+
+<h2>Cross-site forgery example</h2>
+<a id="CSFR">Click me to reset your age!!!!</a>
+
+<script src="/Scripts/jquery-1.4.4.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $("#CSFR").click(function () {
+
+        $.ajax({
+            url: "/Registered/MyAge",
+            data: { age: "0" },
+            type: 'POST',
+            success: function () { alert("Attack succeeded");  },
+            error: function () { alert("Attack failed"); }
+        });
+
+    });
+
+</script>

@@ -1,0 +1,30 @@
+<Schema Namespace="InhQVLocationModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+  <EntityContainer Name="InhQVLocation">
+    <EntitySet Name="Locations" EntityType="InhQVLocationModel.Location" />
+    <EntitySet Name="Actors" EntityType="InhQVLocationModel.Actors" />
+  </EntityContainer>
+  <EntityType Name="EventLocation" BaseType="InhQVLocationModel.Location">
+    <Property Name="LocationName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="GunClub" BaseType="InhQVLocationModel.Organization">
+    <Property Name="ClubName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Location" Abstract="true">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="Int32" Nullable="false" />
+    <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="ShootingRange" BaseType="InhQVLocationModel.Organization">
+    <Property Name="RangeName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Organization" BaseType="InhQVLocationModel.Location" Abstract="true" />
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="ActorId" />
+    </Key>
+    <Property Name="ActorId" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" Nullable="false" />
+  </EntityType>
+</Schema>

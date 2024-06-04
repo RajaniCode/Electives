@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="2ac9089f-7e2f-4bdb-a88c-6af62870ab9e" name="swalther@SWLAPTOP 2009-02-26 21:07:10" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="b3912cd2-2934-4493-843d-c3a1c9a46315">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\TestResults\swalther_SWLAPTOP 2009-02-26 21_07_10">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\EFMvcApplication\bin\EFMvcApplication.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\Moq.2.6.1014.1-bin\Moq.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository\bin\Debug\GenericRepository.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-02-26T21:07:10.5650000-08:00" queuing="2009-02-26T21:07:12.4780000-08:00" start="2009-02-26T21:07:12.7950000-08:00" finish="2009-02-26T21:07:13.8310000-08:00" />
+  <TestDefinitions>
+    <UnitTest name="NameIsRequired" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter05 - understanding models\code\cs\efmvcapplication\efmvcapplication.tests\bin\debug\efmvcapplication.tests.dll" id="b4b74d9b-0ccd-be26-68b0-908bc2d672c0">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="313d3e95-229d-47b8-96c4-e943b161da84" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\EFMvcApplication.Tests\bin\Debug\EFMvcApplication.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EFMvcApplication.Tests.Controllers.HomeControllerTestMock, EFMvcApplication.Tests" name="NameIsRequired" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="b4b74d9b-0ccd-be26-68b0-908bc2d672c0" executionId="313d3e95-229d-47b8-96c4-e943b161da84" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="313d3e95-229d-47b8-96c4-e943b161da84" testId="b4b74d9b-0ccd-be26-68b0-908bc2d672c0" testName="NameIsRequired" computerName="SWLAPTOP" duration="00:00:00.2626826" startTime="2009-02-26T21:07:12.9350000-08:00" endTime="2009-02-26T21:07:13.7230000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method EFMvcApplication.Tests.Controllers.HomeControllerTestMock.NameIsRequired threw exception:  System.ArgumentException: The specified named connection is either not found in the configuration, not intended to be used with the EntityClient provider, or not valid..</Message>
+          <StackTrace>    at System.Data.EntityClient.EntityConnection.ChangeConnectionString(String newConnectionString)
+   at System.Data.EntityClient.EntityConnection..ctor(String connectionString)
+   at System.Data.Objects.ObjectContext.CreateEntityConnection(String connectionString)
+   at System.Data.Objects.ObjectContext..ctor(String connectionString, String defaultContainerName)
+   at EFMvcApplication.Models.ToyStoreDBEntities..ctor() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\EFMvcApplication\Models\DataModel.Designer.cs:line 26
+   at EFMvcApplication.Controllers.HomeController..ctor(IGenericRepository repository) in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\EFMvcApplication\Controllers\HomeController.cs:line 17
+   at EFMvcApplication.Tests.Controllers.HomeControllerTestMock.NameIsRequired() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\EFMvcApplication.Tests\Controllers\HomeControllerTestMock.cs:line 29
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

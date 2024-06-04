@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.microsoft.com/BizTalk/KwTpm" xmlns:mstns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+    <xs:include schemaLocation="Partner.xsd" />
+    <xs:include schemaLocation="StructuredParameters.xsd" />
+    <xs:complexType name="AddendumsType">
+        <xs:sequence>
+            <xs:element name="Addendum" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="AddendumId">
+                            <xs:annotation>
+                                <xs:documentation>Unique Identifier for the Addendum</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element name="FriendlyNames" type="FriendlyNamesType" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>One or more friendly names for the addendum such as "PO Terms"</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                        <xs:element ref="Description" minOccurs="0" />
+                        <xs:element name="BusinessProcess">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="ServiceLinkName">
+                                        <xs:annotation>
+                                            <xs:documentation>Service Link that implements the business process</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:token">
+                                                <xs:maxLength value="256" />
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+				                    <xs:element name="ServiceLinkAssemblySN" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Strong name of the assembly that defines the service link type</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:string">
+                                                <xs:maxLength value="1024" />
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element name="BusinessProcessName" minOccurs="0">
+                                        <xs:annotation>
+                                            <xs:documentation>Type o f the process on which Addendum is based</xs:documentation>
+                                        </xs:annotation>
+                                        <xs:simpleType>
+                                            <xs:restriction base="xs:token">
+                                                <xs:maxLength value="256" />
+                                            </xs:restriction>
+                                        </xs:simpleType>
+                                    </xs:element>
+                                    <xs:element ref="Description" minOccurs="0" />
+                                    <xs:element ref="DefinitionSource" minOccurs="0" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Parameters" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Configurable parameters that configure both the electronic process as identified in the Definition element and FormalText element </xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:all>
+                                    <xs:element ref="StructuredParameters" minOccurs="0" maxOccurs="1" />
+                                    <xs:element name="XQueryParameters" minOccurs="0">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="XQueryParameter" type="XqueryParameterType" minOccurs="0" maxOccurs="unbounded" />
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:all>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="Roles">
+                            <xs:annotation>
+                                <xs:documentation>Roles involved in the process.</xs:documentation>
+                            </xs:annotation>
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="Role" type="RoleType" maxOccurs="unbounded" />
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="LegalTerms" type="LegalTermsType" minOccurs="0">
+                            <xs:annotation>
+                                <xs:documentation>Formal/legal terms of the process</xs:documentation>
+                            </xs:annotation>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+                <xs:unique name="ReferenceIdUnique">
+                    <xs:selector xpath="Parameters/*" />
+                    <xs:field xpath="./ReferenceId" />
+                </xs:unique>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ParameterType">
+        <xs:sequence>
+            <xs:element name="ReferenceId">
+                <xs:simpleType>
+                    <xs:restriction base="xs:token">
+                        <xs:maxLength value="256" />
+                        <xs:minLength value="1" />
+                    </xs:restriction>
+                </xs:simpleType>
+            </xs:element>
+            <xs:element ref="Description" />
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="XqueryParameterType">
+        <xs:complexContent>
+            <xs:extension base="ParameterType">
+                <xs:sequence>
+                    <xs:element name="Xquery">
+                        <xs:simpleType>
+                            <xs:restriction base="xs:string">
+                                <xs:maxLength value="1024" />
+                            </xs:restriction>
+                        </xs:simpleType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="XqueryParameter" type="XqueryParameterType" />
+    <xs:complexType name="LegalTermsType" mixed="true">
+        <xs:sequence>
+            <xs:any id="LegalText" minOccurs="0" maxOccurs="unbounded" namespace="http://www.w3.org/1999/xhtml" processContents="lax">
+                <xs:annotation>
+                    <xs:documentation>XHTML text for any legal document</xs:documentation>
+                </xs:annotation>
+            </xs:any>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="DefinitionSource">
+        <xs:annotation>
+            <xs:documentation>The reference to the  WSDL </xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+            <xs:restriction base="xs:token">
+                <xs:maxLength value="256" />
+                <xs:minLength value="1" />
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="Description">
+        <xs:simpleType>
+            <xs:restriction base="xs:string">
+                <xs:maxLength value="1024" />
+            </xs:restriction>
+        </xs:simpleType>
+    </xs:element>
+    <xs:element name="RoleId" type="RoleIdType" />
+    <xs:simpleType name="RoleIdType">
+        <xs:restriction base="xs:token">
+            <xs:maxLength value="256" />
+            <xs:minLength value="1" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:element name="AddendumId" type="AddendumIdType" />
+    <xs:simpleType name="AddendumIdType">
+        <xs:restriction base="xs:token">
+            <xs:maxLength value="256" />
+            <xs:minLength value="1" />
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="RoleType">
+        <xs:sequence>
+            <xs:element ref="RoleId" />
+            <xs:element ref="Description" minOccurs="0" />
+            <xs:element ref="DefinitionSource" minOccurs="0" />
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

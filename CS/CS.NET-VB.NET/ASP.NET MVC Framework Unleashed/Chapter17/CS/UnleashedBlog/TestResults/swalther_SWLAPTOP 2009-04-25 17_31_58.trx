@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="a2b96a49-3782-4183-af2b-b54b6c3bdaec" name="swalther@SWLAPTOP 2009-04-25 17:31:58" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="427ef621-46f8-4ee6-bda7-8304129deb98">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter17 - Database Access\CS\UnleashedBlog\TestResults\swalther_SWLAPTOP 2009-04-25 17_31_58">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter17 - Database Access\CS\UnleashedBlog\UnleashedBlog\bin\UnleashedBlog.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-04-25T17:31:58.7841913-07:00" queuing="2009-04-25T17:32:00.1293258-07:00" start="2009-04-25T17:32:00.5033632-07:00" finish="2009-04-25T17:32:01.3834512-07:00" />
+  <TestDefinitions>
+    <UnitTest name="ShowNewBlogEntries" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter17 - database access\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="370239e7-c815-9256-431c-21d3de24c4dd">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a0e85e00-0243-4956-854b-73ea1a65896b" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter17 - Database Access\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Temp, UnleashedBlog.Tests" name="ShowNewBlogEntries" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="370239e7-c815-9256-431c-21d3de24c4dd" executionId="a0e85e00-0243-4956-854b-73ea1a65896b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="a0e85e00-0243-4956-854b-73ea1a65896b" testId="370239e7-c815-9256-431c-21d3de24c4dd" testName="ShowNewBlogEntries" computerName="SWLAPTOP" duration="00:00:00.0900499" startTime="2009-04-25T17:32:00.6233752-07:00" endTime="2009-04-25T17:32:01.2434372-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method UnleashedBlog.Tests.Temp.ShowNewBlogEntries threw exception:  System.ArgumentException: The specified named connection is either not found in the configuration, not intended to be used with the EntityClient provider, or not valid..</Message>
+          <StackTrace>    at System.Data.EntityClient.EntityConnection.ChangeConnectionString(String newConnectionString)
+   at System.Data.EntityClient.EntityConnection..ctor(String connectionString)
+   at System.Data.Objects.ObjectContext.CreateEntityConnection(String connectionString)
+   at System.Data.Objects.ObjectContext..ctor(String connectionString, String defaultContainerName)
+   at UnleashedBlog.Models.EntityFramework.BlogDBEntities..ctor() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter17 - Database Access\CS\UnleashedBlog\UnleashedBlog\Models\EntityFramework\DataModel.Designer.cs:line 26
+   at UnleashedBlog.Models.EntityFramework.EntityFrameworkBlogRepository..ctor() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter17 - Database Access\CS\UnleashedBlog\UnleashedBlog\Models\EntityFramework\EntityFrameworkBlogRepository.cs:line 10
+   at UnleashedBlog.Controllers.BlogController..ctor() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter17 - Database Access\CS\UnleashedBlog\UnleashedBlog\Controllers\BlogController.cs:line 13
+   at UnleashedBlog.Tests.Temp.ShowNewBlogEntries() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter17 - Database Access\CS\UnleashedBlog\UnleashedBlog.Tests\Temp.cs:line 21
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

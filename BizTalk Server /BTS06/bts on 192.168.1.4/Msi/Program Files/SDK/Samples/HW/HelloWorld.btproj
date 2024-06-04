@@ -1,0 +1,94 @@
+<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.4617"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{15D66853-F262-4787-BB77-F0F6E20D6896}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\HelloWorld.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = "Microsoft BizTalk Server 2006 SDK Sample"
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft® BizTalk® Server SDK"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright © Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.HelloWorld"
+                    AssemblyName = "HelloWorld"
+                />
+                <Config
+                    Name = "Development"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "HelloOrchestration.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "InvoiceSchema.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.HelloWorld"
+                    Type = "InvoiceSchema"
+                />
+                <File
+                    RelPath = "POSchema.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.HelloWorld"
+                    Type = "POSchema"
+                />
+                <File
+                    RelPath = "POToInvoice.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.HelloWorld"
+                    Type = "POToInvoice"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

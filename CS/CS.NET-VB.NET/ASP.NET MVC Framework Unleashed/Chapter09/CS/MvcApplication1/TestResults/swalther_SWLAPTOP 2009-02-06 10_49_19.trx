@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="a887e332-e019-4034-81fd-676082d2913b" name="swalther@SWLAPTOP 2009-02-06 10:49:19" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="cbaf6b7e-e667-4ec3-924b-a5667541fb58">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter02 - Understanding Routing\Code\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-02-06 10_49_19">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter02 - Understanding Routing\Code\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter02 - Understanding Routing\Code\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-02-06T10:49:19.7169420-08:00" queuing="2009-02-06T10:49:20.9990702-08:00" start="2009-02-06T10:49:21.2620965-08:00" finish="2009-02-06T10:49:22.0651768-08:00" />
+  <TestDefinitions>
+    <UnitTest name="DefaultRouteMatchesHome" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter02 - understanding routing\code\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="e7fbbce7-5696-8b93-de2f-01da1d650e5c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a16b2451-cd16-4f27-a55b-182399bd548a" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter02 - Understanding Routing\Code\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Routes.RouteTest, MvcApplication1.Tests" name="DefaultRouteMatchesHome" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="e7fbbce7-5696-8b93-de2f-01da1d650e5c" executionId="a16b2451-cd16-4f27-a55b-182399bd548a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="a16b2451-cd16-4f27-a55b-182399bd548a" testId="e7fbbce7-5696-8b93-de2f-01da1d650e5c" testName="DefaultRouteMatchesHome" computerName="SWLAPTOP" duration="00:00:00.1121569" startTime="2009-02-06T10:49:21.3301033-08:00" endTime="2009-02-06T10:49:21.9911694-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual failed. Expected:&lt;Defaultt&gt;. Actual:&lt;Default&gt;. </Message>
+          <StackTrace>   at MvcApplication1.Tests.Routes.RouteTest.DefaultRouteMatchesHome() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter02 - Understanding Routing\Code\CS\MvcApplication1\MvcApplication1.Tests\Routes\RouteTest.cs:line 27
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

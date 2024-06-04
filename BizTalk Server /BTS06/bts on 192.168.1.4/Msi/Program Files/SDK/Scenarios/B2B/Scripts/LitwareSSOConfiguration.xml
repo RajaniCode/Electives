@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<!-- ======================================================================================	-->
+<!--                                                                                       	-->
+<!-- Microsoft.Samples.BizTalk.Litware			  					-->
+<!-- End to end Litware scenario sample for BizTalk Server.                       		-->
+<!--                                                                                       	-->
+<!-- This file represents  configuration store application to store and manage the config  	-->
+<!-- settings for Litware scenario. 								-->
+<!--                                                                                       	-->
+<!-- Copyright (c) Microsoft Corporation. All rights reserved.                        	-->
+<!-- THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,          	-->
+<!-- EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES      	-->
+<!-- OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.                           	-->
+<!--                                                                                       	-->
+<!-- ======================================================================================	-->
+
+<sso>
+	<application name="Litware.B2BHub">
+		<description>Application demonstration Litware scenario.</description>
+		<contact>admin@litware.com</contact>
+		<appUserAccount>BizTalk Application Users</appUserAccount>
+		<appAdminAccount>BizTalk Server Administrators</appAdminAccount>
+		<field ordinal="0" label="Reserved" masked="no" />
+		<field ordinal="1" label="DBConn" masked="yes" />
+		<field ordinal="2" label="retryCount" masked="no" />
+		<flags configStoreApp="yes" allowLocalAccounts="yes" enableApp="yes" />
+	</application>
+</sso>
+

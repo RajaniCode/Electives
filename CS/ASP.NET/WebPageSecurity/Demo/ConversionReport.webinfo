@@ -1,0 +1,61 @@
+﻿This report shows the steps taken to convert your Web application from ASP.NET 1.1 to ASP.NET 2.0. 
+There may be some unresolved conversion issues you will need to manually fix. 
+For more information, please refer to http://go.microsoft.com/fwlink/?LinkId=46995 or search for the help topic "Converting from Visual Studio .NET 2002 or 2003".
+Conversion Started on project file SampleSecurity.csproj at July 31 2012, 22:08:29.
+
+=========================ERRORS===================
+
+=========================WARNINGS=================
+Warning: If the base class of any of the code-behind classes declares page fields please add the 'CodeFileBaseClass' attribute in the corresponding Page.
+Warning: This web project was converted as a file-based web application. If your site contained any IIS meta-information, e.g. sub-folders marked as virtual directories, it is recommended that you close this web site and re-open it using the Open Web Site command and selecting the Local IIS tab.
+
+=========================COMMENTS=================
+Web.Config: Added 'xhtmlConformance' attribute.
+Removed attribute AutoEventWireup from file Default.aspx.
+Removed attribute Codebehind from file Default.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Default.aspx.cs (Line 19).
+Removed attribute Codebehind from file Global.asax.
+Removed attribute AutoEventWireup from file Login.aspx.
+Removed attribute Codebehind from file Login.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Login.aspx.cs (Line 19).
+Removed attribute TargetSchema from file SiteMap.ascx.
+Removed attribute AutoEventWireup from file SiteMap.ascx.
+Removed attribute Codebehind from file SiteMap.ascx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file SiteMap.ascx.cs (Line 18).
+Removed attribute AutoEventWireup from file Admin\AdminStuff.aspx.
+Removed attribute Codebehind from file Admin\AdminStuff.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Admin\AdminStuff.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Admin\LastOne.aspx.
+Removed attribute Codebehind from file Admin\LastOne.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Admin\LastOne.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Admin\MoreAdminStuff.aspx.
+Removed attribute Codebehind from file Admin\MoreAdminStuff.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Admin\MoreAdminStuff.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Lib\PopupCalendar.aspx.
+Removed attribute Codebehind from file Lib\PopupCalendar.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Lib\PopupCalendar.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Members\FAQ.aspx.
+Removed attribute Codebehind from file Members\FAQ.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Members\FAQ.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Members\FeatureTour.aspx.
+Removed attribute Codebehind from file Members\FeatureTour.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Members\FeatureTour.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Members\ViewStatistics.aspx.
+Removed attribute Codebehind from file Members\ViewStatistics.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Members\ViewStatistics.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Members\Welcome.aspx.
+Removed attribute Codebehind from file Members\Welcome.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Members\Welcome.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Members\Secure\MemberInfo.aspx.
+Removed attribute Codebehind from file Members\Secure\MemberInfo.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Members\Secure\MemberInfo.aspx.cs (Line 19).
+Removed attribute AutoEventWireup from file Members\Secure\ViewOrderHistory.aspx.
+Removed attribute Codebehind from file Members\Secure\ViewOrderHistory.aspx.
+Warning: Access level of 'Page_Load' changed to 'protected' in file Members\Secure\ViewOrderHistory.aspx.cs (Line 19).
+Added folder App_Code.
+Moved file Global.asax.cs to the App_Code\ directory.
+Moved file AssemblyInfo.cs to the App_Code\ directory.
+Changed HTML validation schema for all projects to 'Internet Explorer 6.0'.
+Removed file SampleSecurity.csproj.
+Removed file SampleSecurity.csproj.webinfo.
+Project SampleSecurity.csproj has been converted successfully at July 31 2012, 22:08:33.

@@ -1,0 +1,127 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1407"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{5A143D88-4DF9-408B-B4B3-C35842F1CE41}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\ComposedMessageProcessor.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "CMP.PipelinesAndSchemas"
+                    AssemblyName = "CMP.PipelinesAndSchemas"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Pipeline.Components"
+                    AssemblyName = "Microsoft.BizTalk.Pipeline.Components"
+                    HintPath = "..\..\..\..\Program Files\Microsoft BizTalk Server 2006\Pipeline Components\Microsoft.BizTalk.Pipeline.Components.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "FFReceivePipeline.btp"
+                    BuildAction = "Compile"
+                    Namespace = "CMP.PipelinesAndSchemas"
+                    Type = "FFReceivePipeline"
+                />
+                <File
+                    RelPath = "FFSendPipeline.btp"
+                    BuildAction = "Compile"
+                    Namespace = "CMP.PipelinesAndSchemas"
+                    Type = "FFSendPipeline"
+                />
+                <File
+                    RelPath = "Invoice.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CMP.PipelinesAndSchemas"
+                    Type = "Invoice"
+                />
+                <File
+                    RelPath = "InvoiceHeader.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CMP.PipelinesAndSchemas"
+                    Type = "InvoiceHeader"
+                />
+                <File
+                    RelPath = "PO.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CMP.PipelinesAndSchemas"
+                    Type = "PO"
+                />
+                <File
+                    RelPath = "PO2Invoice.btm"
+                    BuildAction = "Compile"
+                    Namespace = "CMP.PipelinesAndSchemas"
+                    Type = "PO2Invoice"
+                />
+                <File
+                    RelPath = "POHeader.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CMP.PipelinesAndSchemas"
+                    Type = "POHeader"
+                />
+                <File
+                    RelPath = "PropertySchema.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "CMP.PipelinesAndSchemas"
+                    Type = "PropertySchema"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

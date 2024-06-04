@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="73d15b98-53c5-49c7-bb90-9814b3691d33" name="swalther@SWLAPTOP 2009-02-26 20:35:00" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="679bd00c-cc62-4758-9f08-2c49dd87f8c5">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\VB\EFMvcApplication\TestResults\swalther_SWLAPTOP 2009-02-26 20_35_00">
+      <DeploymentItem filename="C:\Users\swalther\Downloads\Moq.2.6.1014.1-bin\Moq.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\VB\EFMvcApplication\EFMvcApplication\bin\EFMvcApplication.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-02-26T20:35:00.3700000-08:00" queuing="2009-02-26T20:35:04.8130000-08:00" start="2009-02-26T20:35:05.2230000-08:00" finish="2009-02-26T20:35:06.5710000-08:00" />
+  <TestDefinitions>
+    <UnitTest name="TestMethod1" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter05 - understanding models\code\vb\efmvcapplication\efmvcapplication.tests\bin\debug\efmvcapplication.tests.dll" id="00dfa91a-d3e5-d4c2-c866-b921adbe0ced">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="bc064c77-454e-4016-9875-ac1732295872" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\VB\EFMvcApplication\EFMvcApplication.Tests\bin\Debug\EFMvcApplication.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EFMvcApplication.Tests.HomeControllerTestMock, EFMvcApplication.Tests" name="TestMethod1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="00dfa91a-d3e5-d4c2-c866-b921adbe0ced" executionId="bc064c77-454e-4016-9875-ac1732295872" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="bc064c77-454e-4016-9875-ac1732295872" testId="00dfa91a-d3e5-d4c2-c866-b921adbe0ced" testName="TestMethod1" computerName="SWLAPTOP" duration="00:00:00.2015476" startTime="2009-02-26T20:35:05.3660000-08:00" endTime="2009-02-26T20:35:06.3480000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method EFMvcApplication.Tests.HomeControllerTestMock.TestMethod1 threw exception:  System.ArgumentException: The specified named connection is either not found in the configuration, not intended to be used with the EntityClient provider, or not valid..</Message>
+          <StackTrace>    at System.Data.EntityClient.EntityConnection.ChangeConnectionString(String newConnectionString)
+   at System.Data.EntityClient.EntityConnection..ctor(String connectionString)
+   at System.Data.Objects.ObjectContext.CreateEntityConnection(String connectionString)
+   at System.Data.Objects.ObjectContext..ctor(String connectionString, String defaultContainerName)
+   at EFMvcApplication.ToyStoreDBEntities..ctor() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\VB\EFMvcApplication\EFMvcApplication\Models\DataModel.Designer.vb:line 27
+   at EFMvcApplication.HomeController..ctor() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\VB\EFMvcApplication\EFMvcApplication\Controllers\HomeController.vb:line 9
+   at EFMvcApplication.Tests.HomeControllerTestMock.TestMethod1() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\VB\EFMvcApplication\EFMvcApplication.Tests\Controllers\HomeControllerTestMock.vb:line 10
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,808 @@
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://schemas.microsoft.com/businessruleslanguage/2002"
+	xmlns="http://schemas.microsoft.com/businessruleslanguage/2002" xmlns:NS="http://schemas.microsoft.com/businessruleslanguage/2002"
+	xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" elementFormDefault="qualified" version="3.10">
+	<xsd:annotation>
+		<xsd:documentation xml:lang="en">
+		Microsoft Rule Markup Language Schema v3.10
+		Copyright 2002 Microsoft Corporation. All rights reserved.
+	</xsd:documentation>
+	</xsd:annotation>
+	<xsd:element name="brl" type="brlType">
+		<xsd:unique name="VocabularyNamesUnique">
+			<xsd:selector xpath="NS:vocabulary" />
+			<xsd:field xpath="@name" />
+			<xsd:field xpath="version/@major" />
+			<xsd:field xpath="version/@minor" />
+		</xsd:unique>
+		<xsd:unique name="VocabularyIdsUnique">
+			<xsd:selector xpath="NS:vocabulary" />
+			<xsd:field xpath="@id" />
+		</xsd:unique>
+		<xsd:unique name="RuleSetNamesUnique">
+			<xsd:selector xpath="NS:ruleset" />
+			<xsd:field xpath="@name" />
+			<xsd:field xpath="version/@major" />
+			<xsd:field xpath="version/@minor" />
+		</xsd:unique>
+	</xsd:element>
+	<xsd:complexType name="brlType">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="vocabulary" type="vocabularyType">
+				<xsd:unique name="VocabularyDefinitionsUnique">
+					<xsd:selector xpath="NS:vocabularydefinition" />
+					<xsd:field xpath="@name" />
+				</xsd:unique>
+				<xsd:unique name="VocabularyDefinitionIdsUnique">
+					<xsd:selector xpath="NS:vocabularydefinition" />
+					<xsd:field xpath="@id" />
+				</xsd:unique>
+				<xsd:unique name="VocabularyUserPropertyUnique">
+					<xsd:selector xpath="NS:userproperty" />
+					<xsd:field xpath="@name" />
+				</xsd:unique>
+			</xsd:element>
+			<xsd:element name="ruleset" type="rulesetType">
+				<xsd:unique name="RuleNamesUnique">
+					<xsd:selector xpath="NS:rule" />
+					<xsd:field xpath="@name" />
+				</xsd:unique>
+				<xsd:unique name="RulesetUserPropertyUnique">
+					<xsd:selector xpath="NS:userproperty" />
+					<xsd:field xpath="@name" />
+				</xsd:unique>
+			</xsd:element>
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="vocabularyType">
+		<xsd:sequence>
+			<xsd:element name="userproperty" minOccurs="0" maxOccurs="unbounded" type="userProperty" />
+			<xsd:element name="version" minOccurs="0" maxOccurs="unbounded" type="versionType">
+				<xsd:unique name="VocabularyVersionUserPropertyUnique">
+					<xsd:selector xpath="NS:userproperty" />
+					<xsd:field xpath="@name" />
+				</xsd:unique>
+			</xsd:element>
+			<xsd:element name="vocabularydefinition" minOccurs="0" maxOccurs="unbounded" type="vocabularyDefinition" />
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string" use="required" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="uri" type="xsd:string" use="required" />
+		<xsd:attribute name="description" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="vocabularyDefinition">
+		<xsd:sequence>
+			<xsd:choice>
+				<xsd:element name="bindingdefinition" type="bindingDefinition" />
+				<xsd:element name="setdefinition" type="setDefinition" />
+				<xsd:element name="rangedefinition" type="rangeDefinition" />
+				<xsd:element name="literaldefinition" type="objectLiteral" />
+				<xsd:element name="engineoperationdefinition" type="engineOpDefinition" />
+			</xsd:choice>
+			<xsd:element name="formatstring" type="formatString" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="id" type="xsd:string" use="required" />
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="description" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="formatString">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="argument" type="argumentDefinition" />
+		</xsd:sequence>
+		<xsd:attribute name="language" type="xsd:string" use="required" />
+		<xsd:attribute name="string" type="xsd:string" use="required" />
+		<xsd:attribute name="delimiter" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="argumentDefinition">
+		<xsd:choice>
+			<xsd:element name="valuedefinitionlink" type="valueDefinitionLink" />
+			<xsd:element name="valuedefinitionliteral" type="objectLiteral" />
+		</xsd:choice>
+		<xsd:attribute name="position" type="xsd:integer" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="valueDefinitionLink">
+		<xsd:attribute name="vocabulary" type="xsd:string" use="required" />
+		<xsd:attribute name="definition" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="rangeDefinition">
+		<xsd:sequence>
+			<xsd:element name="low">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="valuedefinitionlink" type="valueDefinitionLink" />
+						<xsd:element name="valuedefinitionliteral" type="objectLiteral" />
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+			<xsd:element name="high">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="valuedefinitionlink" type="valueDefinitionLink" />
+						<xsd:element name="valuedefinitionliteral" type="objectLiteral" />
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="setDefinition">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="element">
+				<xsd:complexType>
+					<xsd:choice>
+						<xsd:element name="valuedefinitionlink" type="valueDefinitionLink" />
+						<xsd:element name="valuedefinitionliteral" type="objectLiteral" />
+					</xsd:choice>
+				</xsd:complexType>
+			</xsd:element>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="engineOpDefinition">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="argument" type="argumentDefinition" />
+		</xsd:sequence>
+		<xsd:attribute name="type" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="bindingDefinition">
+		<xsd:choice>
+			<xsd:element name="classbindingdefinition" type="classBindingDefinition" />
+			<xsd:element name="classmemberbindingdefinition" type="classMemberBindingDefinition" />
+			<xsd:element name="databasebindingdefinition" type="databaseBindingDefinition" />
+			<xsd:element name="databasecolumnbindingdefinition" type="databaseColumnBindingDefinition" />
+			<xsd:element name="documentbindingdefinition" type="documentBindingDefinition" />
+			<xsd:element name="documentelementbindingdefinition" type="documentElementBindingDefinition" />
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="argumentMapping">
+		<xsd:attribute name="formatargument" type="xsd:integer" use="required" />
+		<xsd:attribute name="bindingargument" type="xsd:integer" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="classBindingDefinition">
+		<xsd:sequence>
+			<xsd:element name="classinfo" type="classInformation" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="classMemberBindingDefinition">
+		<xsd:sequence>
+			<xsd:element name="classinfo" type="classInformation" />
+			<xsd:element name="argumentmapping" type="argumentMapping" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="argument" type="argumentDefinition" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="member" type="xsd:string" use="required" />
+		<xsd:attribute name="type" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="classInformation">
+		<xsd:all>
+			<xsd:element name="assembly" type="xsd:string" />
+			<xsd:element name="namespace" type="xsd:string" minOccurs="0" />
+		</xsd:all>
+		<xsd:attribute name="class" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="instance" type="xsd:integer" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="typeInformation">
+		<xsd:all>
+			<xsd:element name="assembly" type="xsd:string" />
+			<xsd:element name="namespace" type="xsd:string" minOccurs="0" />
+		</xsd:all>
+		<xsd:attribute name="class" type="xsd:normalizedString" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="databaseBindingDefinition">
+		<xsd:sequence>
+			<xsd:element name="databaseinfo" type="databaseInformation" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="databaseColumnBindingDefinition">
+		<xsd:sequence>
+			<xsd:element name="databaseinfo" type="databaseInformation" />
+			<xsd:element name="argumentmapping" type="argumentMapping" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="argument" type="argumentDefinition" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="column" type="xsd:string" use="required" />
+		<xsd:attribute name="type" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="databaseInformation">
+		<xsd:attribute name="server" type="xsd:string" use="required" />
+		<xsd:attribute name="database" type="xsd:string" use="required"/>
+		<xsd:attribute name="table" type="xsd:string" use="required"/>
+		<xsd:attribute name="connection" type="xsd:boolean" default="true"/>
+		<xsd:attribute name="instance" type="xsd:integer" use="optional"/>
+	</xsd:complexType>
+	<xsd:complexType name="documentBindingDefinition">
+		<xsd:sequence>
+			<xsd:element name="documentinfo" type="documentInformation" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="documentElementBindingDefinition">
+		<xsd:sequence>
+			<xsd:element name="documentinfo" type="documentInformation" />
+			<xsd:element name="argumentmapping" type="argumentMapping" minOccurs="0" maxOccurs="unbounded" />
+			<xsd:element name="argument" type="argumentDefinition" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="field" type="xsd:string" use="required" />
+		<xsd:attribute name="fieldalias" type="xsd:string" use="optional" />
+		<xsd:attribute name="type" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="documentInformation">
+		<xsd:attribute name="schema" type="xsd:string" use="required" />
+		<xsd:attribute name="documenttype" type="xsd:string" use="required" />
+		<xsd:attribute name="selector" type="xsd:string" use="required"/>
+		<xsd:attribute name="selectoralias" type="xsd:string" use="optional" />
+		<xsd:attribute name="instance" type="xsd:integer" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="objectLiteral">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0">
+				<xsd:element name="byte" type="xsd:unsignedByte" />
+				<xsd:element name="nullable_byte" type="xsd:unsignedByte" />
+				<xsd:element name="boolean" type="xsd:boolean" />
+				<xsd:element name="nullable_boolean" type="xsd:boolean" />
+				<xsd:element name="char" type="xsd:string" />
+				<xsd:element name="nullable_char" type="xsd:string" />
+				<xsd:element name="datetime" type="xsd:string" />
+				<xsd:element name="nullable_datetime" type="xsd:string" />
+				<xsd:element name="decimal" type="xsd:decimal" />
+				<xsd:element name="nullable_decimal" type="xsd:decimal" />
+				<xsd:element name="double" type="xsd:double" />
+				<xsd:element name="nullable_double" type="xsd:double" />
+				<xsd:element name="float" type="xsd:float" />
+				<xsd:element name="nullable_float" type="xsd:float" />
+				<xsd:element name="int" type="xsd:int" />
+				<xsd:element name="nullable_int" type="xsd:int" />
+				<xsd:element name="long" type="xsd:long" />
+				<xsd:element name="nullable_long" type="xsd:long" />
+				<xsd:element name="object" type="soapstring" />
+				<xsd:element name="sbyte" type="xsd:byte" />
+				<xsd:element name="nullable_sbyte" type="xsd:byte" />
+				<xsd:element name="short" type="xsd:short" />
+				<xsd:element name="nullable_short" type="xsd:short" />
+				<xsd:element name="string" type="xsd:string" />
+				<xsd:element name="uint" type="xsd:unsignedInt" />
+				<xsd:element name="nullable_uint" type="xsd:unsignedInt" />
+				<xsd:element name="ulong" type="xsd:unsignedLong" />
+				<xsd:element name="nullable_ulong" type="xsd:unsignedLong" />
+				<xsd:element name="ushort" type="xsd:unsignedShort" />
+				<xsd:element name="nullable_ushort" type="xsd:unsignedShort" />
+				<xsd:element name="null" type="nullobject" />
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="type" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="vocabularyReference">
+		<xsd:attribute name="uri" type="xsd:string" use="required" />
+		<xsd:attribute name="element" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="userProperty">
+		<xsd:choice>
+			<xsd:element name="value" type="soapstring" />
+			<xsd:element name="string" type="xsd:string" />
+		</xsd:choice>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="soapstring" mixed="true">
+		<xsd:sequence minOccurs="0">
+			<xsd:any processContents="skip" />
+		</xsd:sequence>
+		<xsd:attribute name="classref" type="xsd:string" use="optional" />
+		<xsd:attribute name="encoding" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="soapstring_stringonly">
+		<xsd:simpleContent>
+			<xsd:extension base="xsd:string">
+				<xsd:attribute name="classref" type="xsd:string" use="optional" />
+				<xsd:attribute name="encoding" type="xsd:string" use="optional" />
+			</xsd:extension>
+		</xsd:simpleContent>
+	</xsd:complexType>
+	<xsd:simpleType name="binaryBooleanOperators">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="equal" />
+			<xsd:enumeration value="not equal" />
+			<xsd:enumeration value="greater than" />
+			<xsd:enumeration value="greater than or equal to" />
+			<xsd:enumeration value="less than" />
+			<xsd:enumeration value="less than or equal to" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="binaryArithmeticOperators">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="add" />
+			<xsd:enumeration value="+" />
+			<xsd:enumeration value="subtract" />
+			<xsd:enumeration value="-" />
+			<xsd:enumeration value="multiply" />
+			<xsd:enumeration value="*" />
+			<xsd:enumeration value="divide" />
+			<xsd:enumeration value="/" />
+			<xsd:enumeration value="remainder" />
+			<xsd:enumeration value="%" />
+			<xsd:enumeration value="power" />
+			<xsd:enumeration value="^" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:group name="builtinLogicalExpression">
+		<xsd:choice>
+			<xsd:element name="and" type="logicalExpr" />
+			<xsd:element name="or" type="logicalExpr" />
+			<xsd:element name="not" type="singleLogicalExpr" />
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="builtinPredicate">
+		<xsd:choice>
+			<xsd:element name="after" type="TemporalPredicate2" />
+			<xsd:element name="before" type="TemporalPredicate2" />
+			<xsd:element name="between" type="TemporalPredicate3" />
+			<xsd:element name="compare" type="relationalOp" />
+			<xsd:element name="exists" type="existsPredicate" />
+			<xsd:element name="match" type="regularExpressionPredicate" />
+			<xsd:element name="range" type="RangePredicate" />
+			<xsd:element name="predicate" type="callPredicate" />
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="logicalExpression">
+		<xsd:choice>
+			<xsd:group ref="builtinLogicalExpression" />
+			<xsd:group ref="builtinPredicate" />
+		</xsd:choice>
+	</xsd:group>
+	<xsd:group name="builtinFunction">
+		<xsd:choice>
+			<xsd:element name="arithmetic" type="arithOperator" />
+			<xsd:element name="assert" type="assertCmd" />
+			<xsd:element name="createobject" type="createPredicate" />
+			<xsd:element name="clear" type="simpleFunction" />
+			<xsd:element name="executor" type="simpleFunction" />
+			<xsd:element name="findfirst" type="regularExpressionPredicate" />
+			<xsd:element name="findall" type="regularExpressionPredicate" />
+			<xsd:element name="halt" type="haltCmd" />
+			<xsd:element name="retract" type="retractCmd" />
+			<xsd:element name="dayofweek" type="temporalFunction" />
+			<xsd:element name="year" type="temporalFunction" />
+			<xsd:element name="month" type="temporalFunction" />
+			<xsd:element name="day" type="temporalFunction" />
+			<xsd:element name="hour" type="temporalFunction" />
+			<xsd:element name="minute" type="temporalFunction" />
+			<xsd:element name="second" type="temporalFunction" />
+			<xsd:element name="timeofday" type="temporalFunction" />
+			<xsd:element name="update" type="updateCmd" />
+			<xsd:element name="retractbytype" type="retractbytypeCmd" />
+		</xsd:choice>
+	</xsd:group>
+	<xsd:complexType name="term">
+		<xsd:choice>
+			<xsd:element name="function" type="callPredicate" />
+			<xsd:element name="constant" type="constantType" />
+			<xsd:element name="reference" type="referenceType" />
+			<xsd:group ref="builtinFunction" />
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="rulesetType">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" minOccurs="0" type="vocabularyReference" />
+			<xsd:element name="userproperty" minOccurs="0" maxOccurs="unbounded" type="userProperty" />
+			<xsd:element name="version" minOccurs="0" maxOccurs="unbounded" type="versionType">
+				<xsd:unique name="VersionUserPropertyUnique">
+					<xsd:selector xpath="NS:userproperty" />
+					<xsd:field xpath="@name" />
+				</xsd:unique>
+			</xsd:element>
+			<xsd:element name="configuration" minOccurs="0" type="rulesetconfig" />
+			<xsd:element name="bindings" minOccurs="0" type="bindings" />
+			<xsd:element name="rule" minOccurs="0" maxOccurs="unbounded" type="ruleType" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="versionType">
+		<xsd:sequence>
+			<xsd:element name="userproperty" minOccurs="0" maxOccurs="unbounded" type="userProperty" />
+		</xsd:sequence>
+		<xsd:attribute name="major" type="xsd:nonNegativeInteger" default="0" />
+		<xsd:attribute name="minor" type="xsd:nonNegativeInteger" default="0" />
+		<xsd:attribute name="description" type="xsd:string" use="required" />
+		<xsd:attribute name="modifiedby" type="xsd:string" use="required" />
+		<xsd:attribute name="date" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="rulesetconfig">
+		<xsd:sequence>
+			<xsd:element name="translator" type="rulesetconfigbinding" minOccurs="0" />
+			<xsd:element name="factretriever" type="rulesetconfigbinding" minOccurs="0" />
+			<xsd:element name="loopdepth" type="xsd:positiveInteger" minOccurs="0" />
+			<xsd:element name="translatortimeout" type="xsd:positiveInteger" minOccurs="0" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="rulesetconfigbinding">
+		<xsd:sequence>
+			<xsd:element name="assembly" type="xsd:string" />
+			<xsd:element name="class" type="xsd:string" />
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="bindings">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="class" type="classDefinition" />
+			<xsd:element name="datarow" type="datasetDefinition" />
+			<xsd:element name="xmldocument" type="xmldocumentDefinition" />
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="classDefinition">
+		<xsd:all>
+			<xsd:element name="assembly" type="xsd:string" />
+			<xsd:element name="namespace" type="xsd:string" minOccurs="0" />
+		</xsd:all>
+		<xsd:attribute name="class" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="ref" type="xsd:string" use="required" />
+		<xsd:attribute name="instance" type="xsd:integer" use="optional" />
+		<xsd:attribute name="instances" type="xsd:positiveInteger" use="optional" />
+		<xsd:attribute name="selectivity" type="selectivityType" use="optional" />
+	</xsd:complexType>
+	<xsd:simpleType name="selectivityType">
+		<xsd:restriction base="xsd:float">
+			<xsd:minInclusive value="0.0" />
+			<xsd:maxInclusive value="1.0" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="datasetDefinition">
+		<xsd:attribute name="dataset" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="table" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="ref" type="xsd:string" use="required" />
+		<xsd:attribute name="instance" type="xsd:integer" use="optional" />
+		<xsd:attribute name="instances" type="xsd:positiveInteger" use="optional" />
+		<xsd:attribute name="selectivity" type="selectivityType" use="optional" />
+		<xsd:attribute name="isdataconnection" type="xsd:boolean" use="optional" />
+		<xsd:attribute name="server" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="xmldocumentDefinition">
+		<xsd:sequence>
+			<xsd:element name="selector" type="xsd:string" />
+			<xsd:element name="selectoralias" type="xsd:string" minOccurs="0" />
+			<xsd:element name="schema" type="xsd:string" minOccurs="0" />
+		</xsd:sequence>
+		<xsd:attribute name="doctype" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="ref" type="xsd:string" use="required" />
+		<xsd:attribute name="instance" type="xsd:integer" use="optional" />
+		<xsd:attribute name="instances" type="xsd:positiveInteger" use="optional" />
+		<xsd:attribute name="selectivity" type="selectivityType" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="ruleType">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" minOccurs="0" type="vocabularyReference" />
+			<xsd:element name="if" type="topLogicalExpr" minOccurs="0" />
+			<xsd:element name="then" type="thenPart" minOccurs="0" />
+		</xsd:sequence>
+		<xsd:attribute name="name" type="xsd:string" use="required" />
+		<xsd:attribute name="priority" type="xsd:integer" use="optional" />
+		<xsd:attribute name="active" type="xsd:boolean" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="topLogicalExpr">
+		<xsd:group ref="logicalExpression" minOccurs="0" />
+	</xsd:complexType>
+	<xsd:complexType name="logicalExpr">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:group ref="logicalExpression" minOccurs="2" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="singleLogicalExpr">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:group ref="logicalExpression" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="callPredicate">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:choice>
+				<xsd:element name="classmember" type="classBinding" />
+				<xsd:element name="datarowmember" type="databaseBinding" />
+				<xsd:element name="xmldocumentmember" type="xmlBinding" />
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="classBinding">
+		<xsd:sequence>
+			<xsd:choice minOccurs="0">
+				<xsd:element name="classref" type="classReferenceType" />
+				<xsd:element name="classmember" type="classBinding" />
+				<xsd:element name="datarowmember" type="databaseBinding" />
+				<xsd:element name="xmldocumentmember" type="xmlBinding" />
+			</xsd:choice>
+			<xsd:element name="argument" type="term" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="classref" type="xsd:string" use="optional" />
+		<xsd:attribute name="cast" type="xsd:string" use="optional" />
+		<xsd:attribute name="member" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="sideeffects" type="xsd:boolean" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="databaseBinding">
+		<xsd:sequence>
+			<xsd:element name="argument" type="term" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="datarowref" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="column" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="type" type="allowedTypes" use="required" />
+		<xsd:attribute name="classref" type="xsd:string" use="optional" />
+		<xsd:attribute name="sideeffects" type="xsd:boolean" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="xmlBinding">
+		<xsd:sequence>
+			<xsd:element name="field" type="xsd:string" />
+			<xsd:element name="fieldalias" type="xsd:string" minOccurs="0" />
+			<xsd:element name="argument" type="term" minOccurs="0" maxOccurs="1" />
+		</xsd:sequence>
+		<xsd:attribute name="xmldocumentref" type="xsd:normalizedString" use="required" />
+		<xsd:attribute name="type" type="allowedTypes" use="required" />
+		<xsd:attribute name="classref" type="xsd:string" use="optional" />
+		<xsd:attribute name="sideeffects" type="xsd:boolean" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="referenceType">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:choice>
+				<xsd:element name="classref" type="classReferenceType" />
+				<xsd:element name="datarowref" type="databaseReferenceType" />
+				<xsd:element name="xmldocumentref" type="xmldocumentReferenceType" />
+			</xsd:choice>
+		</xsd:sequence>
+	</xsd:complexType>
+	<xsd:complexType name="classReferenceType">
+		<xsd:attribute name="ref" type="xsd:normalizedString" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="databaseReferenceType">
+		<xsd:attribute name="ref" type="xsd:normalizedString" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="xmldocumentReferenceType">
+		<xsd:attribute name="ref" type="xsd:normalizedString" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="relationalOp">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="lhs" type="term" />
+			<xsd:element name="rhs" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="operator" type="binaryBooleanOperators" use="required" />
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="createPredicate">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="argument" type="term" minOccurs="0" maxOccurs="unbounded" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+		<xsd:attribute name="classref" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="regularExpressionPredicate">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="pattern" type="term" />
+			<xsd:element name="input" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="temporalFunction">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="time" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="TemporalPredicate2">
+		<xsd:all>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="time1" type="term" />
+			<xsd:element name="time2" type="term" />
+		</xsd:all>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="TemporalPredicate3">
+		<xsd:all>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="time1" type="term" />
+			<xsd:element name="time2" type="term" />
+			<xsd:element name="time3" type="term" />
+		</xsd:all>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="existsPredicate">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="object" type="term" />
+			<xsd:element name="member" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="RangePredicate">
+		<xsd:all>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="rangelow" type="term" />
+			<xsd:element name="rangehigh" type="term" />
+			<xsd:element name="testvalue" type="term" />
+		</xsd:all>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="arithOperator">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="lhs" type="term" />
+			<xsd:element name="rhs" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="operator" type="binaryArithmeticOperators" use="required" />
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="constantType">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:choice>
+				<xsd:element name="byte" type="xsd:unsignedByte" />
+				<xsd:element name="nullable_byte" type="xsd:unsignedByte" />
+				<xsd:element name="boolean" type="xsd:boolean" />
+				<xsd:element name="nullable_boolean" type="xsd:boolean" />
+				<xsd:element name="char" type="xsd:string" />
+				<xsd:element name="nullable_char" type="xsd:string" />
+				<xsd:element name="datetime" type="xsd:string" />
+				<xsd:element name="nullable_datetime" type="xsd:string" />
+				<xsd:element name="decimal" type="xsd:decimal" />
+				<xsd:element name="nullable_decimal" type="xsd:decimal" />
+				<xsd:element name="double" type="xsd:double" />
+				<xsd:element name="nullable_double" type="xsd:double" />
+				<xsd:element name="float" type="xsd:float" />
+				<xsd:element name="nullable_float" type="xsd:float" />
+				<xsd:element name="int" type="xsd:int" />
+				<xsd:element name="nullable_int" type="xsd:int" />
+				<xsd:element name="long" type="xsd:long" />
+				<xsd:element name="nullable_long" type="xsd:long" />
+				<xsd:element name="object" type="soapstring" />
+				<xsd:element name="sbyte" type="xsd:byte" />
+				<xsd:element name="nullable_sbyte" type="xsd:byte" />
+				<xsd:element name="short" type="xsd:short" />
+				<xsd:element name="nullable_short" type="xsd:short" />
+				<xsd:element name="string" type="xsd:string" />
+				<xsd:element name="uint" type="xsd:unsignedInt" />
+				<xsd:element name="nullable_uint" type="xsd:unsignedInt" />
+				<xsd:element name="ulong" type="xsd:unsignedLong" />
+				<xsd:element name="nullable_ulong" type="xsd:unsignedLong" />
+				<xsd:element name="ushort" type="xsd:unsignedShort" />
+				<xsd:element name="nullable_ushort" type="xsd:unsignedShort" />
+				<xsd:element name="null" type="nullobject" />
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="nullobject">
+		<xsd:attribute name="type" type="allowedNullTypes" use="required" />
+	</xsd:complexType>
+	<xsd:simpleType name="allowedNullTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="string" />
+			<xsd:enumeration value="byte" />
+			<xsd:enumeration value="nullable_byte" />
+			<xsd:enumeration value="boolean" />
+			<xsd:enumeration value="nullable_boolean" />
+			<xsd:enumeration value="char" />
+			<xsd:enumeration value="nullable_char" />
+			<xsd:enumeration value="datetime" />
+			<xsd:enumeration value="nullable_datetime" />
+			<xsd:enumeration value="decimal" />
+			<xsd:enumeration value="nullable_decimal" />
+			<xsd:enumeration value="double" />
+			<xsd:enumeration value="nullable_double" />
+			<xsd:enumeration value="float" />
+			<xsd:enumeration value="nullable_float" />
+			<xsd:enumeration value="int" />
+			<xsd:enumeration value="nullable_int" />
+			<xsd:enumeration value="long" />
+			<xsd:enumeration value="nullable_long" />
+			<xsd:enumeration value="sbyte" />
+			<xsd:enumeration value="nullable_sbyte" />
+			<xsd:enumeration value="short" />
+			<xsd:enumeration value="nullable_short" />
+			<xsd:enumeration value="uint" />
+			<xsd:enumeration value="nullable_uint" />
+			<xsd:enumeration value="ulong" />
+			<xsd:enumeration value="nullable_ulong" />
+			<xsd:enumeration value="ushort" />
+			<xsd:enumeration value="nullable_ushort" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:simpleType name="allowedTypes">
+		<xsd:restriction base="xsd:string">
+			<xsd:enumeration value="byte" />
+			<xsd:enumeration value="nullable_byte" />
+			<xsd:enumeration value="boolean" />
+			<xsd:enumeration value="nullable_boolean" />
+			<xsd:enumeration value="char" />
+			<xsd:enumeration value="nullable_char" />
+			<xsd:enumeration value="datetime" />
+			<xsd:enumeration value="nullable_datetime" />
+			<xsd:enumeration value="decimal" />
+			<xsd:enumeration value="nullable_decimal" />
+			<xsd:enumeration value="double" />
+			<xsd:enumeration value="nullable_double" />
+			<xsd:enumeration value="float" />
+			<xsd:enumeration value="nullable_float" />
+			<xsd:enumeration value="int" />
+			<xsd:enumeration value="nullable_int" />
+			<xsd:enumeration value="long" />
+			<xsd:enumeration value="nullable_long" />
+			<xsd:enumeration value="sbyte" />
+			<xsd:enumeration value="nullable_sbyte" />
+			<xsd:enumeration value="short" />
+			<xsd:enumeration value="nullable_short" />
+			<xsd:enumeration value="string" />
+			<xsd:enumeration value="uint" />
+			<xsd:enumeration value="nullable_uint" />
+			<xsd:enumeration value="ulong" />
+			<xsd:enumeration value="nullable_ulong" />
+			<xsd:enumeration value="ushort" />
+			<xsd:enumeration value="nullable_ushort" />
+			<xsd:enumeration value="object" />
+		</xsd:restriction>
+	</xsd:simpleType>
+	<xsd:complexType name="simpleFunction">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="thenPart">
+		<xsd:choice minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="function" type="callPredicate" />
+			<xsd:group ref="builtinFunction" />
+		</xsd:choice>
+	</xsd:complexType>
+	<xsd:complexType name="assertCmd">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="object" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="retractCmd">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="object" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="retractbytypeCmd">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:choice>
+				<xsd:element name="classtype" type="classType" />
+				<xsd:element name="datarowtype" type="datarowType" />
+				<xsd:element name="dataconnectiontype" type="dataconnectionType" />
+				<xsd:element name="documenttype" type="documentType" />
+			</xsd:choice>
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="classType">
+		<xsd:attribute name="classref" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="datarowType">
+		<xsd:attribute name="table" type="xsd:string" use="required" />
+		<xsd:attribute name="dataset" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="dataconnectionType">
+		<xsd:attribute name="table" type="xsd:string" use="required" />
+		<xsd:attribute name="dataset" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="documentType">
+		<xsd:attribute name="document" type="xsd:string" use="required" />
+		<xsd:attribute name="selector" type="xsd:string" use="required" />
+	</xsd:complexType>
+	<xsd:complexType name="haltCmd">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="clearagenda" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+	<xsd:complexType name="updateCmd">
+		<xsd:sequence>
+			<xsd:element name="vocabularylink" type="vocabularyReference" minOccurs="0" />
+			<xsd:element name="object" type="term" />
+		</xsd:sequence>
+		<xsd:attribute name="ref" type="xsd:string" use="optional" />
+	</xsd:complexType>
+</xsd:schema>

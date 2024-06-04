@@ -1,0 +1,225 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1513"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{D61EF641-48F2-4DC3-8741-137FEC99748C}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\..\Microsoft.Samples.Biztalk.WoodgroveBank.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = "Orchestrations for the end to end service oriented scenario using BizTalk and BizTalk adapters - Stubbed version which does not require MQSeries and SAP adapters."
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft® BizTalk® Server 2006"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright (c) Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed"
+                    AssemblyName = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "BTSScn.SO.CustomerService"
+                    BpelCompliance = "False"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    Project = "{BA297D6B-710A-49BF-BF75-200CD887F95B}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "Microsoft.Samples.BizTalk.WoodgroveBank.Utilities"
+                    Project = "{E12D1E4A-6850-43FE-9B72-93884DF14FA7}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                    Private = "True"
+                />
+                <Reference
+                    Name = "Microsoft.Samples.BizTalk.WoodgroveBank.ServiceLevelTracking"
+                    Project = "{CEA86233-15D6-4A26-9D39-57136E02DF44}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Maps"
+                    Project = "{BB207F93-384B-4489-A736-FF37320687F0}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "ConfigHelper"
+                    Project = "{6357D327-CD2D-4811-9243-F8773138FC07}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "ErrorHelper"
+                    Project = "{EC8C80DE-FDE2-4175-B279-D2A4D4C871B1}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "CustomerService.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "CustomerServiceNativeRequestResponse.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web References\StubPendTransWS\Reference.map"
+                    BuildAction = "None"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS"
+                    Generator = "MSDiscoCodeGenerator"
+                />
+                <File
+                    RelPath = "Web References\StubPendTransWS\Reference.odx"
+                    DependentUpon = "Reference.map"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web References\StubPendTransWS\Reference.xsd"
+                    DependentUpon = "Reference.map"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS"
+                    Type = "Reference"
+                />
+                <File
+                    RelPath = "Web References\StubPendTransWS\Reference1.xsd"
+                    DependentUpon = "Reference.map"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS"
+                    Type = "Reference1"
+                />
+                <File
+                    RelPath = "Web References\StubPendTransWS\StubPendTransWS.disco"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Web References\StubPendTransWS\StubPendTransWS.wsdl"
+                    BuildAction = "None"
+                />
+                <Folder
+                    RelPath = "Web References\StubPendTransWS\"
+                    WebReferenceUrl = "http://localhost:4022/PendingTrans/StubPendTransWS.asmx"
+                    UrlBehavior = "Static"
+                />
+                <File
+                    RelPath = "Web References\StubPmntTrckWS\Reference.map"
+                    BuildAction = "None"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS"
+                    Generator = "MSDiscoCodeGenerator"
+                />
+                <File
+                    RelPath = "Web References\StubPmntTrckWS\Reference.odx"
+                    DependentUpon = "Reference.map"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web References\StubPmntTrckWS\Reference.xsd"
+                    DependentUpon = "Reference.map"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS"
+                    Type = "Reference"
+                />
+                <File
+                    RelPath = "Web References\StubPmntTrckWS\Reference1.xsd"
+                    DependentUpon = "Reference.map"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS"
+                    Type = "Reference1"
+                />
+                <File
+                    RelPath = "Web References\StubPmntTrckWS\StubPmntTrckWS.disco"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Web References\StubPmntTrckWS\StubPmntTrckWS.wsdl"
+                    BuildAction = "None"
+                />
+                <Folder
+                    RelPath = "Web References\StubPmntTrckWS\"
+                    WebReferenceUrl = "http://localhost:4020/PaymentTrack/StubPmntTrckWS.asmx"
+                    UrlBehavior = "Static"
+                />
+                <File
+                    RelPath = "Web References\StubSAPWS\Reference.map"
+                    BuildAction = "None"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubSAPWS"
+                    Generator = "MSDiscoCodeGenerator"
+                />
+                <File
+                    RelPath = "Web References\StubSAPWS\Reference.odx"
+                    DependentUpon = "Reference.map"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Web References\StubSAPWS\Reference.xsd"
+                    DependentUpon = "Reference.map"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubSAPWS"
+                    Type = "Reference"
+                />
+                <File
+                    RelPath = "Web References\StubSAPWS\StubSAPWS.disco"
+                    BuildAction = "None"
+                />
+                <File
+                    RelPath = "Web References\StubSAPWS\StubSAPWS.wsdl"
+                    BuildAction = "None"
+                />
+                <Folder
+                    RelPath = "Web References\StubSAPWS\"
+                    WebReferenceUrl = "http://localhost/Microsoft.Samples.BizTalk.WoodgroveBank.StubSAP/StubSAPWS.asmx"
+                    UrlBehavior = "Static"
+                />
+                <Folder
+                    RelPath = "Web References\"
+                    WebReferences = "TRUE"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

@@ -1,0 +1,143 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1513"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{BB207F93-384B-4489-A736-FF37320687F0}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\Microsoft.Samples.Biztalk.WoodgroveBank.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = "Maps for the end to end service oriented scenario using BizTalk"
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft® BizTalk® Server 2006"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright (c) Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    AssemblyName = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "BTSScn.SO.CustomerService"
+                    BpelCompliance = "False"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Schemas"
+                    Project = "{BA297D6B-710A-49BF-BF75-200CD887F95B}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "Utilities"
+                    Project = "{E12D1E4A-6850-43FE-9B72-93884DF14FA7}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "ErrorHelper"
+                    Project = "{EC8C80DE-FDE2-4175-B279-D2A4D4C871B1}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "Aggregate_To_CustomerServiceResponse.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "Aggregate_To_CustomerServiceResponse"
+                />
+                <File
+                    RelPath = "Aggregate_To_ErrorResponse.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "Aggregate_To_ErrorResponse"
+                />
+                <File
+                    RelPath = "CustomerServiceRequest_To_CreditLimiRequest.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "CustomerServiceRequest_To_CreditLimiRequest"
+                />
+                <File
+                    RelPath = "CustomerServiceRequest_To_CreditLimitResponse.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "CustomerServiceRequest_To_CreditLimitResponse"
+                />
+                <File
+                    RelPath = "CustomerServiceRequest_To_CustomerServiceResponseDenied.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "CustomerServiceRequest_To_CustomerServiceResponseDenied"
+                />
+                <File
+                    RelPath = "CustomerServiceRequest_To_LastPaymentRequest.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "CustomerServiceRequest_To_LastPaymentRequest"
+                />
+                <File
+                    RelPath = "CustomerServiceRequest_To_LastPaymentResponseTimeout.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "CustomerServiceRequest_To_LastPaymentResponseTimeout"
+                />
+                <File
+                    RelPath = "CustomerServiceRequest_To_PendingTransactionResponse.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "CustomerServiceRequest_To_PendingTransactionResponse"
+                />
+                <File
+                    RelPath = "CustomerServiceRequest_To_PendingTransactionsRequest.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Maps"
+                    Type = "CustomerServiceRequest_To_PendingTransactionsRequest"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

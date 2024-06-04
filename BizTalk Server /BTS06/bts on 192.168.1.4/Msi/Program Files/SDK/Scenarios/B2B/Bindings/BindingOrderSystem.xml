@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BindingInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Assembly="Microsoft.BizTalk.Deployment, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.0.1.0" BindingStatus="FullyBound" BoundEndpoints="4" TotalEndpoints="4">
+  <ModuleRefCollection>
+    <ModuleRef Name="Microsoft.Samples.BizTalk.Litware.OrderSystem" Version="1.0.0.0" Culture="neutral" PublicKeyToken="xxxxxxxxxxxxxxxx" FullName="">
+      <Services>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.OrderSystem.GetOrder">
+          <Ports>
+            <Port Name="RecvOrderInquiry" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="OrderSystem" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.OrderSystem.IsOrderExist">
+          <Ports>
+            <Port Name="RecvInquiry" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="OrderSystem" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.OrderSystem.NewOrder">
+          <Ports>
+            <Port Name="RecvBasketPort" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="OrderSystem" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.OrderSystem.UpdateOrder">
+          <Ports>
+            <Port Name="RecvPOUpdatePort" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="OrderSystem" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+      </Services>
+    </ModuleRef>
+  </ModuleRefCollection>
+</BindingInfo>

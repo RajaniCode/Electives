@@ -1,0 +1,113 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1005"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{8BA0274A-D616-4ABD-9E91-B1F7BB93F9FC}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\Actions.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = "Microsoft BizTalk Server 2006 SDK Sample"
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft® BizTalk® Server SDK"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright ® Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.DelegateTask"
+                    AssemblyName = "DelegateTask"
+                />
+                <Config
+                    Name = "Development"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "..\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = ".\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "BaseSchema"
+                    Project = "{74FE1F40-B50E-4CB9-8490-1ABD62420531}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "UtilObjects"
+                    Project = "{739B5C67-FB3E-4009-8D40-4DA685D6D016}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Hws.HwsPromotedProperties"
+                    AssemblyName = "Microsoft.BizTalk.Hws.HwsPromotedProperties"
+                    HintPath = "..\..\..\..\..\Developer Tools\BizTalkWizards\ActionApp\Templates\bin\Microsoft.BizTalk.Hws.HwsPromotedProperties.dll"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Hws.HwsSchemas"
+                    AssemblyName = "Microsoft.BizTalk.Hws.HwsSchemas"
+                    HintPath = "..\..\..\..\..\Developer Tools\BizTalkWizards\ActionApp\Templates\bin\Microsoft.BizTalk.Hws.HwsSchemas.dll"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Hws.TemplateExceptions"
+                    AssemblyName = "Microsoft.BizTalk.Hws.TemplateExceptions"
+                    HintPath = "..\..\..\..\..\Developer Tools\BizTalkWizards\ActionApp\Templates\bin\Microsoft.BizTalk.Hws.TemplateExceptions.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "ActivationToTaskMessage.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.DelegateTask"
+                    Type = "ActivationToTaskMessage"
+                />
+                <File
+                    RelPath = "Delegate.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Hws_Activate.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.DelegateTask"
+                    Type = "Hws_Activate"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

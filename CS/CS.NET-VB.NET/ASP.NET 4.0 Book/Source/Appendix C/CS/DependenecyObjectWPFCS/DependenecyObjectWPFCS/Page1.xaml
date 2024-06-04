@@ -1,0 +1,29 @@
+﻿<Page x:Class="DependenecyObjectWPFCS.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="Page1">
+    <Grid>
+        <Label Height="28" Margin="64,30,94,0" Name="label1" VerticalAlignment="Top" 
+		 FontSize="15" FontWeight="Bold">Choose a Color:</Label>
+        <ComboBox Height="23" Margin="47,65,53,0" Name="comboBox1" 
+		 VerticalAlignment="Top">
+            <ComboBoxItem>RED
+            </ComboBoxItem>
+            <ComboBoxItem>BLUE
+            </ComboBoxItem>
+            <ComboBoxItem>YELLOW
+            </ComboBoxItem>
+            <ComboBoxItem>BLACK
+            </ComboBoxItem>
+        </ComboBox>
+        <Canvas Margin="89,0,89,2" Height="100" VerticalAlignment="Bottom">
+            <Canvas.Background>
+                <Binding ElementName="comboBox1" Path="SelectedItem.Content"/>
+            </Canvas.Background>
+        </Canvas>
+    </Grid>
+</Page>

@@ -1,0 +1,2148 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="dc8d5daf-d8cf-4fd5-9afb-dcca0c195238" LowerBound="1.1" HigherBound="509.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="Template" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="ServiceDeclaration" OID="915926c6-604c-416b-b0de-6b4b6e143322" ParentLink="Module_ServiceDeclaration" LowerBound="64.1" HigherBound="508.1">
+            <om:Property Name="InitializedTransactionType" Value="True" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="Action" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="VariableDeclaration" OID="e2989178-395f-458e-a3e1-86eb075a916d" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="92.1" HigherBound="93.1">
+                <om:Property Name="UseDefaultConstructor" Value="True" />
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.TemplateExceptions.AbortException" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="abortException" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="e942cbe3-a81e-4351-a134-59e16379dd63" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="93.1" HigherBound="94.1">
+                <om:Property Name="UseDefaultConstructor" Value="True" />
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.TemplateExceptions.RollbackException" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="rollbackException" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="c3cf5d13-8cea-41a5-9df6-e22a9385aa2c" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="94.1" HigherBound="95.1">
+                <om:Property Name="UseDefaultConstructor" Value="True" />
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.TemplateExceptions.TemplateExceptionsResourceManager" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="resourceManager" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="LongRunningTransaction" OID="cfb10427-c32c-4736-8fdc-0a106bbc8949" ParentLink="ServiceDeclaration_Transaction" LowerBound="65.20" HigherBound="65.51">
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="TemplateTransaction" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+            <om:Element Type="CorrelationDeclaration" OID="17ae9dc6-01c9-4c76-8168-ba9704fbb512" ParentLink="ServiceDeclaration_CorrelationDeclaration" LowerBound="77.1" HigherBound="78.1">
+                <om:Property Name="Type" Value="Template.SyncCorrelation" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="corSyncCorrelation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="StatementRef" OID="de4a65c3-076f-4bab-b2ec-4a1ff3dcc319" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="234.115" HigherBound="234.133">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="928ae495-3c6b-4aa7-8c43-df182e1de97f" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_2" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="d04286b5-5e27-4e76-a4c4-cb7ef23a3fde" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="146.322" HigherBound="146.351">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="ce3606b1-e265-4e40-9d8f-b79adf13a442" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_11" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="5b9e1fce-4b6a-448c-b906-1f8c66c1967b" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="160.285" HigherBound="160.314">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="de641598-c2d6-4b3d-a11d-d8b928734a82" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_18" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="002b8ee8-2f44-4e66-83d4-4aec1a37097c" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="178.102" HigherBound="178.131">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="fd2fdf55-ea16-484c-8a11-a8ff3a0cad20" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_25" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="0c263e3a-ca81-4c30-bc35-f6a2319eb0b3" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="185.102" HigherBound="185.131">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="05cd4445-24e4-4608-9898-acb42d9a055c" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_32" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="CorrelationDeclaration" OID="982d0674-ca53-4723-84a0-fd9176792a0b" ParentLink="ServiceDeclaration_CorrelationDeclaration" LowerBound="78.1" HigherBound="79.1">
+                <om:Property Name="Type" Value="Template.ActionInstanceInterruptCorrelation" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="corActionInstanceInterruptCorrelation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="StatementRef" OID="7a06c167-f3b4-4c8b-93ec-c4e80c1fdd5d" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="104.100" HigherBound="104.148">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="c02b3395-3e1c-4e15-ac2f-b054c5741d1d" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_4" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="58f68fc4-6db3-4c1d-98fc-8267d6d144a8" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="146.226" HigherBound="146.263">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="ce3606b1-e265-4e40-9d8f-b79adf13a442" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_5" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="893fcd70-44c7-4c63-ad6b-c0944d756402" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="148.104" HigherBound="148.141">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="d556481e-53c0-4c78-b83e-ed8c871fb44d" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_12" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="7e662ab8-ec64-4d0a-976c-64b79ba2ba94" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="160.102" HigherBound="160.139">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="de641598-c2d6-4b3d-a11d-d8b928734a82" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_13" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="3b213cc5-a86c-4335-a0a9-c59b8bf8b471" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="162.104" HigherBound="162.141">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="58da7e9a-1526-4475-9ca7-c425c9bdae64" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_19" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="1c4ee645-3eb3-4e2a-992d-f387e6a02420" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="178.275" HigherBound="178.312">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="fd2fdf55-ea16-484c-8a11-a8ff3a0cad20" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_20" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="6f21f451-8ca4-4fdb-abbb-dd01fd7a0f4a" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="180.104" HigherBound="180.141">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="38b81292-eb06-4cf0-857c-ce9d1d2b1988" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_26" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="154f2489-edcb-484b-8667-cf0b996fcdb0" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="185.314" HigherBound="185.351">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="05cd4445-24e4-4608-9898-acb42d9a055c" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_27" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="8f252e31-3f6d-4681-a4ed-435a9b45da4d" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="187.104" HigherBound="187.141">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="241cbfc0-776a-4dbd-b17c-b73c0947e9ac" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_33" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="d65ee356-686e-4d78-b44b-bcfe88659810" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="282.106" HigherBound="282.143">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="6ef6372e-ba6c-41e5-a3ff-eb8e60d28586" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_6" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="CorrelationDeclaration" OID="8ac97743-0543-4ccc-8e38-ced62697f8e4" ParentLink="ServiceDeclaration_CorrelationDeclaration" LowerBound="79.1" HigherBound="80.1">
+                <om:Property Name="Type" Value="Template.ParentFinishCorrelation" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="corParentFinishCorrelation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="StatementRef" OID="834d390e-d504-4bbd-a6d4-a3ed14f39680" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="207.129" HigherBound="207.155">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="ea057dcf-a87d-4137-b53c-7131f24a0b08" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_3" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="837b4f46-a656-4e40-8567-4c68e6037b20" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="146.150" HigherBound="146.187">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="ce3606b1-e265-4e40-9d8f-b79adf13a442" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_9" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="77954493-c9b6-439f-b7a4-caf199ca4161" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="160.141" HigherBound="160.178">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="de641598-c2d6-4b3d-a11d-d8b928734a82" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_16" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="77b25066-10ae-4f97-9897-9f17f233cb63" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="178.314" HigherBound="178.351">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="fd2fdf55-ea16-484c-8a11-a8ff3a0cad20" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_23" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="d40a4f55-3dda-4cb6-8e8b-d1c794efc2fb" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="185.190" HigherBound="185.227">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="05cd4445-24e4-4608-9898-acb42d9a055c" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_30" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="ba878c67-1807-4de4-a6bf-cccd678f7553" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="498.109" HigherBound="498.135">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="662ea590-086d-4ac5-be56-b09d81334780" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_36" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="CorrelationDeclaration" OID="38e6176e-3abd-4093-aebc-cecd674d0d08" ParentLink="ServiceDeclaration_CorrelationDeclaration" LowerBound="80.1" HigherBound="81.1">
+                <om:Property Name="Type" Value="Template.SelfFinishCorrelation" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="corSelfFinishCorrelation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="StatementRef" OID="7254b63c-ba2e-4ea8-9c38-53c9d1ac1bb1" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="146.189" HigherBound="146.224">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="ce3606b1-e265-4e40-9d8f-b79adf13a442" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_10" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="6054f7a5-dfee-4aee-bbd3-aac2d782f915" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="160.316" HigherBound="160.351">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="de641598-c2d6-4b3d-a11d-d8b928734a82" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_17" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="6ea520d7-7751-446a-a106-d304565731a9" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="178.238" HigherBound="178.273">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="fd2fdf55-ea16-484c-8a11-a8ff3a0cad20" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_24" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="c9fe8eb3-a19c-43b5-91a8-b3a5af3fe1d6" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="185.229" HigherBound="185.264">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="05cd4445-24e4-4608-9898-acb42d9a055c" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_31" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="7b44fde4-7655-486b-b8fa-c7cb9d27cbfb" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="278.123" HigherBound="278.147">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="df527b22-1bdc-4aeb-b418-42d4950705d8" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_1" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="CorrelationDeclaration" OID="46fdd063-ea57-46dd-882e-e6be652ce6a9" ParentLink="ServiceDeclaration_CorrelationDeclaration" LowerBound="81.1" HigherBound="82.1">
+                <om:Property Name="Type" Value="Template.ActivityFlowInterruptCorrelation" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="corActivityFlowInterruptCorrelation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="StatementRef" OID="367d945c-4fc2-4dfc-b30a-325fdbbaae36" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="146.102" HigherBound="146.148">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="ce3606b1-e265-4e40-9d8f-b79adf13a442" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_7" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="be6093ce-b8e4-442e-9dbc-713913fe2f00" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="160.180" HigherBound="160.226">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="de641598-c2d6-4b3d-a11d-d8b928734a82" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_14" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="7d8c078d-b63f-45b0-b2d0-892ef48ec32d" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="178.133" HigherBound="178.179">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="fd2fdf55-ea16-484c-8a11-a8ff3a0cad20" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_21" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="eb48112c-1cd8-4817-b72e-4942e138accc" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="185.266" HigherBound="185.312">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="05cd4445-24e4-4608-9898-acb42d9a055c" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_28" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="8b523e6c-5ccb-4edd-b568-98a1a3bf79c5" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="297.106" HigherBound="297.141">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="13df72b9-267f-4aa1-a976-71e4440b6eae" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_34" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="CorrelationDeclaration" OID="8085cb8c-a73d-41b7-b2e4-8230c0f48cf6" ParentLink="ServiceDeclaration_CorrelationDeclaration" LowerBound="82.1" HigherBound="83.1">
+                <om:Property Name="Type" Value="Template.ActivityModelInstanceInterruptCorrelation" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="corActivityModelInstanceInterruptCorrelation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="StatementRef" OID="6123a96a-ac32-4421-93a5-afcfad81cc2e" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="146.265" HigherBound="146.320">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="ce3606b1-e265-4e40-9d8f-b79adf13a442" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_8" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="14ed55de-3b09-4e38-ac79-b42e2f1e0f18" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="160.228" HigherBound="160.283">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="de641598-c2d6-4b3d-a11d-d8b928734a82" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_15" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="f6ed6f5b-1816-434f-a8bd-91b877639247" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="178.181" HigherBound="178.236">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="fd2fdf55-ea16-484c-8a11-a8ff3a0cad20" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_22" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="cce3f0bf-2bd4-4505-8b32-3817f4ad3569" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="185.133" HigherBound="185.188">
+                    <om:Property Name="Initializes" Value="True" />
+                    <om:Property Name="Ref" Value="05cd4445-24e4-4608-9898-acb42d9a055c" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_29" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="StatementRef" OID="f4dcd75b-2d5b-4b89-b2fc-207de6d6ceca" ParentLink="CorrelationDeclaration_StatementRef" LowerBound="312.106" HigherBound="312.150">
+                    <om:Property Name="Initializes" Value="False" />
+                    <om:Property Name="Ref" Value="0753bed7-02bf-481b-a233-7604211b735b" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="StatementRef_35" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="1ca65c9f-8d83-4b41-9725-e53d240c322d" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="83.1" HigherBound="84.1">
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ResponseMessage_4" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="9ca11acf-f061-4634-9494-126b3f8e57f2" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="84.1" HigherBound="85.1">
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ResponseMessage_3" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="183b5342-99f6-481b-b7bc-781ff44c360d" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="85.1" HigherBound="86.1">
+                <om:Property Name="Type" Value="Template.Hws_Activate" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ActivationMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="e33dee7a-1b90-4f19-a747-0f53a8a051d1" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="86.1" HigherBound="87.1">
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ResponseMessage_1" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="281fb9d1-b170-4220-a691-87a5262ea807" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="87.1" HigherBound="88.1">
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Interrupt" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="InterruptMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="4b5a7980-1718-4132-b622-464282e700fa" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="88.1" HigherBound="89.1">
+                <om:Property Name="Type" Value="Template.Hws_Synchronize" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SyncMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="ad4d3579-0b17-4f9b-a2df-4e25879144fb" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="89.1" HigherBound="90.1">
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="FinishMessageFromParent" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="b603a5f7-c4fe-4b77-b2cd-84820e597270" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="90.1" HigherBound="91.1">
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="FinishMessageFromSelf" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="e5899009-4fa6-4b84-8aea-aafcdd854f69" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="91.1" HigherBound="92.1">
+                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ResponseMessage_2" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="8bc11692-8703-4e71-baad-4d6ef122faa9" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Task" OID="d764ea0f-32a3-4e63-b506-a02670e9307e" ParentLink="ServiceBody_Statement" LowerBound="97.1" HigherBound="190.1">
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ActivateAndSendInstanceIdBack" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="Scope" OID="9dc8da4f-e411-49e5-8ad7-1957ad2cefb0" ParentLink="ComplexStatement_Statement" LowerBound="97.1" HigherBound="110.1">
+                        <om:Property Name="InitializedTransactionType" Value="True" />
+                        <om:Property Name="IsSynchronized" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="AtomicScopeForReceivingActivationMessage" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Receive" OID="c02b3395-3e1c-4e15-ac2f-b054c5741d1d" ParentLink="ComplexStatement_Statement" LowerBound="103.1" HigherBound="108.1">
+                            <om:Property Name="Activate" Value="True" />
+                            <om:Property Name="PortName" Value="ActionActivationPort" />
+                            <om:Property Name="MessageName" Value="ActivationMessage" />
+                            <om:Property Name="OperationName" Value="ActivationOperation" />
+                            <om:Property Name="OperationMessageName" Value="Request" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="ReceiveActivationMessage" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="AtomicTransaction" OID="938a9940-5b36-47fc-804a-38f572e84fb5" ParentLink="Scope_Transaction" LowerBound="99.18" HigherBound="99.87">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="TransactionForCreatingActionInstanceIdCorrelation" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="TransactionAttribute" OID="e451bd5e-d1f8-4274-b415-564f3a74df0b" ParentLink="Statement_CLRAttribute" LowerBound="98.1" HigherBound="99.1">
+                            <om:Property Name="Batch" Value="True" />
+                            <om:Property Name="Retry" Value="True" />
+                            <om:Property Name="Timeout" Value="60" />
+                            <om:Property Name="Isolation" Value="Serializable" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Scope" OID="a3339298-2773-4dbf-8b08-c0d48c4097e2" ParentLink="ComplexStatement_Statement" LowerBound="110.1" HigherBound="131.1">
+                        <om:Property Name="InitializedTransactionType" Value="True" />
+                        <om:Property Name="IsSynchronized" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="ResponseMessageScope" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="VariableDeclaration" OID="ea42203e-b99f-4b2e-a27b-59b9b59fecd3" ParentLink="Scope_VariableDeclaration" LowerBound="113.1" HigherBound="114.1">
+                            <om:Property Name="UseDefaultConstructor" Value="True" />
+                            <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                            <om:Property Name="ParamDirection" Value="In" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="responseMessageXml" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="Construct" OID="b00dc963-db85-43fe-b0cb-efded4049648" ParentLink="ComplexStatement_Statement" LowerBound="117.1" HigherBound="129.1">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="BuildResponseMessage" />
+                            <om:Property Name="Signal" Value="True" />
+                            <om:Element Type="MessageRef" OID="34f452cd-c5d2-4294-bb69-3f1b6570a7f8" ParentLink="Construct_MessageRef" LowerBound="118.31" HigherBound="118.48">
+                                <om:Property Name="Ref" Value="ResponseMessage_1" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="MessageAssignment" OID="de25443f-2361-450f-bfc0-4a315456209f" ParentLink="ComplexStatement_Statement" LowerBound="120.1" HigherBound="123.1">
+                                <om:Property Name="Expression" Value="responseMessageXml.LoadXml(&quot;&lt;ns0:HwsMessage xmlns:ns0='http://schemas.microsoft.com/Hws/2003/Hws_ActivateResponse'&gt; &lt;HwsSection HwsMessageType='Hws_ActivateResponse'&gt;  &lt;ActivityFlowID&gt;ActivityFlowID_0&lt;/ActivityFlowID&gt; &lt;ActionInstanceID&gt;ActionInstanceID_0&lt;/ActionInstanceID&gt; &lt;ActivityModelInstanceID&gt;ActivityModelInstanceID_0&lt;/ActivityModelInstanceID&gt; &lt;ParentActionInstanceID&gt;ParentActionInstanceID_0&lt;/ParentActionInstanceID&gt; &lt;/HwsSection&gt; &lt;/ns0:HwsMessage&gt;&quot;);&#xD;&#xA;ResponseMessage_1 = responseMessageXml;" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ConstructTheMessage" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="MessageAssignment" OID="0966be6a-30f3-4d63-b7bc-1ac972b5f3d4" ParentLink="ComplexStatement_Statement" LowerBound="123.1" HigherBound="128.1">
+                                <om:Property Name="Expression" Value="ResponseMessage_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);&#xD;&#xA;ResponseMessage_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID);&#xD;&#xA;ResponseMessage_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID);&#xD;&#xA;ResponseMessage_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityFlowID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityFlowID);&#xD;&#xA;" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SetPropertiesOnTheMessage" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Decision" OID="32c1b181-e6d0-412b-9d28-6d060fa064f6" ParentLink="ComplexStatement_Statement" LowerBound="131.1" HigherBound="190.1">
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="AnalystComments" Value="If the parent instance Id is  00000000-0000-0000-0000-000000000000 in the independent invocation scenario we generate a new dummy GUID so that the subscriptions for corFinishMessageFromParent and corSyncMessage are unique." />
+                        <om:Property Name="Name" Value="CheckIfParentInstanceIdIsNull" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="DecisionBranch" OID="90ed2ccd-7791-4c22-90db-54c3ed4b0e29" ParentLink="ReallyComplexStatement_Branch" LowerBound="132.13" HigherBound="165.1">
+                            <om:Property Name="Expression" Value="(ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID) == &quot;00000000-0000-0000-0000-000000000000&quot; || ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID) == &quot;{00000000-0000-0000-0000-000000000000}&quot;)" />
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="CheckParentInstanceID" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Decision" OID="31328039-5836-4dc8-9947-5c876329399a" ParentLink="ComplexStatement_Statement" LowerBound="134.1" HigherBound="164.1">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="CheckIfActivityModelInstanceIdIsNull" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="DecisionBranch" OID="ca6f95bc-cf38-42c9-be9f-927d4931b980" ParentLink="ReallyComplexStatement_Branch" LowerBound="135.17" HigherBound="150.1">
+                                    <om:Property Name="Expression" Value="(ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) == &quot;00000000-0000-0000-0000-000000000000&quot; || ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) == &quot;{00000000-0000-0000-0000-000000000000}&quot;)" />
+                                    <om:Property Name="IsGhostBranch" Value="True" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="CheckActivityModelInstanceId" />
+                                    <om:Property Name="Signal" Value="False" />
+                                    <om:Element Type="Construct" OID="793f9293-cb7a-47ff-a8a3-7e6d1a824be2" ParentLink="ComplexStatement_Statement" LowerBound="137.1" HigherBound="145.1">
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="UpdateParentInstanceAndActivityModelInstanceIdId" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="MessageAssignment" OID="bdb6bafd-7801-48eb-8522-28786d149b45" ParentLink="ComplexStatement_Statement" LowerBound="140.1" HigherBound="144.1">
+                                            <om:Property Name="Expression" Value="ResponseMessage_3 = ResponseMessage_1;&#xD;&#xA;ResponseMessage_3(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID) = System.Convert.ToString(System.Guid.NewGuid());&#xD;&#xA;ResponseMessage_3(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) = System.Convert.ToString(System.Guid.NewGuid());&#xD;&#xA;" />
+                                            <om:Property Name="ReportToAnalyst" Value="False" />
+                                            <om:Property Name="Name" Value="SetActivityModelInstanceIdAndParentInstanceIDToNewGuid" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                        <om:Element Type="MessageRef" OID="dc6339a4-80c8-4514-b345-c943b7175e9e" ParentLink="Construct_MessageRef" LowerBound="138.31" HigherBound="138.48">
+                                            <om:Property Name="Ref" Value="ResponseMessage_3" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Signal" Value="False" />
+                                        </om:Element>
+                                    </om:Element>
+                                    <om:Element Type="Send" OID="ce3606b1-e265-4e40-9d8f-b79adf13a442" ParentLink="ComplexStatement_Statement" LowerBound="145.1" HigherBound="147.1">
+                                        <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                        <om:Property Name="MessageName" Value="ResponseMessage_3" />
+                                        <om:Property Name="OperationName" Value="SendOrReceiveActivateResponse" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="SendActivateResponse" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                    <om:Element Type="Receive" OID="d556481e-53c0-4c78-b83e-ed8c871fb44d" ParentLink="ComplexStatement_Statement" LowerBound="147.1" HigherBound="149.1">
+                                        <om:Property Name="Activate" Value="False" />
+                                        <om:Property Name="PortName" Value="ActionDirectBoundInPort" />
+                                        <om:Property Name="MessageName" Value="ResponseMessage_3" />
+                                        <om:Property Name="OperationName" Value="SendOrReceiveActivateResponse" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="ReceiveActivateResponse" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                </om:Element>
+                                <om:Element Type="DecisionBranch" OID="400f363b-e1f5-4bc4-b3bd-fb990283d433" ParentLink="ReallyComplexStatement_Branch">
+                                    <om:Property Name="IsGhostBranch" Value="True" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="Else" />
+                                    <om:Property Name="Signal" Value="False" />
+                                    <om:Element Type="Construct" OID="8ed0b1d4-c00b-459b-9a31-69ada53cc93c" ParentLink="ComplexStatement_Statement" LowerBound="152.1" HigherBound="159.1">
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="UpdateParentInstanceId" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="MessageAssignment" OID="7a8806be-e1c4-4911-a62b-f42b314b369f" ParentLink="ComplexStatement_Statement" LowerBound="155.1" HigherBound="158.1">
+                                            <om:Property Name="Expression" Value="ResponseMessage_2 = ResponseMessage_1;&#xD;&#xA;ResponseMessage_2(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID) = System.Convert.ToString(System.Guid.NewGuid());&#xD;&#xA;" />
+                                            <om:Property Name="ReportToAnalyst" Value="False" />
+                                            <om:Property Name="Name" Value="SetParentInstanceIDToNewGuid" />
+                                            <om:Property Name="Signal" Value="False" />
+                                        </om:Element>
+                                        <om:Element Type="MessageRef" OID="91d9e39c-70f8-451a-a533-b7e9dbb2e29d" ParentLink="Construct_MessageRef" LowerBound="153.31" HigherBound="153.48">
+                                            <om:Property Name="Ref" Value="ResponseMessage_2" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Signal" Value="False" />
+                                        </om:Element>
+                                    </om:Element>
+                                    <om:Element Type="Send" OID="de641598-c2d6-4b3d-a11d-d8b928734a82" ParentLink="ComplexStatement_Statement" LowerBound="159.1" HigherBound="161.1">
+                                        <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                        <om:Property Name="MessageName" Value="ResponseMessage_2" />
+                                        <om:Property Name="OperationName" Value="SendOrReceiveActivateResponse" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="SendActivateResponse" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                    <om:Element Type="Receive" OID="58da7e9a-1526-4475-9ca7-c425c9bdae64" ParentLink="ComplexStatement_Statement" LowerBound="161.1" HigherBound="163.1">
+                                        <om:Property Name="Activate" Value="False" />
+                                        <om:Property Name="PortName" Value="ActionDirectBoundInPort" />
+                                        <om:Property Name="MessageName" Value="ResponseMessage_2" />
+                                        <om:Property Name="OperationName" Value="SendOrReceiveActivateResponse" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="ReceiveActivateResponse" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                </om:Element>
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="DecisionBranch" OID="b31e8954-4d89-48f1-aee5-32275aef0f8e" ParentLink="ReallyComplexStatement_Branch">
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Else" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Decision" OID="c54d8bb4-2c63-4887-9e18-9880a32c93fc" ParentLink="ComplexStatement_Statement" LowerBound="167.1" HigherBound="189.1">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="CheckIfActivityModelInstanceIdIsNull" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="DecisionBranch" OID="1f07a484-527c-4a6c-bdc4-93703c574a91" ParentLink="ReallyComplexStatement_Branch" LowerBound="168.17" HigherBound="182.1">
+                                    <om:Property Name="Expression" Value="(ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) == &quot;00000000-0000-0000-0000-000000000000&quot; || ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) == &quot;{00000000-0000-0000-0000-000000000000}&quot;)" />
+                                    <om:Property Name="IsGhostBranch" Value="True" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="CheckActivityModelInstanceId" />
+                                    <om:Property Name="Signal" Value="False" />
+                                    <om:Element Type="Construct" OID="a43b3ad2-1503-41a8-a2b6-8923c1b3a7e5" ParentLink="ComplexStatement_Statement" LowerBound="170.1" HigherBound="177.1">
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="UpdateActivityModelInstanceIdId" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="MessageAssignment" OID="63d1176d-1281-450f-91e6-80001d19dbcc" ParentLink="ComplexStatement_Statement" LowerBound="173.1" HigherBound="176.1">
+                                            <om:Property Name="Expression" Value="ResponseMessage_4 = ResponseMessage_1;&#xD;&#xA;ResponseMessage_4(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) = System.Convert.ToString(System.Guid.NewGuid());&#xD;&#xA;" />
+                                            <om:Property Name="ReportToAnalyst" Value="False" />
+                                            <om:Property Name="Name" Value="SetActivityModelInstanceIDToNewGuid" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                        <om:Element Type="MessageRef" OID="af72240f-689c-4073-bc62-082eae5b8e5b" ParentLink="Construct_MessageRef" LowerBound="171.31" HigherBound="171.48">
+                                            <om:Property Name="Ref" Value="ResponseMessage_4" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Signal" Value="False" />
+                                        </om:Element>
+                                    </om:Element>
+                                    <om:Element Type="Send" OID="fd2fdf55-ea16-484c-8a11-a8ff3a0cad20" ParentLink="ComplexStatement_Statement" LowerBound="177.1" HigherBound="179.1">
+                                        <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                        <om:Property Name="MessageName" Value="ResponseMessage_4" />
+                                        <om:Property Name="OperationName" Value="SendOrReceiveActivateResponse" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="SendActivateResponse" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                    <om:Element Type="Receive" OID="38b81292-eb06-4cf0-857c-ce9d1d2b1988" ParentLink="ComplexStatement_Statement" LowerBound="179.1" HigherBound="181.1">
+                                        <om:Property Name="Activate" Value="False" />
+                                        <om:Property Name="PortName" Value="ActionDirectBoundInPort" />
+                                        <om:Property Name="MessageName" Value="ResponseMessage_4" />
+                                        <om:Property Name="OperationName" Value="SendOrReceiveActivateResponse" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="ReceiveActivateResponse" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                </om:Element>
+                                <om:Element Type="DecisionBranch" OID="0cacb0f7-44de-4939-a6a5-81b545235d6e" ParentLink="ReallyComplexStatement_Branch">
+                                    <om:Property Name="IsGhostBranch" Value="True" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="Else" />
+                                    <om:Property Name="Signal" Value="False" />
+                                    <om:Element Type="Send" OID="05cd4445-24e4-4608-9898-acb42d9a055c" ParentLink="ComplexStatement_Statement" LowerBound="184.1" HigherBound="186.1">
+                                        <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                        <om:Property Name="MessageName" Value="ResponseMessage_1" />
+                                        <om:Property Name="OperationName" Value="SendOrReceiveActivateResponse" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="SendActivateResponse" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                    <om:Element Type="Receive" OID="241cbfc0-776a-4dbd-b17c-b73c0947e9ac" ParentLink="ComplexStatement_Statement" LowerBound="186.1" HigherBound="188.1">
+                                        <om:Property Name="Activate" Value="False" />
+                                        <om:Property Name="PortName" Value="ActionDirectBoundInPort" />
+                                        <om:Property Name="MessageName" Value="ResponseMessage_1" />
+                                        <om:Property Name="OperationName" Value="SendOrReceiveActivateResponse" />
+                                        <om:Property Name="OperationMessageName" Value="Request" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="ReceiveActivateResponse" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                </om:Element>
+                            </om:Element>
+                        </om:Element>
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="Scope" OID="8fdf2e1f-700b-41fe-b0cf-043947649aef" ParentLink="ServiceBody_Statement" LowerBound="190.1" HigherBound="494.1">
+                    <om:Property Name="InitializedTransactionType" Value="True" />
+                    <om:Property Name="IsSynchronized" Value="False" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ScopeForParallelStatement" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="LongRunningTransaction" OID="b28126df-eb29-464e-842b-59ccfdf66d86" ParentLink="Scope_Transaction" LowerBound="191.18" HigherBound="191.71">
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="TransactForParallelStatement" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                    <om:Element Type="Parallel" OID="cfd0a096-4d07-4a6a-99b5-985b50c599c4" ParentLink="ComplexStatement_Statement" LowerBound="195.1" HigherBound="329.1">
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Parallel" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="ParallelBranch" OID="b2c9690d-01c5-4e2c-bb2a-3ebbb7cdc275" ParentLink="ReallyComplexStatement_Branch" LowerBound="200.1" HigherBound="271.1">
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Branch_1" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Decision" OID="0693d593-b2a3-4109-872a-1836cd96fb09" ParentLink="ComplexStatement_Statement" LowerBound="200.1" HigherBound="239.1">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="CheckForDependentComposition" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="DecisionBranch" OID="3468030f-1958-4fd0-a5bb-ffa73607d576" ParentLink="ReallyComplexStatement_Branch" LowerBound="201.29" HigherBound="239.1">
+                                    <om:Property Name="Expression" Value="ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.IsDependentOnParent)==true" />
+                                    <om:Property Name="IsGhostBranch" Value="True" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="IfDependentIsTrue" />
+                                    <om:Property Name="Signal" Value="False" />
+                                    <om:Element Type="Listen" OID="b92a25d7-4351-4b52-a697-1b08204f5cb4" ParentLink="ComplexStatement_Statement" LowerBound="203.1" HigherBound="238.1">
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="ListenForSyncOrFinishFromParent" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="ListenBranch" OID="99586411-12cc-4f90-87e1-8f5d8ef111a4" ParentLink="ReallyComplexStatement_Branch" LowerBound="203.1" HigherBound="203.1">
+                                            <om:Property Name="IsGhostBranch" Value="True" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="ListenBranch_1" />
+                                            <om:Property Name="Signal" Value="True" />
+                                            <om:Element Type="Scope" OID="7d7f5afc-4286-42da-92c8-850618d26b51" ParentLink="ComplexStatement_Statement" LowerBound="209.1" HigherBound="230.1">
+                                                <om:Property Name="InitializedTransactionType" Value="True" />
+                                                <om:Property Name="IsSynchronized" Value="False" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="ScopeForFinishMessage_1" />
+                                                <om:Property Name="Signal" Value="True" />
+                                                <om:Element Type="Construct" OID="4f14f201-76ca-45c2-be8d-318b61da2b82" ParentLink="ComplexStatement_Statement" LowerBound="217.1" HigherBound="226.1">
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="BuildFinishMessage" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                    <om:Element Type="MessageRef" OID="7ddd1888-7e79-4965-921c-56244471334f" ParentLink="Construct_MessageRef" LowerBound="218.59" HigherBound="218.82">
+                                                        <om:Property Name="Ref" Value="SelfFinishMessage_Out_1" />
+                                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                                        <om:Property Name="Signal" Value="False" />
+                                                    </om:Element>
+                                                    <om:Element Type="MessageAssignment" OID="1df0810f-7fa5-41fa-b34b-d4e644fbd210" ParentLink="ComplexStatement_Statement" LowerBound="220.1" HigherBound="223.1">
+                                                        <om:Property Name="Expression" Value="finishMessageXml_1.LoadXml(&quot;&lt;HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'&gt; &lt;HwsSection HwsMessageType='Hws_Finish' xmlns=''&gt; &lt;ActionInstanceID&gt;ActionInstanceID_0&lt;/ActionInstanceID&gt; &lt;/HwsSection&gt; &lt;/HwsMessage&gt;&quot;);&#xD;&#xA;SelfFinishMessage_Out_1 = finishMessageXml_1;" />
+                                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                                        <om:Property Name="Name" Value="ConstructTheMessage" />
+                                                        <om:Property Name="Signal" Value="False" />
+                                                    </om:Element>
+                                                    <om:Element Type="MessageAssignment" OID="c0b5e0f6-4dfb-4333-87f6-3a0d144fd13a" ParentLink="ComplexStatement_Statement" LowerBound="223.1" HigherBound="225.1">
+                                                        <om:Property Name="Expression" Value="SelfFinishMessage_Out_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);" />
+                                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                                        <om:Property Name="Name" Value="SetPropertiesOnTheMessage" />
+                                                        <om:Property Name="Signal" Value="True" />
+                                                    </om:Element>
+                                                </om:Element>
+                                                <om:Element Type="Send" OID="f003a2fd-abc0-4e56-8830-ae99f5fdc6c0" ParentLink="ComplexStatement_Statement" LowerBound="226.1" HigherBound="228.1">
+                                                    <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                                    <om:Property Name="MessageName" Value="SelfFinishMessage_Out_1" />
+                                                    <om:Property Name="OperationName" Value="SendOrReceiveFinishMessage" />
+                                                    <om:Property Name="OperationMessageName" Value="Request" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="SendFinishMessage" />
+                                                    <om:Property Name="Signal" Value="False" />
+                                                </om:Element>
+                                                <om:Element Type="VariableDeclaration" OID="72d67e73-7194-439e-b1e2-b786bdad57b1" ParentLink="Scope_VariableDeclaration" LowerBound="213.1" HigherBound="214.1">
+                                                    <om:Property Name="UseDefaultConstructor" Value="True" />
+                                                    <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                                                    <om:Property Name="ParamDirection" Value="In" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="finishMessageXml_1" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                </om:Element>
+                                                <om:Element Type="MessageDeclaration" OID="e7b6d639-789d-4c4d-b217-7279cf5e97a8" ParentLink="Scope_MessageDeclaration" LowerBound="212.1" HigherBound="213.1">
+                                                    <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                                                    <om:Property Name="ParamDirection" Value="In" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="SelfFinishMessage_Out_1" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                </om:Element>
+                                            </om:Element>
+                                            <om:Element Type="Terminate" OID="a0ee319c-d819-401f-ad72-20f13974df77" ParentLink="ComplexStatement_Statement" LowerBound="230.1" HigherBound="232.1">
+                                                <om:Property Name="ErrorMessage" Value="resourceManager.ResolveString(&quot;PARENT_FINISH_MESSAGE&quot;);" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="TerminateAction" />
+                                                <om:Property Name="Signal" Value="False" />
+                                            </om:Element>
+                                            <om:Element Type="Receive" OID="ea057dcf-a87d-4137-b53c-7131f24a0b08" ParentLink="ListenBranch_Statement" LowerBound="206.1" HigherBound="207.156">
+                                                <om:Property Name="Activate" Value="False" />
+                                                <om:Property Name="PortName" Value="ActionDirectBoundInPort" />
+                                                <om:Property Name="MessageName" Value="FinishMessageFromParent" />
+                                                <om:Property Name="OperationName" Value="SendOrReceiveFinishMessage" />
+                                                <om:Property Name="OperationMessageName" Value="Request" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="ReceiveFinishMessageFromParent" />
+                                                <om:Property Name="Signal" Value="True" />
+                                            </om:Element>
+                                        </om:Element>
+                                        <om:Element Type="ListenBranch" OID="387bda99-8552-4a14-bfd8-19946b995e20" ParentLink="ReallyComplexStatement_Branch" LowerBound="203.1" HigherBound="203.1">
+                                            <om:Property Name="IsGhostBranch" Value="True" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="ListenBranch_2" />
+                                            <om:Property Name="Signal" Value="True" />
+                                            <om:Element Type="Receive" OID="928ae495-3c6b-4aa7-8c43-df182e1de97f" ParentLink="ListenBranch_Statement" LowerBound="233.1" HigherBound="234.134">
+                                                <om:Property Name="Activate" Value="False" />
+                                                <om:Property Name="PortName" Value="ActionDirectBoundInPort" />
+                                                <om:Property Name="MessageName" Value="SyncMessage" />
+                                                <om:Property Name="OperationName" Value="SendOrReceiveSyncMessage" />
+                                                <om:Property Name="OperationMessageName" Value="Request" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="ReceiveSyncMessage" />
+                                                <om:Property Name="Signal" Value="True" />
+                                            </om:Element>
+                                        </om:Element>
+                                    </om:Element>
+                                </om:Element>
+                                <om:Element Type="DecisionBranch" OID="4ce1a364-71e5-4d97-8e02-be0ca6cd00ac" ParentLink="ReallyComplexStatement_Branch">
+                                    <om:Property Name="IsGhostBranch" Value="True" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="Else" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Scope" OID="72b25ba4-3f9f-43ef-849a-c72a97542ee9" ParentLink="ComplexStatement_Statement" LowerBound="239.1" HigherBound="250.1">
+                                <om:Property Name="InitializedTransactionType" Value="True" />
+                                <om:Property Name="IsSynchronized" Value="False" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ScopeAllActionSpecificLogic" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="LongRunningTransaction" OID="d4a933ea-4d64-4411-9289-59ec72565d65" ParentLink="Scope_Transaction" LowerBound="240.34" HigherBound="240.89">
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="TransactAllActionSpecificLogic" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="Task" OID="664941d3-0b14-465e-a82d-d922f8a2ec88" ParentLink="ComplexStatement_Statement" LowerBound="244.1" HigherBound="244.1">
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="DoAllActionSpecificLogicHere" />
+                                    <om:Property Name="Signal" Value="True" />
+                                </om:Element>
+                                <om:Element Type="Compensation" OID="bc335fb4-11e0-4822-b04d-5c38f0b0ffdf" ParentLink="Scope_Compensation" LowerBound="245.1" HigherBound="249.1">
+                                    <om:Property Name="IsCustom" Value="True" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="CompensateForAllActionSpecificLogic" />
+                                    <om:Property Name="Signal" Value="True" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Scope" OID="84738ce8-568a-4754-8b57-7cd1388315d1" ParentLink="ComplexStatement_Statement" LowerBound="250.1" HigherBound="271.1">
+                                <om:Property Name="InitializedTransactionType" Value="True" />
+                                <om:Property Name="IsSynchronized" Value="False" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ScopeForFinishMessage_2" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="VariableDeclaration" OID="54a56d07-1360-4cea-ad35-e0e1e3857a6d" ParentLink="Scope_VariableDeclaration" LowerBound="254.1" HigherBound="255.1">
+                                    <om:Property Name="UseDefaultConstructor" Value="True" />
+                                    <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                                    <om:Property Name="ParamDirection" Value="In" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="finishMessageXml_2" />
+                                    <om:Property Name="Signal" Value="True" />
+                                </om:Element>
+                                <om:Element Type="Construct" OID="812ba0c8-409b-485a-b57f-4558cbbf3192" ParentLink="ComplexStatement_Statement" LowerBound="258.1" HigherBound="267.1">
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="BuildFinishMessage" />
+                                    <om:Property Name="Signal" Value="True" />
+                                    <om:Element Type="MessageRef" OID="ee3b3c49-2520-4cb2-a4a2-61f2c6bf7408" ParentLink="Construct_MessageRef" LowerBound="259.47" HigherBound="259.70">
+                                        <om:Property Name="Ref" Value="SelfFinishMessage_Out_2" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Signal" Value="False" />
+                                    </om:Element>
+                                    <om:Element Type="MessageAssignment" OID="783b74a4-3291-49c1-8bd0-0a61d9227669" ParentLink="ComplexStatement_Statement" LowerBound="261.1" HigherBound="264.1">
+                                        <om:Property Name="Expression" Value="finishMessageXml_2.LoadXml(&quot;&lt;HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'&gt; &lt;HwsSection HwsMessageType='Hws_Finish' xmlns=''&gt; &lt;ActionInstanceID&gt;ActionInstanceID_0&lt;/ActionInstanceID&gt; &lt;/HwsSection&gt; &lt;/HwsMessage&gt;&quot;);&#xD;&#xA;SelfFinishMessage_Out_2 = finishMessageXml_2;" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="ConstructTheMessage" />
+                                        <om:Property Name="Signal" Value="True" />
+                                    </om:Element>
+                                    <om:Element Type="MessageAssignment" OID="55204d4f-8903-4cef-8f65-68dc39f236d7" ParentLink="ComplexStatement_Statement" LowerBound="264.1" HigherBound="266.1">
+                                        <om:Property Name="Expression" Value="SelfFinishMessage_Out_2(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="SetPropertiesOnTheMessage" />
+                                        <om:Property Name="Signal" Value="False" />
+                                    </om:Element>
+                                </om:Element>
+                                <om:Element Type="Send" OID="2265ebcb-ef97-434e-9a8a-caf348d0f53c" ParentLink="ComplexStatement_Statement" LowerBound="267.1" HigherBound="269.1">
+                                    <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                    <om:Property Name="MessageName" Value="SelfFinishMessage_Out_2" />
+                                    <om:Property Name="OperationName" Value="SendOrReceiveFinishMessage" />
+                                    <om:Property Name="OperationMessageName" Value="Request" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="SendFinishMessage" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageDeclaration" OID="754d37de-4775-42ff-bcd9-3cce1abdde6d" ParentLink="Scope_MessageDeclaration" LowerBound="253.1" HigherBound="254.1">
+                                    <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                                    <om:Property Name="ParamDirection" Value="In" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="SelfFinishMessage_Out_2" />
+                                    <om:Property Name="Signal" Value="True" />
+                                </om:Element>
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="ParallelBranch" OID="7e717fce-654a-4405-b0cc-86041631f718" ParentLink="ReallyComplexStatement_Branch" LowerBound="274.1" HigherBound="327.1">
+                            <om:Property Name="IsGhostBranch" Value="True" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Branch_2" />
+                            <om:Property Name="Signal" Value="False" />
+                            <om:Element Type="Task" OID="a9c1b6d5-22f1-4f0d-b394-b9ec217a1f0e" ParentLink="ComplexStatement_Statement" LowerBound="274.1" HigherBound="327.1">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ListenForAbortOrFinishMessage" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="Listen" OID="5a8d8fb2-eec4-4586-88e9-cc8ef55b01ed" ParentLink="ComplexStatement_Statement" LowerBound="274.1" HigherBound="327.1">
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="ListenForAbortOrFinish" />
+                                    <om:Property Name="Signal" Value="True" />
+                                    <om:Element Type="ListenBranch" OID="b8026e9a-f07e-4753-91a9-7b3683335e92" ParentLink="ReallyComplexStatement_Branch" LowerBound="274.1" HigherBound="274.1">
+                                        <om:Property Name="IsGhostBranch" Value="True" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="Branch_3" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="Receive" OID="df527b22-1bdc-4aeb-b418-42d4950705d8" ParentLink="ListenBranch_Statement" LowerBound="277.1" HigherBound="278.148">
+                                            <om:Property Name="Activate" Value="False" />
+                                            <om:Property Name="PortName" Value="ActionDirectBoundInPort" />
+                                            <om:Property Name="MessageName" Value="FinishMessageFromSelf" />
+                                            <om:Property Name="OperationName" Value="SendOrReceiveFinishMessage" />
+                                            <om:Property Name="OperationMessageName" Value="Request" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="ReceiveFinishMessage" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                    </om:Element>
+                                    <om:Element Type="ListenBranch" OID="6c23c282-1291-4ff4-ade7-d794d86647bc" ParentLink="ReallyComplexStatement_Branch" LowerBound="274.1" HigherBound="274.1">
+                                        <om:Property Name="IsGhostBranch" Value="True" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="Branch_4" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="Decision" OID="67965ca9-87ac-4cd9-ab0f-52362ad887c7" ParentLink="ComplexStatement_Statement" LowerBound="284.1" HigherBound="295.1">
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="CheckForInterruptTypeAbort" />
+                                            <om:Property Name="Signal" Value="True" />
+                                            <om:Element Type="DecisionBranch" OID="4037a808-5a1c-4e96-adb8-eb9a17bd0656" ParentLink="ReallyComplexStatement_Branch" LowerBound="285.37" HigherBound="290.1">
+                                                <om:Property Name="Expression" Value="InterruptMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.InterruptType) == &quot;Abort&quot;" />
+                                                <om:Property Name="IsGhostBranch" Value="True" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="CheckIfAbort" />
+                                                <om:Property Name="Signal" Value="False" />
+                                                <om:Element Type="Throw" OID="eb37aa35-0811-44fe-a20f-201c19efb9fb" ParentLink="ComplexStatement_Statement" LowerBound="287.1" HigherBound="289.1">
+                                                    <om:Property Name="ThrownReference" Value="abortException" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="ThrowAbortException" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                </om:Element>
+                                            </om:Element>
+                                            <om:Element Type="DecisionBranch" OID="be78d303-c4d5-49d8-9592-808bed46f4f3" ParentLink="ReallyComplexStatement_Branch">
+                                                <om:Property Name="IsGhostBranch" Value="True" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="Else" />
+                                                <om:Property Name="Signal" Value="False" />
+                                                <om:Element Type="Throw" OID="a0843bd7-9638-4542-af5e-4cfa0364b15f" ParentLink="ComplexStatement_Statement" LowerBound="292.1" HigherBound="294.1">
+                                                    <om:Property Name="ThrownReference" Value="rollbackException" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="ThrowRollbackException" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                </om:Element>
+                                            </om:Element>
+                                        </om:Element>
+                                        <om:Element Type="Receive" OID="6ef6372e-ba6c-41e5-a3ff-eb8e60d28586" ParentLink="ListenBranch_Statement" LowerBound="281.1" HigherBound="282.144">
+                                            <om:Property Name="Activate" Value="False" />
+                                            <om:Property Name="PortName" Value="ActionInterruptPort" />
+                                            <om:Property Name="MessageName" Value="InterruptMessage" />
+                                            <om:Property Name="OperationName" Value="InterruptOperation" />
+                                            <om:Property Name="OperationMessageName" Value="Request" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="ReceiveActionInstanceInterruptMessage" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                    </om:Element>
+                                    <om:Element Type="ListenBranch" OID="21cc3abc-cfe2-4a02-9b7d-af042469d063" ParentLink="ReallyComplexStatement_Branch" LowerBound="274.1" HigherBound="274.1">
+                                        <om:Property Name="IsGhostBranch" Value="True" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="Decision" OID="8c2a3591-498f-46dc-bddf-3ab37e0946aa" ParentLink="ComplexStatement_Statement" LowerBound="299.1" HigherBound="310.1">
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="CheckForInterruptTypeAbort" />
+                                            <om:Property Name="Signal" Value="True" />
+                                            <om:Element Type="DecisionBranch" OID="3e4809d3-e74f-4c63-b80c-b7e6d154226a" ParentLink="ReallyComplexStatement_Branch" LowerBound="300.37" HigherBound="305.1">
+                                                <om:Property Name="Expression" Value="InterruptMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.InterruptType) == &quot;Abort&quot;" />
+                                                <om:Property Name="IsGhostBranch" Value="True" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="CheckIfAbort" />
+                                                <om:Property Name="Signal" Value="False" />
+                                                <om:Element Type="Throw" OID="0c715c29-847a-439a-b8a6-aec08b07614e" ParentLink="ComplexStatement_Statement" LowerBound="302.1" HigherBound="304.1">
+                                                    <om:Property Name="ThrownReference" Value="abortException" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="ThrowAbortException" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                </om:Element>
+                                            </om:Element>
+                                            <om:Element Type="DecisionBranch" OID="5f31192a-bed8-4919-8440-7e89dcb19ef1" ParentLink="ReallyComplexStatement_Branch">
+                                                <om:Property Name="IsGhostBranch" Value="True" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="Else" />
+                                                <om:Property Name="Signal" Value="False" />
+                                                <om:Element Type="Throw" OID="432e3bbe-885f-4bb3-8a3e-fe25b6e42b3d" ParentLink="ComplexStatement_Statement" LowerBound="307.1" HigherBound="309.1">
+                                                    <om:Property Name="ThrownReference" Value="rollbackException" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="ThrowRollbackException" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                </om:Element>
+                                            </om:Element>
+                                        </om:Element>
+                                        <om:Element Type="Receive" OID="13df72b9-267f-4aa1-a976-71e4440b6eae" ParentLink="ListenBranch_Statement" LowerBound="296.1" HigherBound="297.142">
+                                            <om:Property Name="Activate" Value="False" />
+                                            <om:Property Name="PortName" Value="ActionInterruptPort" />
+                                            <om:Property Name="MessageName" Value="InterruptMessage" />
+                                            <om:Property Name="OperationName" Value="InterruptOperation" />
+                                            <om:Property Name="OperationMessageName" Value="Request" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="ReceiveActivityFlowInterruptMessage" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                    </om:Element>
+                                    <om:Element Type="ListenBranch" OID="a4500497-7ade-4790-ae9f-b0b3c48fcc35" ParentLink="ReallyComplexStatement_Branch" LowerBound="274.1" HigherBound="274.1">
+                                        <om:Property Name="IsGhostBranch" Value="True" />
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="Decision" OID="fa3798ca-f0d6-4193-bc8f-bd3b79318851" ParentLink="ComplexStatement_Statement" LowerBound="314.1" HigherBound="325.1">
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="CheckForInterruptTypeAbort" />
+                                            <om:Property Name="Signal" Value="True" />
+                                            <om:Element Type="DecisionBranch" OID="85e8f161-b2cc-43b2-bb05-c9665dc95efb" ParentLink="ReallyComplexStatement_Branch" LowerBound="315.37" HigherBound="320.1">
+                                                <om:Property Name="Expression" Value="InterruptMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.InterruptType) == &quot;Abort&quot;" />
+                                                <om:Property Name="IsGhostBranch" Value="True" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="CheckIfAbort" />
+                                                <om:Property Name="Signal" Value="False" />
+                                                <om:Element Type="Throw" OID="eb33e4ee-ef7d-4ccf-a02d-d7ce2e72b0c2" ParentLink="ComplexStatement_Statement" LowerBound="317.1" HigherBound="319.1">
+                                                    <om:Property Name="ThrownReference" Value="abortException" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="ThrowAbortException" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                </om:Element>
+                                            </om:Element>
+                                            <om:Element Type="DecisionBranch" OID="62630220-08c0-4eb4-bff2-17c98b43cbe3" ParentLink="ReallyComplexStatement_Branch">
+                                                <om:Property Name="IsGhostBranch" Value="True" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="Else" />
+                                                <om:Property Name="Signal" Value="False" />
+                                                <om:Element Type="Throw" OID="88cee11e-775f-4079-9824-e083c4e88d98" ParentLink="ComplexStatement_Statement" LowerBound="322.1" HigherBound="324.1">
+                                                    <om:Property Name="ThrownReference" Value="rollbackException" />
+                                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                                    <om:Property Name="Name" Value="ThrowRollbackException" />
+                                                    <om:Property Name="Signal" Value="True" />
+                                                </om:Element>
+                                            </om:Element>
+                                        </om:Element>
+                                        <om:Element Type="Receive" OID="0753bed7-02bf-481b-a233-7604211b735b" ParentLink="ListenBranch_Statement" LowerBound="311.1" HigherBound="312.151">
+                                            <om:Property Name="Activate" Value="False" />
+                                            <om:Property Name="PortName" Value="ActionInterruptPort" />
+                                            <om:Property Name="MessageName" Value="InterruptMessage" />
+                                            <om:Property Name="OperationName" Value="InterruptOperation" />
+                                            <om:Property Name="OperationMessageName" Value="Request" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="ReceiveActivityModelInstanceInterruptMessage" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                    </om:Element>
+                                </om:Element>
+                            </om:Element>
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Catch" OID="6ee4ca7c-5269-4626-b055-4a8a6e1d1914" ParentLink="Scope_Catch" LowerBound="332.1" HigherBound="382.1">
+                        <om:Property Name="ExceptionName" Value="eAbortException" />
+                        <om:Property Name="ExceptionType" Value="Microsoft.BizTalk.Hws.TemplateExceptions.AbortException" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="CatchAbortException" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Scope" OID="e41029be-c55b-4d80-89c4-d60f36351ff7" ParentLink="Catch_Statement" LowerBound="335.1" HigherBound="379.1">
+                            <om:Property Name="InitializedTransactionType" Value="True" />
+                            <om:Property Name="IsSynchronized" Value="False" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="ScopeForFinishMessage_3" />
+                            <om:Property Name="Signal" Value="True" />
+                            <om:Element Type="VariableDeclaration" OID="4951143d-4034-41d2-9f21-c600d963f4a2" ParentLink="Scope_VariableDeclaration" LowerBound="339.1" HigherBound="340.1">
+                                <om:Property Name="UseDefaultConstructor" Value="True" />
+                                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                                <om:Property Name="ParamDirection" Value="In" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="finishMessageXml_3" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="Construct" OID="5dbfdc28-e7dc-4fc8-aaee-1b05cbcf9aa4" ParentLink="ComplexStatement_Statement" LowerBound="343.1" HigherBound="352.1">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="BuildFinishMessage" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="MessageRef" OID="e92b276b-968d-40bc-8b70-ab6403fd56be" ParentLink="Construct_MessageRef" LowerBound="344.43" HigherBound="344.66">
+                                    <om:Property Name="Ref" Value="SelfFinishMessage_Out_3" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageAssignment" OID="81d7e0e1-b744-4e9e-a80d-f9c8bd9972d9" ParentLink="ComplexStatement_Statement" LowerBound="346.1" HigherBound="349.1">
+                                    <om:Property Name="Expression" Value="finishMessageXml_3.LoadXml(&quot;&lt;HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'&gt; &lt;HwsSection HwsMessageType='Hws_Finish' xmlns=''&gt; &lt;ActionInstanceID&gt;ActionInstanceID_0&lt;/ActionInstanceID&gt; &lt;/HwsSection&gt; &lt;/HwsMessage&gt;&quot;);&#xD;&#xA;SelfFinishMessage_Out_3 = finishMessageXml_3;" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="ConstructTheMessage" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageAssignment" OID="fd1d7fe0-8faa-4917-ba48-506fc5795a99" ParentLink="ComplexStatement_Statement" LowerBound="349.1" HigherBound="351.1">
+                                    <om:Property Name="Expression" Value="SelfFinishMessage_Out_3(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="SetPropertiesOnTheMessage" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Scope" OID="1aeea12c-468e-4578-844f-9dfcd7d28999" ParentLink="ComplexStatement_Statement" LowerBound="352.1" HigherBound="377.1">
+                                <om:Property Name="InitializedTransactionType" Value="True" />
+                                <om:Property Name="IsSynchronized" Value="False" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ScopeForSendingFinishMessage" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="Send" OID="37b4c516-5b83-4dd2-8a66-f293c8286887" ParentLink="ComplexStatement_Statement" LowerBound="357.1" HigherBound="359.1">
+                                    <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                    <om:Property Name="MessageName" Value="SelfFinishMessage_Out_3" />
+                                    <om:Property Name="OperationName" Value="SendOrReceiveFinishMessage" />
+                                    <om:Property Name="OperationMessageName" Value="Request" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="SendFinishMessage" />
+                                    <om:Property Name="Signal" Value="True" />
+                                </om:Element>
+                                <om:Element Type="Catch" OID="9de0e9f6-0089-446d-803d-a88e83406c1e" ParentLink="Scope_Catch" LowerBound="362.1" HigherBound="375.1">
+                                    <om:Property Name="ExceptionName" Value="persistenceException" />
+                                    <om:Property Name="ExceptionType" Value="Microsoft.XLANGs.BaseTypes.PersistenceException" />
+                                    <om:Property Name="IsFaultMessage" Value="False" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="CatchPersistenceException" />
+                                    <om:Property Name="Signal" Value="True" />
+                                    <om:Element Type="Decision" OID="00bb6726-a37d-4d96-999c-a362462b7b82" ParentLink="Catch_Statement" LowerBound="365.1" HigherBound="374.1">
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="IgnorePublishException" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="DecisionBranch" OID="2feea8bc-55f7-4d57-a471-59842aefbc76" ParentLink="ReallyComplexStatement_Branch" LowerBound="366.45" HigherBound="369.1">
+                                            <om:Property Name="Expression" Value="persistenceException.InnerException.GetType() == typeof(Microsoft.XLANGs.BaseTypes.PublishMessageException)" />
+                                            <om:Property Name="IsGhostBranch" Value="True" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="IfPublishMessageException" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                        <om:Element Type="DecisionBranch" OID="3d37f23f-281f-4502-9334-f08a0a912069" ParentLink="ReallyComplexStatement_Branch">
+                                            <om:Property Name="IsGhostBranch" Value="True" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="Else" />
+                                            <om:Property Name="Signal" Value="False" />
+                                            <om:Element Type="Throw" OID="a9b6a05b-4f80-4aad-89db-cdf0b9a2935d" ParentLink="ComplexStatement_Statement" LowerBound="371.1" HigherBound="373.1">
+                                                <om:Property Name="ThrownReference" Value="persistenceException" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="ThrowPersistenceException" />
+                                                <om:Property Name="Signal" Value="True" />
+                                            </om:Element>
+                                        </om:Element>
+                                    </om:Element>
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="MessageDeclaration" OID="f27e050f-aa83-4260-bf56-64333f15d43c" ParentLink="Scope_MessageDeclaration" LowerBound="338.1" HigherBound="339.1">
+                                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                                <om:Property Name="ParamDirection" Value="In" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SelfFinishMessage_Out_3" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Terminate" OID="73955040-9355-481e-b223-cff1d960ef39" ParentLink="Catch_Statement" LowerBound="379.1" HigherBound="381.1">
+                            <om:Property Name="ErrorMessage" Value="eAbortException.Message;" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="TerminateDueToAbortInterrupt" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Catch" OID="2af4b8b1-1e0f-404c-a7e9-461e362de1ac" ParentLink="Scope_Catch" LowerBound="382.1" HigherBound="437.1">
+                        <om:Property Name="ExceptionName" Value="eRollbackException" />
+                        <om:Property Name="ExceptionType" Value="Microsoft.BizTalk.Hws.TemplateExceptions.RollbackException" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="CatchRollbackException" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Compensate" OID="5b5bc1d9-7c1d-4e0c-87f8-dfaadc797400" ParentLink="Catch_Statement" LowerBound="385.1" HigherBound="390.1">
+                            <om:Property Name="Invokee" Value="TransactAllActionSpecificLogic" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="CallCompensateForActionSpecificLogic" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="Scope" OID="a27c8d44-7900-4471-9573-a60267f19637" ParentLink="Catch_Statement" LowerBound="390.1" HigherBound="434.1">
+                            <om:Property Name="InitializedTransactionType" Value="True" />
+                            <om:Property Name="IsSynchronized" Value="False" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="ScopeForFinishMessage_5" />
+                            <om:Property Name="Signal" Value="True" />
+                            <om:Element Type="VariableDeclaration" OID="e98443a8-6f75-4306-b3ac-8b3db6c3c8cc" ParentLink="Scope_VariableDeclaration" LowerBound="394.1" HigherBound="395.1">
+                                <om:Property Name="UseDefaultConstructor" Value="True" />
+                                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                                <om:Property Name="ParamDirection" Value="In" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="finishMessageXml_5" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="Construct" OID="16e8bfc9-0e3f-4e6d-aa38-627e81fd2a5d" ParentLink="ComplexStatement_Statement" LowerBound="398.1" HigherBound="407.1">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="BuildFinishMessage" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="MessageRef" OID="47e459ba-e5d0-4b9e-86c5-4d14e3a60f6e" ParentLink="Construct_MessageRef" LowerBound="399.43" HigherBound="399.66">
+                                    <om:Property Name="Ref" Value="SelfFinishMessage_Out_5" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageAssignment" OID="32e114a9-38cf-4fc9-afb7-7d35711b2807" ParentLink="ComplexStatement_Statement" LowerBound="401.1" HigherBound="404.1">
+                                    <om:Property Name="Expression" Value="finishMessageXml_5.LoadXml(&quot;&lt;HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'&gt; &lt;HwsSection HwsMessageType='Hws_Finish' xmlns=''&gt; &lt;ActionInstanceID&gt;ActionInstanceID_0&lt;/ActionInstanceID&gt; &lt;/HwsSection&gt; &lt;/HwsMessage&gt;&quot;);&#xD;&#xA;SelfFinishMessage_Out_5 = finishMessageXml_5;" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="ConstructTheMessage" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageAssignment" OID="b0e2c6f1-7293-4770-8183-2266a27924b5" ParentLink="ComplexStatement_Statement" LowerBound="404.1" HigherBound="406.1">
+                                    <om:Property Name="Expression" Value="SelfFinishMessage_Out_5(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="SetPropertiesOnTheMessage" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Scope" OID="21b863c7-28fa-4175-a120-fb396fb07951" ParentLink="ComplexStatement_Statement" LowerBound="407.1" HigherBound="432.1">
+                                <om:Property Name="InitializedTransactionType" Value="True" />
+                                <om:Property Name="IsSynchronized" Value="False" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ScopeForSendingFinishMessage" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="Send" OID="958df78d-b98f-48ca-87da-5ef73caa0126" ParentLink="ComplexStatement_Statement" LowerBound="412.1" HigherBound="414.1">
+                                    <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                    <om:Property Name="MessageName" Value="SelfFinishMessage_Out_5" />
+                                    <om:Property Name="OperationName" Value="SendOrReceiveFinishMessage" />
+                                    <om:Property Name="OperationMessageName" Value="Request" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="SendFinishMessage" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="Catch" OID="cc41065d-0235-4fa4-a363-63f89708b156" ParentLink="Scope_Catch" LowerBound="417.1" HigherBound="430.1">
+                                    <om:Property Name="ExceptionName" Value="persistenceException" />
+                                    <om:Property Name="ExceptionType" Value="Microsoft.XLANGs.BaseTypes.PersistenceException" />
+                                    <om:Property Name="IsFaultMessage" Value="False" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="CatchPersistenceException" />
+                                    <om:Property Name="Signal" Value="True" />
+                                    <om:Element Type="Decision" OID="0537ab83-7c6f-4ea4-8bbb-95c8b704e7d1" ParentLink="Catch_Statement" LowerBound="420.1" HigherBound="429.1">
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="IgnorePublishException" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="DecisionBranch" OID="bdd9f816-8369-4e58-b63d-25f95b32aca8" ParentLink="ReallyComplexStatement_Branch" LowerBound="421.45" HigherBound="424.1">
+                                            <om:Property Name="Expression" Value="persistenceException.InnerException.GetType() == typeof(Microsoft.XLANGs.BaseTypes.PublishMessageException)" />
+                                            <om:Property Name="IsGhostBranch" Value="True" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="IfPublishMessageException" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                        <om:Element Type="DecisionBranch" OID="41895f8a-6251-4f66-b000-81da9575d4d1" ParentLink="ReallyComplexStatement_Branch">
+                                            <om:Property Name="IsGhostBranch" Value="True" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="Else" />
+                                            <om:Property Name="Signal" Value="False" />
+                                            <om:Element Type="Throw" OID="556f4d8d-aa78-45e2-beee-8b1ba559eed7" ParentLink="ComplexStatement_Statement" LowerBound="426.1" HigherBound="428.1">
+                                                <om:Property Name="ThrownReference" Value="persistenceException" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="ThrowPersistenceException" />
+                                                <om:Property Name="Signal" Value="True" />
+                                            </om:Element>
+                                        </om:Element>
+                                    </om:Element>
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="MessageDeclaration" OID="060679be-e16b-43bb-8d2c-3c5839933cc0" ParentLink="Scope_MessageDeclaration" LowerBound="393.1" HigherBound="394.1">
+                                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                                <om:Property Name="ParamDirection" Value="In" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SelfFinishMessage_Out_5" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Terminate" OID="de36094a-e115-409a-8323-2d7efd7f02d5" ParentLink="Catch_Statement" LowerBound="434.1" HigherBound="436.1">
+                            <om:Property Name="ErrorMessage" Value="eRollbackException.Message;" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="TerminateDueToRollbackInterrupt" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Catch" OID="aa0a6498-e918-4dba-af66-c2d3282483e9" ParentLink="Scope_Catch" LowerBound="437.1" HigherBound="492.1">
+                        <om:Property Name="ExceptionType" Value="General Exception" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="CatchUnknownExceptions" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Compensate" OID="b9491e94-c956-4a8d-93fa-6cfe7b0d10a6" ParentLink="Catch_Statement" LowerBound="440.1" HigherBound="445.1">
+                            <om:Property Name="Invokee" Value="TransactAllActionSpecificLogic" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="CallCompensateForActionSpecificLogic" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="Scope" OID="69c641c8-6b41-4f50-9531-a981edefa77a" ParentLink="Catch_Statement" LowerBound="445.1" HigherBound="489.1">
+                            <om:Property Name="InitializedTransactionType" Value="True" />
+                            <om:Property Name="IsSynchronized" Value="False" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="ScopeForFinishMessage_4" />
+                            <om:Property Name="Signal" Value="True" />
+                            <om:Element Type="VariableDeclaration" OID="cc44ee88-c752-4fe9-9baf-43049e33bafb" ParentLink="Scope_VariableDeclaration" LowerBound="449.1" HigherBound="450.1">
+                                <om:Property Name="UseDefaultConstructor" Value="True" />
+                                <om:Property Name="Type" Value="System.Xml.XmlDocument" />
+                                <om:Property Name="ParamDirection" Value="In" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="finishMessageXml_4" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                            <om:Element Type="Construct" OID="6e843c98-0adb-42ac-a2a7-7aa854f98a94" ParentLink="ComplexStatement_Statement" LowerBound="453.1" HigherBound="462.1">
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="BuildFinishMessage" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="MessageRef" OID="491c652d-ba9f-4dcd-80e9-78dfa927f66d" ParentLink="Construct_MessageRef" LowerBound="454.43" HigherBound="454.66">
+                                    <om:Property Name="Ref" Value="SelfFinishMessage_Out_4" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Signal" Value="False" />
+                                </om:Element>
+                                <om:Element Type="MessageAssignment" OID="74b75dba-3c77-45e9-99bf-37e99eecfbd6" ParentLink="ComplexStatement_Statement" LowerBound="456.1" HigherBound="459.1">
+                                    <om:Property Name="Expression" Value="finishMessageXml_4.LoadXml(&quot;&lt;HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'&gt; &lt;HwsSection HwsMessageType='Hws_Finish' xmlns=''&gt; &lt;ActionInstanceID&gt;ActionInstanceID_0&lt;/ActionInstanceID&gt; &lt;/HwsSection&gt; &lt;/HwsMessage&gt;&quot;);&#xD;&#xA;SelfFinishMessage_Out_4 = finishMessageXml_4;" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="ConstructTheMessage" />
+                                    <om:Property Name="Signal" Value="True" />
+                                </om:Element>
+                                <om:Element Type="MessageAssignment" OID="17c0146f-6f7a-4d67-8fbe-addf58b6a7b7" ParentLink="ComplexStatement_Statement" LowerBound="459.1" HigherBound="461.1">
+                                    <om:Property Name="Expression" Value="SelfFinishMessage_Out_4(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="SetPropertiesOnTheMessage" />
+                                    <om:Property Name="Signal" Value="True" />
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="Scope" OID="4e72146e-aa07-4d08-b40a-947e93326c9e" ParentLink="ComplexStatement_Statement" LowerBound="462.1" HigherBound="487.1">
+                                <om:Property Name="InitializedTransactionType" Value="True" />
+                                <om:Property Name="IsSynchronized" Value="False" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="ScopeForSendingFinishMessage" />
+                                <om:Property Name="Signal" Value="True" />
+                                <om:Element Type="Send" OID="8475352f-f0b8-417f-9510-6527c2fe55a7" ParentLink="ComplexStatement_Statement" LowerBound="467.1" HigherBound="469.1">
+                                    <om:Property Name="PortName" Value="ActionDirectBoundOutPort" />
+                                    <om:Property Name="MessageName" Value="SelfFinishMessage_Out_4" />
+                                    <om:Property Name="OperationName" Value="SendOrReceiveFinishMessage" />
+                                    <om:Property Name="OperationMessageName" Value="Request" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="SendFinishMessage" />
+                                    <om:Property Name="Signal" Value="True" />
+                                </om:Element>
+                                <om:Element Type="Catch" OID="8cb36e0f-20aa-456e-9c7c-70864639c70b" ParentLink="Scope_Catch" LowerBound="472.1" HigherBound="485.1">
+                                    <om:Property Name="ExceptionName" Value="persistenceException" />
+                                    <om:Property Name="ExceptionType" Value="Microsoft.XLANGs.BaseTypes.PersistenceException" />
+                                    <om:Property Name="IsFaultMessage" Value="False" />
+                                    <om:Property Name="ReportToAnalyst" Value="True" />
+                                    <om:Property Name="Name" Value="CatchPersistenceException" />
+                                    <om:Property Name="Signal" Value="True" />
+                                    <om:Element Type="Decision" OID="d827dcc0-51a4-4be8-91ad-5b5b26869f58" ParentLink="Catch_Statement" LowerBound="475.1" HigherBound="484.1">
+                                        <om:Property Name="ReportToAnalyst" Value="True" />
+                                        <om:Property Name="Name" Value="IgnorePublishException" />
+                                        <om:Property Name="Signal" Value="True" />
+                                        <om:Element Type="DecisionBranch" OID="d8478a4a-9815-42fc-b47e-078c230ee438" ParentLink="ReallyComplexStatement_Branch" LowerBound="476.45" HigherBound="479.1">
+                                            <om:Property Name="Expression" Value="persistenceException.InnerException.GetType() == typeof(Microsoft.XLANGs.BaseTypes.PublishMessageException)" />
+                                            <om:Property Name="IsGhostBranch" Value="True" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="IfPublishMessageException" />
+                                            <om:Property Name="Signal" Value="True" />
+                                        </om:Element>
+                                        <om:Element Type="DecisionBranch" OID="1135a9bf-cc34-4f2c-92b1-7c496ce9ecd0" ParentLink="ReallyComplexStatement_Branch">
+                                            <om:Property Name="IsGhostBranch" Value="True" />
+                                            <om:Property Name="ReportToAnalyst" Value="True" />
+                                            <om:Property Name="Name" Value="Else" />
+                                            <om:Property Name="Signal" Value="False" />
+                                            <om:Element Type="Throw" OID="23db2d99-b5cd-4ff7-b904-4105b4888a5f" ParentLink="ComplexStatement_Statement" LowerBound="481.1" HigherBound="483.1">
+                                                <om:Property Name="ThrownReference" Value="persistenceException" />
+                                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                                <om:Property Name="Name" Value="ThrowPersistenceException" />
+                                                <om:Property Name="Signal" Value="True" />
+                                            </om:Element>
+                                        </om:Element>
+                                    </om:Element>
+                                </om:Element>
+                            </om:Element>
+                            <om:Element Type="MessageDeclaration" OID="b1ba2d4b-ba49-48a8-9b91-a6386738c62b" ParentLink="Scope_MessageDeclaration" LowerBound="448.1" HigherBound="449.1">
+                                <om:Property Name="Type" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                                <om:Property Name="ParamDirection" Value="In" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Name" Value="SelfFinishMessage_Out_4" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Throw" OID="bb700a27-91cd-4d0a-b2b4-e856b23b8db7" ParentLink="Catch_Statement" LowerBound="489.1" HigherBound="491.1">
+                            <om:Property Name="ThrownReference" Value="General Exception" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="RethrowTheUnknownException" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="Listen" OID="a8c3b02b-a174-4c86-96bd-8fe2352b4355" ParentLink="ServiceBody_Statement" LowerBound="494.1" HigherBound="506.1">
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="ListenForFinishMessageFromParent" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="ListenBranch" OID="6e7e0bb9-7414-4c5d-bf77-f262e7ff1c22" ParentLink="ReallyComplexStatement_Branch" LowerBound="494.1" HigherBound="494.1">
+                        <om:Property Name="IsGhostBranch" Value="True" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="ListenBranch_3" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Receive" OID="662ea590-086d-4ac5-be56-b09d81334780" ParentLink="ListenBranch_Statement" LowerBound="497.1" HigherBound="498.136">
+                            <om:Property Name="Activate" Value="False" />
+                            <om:Property Name="PortName" Value="ActionDirectBoundInPort" />
+                            <om:Property Name="MessageName" Value="FinishMessageFromParent" />
+                            <om:Property Name="OperationName" Value="SendOrReceiveFinishMessage" />
+                            <om:Property Name="OperationMessageName" Value="Request" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="ReceiveFinishMessageFromParent" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="ListenBranch" OID="937bcf9d-af51-40c4-b155-36e690561f00" ParentLink="ReallyComplexStatement_Branch" LowerBound="494.1" HigherBound="494.1">
+                        <om:Property Name="IsGhostBranch" Value="True" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="ListenBranch_4" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Delay" OID="118a9d67-9d80-42f4-9f06-ac66e5237ea4" ParentLink="ListenBranch_Statement" LowerBound="501.1" HigherBound="502.51">
+                            <om:Property Name="Timeout" Value="new System.TimeSpan(0,0,5)" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="WaitFor5Seconds" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="d1f66a92-3c5d-45ec-9a35-046192e9db1c" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="67.1" HigherBound="69.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="2" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Template.ActionActivationPortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ActionActivationPort" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="LogicalBindingAttribute" OID="e4b6ecac-6fe2-4ce5-9ab1-199e04d487c7" ParentLink="PortDeclaration_CLRAttribute" LowerBound="67.1" HigherBound="68.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="a3cc7bd6-0536-43ef-aacb-6bfeb407298c" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="69.1" HigherBound="71.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Right" />
+                <om:Property Name="PortIndex" Value="3" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Template.ActionInterruptPortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ActionInterruptPort" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="LogicalBindingAttribute" OID="88aa9dab-e94e-4338-a976-53c557af921a" ParentLink="PortDeclaration_CLRAttribute" LowerBound="69.1" HigherBound="70.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="8c13263c-b4c3-46e1-a1e9-5530fe05e4ac" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="71.1" HigherBound="74.1">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="-1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="True" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Template.ActionDirectBoundPortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ActionDirectBoundOutPort" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="DirectBindingAttribute" OID="dba491b6-f3d3-4611-8eba-052d2a923245" ParentLink="PortDeclaration_CLRAttribute" LowerBound="71.1" HigherBound="72.1">
+                    <om:Property Name="DirectBindingType" Value="MessageBox" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="aca52266-c79d-4a0c-b96a-eb7db9faac07" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="74.1" HigherBound="77.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="-1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="True" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Template.ActionDirectBoundPortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ActionDirectBoundInPort" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="DirectBindingAttribute" OID="94ed4d66-1f08-4938-86cb-0f564709f6b3" ParentLink="PortDeclaration_CLRAttribute" LowerBound="74.1" HigherBound="75.1">
+                    <om:Property Name="DirectBindingType" Value="MessageBox" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="8cca027c-c6f8-421b-945d-718df327a2be" ParentLink="Module_PortType" LowerBound="4.1" HigherBound="11.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ActionInterruptPortType" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="OperationDeclaration" OID="86e4e20b-e337-4ed3-a8af-e42755a865cc" ParentLink="PortType_OperationDeclaration" LowerBound="6.1" HigherBound="10.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="InterruptOperation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="6e0ef4b1-1100-4ed5-9187-efbba4183ed4" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="8.13" HigherBound="8.59">
+                    <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Interrupt" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="0b7e4969-53d8-4b54-af4c-41c15c8a0448" ParentLink="Module_PortType" LowerBound="11.1" HigherBound="18.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ActionFinishPortType" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="OperationDeclaration" OID="3cf27dd6-cd8a-480c-86ba-139aade12d53" ParentLink="PortType_OperationDeclaration" LowerBound="13.1" HigherBound="17.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SendOrReceiveFinishMessage" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="fd69079c-9144-479d-9477-3dd6e7877533" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="15.13" HigherBound="15.56">
+                    <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="fe86aeb7-be4c-4519-95f8-33305bc41a89" ParentLink="Module_PortType" LowerBound="18.1" HigherBound="33.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ActionDirectBoundPortType" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="574aa58c-ccfd-4699-8d08-f7ef33a42d9c" ParentLink="PortType_OperationDeclaration" LowerBound="20.1" HigherBound="24.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SendOrReceiveFinishMessage" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="2b7137ef-0d43-4123-8f97-8b65a8942ae1" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="22.13" HigherBound="22.56">
+                    <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="OperationDeclaration" OID="a3286b28-9884-4b3b-b3d7-9005c2d5f0eb" ParentLink="PortType_OperationDeclaration" LowerBound="24.1" HigherBound="28.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SendOrReceiveSyncMessage" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="7991523d-ffc0-44b6-9dcc-04188b8c656c" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="26.13" HigherBound="26.28">
+                    <om:Property Name="Ref" Value="Template.Hws_Synchronize" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="OperationDeclaration" OID="119e08f9-1859-4977-be3a-d15bd1d5027f" ParentLink="PortType_OperationDeclaration" LowerBound="28.1" HigherBound="32.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SendOrReceiveActivateResponse" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="7ee5513e-bfe3-4b8b-921e-281e47c46317" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="30.13" HigherBound="30.66">
+                    <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="15855fa4-0096-4f30-87b6-5f1beb200dd4" ParentLink="Module_PortType" LowerBound="33.1" HigherBound="40.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ActionActivationPortType" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="OperationDeclaration" OID="4fd44d05-26e1-4ea2-b1ef-5b14ec1fec5f" ParentLink="PortType_OperationDeclaration" LowerBound="35.1" HigherBound="39.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="ActivationOperation" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="7e3bfb03-24e1-413d-a6bb-017aa970c9c2" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="37.13" HigherBound="37.25">
+                    <om:Property Name="Ref" Value="Template.Hws_Activate" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="CorrelationType" OID="2aba568e-d199-4a9e-ad34-d3f19d3afe08" ParentLink="Module_CorrelationType" LowerBound="40.1" HigherBound="44.1">
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="SyncCorrelation" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="PropertyRef" OID="77ff923f-34e8-4d6e-b118-2ac67d004f7c" ParentLink="CorrelationType_PropertyRef" LowerBound="42.9" HigherBound="42.69">
+                <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="CorrelationType" OID="01352fc8-ece9-484b-8e30-75204716daaf" ParentLink="Module_CorrelationType" LowerBound="44.1" HigherBound="48.1">
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ActionInstanceInterruptCorrelation" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="PropertyRef" OID="792516ed-8d1f-4f0d-9f62-103145f7aeb5" ParentLink="CorrelationType_PropertyRef" LowerBound="46.9" HigherBound="46.71">
+                <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="CorrelationType" OID="f2bb7772-ed06-4e58-84ec-4301a6ce2280" ParentLink="Module_CorrelationType" LowerBound="48.1" HigherBound="52.1">
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ParentFinishCorrelation" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="PropertyRef" OID="fc2adbba-fe67-46a3-9086-0e6f585fb053" ParentLink="CorrelationType_PropertyRef" LowerBound="50.9" HigherBound="50.69">
+                <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="CorrelationType" OID="c6fd5063-7eec-4039-a47f-5d8de91c835f" ParentLink="Module_CorrelationType" LowerBound="52.1" HigherBound="56.1">
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="SelfFinishCorrelation" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="PropertyRef" OID="6d68ec94-6164-4ff7-b09b-c2a6d5493ec4" ParentLink="CorrelationType_PropertyRef" LowerBound="54.9" HigherBound="54.71">
+                <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="CorrelationType" OID="ba6557d8-fbc3-4d50-ae46-631287f7548c" ParentLink="Module_CorrelationType" LowerBound="56.1" HigherBound="60.1">
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ActivityModelInstanceInterruptCorrelation" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="PropertyRef" OID="88797be9-4369-4bdd-94d2-ab916e414ff0" ParentLink="CorrelationType_PropertyRef" LowerBound="58.9" HigherBound="58.76">
+                <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="CorrelationType" OID="c1de34af-dac8-48e3-af18-00923fe9b54c" ParentLink="Module_CorrelationType" LowerBound="60.1" HigherBound="64.1">
+            <om:Property Name="TypeModifier" Value="Private" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="ActivityFlowInterruptCorrelation" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="PropertyRef" OID="166f2197-1d00-499f-9574-00b9c25eace7" ParentLink="CorrelationType_PropertyRef" LowerBound="62.9" HigherBound="62.67">
+                <om:Property Name="Ref" Value="Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityFlowID" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="PropertyRef_1" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+module Template
+{
+    private porttype ActionInterruptPortType
+    {
+        oneway InterruptOperation
+        {
+            Microsoft.BizTalk.Hws.HwsSchemas.Hws_Interrupt
+        };
+    };
+    private porttype ActionFinishPortType
+    {
+        oneway SendOrReceiveFinishMessage
+        {
+            Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish
+        };
+    };
+    private porttype ActionDirectBoundPortType
+    {
+        oneway SendOrReceiveFinishMessage
+        {
+            Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish
+        };
+        oneway SendOrReceiveSyncMessage
+        {
+            Hws_Synchronize
+        };
+        oneway SendOrReceiveActivateResponse
+        {
+            Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse
+        };
+    };
+    internal porttype ActionActivationPortType
+    {
+        oneway ActivationOperation
+        {
+            Hws_Activate
+        };
+    };
+    private correlationtype SyncCorrelation
+    {
+        Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID
+    };
+    private correlationtype ActionInstanceInterruptCorrelation
+    {
+        Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID
+    };
+    private correlationtype ParentFinishCorrelation
+    {
+        Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID
+    };
+    private correlationtype SelfFinishCorrelation
+    {
+        Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID
+    };
+    private correlationtype ActivityModelInstanceInterruptCorrelation
+    {
+        Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID
+    };
+    private correlationtype ActivityFlowInterruptCorrelation
+    {
+        Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityFlowID
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    private service longrunning transaction Action
+    {
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port implements ActionActivationPortType ActionActivationPort;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port implements ActionInterruptPortType ActionInterruptPort;
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        [Microsoft.XLANGs.BaseTypes.OrderedDelivery()]
+        port uses ActionDirectBoundPortType ActionDirectBoundOutPort;
+        [Microsoft.XLANGs.BaseTypes.DirectBinding()]
+        [Microsoft.XLANGs.BaseTypes.OrderedDelivery()]
+        port implements ActionDirectBoundPortType ActionDirectBoundInPort;
+        correlation SyncCorrelation corSyncCorrelation;
+        correlation ActionInstanceInterruptCorrelation corActionInstanceInterruptCorrelation;
+        correlation ParentFinishCorrelation corParentFinishCorrelation;
+        correlation SelfFinishCorrelation corSelfFinishCorrelation;
+        correlation ActivityFlowInterruptCorrelation corActivityFlowInterruptCorrelation;
+        correlation ActivityModelInstanceInterruptCorrelation corActivityModelInstanceInterruptCorrelation;
+        message Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse ResponseMessage_4;
+        message Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse ResponseMessage_3;
+        message Hws_Activate ActivationMessage;
+        message Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse ResponseMessage_1;
+        message Microsoft.BizTalk.Hws.HwsSchemas.Hws_Interrupt InterruptMessage;
+        message Hws_Synchronize SyncMessage;
+        message Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish FinishMessageFromParent;
+        message Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish FinishMessageFromSelf;
+        message Microsoft.BizTalk.Hws.HwsSchemas.Hws_ActivateResponse ResponseMessage_2;
+        Microsoft.BizTalk.Hws.TemplateExceptions.AbortException abortException;
+        Microsoft.BizTalk.Hws.TemplateExceptions.RollbackException rollbackException;
+        Microsoft.BizTalk.Hws.TemplateExceptions.TemplateExceptionsResourceManager resourceManager;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("9dc8da4f-e411-49e5-8ad7-1957ad2cefb0")]
+            [Microsoft.XLANGs.BaseTypes.Transaction(Retry=true,Batch=true,Timeout=60,TranIsolationLevel=System.Data.IsolationLevel.Serializable)]
+            scope atomic transaction TransactionForCreatingActionInstanceIdCorrelation
+            {
+                body
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("c02b3395-3e1c-4e15-ac2f-b054c5741d1d")]
+                    activate receive (ActionActivationPort.ActivationOperation, ActivationMessage, initialize corActionInstanceInterruptCorrelation);
+                    abortException = new Microsoft.BizTalk.Hws.TemplateExceptions.AbortException();
+                    rollbackException = new Microsoft.BizTalk.Hws.TemplateExceptions.RollbackException();
+                    resourceManager = new Microsoft.BizTalk.Hws.TemplateExceptions.TemplateExceptionsResourceManager();
+                }
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("a3339298-2773-4dbf-8b08-c0d48c4097e2")]
+            scope
+            {
+                System.Xml.XmlDocument responseMessageXml;
+                body
+                {
+                    responseMessageXml = new System.Xml.XmlDocument();
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("b00dc963-db85-43fe-b0cb-efded4049648")]
+                    construct ResponseMessage_1
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("de25443f-2361-450f-bfc0-4a315456209f")]
+                        responseMessageXml.LoadXml("<ns0:HwsMessage xmlns:ns0='http://schemas.microsoft.com/Hws/2003/Hws_ActivateResponse'> <HwsSection HwsMessageType='Hws_ActivateResponse'>  <ActivityFlowID>ActivityFlowID_0</ActivityFlowID> <ActionInstanceID>ActionInstanceID_0</ActionInstanceID> <ActivityModelInstanceID>ActivityModelInstanceID_0</ActivityModelInstanceID> <ParentActionInstanceID>ParentActionInstanceID_0</ParentActionInstanceID> </HwsSection> </ns0:HwsMessage>");
+                        ResponseMessage_1 = responseMessageXml;
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("0966be6a-30f3-4d63-b7bc-1ac972b5f3d4")]
+                        ResponseMessage_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);
+                        ResponseMessage_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID);
+                        ResponseMessage_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID);
+                        ResponseMessage_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityFlowID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityFlowID);
+                    }
+                }
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("32c1b181-e6d0-412b-9d28-6d060fa064f6")]
+            if ((ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID) == "00000000-0000-0000-0000-000000000000" || ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID) == "{00000000-0000-0000-0000-000000000000}"))
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("31328039-5836-4dc8-9947-5c876329399a")]
+                if ((ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) == "00000000-0000-0000-0000-000000000000" || ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) == "{00000000-0000-0000-0000-000000000000}"))
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("793f9293-cb7a-47ff-a8a3-7e6d1a824be2")]
+                    construct ResponseMessage_3
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("bdb6bafd-7801-48eb-8522-28786d149b45")]
+                        ResponseMessage_3 = ResponseMessage_1;
+                        ResponseMessage_3(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID) = System.Convert.ToString(System.Guid.NewGuid());
+                        ResponseMessage_3(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) = System.Convert.ToString(System.Guid.NewGuid());
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("ce3606b1-e265-4e40-9d8f-b79adf13a442")]
+                    send (ActionDirectBoundOutPort.SendOrReceiveActivateResponse, ResponseMessage_3, initialize corActivityFlowInterruptCorrelation, initialize corParentFinishCorrelation, initialize corSelfFinishCorrelation, corActionInstanceInterruptCorrelation, initialize corActivityModelInstanceInterruptCorrelation, initialize corSyncCorrelation);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("d556481e-53c0-4c78-b83e-ed8c871fb44d")]
+                    receive (ActionDirectBoundInPort.SendOrReceiveActivateResponse, ResponseMessage_3, corActionInstanceInterruptCorrelation);
+                }
+                else 
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("8ed0b1d4-c00b-459b-9a31-69ada53cc93c")]
+                    construct ResponseMessage_2
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("7a8806be-e1c4-4911-a62b-f42b314b369f")]
+                        ResponseMessage_2 = ResponseMessage_1;
+                        ResponseMessage_2(Microsoft.BizTalk.Hws.HwsPromotedProperties.ParentInstanceID) = System.Convert.ToString(System.Guid.NewGuid());
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("de641598-c2d6-4b3d-a11d-d8b928734a82")]
+                    send (ActionDirectBoundOutPort.SendOrReceiveActivateResponse, ResponseMessage_2, corActionInstanceInterruptCorrelation, initialize corParentFinishCorrelation, initialize corActivityFlowInterruptCorrelation, initialize corActivityModelInstanceInterruptCorrelation, initialize corSyncCorrelation, initialize corSelfFinishCorrelation);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("58da7e9a-1526-4475-9ca7-c425c9bdae64")]
+                    receive (ActionDirectBoundInPort.SendOrReceiveActivateResponse, ResponseMessage_2, corActionInstanceInterruptCorrelation);
+                }
+            }
+            else 
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("c54d8bb4-2c63-4887-9e18-9880a32c93fc")]
+                if ((ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) == "00000000-0000-0000-0000-000000000000" || ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) == "{00000000-0000-0000-0000-000000000000}"))
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("a43b3ad2-1503-41a8-a2b6-8923c1b3a7e5")]
+                    construct ResponseMessage_4
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("63d1176d-1281-450f-91e6-80001d19dbcc")]
+                        ResponseMessage_4 = ResponseMessage_1;
+                        ResponseMessage_4(Microsoft.BizTalk.Hws.HwsPromotedProperties.ActivityModelInstanceID) = System.Convert.ToString(System.Guid.NewGuid());
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("fd2fdf55-ea16-484c-8a11-a8ff3a0cad20")]
+                    send (ActionDirectBoundOutPort.SendOrReceiveActivateResponse, ResponseMessage_4, initialize corSyncCorrelation, initialize corActivityFlowInterruptCorrelation, initialize corActivityModelInstanceInterruptCorrelation, initialize corSelfFinishCorrelation, corActionInstanceInterruptCorrelation, initialize corParentFinishCorrelation);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("38b81292-eb06-4cf0-857c-ce9d1d2b1988")]
+                    receive (ActionDirectBoundInPort.SendOrReceiveActivateResponse, ResponseMessage_4, corActionInstanceInterruptCorrelation);
+                }
+                else 
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("05cd4445-24e4-4608-9898-acb42d9a055c")]
+                    send (ActionDirectBoundOutPort.SendOrReceiveActivateResponse, ResponseMessage_1, initialize corSyncCorrelation, initialize corActivityModelInstanceInterruptCorrelation, initialize corParentFinishCorrelation, initialize corSelfFinishCorrelation, initialize corActivityFlowInterruptCorrelation, corActionInstanceInterruptCorrelation);
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("241cbfc0-776a-4dbd-b17c-b73c0947e9ac")]
+                    receive (ActionDirectBoundInPort.SendOrReceiveActivateResponse, ResponseMessage_1, corActionInstanceInterruptCorrelation);
+                }
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("8fdf2e1f-700b-41fe-b0cf-043947649aef")]
+            scope longrunning transaction TransactForParallelStatement
+            {
+                body
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("cfd0a096-4d07-4a6a-99b5-985b50c599c4")]
+                    parallel
+                    {
+                        task
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("0693d593-b2a3-4109-872a-1836cd96fb09")]
+                            if (ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.IsDependentOnParent)==true)
+                            {
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("b92a25d7-4351-4b52-a697-1b08204f5cb4")]
+                                listen
+                                {
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("ea057dcf-a87d-4137-b53c-7131f24a0b08")]
+                                    until receive (ActionDirectBoundInPort.SendOrReceiveFinishMessage, FinishMessageFromParent, corParentFinishCorrelation)
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("7d7f5afc-4286-42da-92c8-850618d26b51")]
+                                        scope
+                                        {
+                                            message Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish SelfFinishMessage_Out_1;
+                                            System.Xml.XmlDocument finishMessageXml_1;
+                                            body
+                                            {
+                                                finishMessageXml_1 = new System.Xml.XmlDocument();
+                                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("4f14f201-76ca-45c2-be8d-318b61da2b82")]
+                                                construct SelfFinishMessage_Out_1
+                                                {
+                                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("1df0810f-7fa5-41fa-b34b-d4e644fbd210")]
+                                                    finishMessageXml_1.LoadXml("<HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'> <HwsSection HwsMessageType='Hws_Finish' xmlns=''> <ActionInstanceID>ActionInstanceID_0</ActionInstanceID> </HwsSection> </HwsMessage>");
+                                                    SelfFinishMessage_Out_1 = finishMessageXml_1;
+                                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("c0b5e0f6-4dfb-4333-87f6-3a0d144fd13a")]
+                                                    SelfFinishMessage_Out_1(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);
+                                                }
+                                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("f003a2fd-abc0-4e56-8830-ae99f5fdc6c0")]
+                                                send (ActionDirectBoundOutPort.SendOrReceiveFinishMessage, SelfFinishMessage_Out_1);
+                                            }
+                                        }
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("a0ee319c-d819-401f-ad72-20f13974df77")]
+                                        terminate resourceManager.ResolveString("PARENT_FINISH_MESSAGE");;
+                                    }
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("928ae495-3c6b-4aa7-8c43-df182e1de97f")]
+                                    until receive (ActionDirectBoundInPort.SendOrReceiveSyncMessage, SyncMessage, corSyncCorrelation)
+                                    {
+                                    }
+                                }
+                            }
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("72b25ba4-3f9f-43ef-849a-c72a97542ee9")]
+                            scope longrunning transaction TransactAllActionSpecificLogic
+                            {
+                                body
+                                {
+                                }
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("bc335fb4-11e0-4822-b04d-5c38f0b0ffdf")]
+                                compensation ()
+                                {
+                                }
+                            }
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("84738ce8-568a-4754-8b57-7cd1388315d1")]
+                            scope
+                            {
+                                message Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish SelfFinishMessage_Out_2;
+                                System.Xml.XmlDocument finishMessageXml_2;
+                                body
+                                {
+                                    finishMessageXml_2 = new System.Xml.XmlDocument();
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("812ba0c8-409b-485a-b57f-4558cbbf3192")]
+                                    construct SelfFinishMessage_Out_2
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("783b74a4-3291-49c1-8bd0-0a61d9227669")]
+                                        finishMessageXml_2.LoadXml("<HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'> <HwsSection HwsMessageType='Hws_Finish' xmlns=''> <ActionInstanceID>ActionInstanceID_0</ActionInstanceID> </HwsSection> </HwsMessage>");
+                                        SelfFinishMessage_Out_2 = finishMessageXml_2;
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("55204d4f-8903-4cef-8f65-68dc39f236d7")]
+                                        SelfFinishMessage_Out_2(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);
+                                    }
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("2265ebcb-ef97-434e-9a8a-caf348d0f53c")]
+                                    send (ActionDirectBoundOutPort.SendOrReceiveFinishMessage, SelfFinishMessage_Out_2);
+                                }
+                            }
+                        }
+                        task
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("5a8d8fb2-eec4-4586-88e9-cc8ef55b01ed")]
+                            listen
+                            {
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("df527b22-1bdc-4aeb-b418-42d4950705d8")]
+                                until receive (ActionDirectBoundInPort.SendOrReceiveFinishMessage, FinishMessageFromSelf, corSelfFinishCorrelation)
+                                {
+                                }
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("6ef6372e-ba6c-41e5-a3ff-eb8e60d28586")]
+                                until receive (ActionInterruptPort.InterruptOperation, InterruptMessage, corActionInstanceInterruptCorrelation)
+                                {
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("67965ca9-87ac-4cd9-ab0f-52362ad887c7")]
+                                    if (InterruptMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.InterruptType) == "Abort")
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("eb37aa35-0811-44fe-a20f-201c19efb9fb")]
+                                        throw abortException;
+                                    }
+                                    else 
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("a0843bd7-9638-4542-af5e-4cfa0364b15f")]
+                                        throw rollbackException;
+                                    }
+                                }
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("13df72b9-267f-4aa1-a976-71e4440b6eae")]
+                                until receive (ActionInterruptPort.InterruptOperation, InterruptMessage, corActivityFlowInterruptCorrelation)
+                                {
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("8c2a3591-498f-46dc-bddf-3ab37e0946aa")]
+                                    if (InterruptMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.InterruptType) == "Abort")
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("0c715c29-847a-439a-b8a6-aec08b07614e")]
+                                        throw abortException;
+                                    }
+                                    else 
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("432e3bbe-885f-4bb3-8a3e-fe25b6e42b3d")]
+                                        throw rollbackException;
+                                    }
+                                }
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("0753bed7-02bf-481b-a233-7604211b735b")]
+                                until receive (ActionInterruptPort.InterruptOperation, InterruptMessage, corActivityModelInstanceInterruptCorrelation)
+                                {
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("fa3798ca-f0d6-4193-bc8f-bd3b79318851")]
+                                    if (InterruptMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.InterruptType) == "Abort")
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("eb33e4ee-ef7d-4ccf-a02d-d7ce2e72b0c2")]
+                                        throw abortException;
+                                    }
+                                    else 
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("88cee11e-775f-4079-9824-e083c4e88d98")]
+                                        throw rollbackException;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+                exceptions
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("6ee4ca7c-5269-4626-b055-4a8a6e1d1914")]
+                    catch (Microsoft.BizTalk.Hws.TemplateExceptions.AbortException eAbortException)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("e41029be-c55b-4d80-89c4-d60f36351ff7")]
+                        scope
+                        {
+                            message Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish SelfFinishMessage_Out_3;
+                            System.Xml.XmlDocument finishMessageXml_3;
+                            body
+                            {
+                                finishMessageXml_3 = new System.Xml.XmlDocument();
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("5dbfdc28-e7dc-4fc8-aaee-1b05cbcf9aa4")]
+                                construct SelfFinishMessage_Out_3
+                                {
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("81d7e0e1-b744-4e9e-a80d-f9c8bd9972d9")]
+                                    finishMessageXml_3.LoadXml("<HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'> <HwsSection HwsMessageType='Hws_Finish' xmlns=''> <ActionInstanceID>ActionInstanceID_0</ActionInstanceID> </HwsSection> </HwsMessage>");
+                                    SelfFinishMessage_Out_3 = finishMessageXml_3;
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("fd1d7fe0-8faa-4917-ba48-506fc5795a99")]
+                                    SelfFinishMessage_Out_3(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);
+                                }
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("1aeea12c-468e-4578-844f-9dfcd7d28999")]
+                                scope
+                                {
+                                    body
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("37b4c516-5b83-4dd2-8a66-f293c8286887")]
+                                        send (ActionDirectBoundOutPort.SendOrReceiveFinishMessage, SelfFinishMessage_Out_3);
+                                    }
+                                    exceptions
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("9de0e9f6-0089-446d-803d-a88e83406c1e")]
+                                        catch (Microsoft.XLANGs.BaseTypes.PersistenceException persistenceException)
+                                        {
+                                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("00bb6726-a37d-4d96-999c-a362462b7b82")]
+                                            if (persistenceException.InnerException.GetType() == typeof(Microsoft.XLANGs.BaseTypes.PublishMessageException))
+                                            {
+                                            }
+                                            else 
+                                            {
+                                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("a9b6a05b-4f80-4aad-89db-cdf0b9a2935d")]
+                                                throw persistenceException;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("73955040-9355-481e-b223-cff1d960ef39")]
+                        terminate eAbortException.Message;;
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("2af4b8b1-1e0f-404c-a7e9-461e362de1ac")]
+                    catch (Microsoft.BizTalk.Hws.TemplateExceptions.RollbackException eRollbackException)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("5b5bc1d9-7c1d-4e0c-87f8-dfaadc797400")]
+                        if (succeeded(TransactAllActionSpecificLogic))
+                        {
+                            compensate TransactAllActionSpecificLogic ();
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("a27c8d44-7900-4471-9573-a60267f19637")]
+                        scope
+                        {
+                            message Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish SelfFinishMessage_Out_5;
+                            System.Xml.XmlDocument finishMessageXml_5;
+                            body
+                            {
+                                finishMessageXml_5 = new System.Xml.XmlDocument();
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("16e8bfc9-0e3f-4e6d-aa38-627e81fd2a5d")]
+                                construct SelfFinishMessage_Out_5
+                                {
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("32e114a9-38cf-4fc9-afb7-7d35711b2807")]
+                                    finishMessageXml_5.LoadXml("<HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'> <HwsSection HwsMessageType='Hws_Finish' xmlns=''> <ActionInstanceID>ActionInstanceID_0</ActionInstanceID> </HwsSection> </HwsMessage>");
+                                    SelfFinishMessage_Out_5 = finishMessageXml_5;
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("b0e2c6f1-7293-4770-8183-2266a27924b5")]
+                                    SelfFinishMessage_Out_5(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);
+                                }
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("21b863c7-28fa-4175-a120-fb396fb07951")]
+                                scope
+                                {
+                                    body
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("958df78d-b98f-48ca-87da-5ef73caa0126")]
+                                        send (ActionDirectBoundOutPort.SendOrReceiveFinishMessage, SelfFinishMessage_Out_5);
+                                    }
+                                    exceptions
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("cc41065d-0235-4fa4-a363-63f89708b156")]
+                                        catch (Microsoft.XLANGs.BaseTypes.PersistenceException persistenceException)
+                                        {
+                                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("0537ab83-7c6f-4ea4-8bbb-95c8b704e7d1")]
+                                            if (persistenceException.InnerException.GetType() == typeof(Microsoft.XLANGs.BaseTypes.PublishMessageException))
+                                            {
+                                            }
+                                            else 
+                                            {
+                                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("556f4d8d-aa78-45e2-beee-8b1ba559eed7")]
+                                                throw persistenceException;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("de36094a-e115-409a-8323-2d7efd7f02d5")]
+                        terminate eRollbackException.Message;;
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("aa0a6498-e918-4dba-af66-c2d3282483e9")]
+                    catch
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("b9491e94-c956-4a8d-93fa-6cfe7b0d10a6")]
+                        if (succeeded(TransactAllActionSpecificLogic))
+                        {
+                            compensate TransactAllActionSpecificLogic ();
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("69c641c8-6b41-4f50-9531-a981edefa77a")]
+                        scope
+                        {
+                            message Microsoft.BizTalk.Hws.HwsSchemas.Hws_Finish SelfFinishMessage_Out_4;
+                            System.Xml.XmlDocument finishMessageXml_4;
+                            body
+                            {
+                                finishMessageXml_4 = new System.Xml.XmlDocument();
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("6e843c98-0adb-42ac-a2a7-7aa854f98a94")]
+                                construct SelfFinishMessage_Out_4
+                                {
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("74b75dba-3c77-45e9-99bf-37e99eecfbd6")]
+                                    finishMessageXml_4.LoadXml("<HwsMessage xmlns='http://schemas.microsoft.com/Hws/2003/Hws_Finish'> <HwsSection HwsMessageType='Hws_Finish' xmlns=''> <ActionInstanceID>ActionInstanceID_0</ActionInstanceID> </HwsSection> </HwsMessage>");
+                                    SelfFinishMessage_Out_4 = finishMessageXml_4;
+                                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("17c0146f-6f7a-4d67-8fbe-addf58b6a7b7")]
+                                    SelfFinishMessage_Out_4(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID)=ActivationMessage(Microsoft.BizTalk.Hws.HwsPromotedProperties.ScheduleInstanceID);
+                                }
+                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("4e72146e-aa07-4d08-b40a-947e93326c9e")]
+                                scope
+                                {
+                                    body
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("8475352f-f0b8-417f-9510-6527c2fe55a7")]
+                                        send (ActionDirectBoundOutPort.SendOrReceiveFinishMessage, SelfFinishMessage_Out_4);
+                                    }
+                                    exceptions
+                                    {
+                                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("8cb36e0f-20aa-456e-9c7c-70864639c70b")]
+                                        catch (Microsoft.XLANGs.BaseTypes.PersistenceException persistenceException)
+                                        {
+                                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("d827dcc0-51a4-4be8-91ad-5b5b26869f58")]
+                                            if (persistenceException.InnerException.GetType() == typeof(Microsoft.XLANGs.BaseTypes.PublishMessageException))
+                                            {
+                                            }
+                                            else 
+                                            {
+                                                [Microsoft.XLANGs.BaseTypes.DesignerPosition("23db2d99-b5cd-4ff7-b904-4105b4888a5f")]
+                                                throw persistenceException;
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("bb700a27-91cd-4d0a-b2b4-e856b23b8db7")]
+                        throw;
+                    }
+                }
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("a8c3b02b-a174-4c86-96bd-8fe2352b4355")]
+            listen
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("662ea590-086d-4ac5-be56-b09d81334780")]
+                until receive (ActionDirectBoundInPort.SendOrReceiveFinishMessage, FinishMessageFromParent, corParentFinishCorrelation)
+                {
+                }
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("118a9d67-9d80-42f4-9f06-ac66e5237ea4")]
+                timeout new System.TimeSpan(0,0,5)
+                {
+                }
+            }
+        }
+    }
+}
+

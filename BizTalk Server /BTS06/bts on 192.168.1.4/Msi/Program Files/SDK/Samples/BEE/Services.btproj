@@ -1,0 +1,153 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1004"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{D07BF0CB-AE74-45DC-AABB-5BA2AE637E30}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "key.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.BamEndToEnd.Services"
+                    AssemblyName = "Microsoft.Samples.BizTalk.BamEndToEnd.Services"
+                />
+                <Config
+                    Name = "Development"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Components"
+                    Project = "{BE4517AC-9E08-48EC-B9EC-E0B01544C860}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Pipeline.Components"
+                    AssemblyName = "Microsoft.BizTalk.Pipeline.Components"
+                    HintPath = "..\..\..\..\..\Pipeline Components\Microsoft.BizTalk.Pipeline.Components.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "BAMInbound.btp"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services"
+                    Type = "BAMInbound"
+                />
+                <File
+                    RelPath = "BAMPartSchema.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services"
+                    Type = "BAMPartSchema"
+                />
+                <File
+                    RelPath = "Orchestration1.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Orchestration2.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "Orchestration3.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "PropertySchema.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services.PropertySchema"
+                    Type = "PropertySchema"
+                />
+                <File
+                    RelPath = "Schema1.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services"
+                    Type = "Schema1"
+                />
+                <File
+                    RelPath = "Schema2.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services"
+                    Type = "Schema2"
+                />
+                <File
+                    RelPath = "Schema3.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services"
+                    Type = "Schema3"
+                />
+                <File
+                    RelPath = "Transform_1.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services"
+                    Type = "Transform_1"
+                />
+                <File
+                    RelPath = "Transform_2.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services"
+                    Type = "Transform_2"
+                />
+                <File
+                    RelPath = "Transform_3.btm"
+                    BuildAction = "Compile"
+                    Namespace = "BamEndToEnd.Services"
+                    Type = "Transform_3"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

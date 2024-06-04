@@ -1,0 +1,18 @@
+﻿@model IList<MVC3Demo.Models.ProductModel>
+
+    <div style="float: left; width: 20%; text-align: left;">
+        <div style="height: 25px; padding-left: 80px; text-decoration: underline; vertical-align: bottom">
+            Product List
+        </div>
+        @if (this.Model != null)
+        {            
+            foreach (var p in this.Model)
+            {
+            <div style="padding-left: 80px;">
+                <span id="@p.PrdCode" style="text-decoration:underline; color:Blue; cursor:hand;" onclick="javascript:void onLinkClick(@p.PrdCode)" >
+                    @p.Name
+                </span>
+            </div>
+            }
+        }
+    </div>

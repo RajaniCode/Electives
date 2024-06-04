@@ -1,0 +1,959 @@
+<?xml version="1.0" encoding="utf-8"?>
+<definitions xmlns:s1="http://microsoft.com/wsdl/types/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://microsoft.com/Biztalk2004/Hws/Hwsservice" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://microsoft.com/Biztalk2004/Hws/Hwsservice" xmlns="http://schemas.xmlsoap.org/wsdl/">
+  <types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/Biztalk2004/Hws/Hwsservice">
+      <s:import namespace="http://microsoft.com/wsdl/types/" />
+      <s:element name="GetNewActivityFlowID">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetNewActivityFlowIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="NewActivityFlowID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActivityList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityFlowID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentActionInstanceID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentTaskID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="target" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActivityListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="ExecutableActions" type="s0:Activity" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Activity">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityType" type="s0:ActivityType" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionTypeID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityModelTypeID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivationBlockID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionIndex" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StepName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="StepDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreviousActionTypeID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsDependentComposible" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActivityType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Action" />
+          <s:enumeration value="ActivityModel" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetActionParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="actionTypeID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActionParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ActionParameters" type="s0:ActionParameters" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActionParameters">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Action" type="s0:Activity" />
+          <s:element minOccurs="0" maxOccurs="1" name="XsdDoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskSchemas" type="s0:ArrayOfString" />
+          <s:element minOccurs="0" maxOccurs="1" name="Targets" type="s0:ArrayOfTarget" />
+          <s:element minOccurs="0" maxOccurs="1" name="ParametersDoc" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActionInstanceTitle" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsOverridable" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfString">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="string" nillable="true" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfTarget">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Target" nillable="true" type="s0:Target" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Target">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ParameterName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="InstanceXPath" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Min" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Max" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetActivityModelParameters">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityModelTypeID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="activationBlockID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActivityModelParametersResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="ActivityModelParameters" type="s0:ActionParameters" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActionTargetList">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityFlowID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="actionTypeID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="activityModelTypeID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentActionInstanceID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentTaskID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActionTargetListResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TargetList" type="s0:Actors" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="Actors">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="GlobalActorGroup" type="s0:ParameterActorGrouping" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActorList" type="s0:ArrayOfActor" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ParameterActorGrouping">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ActorIndices" type="s0:ArrayOfInt" />
+          <s:element minOccurs="0" maxOccurs="1" name="Groups" type="s0:ArrayOfFactStoreGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfInt">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="int" type="s:int" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfFactStoreGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="FactStoreGroup" nillable="true" type="s0:FactStoreGroup" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="FactStoreGroup">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActorIndices" type="s0:ArrayOfInt" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfActor">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Actor" nillable="true" type="s0:Actor" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Actor">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="FriendlyName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetActivityModelTargetLists">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityFlowID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="activityModelTypeID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="activityModelStepIDs" type="s0:ArrayOfInt" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentActionInstanceID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentTaskID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActivityModelTargetListsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="TargetLists" type="s0:Actors" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckConstraint">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityFlowID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentActionInstanceID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentTaskID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="isDependentComposition" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="actionParameters" type="s0:ActionParameters" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="CheckConstraintResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CheckConstraintPass" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddActionToActivityFlow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityFlowID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentActionInstanceID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentTaskID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="isDependentComposition" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="actionParameters" type="s0:ActionParameters" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddActionToActivityFlowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ActionInstanceID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="AddActivationBlockToActivityFlow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityFlowID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="activityModelInstanceID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentActionInstanceID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="parentTaskID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="isDependentComposition" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="activationBlockParameters" type="s0:ArrayOfActionParameters" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfActionParameters">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ActionParameters" nillable="true" type="s0:ActionParameters" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="AddActivationBlockToActivityFlowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="CurrentActivityModelInstanceID" type="s1:guid" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIgnoreActivityFlow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityFlowID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="isIgnore" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUserID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetIgnoreActivityFlowResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="InterruptAction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="actionInstanceID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="interruptLevel" type="s0:InterruptLevel" />
+            <s:element minOccurs="1" maxOccurs="1" name="interruptType" type="s0:InterruptType" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="InterruptLevel">
+        <s:restriction base="s:string">
+          <s:enumeration value="ActionInstance" />
+          <s:enumeration value="ActivityModelInstance" />
+          <s:enumeration value="ActivityFlow" />
+        </s:restriction>
+      </s:simpleType>
+      <s:simpleType name="InterruptType">
+        <s:restriction base="s:string">
+          <s:enumeration value="Abort" />
+          <s:enumeration value="Rollback" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="InterruptActionResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetActivityFlowInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="activityFlowID" type="s1:guid" />
+            <s:element minOccurs="1" maxOccurs="1" name="detailLevel" type="s0:ActivityFlowDetailLevel" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="ActivityFlowDetailLevel">
+        <s:restriction base="s:string">
+          <s:enumeration value="ActivityFlowLevel" />
+          <s:enumeration value="ActionInstanceLevel" />
+          <s:enumeration value="TaskLevel" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="GetActivityFlowInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ActivityFlowTrackingInfo" type="s0:ActivityFlow" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActivityFlow">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DetailLevel" type="s0:ActivityFlowDetailLevel" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatInfo" type="s0:ActivityFlowStat" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityFlowID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActivityFlowDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s0:ActivityFlowStatus" />
+          <s:element minOccurs="0" maxOccurs="1" name="RootActionInstances" type="s0:ArrayOfActionInstance" />
+          <s:element minOccurs="0" maxOccurs="1" name="Initiator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Owners" type="s0:ArrayOfString" />
+          <s:element minOccurs="1" maxOccurs="1" name="AllIgnoring" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTimeStamp" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastModifiedTimeStamp" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActivityFlowProperties" type="s0:ArrayOfResourceProperty" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ActivityFlowStat">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="DetailLevel" type="s0:ActivityFlowDetailLevel" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionInstanceCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="AdHocActionInstanceCount" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityModelCount" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastActionName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastActionInitiator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LastActionTargets" type="s0:ArrayOfString" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActivityFlowStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Active" />
+          <s:enumeration value="InActive" />
+          <s:enumeration value="Complete" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfActionInstance">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ActionInstance" nillable="true" type="s0:ActionInstance" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ActionInstance">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityFlowID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionTypeID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionInstanceID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreviousActionInstanceID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="PreviousTaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityModelTypeID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityModelIndex" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityModelInstanceID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActivityModelName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActionInstanceTitle" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Initiator" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsDependent" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s0:ActionStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="EndTime" type="s:dateTime" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tasks" type="s0:ArrayOfTask" />
+          <s:element minOccurs="0" maxOccurs="1" name="ActionProperties" type="s0:ArrayOfResourceProperty" />
+          <s:element minOccurs="0" maxOccurs="1" name="ChildActionInstances" type="s0:ArrayOfActionInstance" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="ActionStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="Start" />
+          <s:enumeration value="PendingSynchronize" />
+          <s:enumeration value="Finish" />
+          <s:enumeration value="Abort" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfTask">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="Task" nillable="true" type="s0:Task" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Task">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Initiator" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Target" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TargetXPath" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskID" type="s1:guid" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskDescription" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityFlowID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActionInstanceID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="TaskTimeStamp" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentStatus" type="s0:TaskStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="CurrentPercentageComplete" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Responses" type="s0:ArrayOfTaskResponse" />
+          <s:element minOccurs="0" maxOccurs="1" name="TargetNamespaceUri" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="TaskProperties" type="s0:ArrayOfResourceProperty" />
+          <s:element minOccurs="1" maxOccurs="1" name="Reassignment" type="s0:Reassignment" />
+        </s:sequence>
+      </s:complexType>
+      <s:simpleType name="TaskStatus">
+        <s:restriction base="s:string">
+          <s:enumeration value="NotStarted" />
+          <s:enumeration value="InProgress" />
+          <s:enumeration value="Completed" />
+          <s:enumeration value="Waiting" />
+          <s:enumeration value="Deferred" />
+          <s:enumeration value="Accepted" />
+          <s:enumeration value="Tentative" />
+          <s:enumeration value="Declined" />
+          <s:enumeration value="Interrupted" />
+          <s:enumeration value="Cancelled" />
+        </s:restriction>
+      </s:simpleType>
+      <s:complexType name="ArrayOfTaskResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="TaskResponse" nillable="true" type="s0:TaskResponse" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="TaskResponse">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="ResponseTimeStamp" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s0:TaskStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="PercentageComplete" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Responder" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ResponseProperties" type="s0:ArrayOfResourceProperty" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ArrayOfResourceProperty">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="ResourceProperty" type="s0:ResourceProperty" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ResourceProperty">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Type" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Value" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="Reassignment">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="PreviousTaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="NextTaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="FirstTaskID" type="s1:guid" />
+          <s:element minOccurs="1" maxOccurs="1" name="LastTaskID" type="s1:guid" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllActivityFlowsForUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="activityFlowFilter" type="s0:ActivityFlowFilter" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ActivityFlowFilter">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StartTimeStart" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTimeEnd" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="ActivityFlowStatus" type="s0:ActivityFlowStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseStatusFilter" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllActivityFlowsForUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="AllActivityFlows" type="s0:ActivityFlow" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActionInstance">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="actionInstanceID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetActionInstanceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ActionInstance" type="s0:ActionInstance" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="taskID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Task" type="s0:Task" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAllTasksForUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskFilter" type="s0:TaskFilter" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="TaskFilter">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" name="StartTimeStart" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="StartTimeEnd" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="taskStatus" type="s0:TaskStatus" />
+          <s:element minOccurs="1" maxOccurs="1" name="UseStatusFilter" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetAllTasksForUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="AllTasks" type="s0:Task" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskMessage">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="taskID" type="s1:guid" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetTaskMessageResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="TaskMessage" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendTaskResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="taskResponse" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="actingUser" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SendTaskResponseResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="UpdateCache">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="level" type="s0:UpdateCacheLevel" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:simpleType name="UpdateCacheLevel">
+        <s:restriction base="s:string">
+          <s:enumeration value="UpdateCacheLevel_All" />
+          <s:enumeration value="UpdateCacheLevel_Actions" />
+          <s:enumeration value="UpdateCacheLevel_ActivityModels" />
+          <s:enumeration value="UpdateCacheLevel_Constraints" />
+        </s:restriction>
+      </s:simpleType>
+      <s:element name="UpdateCacheResponse">
+        <s:complexType />
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://microsoft.com/wsdl/types/">
+      <s:simpleType name="guid">
+        <s:restriction base="s:string">
+          <s:pattern value="[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}" />
+        </s:restriction>
+      </s:simpleType>
+    </s:schema>
+  </types>
+  <message name="GetNewActivityFlowIDSoapIn">
+    <part name="parameters" element="s0:GetNewActivityFlowID" />
+  </message>
+  <message name="GetNewActivityFlowIDSoapOut">
+    <part name="parameters" element="s0:GetNewActivityFlowIDResponse" />
+  </message>
+  <message name="GetActivityListSoapIn">
+    <part name="parameters" element="s0:GetActivityList" />
+  </message>
+  <message name="GetActivityListSoapOut">
+    <part name="parameters" element="s0:GetActivityListResponse" />
+  </message>
+  <message name="GetActionParametersSoapIn">
+    <part name="parameters" element="s0:GetActionParameters" />
+  </message>
+  <message name="GetActionParametersSoapOut">
+    <part name="parameters" element="s0:GetActionParametersResponse" />
+  </message>
+  <message name="GetActivityModelParametersSoapIn">
+    <part name="parameters" element="s0:GetActivityModelParameters" />
+  </message>
+  <message name="GetActivityModelParametersSoapOut">
+    <part name="parameters" element="s0:GetActivityModelParametersResponse" />
+  </message>
+  <message name="GetActionTargetListSoapIn">
+    <part name="parameters" element="s0:GetActionTargetList" />
+  </message>
+  <message name="GetActionTargetListSoapOut">
+    <part name="parameters" element="s0:GetActionTargetListResponse" />
+  </message>
+  <message name="GetActivityModelTargetListsSoapIn">
+    <part name="parameters" element="s0:GetActivityModelTargetLists" />
+  </message>
+  <message name="GetActivityModelTargetListsSoapOut">
+    <part name="parameters" element="s0:GetActivityModelTargetListsResponse" />
+  </message>
+  <message name="CheckConstraintSoapIn">
+    <part name="parameters" element="s0:CheckConstraint" />
+  </message>
+  <message name="CheckConstraintSoapOut">
+    <part name="parameters" element="s0:CheckConstraintResponse" />
+  </message>
+  <message name="AddActionToActivityFlowSoapIn">
+    <part name="parameters" element="s0:AddActionToActivityFlow" />
+  </message>
+  <message name="AddActionToActivityFlowSoapOut">
+    <part name="parameters" element="s0:AddActionToActivityFlowResponse" />
+  </message>
+  <message name="AddActivationBlockToActivityFlowSoapIn">
+    <part name="parameters" element="s0:AddActivationBlockToActivityFlow" />
+  </message>
+  <message name="AddActivationBlockToActivityFlowSoapOut">
+    <part name="parameters" element="s0:AddActivationBlockToActivityFlowResponse" />
+  </message>
+  <message name="SetIgnoreActivityFlowSoapIn">
+    <part name="parameters" element="s0:SetIgnoreActivityFlow" />
+  </message>
+  <message name="SetIgnoreActivityFlowSoapOut">
+    <part name="parameters" element="s0:SetIgnoreActivityFlowResponse" />
+  </message>
+  <message name="InterruptActionSoapIn">
+    <part name="parameters" element="s0:InterruptAction" />
+  </message>
+  <message name="InterruptActionSoapOut">
+    <part name="parameters" element="s0:InterruptActionResponse" />
+  </message>
+  <message name="GetActivityFlowInfoSoapIn">
+    <part name="parameters" element="s0:GetActivityFlowInfo" />
+  </message>
+  <message name="GetActivityFlowInfoSoapOut">
+    <part name="parameters" element="s0:GetActivityFlowInfoResponse" />
+  </message>
+  <message name="GetAllActivityFlowsForUserSoapIn">
+    <part name="parameters" element="s0:GetAllActivityFlowsForUser" />
+  </message>
+  <message name="GetAllActivityFlowsForUserSoapOut">
+    <part name="parameters" element="s0:GetAllActivityFlowsForUserResponse" />
+  </message>
+  <message name="GetActionInstanceSoapIn">
+    <part name="parameters" element="s0:GetActionInstance" />
+  </message>
+  <message name="GetActionInstanceSoapOut">
+    <part name="parameters" element="s0:GetActionInstanceResponse" />
+  </message>
+  <message name="GetTaskInfoSoapIn">
+    <part name="parameters" element="s0:GetTaskInfo" />
+  </message>
+  <message name="GetTaskInfoSoapOut">
+    <part name="parameters" element="s0:GetTaskInfoResponse" />
+  </message>
+  <message name="GetAllTasksForUserSoapIn">
+    <part name="parameters" element="s0:GetAllTasksForUser" />
+  </message>
+  <message name="GetAllTasksForUserSoapOut">
+    <part name="parameters" element="s0:GetAllTasksForUserResponse" />
+  </message>
+  <message name="GetTaskMessageSoapIn">
+    <part name="parameters" element="s0:GetTaskMessage" />
+  </message>
+  <message name="GetTaskMessageSoapOut">
+    <part name="parameters" element="s0:GetTaskMessageResponse" />
+  </message>
+  <message name="SendTaskResponseSoapIn">
+    <part name="parameters" element="s0:SendTaskResponse" />
+  </message>
+  <message name="SendTaskResponseSoapOut">
+    <part name="parameters" element="s0:SendTaskResponseResponse" />
+  </message>
+  <message name="UpdateCacheSoapIn">
+    <part name="parameters" element="s0:UpdateCache" />
+  </message>
+  <message name="UpdateCacheSoapOut">
+    <part name="parameters" element="s0:UpdateCacheResponse" />
+  </message>
+  <portType name="HwsServiceSoap">
+    <operation name="GetNewActivityFlowID">
+      <input message="s0:GetNewActivityFlowIDSoapIn" />
+      <output message="s0:GetNewActivityFlowIDSoapOut" />
+    </operation>
+    <operation name="GetActivityList">
+      <input message="s0:GetActivityListSoapIn" />
+      <output message="s0:GetActivityListSoapOut" />
+    </operation>
+    <operation name="GetActionParameters">
+      <input message="s0:GetActionParametersSoapIn" />
+      <output message="s0:GetActionParametersSoapOut" />
+    </operation>
+    <operation name="GetActivityModelParameters">
+      <input message="s0:GetActivityModelParametersSoapIn" />
+      <output message="s0:GetActivityModelParametersSoapOut" />
+    </operation>
+    <operation name="GetActionTargetList">
+      <input message="s0:GetActionTargetListSoapIn" />
+      <output message="s0:GetActionTargetListSoapOut" />
+    </operation>
+    <operation name="GetActivityModelTargetLists">
+      <input message="s0:GetActivityModelTargetListsSoapIn" />
+      <output message="s0:GetActivityModelTargetListsSoapOut" />
+    </operation>
+    <operation name="CheckConstraint">
+      <input message="s0:CheckConstraintSoapIn" />
+      <output message="s0:CheckConstraintSoapOut" />
+    </operation>
+    <operation name="AddActionToActivityFlow">
+      <input message="s0:AddActionToActivityFlowSoapIn" />
+      <output message="s0:AddActionToActivityFlowSoapOut" />
+    </operation>
+    <operation name="AddActivationBlockToActivityFlow">
+      <input message="s0:AddActivationBlockToActivityFlowSoapIn" />
+      <output message="s0:AddActivationBlockToActivityFlowSoapOut" />
+    </operation>
+    <operation name="SetIgnoreActivityFlow">
+      <input message="s0:SetIgnoreActivityFlowSoapIn" />
+      <output message="s0:SetIgnoreActivityFlowSoapOut" />
+    </operation>
+    <operation name="InterruptAction">
+      <input message="s0:InterruptActionSoapIn" />
+      <output message="s0:InterruptActionSoapOut" />
+    </operation>
+    <operation name="GetActivityFlowInfo">
+      <input message="s0:GetActivityFlowInfoSoapIn" />
+      <output message="s0:GetActivityFlowInfoSoapOut" />
+    </operation>
+    <operation name="GetAllActivityFlowsForUser">
+      <input message="s0:GetAllActivityFlowsForUserSoapIn" />
+      <output message="s0:GetAllActivityFlowsForUserSoapOut" />
+    </operation>
+    <operation name="GetActionInstance">
+      <input message="s0:GetActionInstanceSoapIn" />
+      <output message="s0:GetActionInstanceSoapOut" />
+    </operation>
+    <operation name="GetTaskInfo">
+      <input message="s0:GetTaskInfoSoapIn" />
+      <output message="s0:GetTaskInfoSoapOut" />
+    </operation>
+    <operation name="GetAllTasksForUser">
+      <input message="s0:GetAllTasksForUserSoapIn" />
+      <output message="s0:GetAllTasksForUserSoapOut" />
+    </operation>
+    <operation name="GetTaskMessage">
+      <input message="s0:GetTaskMessageSoapIn" />
+      <output message="s0:GetTaskMessageSoapOut" />
+    </operation>
+    <operation name="SendTaskResponse">
+      <input message="s0:SendTaskResponseSoapIn" />
+      <output message="s0:SendTaskResponseSoapOut" />
+    </operation>
+    <operation name="UpdateCache">
+      <input message="s0:UpdateCacheSoapIn" />
+      <output message="s0:UpdateCacheSoapOut" />
+    </operation>
+  </portType>
+  <binding name="HwsServiceSoap" type="s0:HwsServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <operation name="GetNewActivityFlowID">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetNewActivityFlowID" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetActivityList">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetActivityList" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetActionParameters">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetActionParameters" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetActivityModelParameters">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetActivityModelParameters" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetActionTargetList">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetActionTargetList" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetActivityModelTargetLists">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetActivityModelTargetLists" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="CheckConstraint">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/CheckConstraint" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="AddActionToActivityFlow">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/AddActionToActivityFlow" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="AddActivationBlockToActivityFlow">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/AddActivationBlockToActivityFlow" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="SetIgnoreActivityFlow">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/SetIgnoreActivityFlow" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="InterruptAction">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/InterruptAction" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetActivityFlowInfo">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetActivityFlowInfo" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetAllActivityFlowsForUser">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetAllActivityFlowsForUser" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetActionInstance">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetActionInstance" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetTaskInfo">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetTaskInfo" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetAllTasksForUser">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetAllTasksForUser" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="GetTaskMessage">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/GetTaskMessage" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="SendTaskResponse">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/SendTaskResponse" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+    <operation name="UpdateCache">
+      <soap:operation soapAction="http://microsoft.com/Biztalk2004/Hws/Hwsservice/UpdateCache" style="document" />
+      <input>
+        <soap:body use="literal" />
+      </input>
+      <output>
+        <soap:body use="literal" />
+      </output>
+    </operation>
+  </binding>
+  <service name="HwsService">
+    <port name="HwsServiceSoap" binding="s0:HwsServiceSoap">
+      <soap:address location="http://localhost/HwsService/HwsService.asmx" />
+    </port>
+  </service>
+</definitions>

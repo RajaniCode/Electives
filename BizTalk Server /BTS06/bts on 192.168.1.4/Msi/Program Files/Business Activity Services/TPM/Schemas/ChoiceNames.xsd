@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:element name="ChoiceNames" type="ChoiceNamesType" />
+	<xs:complexType name="ChoiceNamesType">
+		<xs:sequence>
+			<xs:element name="ChoiceName" type="ChoiceNameType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ChoiceNameType">
+		<xs:restriction base="xs:token">
+			<xs:minLength value="1" />
+			<xs:maxLength value="64" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

@@ -1,0 +1,48 @@
+﻿<Window x:Class="WPF_DaatGridEvents.MainWindow_DataGrid_Operations"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow_DataGrid_Operations" Height="447" Width="909"
+         Loaded="Window_Loaded">    
+<Grid>
+    <DataGrid AutoGenerateColumns="False" Height="226" 
+          HorizontalAlignment="Left" Margin="106,111,0,0" 
+          Name="dgEmp" VerticalAlignment="Top" Width="684" ColumnWidth="*"
+          RowEditEnding="dgEmp_RowEditEnding"  CellEditEnding="dgEmp_CellEditEnding"
+          SelectionChanged="dgEmp_SelectionChanged" >
+        <DataGrid.Columns>
+            <DataGridTextColumn Binding="{Binding EmpNo}" Header="EmpNo" 
+                      IsReadOnly="True" x:Name="dgrEmpNo">                
+            </DataGridTextColumn>
+            <DataGridTextColumn Binding="{Binding EmpName}" Header="EmpName" 
+                      IsReadOnly="True" x:Name="dgrEmpName">                
+            </DataGridTextColumn>
+            <DataGridTextColumn Binding="{Binding Salary, Mode=TwoWay}" 
+                      Header="Salary" x:Name="dgrSalary" IsReadOnly="True">                
+            </DataGridTextColumn>
+            <DataGridTextColumn Binding="{Binding DeptNo, Mode=TwoWay}" 
+                      Header="DeptNo" x:Name="dgrDeptNo" IsReadOnly="True">                
+            </DataGridTextColumn>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="Update" x:Name="btnUpdate" 
+                                Click="btnUpdate_Click"></Button>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+            <DataGridTemplateColumn>
+                <DataGridTemplateColumn.CellTemplate>
+                    <DataTemplate>
+                        <Button Content="Delete" x:Name="btnDelete" 
+                                Click="btnDelete_Click"></Button>
+                    </DataTemplate>
+                </DataGridTemplateColumn.CellTemplate>
+            </DataGridTemplateColumn>
+        </DataGrid.Columns>
+    </DataGrid>
+    <TextBlock Height="55" HorizontalAlignment="Left" Margin="106,29,0,0" 
+               Name="textBlock1" VerticalAlignment="Top" Width="693"
+                Text="WPF DataGrid for Update and Delete Operations"                
+                TextAlignment="Center" FontFamily="Verdana" FontSize="28" />
+</Grid>
+</Window>

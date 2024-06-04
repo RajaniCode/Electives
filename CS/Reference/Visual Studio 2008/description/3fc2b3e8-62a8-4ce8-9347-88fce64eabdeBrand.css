@@ -1,0 +1,282 @@
+﻿/*Global*/
+h1 {
+    font-size: 36px;
+    font-family: 'Segoe UI Light';
+    color: #707070;
+    font-weight: normal;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: 'Segoe UI', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif !important;
+    color:#707070 !important;
+    font-weight:normal;
+}
+
+a, a:link, a:visited {
+    color: #0095c4;
+}
+
+body {
+    color:#707070;
+}
+
+.profile-usercard {
+    color:#707070 !important;
+}
+
+/*temporary setting to override msdn_windows.css
+can remove once conflicting settings are removed from that file*/
+
+
+.LocalNavigation, .LocalNavigation .TabOn, .LocalNavigation .TabOn:hover, .LocalNavigation .TabOff, .LocalNavigation .TabOff a:hover {
+    display: block;
+    background-color:transparent !important;
+    color: #0095c4;
+}
+
+.LocalNavigation .TabOff a {
+color:#707070 ;
+}
+
+/*End Global*/
+
+
+.subMenu > h2
+{
+    font-family: 'Segoe UI Light','Segoe UI', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif !important;
+    font-weight:normal;
+    font-size:30px;
+    margin: 15px 10px 5px 0;
+    padding-bottom:0px;
+}
+
+.itemRow {
+}
+    .itemRow .itemTitle {
+    font-weight: normal;
+    }
+    #MainContent a.officialMicrosoftLabel
+    {
+        color: #ACACAC;
+    }
+.tabHeaders {
+    color:#707070; 
+    overflow:hidden;
+    border-bottom:1px solid #707070;
+}
+
+    .tabHeaders div, .tabHeaders div+div {
+        background: white;
+        font-weight:normal;
+        margin: 0 0 0 0;
+    }
+
+    .tabHeaders div.current {
+        background: #F8F8F8;
+        color:#707070;
+        cursor: default;
+        font-weight:bold;
+        border:1px solid #707070;
+        border-bottom-width:0px;
+    }
+
+.tabContents {
+    border-top-width:0px;
+}
+   
+#UploadPage {
+    margin: 0px 0px 0px 10px;
+}
+    #UploadPage h1 {
+        padding: 0;
+        font-size: 22px;
+    }
+    #UploadPage h2 {
+        color:#F39700 !important;
+    }
+
+    #UploadPage #uploadPageInstruction {
+        margin-top:10px;
+    }
+        
+    #UploadPage fieldset {
+        margin-left:0px;
+    }
+
+    #UploadPage fieldset h2 {
+        font-weight:normal;
+    }
+
+    #UploadPage fieldset#uploadsForm{
+        margin-top:25px;
+    }
+    
+    #UploadPage fieldset#summary textarea {
+        margin-left:0px;
+    }
+
+
+#sideNav {
+}
+
+    #sideNav .section
+    {
+        margin-top: 10px;
+    }
+
+    #sideNav .section h3 {
+        background-color: transparent;
+
+    }
+
+    #sideNav .section UL LI {
+        border-bottom-width: 0px;
+    }
+
+    #sideNav .section form > div {
+        border-bottom: none;
+        color: #707070;
+    }
+        #sideNav .section ul li > div.itemCount
+        {
+            color: #707070;
+        }
+
+
+#searchPage {
+}
+
+    #searchPage h2, #searchPage h3 {
+        text-transform:none;
+        background-color:transparent;
+        font-weight:normal;
+        font-size:1.2em;
+    }
+
+    #searchPage .browseFilterBar {
+        background-color:transparent;
+        border-width:0px;
+        font-weight:normal;
+    }
+
+#requestsPage {
+    padding-top:15px;
+}
+    #requestsPage .tabHeaders {
+        overflow: visible;
+        border-bottom: none;
+    }
+
+    #requestsPage #requestsList {
+        border: none;
+    }
+
+    #requestsPage #requestsFilterBar {
+        border-bottom: 1px solid #707070;
+    }
+
+    #requestsPage h2, #requestsPage h3 {
+        text-transform:none;
+        background-color:transparent;
+        font-weight:normal;
+        font-size:1.2em;
+    }
+
+#extraActions {
+}
+    #extraActions .section
+    {
+        margin-bottom: 10px;
+    }
+    #extraActions .section a
+    {
+        font-weight:normal;
+    }
+
+    #extraActions #contributeSection div img {
+        width:0px;
+    }
+
+.Rating {
+}
+
+    .Rating .FilledRatingStar
+    {
+        background: url(../WindowsM/fullStar.png) no-repeat;
+        width: 8px;
+        height: 20px;
+        padding: 0 8px 0 0;
+
+    }
+
+    .Rating .FilledRatingStarHover
+    {
+        background: url(../WindowsM/fullStarHover.png) no-repeat;
+        width: 8px;
+        height: 20px;
+        padding: 0 8px 0 0;
+    }
+
+    .Rating .HalfRatingStar
+    {
+        background: url(../WindowsM/halfStar.png) no-repeat;
+        width: 8px;
+        height: 20px;
+        padding: 0 8px 0 0;
+    }
+
+    .Rating .EmptyRatingStar
+    {
+        background: url(../WindowsM/emptyStar.png) no-repeat;
+        width: 8px;
+        height: 20px;
+        padding: 0 8px 0 0;
+    }
+
+#projectPage {
+}
+
+    #projectPage .projectTitle {
+        color: #707070;
+        margin: 5px 0px 15px 0px;
+    }
+
+    #projectPage #Downloads, #projectPage #publishBar {
+        border: 1px solid #707070;
+        color: #707070;
+        background-color: #F8F8F8;
+    }
+
+    #projectPage #publishBar a, #projectPage #publishBar a:visited {
+        color: #0095c4;
+        font-weight: normal;
+    }
+
+    #projectPage #Collections .bevelButton{
+        background-color: #F8F8F8;
+        color: #0095C4;
+        border: 1px solid #707070;
+    }
+
+    #projectPage #DiscussionsTabPane .threadHeader .title {
+        font-weight:bold !important;
+        color:Black !important;#F8F8F8;
+        font-family: 'Segoe UI', 'Lucida Grande', Verdana, Arial, Helvetica, sans-serif !important;
+    }
+
+    #projectPage .sidebar .section .titleBar h3 {
+        font-weight:normal;
+        font-size:1.2em;
+    }
+
+#LocalNav {
+}
+
+    #LocalNav.HeaderTabs {
+        margin-left:11px;
+    }
+
+    
+

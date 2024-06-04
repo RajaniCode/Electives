@@ -1,0 +1,118 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1377"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{588E59F1-D292-4553-B58B-8655A2D2C7A7}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\..\Microsoft.Samples.BizTalk.SouthridgeVideo.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft BizTalk (TM) Server 2006"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright (c) Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderStage2"
+                    AssemblyName = "Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderStage2"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "BTSScn.BPM.CableOrderApp"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "3"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = "BTSScn.BPM.CableOrderApp"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "3"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "CableProvisioningSystemClient"
+                    Project = "{DF99B851-9B7A-4204-91C4-398CCE55F860}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "Schemas"
+                    Project = "{0C4BE102-D0AF-4AB6-95A4-EC306CE611A3}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "CableOrderActions"
+                    Project = "{131D26A3-E7E9-415D-908A-4671A83CE9D7}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "OrderManager"
+                    Project = "{2DDB64EF-DBFA-492F-BF8A-F91E6409CCC5}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                />
+                <Reference
+                    Name = "Utilities"
+                    Project = "{19F878AA-6D7E-4487-BCF5-AFD6AA368C73}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "SchemaClasses"
+                    Project = "{86A44396-2248-4B14-83DC-00EFF2A5B244}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "IOrderHandler"
+                    Project = "{7B018FE9-9DA1-43FB-BE10-6BFF243ABF2E}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+                <Reference
+                    Name = "ServiceLevelTracking"
+                    Project = "{D9D576AF-CE23-42E2-A561-874BE8C46A67}"
+                    Package = "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "CableOrder2.odx"
+                    BuildAction = "Compile"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<SSO>
+  <application name="SSOApp1">
+    <description>An Individual Type Affiliate Application for both Host Initiated SSO and Windows Initiated SSO</description>
+    <contact>someone@companyname.com</contact>
+    <appUserAccount>DomainName\AppUserGroup</appUserAccount>
+    <appAdminAccount>DomainName\AppAdminGroup</appAdminAccount>
+    <field ordinal="0" label="User ID" masked="no" />
+    <field ordinal="1" label="Password" masked="yes" />
+    <flags hostInitiatedSSO="yes" validatePassword="yes" windowsInitiatedSSO="yes" enableApp="yes" />
+  </application>
+</SSO>

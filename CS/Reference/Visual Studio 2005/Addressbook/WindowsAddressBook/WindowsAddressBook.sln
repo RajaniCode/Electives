@@ -1,0 +1,37 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WindowsAddressBook", "WindowsAddressBook.csproj", "{D7DCA454-C0B8-40E6-8028-FD096A5A86CA}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookBO", "..\AddressBookBO\AddressBookBO.csproj", "{D16C8BAF-6282-4123-A456-E034FE1AC47E}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AddressBookDB", "..\AddressBookDatabase\AddressBookDB.csproj", "{7F642840-144E-4D09-87DD-98404A0A7991}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{D7DCA454-C0B8-40E6-8028-FD096A5A86CA}.Debug.ActiveCfg = Debug|.NET
+		{D7DCA454-C0B8-40E6-8028-FD096A5A86CA}.Debug.Build.0 = Debug|.NET
+		{D7DCA454-C0B8-40E6-8028-FD096A5A86CA}.Release.ActiveCfg = Release|.NET
+		{D7DCA454-C0B8-40E6-8028-FD096A5A86CA}.Release.Build.0 = Release|.NET
+		{D16C8BAF-6282-4123-A456-E034FE1AC47E}.Debug.ActiveCfg = Debug|.NET
+		{D16C8BAF-6282-4123-A456-E034FE1AC47E}.Debug.Build.0 = Debug|.NET
+		{D16C8BAF-6282-4123-A456-E034FE1AC47E}.Release.ActiveCfg = Release|.NET
+		{D16C8BAF-6282-4123-A456-E034FE1AC47E}.Release.Build.0 = Release|.NET
+		{7F642840-144E-4D09-87DD-98404A0A7991}.Debug.ActiveCfg = Debug|.NET
+		{7F642840-144E-4D09-87DD-98404A0A7991}.Debug.Build.0 = Debug|.NET
+		{7F642840-144E-4D09-87DD-98404A0A7991}.Release.ActiveCfg = Release|.NET
+		{7F642840-144E-4D09-87DD-98404A0A7991}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

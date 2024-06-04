@@ -1,0 +1,57 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Calendar Updation</title>
+       <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+   </head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+    <div id="header">
+                <h1>
+                    ASP.NET 4.0 Black Book
+                </h1>
+            </div>
+            <div id="sidebar">
+                <div id="nav">
+               &nbsp;<br />                
+			<br />
+
+                </div>
+            </div>
+            <div id="content">
+                <div class ="itemContent">
+                   <strong><em>Calendar<br />
+                        <asp:Calendar ID="Calendar1" runat="server" BackColor="White" 
+             			BorderColor="Black"
+            			Font-Names="Verdana" Font-Size="9pt" ForeColor="Black" Height="250px" 
+             			NextPrevFormat="ShortMonth"
+            			Width="220px" BorderStyle="Solid" CellSpacing="1">
+            			<SelectedDayStyle BackColor="#333399" ForeColor="White" />
+            			<TodayDayStyle BackColor="#999999" ForeColor="White" />
+            			<DayStyle BackColor="#CCCCCC" />
+            			<OtherMonthDayStyle ForeColor="#999999" />
+            			<NextPrevStyle Font-Size="8pt" ForeColor="White" Font-Bold="True" />
+            			<DayHeaderStyle Font-Bold="True" Font-Size="8pt" ForeColor="#333333" 
+             			Height="7pt" />
+                        <TitleStyle BackColor="#333399" Font-Bold="True" Font-Size="12pt" 
+             			ForeColor="White"
+            			Height="12pt" BorderStyle="Solid" />
+                        </asp:Calendar>
+			</em></strong>
+			<br />
+        <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>  </div> 
+     <div id="footer">
+                    <p class="left">
+                        All content copyright &copy; Kogent Solutions Inc.</p>
+                
+         </div></div>
+    </form>
+</body>
+</html>

@@ -1,0 +1,20 @@
+How to: Sign an Assembly with a Strong Name
+
+The Windows Software Development Kit (SDK) provides several ways to sign an assembly with a strong name:
+Using the Assembly Linker (Al.exe) provided by the Windows SDK.
+
+Using assembly attributes to insert the strong name information in your code. You can use either the AssemblyKeyFileAttribute or the AssemblyKeyNameAttribute, depending on where the key file to be used is located.
+
+To create and sign an assembly with a strong name using the Assembly Linker
+
+At the command prompt, type the following command:
+al /out:<assembly name> <module name> /keyfile:<file name>
+
+In this command, assembly name is the name of the assembly to sign with a strong name, module name is the name of the code module used to create the assembly, and file name is the name of the container or file that contains the key pair. 
+
+
+The following example signs the assembly MyAssembly.dll with a strong name using the key file sgKey.snk.
+
+al /out:MyAssembly.dll MyModule.netmodule /keyfile:sgKey.snk
+
+

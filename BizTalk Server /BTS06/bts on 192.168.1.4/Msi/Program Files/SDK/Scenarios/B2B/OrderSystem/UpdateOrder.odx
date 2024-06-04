@@ -1,0 +1,361 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="fa061eab-ee6c-4dc6-adfb-6e9fd4c1380e" LowerBound="1.1" HigherBound="89.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.Litware.OrderSystem" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="ServiceDeclaration" OID="ae0f235d-8f9d-4e90-aba3-c911c9b39868" ParentLink="Module_ServiceDeclaration" LowerBound="11.1" HigherBound="88.1">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="UpdateOrder" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="VariableDeclaration" OID="be401657-76a6-431d-839b-017a53885aee" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="20.1" HigherBound="21.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="orderID" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="c5f2663d-b3d7-48a5-8c76-f75197f7c808" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="21.1" HigherBound="22.1">
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.String" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="partnerID" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="VariableDeclaration" OID="bd1917e0-b3af-4925-ab04-ba395085f822" ParentLink="ServiceDeclaration_VariableDeclaration" LowerBound="22.1" HigherBound="23.1">
+                <om:Property Name="InitialValue" Value="true" />
+                <om:Property Name="UseDefaultConstructor" Value="False" />
+                <om:Property Name="Type" Value="System.Boolean" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="result" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="1e8b33a1-b00a-4f64-b8dd-7b49fa19e381" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="16.1" HigherBound="17.1">
+                <om:Property Name="Type" Value="Microsoft.Samples.BizTalk.Litware.Schemas.Order.PurchaseOrder" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="OrderMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="398303ca-54c8-4a50-8f2a-b2568d74c6b2" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="17.1" HigherBound="18.1">
+                <om:Property Name="Type" Value="Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.OrderAck" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="OrderAckMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="7d3e5340-b0d8-4da9-9801-eb0ef5e2b1c8" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="18.1" HigherBound="19.1">
+                <om:Property Name="Type" Value="Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.BusinessFaultMessage" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="BusinessFaultMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="8a8189fe-9815-42be-9667-57eeeed8bb69" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="19.1" HigherBound="20.1">
+                <om:Property Name="Type" Value="Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.SystemFaultMessage" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SystemFaultMessage" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="ServiceBody" OID="a39bf24d-dadd-411b-9735-2732c9a36242" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="00cc46d1-649f-414c-86e2-9d341f05ad1b" ParentLink="ServiceBody_Statement" LowerBound="25.1" HigherBound="30.1">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="RecvPOUpdatePort" />
+                    <om:Property Name="MessageName" Value="OrderMessage" />
+                    <om:Property Name="OperationName" Value="RecvPOUpdateOp" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Recv PO Chg" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="Scope" OID="35af0db4-a515-4736-a7e7-5a88a691f5bc" ParentLink="ServiceBody_Statement" LowerBound="30.1" HigherBound="76.1">
+                    <om:Property Name="InitializedTransactionType" Value="True" />
+                    <om:Property Name="IsSynchronized" Value="False" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="DBScope" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="VariableAssignment" OID="1730debd-5558-4dc7-909a-8fc85ca3d7f1" ParentLink="ComplexStatement_Statement" LowerBound="35.1" HigherBound="39.1">
+                        <om:Property Name="Expression" Value="orderID = OrderMessage(Microsoft.Samples.BizTalk.Litware.Schemas.OrderGroupID);&#xD;&#xA;partnerID = OrderMessage(Microsoft.Samples.BizTalk.Litware.Schemas.SoldToName);&#xD;&#xA;result = Microsoft.Samples.BizTalk.Litware.Utilities.DBHelper.UpdateOrder(partnerID, orderID, OrderMessage);" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Update Order" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                    <om:Element Type="Catch" OID="bfdb11d5-8db2-4f22-b6d0-3a435480ea02" ParentLink="Scope_Catch" LowerBound="42.1" HigherBound="58.1">
+                        <om:Property Name="ExceptionName" Value="appExp" />
+                        <om:Property Name="ExceptionType" Value="System.ApplicationException" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="CatchBusinessException" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Construct" OID="0e7eecde-0bd5-4ff4-be1a-5040be8f89cf" ParentLink="Catch_Statement" LowerBound="45.1" HigherBound="53.1">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="OrderFaultMessage" />
+                            <om:Property Name="Signal" Value="True" />
+                            <om:Element Type="MessageRef" OID="ba2ed4f5-a0b9-4ff9-a169-d91a7fb3a538" ParentLink="Construct_MessageRef" LowerBound="46.35" HigherBound="46.55">
+                                <om:Property Name="Ref" Value="BusinessFaultMessage" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="MessageAssignment" OID="4a4b4c7a-1623-4a1b-ba1b-f52a908b43cc" ParentLink="ComplexStatement_Statement" LowerBound="48.1" HigherBound="52.1">
+                                <om:Property Name="Expression" Value="BusinessFaultMessage = Microsoft.Samples.BizTalk.Litware.Utilities.ResourceHelper.GetEmptyBusinessFault();&#xD;&#xA;BusinessFaultMessage.Message = appExp.Message;&#xD;&#xA;BusinessFaultMessage.Trace = appExp.StackTrace;" />
+                                <om:Property Name="ReportToAnalyst" Value="False" />
+                                <om:Property Name="Name" Value="Order Fault Assignment" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Send" OID="3f37ee4b-04a9-42db-87f9-b70ddfce7754" ParentLink="Catch_Statement" LowerBound="53.1" HigherBound="55.1">
+                            <om:Property Name="PortName" Value="RecvPOUpdatePort" />
+                            <om:Property Name="MessageName" Value="BusinessFaultMessage" />
+                            <om:Property Name="OperationName" Value="RecvPOUpdateOp" />
+                            <om:Property Name="OperationMessageName" Value="BusinessFault" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Send Business Fault" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="Terminate" OID="e3597ff1-6cb2-4620-ab4b-5c6e4f9e8492" ParentLink="Catch_Statement" LowerBound="55.1" HigherBound="57.1">
+                            <om:Property Name="ErrorMessage" Value="appExp.Message;" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="End Orch" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="Catch" OID="16b0c33c-7154-4298-9298-ae1a3cab2999" ParentLink="Scope_Catch" LowerBound="58.1" HigherBound="74.1">
+                        <om:Property Name="ExceptionName" Value="e" />
+                        <om:Property Name="ExceptionType" Value="System.Exception" />
+                        <om:Property Name="IsFaultMessage" Value="False" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="CatchSystemException" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="Construct" OID="66f1a824-15e5-419e-ab47-6bce3be018c8" ParentLink="Catch_Statement" LowerBound="61.1" HigherBound="69.1">
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="OrderFaultMessage" />
+                            <om:Property Name="Signal" Value="True" />
+                            <om:Element Type="MessageRef" OID="1726cf5f-6ae5-4555-b151-2c727f46fec0" ParentLink="Construct_MessageRef" LowerBound="62.35" HigherBound="62.53">
+                                <om:Property Name="Ref" Value="SystemFaultMessage" />
+                                <om:Property Name="ReportToAnalyst" Value="True" />
+                                <om:Property Name="Signal" Value="False" />
+                            </om:Element>
+                            <om:Element Type="MessageAssignment" OID="df35183c-89c7-4be6-ad49-ea62db3aec1c" ParentLink="ComplexStatement_Statement" LowerBound="64.1" HigherBound="68.1">
+                                <om:Property Name="Expression" Value="SystemFaultMessage = Microsoft.Samples.BizTalk.Litware.Utilities.ResourceHelper.GetEmptySystemFault();&#xD;&#xA;SystemFaultMessage.Message = e.Message;&#xD;&#xA;SystemFaultMessage.Trace = e.StackTrace;" />
+                                <om:Property Name="ReportToAnalyst" Value="False" />
+                                <om:Property Name="Name" Value="Order Fault Assignment" />
+                                <om:Property Name="Signal" Value="True" />
+                            </om:Element>
+                        </om:Element>
+                        <om:Element Type="Send" OID="ea5a4bf2-2627-4149-939d-c0243d173ee8" ParentLink="Catch_Statement" LowerBound="69.1" HigherBound="71.1">
+                            <om:Property Name="PortName" Value="RecvPOUpdatePort" />
+                            <om:Property Name="MessageName" Value="SystemFaultMessage" />
+                            <om:Property Name="OperationName" Value="RecvPOUpdateOp" />
+                            <om:Property Name="OperationMessageName" Value="SystemFault" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="Send System Fault" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                        <om:Element Type="Terminate" OID="f4d5a493-ad75-4b2e-8bf4-f855ba9123fd" ParentLink="Catch_Statement" LowerBound="71.1" HigherBound="73.1">
+                            <om:Property Name="ErrorMessage" Value="e.Message;" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="End Orch" />
+                            <om:Property Name="Signal" Value="True" />
+                        </om:Element>
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="Construct" OID="104365bc-cd78-4f91-87ee-118efe05b69a" ParentLink="ServiceBody_Statement" LowerBound="76.1" HigherBound="84.1">
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Construct Ack" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="Transform" OID="0a217811-7ea7-4caa-b1af-6df77de7c65a" ParentLink="ComplexStatement_Statement" LowerBound="79.1" HigherBound="81.1">
+                        <om:Property Name="ClassName" Value="Microsoft.Samples.BizTalk.Litware.Maps.PurchaseOrder_To_OrderAck" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="PO X Ack" />
+                        <om:Property Name="Signal" Value="True" />
+                        <om:Element Type="MessagePartRef" OID="c979889d-0c73-4c10-a256-2efd2b91d2b5" ParentLink="Transform_InputMessagePartRef" LowerBound="80.114" HigherBound="80.126">
+                            <om:Property Name="MessageRef" Value="OrderMessage" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_1" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="MessagePartRef" OID="ca01f484-f593-465e-884a-6f2c70dd4d1e" ParentLink="Transform_OutputMessagePartRef" LowerBound="80.28" HigherBound="80.43">
+                            <om:Property Name="MessageRef" Value="OrderAckMessage" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_2" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="MessageAssignment" OID="5d0d8cfe-f2fd-4844-a3ba-f0aca2cee974" ParentLink="ComplexStatement_Statement" LowerBound="81.1" HigherBound="83.1">
+                        <om:Property Name="Expression" Value="OrderAckMessage.Response.Result = result;" />
+                        <om:Property Name="ReportToAnalyst" Value="False" />
+                        <om:Property Name="Name" Value="Set Result" />
+                        <om:Property Name="Signal" Value="True" />
+                    </om:Element>
+                    <om:Element Type="MessageRef" OID="f600ea30-f976-4bfc-91ec-daa06e94de88" ParentLink="Construct_MessageRef" LowerBound="77.23" HigherBound="77.38">
+                        <om:Property Name="Ref" Value="OrderAckMessage" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="Send" OID="466d1222-8d2a-4098-9fb0-eeaf6694e9d4" ParentLink="ServiceBody_Statement" LowerBound="84.1" HigherBound="86.1">
+                    <om:Property Name="PortName" Value="RecvPOUpdatePort" />
+                    <om:Property Name="MessageName" Value="OrderAckMessage" />
+                    <om:Property Name="OperationName" Value="RecvPOUpdateOp" />
+                    <om:Property Name="OperationMessageName" Value="Response" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="SendUpdate" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="6598f366-cd08-4af4-83ce-f8b436a27cdd" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="14.1" HigherBound="16.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="-1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Microsoft.Samples.BizTalk.Litware.OrderSystem.RecvPOUpdatePortType" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="RecvPOUpdatePort" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="LogicalBindingAttribute" OID="b54c9ac5-57c5-44a1-a135-a5d0538121c7" ParentLink="PortDeclaration_CLRAttribute" LowerBound="14.1" HigherBound="15.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="cded0c27-c078-4198-a2f2-a14326ea055e" ParentLink="Module_PortType" LowerBound="4.1" HigherBound="11.1">
+            <om:Property Name="Synchronous" Value="True" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="RecvPOUpdatePortType" />
+            <om:Property Name="Signal" Value="True" />
+            <om:Element Type="OperationDeclaration" OID="5e315c09-ffad-467d-9c09-6549680242f0" ParentLink="PortType_OperationDeclaration" LowerBound="6.1" HigherBound="10.1">
+                <om:Property Name="OperationType" Value="RequestResponse" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="RecvPOUpdateOp" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="MessageRef" OID="47bbb8bd-aee7-495d-964b-a03b8fda0552" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="8.13" HigherBound="8.75">
+                    <om:Property Name="Ref" Value="Microsoft.Samples.BizTalk.Litware.Schemas.Order.PurchaseOrder" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="MessageRef" OID="696b0ad0-a3c8-48fb-8f40-15eada6dd4e2" ParentLink="OperationDeclaration_ResponseMessageRef" LowerBound="8.77" HigherBound="8.140">
+                    <om:Property Name="Ref" Value="Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.OrderAck" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Response" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="MessageRef" OID="1f7a15e9-af27-4109-8500-62c69fdbbd0b" ParentLink="OperationDeclaration_FaultMessageRef" LowerBound="8.142" HigherBound="8.233">
+                    <om:Property Name="Ref" Value="Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.BusinessFaultMessage" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="BusinessFault" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="MessageRef" OID="06c3f057-b0ac-4e25-90cf-38a2cea6b536" ParentLink="OperationDeclaration_FaultMessageRef" LowerBound="8.235" HigherBound="8.322">
+                    <om:Property Name="Ref" Value="Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.SystemFaultMessage" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="SystemFault" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+module Microsoft.Samples.BizTalk.Litware.OrderSystem
+{
+    internal porttype RecvPOUpdatePortType
+    {
+        requestresponse RecvPOUpdateOp
+        {
+            Microsoft.Samples.BizTalk.Litware.Schemas.Order.PurchaseOrder, Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.OrderAck, BusinessFault = Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.BusinessFaultMessage, SystemFault = Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.SystemFaultMessage
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service UpdateOrder
+    {
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port implements RecvPOUpdatePortType RecvPOUpdatePort;
+        message Microsoft.Samples.BizTalk.Litware.Schemas.Order.PurchaseOrder OrderMessage;
+        message Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.OrderAck OrderAckMessage;
+        message Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.BusinessFaultMessage BusinessFaultMessage;
+        message Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem.SystemFaultMessage SystemFaultMessage;
+        System.String orderID;
+        System.String partnerID;
+        System.Boolean result;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("00cc46d1-649f-414c-86e2-9d341f05ad1b")]
+            activate receive (RecvPOUpdatePort.RecvPOUpdateOp, OrderMessage);
+            orderID = "";
+            partnerID = "";
+            result = true;
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("35af0db4-a515-4736-a7e7-5a88a691f5bc")]
+            scope
+            {
+                body
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("1730debd-5558-4dc7-909a-8fc85ca3d7f1")]
+                    orderID = OrderMessage(Microsoft.Samples.BizTalk.Litware.Schemas.OrderGroupID);
+                    partnerID = OrderMessage(Microsoft.Samples.BizTalk.Litware.Schemas.SoldToName);
+                    result = Microsoft.Samples.BizTalk.Litware.Utilities.DBHelper.UpdateOrder(partnerID, orderID, OrderMessage);
+                }
+                exceptions
+                {
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("bfdb11d5-8db2-4f22-b6d0-3a435480ea02")]
+                    catch (System.ApplicationException appExp)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("0e7eecde-0bd5-4ff4-be1a-5040be8f89cf")]
+                        construct BusinessFaultMessage
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("4a4b4c7a-1623-4a1b-ba1b-f52a908b43cc")]
+                            BusinessFaultMessage = Microsoft.Samples.BizTalk.Litware.Utilities.ResourceHelper.GetEmptyBusinessFault();
+                            BusinessFaultMessage.Message = appExp.Message;
+                            BusinessFaultMessage.Trace = appExp.StackTrace;
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("3f37ee4b-04a9-42db-87f9-b70ddfce7754")]
+                        send (RecvPOUpdatePort.RecvPOUpdateOp.BusinessFault, BusinessFaultMessage);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("e3597ff1-6cb2-4620-ab4b-5c6e4f9e8492")]
+                        terminate appExp.Message;;
+                    }
+                    [Microsoft.XLANGs.BaseTypes.DesignerPosition("16b0c33c-7154-4298-9298-ae1a3cab2999")]
+                    catch (System.Exception e)
+                    {
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("66f1a824-15e5-419e-ab47-6bce3be018c8")]
+                        construct SystemFaultMessage
+                        {
+                            [Microsoft.XLANGs.BaseTypes.DesignerPosition("df35183c-89c7-4be6-ad49-ea62db3aec1c")]
+                            SystemFaultMessage = Microsoft.Samples.BizTalk.Litware.Utilities.ResourceHelper.GetEmptySystemFault();
+                            SystemFaultMessage.Message = e.Message;
+                            SystemFaultMessage.Trace = e.StackTrace;
+                        }
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("ea5a4bf2-2627-4149-939d-c0243d173ee8")]
+                        send (RecvPOUpdatePort.RecvPOUpdateOp.SystemFault, SystemFaultMessage);
+                        [Microsoft.XLANGs.BaseTypes.DesignerPosition("f4d5a493-ad75-4b2e-8bf4-f855ba9123fd")]
+                        terminate e.Message;;
+                    }
+                }
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("104365bc-cd78-4f91-87ee-118efe05b69a")]
+            construct OrderAckMessage
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("0a217811-7ea7-4caa-b1af-6df77de7c65a")]
+                transform (OrderAckMessage) = Microsoft.Samples.BizTalk.Litware.Maps.PurchaseOrder_To_OrderAck (OrderMessage);
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("5d0d8cfe-f2fd-4844-a3ba-f0aca2cee974")]
+                OrderAckMessage.Response.Result = result;
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("466d1222-8d2a-4098-9fb0-eeaf6694e9d4")]
+            send (RecvPOUpdatePort.RecvPOUpdateOp, OrderAckMessage);
+        }
+    }
+}
+

@@ -1,0 +1,52 @@
+﻿<UserControl xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"  
+             x:Class="Silv4_DataGrid_DML_Application.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="400" d:DesignWidth="850" 
+             xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk"
+              Loaded="UserControl_Loaded">
+
+    <Grid x:Name="LayoutRoot" Background="White" Height="398" Width="849">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="76*" />
+            <RowDefinition Height="322*" />
+        </Grid.RowDefinitions>
+        <TextBlock Height="52" HorizontalAlignment="Left" Margin="16,11,0,0" 
+                   Name="textBlock1" Text="Customer Information System" 
+                    TextAlignment="Center" VerticalAlignment="Top" Width="674" 
+                   FontSize="36" FontFamily="Comic Sans MS" />
+        <data:DataGrid x:Name="dgCustomer" AutoGenerateColumns="False" Grid.Row="1"  RowEditEnded="dgCustomer_RowEditEnded" SelectionChanged="dgCustomer_SelectionChanged" Margin="0,0,237,0">
+            <data:DataGrid.Columns>
+                <data:DataGridTextColumn Binding="{Binding CustomerID}" Header="Customer Id" IsReadOnly="True"></data:DataGridTextColumn>
+                <data:DataGridTextColumn Binding="{Binding CustomerName}" Header="Customer Name" IsReadOnly="True"></data:DataGridTextColumn>
+                <data:DataGridTextColumn Binding="{Binding Address}" Header="Address" IsReadOnly="True"></data:DataGridTextColumn>
+                <data:DataGridTextColumn Binding="{Binding City}" Header="City" IsReadOnly="True"></data:DataGridTextColumn>
+                <data:DataGridTextColumn Binding="{Binding State}" Header="State" IsReadOnly="True"></data:DataGridTextColumn>
+                <data:DataGridTextColumn Binding="{Binding Age}" Header="Age" Width="Auto" IsReadOnly="True"></data:DataGridTextColumn>
+                <data:DataGridTemplateColumn Header="Update">
+                    <data:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnUpdate" Content="Update" Click="btnUpdate_Click"></Button>
+                        </DataTemplate>
+                    </data:DataGridTemplateColumn.CellTemplate>
+                </data:DataGridTemplateColumn>
+
+                <data:DataGridTemplateColumn Header="Delete">
+                    <data:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button x:Name="btnDelete" Content="Delete" Click="btnDelete_Click"></Button>
+                        </DataTemplate>
+                    </data:DataGridTemplateColumn.CellTemplate>
+                </data:DataGridTemplateColumn>
+
+            </data:DataGrid.Columns>
+        </data:DataGrid>
+        <Button Content="Insert New Customer" Grid.Row="1" Height="23" 
+                HorizontalAlignment="Left" Margin="610,287,0,0" 
+                Name="btnInsertRow" VerticalAlignment="Top" Width="137" 
+                Click="btnInsertRow_Click" />
+    </Grid>
+</UserControl>

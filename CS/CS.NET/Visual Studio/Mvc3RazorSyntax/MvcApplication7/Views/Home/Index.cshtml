@@ -1,0 +1,28 @@
+﻿@inherits System.Web.Mvc.WebViewPage
+
+@{
+    View.Title = "Home Page";
+    LayoutPage = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>@View.Message</h2>
+
+The date and time is @DateTime.Now <br />
+
+@("<script>alert('Hello world!');</script>")
+
+@MvcHtmlString.Create("<script>alert('Hello world');</script>")
+
+@for(int i = 0;i < 10;i++) {
+	<li>@i</li>
+}
+
+
+@View.Message
+
+The make is @View.Car.Make and the model is @View.Car.Model
+
+
+@section footer {
+	<b>Footer here</b>
+}

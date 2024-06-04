@@ -1,0 +1,7 @@
+﻿<%@ Master Language="C#" MasterPageFile="Outer.master" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<asp:Content ContentPlaceHolderID="MainContent" runat="server">
+    <h1>Inner Master</h1>
+    <asp:ContentPlaceHolder 
+        ID="MainContent" 
+        runat="server" />
+</asp:Content>

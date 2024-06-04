@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<configuration>
+    <appSettings>
+<!-- Default server and database for bm.exe. -->
+        <add key="DefaultServer" value="localhost" />
+        <add key="DefaultDatabase" value="BAMPrimaryImport" />
+
+<!-- Command timeout in seconds. From 1 second to 18000 seconds (5 hours). -->    
+        <add key="CommandTimeout" value="1800" />
+    </appSettings>
+    <runtime>
+        <gcConcurrent enabled="true" />
+        <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+            <publisherPolicy apply="yes" />
+            <probing privatePath="interop" />
+        </assemblyBinding>
+    </runtime>
+
+    <system.diagnostics>
+<!-- To turn on BAM tracing, remove this comment or use the "-trace:on" command-line switch
+        <switches>
+            <add name="bm" value="1" />
+            <add name="Microsoft.BizTalk.Bam.Management" value="1" />
+        </switches>
+ -->
+        <trace autoflush="true" indentsize="4">
+            <listeners>
+                <add name="BamTraceListener" type="System.Diagnostics.TextWriterTraceListener" initializeData="BamManagerTrace.log" />
+            </listeners>
+        </trace>
+    </system.diagnostics>
+</configuration>

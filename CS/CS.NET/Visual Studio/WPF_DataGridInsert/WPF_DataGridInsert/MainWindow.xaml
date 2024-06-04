@@ -1,0 +1,22 @@
+﻿<Window x:Class="WPF_DataGridInsert.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525" Loaded="Window_Loaded">
+    <Grid>
+        <DataGrid AutoGenerateColumns="False" Height="237" 
+                  HorizontalAlignment="Left" Margin="18,66,0,0" Name="dgEmp" 
+                  VerticalAlignment="Top" Width="466" ColumnWidth="*" 
+                  CellEditEnding="dgEmp_CellEditEnding"
+                   SelectionChanged="dgEmp_SelectionChanged"
+                   RowEditEnding="dgEmp_RowEditEnding">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding EmpNo}" Header="EmpNo"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding EmpName}" Header="EmpName"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding Salary}" Header="Salary"></DataGridTextColumn>
+                <DataGridTextColumn Binding="{Binding DeptNo}" Header="DeptNo"></DataGridTextColumn>
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        <TextBlock Height="42" HorizontalAlignment="Left" Margin="18,15,0,0" Name="textBlock1" Text="Employee Information System" VerticalAlignment="Top" Width="462" TextAlignment="Center" FontSize="28" FontWeight="ExtraBold" />
+    </Grid>
+</Window>

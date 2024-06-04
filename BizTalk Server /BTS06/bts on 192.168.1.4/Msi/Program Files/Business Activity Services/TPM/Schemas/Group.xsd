@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:b="urn:schemas-microsoft-com:BizTalkServer" xmlns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:element name="GroupObject" type="GroupObjectType" />
+	<xs:complexType name="GroupObjectType">
+		<xs:all>
+			<xs:element name="GroupId" type="GroupIdType" />
+			<xs:element name="Description" type="Description" minOccurs="0"/>
+			<xs:element name="FriendlyNames" type="FriendlyNamesType" minOccurs="0" />
+			<xs:element name="LastModified" type="xs:dateTime" nillable="true" minOccurs="0" />
+		</xs:all>
+		<xs:attribute name="ignoreLastModified" type="xs:boolean" use="optional" />
+	</xs:complexType>
+	<xs:simpleType name="GroupIdType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="128" />
+			<xs:minLength value="1" />
+			<xs:pattern value="[^`~!@#$%^&amp;*()+=\[\]{}\|;'&quot;&gt;&lt;,\?\\]+"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Description">
+		<xs:annotation>
+			<xs:documentation>Changed to complex type to accommodate inline markup</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="FriendlyNamesType">
+		<xs:annotation>
+			<xs:documentation>Friendly Names Type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FriendlyName" minOccurs="0" maxOccurs="unbounded">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

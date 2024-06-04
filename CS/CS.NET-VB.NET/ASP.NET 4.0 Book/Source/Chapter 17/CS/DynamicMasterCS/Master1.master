@@ -1,0 +1,50 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Master1.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<script runat="server">
+	void LinkButton1_Click(Object sender, EventArgs e)
+{
+		Session["masterpage"] = "Master2.master";
+		Response.Redirect(Request.Url.ToString());
+}
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Loading Pages Dynamically</title>
+    
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+		<div id="header">
+			<h1>
+				ASP.NET 4.0 Black Book
+			</h1>
+		</div>
+		<div id="sidebar">
+			<div id="nav">
+				&nbsp;
+			</div>
+		</div>
+		<div id="content">
+			<div class="itemContent">
+			<h1>
+			Master Page Without Color</h1>
+			<asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+			</asp:ContentPlaceHolder>
+			<asp:LinkButton ID="LinkButton1" runat="server" 
+ 			OnClick="LinkButton1_Click">Page With Background Color
+			</asp:LinkButton>&nbsp;</div>
+		</div>
+	</div>
+			<div id="footer">
+			<p class="left">
+				All content copyright &copy; Kogent Solutions Inc.</p>
+			</div>
+			
+
+    </form>
+</body>
+</html>

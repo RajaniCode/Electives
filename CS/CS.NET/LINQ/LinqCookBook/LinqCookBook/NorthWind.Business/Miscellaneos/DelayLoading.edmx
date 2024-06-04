@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DelayLoadingModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="DelayLoadingModelStoreContainer">
+          <EntitySet Name="Article" EntityType="DelayLoadingModel.Store.Article" store:Type="Tables" Schema="rs" />
+        </EntityContainer>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="ArticleId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PublishedDate" Type="date" Nullable="false" />
+          <Property Name="AuthorInfo" Type="varchar(max)" Nullable="false" />
+          <Property Name="Summary" Type="varchar(max)" Nullable="false" />
+          <Property Name="Content" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DelayLoadingModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="DelayLoadingEntities">
+          <EntitySet Name="Articles" EntityType="DelayLoadingModel.Article" />
+          <EntitySet Name="ArticleDetails" EntityType="DelayLoadingModel.ArticleDetail" />
+          <AssociationSet Name="ArticleArticleDetail" Association="DelayLoadingModel.ArticleArticleDetail">
+            <End Role="Article" EntitySet="Articles" />
+            <End Role="ArticleDetail" EntitySet="ArticleDetails" /></AssociationSet></EntityContainer>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="ArticleId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PublishedDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="ArticleDetail" Relationship="DelayLoadingModel.ArticleArticleDetail" FromRole="Article" ToRole="ArticleDetail" /></EntityType>
+        <EntityType Name="ArticleDetail">
+          <Key>
+            <PropertyRef Name="ArticleId" /></Key>
+          <Property Name="ArticleId" Type="Int32" Nullable="false" />
+          <Property Name="AuthorInfo" Type="String" Nullable="false" />
+          <Property Name="Summary" Type="String" Nullable="false" />
+          <Property Name="Content" Type="String" Nullable="false" />
+          <NavigationProperty Name="Article" Relationship="DelayLoadingModel.ArticleArticleDetail" FromRole="ArticleDetail" ToRole="Article" /></EntityType>
+        <Association Name="ArticleArticleDetail">
+          <End Type="DelayLoadingModel.Article" Role="Article" Multiplicity="1" />
+          <End Type="DelayLoadingModel.ArticleDetail" Role="ArticleDetail" Multiplicity="1" />
+			<ReferentialConstraint>
+				<Principal Role="Article">
+					<PropertyRef Name="ArticleId" />
+				</Principal>
+				<Dependent Role="ArticleDetail">
+					<PropertyRef Name="ArticleId" />
+				</Dependent>
+			</ReferentialConstraint>
+		</Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="DelayLoadingModelStoreContainer" CdmEntityContainer="DelayLoadingEntities">
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="IsTypeOf(DelayLoadingModel.Article)">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="PublishedDate" ColumnName="PublishedDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ArticleDetails">
+            <EntityTypeMapping TypeName="IsTypeOf(DelayLoadingModel.ArticleDetail)">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="Content" ColumnName="Content" />
+                <ScalarProperty Name="Summary" ColumnName="Summary" />
+                <ScalarProperty Name="AuthorInfo" ColumnName="AuthorInfo" />
+                <ScalarProperty Name="ArticleId" ColumnName="ArticleId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="ArticleArticleDetail" TypeName="DelayLoadingModel.ArticleArticleDetail" StoreEntitySet="Article">
+            <EndProperty Name="ArticleDetail">
+              <ScalarProperty Name="ArticleId" ColumnName="ArticleId" /></EndProperty>
+            <EndProperty Name="Article">
+              <ScalarProperty Name="ArticleId" ColumnName="ArticleId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="DelayLoading">
+        <EntityTypeShape EntityType="DelayLoadingModel.Article" Width="1.5" PointX="6.5" PointY="1.125" Height="1.427958984375" IsExpanded="true" />
+        <EntityTypeShape EntityType="DelayLoadingModel.ArticleDetail" Width="1.5" PointX="4.125" PointY="1.125" Height="1.5923063151041665" />
+        <AssociationConnector Association="DelayLoadingModel.ArticleArticleDetail">
+          <ConnectorPoint PointX="6.5" PointY="1.8389794921875" />
+          <ConnectorPoint PointX="5.625" PointY="1.8389794921875" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

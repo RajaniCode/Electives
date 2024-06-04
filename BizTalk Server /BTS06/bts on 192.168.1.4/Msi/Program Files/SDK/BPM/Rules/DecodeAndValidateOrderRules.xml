@@ -1,0 +1,347 @@
+<?xml version="1.0" encoding="utf-8"?>
+<brl xmlns="http://schemas.microsoft.com/businessruleslanguage/2002">
+  <ruleset name="DecodeAndValidateOrder">
+    <version major="1" minor="0" description="" modifiedby="" date="2005-05-10T00:15:04.9654683-07:00" />
+    <configuration />
+    <bindings>
+      <xmldocument ref="xml_31" doctype="Microsoft.Samples.BizTalk.SouthridgeVideo.Schemas.OrderSchema" instances="16" selectivity="1" instance="0">
+        <selector>/*[local-name()='Order' and namespace-uri()='http://Microsoft.Samples.BizTalk.SouthridgeVideo.Schemas.Order.v1']</selector>
+        <selectoralias>/Order</selectoralias>
+      </xmldocument>
+    </bindings>
+    <rule name="ChangeServiceRule" priority="0" active="true">
+      <if>
+        <or>
+          <compare operator="equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="05703dd9-1111-40b8-890d-ad7bfc45a925" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>CS</string>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="05703dd9-1111-40b8-890d-ad7bfc45a925" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>CD</string>
+              </constant>
+            </rhs>
+          </compare>
+        </or>
+      </if>
+      <then>
+        <function>
+          <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="true">
+            <field>*[local-name()='OrderType' and namespace-uri()='']</field>
+            <fieldalias>OrderType</fieldalias>
+            <argument>
+              <constant>
+                <string>CHANGE</string>
+              </constant>
+            </argument>
+          </xmldocumentmember>
+        </function>
+      </then>
+    </rule>
+    <rule name="InvalidServiceOrder" priority="0" active="true">
+      <if>
+        <and>
+          <compare operator="not equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="c22af575-9920-417c-a545-67fa0ece9832" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>NS</string>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="not equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="c22af575-9920-417c-a545-67fa0ece9832" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>ND</string>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="not equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="c22af575-9920-417c-a545-67fa0ece9832" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>XS</string>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="not equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="c22af575-9920-417c-a545-67fa0ece9832" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>XD</string>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="not equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="c22af575-9920-417c-a545-67fa0ece9832" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>CS</string>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="not equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="c22af575-9920-417c-a545-67fa0ece9832" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>CD</string>
+              </constant>
+            </rhs>
+          </compare>
+        </and>
+      </if>
+      <then>
+        <function>
+          <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="true">
+            <field>*[local-name()='OrderType' and namespace-uri()='']</field>
+            <fieldalias>OrderType</fieldalias>
+            <argument>
+              <constant>
+                <string>INVALID</string>
+              </constant>
+            </argument>
+          </xmldocumentmember>
+        </function>
+      </then>
+    </rule>
+    <rule name="StandardServiceClassRule" priority="0" active="true">
+      <if>
+        <match>
+          <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="949cabdb-16a5-42cf-a80d-e45fec6d0a62" />
+          <pattern>
+            <constant>
+              <string>.S</string>
+            </constant>
+          </pattern>
+          <input>
+            <function>
+              <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                <fieldalias>OrderTypeCode</fieldalias>
+              </xmldocumentmember>
+            </function>
+          </input>
+        </match>
+      </if>
+      <then>
+        <function>
+          <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="true">
+            <field>*[local-name()='ServiceClass' and namespace-uri()='']</field>
+            <fieldalias>ServiceClass</fieldalias>
+            <argument>
+              <constant>
+                <string>S</string>
+              </constant>
+            </argument>
+          </xmldocumentmember>
+        </function>
+      </then>
+    </rule>
+    <rule name="DeluxeServiceClassRule" priority="0" active="true">
+      <if>
+        <match>
+          <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="949cabdb-16a5-42cf-a80d-e45fec6d0a62" />
+          <pattern>
+            <constant>
+              <string>.D</string>
+            </constant>
+          </pattern>
+          <input>
+            <function>
+              <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                <fieldalias>OrderTypeCode</fieldalias>
+              </xmldocumentmember>
+            </function>
+          </input>
+        </match>
+      </if>
+      <then>
+        <function>
+          <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="true">
+            <field>*[local-name()='ServiceClass' and namespace-uri()='']</field>
+            <fieldalias>ServiceClass</fieldalias>
+            <argument>
+              <constant>
+                <string>D</string>
+              </constant>
+            </argument>
+          </xmldocumentmember>
+        </function>
+      </then>
+    </rule>
+    <rule name="ActivateServiceRule" priority="0" active="true">
+      <if>
+        <or>
+          <compare operator="equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="05703dd9-1111-40b8-890d-ad7bfc45a925" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>NS</string>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="05703dd9-1111-40b8-890d-ad7bfc45a925" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>ND</string>
+              </constant>
+            </rhs>
+          </compare>
+        </or>
+      </if>
+      <then>
+        <function>
+          <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="true">
+            <field>*[local-name()='OrderType' and namespace-uri()='']</field>
+            <fieldalias>OrderType</fieldalias>
+            <argument>
+              <constant>
+                <string>ACTIVATE</string>
+              </constant>
+            </argument>
+          </xmldocumentmember>
+        </function>
+      </then>
+    </rule>
+    <rule name="CancelServiceRule" priority="0" active="true">
+      <if>
+        <or>
+          <compare operator="equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="05703dd9-1111-40b8-890d-ad7bfc45a925" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>XS</string>
+              </constant>
+            </rhs>
+          </compare>
+          <compare operator="equal">
+            <vocabularylink uri="3f0e9bcc-6212-4e6a-853c-e517f157a626" element="05703dd9-1111-40b8-890d-ad7bfc45a925" />
+            <lhs>
+              <function>
+                <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="false">
+                  <field>*[local-name()='OrderTypeCode' and namespace-uri()='']</field>
+                  <fieldalias>OrderTypeCode</fieldalias>
+                </xmldocumentmember>
+              </function>
+            </lhs>
+            <rhs>
+              <constant>
+                <string>XD</string>
+              </constant>
+            </rhs>
+          </compare>
+        </or>
+      </if>
+      <then>
+        <function>
+          <xmldocumentmember xmldocumentref="xml_31" type="string" sideeffects="true">
+            <field>*[local-name()='OrderType' and namespace-uri()='']</field>
+            <fieldalias>OrderType</fieldalias>
+            <argument>
+              <constant>
+                <string>CANCEL</string>
+              </constant>
+            </argument>
+          </xmldocumentmember>
+        </function>
+      </then>
+    </rule>
+  </ruleset>
+</brl>

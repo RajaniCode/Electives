@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <system.serviceModel>
+        <client>
+            <endpoint address="net.msmq://localhost/private/MyQueue" bindingConfiguration="NetMsmqBinding_InterfaceMSMQ"
+                binding="customBinding" contract="InterfaceMSMQ" />
+        </client>
+        <bindings>
+            <customBinding>
+                <binding name="NetMsmqBinding_InterfaceMSMQ">
+                    <binaryMessageEncoding maxReadPoolSize="64" maxWritePoolSize="16" />
+                    <msmqTransport manualAddressing="false" maxBufferPoolSize="524288"
+                        maxMessageSize="65536" deadLetterQueue="net.msmq://localhost/System$;DEADXACT"
+                        durable="true" exactlyOnce="true" maxImmediateRetries="5"
+                        maxRetryCycles="2147483647" poisonMessageHandling="EnabledIfSupported"
+                        rejectAfterLastRetry="false" retryCycleDelay="00:10:00" timeToLive="1.00:00:00"
+                        useSourceJournal="false" useMsmqTracing="false" maxPoolSize="8"
+                        convertAddressUsingActiveDirectory="false">
+                        <msmqTransportSecurity msmqAuthenticationMode="WindowsDomain"
+                            msmqEncryptionAlgorithm="RC4Stream" msmqProtectionLevel="Sign"
+                            msmqSecureHashAlgorithm="SHA1" />
+                    </msmqTransport>
+                </binding>
+            </customBinding>
+        </bindings>
+    </system.serviceModel>
+</configuration>

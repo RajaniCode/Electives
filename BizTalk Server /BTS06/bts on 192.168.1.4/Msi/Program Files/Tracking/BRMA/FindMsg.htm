@@ -1,0 +1,191 @@
+<!-- Copyright (c) Microsoft Corporation.  All rights reserved. -->
+<!--  -->
+<!-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, -->
+<!-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED -->
+<!-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. -->
+<!-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE -->
+<!-- AND INFORMATION REMAINS WITH THE USER. -->
+<!--  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+    <HEAD>
+    <META content="Microsoft Visual Studio 7.0" name="GENERATOR">
+    <META content="C#" name="CODE_LANGUAGE">
+    <META content="JavaScript" name="vs_defaultClientScript">
+    <META content="http://schemas.microsoft.com/intellisense/ie5" name="vs_targetSchema">
+	<LINK REL="stylesheet" TYPE="text/css" HREF="default.css" ID="brma_ss">
+		<script language="JavaScript" src="CommonUtils.js"></script>
+		<script language="JavaScript" src="resultsutil.js"></script>
+		<script language="VBScript" src="CommonUtils.vbs"></script> 
+
+    <script language="JavaScript">
+    var sQNamespace="";
+    var ErrMsg="";
+    var oNavCtrl;
+    HelpTopic = "cshidFindMessageView"; // Set ID of the help topic for this page
+    
+    var LastSchemaName = "";
+
+    function PageLoad()
+    {
+		oNavCtrl = document.CollapsibleCtrl;
+		try
+		{
+			// Initialize static strings
+			var title = oNavCtrl.GetWebPageResourceString("title_FindMsgView");
+			ChangeTitle(title);
+
+			PivotTableHeader.innerHTML = oNavCtrl.GetWebPageResourceString("msg_ToAccessViews");
+			oNavCtrl.LoadConfig();
+
+			var oFindMsgCtrl = document.FindMsgCtrl;
+			oFindMsgCtrl.initHTML( oNavCtrl.SqlServer, oNavCtrl.SQLDatabase);
+		}
+		catch(e)
+		{
+			alertErr(e.description);
+		}
+    }
+
+    function PageUnload()
+    {
+        try
+        {
+            document.FindMsgCtrl.uninitHTML();
+			document.ScriptEventBroadcaster.Dispose();
+        }
+        catch(e)
+        {
+            var sErrMsg = oNavCtrl.GetWebPageResourceString("err_GenericError") + "\n";
+            sErrMsg += e.description;
+            alertErr(sErrMsg);
+        }
+    }
+
+    var attached=false;
+
+    function OnExecQueryBtn_Click()
+    {
+        try
+        {
+			var PtXmlData4LastQuery = "";
+            var pt = document.ptable1;
+
+			if(LastSchemaName == document.FindMsgCtrl.SchemaName)
+			{//if it is the same schema, store the formatting nd reapply it back
+				PtXmlData4LastQuery = pt.XMLData;
+			}
+			
+            // clear result list that may be there from the previous query
+			ResetPTableBeforeExectingQuery();
+			
+			var bSuccess = document.FindMsgCtrl.ExecuteQuery();
+			if (!bSuccess)
+			{
+				LastSchemaName = ""; // This resets PT layout
+				return;
+			}
+			
+            SetPtableView();
+ 
+            if(attached==false)
+            {
+                pt.attachEvent("BeforeContextMenu", caselist_BeforeContextMenu);
+                attached=true;
+            }
+
+            pt.ActiveView.TitleBar.Caption = oNavCtrl.GetWebPageResourceString("STR_CASELIST");
+			pt.UseRemoteProvider = true;
+			
+            var rs=document.FindMsgCtrl.RecordSet;
+            if (rs != null)
+            {
+                var header = oNavCtrl.GetWebPageResourceString("msg_ToAccessViewsWithCount");
+                header = oNavCtrl.FormatString1(header, rs.RecordCount);
+			    PivotTableHeader.innerHTML = header;
+                pt.DataSource = rs;
+                pt.DataMember = "";
+                pt.ActiveView.AutoLayout();
+    			RemovePivotTableColumn(pt, SVC_CLASS_ID_COLUMN); // hide this GUID from the UI by default
+    			RemovePivotTableColumn(pt, ACTIVITY_ID_COLUMN); // hide this GUID from the UI by default
+            }
+
+			if(LastSchemaName == document.FindMsgCtrl.SchemaName)
+			{//if it is the same schema, store the formatting nd reapply it back
+				pt.XMLData = PtXmlData4LastQuery;
+			}
+			else
+			{
+				window.setTimeout("DoPTLayoutForFindMsg();", 10);
+			}
+
+            //show pivot table...
+            divShow("PivotTable");
+
+            //scroll to the bottom to show the newly opened pivot table
+            //window.scrollTo(0,document.body.scrollHeight);
+            
+            //store the last schema name for the next time
+            LastSchemaName = document.FindMsgCtrl.SchemaName;
+        }
+        catch(e)
+        {
+            ErrMsg=oNavCtrl.GetWebPageResourceString("fm_err_GetResults");
+            ErrMsg+="\n";
+            ErrMsg+=e.description
+            alertErr(ErrMsg);
+        }
+    }
+    </SCRIPT>
+    
+	<SCRIPT language="JavaScript" for="ScriptEventBroadcaster" Event="ExecQuery">
+		OnExecQueryBtn_Click();
+	</SCRIPT>
+
+	<SCRIPT language="JavaScript" for="ScriptEventBroadcaster" Event="SaveAs">
+		if(!document.all("SaveAsBtn").disabled)
+		{
+			OnSaveAs();
+		}
+	</SCRIPT>
+
+	<SCRIPT language="JavaScript" for="ScriptEventBroadcaster" Event="ShowHelp">
+		ShowPageHelp();
+	</SCRIPT>    
+
+    </HEAD>
+    <BODY onload="PageLoad();" onunload="PageUnload();" MS_POSITIONING="GridLayout" STYLE="background-color:#ffffff;">
+        <FORM id="Form1" method="post" runat="server" STYLE="background-color:#ffffff;">
+        <!-- buttons for communication between Hat Application and IE. -->
+        <INPUT type="button" ID="SaveAsBtn" disabled style="DISPLAY:none;" onclick='OnSaveAs();'>
+        <INPUT type="button" ID="HelpBtn" style="DISPLAY:none;" onclick='ShowPageHelp();'>
+        
+        <DIV ID="myDiv" STYLE="display:block">
+            <OBJECT id="FindMsgCtrl" classid="clsid:75031C39-3039-4267-8CC0-C64DDE6453A2" VIEWASTEXT>
+            </OBJECT>
+        </DIV>
+        <DIV id="PivotTable" style="DISPLAY:none">
+			<BR>
+			<hr>
+				<A ID="PivotTableHeader">&nbsp;</A>
+			<BR>
+            <OBJECT id="ptable1" height="90%" width="100%" classid="clsid:0002E55A-0000-0000-C000-000000000046" name="ptable1" VIEWASTEXT>
+                <PARAM NAME="XMLData" VALUE='<xml xmlns:x="urn:schemas-microsoft-com:office:excel">&#13;&#10; <x:PivotTable>&#13;&#10;  <x:OWCVersion>10.0.0.2922         </x:OWCVersion>&#13;&#10;  <x:NoDisplayToolbar/>&#13;&#10;  <x:DisplayScreenTips/>&#13;&#10;  <x:NoAutoFit/>&#13;&#10;  <x:Height>300</x:Height>&#13;&#10;  <x:Width>716</x:Width>&#13;&#10;  <x:CubeProvider>msolap.2</x:CubeProvider>&#13;&#10;  <x:DisplayFieldList/>&#13;&#10;  <x:CacheDetails/>&#13;&#10; </x:PivotTable>&#13;&#10;</xml>'>
+            </OBJECT>
+        </DIV>
+		<DIV id="HelperObjectsDiv" style="DISPLAY: none">
+			<OBJECT id="Admin" classid="clsid:124B0FB8-DF1E-46b0-97B1-FD698C35C497" VIEWASTEXT>
+			</OBJECT>
+			
+			<OBJECT id="Help" classid="clsid:DAC40761-C9C8-4653-AB49-C4D4AE4FF042" VIEWASTEXT>
+			</OBJECT>
+			
+			<OBJECT id="CollapsibleCtrl" CLASSID="clsid:12BBC156-5455-4a61-8DC8-82F56838CB99" VIEWASTEXT>
+			</OBJECT>
+
+			<OBJECT id="ScriptEventBroadcaster" CLASSID="clsid:1708739A-1EBE-4c62-9B7E-2FA131FFCB5C" VIEWASTEXT>
+			</OBJECT>
+		</DIV>
+        </FORM>
+    </BODY>
+</HTML>

@@ -1,0 +1,221 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1346"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{6D7AC1F1-06AC-430E-AC7B-91E0370646A1}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\Microsoft.Samples.BizTalk.Litware.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.Litware.Schemas"
+                    AssemblyName = "Microsoft.Samples.BizTalk.Litware.Schemas"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "BTSScn.B2B.Hub"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = "BTSScn.B2B.Hub"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "PropertySchema.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas"
+                    Type = "PropertySchema"
+                />
+                <File
+                    RelPath = "EDI\X124010850Schema.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.EDI"
+                    Type = "X124010850Schema"
+                />
+                <File
+                    RelPath = "Order\Basket.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.Order"
+                    Type = "Basket"
+                />
+                <File
+                    RelPath = "Order\OrderForm.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.Order"
+                    Type = "OrderForm"
+                />
+                <File
+                    RelPath = "Order\OrderTemplate.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.Order"
+                    Type = "OrderTemplate"
+                />
+                <File
+                    RelPath = "Order\PurchaseOrder.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.Order"
+                    Type = "PurchaseOrder"
+                />
+                <File
+                    RelPath = "Order\RequestOrder.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.Order"
+                    Type = "RequestOrder"
+                />
+                <File
+                    RelPath = "OrderSystem\BusinessFaultMessage.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem"
+                    Type = "BusinessFaultMessage"
+                />
+                <File
+                    RelPath = "OrderSystem\OrderAck.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem"
+                    Type = "OrderAck"
+                />
+                <File
+                    RelPath = "OrderSystem\OrderInquiry.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem"
+                    Type = "OrderInquiry"
+                />
+                <File
+                    RelPath = "OrderSystem\SystemFaultMessage.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.OrderSystem"
+                    Type = "SystemFaultMessage"
+                />
+                <File
+                    RelPath = "TPM\FileBinding.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "FileBinding"
+                />
+                <File
+                    RelPath = "TPM\HttpBinding.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "HttpBinding"
+                />
+                <File
+                    RelPath = "TPM\MessageProcessing.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "MessageProcessingSchema"
+                />
+                <File
+                    RelPath = "TPM\Partner.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "Partner"
+                />
+                <File
+                    RelPath = "TPM\ProfileAck.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "ProfileAck"
+                />
+                <File
+                    RelPath = "TPM\RequestProfile.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "RequestProfile"
+                />
+                <File
+                    RelPath = "TPM\ServiceLinkType.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "ServiceLinkType"
+                />
+                <File
+                    RelPath = "TPM\SoapBinding.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "SoapBinding"
+                />
+                <File
+                    RelPath = "TPM\wsdl.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "wsdl"
+                />
+                <File
+                    RelPath = "TPM\WssBinding.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.Litware.Schemas.TPM"
+                    Type = "WssBinding"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

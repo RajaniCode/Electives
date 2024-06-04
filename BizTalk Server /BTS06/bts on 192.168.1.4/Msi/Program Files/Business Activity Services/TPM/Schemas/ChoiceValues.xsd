@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:element name="ChoiceValues" type="ChoiceValuesType" />
+	<xs:complexType name="ChoiceValuesType">
+		<xs:sequence>
+			<xs:element name="ChoiceValue" type="ChoiceValueType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="ChoiceNameType" use="required" />
+	</xs:complexType>
+	<xs:simpleType name="ChoiceNameType">
+		<xs:restriction base="xs:token">
+			<xs:minLength value="1" />
+			<xs:maxLength value="64" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ChoiceValueType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="1" />
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

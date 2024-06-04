@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+   
+<appSettings>
+	<!-- Tpm web service Urls -->
+	<add key="Microsoft.BizTalk.KwTpm.StsHandlers.TPMgmtWs.TPMgmtWS" value="PUT TPMGMTWS URL HERE"/>
+	<add key="Microsoft.BizTalk.KwTpm.StsHandlers.TPPubWs.TPPubWS" value="PUT TPPUBWS URL HERE"/>
+	
+	<!-- user groups for Tpm -->
+	<add key="KWBusinessAdmin" value="BUSINESS ADMIN GROUP" />
+	<add key="KWBusinessManager" value="BUSINESS MANAGER GROUP" />
+	<add key="KWBusinessUser" value="BUSINESS USER GROUP" />
+	<add key="BizTalkAdmin" value="BIZTALK ADMIN GROUP" />
+	<add key="KwTpmWsTimeOut" value="900000"/>
+</appSettings>
+
+  <system.web>
+	<httpModules>
+		<add type="System.Web.Security.UrlAuthorizationModule"  name="UrlAuthorization" />
+	</httpModules>
+    <!--  DYNAMIC DEBUG COMPILATION
+          Set compilation debug="true" to enable ASPX debugging.  Otherwise, setting this value to
+          false will improve runtime performance of this application. 
+          Set compilation debug="true" to insert debugging symbols (.pdb information)
+          into the compiled page. Because this creates a larger file that executes
+          more slowly, you should set this value to true only when debugging and to
+          false at all other times. For more information, refer to the documentation about
+          debugging ASP .NET files.
+    -->
+    <compilation defaultLanguage="c#" debug="false"/>
+
+    <!--  CUSTOM ERROR MESSAGES
+          Set customError mode values to control the display of user-friendly 
+          error messages to users instead of error details (including a stack trace):
+
+          "On" Always display custom (friendly) messages  
+          "Off" Always display detailed ASP.NET error information.
+          "RemoteOnly" Display custom (friendly) messages only to users not running 
+          on the local Web server. This setting is recommended for security purposes, so 
+          that you do not display application detail information to remote clients.
+    -->
+    <customErrors mode="RemoteOnly"/>
+
+    <!--  AUTHENTICATION 
+          This section sets the authentication policies of the application. Possible modes are "Windows", "Forms", 
+          "Passport" and "None"
+    -->
+    <authentication mode="Windows"/>     
+	<identity impersonate="true"/>
+		
+	<httpRuntime executionTimeout="3600" />
+
+    <!--  APPLICATION-LEVEL TRACE LOGGING
+          Application-level tracing enables trace log output for every page within an application. 
+          Set trace enabled="true" to enable application trace logging.  If pageOutput="true", the
+          trace information will be displayed at the bottom of each page.  Otherwise, you can view the 
+          application trace log by browsing the "trace.axd" page from your web application
+          root. 
+    -->
+    <trace enabled="false" requestLimit="10" pageOutput="false" traceMode="SortByTime" localOnly="true"/>
+
+    <!--  SESSION STATE SETTINGS
+          By default ASP .NET uses cookies to identify which requests belong to a particular session. 
+          If cookies are not available, a session can be tracked by adding a session identifier to the URL. 
+          To disable cookies, set sessionState cookieless="true".
+    -->
+    <sessionState mode="InProc" cookieless="false" timeout="20"/>
+
+    <!--  GLOBALIZATION
+          This section sets the globalization settings of the application. 
+    -->
+    <globalization requestEncoding="utf-8" responseEncoding="utf-8"/>
+   
+   <httpHandlers>
+			<clear/>
+			<add verb="*" path="*.aspx" type="System.Web.UI.PageHandlerFactory, System.Web, Version=1.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"/>
+	</httpHandlers>		
+	<authorization>
+		<deny users="?" /> 
+		<allow users="*" verbs="GET, HEAD, POST" />
+	</authorization>
+	<trust level="Full" originUrl="" />
+ </system.web>
+ 
+	<system.diagnostics>
+		<switches>
+			<add name="Microsoft.BizTalk.KwTpm.StsHandlers" value="0"/>
+		</switches>
+	</system.diagnostics>
+
+</configuration>

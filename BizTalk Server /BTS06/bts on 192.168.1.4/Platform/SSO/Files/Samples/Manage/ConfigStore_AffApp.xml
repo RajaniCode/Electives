@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<SSO>
+  <application name="ConfigApp1">
+    <description>A Config Store type Affiliate Application</description>
+    <contact>someone@companyname.com</contact>
+    <appUserAccount>DomainName\ConfigAppUserGroup</appUserAccount>
+    <appAdminAccount>DomainName\ConfigAppAdminGroup</appAdminAccount>
+    <field ordinal="0" label="ServerName" masked="no" />
+    <field ordinal="1" label="Port" masked="no" />
+    <field ordinal="2" label="Retry Count" masked="no" />
+    <field ordinal="3" label="Retry Interval" masked="no" />
+    <flags windowsInitiatedSSO="no" configStoreApp="yes" enableApp="yes" />
+  </application>
+</SSO>

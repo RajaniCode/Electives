@@ -1,0 +1,123 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1513"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{BA297D6B-710A-49BF-BF75-200CD887F95B}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\Microsoft.Samples.Biztalk.WoodgroveBank.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = "Schemas for the end to end service oriented scenario using BizTalk"
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = "Microsoft® BizTalk® Server 2006"
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = "Copyright (c) Microsoft Corporation. All rights reserved."
+                    AssemblyCompany = "Microsoft Corporation"
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    AssemblyName = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "BTSScn.SO.CustomerService"
+                    BpelCompliance = "False"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = ""
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "BAPI_BANKACCT_GET_DETAIL.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    Type = "BAPI_BANKACCT_GET_DETAIL"
+                />
+                <File
+                    RelPath = "CustomerServiceRequest.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    Type = "CustomerServiceRequest"
+                />
+                <File
+                    RelPath = "CustomerServiceResponse.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    Type = "CustomerServiceResponse"
+                />
+                <File
+                    RelPath = "LastPaymentRequest.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    Type = "LastPaymentRequest"
+                />
+                <File
+                    RelPath = "LastPaymentResponse.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    Type = "LastPaymentResponse"
+                />
+                <File
+                    RelPath = "PendingTransactionsRequest.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    Type = "PendingTransactionsRequest"
+                />
+                <File
+                    RelPath = "PendingTransactionsResponse.xsd"
+                    SubType = "Designer"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.WoodgroveBank.Schemas"
+                    Type = "PendingTransactionsResponse"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

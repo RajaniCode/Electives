@@ -1,0 +1,110 @@
+<Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+  <EntityContainerMapping StorageEntityContainer="QueryViewWithManyToManyStoreContainer" CdmEntityContainer="QueryViewMM">
+    <EntitySetMapping Name="Clubs">
+      <QueryView>
+					select value QueryViewWithManyToMany.Club(c.ClubId,c.ClubName)
+					from QueryViewWithManyToManyStoreContainer.Clubs as c
+				</QueryView>
+      <EntityTypeMapping TypeName="QueryViewWithManyToMany.Club">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="QueryViewWithManyToMany.Store.InsertClub">
+            <ScalarProperty Name="ClubName" ParameterName="ClubName" />
+            <ResultBinding Name="ClubId" ColumnName="ClubId" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="QueryViewWithManyToMany.Store.UpdateClub">
+            <ScalarProperty Name="ClubName" ParameterName="ClubName" Version="Current" />
+            <ScalarProperty Name="ClubId" ParameterName="ClubId" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="QueryViewWithManyToMany.Store.DeleteClub">
+            <ScalarProperty Name="ClubId" ParameterName="ClubId" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Members">
+      <QueryView>
+					select value QueryViewWithManyToMany.Member(m.MemberId,m.Name)
+					from QueryViewWithManyToManyStoreContainer.Members as m
+				</QueryView>
+      <EntityTypeMapping TypeName="QueryViewWithManyToMany.Member">
+        <ModificationFunctionMapping>
+          <InsertFunction FunctionName="QueryViewWithManyToMany.Store.InsertMember">
+            <ScalarProperty Name="Name" ParameterName="Name" />
+            <ResultBinding Name="MemberId" ColumnName="MemberId" />
+          </InsertFunction>
+          <UpdateFunction FunctionName="QueryViewWithManyToMany.Store.UpdateMember">
+            <ScalarProperty Name="Name" ParameterName="Name" Version="Current" />
+            <ScalarProperty Name="MemberId" ParameterName="MemberId" Version="Current" />
+          </UpdateFunction>
+          <DeleteFunction FunctionName="QueryViewWithManyToMany.Store.DeleteMember">
+            <ScalarProperty Name="MemberId" ParameterName="MemberId" />
+          </DeleteFunction>
+        </ModificationFunctionMapping>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping TypeName="QueryViewWithManyToMany.Gold" Name="Gold">
+      <QueryView>
+					select value QueryViewWithManyToMany.Gold(
+					createref(QueryViewMM.Clubs,row(m.ClubId)),
+					createref(QueryViewMM.Members,row(m.MemberId))
+					)
+					from QueryViewWithManyToManyStoreContainer.Membership as m
+					where m.MemberShipType = 'G'
+				</QueryView>
+      <ModificationFunctionMapping>
+        <InsertFunction FunctionName="QueryViewWithManyToMany.Store.InsertGoldMembership">
+          <EndProperty Name="Clubs">
+            <ScalarProperty Name="ClubId" ParameterName="ClubId" />
+          </EndProperty>
+          <EndProperty Name="Members">
+            <ScalarProperty Name="MemberId" ParameterName="MemberId" />
+          </EndProperty>
+        </InsertFunction>
+        <DeleteFunction FunctionName="QueryViewWithManyToMany.Store.DeleteMembership">
+          <EndProperty Name="Clubs">
+            <ScalarProperty Name="ClubId" ParameterName="ClubId" />
+          </EndProperty>
+          <EndProperty Name="Members">
+            <ScalarProperty Name="MemberId" ParameterName="MemberId" />
+          </EndProperty>
+        </DeleteFunction>
+      </ModificationFunctionMapping>
+    </AssociationSetMapping>
+    <AssociationSetMapping TypeName="QueryViewWithManyToMany.Platinium" Name="Platinium">
+      <QueryView>
+					select value QueryViewWithManyToMany.Platinium(
+					createref(QueryViewMM.Clubs,row(m.ClubId)),
+					createref(QueryViewMM.Members,row(m.MemberId))
+					)
+					from QueryViewWithManyToManyStoreContainer.Membership as m
+					where m.MemberShipType = 'P'
+				</QueryView>
+      <ModificationFunctionMapping>
+        <InsertFunction FunctionName="QueryViewWithManyToMany.Store.InsertPlatiniumMembership">
+          <EndProperty Name="Clubs">
+            <ScalarProperty Name="ClubId" ParameterName="ClubId" />
+          </EndProperty>
+          <EndProperty Name="Members">
+            <ScalarProperty Name="MemberId" ParameterName="MemberId" />
+          </EndProperty>
+        </InsertFunction>
+        <DeleteFunction FunctionName="QueryViewWithManyToMany.Store.DeleteMembership">
+          <EndProperty Name="Clubs">
+            <ScalarProperty Name="ClubId" ParameterName="ClubId" />
+          </EndProperty>
+          <EndProperty Name="Members">
+            <ScalarProperty Name="MemberId" ParameterName="MemberId" />
+          </EndProperty>
+        </DeleteFunction>
+      </ModificationFunctionMapping>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Actors">
+      <EntityTypeMapping TypeName="IsTypeOf(QueryViewWithManyToMany.Actors)">
+        <MappingFragment StoreEntitySet="Actors">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ActorId" ColumnName="ActorId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

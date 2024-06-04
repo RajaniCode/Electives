@@ -1,0 +1,56 @@
+﻿<Window xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:app="clr-namespace:AnnotatedViewers;assembly=" 
+    xmlns:ann="clr-namespace:System.Windows.Annotations;assembly=PresentationFramework"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    Width="500" Height="450"
+    Title="Annotated Viewers"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="AnnotatedViewers.AnnotatedViewersApp"
+    Initialized="Init"
+    Name="topLevel" xmlns:MappingPIGen1="clr-namespace:System.Windows.Annotations;assembly=PresentationFramework">
+  
+  <Grid>
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto" />
+      <RowDefinition />
+    </Grid.RowDefinitions>
+
+    <StackPanel Grid.Row="0" Orientation="Horizontal">
+      <Menu>
+        <MenuItem Header="Content">
+          <MenuItem Header="Flow Content in FlowDocumentReader" Click="LoadFlowDocumentReader"/>
+          <MenuItem Header="Flow Content in FlowDocumentPageViewer" Click="LoadFlowDocumentPageViewer"/>
+          <MenuItem Header="Flow Content in FlowDocumentScrollViewer" Click="LoadFlowDocumentScrollViewer"/>
+          <MenuItem Header="XPS Content in DocumentViewer" Click="LoadFixedDocument"/>
+          <MenuItem Header="No Content in Current Viewer" Click="ClearContent"/>
+        </MenuItem>
+        <MenuItem Header="Annotations">
+          <MenuItem Header="Enable Annotations" Click="EnableAnnotations" />
+          <MenuItem Header="Disable Annotations" Click="DisableAnnotations" />
+        </MenuItem>
+        <MenuItem Header="Actions">
+          <MenuItem Name="highlight" Command="ann:AnnotationService.CreateHighlightCommand" CommandParameter="{Binding}" />
+          <MenuItem Name="textNote" Command="ann:AnnotationService.CreateTextStickyNoteCommand" CommandParameter="{Binding}" />
+          <MenuItem Name="inkNote" Command="ann:AnnotationService.CreateInkStickyNoteCommand" CommandParameter="{Binding}" />
+          <Separator />
+          <MenuItem Command="ann:AnnotationService.ClearHighlightsCommand" />
+          <MenuItem Command="ann:AnnotationService.DeleteStickyNotesCommand" />
+          <MenuItem Command="ann:AnnotationService.DeleteAnnotationsCommand" />
+        </MenuItem>
+      </Menu>
+
+      <TextBox BorderBrush="Transparent" Background="Transparent" Text="  Highlight color: " />
+      
+      <ComboBox BorderBrush="Transparent" Background="Transparent" SelectedIndex="0" SelectionChanged="OnColorChanged" Focusable="False">
+        <ComboBoxItem> Default </ComboBoxItem>
+        <ComboBoxItem> Pink </ComboBoxItem>
+        <ComboBoxItem> Yellow </ComboBoxItem>
+        <ComboBoxItem> Blue </ComboBoxItem>
+      </ComboBox>
+
+    </StackPanel>
+    <Border Name="Holder" Grid.Row="2" Background="White" BorderThickness="5" BorderBrush="Brown">
+
+    </Border>
+  </Grid>
+</Window>

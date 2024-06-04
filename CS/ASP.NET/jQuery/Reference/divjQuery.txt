@@ -1,0 +1,26 @@
+<%--<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>--%>
+
+<div class="container" id="content">
+    <div id="divAlertMessage" runat="server" visible="true" class="alert fade in alert-success">
+        <asp:Button runat="server" ID="ButtonAlertMessage" CssClass="close" Text="X" />
+        <%--<asp:Button runat="server" ID="ButtonAlertMessage" CssClass="close" Text="X" OnClientClick="Method(); return false;" />--%>
+        <asp:Label runat="server" ID="LabelAlertMessage"></asp:Label>  
+    </div>
+</div>
+
+<script type="text/javascript">
+//    function Method() {
+//        var v = document.getElementById("MainContent_divAlertMessage");
+//        v.style.visibility = "hidden";
+//    }
+
+    $(document).ready(function () {
+        $("#MainContent_ButtonAlertMessage").click(function () {
+            $("#MainContent_divAlertMessage").hide();
+            return false;
+        });
+    }); 
+</script>
+
+
+<asp:Button runat="server" ID="ButtonAlertMessage" CssClass="close" Text="X" OnClientClick="Method(); return false;" />

@@ -1,0 +1,1 @@
+﻿<%@ WebService Language="C#" CodeBehind="WISpawnerService.asmx.cs" Class="WISpawner.WISpawnerService" %>

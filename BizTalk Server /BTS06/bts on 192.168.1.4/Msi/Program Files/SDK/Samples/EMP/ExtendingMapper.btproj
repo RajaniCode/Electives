@@ -1,0 +1,133 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.5.1350"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{A209E672-29AC-4BDD-8B18-26FB8BFEA79A}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = ".\ExtendingMapper.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    AssemblyName = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                />
+                <Config
+                    Name = "Development"
+                    ApplicationName = "ExtendingMapperApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    ApplicationName = "ExtendingMapperApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Microsoft.Samples.BizTalk.ExtendingMapper.MapperClassLibrary"
+                    AssemblyName = "Microsoft.Samples.BizTalk.ExtendingMapper.MapperClassLibrary"
+                    HintPath = "MapperClassLibrary\bin\Debug\Microsoft.Samples.BizTalk.ExtendingMapper.MapperClassLibrary.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "Destination.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "Destination"
+                />
+                <File
+                    RelPath = "OverridingMapXslt.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "OverridingMapXslt"
+                />
+                <File
+                    RelPath = "Scriptor_CallExternalAssembly.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "Scriptor_CallExternalAssembly"
+                />
+                <File
+                    RelPath = "Scriptor_GlobalVariableInInlineScript.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "Scriptor_GlobalVariableInInlineScript"
+                />
+                <File
+                    RelPath = "Scriptor_InlineScripts.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "Scriptor_InlineScripts"
+                />
+                <File
+                    RelPath = "Scriptor_InlineXslt.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "Scriptor_InlineXslt"
+                />
+                <File
+                    RelPath = "Scriptor_InlineXsltCallingExternalAssembly.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "Scriptor_InlineXsltCallingExternalAssembly"
+                />
+                <File
+                    RelPath = "Scriptor_XsltCalltemplate.btm"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "Scriptor_XsltCalltemplate"
+                />
+                <File
+                    RelPath = "Source.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.ExtendingMapper"
+                    Type = "Source"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="50ec408a-be84-4a36-a0c8-0f548fbfd7e3" name="swalther@SWLAPTOP 2009-02-26 21:32:51" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="44716368-88fc-4fe3-b203-54c83ef2ddb1">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\TestResults\swalther_SWLAPTOP 2009-02-26 21_32_51">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\EFMvcApplication\bin\EFMvcApplication.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\Moq.2.6.1014.1-bin\Moq.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository\bin\Debug\GenericRepository.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Error">
+    <Counters total="1" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="SWLAPTOP" outcome="Error" timestamp="2009-02-26T21:33:31.3670000-08:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <Times creation="2009-02-26T21:32:51.5160000-08:00" queuing="2009-02-26T21:32:52.8720000-08:00" start="2009-02-26T21:32:53.1130000-08:00" finish="2009-02-26T21:33:31.3670000-08:00" />
+  <TestDefinitions>
+    <UnitTest name="CreateThenList" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter05 - understanding models\code\cs\efmvcapplication\efmvcapplication.tests\bin\debug\efmvcapplication.tests.dll" id="6e0022fa-0049-8606-f556-e96efc0b424c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="4b43e506-c025-4a65-8380-4f19ec762f02" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter05 - Understanding Models\Code\CS\EFMvcApplication\EFMvcApplication.Tests\bin\Debug\EFMvcApplication.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="EFMvcApplication.Tests.Controllers.HomeControllerTestFake, EFMvcApplication.Tests" name="CreateThenList" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="6e0022fa-0049-8606-f556-e96efc0b424c" executionId="3a2d3165-c1ef-4655-8c9c-a97d954680ff" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="3a2d3165-c1ef-4655-8c9c-a97d954680ff" testId="6e0022fa-0049-8606-f556-e96efc0b424c" testName="CreateThenList" computerName="SWLAPTOP" duration="00:00:38.1330000" startTime="2009-02-26T21:32:53.2340000-08:00" endTime="2009-02-26T21:33:31.3670000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    </UnitTestResult>
+  </Results>
+</TestRun>

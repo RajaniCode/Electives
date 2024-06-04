@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MetaData">
+  <DataContextMoniker Name="/MetaDataDataContext" />
+  <nestedChildShapes>
+    <classShape Id="fe84c5fd-32f3-4ac8-86cf-7684b07b1ad2" absoluteBounds="0.75, 0.75, 2, 1.0961531575520833">
+      <DataClassMoniker Name="/MetaDataDataContext/Page" />
+      <nestedChildShapes>
+        <elementListCompartment Id="1ecd92c1-5085-462e-b539-25a87fa75cbf" absoluteBounds="0.76500000000000012, 1.21, 1.9700000000000002, 0.53615315755208326" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="a210a253-0f4a-4cff-a978-10e2311db7bc" absoluteBounds="3.375, 0.75, 2, 1.4248478190104168">
+      <DataClassMoniker Name="/MetaDataDataContext/MetaData" />
+      <nestedChildShapes>
+        <elementListCompartment Id="eb10acee-3c5b-4135-bbe1-f4325a9fc0f2" absoluteBounds="3.3899999999999997, 1.21, 1.9700000000000002, 0.86484781901041674" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(2.75 : 1.29807657877604); (3.375 : 1.29807657877604)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/MetaDataDataContext/Page/Page_MetaData" />
+      <nodes>
+        <classShapeMoniker Id="fe84c5fd-32f3-4ac8-86cf-7684b07b1ad2" />
+        <classShapeMoniker Id="a210a253-0f4a-4cff-a978-10e2311db7bc" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

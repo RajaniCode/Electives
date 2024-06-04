@@ -1,0 +1,313 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="IncludeTPTModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="IncludeTPTModelStoreContainer">
+          <EntitySet Name="Company" EntityType="IncludeTPTModel.Store.Company" store:Type="Tables" Schema="include" />
+          <EntitySet Name="Contact" EntityType="IncludeTPTModel.Store.Contact" store:Type="Tables" Schema="include" />
+          <EntitySet Name="Department" EntityType="IncludeTPTModel.Store.Department" store:Type="Tables" Schema="include" />
+          <EntitySet Name="GunSmith" EntityType="IncludeTPTModel.Store.GunSmith" store:Type="Tables" Schema="include" />
+          <EntitySet Name="Location" EntityType="IncludeTPTModel.Store.Location" store:Type="Tables" Schema="include" />
+          <EntitySet Name="Phone" EntityType="IncludeTPTModel.Store.Phone" store:Type="Tables" Schema="include" />
+          <AssociationSet Name="FK_Company_Location" Association="IncludeTPTModel.Store.FK_Company_Location">
+            <End Role="Location" EntitySet="Location" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Department_Company" Association="IncludeTPTModel.Store.FK_Department_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Department" EntitySet="Department" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GunSmith_Company" Association="IncludeTPTModel.Store.FK_GunSmith_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="GunSmith" EntitySet="GunSmith" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GunSmith_Contact" Association="IncludeTPTModel.Store.FK_GunSmith_Contact">
+            <End Role="Contact" EntitySet="Contact" />
+            <End Role="GunSmith" EntitySet="GunSmith" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Location_Phone" Association="IncludeTPTModel.Store.FK_Location_Phone">
+            <End Role="Phone" EntitySet="Phone" />
+            <End Role="Location" EntitySet="Location" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ContactName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" />
+          </Key>
+          <Property Name="DepartmentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GunSmith">
+          <Key>
+            <PropertyRef Name="GunSmithId" />
+          </Key>
+          <Property Name="GunSmithId" Type="int" Nullable="false" />
+          <Property Name="IsCertified" Type="bit" Nullable="false" />
+          <Property Name="CompanyId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="PhoneId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="PhoneId" />
+          </Key>
+          <Property Name="PhoneId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Number" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Company_Location">
+          <End Role="Location" Type="IncludeTPTModel.Store.Location" Multiplicity="1" />
+          <End Role="Company" Type="IncludeTPTModel.Store.Company" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Location">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Department_Company">
+          <End Role="Company" Type="IncludeTPTModel.Store.Company" Multiplicity="1" />
+          <End Role="Department" Type="IncludeTPTModel.Store.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="Department">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GunSmith_Company">
+          <End Role="Company" Type="IncludeTPTModel.Store.Company" Multiplicity="1" />
+          <End Role="GunSmith" Type="IncludeTPTModel.Store.GunSmith" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="CompanyId" />
+            </Principal>
+            <Dependent Role="GunSmith">
+              <PropertyRef Name="CompanyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GunSmith_Contact">
+          <End Role="Contact" Type="IncludeTPTModel.Store.Contact" Multiplicity="1" />
+          <End Role="GunSmith" Type="IncludeTPTModel.Store.GunSmith" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Contact">
+              <PropertyRef Name="ContactId" />
+            </Principal>
+            <Dependent Role="GunSmith">
+              <PropertyRef Name="GunSmithId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Location_Phone">
+          <End Role="Phone" Type="IncludeTPTModel.Store.Phone" Multiplicity="1" />
+          <End Role="Location" Type="IncludeTPTModel.Store.Location" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Phone">
+              <PropertyRef Name="PhoneId" />
+            </Principal>
+            <Dependent Role="Location">
+              <PropertyRef Name="PhoneId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="IncludeTPTModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="IncludeTPTEntities">
+          <EntitySet Name="Contacts" EntityType="IncludeTPTModel.Contact" />
+          <EntitySet Name="Location" EntityType="IncludeTPTModel.Location" />
+          <AssociationSet Name="FK_GunSmith_Company" Association="IncludeTPTModel.FK_GunSmith_Company">
+            <End EntitySet="Location" Role="Company" />
+            <End EntitySet="Contacts" Role="GunSmith" />
+          </AssociationSet>
+          <EntitySet Name="Phone" EntityType="IncludeTPTModel.Phone" />
+          <AssociationSet Name="FK_Location_Phone" Association="IncludeTPTModel.FK_Location_Phone">
+            <End Role="Phone" EntitySet="Phone" />
+            <End Role="Location" EntitySet="Location" /></AssociationSet>
+          <EntitySet Name="DepartmentSet" EntityType="IncludeTPTModel.Department" />
+          <AssociationSet Name="FK_Departments_Company" Association="IncludeTPTModel.FK_Departments_Company">
+            <End Role="Company" EntitySet="Location" />
+            <End Role="Departments" EntitySet="DepartmentSet" /></AssociationSet>
+          </EntityContainer>
+        <EntityType Name="Company" BaseType="IncludeTPTModel.Location">
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="GunSmith" Relationship="IncludeTPTModel.FK_GunSmith_Company" FromRole="Company" ToRole="GunSmith" />
+          <NavigationProperty Name="Departments" Relationship="IncludeTPTModel.FK_Departments_Company" FromRole="Company" ToRole="Departments" />
+          </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int32" Nullable="false" />
+          <Property Name="ContactName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="GunSmith" BaseType="IncludeTPTModel.Contact">
+          <Property Name="IsCertified" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="IncludeTPTModel.FK_GunSmith_Company" FromRole="GunSmith" ToRole="Company" />
+        </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Phone" Relationship="IncludeTPTModel.FK_Location_Phone" FromRole="Location" ToRole="Phone" /></EntityType>
+        <Association Name="FK_GunSmith_Company">
+          <End Type="IncludeTPTModel.Company" Multiplicity="1" Role="Company" />
+          <End Type="IncludeTPTModel.GunSmith" Multiplicity="*" Role="GunSmith" />
+        </Association>
+        <EntityType Name="Phone">
+          <Key>
+            <PropertyRef Name="PhoneId" /></Key>
+          <Property Name="PhoneId" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="String" Nullable="false" />
+          <NavigationProperty Name="Location" Relationship="IncludeTPTModel.FK_Location_Phone" FromRole="Phone" ToRole="Location" /></EntityType>
+        <Association Name="FK_Location_Phone">
+          <End Type="IncludeTPTModel.Phone" Role="Phone" Multiplicity="1" />
+          <End Type="IncludeTPTModel.Location" Role="Location" Multiplicity="*" /></Association>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="DepartmentId" /></Key>
+          <Property Name="DepartmentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="IncludeTPTModel.FK_Departments_Company" FromRole="Departments" ToRole="Company" /></EntityType>
+        <Association Name="FK_Departments_Company">
+          <End Type="IncludeTPTModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="IncludeTPTModel.Department" Role="Departments" Multiplicity="*" /></Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="IncludeTPTModelStoreContainer" CdmEntityContainer="IncludeTPTEntities">
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="IsTypeOf(IncludeTPTModel.Contact)">
+              <MappingFragment StoreEntitySet="Contact">
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+                <ScalarProperty Name="ContactName" ColumnName="ContactName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          <EntityTypeMapping TypeName="IsTypeOf(IncludeTPTModel.GunSmith)">
+              <MappingFragment StoreEntitySet="GunSmith">
+                <ScalarProperty Name="ContactId" ColumnName="GunSmithId" />
+                <ScalarProperty Name="IsCertified" ColumnName="IsCertified" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Location">
+            <EntityTypeMapping TypeName="IsTypeOf(IncludeTPTModel.Location)">
+              <MappingFragment StoreEntitySet="Location">
+                <ScalarProperty Name="LocationId" ColumnName="LocationId" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          <EntityTypeMapping TypeName="IsTypeOf(IncludeTPTModel.Company)">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="LocationId" ColumnName="CompanyId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_GunSmith_Company" TypeName="IncludeTPTModel.FK_GunSmith_Company" StoreEntitySet="GunSmith">
+            <EndProperty Name="GunSmith">
+              <ScalarProperty Name="ContactId" ColumnName="GunSmithId" /></EndProperty>
+            <EndProperty Name="Company">
+              <ScalarProperty Name="LocationId" ColumnName="CompanyId" /></EndProperty>
+            </AssociationSetMapping>
+          <EntitySetMapping Name="Phone">
+            <EntityTypeMapping TypeName="IsTypeOf(IncludeTPTModel.Phone)">
+              <MappingFragment StoreEntitySet="Phone">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="PhoneId" ColumnName="PhoneId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_Location_Phone" TypeName="IncludeTPTModel.FK_Location_Phone" StoreEntitySet="Location">
+            <EndProperty Name="Location">
+              <ScalarProperty Name="LocationId" ColumnName="LocationId" /></EndProperty>
+            <EndProperty Name="Phone">
+              <ScalarProperty Name="PhoneId" ColumnName="PhoneId" /></EndProperty></AssociationSetMapping>
+          <EntitySetMapping Name="DepartmentSet">
+            <EntityTypeMapping TypeName="IsTypeOf(IncludeTPTModel.Department)">
+              <MappingFragment StoreEntitySet="Department">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_Departments_Company" TypeName="IncludeTPTModel.FK_Departments_Company" StoreEntitySet="Department">
+            <EndProperty Name="Company">
+              <ScalarProperty Name="LocationId" ColumnName="CompanyId" /></EndProperty>
+            <EndProperty Name="Departments">
+              <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="IncludeTPT">
+        <EntityTypeShape EntityType="IncludeTPTModel.Company" Width="1.5" PointX="5" PointY="4.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="IncludeTPTModel.Contact" Width="1.5" PointX="7.75" PointY="2.625" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="IncludeTPTModel.GunSmith" Width="1.5" PointX="7.625" PointY="4.625" Height="1.4033821614583335" IsExpanded="true" />
+        <EntityTypeShape EntityType="IncludeTPTModel.Location" Width="1.5" PointX="5" PointY="2.5" Height="1.59568359375" IsExpanded="true" />
+        <AssociationConnector ManuallyRouted="false" Association="IncludeTPTModel.FK_GunSmith_Company">
+          <ConnectorPoint PointX="6.5" PointY="5.3266910807291667" />
+          <ConnectorPoint PointX="7.625" PointY="5.3266910807291667" />
+          </AssociationConnector>
+        <InheritanceConnector EntityType="IncludeTPTModel.GunSmith">
+          <ConnectorPoint PointX="8.4375" PointY="4.22068359375" />
+          <ConnectorPoint PointX="8.4375" PointY="4.625" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="IncludeTPTModel.Company">
+          <ConnectorPoint PointX="5.75" PointY="4.09568359375" />
+          <ConnectorPoint PointX="5.75" PointY="4.5" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="IncludeTPTModel.Phone" Width="1.5" PointX="6.25" PointY="0.5" Height="1.5956835937499998" />
+        <AssociationConnector Association="IncludeTPTModel.FK_Location_Phone" >
+          <ConnectorPoint PointX="7.0937505000000005" PointY="2.0956835937499996" />
+          <ConnectorPoint PointX="7.0937505000000005" PointY="3.297841796875" />
+          <ConnectorPoint PointX="6.5" PointY="3.297841796875" /></AssociationConnector>
+        <EntityTypeShape EntityType="IncludeTPTModel.Department" Width="1.5" PointX="6.25" PointY="6.625" Height="1.5956835937499996" />
+        <AssociationConnector Association="IncludeTPTModel.FK_Departments_Company" >
+          <ConnectorPoint PointX="5.6249994999999995" PointY="6.2879850260416665" />
+          <ConnectorPoint PointX="5.6249994999999995" PointY="7.422841796875" />
+          <ConnectorPoint PointX="6.25" PointY="7.422841796875" /></AssociationConnector>
+        </Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

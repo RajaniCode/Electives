@@ -1,0 +1,311 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="ab792ded-a7d0-44cb-9ad4-cf01b5dff27f" LowerBound="1.1" HigherBound="64.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="Loan_Acceptance" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="PortType" OID="3dd1216b-97df-4146-94c0-816ddeeabf90" ParentLink="Module_PortType" LowerBound="12.1" HigherBound="19.1">
+            <om:Property Name="Synchronous" Value="True" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="SQLServiceExec" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="1ebf67a2-90e9-4137-a072-3f7ac70eff28" ParentLink="PortType_OperationDeclaration" LowerBound="14.1" HigherBound="18.1">
+                <om:Property Name="OperationType" Value="RequestResponse" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="procedure" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="ae4db4c8-e66d-4b38-ab55-90b2e2dd22c2" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="16.13" HigherBound="16.29">
+                    <om:Property Name="Ref" Value="Loan_Acceptance.procedureRequest" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+                <om:Element Type="MessageRef" OID="3c997253-5437-415a-b38c-b9f06d312e36" ParentLink="OperationDeclaration_ResponseMessageRef" LowerBound="16.31" HigherBound="16.48">
+                    <om:Property Name="Ref" Value="Loan_Acceptance.procedureResponse" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Response" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="be42b116-af38-4e4b-87b7-8f88171579c2" ParentLink="Module_PortType" LowerBound="19.1" HigherBound="26.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PortType_LoanApplication" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="1cba9fc3-67ba-4b5a-a7fa-29be96f8e95d" ParentLink="PortType_OperationDeclaration" LowerBound="21.1" HigherBound="25.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Operation_1" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="e4d87446-f773-42a4-bd58-7588bf3ed696" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="23.13" HigherBound="23.28">
+                    <om:Property Name="Ref" Value="Loan_Acceptance.LoanApplication" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="PortType" OID="d68d6ba8-b10e-4e31-b91e-773bfb2e44e6" ParentLink="Module_PortType" LowerBound="26.1" HigherBound="33.1">
+            <om:Property Name="Synchronous" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="PortType_result" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="OperationDeclaration" OID="f8c80a3d-177e-4bc8-bee7-7571d6f4b88f" ParentLink="PortType_OperationDeclaration" LowerBound="28.1" HigherBound="32.1">
+                <om:Property Name="OperationType" Value="OneWay" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Operation_1" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="MessageRef" OID="9e733b2b-e0c6-424e-b0f6-4c062f4b1ca2" ParentLink="OperationDeclaration_RequestMessageRef" LowerBound="30.13" HigherBound="30.30">
+                    <om:Property Name="Ref" Value="Loan_Acceptance.procedureResponse" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Request" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="MultipartMessageType" OID="8c7dcc45-2af2-4d92-82bf-cb0a4a46d4de" ParentLink="Module_MessageType" LowerBound="4.1" HigherBound="8.1">
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="procedureRequest" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="PartDeclaration" OID="56ab82e7-ab48-40bf-ac2d-6a8f771617c1" ParentLink="MultipartMessageType_PartDeclaration" LowerBound="6.1" HigherBound="7.1">
+                <om:Property Name="ClassName" Value="Loan_Acceptance.SQLService.RequestRoot" />
+                <om:Property Name="IsBodyPart" Value="True" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="parameters" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="MultipartMessageType" OID="dbdfbb38-9806-4c5c-92cd-4683258ed0f0" ParentLink="Module_MessageType" LowerBound="8.1" HigherBound="12.1">
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="procedureResponse" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="PartDeclaration" OID="357b9bf8-f0fd-4b2a-8536-959995f69a4b" ParentLink="MultipartMessageType_PartDeclaration" LowerBound="10.1" HigherBound="11.1">
+                <om:Property Name="ClassName" Value="Loan_Acceptance.SQLService.ResponseRoot" />
+                <om:Property Name="IsBodyPart" Value="True" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="parameters" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="ServiceDeclaration" OID="24075ed1-adc8-4149-a24a-9181c5faeb94" ParentLink="Module_ServiceDeclaration" LowerBound="33.1" HigherBound="63.1">
+            <om:Property Name="InitializedTransactionType" Value="False" />
+            <om:Property Name="IsInvokable" Value="False" />
+            <om:Property Name="TypeModifier" Value="Internal" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="Orchestration_1" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="ServiceBody" OID="7053b85a-1ce4-4f53-9b06-73176b73195e" ParentLink="ServiceDeclaration_ServiceBody">
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="Receive" OID="38737c07-6c1d-448a-a5a5-9093ef511e27" ParentLink="ServiceBody_Statement" LowerBound="47.1" HigherBound="49.1">
+                    <om:Property Name="Activate" Value="True" />
+                    <om:Property Name="PortName" Value="LoanApplication_in_port" />
+                    <om:Property Name="MessageName" Value="LoanApplicationMSG" />
+                    <om:Property Name="OperationName" Value="Operation_1" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Receive_Application" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="Construct" OID="5d75e5f9-51e4-4a13-afe4-46ff779c955a" ParentLink="ServiceBody_Statement" LowerBound="49.1" HigherBound="55.1">
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Construct_SPROC_input" />
+                    <om:Property Name="Signal" Value="True" />
+                    <om:Element Type="Transform" OID="5a047244-1f61-4716-9d44-e7f0218854ba" ParentLink="ComplexStatement_Statement" LowerBound="52.1" HigherBound="54.1">
+                        <om:Property Name="ClassName" Value="Loan_Acceptance.Make_SPROC_argument" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Name" Value="Make_SPROC_argument" />
+                        <om:Property Name="Signal" Value="False" />
+                        <om:Element Type="MessagePartRef" OID="853819c9-05b8-4f28-a109-aceac069216d" ParentLink="Transform_InputMessagePartRef" LowerBound="53.91" HigherBound="53.109">
+                            <om:Property Name="MessageRef" Value="LoanApplicationMSG" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_1" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                        <om:Element Type="MessagePartRef" OID="3c636b33-247d-41fe-9868-e77640734cae" ParentLink="Transform_OutputMessagePartRef" LowerBound="53.28" HigherBound="53.50">
+                            <om:Property Name="MessageRef" Value="SPROC_input" />
+                            <om:Property Name="PartRef" Value="parameters" />
+                            <om:Property Name="ReportToAnalyst" Value="True" />
+                            <om:Property Name="Name" Value="MessagePartReference_2" />
+                            <om:Property Name="Signal" Value="False" />
+                        </om:Element>
+                    </om:Element>
+                    <om:Element Type="MessageRef" OID="91623ead-edde-46ce-ab06-162e018096c6" ParentLink="Construct_MessageRef" LowerBound="50.23" HigherBound="50.34">
+                        <om:Property Name="Ref" Value="SPROC_input" />
+                        <om:Property Name="ReportToAnalyst" Value="True" />
+                        <om:Property Name="Signal" Value="False" />
+                    </om:Element>
+                </om:Element>
+                <om:Element Type="Send" OID="897f6436-6d40-4f64-90a9-0fcb875313f6" ParentLink="ServiceBody_Statement" LowerBound="55.1" HigherBound="57.1">
+                    <om:Property Name="PortName" Value="SPROC_Call_port" />
+                    <om:Property Name="MessageName" Value="SPROC_input" />
+                    <om:Property Name="OperationName" Value="procedure" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Call_SPROC" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="Receive" OID="f58039b0-2cba-4239-ba89-10b3888b4d93" ParentLink="ServiceBody_Statement" LowerBound="57.1" HigherBound="59.1">
+                    <om:Property Name="Activate" Value="False" />
+                    <om:Property Name="PortName" Value="SPROC_Call_port" />
+                    <om:Property Name="MessageName" Value="SPROC_result" />
+                    <om:Property Name="OperationName" Value="procedure" />
+                    <om:Property Name="OperationMessageName" Value="Response" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Receive_SPROC_Result" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+                <om:Element Type="Send" OID="3da84318-fac2-49d5-8c55-619c2cd01caf" ParentLink="ServiceBody_Statement" LowerBound="59.1" HigherBound="61.1">
+                    <om:Property Name="PortName" Value="Save_result_port" />
+                    <om:Property Name="MessageName" Value="SPROC_result" />
+                    <om:Property Name="OperationName" Value="Operation_1" />
+                    <om:Property Name="OperationMessageName" Value="Request" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="Save_Result" />
+                    <om:Property Name="Signal" Value="True" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="ab1d34aa-2a8b-4975-a1ea-4add6a1acfa1" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="36.1" HigherBound="38.1">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="20" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Loan_Acceptance.PortType_result" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="Save_result_port" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="01def3fd-a6f7-4463-834e-0030168efb9f" ParentLink="PortDeclaration_CLRAttribute" LowerBound="36.1" HigherBound="37.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="8528c095-3474-4bb4-83c5-544391a50d3c" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="38.1" HigherBound="40.1">
+                <om:Property Name="PortModifier" Value="Implements" />
+                <om:Property Name="Orientation" Value="Left" />
+                <om:Property Name="PortIndex" Value="1" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Loan_Acceptance.PortType_LoanApplication" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="LoanApplication_in_port" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="LogicalBindingAttribute" OID="1349ba15-9271-47f1-83fd-86f39be57f86" ParentLink="PortDeclaration_CLRAttribute" LowerBound="38.1" HigherBound="39.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="PortDeclaration" OID="9342a89a-4f74-40cc-9671-11d26aef4ae1" ParentLink="ServiceDeclaration_PortDeclaration" LowerBound="40.1" HigherBound="42.1">
+                <om:Property Name="PortModifier" Value="Uses" />
+                <om:Property Name="Orientation" Value="Right" />
+                <om:Property Name="PortIndex" Value="16" />
+                <om:Property Name="IsWebPort" Value="False" />
+                <om:Property Name="OrderedDelivery" Value="False" />
+                <om:Property Name="DeliveryNotification" Value="None" />
+                <om:Property Name="Type" Value="Loan_Acceptance.SQLServiceExec" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SPROC_Call_port" />
+                <om:Property Name="Signal" Value="True" />
+                <om:Element Type="LogicalBindingAttribute" OID="27bbea84-7994-4eac-adc7-b5fa4e5f32d6" ParentLink="PortDeclaration_CLRAttribute" LowerBound="40.1" HigherBound="41.1">
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="2842cbf0-9ef4-400e-a093-748d4e24b899" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="42.1" HigherBound="43.1">
+                <om:Property Name="Type" Value="Loan_Acceptance.LoanApplication" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="LoanApplicationMSG" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="f18959af-5c52-45c7-a06b-7369c84a3df3" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="43.1" HigherBound="44.1">
+                <om:Property Name="Type" Value="Loan_Acceptance.procedureRequest" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SPROC_input" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+            <om:Element Type="MessageDeclaration" OID="9869cc79-cc8f-4cf6-b931-4fcf1e1bc1b6" ParentLink="ServiceDeclaration_MessageDeclaration" LowerBound="44.1" HigherBound="45.1">
+                <om:Property Name="Type" Value="Loan_Acceptance.procedureResponse" />
+                <om:Property Name="ParamDirection" Value="In" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="SPROC_result" />
+                <om:Property Name="Signal" Value="True" />
+            </om:Element>
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+module Loan_Acceptance
+{
+    internal messagetype procedureRequest
+    {
+        body SQLService.RequestRoot parameters;
+    };
+    internal messagetype procedureResponse
+    {
+        body SQLService.ResponseRoot parameters;
+    };
+    internal porttype SQLServiceExec
+    {
+        requestresponse procedure
+        {
+            procedureRequest, procedureResponse
+        };
+    };
+    internal porttype PortType_LoanApplication
+    {
+        oneway Operation_1
+        {
+            LoanApplication
+        };
+    };
+    internal porttype PortType_result
+    {
+        oneway Operation_1
+        {
+            procedureResponse
+        };
+    };
+    [Microsoft.XLANGs.BaseTypes.BPELExportable(false)]
+    internal service Orchestration_1
+    {
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses PortType_result Save_result_port;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port implements PortType_LoanApplication LoanApplication_in_port;
+        [Microsoft.XLANGs.BaseTypes.LogicalBinding()]
+        port uses SQLServiceExec SPROC_Call_port;
+        message LoanApplication LoanApplicationMSG;
+        message procedureRequest SPROC_input;
+        message procedureResponse SPROC_result;
+        body ()
+        {
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("38737c07-6c1d-448a-a5a5-9093ef511e27")]
+            activate receive (LoanApplication_in_port.Operation_1, LoanApplicationMSG);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("5d75e5f9-51e4-4a13-afe4-46ff779c955a")]
+            construct SPROC_input
+            {
+                [Microsoft.XLANGs.BaseTypes.DesignerPosition("5a047244-1f61-4716-9d44-e7f0218854ba")]
+                transform (SPROC_input.parameters) = Loan_Acceptance.Make_SPROC_argument (LoanApplicationMSG);
+            }
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("897f6436-6d40-4f64-90a9-0fcb875313f6")]
+            send (SPROC_Call_port.procedure, SPROC_input);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("f58039b0-2cba-4239-ba89-10b3888b4d93")]
+            receive (SPROC_Call_port.procedure, SPROC_result);
+            [Microsoft.XLANGs.BaseTypes.DesignerPosition("3da84318-fac2-49d5-8c55-619c2cd01caf")]
+            send (Save_result_port.Operation_1, SPROC_result);
+        }
+    }
+}
+

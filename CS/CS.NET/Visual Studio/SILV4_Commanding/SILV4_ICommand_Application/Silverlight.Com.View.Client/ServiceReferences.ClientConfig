@@ -1,0 +1,18 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_IService" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:8900/SILV4_ICommand/Service.svc"
+                binding="basicHttpBinding" bindingConfiguration="BasicHttpBinding_IService"
+                contract="MyRef.IService" name="BasicHttpBinding_IService" />
+        </client>
+        <extensions />
+    </system.serviceModel>
+</configuration>

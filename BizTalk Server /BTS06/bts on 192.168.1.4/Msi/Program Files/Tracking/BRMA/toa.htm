@@ -1,0 +1,593 @@
+<!-- Copyright (c) Microsoft Corporation.  All rights reserved. -->
+<!--  -->
+<!-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, -->
+<!-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED -->
+<!-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. -->
+<!-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE -->
+<!-- AND INFORMATION REMAINS WITH THE USER. -->
+<!--  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<link rel="Configuration" href="HATcfg.xml"/>
+		<META CONTENT="Microsoft Visual Studio 7.0" name="GENERATOR">
+		<META CONTENT="C#" NAME="CODE_LANGUAGE">
+		<META CONTENT="JavaScript" NAME="vs_defaultClientScript">
+		<META CONTENT="http://schemas.microsoft.com/intellisense/ie5" NAME="vs_targetSchema">
+		<LINK REL="stylesheet" TYPE="text/css" HREF="default.css" ID="brma_ss">
+		<script language="JavaScript" src="CommonUtils.js"></script>
+		<script language="VBScript" src="CommonUtils.vbs"></script> 
+		
+		<SCRIPT LANGUAGE="jscript">
+			var oDbUtil, oNavCtrl, DataType, SqlSrv, SqlDB, OlapSrv, OlapDB, View, Group, Inst, SvcClassId, sNewUrl, nUrlCount, ActivityId, MessageId;
+			HelpTopic = "cshidInstanceActivityView"; // Set ID of the help topic for this page
+
+			var sResServiceInstance="Service/Name";//brma.Resources.GetDbString("SVF_COL_SVC_NAME");
+			var sResActivityID="ServiceInstance/ActivityID";//brma.Resources.GetDbString("sSVF_COL_SVCINST_ACTIVITYID");
+			var sResInstanceID="ServiceInstance/InstanceID";//brma.Resources.GetDbString("SVF_COL_SVCINST_INSTID");
+			var sHost="ServiceInstance/Host";//Resources.GetDbString("SVF_COL_SVCINST_HOST");
+			var sResState="ServiceInstance/State";//brma.Resources.GetDbString("SVF_COL_SVCINST_STATE");
+			var sResStartTime="ServiceInstance/StartTime";//brma.Resources.GetDbString("SVF_COL_SVCINST_STRTIME");
+			var sResEndTime="ServiceInstance/EndTime";//brma.Resources.GetDbString("SVF_COL_SVCINST_ENDTIME");
+			var sResDuration="ServiceInstance/Duration";//brma.Resources.GetDbString("SVF_COL_SVCINST_DURATION");
+			var sResExitCode="ServiceInstance/ExitCode";//brma.Resources.GetDbString("SVF_COL_SVCINST_EXITCODE");
+			var sResType="Service/Type";//brma.Resources.GetDbString("SVF_COL_SVC_TYPE");
+			var sResVersionGUID="Service/VersionGUID";//brma.Resources.GetDbString("SVF_COL_SVC_VERSIONGUID");
+			var sResDeploymentTime="Service/DeploymentTime";//brma.Resources.GetDbString("SVF_COL_SVC_DEPLTIME");
+			var sErrorInfo="ServiceInstance/ErrorInfo";//Resources.GetDbString("SVF_COL_SVC_ERRORINFO");
+
+			var sMsgInstID= "MessageInstance/InstanceID";//Resources.GetDbString("MSF_COL_MSGINST_INSTID");
+			var sMsgTransportType="Event/Adapter";//Resources.GetDbString("MSF_COL_MSGINST_TRANSPT");
+			var sMsgSchemaName="MessageInstance/SchemaName";//Resources.GetDbString("MSF_COL_MSGINST_SCHEMA");
+			var sMsgURL="Event/URL";//Resources.GetDbString("MSF_COL_MSGINST_URL");
+			var sMsgDecriptionCertificate="Event/DecryptionCertificate";//Resources.GetDbString("MSF_COL_MSGINST_DECRCERT");
+			var sMsgSignature	="Event/Signature";//Resources.GetDbString("MSF_COL_MSGINST_SIGNT");
+			var sMsgTimeStamp = "Event/Timestamp";//Resources.GetDbString("MSF_COL_EVENT_TIMESTAMP");
+			var sMsgDirection = "Event/Direction";//Resources.GetDbString("MSF_COL_EVENT_DIRECTION");
+			var sMsgEventID="Event/EventID";//Resources.GetDbString("MSF_COL_EVENT_ID");
+			var sMsgDirectionId = "nMessageStatusID";//Resources.GetDbString("MSF_COL_EVENT_DIRECTION");
+			var sMsgPartCount="MessageInstance/PartCount";//Resources.GetDbString("MSF_COL_PART_COUNT");;
+			var sMsgSize="MessageInstance/Size";//Resources.GetDbString("MSF_COL_SIZE");
+			var sMsgParty="Event/Party";//Resources.GetDbString("MSF_COL_PARTY");
+			var sMsgPort="Event/Port";//Resources.GetDbString("MSF_COL_PORT");
+
+			var sSvcMsgName="Service/Name";//Resources.GetDbString("SVF_COL_SVC_NAME");
+			var sSvcMsgGuid="ServiceInstance/InstanceID";//Resources.GetDbString("SVF_COL_SVCINST_INSTID");
+			var sSvcClassId="Service/ServiceClassGUID";
+			var OrchestrationServiceClass = "226FC6B9-0416-47A4-A8E8-4721F1DB1A1B";
+
+			function PageLoad()
+			{
+				oNavCtrl = document.CollapsibleCtrl;
+				oDbUtil	 = document.DbUtil;
+				
+				try
+				{
+					// Initialize static strings
+					var title = oNavCtrl.GetWebPageResourceString("title_ThreadOfActivity");;
+					ChangeTitle(title);
+
+					str_ToaView.innerText = oNavCtrl.GetWebPageResourceString("str_ToaView");
+					str_SwitchTo.innerText = oNavCtrl.GetWebPageResourceString("str_SwitchTo");
+					a_TechDetails.innerText = oNavCtrl.GetWebPageResourceString("title_TechnicalDetails");
+					toa_ServiceInstance.innerText = oNavCtrl.GetWebPageResourceString("toa_ServiceInstance");
+					toa_ActivityID.innerText = oNavCtrl.GetWebPageResourceString("toa_ActivityID");
+					toa_InstanceID.innerText = oNavCtrl.GetWebPageResourceString("toa_InstanceID");
+					toa_Host.innerText = oNavCtrl.GetWebPageResourceString("toa_Host");
+					toa_Type.innerText = oNavCtrl.GetWebPageResourceString("toa_Type");
+					toa_VersionID.innerText = oNavCtrl.GetWebPageResourceString("toa_VersionID");
+					toa_DeploymentTime.innerText = oNavCtrl.GetWebPageResourceString("toa_DeploymentTime");
+					toa_State.innerText = oNavCtrl.GetWebPageResourceString("toa_State");
+					toa_StartTime.innerText = oNavCtrl.GetWebPageResourceString("toa_StartTime");
+					toa_EndTime.innerText = oNavCtrl.GetWebPageResourceString("toa_EndTime");
+					toa_Duration.innerText = oNavCtrl.GetWebPageResourceString("toa_Duration");
+					toa_ExitCode.innerText = oNavCtrl.GetWebPageResourceString("toa_ExitCode");
+					toa_Error.innerText = oNavCtrl.GetWebPageResourceString("toa_Error");
+					toa_msgActivityHeader.innerText = oNavCtrl.GetWebPageResourceString("toa_msgActivityHeader");
+					toa_InOut.innerText = oNavCtrl.GetWebPageResourceString("toa_InOut");
+					toa_MessageInstance.innerText = oNavCtrl.GetWebPageResourceString("toa_MessageInstance");
+					toa_Status.innerText = oNavCtrl.GetWebPageResourceString("toa_Status");
+					toa_Timestamp.innerText = oNavCtrl.GetWebPageResourceString("toa_Timestamp");
+					toa_Exception.innerText = oNavCtrl.GetWebPageResourceString("toa_Exception");
+					
+					DataType 	= oNavCtrl.GetViewParameter("sDataType"); 
+					SqlSrv 		= oNavCtrl.GetViewParameter("sqlSrv"); 
+					SqlDB 		= oNavCtrl.GetViewParameter("sqlDB"); 
+					OlapSrv 	= oNavCtrl.GetViewParameter("olapSrv"); 
+					OlapDB 		= oNavCtrl.GetViewParameter("olapDB"); 
+					View 		= oNavCtrl.GetViewParameter("view"); 
+					Group 		= oNavCtrl.GetViewParameter("group");
+					AppType		= oNavCtrl.GetViewParameter("AppType");
+					Inst 		= oNavCtrl.GetViewParameter("inst");
+					ActivityId	= oNavCtrl.GetViewParameter("activity");
+					MessageId	= oNavCtrl.GetViewParameter("messageId");
+
+					divShow("TOA_BODY"); // Show the page only after at least some UI names are initialized
+					
+					var ForceLive = oNavCtrl.GetViewParameter("ForceLive");
+								
+					if("1" == ForceLive)
+					{//replace given databases with the live ones
+						
+						oNavCtrl.LoadConfig();//force loading the live params					
+						
+						SqlSrv = oNavCtrl.DecodeFromUrl(oNavCtrl.LiveSqlServer);
+						SqlDB = oNavCtrl.DecodeFromUrl(oNavCtrl.LiveSQLDatabase);
+						
+						//todo need also live group and app type?
+						//Group = oNavCtrl.LiveSqlServer;
+						//AppType = oNavCtrl.LiveSqlServer;						
+					}
+
+					nUrlCount=0;
+					
+					// Check for the activityId
+					if (ActivityId == "")
+					{
+						// If the activity Id is null, then try to get it with 
+						// MessageId, InstanceId pair
+						ActivityId = oDbUtil.getActivityId(SqlSrv, SqlDB, Inst, MessageId);
+					}
+					
+					
+					fillServiceInstInfo(SqlSrv, SqlDB, Inst, ActivityId);				
+					fillMsgBoundToSvc(SqlSrv, SqlDB, Inst, ActivityId);
+									
+					//by now SvcClassId is populated, time to initialize all extensions and add table of urls
+					var html=oNavCtrl.GetMsgFlowExtencibilityHtml(SvcClassId, Inst, SqlSrv, SqlDB, Group, AppType);
+
+					//show table only if there is at least one URL added
+					if("" != html)
+					{
+						addExtensionUrl(html);
+						divShow("ExtUrlList");
+					}
+				}
+				catch(e)
+				{
+					alertErr(e.description);
+				}
+			}
+			
+			function NavigateToTechDetails()
+			{
+				oNavCtrl = document.CollapsibleCtrl;
+				var URLParams 	= oNavCtrl.UrlParams;
+				NavigateNoPopUpWindow("techdetails.htm?" + URLParams);
+			}
+
+			function divShow(sDivName){		
+				eval(sDivName + ".style.display='block'");
+			}
+			
+			function PopUpAllExceptions()
+			{
+				document.all("CollapsibleCtrl").ShowExceptions(Inst);
+			}
+
+            function PopUpMMCInstanceQuery()
+            {
+				oNavCtrl.PopUpMMCInstanceQuery(Inst);
+            }
+            
+			function addExtensionUrl(newUrl)
+			{
+				ExtBody.insertRow(ExtBody.childNodes.length);
+				var oRow = ExtBody.childNodes(ExtBody.childNodes.length-1);				
+				
+				oRow.insertCell();
+				oRow.childNodes(0).innerHTML = newUrl;
+			}
+			
+			function fillServiceInstInfo(SqlSrv , SqlDB, InstanceId, ActivityId)
+			{
+				//fill one service instance info
+				//read service info into internal variable from DB
+				oDbUtil.GetSvcInstCaseInfo(SqlSrv , SqlDB, InstanceId, ActivityId);	
+						
+				//read values from internal variable
+				ResServiceInstance.innerText	= oDbUtil.getSvcInstCaseVal(sResServiceInstance);
+				m_sResActivityID.innerText		= "{" + oDbUtil.getSvcInstCaseVal(sResActivityID) + "}";
+				ResInstanceID.innerText		= "{" + oDbUtil.getSvcInstCaseVal(sResInstanceID) + "}";
+				Host.innerText				= oDbUtil.getSvcInstCaseVal(sHost);
+				ResState.innerText			= oDbUtil.getSvcInstCaseVal(sResState);
+				ResStartTime.innerText		= oDbUtil.getSvcInstCaseVal(sResStartTime);
+				ResEndTime.innerText		= oDbUtil.getSvcInstCaseVal(sResEndTime);
+				ResDuration.innerText		= oDbUtil.getSvcInstCaseVal(sResDuration);
+				ResExitCode.innerText		= oDbUtil.getSvcInstCaseVal(sResExitCode);
+				//ResName.innerText			= oDbUtil.getSvcInstCaseVal("<%= this.ResName %>");
+				ResType.innerText			= oDbUtil.getSvcInstCaseVal(sResType);
+				ResVersionGUID.innerText		= "{" + oDbUtil.getSvcInstCaseVal(sResVersionGUID) + "}";
+				ResDeploymentTime.innerText	= oDbUtil.getSvcInstCaseVal(sResDeploymentTime);				
+				
+				ErrInfoBody.innerText= oDbUtil.getSvcInstCaseVal(sErrorInfo);
+								
+				var nNumberOfExceptions=oDbUtil.getNumberOfExceptions(SqlSrv , SqlDB, Inst);
+	
+				if(nNumberOfExceptions>0)
+				{//str_ToaShowExceptionsUrlText
+					var LinkText=oNavCtrl.GetWebPageResourceString("str_ToaShowExceptionsUrlText");
+					LinkText+=" (";
+					LinkText+=nNumberOfExceptions;
+					LinkText+=").";
+					ExceptionUrl.innerText=LinkText;
+					var sHref="javascript:PopUpAllExceptions()";
+					ExceptionUrl.href=sHref;
+				}
+
+                // Only if preferences point to a live database
+                var endTime = oDbUtil.getSvcInstCaseVal(sResEndTime);
+                if(1 == oNavCtrl.DataType && (null == endTime || endTime == ""))
+                {
+                    LinkToMmcQuery.innerText = oNavCtrl.GetWebPageResourceString("str_ToaLinkToMmcQueryUrlText");
+					LinkToMmcQuery.href = "javascript:PopUpMMCInstanceQuery()";
+                }
+        
+        
+				
+				SvcClassId = oDbUtil.getSvcInstCaseVal(sSvcClassId);
+				var IsOrchestration = ( 0 == oNavCtrl.CompareGuidStrings(SvcClassId, OrchestrationServiceClass));
+				if(IsOrchestration)
+				{//not an orchestration - remove the link
+					a_delimiter.style.visibility = 'visible'; //VISIBILITY
+					str_SwitchTo.style.visibility = 'visible'; //VISIBILITY
+					a_TechDetails.style.visibility = 'visible'; //VISIBILITY
+				}
+				
+				//clear internal variable				
+				oDbUtil.clearSvcInstCaseInfo();
+			}
+			
+			
+			
+			function fillMsgBoundToSvc(SqlSrv, SqlDB, InstanceId, ActivityId)
+			{
+				//all messages in once
+				fillMsgIns(SqlSrv, SqlDB, InstanceId, ActivityId);//, "0", "R"					
+			}
+			
+			function fillMsgIns(SqlSrv, SqlDB, InstanceId, ActivityId)//, dir, suffix)
+			{
+				var msgName, msgStatus, msgTimeStamp, msgInstID, msgSize, num, direc, sufMess,dir,sufSvc,dirSvc;
+				num	= oDbUtil.GetServiceInstanceMessages(SqlSrv , SqlDB, InstanceId, ActivityId);//, dir);
+				
+				if(num>0)
+				{
+					do
+					{
+						MsgInstID=					oDbUtil.getServiceInstanceMessagesVal(sMsgInstID);
+						MsgTransportType=			oDbUtil.getServiceInstanceMessagesVal(sMsgTransportType);
+						MsgSchemaName=				oDbUtil.getServiceInstanceMessagesVal(sMsgSchemaName);
+						MsgURL=						oDbUtil.getServiceInstanceMessagesVal(sMsgURL);
+						MsgDecriptionCertificate=	oDbUtil.getServiceInstanceMessagesVal(sMsgDecriptionCertificate);
+						MsgSignature=				oDbUtil.getServiceInstanceMessagesVal(sMsgSignature);
+						MsgTimeStamp=				oDbUtil.getServiceInstanceMessagesVal(sMsgTimeStamp);
+						MsgDirection=				oDbUtil.getServiceInstanceMessagesVal(sMsgDirection);
+						MsgEventID=					oDbUtil.getServiceInstanceMessagesVal(sMsgEventID);
+						MsgDirectionId=				oDbUtil.getServiceInstanceMessagesVal(sMsgDirectionId);
+						MsgPartCount=				oDbUtil.getServiceInstanceMessagesVal(sMsgPartCount);
+						MsgSize=					oDbUtil.getServiceInstanceMessagesVal(sMsgSize);
+						MsgParty=					oDbUtil.getServiceInstanceMessagesVal(sMsgParty);
+						MsgPort=					oDbUtil.getServiceInstanceMessagesVal(sMsgPort);
+
+						if ((MsgDirectionId=="0") || (MsgDirectionId == "1"))
+							msgStatus = "OK";
+						else
+							msgStatus = MsgDirection;
+
+						if (MsgDirectionId=="0")//receive
+						{
+							sufMess = "R";
+							dir= "0";
+							sufSvc  = "S";//for recieved messages show just sending services
+							dirSvc  = "1";
+						}
+						else // Send, Transmission Fail, Transmission Retry are all outbound
+						{
+							sufMess = "S";
+							dir= "1";
+							sufSvc  = "R";//for sent messages show just recieving services
+							dirSvc  = "0";
+						}
+						
+						displayMsgInst(sufMess, MsgSchemaName, msgStatus, MsgTimeStamp, MsgInstID, MsgPartCount, MsgSize, MsgTransportType, MsgURL, MsgDecriptionCertificate, MsgSignature, MsgParty, MsgPort);						
+						
+						fillSvcByMsgInst(SqlSrv , SqlDB, InstanceId, MsgInstID, ActivityId, dir, sufMess, dirSvc, sufSvc);
+					} while(oDbUtil.ServiceInstanceMessagesMoveNext())
+					
+					//clear internal vars
+					oDbUtil.clearServiceInstanceMessages();
+				}
+			}
+			
+			function fillSvcByMsgInst(SqlSrv, SqlDB, InstanceId, msgInstID, sourceActivityId, dir, suffix, dirSvc, suffixSvc)
+			{
+				var svcGuid, svcName, activityId, num;
+				var num	= oDbUtil.GetMessageInstanceServices(SqlSrv, SqlDB, InstanceId, msgInstID, sourceActivityId, dirSvc);
+				if(num>0)
+				{
+					do
+					{
+						svcGuid	= oDbUtil.getMessageInstanceServicesVal(sSvcMsgGuid);
+						svcName	= oDbUtil.getMessageInstanceServicesVal(sSvcMsgName);
+						activityId	= oDbUtil.getMessageInstanceServicesVal(sResActivityID);
+						displaySvcByMsg(activityId, svcGuid, svcName, suffix, suffixSvc);
+					}while(oDbUtil.MessageInstanceServicesMoveNext())					
+					oDbUtil.clearMessageInstanceServices();
+				}
+			}
+			
+			function displayMsgInst(msgType, msgName, msgStatus, msgTimeStamp, msgInstID, msgPartCount, msgSize, msgTransportType, msgURL, msgDecriptionCertificate, msgSignature, msgParty, msgPort)
+			{
+				var oRow, strHTML, strLink;
+				
+				strHTML = "<TABLE>";
+				strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_MsgInstID") + "</TD><TD>&nbsp;{"+msgInstID+"}</TD></TR>";
+				if(msgSize!="")
+					strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_Size") + "</TD><TD>&nbsp;"+msgSize+"</TD></TR>";
+				if(msgPartCount!="")
+					strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_PartCount") + "</TD><TD>&nbsp;"+msgPartCount+"</TD></TR>";
+				if(msgTransportType!="")
+					strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_TransportType") + "</TD><TD>&nbsp;"+msgTransportType+"</TD></TR>";
+				if(msgURL!="")
+					strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_URL") + "</TD><TD>&nbsp;"+msgURL+"</TD></TR>";
+				if(msgDecriptionCertificate!="")
+					strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_DecriptionCertificate") + "</TD><TD>&nbsp;"+msgDecriptionCertificate+"</TD></TR>";
+				if(msgSignature!="")
+					strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_Signature") + "</TD><TD>&nbsp;"+msgSignature+"</TD></TR>";
+				if(msgParty!="")
+					strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_Party") + "</TD><TD>&nbsp;"+msgParty+"</TD></TR>";
+				if(msgPort!="")
+					strHTML+= "<TR><TD>" + oNavCtrl.GetWebPageResourceString("toa_tbl_Port") + "</TD><TD>&nbsp;"+msgPort+"</TD></TR>";
+				strHTML+= "</TABLE>";
+				
+				strLink = "<A HREF='#" + msgName + "'>" + msgName + "</A>";				
+				
+				tBody.insertRow(tBody.childNodes.length);
+				var oRow = tBody.childNodes(tBody.childNodes.length-1);
+				
+				for(i=0;i<4;i++){
+					oRow.insertCell();
+					oRow.childNodes(i).className = "toaMsgRow";
+				}
+				oRow.childNodes(0).innerHTML 	= "<A NAME='" + msgName + "'><IMG SRC='msg" + msgType + ".gif' ALIGN='absmiddle'/></A>";
+				oRow.childNodes(1).innerHTML 	= strLink;
+				oRow.childNodes(2).innerText 	= msgStatus;
+				oRow.childNodes(3).innerText 	= msgTimeStamp;
+				oRow.childNodes(3).innerHTML 	+= "&nbsp;<IMG SRC='msgHide.gif'  ALT='' ALIGN='absmiddle'/>";
+				oRow.onclick					= showMsgInstDetails;
+				
+				tBody.insertRow(tBody.childNodes.length);
+				oRow = tBody.childNodes(tBody.childNodes.length-1);
+				
+				for(i=0;i<2;i++)
+					oRow.insertCell();
+				oRow.childNodes(1).colSpan 				= 4;
+				oRow.childNodes(1).style.paddingLeft 	= "5px";
+				oRow.childNodes(1).innerHTML			= strHTML;
+				oRow.style.display						= ""
+			}
+			
+			function displaySvcByMsg(activityId, svcGuid, svcName, suffix, suffixSvc)
+			{
+				// construct link to other instances
+				var strLink = "toa.htm?DataType=" + oNavCtrl.EncodeForUrl(DataType) + "&SqlSrv=" + oNavCtrl.EncodeForUrl(SqlSrv) + "&SqlDB=" + oNavCtrl.EncodeForUrl(SqlDB);
+					strLink += "&OlapSrv=" + oNavCtrl.EncodeForUrl(OlapSrv) + "&OlapDB=" + oNavCtrl.EncodeForUrl(OlapDB) + "&View=" + oNavCtrl.EncodeForUrl(View);
+					strLink += "&Inst={" + svcGuid + "}" + "&Activity={" + activityId + "}" + "&messageId=";
+					
+				tBody.insertRow(tBody.childNodes.length);
+				var oRow = tBody.childNodes(tBody.childNodes.length-1);
+				
+				for(i=0;i<2;i++){
+					oRow.insertCell();
+					oRow.childNodes(i).className = "toaMsgSvc";
+				}	
+				oRow.childNodes(0).style.textAlign 		=  "right";
+				oRow.childNodes(0).innerHTML			=  "<IMG SRC='serviceInst.gif' ALT='' ALIGN='absmiddle'>&nbsp;";
+				//oRow.childNodes(0).innerHTML			+= "<IMG SRC='svc" + suffixSvc +".gif' ALT='' ALIGN='absmiddle'>";
+				oRow.childNodes(1).colSpan 				= 4;	
+				oRow.childNodes(1).innerHTML			=  "<A HREF='" + strLink + "'>" + svcName + "</A>"	
+				oRow.style.display						= "";
+			}
+			
+			function showMsgInstDetails()
+			{
+				try
+				{
+					var oCell 		= (event.srcElement.tagName=="TD")? event.srcElement:event.srcElement.parentElement;		
+					var oRow		= oCell.parentElement;
+					var oImg		= oRow.childNodes(3).getElementsByTagName("IMG");
+					var oTmpCell;
+					
+					for(i=0;i<oRow.childNodes.length;i++)
+						oRow.childNodes(i).className = (oRow.childNodes(i).className=="toaMsgRow")? "toaMsgRowSelected":"toaMsgRow";
+					oImg[0].src = (oImg[0].src.indexOf("Show")==-1)? "msgShow.gif":"msgHide.gif";
+					
+					for(i=oRow.rowIndex+1;i<tBody.childNodes.length;i++){
+						oTmpCell = tBody.childNodes(i).childNodes(0);
+						if(oTmpCell.className=="toaMsgRow"||oTmpCell.className=="toaMsgRowSelected") return;
+						tBody.childNodes(i).style.display = (tBody.childNodes(i).style.display=="none")?"":"none";			
+					}	
+				}
+				catch(e){}
+			}
+		</SCRIPT>
+
+
+	</HEAD>
+	<BODY MS_POSITIONING="GridLayout" ONLOAD="PageLoad();" ID="body">
+		<FORM id="TOA" METHOD="post" RUNAT="server">
+		<!-- buttons for communication between Hat Application and IE. -->
+		<INPUT type="button" ID="HelpBtn" style="DISPLAY:none;" onclick='ShowPageHelp();'>
+
+		<DIV id="TOA_BODY" style="DISPLAY:none">
+			<TABLE BORDER="0" WIDTH="100%" CELLSPACING="0" CELLPADDING="0">
+			<TR align="left" width="100%">
+			<td>
+	
+				<DIV class="subNav" style="padding-left:10;padding-top:1;padding-bottom:1;">
+					<A id="str_ToaView"/>
+						<a id="a_delimiter"  style="VISIBILITY: hidden;">&nbsp;&nbsp;|&nbsp;&nbsp;</a>
+						<A id="str_SwitchTo" style="font-weight:normal;VISIBILITY: hidden;" >&nbsp;</A>
+						<A ID="a_TechDetails" HREF="#" onclick="NavigateToTechDetails();" style="font-weight:normal;VISIBILITY: hidden;">&nbsp;</A>
+				</DIV>
+			</td>
+			</tr>
+			</table>
+					
+				<TABLE CELLSPACING="0" CELLPADDING="0">
+					<TR>
+						<TD STYLE="padding-left:10;padding-top:2;vertical-align:top;" ROWSPAN="13"><IMG SRC="serviceInstRed.gif"</TD>
+						<TD><B>&nbsp;&nbsp;<A id="toa_ServiceInstance"/></B>&nbsp;&nbsp;</TD>
+						<TD><B><A ID="ResServiceInstance"></A>&nbsp;</B></TD>
+					</TR>
+				</TABLE>
+							
+				<TABLE STYLE="padding-left:35;margin-top:1;width:650;" CELLSPACING="0" CELLPADDING="0">
+					<TR>
+						<TD STYLE="width:180;"><A id="toa_ActivityID"/></TD>
+						<TD STYLE="width:*;"><A ID="m_sResActivityID"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD STYLE="width:180;"><A id="toa_InstanceID"/></TD>
+						<TD STYLE="width:*;"><A ID="ResInstanceID"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD><A id="toa_Host"/></TD>
+						<TD><A ID="Host"></A>&nbsp;</TD>
+					</TR>
+				
+				<!--
+					<TR>
+						<TD><%= Microsoft.BizTalk.Brma.Resources.GetString("toa_Name") %></TD>
+						<TD><A ID="ResName"></A>&nbsp;</TD>
+					</TR>
+				-->
+				
+					<TR>
+						<TD><A id="toa_Type"/></TD>
+						<TD><A ID="ResType"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD><A id="toa_VersionID"/></TD>
+						<TD><A ID="ResVersionGUID"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD><A id="toa_DeploymentTime"/></TD>
+						<TD><A ID="ResDeploymentTime"></A>&nbsp;</TD>
+					</TR>
+					
+					<TR>
+						<TD><A id="toa_State"/></TD>
+						<TD><A ID="ResState"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD><A id="toa_StartTime"/></TD>
+						<TD><A ID="ResStartTime"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD><A id="toa_EndTime"/></TD>
+						<TD><A ID="ResEndTime"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD><A id="toa_Duration"/></TD>
+						<TD><A ID="ResDuration"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD><A id="toa_ExitCode"/></TD>
+						<TD><A ID="ResExitCode"></A>&nbsp;</TD>
+					</TR>
+					<TR>
+						<TD  STYLE="padding-left:35;vertical-align:top;width:180;"><A id="toa_Error"/></TD>
+						<TD><A ID="ErrInfoBody"></A>&nbsp;</TD>
+	
+			<!--
+	
+					<TD>
+					<TABLE CELLSPACING="0">
+						<TBODY ID="ErrInfoBody">
+						</TBODY>
+					</TABLE>
+					</TD>
+					</TR>
+					<TR>
+						<TD>&nbsp;</TD>
+						<TD><A></A>&nbsp;</TD>
+					</TR>
+			-->
+					<TR>
+						<TD STYLE="padding-left:35;"><A ID="toa_Exception"></A></TD>
+						<TD><A ID="ExceptionUrl"></A>&nbsp;</TD>
+			<!--
+						<TD>
+							<TABLE CELLSPACING="0">
+								<TBODY ID="ExceptionUrl">
+								</TBODY>
+							</TABLE>
+						&nbsp;</TD>
+			-->
+                    </TR>
+				    <TR>
+					    <TD>&nbsp;</TD>
+					    <TD>&nbsp;</TD>
+				    </TR>
+                    <TR>
+					    <TD STYLE="padding-left:35;" COLSPAN=2><A ID="LinkToMmcQuery"></A></TD>
+                    </TR>
+				    <TR>
+					    <TD>&nbsp;</TD>
+					    <TD>&nbsp;</TD>
+				    </TR>
+				</TABLE>
+				
+				<DIV id="ExtUrlList" style="DISPLAY:none">
+					<TABLE CELLSPACING="0">
+						<TBODY ID="ExtBody">
+							<TR>
+						<!--
+								<TD STYLE="width:17;" ROWSPAN="13"></TD>
+								<TD><B><%= Microsoft.BizTalk.Brma.Resources.GetString("toa_ExtUrlList") %></B></TD>
+						-->
+							</TR>
+						</TBODY>
+					</TABLE>
+					<TABLE>
+						<TBODY>
+						<TR>
+							<TD COLSPAN="2">&nbsp;</TD>
+						</TR>
+						</TBODY>
+					</TABLE>
+				</DIV>
+					
+				<TABLE>
+					<TR>
+						<TD STYLE="padding-left:10;"><IMG SRC="msgActivity.gif" ALT="" ALIGN="absmiddle"></TD>
+						<TD COLSPAN="2"><B>&nbsp;<A id="toa_msgActivityHeader"/></B></TD>
+					</TR>
+				</TABLE>
+				<TABLE CLASS="toaMsg" CELLSPACING="0">
+					<TBODY ID="tBody">
+						<TR>
+							<TD CLASS="toaMsgHeader" WIDTH="10%"><A id="toa_InOut"/></TD>
+							<TD CLASS="toaMsgHeader" WIDTH="35%"><A id="toa_MessageInstance"/></TD>
+							<TD CLASS="toaMsgHeader" WIDTH="20%"><A id="toa_Status"/></TD>
+							<TD CLASS="toaMsgHeader" WIDTH="35%"><A id="toa_Timestamp"/></TD>
+						</TR>
+					</TBODY>
+				</TABLE>
+			</DIV>
+			
+			<DIV id="HelperObjects" style="DISPLAY:none">
+				<OBJECT ID="DbUtil" CLASSID="clsid:60F98CD2-48B2-4e9a-96B3-946FB1EE7978" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="Help" classid="clsid:DAC40761-C9C8-4653-AB49-C4D4AE4FF042" VIEWASTEXT>
+				</OBJECT>
+	
+				<OBJECT id="CollapsibleCtrl" CLASSID="clsid:12BBC156-5455-4a61-8DC8-82F56838CB99" VIEWASTEXT>
+				</OBJECT>		
+			</DIV>
+		</FORM>
+	</BODY>
+</HTML>

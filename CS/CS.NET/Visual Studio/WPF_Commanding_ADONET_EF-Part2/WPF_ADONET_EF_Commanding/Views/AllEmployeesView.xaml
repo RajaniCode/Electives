@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="WPF_ADONET_EF_Commanding.AllEmployeesView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:DAL="clr-namespace:DataAccessLibrary;assembly=DataAccessLibrary"
+             xmlns:viewmodel="clr-namespace:WPF_ADONET_EF_Commanding"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="330">
+    <UserControl.Resources>
+        <!--Instance of the AllEmployees_Command_ViewModel class-->
+        <viewmodel:AllEmployeeViewModel x:Key="EmpViewModel"></viewmodel:AllEmployeeViewModel>
+    </UserControl.Resources>
+    <Grid x:Name="grdMain" Width="320"
+           DataContext="{Binding Source={StaticResource EmpViewModel}}">    
+        <Grid x:Name="grdChild" DataContext="{Binding Path=Employees}">
+            <Button Content="Get All Employee" Height="39" HorizontalAlignment="Left" 
+                    Margin="30,0,0,0" Name="btnGetAllEmployee" VerticalAlignment="Top" 
+                    Width="130" 
+                     Command="{Binding Path=DataContext.AllEmployees,ElementName=grdMain}"/>
+            <DataGrid AutoGenerateColumns="False" Height="239" HorizontalAlignment="Left"
+                      Margin="10,68,0,0" Name="dgEmployee" VerticalAlignment="Top" Width="300"
+                       DataContext="{Binding}"
+                       ItemsSource="{Binding}" ColumnWidth="*">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding EmpNo}" Header="EmpNo"  Width="40"/>
+                    <DataGridTextColumn Binding="{Binding EmpName}" Header="EmpName" Width="100"/>
+                    <DataGridTextColumn Binding="{Binding DeptNo}" Header="DeptNo" Width="40"/>
+                    <DataGridTextColumn Binding="{Binding Salary}" Header="Salary" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</UserControl>

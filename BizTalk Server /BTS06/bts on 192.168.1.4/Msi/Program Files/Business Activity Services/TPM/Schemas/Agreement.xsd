@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.microsoft.com/BizTalk/KwTpm" xmlns:mstns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:include schemaLocation="Addendum.xsd" />
+	<xs:element name="Agreement">
+		<xs:annotation>
+			<xs:documentation>Trading Partner Agreement defines relationship between partners. It specifies the partners, duration of their relationship, various addendums referenced and exception contacts.</xs:documentation>
+		</xs:annotation>
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="AgreementId" />
+				<xs:element name="TemplateId" type="AgreementIdType" minOccurs="0" />
+				<xs:element name="FriendlyNames" type="FriendlyNamesType" minOccurs="0" />
+				<xs:element name="Description" minOccurs="0">
+					<xs:simpleType>
+						<xs:restriction base="xs:string">
+							<xs:maxLength value="255" />
+						</xs:restriction>
+					</xs:simpleType>
+				</xs:element>
+				<xs:element name="AgreementDate" type="xs:date" minOccurs="0" />
+				<xs:element name="Duration" minOccurs="0">
+					<xs:annotation>
+						<xs:documentation>Duration for which Agreement is effective</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="StartDate" type="xs:date" minOccurs="0" />
+							<xs:element name="EndDate" type="xs:date" minOccurs="0" />
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="Self" type="PartnerInfo" />
+				<xs:element name="Partners">
+					<xs:annotation>
+						<xs:documentation>Partners involved in TPA</xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="PartnerInfo" type="PartnerInfo"/>
+						</xs:sequence>
+					</xs:complexType>
+					<xs:unique name="PartnerIdUnique">
+						<xs:selector xpath="Partner" />
+						<xs:field xpath="PartnerId" />
+					</xs:unique>
+				</xs:element>
+				<xs:element name="Addendums" type="AddendumsType" />
+				<xs:element name="LegalTerms" type="LegalTermsType" minOccurs="0" />
+				<xs:element name="Status" type="AgreementStatusType" />
+			</xs:sequence>
+			<xs:attribute name="schemaVersion" type="xs:decimal" use="required" />
+			<xs:attribute name="ignoreLastModified" type="xs:boolean" use="optional" />
+			<xs:attribute name="lastModified" type="xs:dateTime" use="required" />
+		</xs:complexType>
+		<xs:unique name="UniqueAddendumName">
+			<xs:selector xpath="mstns:Addendums/mstns:Addendum" />
+			<xs:field xpath="mstns:AddendumId" />
+		</xs:unique>
+		<xs:unique name="UniqueBusinessProcess">
+			<xs:selector xpath="mstns:Addendums/*" />
+			<xs:field xpath="mstns:BusinessProcess/mstns:ServiceLinkName" />
+			<xs:field xpath="mstns:BusinessProcess/mstns:BusinessProcessName" />
+			<xs:field xpath="mstns:BusinessProcess/mstns:DefinitionSource" />
+		</xs:unique>
+	</xs:element>
+	<xs:complexType name="PartnerInfo">
+		<xs:sequence>
+			<xs:element name="PartnerId" type="PartnerId" />
+			<xs:element name="IsGroup" type="xs:boolean" />
+			<xs:element name="AddendumRoles" type="AddendumRolesType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AddendumRolesType">
+		<xs:sequence>
+			<xs:element name="AddendumRole" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element ref="AddendumId" />
+						<xs:element ref="RoleId" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AgreementId" type="AgreementIdType">
+		<xs:annotation>
+			<xs:documentation>Unique Identifier of Agreement</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:simpleType name="AgreementIdType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="255" />
+			<xs:minLength value="1" />
+			<xs:pattern value="[^`~!@#$%^&amp;*()+=\[\]{}\|;'&quot;&gt;&lt;,\?\\]+"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AgreementStatusType">
+		<xs:restriction base="xs:short">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

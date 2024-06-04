@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="SILV_SearchUserControl.SearchValue"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="400" Height="50">
+    <Grid x:Name="LayoutRoot" Background="White" Width="400" Height="50">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+            <ColumnDefinition Width="150"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <TextBlock 
+            Text="Search Data:" Grid.Column="0" Margin="1,1,1,1"
+             FontFamily="Times New Roman" FontSize="27"
+             Foreground="Red" FontWeight="Bold"></TextBlock>
+        <TextBox x:Name="txtSearch" Grid.Column="1" Margin="1,1,1,1" 
+                 TextChanged="txtSearch_TextChanged" Height="40" Width="100"></TextBox>
+    </Grid>
+</UserControl>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+
+<!-- ===================================================================================== -->
+<!--                                                                                       -->
+<!-- Microsoft.Samples.BizTalk.WoodgroveBank.PaymentTracker                                -->
+<!-- End to end Service Oriented Scenatio sample for BizTalk Server.                       -->
+<!--                                                                                       -->
+<!-- This file represents  user mappings for the the PayementTracker SSO affiliate app.    -->
+<!-- Use this file with the ssomanage command to create a mapping between a windows user   -->
+<!-- that is logged on using the Customer Service Application client and the corresponding -->
+<!-- user in the Payment Tracking back end system.  For the IVR application client, the    -->
+<!-- user id the IVR app is running under should also be mapped to a corresponding user in -->
+<!-- in the payment tracking system.                                                       -->
+<!--                                                                                       -->
+<!-- Copyright (C) Microsoft Corporation. All rights reserved.                        -->
+<!-- THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,          -->
+<!-- EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES      -->
+<!-- OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.                           -->
+<!--                                                                                       -->
+<!-- ===================================================================================== -->
+
+<SSO>
+	<mapping>
+
+		<windowsDomain>
+			<!--
+			Specify the windows domain name of the user whose id will be mapped to the PaymentTracker Affiliate App.
+			-->
+		</windowsDomain> 
+
+		<windowsUserId>
+			<!--
+			Specify the windows user id of the user in the domain specified above.
+			This user must be a member of the group that is allowed to use the PaymentTracker Affiliate App.
+			-->
+		</windowsUserId> 
+
+		<!--  This is the name of the Affiliate application. Do not change this. -->
+
+		<externalApplication>WoodgroveBank.PaymentTracker</externalApplication> 
+
+		<externalUserId>
+			<!--
+			This is the user id in the Payment Tracking System that corresponds to the windows user specified above.
+			The Payment Tracker simulator program supplied with the scenario, for the purposes of excercising both
+			success and failure conditions with authentication of the users, successfully authenticates the user id's
+			beginning with 'PT' and fails the other users of authentication.  Therefore, choose the appropriate
+			user id.  It is also possible to repeat the entire <mapping> element for each user id and to define 
+			multiple mappings in the same file.	
+			-->
+		</externalUserId> 
+
+	</mapping>
+</SSO>
+

@@ -1,0 +1,56 @@
+﻿<Window x:Class="WPF_DataGrid_PropertyTriggers.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:src="clr-namespace:WPF_DataGrid_PropertyTriggers"
+        Title="MainWindow" Height="382" Width="892">
+    <Window.Resources>
+        <src:EmployeeCollection x:Key="EmpCol"></src:EmployeeCollection>
+        <Style TargetType="{x:Type DataGridCell}">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Designation}" Value="Manager">
+                    <Setter Property="Background" Value="Red"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Designation}" Value="Clerk">
+                    <Setter Property="Background" Value="Yellow"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Designation}" Value="Supervisor">
+                    <Setter Property="Background" Value="Chocolate"></Setter>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding Designation}" Value="Operator">
+                    <Setter Property="Background" Value="Magenta"></Setter>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        
+    </Window.Resources>
+    <Grid DataContext="{Binding Source={StaticResource EmpCol}}">
+        <DataGrid AutoGenerateColumns="True" Height="272" HorizontalAlignment="Left" Margin="43,48,0,0"
+                  Name="dgEmp" VerticalAlignment="Top" Width="652" ItemsSource="{Binding}"
+                   ColumnWidth="*"/>
+        <TextBlock Height="45" HorizontalAlignment="Left" Margin="132,0,0,0" 
+                   Name="textBlock1" Text="Employee Infoemation System" 
+                   VerticalAlignment="Top" Width="467" OpacityMask="#FF930000" 
+                   FontStyle="Oblique" FontWeight="ExtraBold" FontSize="26" TextWrapping="WrapWithOverflow" 
+                   TextTrimming="CharacterEllipsis" />
+        <StackPanel Height="250" HorizontalAlignment="Left" Margin="717,52,0,0" Name="stackPanel1"
+                    VerticalAlignment="Top" Width="125">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="80" Text="Manager" FontSize="15"></TextBlock>
+                <Rectangle Fill="Red" Width="44"></Rectangle>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="80" Text="Clerk" FontSize="15"></TextBlock>
+                <Rectangle Fill="Yellow" Width="44"></Rectangle>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="80" Text="Supervisor" FontSize="15"></TextBlock>
+                <Rectangle Fill="Chocolate" Width="44"></Rectangle>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Width="80" Text="Operator" FontSize="15"></TextBlock>
+                <Rectangle Fill="Magenta" Width="44"></Rectangle>
+            </StackPanel>
+        </StackPanel>
+        <TextBlock Height="35" HorizontalAlignment="Left" Margin="717,11,0,0" Name="textBlock2" Text="Legend" VerticalAlignment="Top" Width="123" FontSize="20" />
+    </Grid>
+</Window>

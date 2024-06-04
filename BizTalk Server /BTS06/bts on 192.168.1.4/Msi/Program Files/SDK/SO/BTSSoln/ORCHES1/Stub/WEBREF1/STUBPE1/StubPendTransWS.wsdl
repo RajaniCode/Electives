@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s3="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsResponse" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PendingTransactions" xmlns:s1="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsRequest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsRequest" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PendingTransactions" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PendingTransactions">
+      <s:import namespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsRequest" />
+      <s:import namespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsResponse" />
+      <s:element name="GetPendingTransactions">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:PendingTransactionsRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPendingTransactionsResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s3:PendingTransactionsResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsRequest">
+      <s:import namespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsRequest" />
+      <s:element name="PendingTransactionsRequest" type="s2:PendingTransactionsRequest" />
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsRequest">
+      <s:complexType name="PendingTransactionsRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="CustomerName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsResponse">
+      <s:element name="PendingTransactionsResponse" type="s3:PendingTransactionsResponse" />
+      <s:complexType name="PendingTransactionsResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ResponseStatus" type="s3:PendingTransactionsResponseResponseStatus" />
+          <s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="PendingTransaction" type="s3:PendingTransactionsResponsePendingTransaction" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="PendingTransactionsResponseResponseStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Error" type="s3:PendingTransactionsResponseResponseStatusError" />
+        </s:sequence>
+        <s:attribute name="Result" type="s:string" />
+      </s:complexType>
+      <s:complexType name="PendingTransactionsResponseResponseStatusError">
+        <s:attribute name="ErrorNumber" type="s:string" />
+        <s:attribute name="ErrorDescription" type="s:string" />
+        <s:attribute name="ErrorSource" type="s:string" />
+      </s:complexType>
+      <s:complexType name="PendingTransactionsResponsePendingTransaction">
+        <s:sequence>
+          <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="DatePosted" type="s:date" />
+          <s:element minOccurs="1" maxOccurs="1" form="unqualified" name="AmountPosted" type="s:decimal" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="MerchantName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="MerchantCity" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="MerchantCountry" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetPendingTransactionsSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPendingTransactions" />
+  </wsdl:message>
+  <wsdl:message name="GetPendingTransactionsSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPendingTransactionsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="StubPendingTransactionsWebServiceSoap">
+    <wsdl:operation name="GetPendingTransactions">
+      <wsdl:input message="tns:GetPendingTransactionsSoapIn" />
+      <wsdl:output message="tns:GetPendingTransactionsSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="StubPendingTransactionsWebServiceSoap" type="tns:StubPendingTransactionsWebServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPendingTransactions">
+      <soap:operation soapAction="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PendingTransactions/GetPendingTransactions" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="StubPendingTransactionsWebServiceSoap12" type="tns:StubPendingTransactionsWebServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetPendingTransactions">
+      <soap12:operation soapAction="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PendingTransactions/GetPendingTransactions" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="StubPendingTransactionsWebService">
+    <wsdl:port name="StubPendingTransactionsWebServiceSoap" binding="tns:StubPendingTransactionsWebServiceSoap">
+      <soap:address location="http://localhost:4022/PendingTrans/StubPendTransWS.asmx" />
+    </wsdl:port>
+    <wsdl:port name="StubPendingTransactionsWebServiceSoap12" binding="tns:StubPendingTransactionsWebServiceSoap12">
+      <soap12:address location="http://localhost:4022/PendingTrans/StubPendTransWS.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

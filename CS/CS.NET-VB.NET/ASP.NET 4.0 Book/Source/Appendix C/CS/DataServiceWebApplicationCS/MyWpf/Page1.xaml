@@ -1,0 +1,32 @@
+﻿<Page x:Class="MyWpf.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      mc:Ignorable="d" 
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="Page1">
+    <Grid x:Name="Grid1">
+        <ListView Name="ListViewEmployeeDetails" Margin="61,70,39,120" 
+	ItemTemplate="{DynamicResource EmployeeTemplate}" ItemsSource="{Binding Path=Table}">
+            <ListView.Background>
+                <LinearGradientBrush>
+                    <GradientStop Color="Bisque"  Offset="0"/>
+                </LinearGradientBrush>
+            </ListView.Background>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Employee ID" DisplayMemberBinding="{Binding Path=EmployeeID}"/>
+                    <GridViewColumn Header="First Name" DisplayMemberBinding="{Binding Path=FirstName}"/>
+                    <GridViewColumn Header="Last Name" DisplayMemberBinding="{Binding Path=LastName}"/>
+                    <GridViewColumn Header="City" DisplayMemberBinding="{Binding Path=City}"/>
+                    <GridViewColumn Header="Country" DisplayMemberBinding="{Binding Path=Country}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Height="40" Margin="161,0,164,53" Name="button1" VerticalAlignment="Bottom" 
+	 Click="button1_Click">Button</Button>
+        <Label Height="28" HorizontalAlignment="Left" Margin="11,10,0,0" Name="label1" 
+	 VerticalAlignment="Top" Width="142" FontSize="13">Data from Web Service</Label>
+    </Grid>
+</Page>

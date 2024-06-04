@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<script type="text/javascript">
+    var p1, p2;
+
+    $(document).ready(function () {
+        $("#buttonStart1").bind("click", buttonStartHandler1);
+        $("#buttonStart2").bind("click", buttonStartHandler2);
+        $("#buttonAbort1").bind("click", buttonAbortHandler1);
+        $("#buttonAbort2").bind("click", buttonAbortHandler2);
+    });
+</script>
+
+<script type="text/javascript">
+    function buttonStartHandler1() {
+        updateStatusProgressBar1();
+
+        p1 = new ProgressBar();
+        p1.setInterval(300)
+          .callback(function (status) { $("#progressbar1").text(status); },
+                    function (response) { $("#progressbar1").text(response); updateStatusProgressBar1(); },
+                    function () { $("#progressbar1").text(""); updateStatusProgressBar1(); })
+          .start("/task/dowork?repeat=5", "/task/status", "/task/abort");
+    }
+
+    function buttonAbortHandler1() {
+        p1.abort();
+    }
+
+    function updateStatusProgressBar1() {
+        $("#buttonStart1").toggleDisabled();
+        $("#buttonAbort1").toggleDisabled();
+    }
+</script>
+
+<script type="text/javascript">
+    function buttonStartHandler2() {
+        updateStatusProgressBar2();
+
+        p2 = new ProgressBar();
+        p2.setInterval(600)
+            .callback(function (status) { $("#progressbar2").text(status); },
+                    function (response) { $("#progressbar2").text(response); updateStatusProgressBar2(); },
+                    function () { $("#progressbar2").text(""); updateStatusProgressBar2(); })
+            .start("/task/bookflight?from=Rome&to=NewYork", "/task/status", "/task/abort");
+    }
+
+    function buttonAbortHandler2() {
+        p2.abort();
+    }
+
+    function updateStatusProgressBar2() {
+        $("#buttonStart2").toggleDisabled();
+        $("#buttonAbort2").toggleDisabled();
+    }   
+</script>
+
+
+<div style="float:left;margin:10px;">
+    <fieldset style="padding:10px; width:300px; border:solid 2px #454545;">
+        <legend>Repeat some tasks...</legend>
+        <input id="buttonStart1" type="button" value="Start task" />
+
+        <hr />
+        <div id="progressbar1_container">
+            <span id="progressbar1"></span>
+            <input id="buttonAbort1" type="button" value="Abort" disabled="disabled" />
+        </div>
+    </fieldset>
+</div>
+
+<div style="float:left;margin:10px;">
+    <fieldset style="padding:10px; width:360px; border:solid 2px #454545;">
+        <legend>Book a flight...</legend>
+        <input id="buttonStart2" type="button" value="Book a flight..." />
+
+        <hr />
+        <div id="progressbar2_container">
+            <span id="progressbar2"></span>
+            <input id="buttonAbort2" type="button" value="Abort flight booking" disabled="disabled" />
+        </div>    
+    </fieldset>
+</div>
+
+<div style="clear:both" />
+
+

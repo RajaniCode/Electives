@@ -1,0 +1,92 @@
+﻿@model SimpleExamples.Models.SortableListExampleViewModel
+@using SimpleExamples.Models
+@{
+    ViewBag.Title = "Sortable List Example";
+    Layout = "~/Views/Shared/_LayoutServer.cshtml";
+}
+
+@section Scripts{
+   
+    <script src="~/Scripts/MVCControlToolkit.Controls.Items-3.0.0.min.js"></script>
+}
+<h2>Sortable List Example</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false, "There are some errors")
+    <div style="margin-top:70px">
+        <div class="editor-label">
+            <strong>
+                Reorder elements by dragging them with the mouse
+            </strong>
+        </div>
+        <div class="editor-field">
+            @Html.SortableListFor(m => m.Keywords,
+             _S.L<string>(//Function based template. See here: https://mvccontrolstoolkit.codeplex.com/wikipage?title=Use%20of%20Templates 
+                                (x) => x.TypedTextBoxFor(m => m, watermarkCss: "watermark", overrideWatermark: "insert keyword").ToString() +
+                            x.SortableListDeleteButton("Delete", ManipulationButtonStyle.Link).ToString()
+                            ),
+                            "KeywordInsert", 0.8f,
+                htmlAttributesContainer: new Dictionary<string, object> { { "class", "SortableList" } },
+                            itemCss: "normalRow", altItemCss: "alternateRow")
+            @Html.SortableListAddButtonFor(m => m.Keywords, "Add New Item")
+            <input type="submit" value="Submit" />
+        </div>
+    </div>
+    <div style="margin-top:50px">
+        <div class="editor-label">
+            <strong>
+                A similar Keywords list but with sorting disabled, with customs Items Container,
+                Custom Item type, header and footer, and with a TypedEditDisplay to edit the names. Click on the names to edit them.
+                <br />
+                Click on the headers to change column sorting (the change is applied after submit).
+                This way the Sortable List works like a standard Grid. However it ha no changes tracking capabilities; this means that on the server
+                side you just know the new state of the keyword list, but you don't know which elements were inserted, modified and deleted 
+                to reflect the same changes on a DataBase(however you may compute them).
+                <br />
+                The @Html.ActionLink("DataGrid", "DataGridExample"), instead, has native changes tracking capabilities.
+                <a href="http://www.mvc-controls.com/features/server-updates">The commercial version of the toolkit</a> has components that add changes tracking capabilities to all Items controls.
+            </strong>
+        </div>
+        <div class="editor-field">
+            <table class="grid">
+                <thead>
+                    <tr>
+                        <td><strong>@Html.SortButtonForCollection(m => m.Keywords1, m => m.Keyword, null, SortButtonStyle.Button)</strong></td>
+                        <td><strong>@Html.SortButtonForCollection(m => m.Keywords1, m => m.Title, null, SortButtonStyle.Button)</strong></td>
+                        <td></td>
+                    </tr>
+                </thead>
+                @Html.SortableListFor(m => m.Keywords1,
+             _S.H<KeywordItem>(//Razor Helper based template. See here: https://mvccontrolstoolkit.codeplex.com/wikipage?title=Use%20of%20Templates
+                        @<text>
+                            <td style='width: 120px'>
+                                @item.TypedEditDisplayFor(m => m.Keyword, new { style = "width: 100px" }, new { style = "width: 100px" }, simpleClick: true)
+                            </td>
+                            <td style='width: 120px'>
+                                @item.TypedEditDisplayFor(m => m.Title, new { style = "width: 100px" }, new { style = "width: 100px" }, simpleClick: true)
+                                @item.ValidationMessageFor(m => m.Keyword, "*")
+                            </td>
+                            <td >
+                                @item.SortableListDeleteButton("Delete", ManipulationButtonStyle.Link)
+                            </td>
+                        </text>
+                    ),
+                    canSort: false,
+                    allItemsContainer: ExternalContainerType.tbody,
+                    itemContainer: ExternalContainerType.tr,
+                    itemCss: "normalRow", altItemCss: "alternateRow",
+
+                    footerTemplate: _S.L<KeywordItem>((x) =>
+                        "<td colspan='3'><strong>Keywords Item Footer</strong></td>"))
+</table>
+            
+            @Html.EnableSortingNoTrackFor(m => m.Keywords1, m => m.KeywordsOrdering, 
+                "NormalHeaderToDo", 
+                "AscendingHeaderToDo", 
+                "DescendingHeaderToDo")
+        </div>
+        @Html.SortableListAddButtonFor(m => m.Keywords1, "Add New Item")
+        <input type="submit" value="Submit" />
+   </div>
+}

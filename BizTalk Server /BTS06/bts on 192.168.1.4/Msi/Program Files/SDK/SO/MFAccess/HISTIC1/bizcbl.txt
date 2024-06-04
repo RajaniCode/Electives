@@ -1,0 +1,245 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. BIZTLK.
+
+       ENVIRONMENT DIVISION.
+
+       DATA DIVISION.
+
+       WORKING-STORAGE SECTION.
+       77  RDM-NUM       PIC S9V9(6) COMP-3.
+       77  RDM-SEED      PIC S9(4) COMP.
+       77  TRAN-NUM      PIC S9(4) COMP.
+       77  WK-NUM        PIC S9(3).
+
+       01  TIME-AREA.
+           05  T-HR      PIC 9(2).
+           05  T-MIN     PIC 9(2).
+           05  T-SEC     PIC 9(4).
+
+       01  DATE-AREA.
+           05  D-YR      PIC 9(2).
+           05  D-MO      PIC 9(2).
+           05  D-DAY     PIC 9(2).
+
+       01  RANDOM-TRAN-DATE.
+           05  R-MO      PIC 9(2).
+           05  R-DAY     PIC 9(2).
+           05  R-YEAR    PIC 9(4).
+           05  R-HR      PIC 9(2).
+           05  R-MIN     PIC 9(2).
+
+       01  RANDOM-CITY-DATA.
+           05  FILLER  PIC X(17) VALUE 'SYDNEY           '.
+           05  FILLER  PIC X(11) VALUE 'AUSTRALIA  '.
+           05  FILLER  PIC X(17) VALUE 'WELLINGTON       '.
+           05  FILLER  PIC X(11) VALUE 'NEW ZEALAND'.
+           05  FILLER  PIC X(17) VALUE 'VENICE           '.
+           05  FILLER  PIC X(11) VALUE 'ITALY      '.
+           05  FILLER  PIC X(17) VALUE 'SEATTLE          '.
+           05  FILLER  PIC X(11) VALUE 'USA        '.
+           05  FILLER  PIC X(17) VALUE 'OSAKA            '.
+           05  FILLER  PIC X(11) VALUE 'JAPAN      '.
+           05  FILLER  PIC X(17) VALUE 'QUITO            '.
+           05  FILLER  PIC X(11) VALUE 'ECUADOR    '.
+           05  FILLER  PIC X(17) VALUE 'ACAPULCO         '.
+           05  FILLER  PIC X(11) VALUE 'MEXICO     '.
+           05  FILLER  PIC X(17) VALUE 'CAIRO            '.
+           05  FILLER  PIC X(11) VALUE 'EGYPT      '.
+           05  FILLER  PIC X(17) VALUE 'NICOSIA          '.
+           05  FILLER  PIC X(11) VALUE 'CYPRUS     '.
+           05  FILLER  PIC X(17) VALUE 'MANAKARA         '.
+           05  FILLER  PIC X(11) VALUE 'MADAGASCAR '.
+           05  FILLER  PIC X(17) VALUE 'VANCOUVER        '.
+           05  FILLER  PIC X(11) VALUE 'CANADA     '.
+           05  FILLER  PIC X(17) VALUE 'BANGKOK          '.
+           05  FILLER  PIC X(11) VALUE 'THAILAND   '.
+           05  FILLER  PIC X(17) VALUE 'TANGIER          '.
+           05  FILLER  PIC X(11) VALUE 'MOROCCO    '.
+           05  FILLER  PIC X(17) VALUE 'MADRID           '.
+           05  FILLER  PIC X(11) VALUE 'SPAIN      '.
+           05  FILLER  PIC X(17) VALUE 'BRUSSELS         '.
+           05  FILLER  PIC X(11) VALUE 'BELGIUM    '.
+           05  FILLER  PIC X(17) VALUE 'BANGALORE        '.
+           05  FILLER  PIC X(11) VALUE 'INDIA      '.
+           05  FILLER  PIC X(17) VALUE 'ISTANBUL         '.
+           05  FILLER  PIC X(11) VALUE 'TURKEY     '.
+           05  FILLER  PIC X(17) VALUE 'ATLANTA          '.
+           05  FILLER  PIC X(11) VALUE 'USA        '.
+           05  FILLER  PIC X(17) VALUE 'OTTAWA           '.
+           05  FILLER  PIC X(11) VALUE 'CANADA     '.
+           05  FILLER  PIC X(17) VALUE 'CUZCO            '.
+           05  FILLER  PIC X(11) VALUE 'PERU       '.
+       01  RANDOM-CITIES REDEFINES RANDOM-CITY-DATA.
+           05  THESE-ITEMS OCCURS 20 TIMES.
+               10  R-CITY     PIC X(17).
+               10  R-COUNTRY  PIC X(11).
+
+       01  RANDOM-MERCHANT-DATA.
+           05  FILLER  PIC X(18) VALUE 'MERCHANT XYZAB    '.
+           05  FILLER  PIC X(18) VALUE 'COMPANY JKLMN     '.
+           05  FILLER  PIC X(18) VALUE 'CORPORATION WXYZ12'.
+           05  FILLER  PIC X(18) VALUE 'BUSINESS ABCDE123 '.
+           05  FILLER  PIC X(18) VALUE 'CONGLOMERATE TUVWX'.
+           05  FILLER  PIC X(18) VALUE 'VENTURE PQRST     '.
+           05  FILLER  PIC X(18) VALUE 'FIRM DEFGHI       '.
+           05  FILLER  PIC X(18) VALUE 'MERCHANT CCCDDD   '.
+           05  FILLER  PIC X(18) VALUE 'COMPANY SSSTTT    '.
+           05  FILLER  PIC X(18) VALUE 'CORPORATION BCBCBC'.
+           05  FILLER  PIC X(18) VALUE 'BUSINESS WWXXYYZZ '.
+           05  FILLER  PIC X(18) VALUE 'CONGLOMERATE 123AB'.
+           05  FILLER  PIC X(18) VALUE 'VENTURE DDDEEE    '.
+           05  FILLER  PIC X(18) VALUE 'FIRM IIIJJJ       '.
+           05  FILLER  PIC X(18) VALUE 'MERCHANT 444555AAA'.
+           05  FILLER  PIC X(18) VALUE 'COMPANY 666777BBB '.
+           05  FILLER  PIC X(18) VALUE 'CORPORATION 888999'.
+           05  FILLER  PIC X(18) VALUE 'BUSINESS 111222ZZZ'.
+           05  FILLER  PIC X(18) VALUE 'CONGLOMERATE 33YY '.
+           05  FILLER  PIC X(18) VALUE 'VENTURE WWW111222 '.
+       01  RANDOM-MERCHANTS REDEFINES RANDOM-MERCHANT-DATA.
+           05  THESE-ITEMS OCCURS 20 TIMES.
+               10  R-MERCHANT PIC X(18).
+
+       LINKAGE SECTION.
+
+       01  DFHCOMMAREA.
+           05  ACCTNUM-AREA.
+               10  ACCT-PART-1   PIC 9(4).
+               10  ACCT-PART-2   PIC 9(4).
+               10  ACCT-PART-3   PIC 9(4).
+               10  ACCT-PART-4   PIC 9(4).
+
+           05  ERROR-INFO.
+               10  ERRDESC      PIC X(30).
+               10  ERRNUM       PIC 9(4).
+               10  ERRSRC       PIC X(30).
+
+           05  TRAN-COUNT       PIC S9(4) COMP.
+           05  TRANS-REC OCCURS 500 TIMES
+                          DEPENDING ON TRAN-COUNT.
+               10  MERCHANT-NAME      PIC X(18).
+               10  MERCHANT-CITY      PIC X(17).
+               10  MERCHANT-COUNTRY   PIC X(11).
+               10  TRAN-DATE          PIC X(12).
+               10  TRAN-AMOUNT        PIC S9(5)V99 COMP-3.
+
+      *****************************************************************
+       PROCEDURE DIVISION.
+
+           ACCEPT TIME-AREA FROM TIME.
+           MOVE T-SEC TO RDM-SEED.
+           ACCEPT DATE-AREA FROM DATE.
+
+           IF (ACCT-PART-1 IS NUMERIC) AND
+              (ACCT-PART-2 IS NUMERIC) AND
+              (ACCT-PART-3 IS NUMERIC) AND
+              (ACCT-PART-4 IS NUMERIC) THEN
+             PERFORM PROCESS-ACCT THRU
+                     PROCESS-ACCT-EXIT
+           ELSE
+             PERFORM ACCT-NUM-ERROR THRU
+                     ACCT-NUM-ERROR-EXIT.
+
+           EXEC CICS RETURN
+                END-EXEC.
+
+           GOBACK.
+
+       PROCESS-ACCT.
+           MOVE 0 TO ERRNUM.
+           MOVE SPACES TO ERRDESC.
+           MOVE SPACES TO ERRSRC.
+
+           COMPUTE RDM-NUM  =
+               (FUNCTION RANDOM(RDM-SEED))
+           IF ACCT-PART-4 < 501 THEN
+             MOVE ACCT-PART-4 TO TRAN-COUNT
+           ELSE
+             COMPUTE TRAN-COUNT =
+                 1 + (RDM-NUM * 499).
+           IF (TRAN-COUNT < 0) OR
+              (TRAN-COUNT > 500) THEN
+             MOVE +10 TO TRAN-COUNT.
+
+           IF TRAN-COUNT > 0 THEN
+             PERFORM FILL-TRANS-AREA THRU
+                     FILL-TRANS-AREA-EXIT
+                VARYING TRAN-NUM FROM 1 BY 1
+                UNTIL TRAN-NUM > TRAN-COUNT.
+
+       PROCESS-ACCT-EXIT.  EXIT.
+
+       FILL-TRANS-AREA.
+           COMPUTE TRAN-AMOUNT(TRAN-NUM) =
+              1.00 + ((FUNCTION RANDOM) * 999.00).
+           PERFORM FILL-DATE THRU
+                   FILL-DATE-EXIT.
+           PERFORM FILL-NAME THRU
+                   FILL-NAME-EXIT.
+           PERFORM FILL-CITY-COUNTRY THRU
+                   FILL-CITY-COUNTRY-EXIT.
+
+
+       FILL-TRANS-AREA-EXIT.  EXIT.
+
+       FILL-DATE.
+           MOVE D-MO TO R-MO.
+           MOVE D-DAY TO R-DAY.
+           MOVE D-YR TO R-YEAR.
+           ADD 2000 TO R-YEAR.
+           COMPUTE R-HR = 1 +
+               ((FUNCTION RANDOM) * 23).
+           COMPUTE  WK-NUM = (FUNCTION RANDOM) * 59.
+           MOVE WK-NUM TO R-MIN.
+
+           PERFORM UNTIL WK-NUM < 1
+
+             IF WK-NUM <  R-DAY THEN
+                 SUBTRACT WK-NUM FROM R-DAY
+                 MOVE ZERO TO WK-NUM
+             ELSE
+                 SUBTRACT R-DAY FROM WK-NUM
+                 IF R-MO > 1 THEN
+                     SUBTRACT 1 FROM R-MO
+                     IF R-MO = 2 THEN
+                       MOVE 28 TO R-DAY
+                     ELSE
+                       MOVE 30 TO R-DAY
+                     END-IF
+                 ELSE
+                     MOVE 12 TO R-MO
+                     SUBTRACT 1 FROM R-YEAR
+                     MOVE 31 TO R-DAY
+                 END-IF
+             END-IF
+           END-PERFORM.
+
+           MOVE RANDOM-TRAN-DATE TO TRAN-DATE(TRAN-NUM).
+       FILL-DATE-EXIT.  EXIT.
+
+       FILL-NAME.
+           COMPUTE  WK-NUM = 1 + (FUNCTION RANDOM) * 19.
+           IF (WK-NUM < 1) OR (WK-NUM) > 20 THEN
+               MOVE 15 TO WK-NUM
+           END-IF.
+           MOVE R-MERCHANT(WK-NUM) TO MERCHANT-NAME(TRAN-NUM).
+       FILL-NAME-EXIT.  EXIT.
+
+       FILL-CITY-COUNTRY.
+           COMPUTE  WK-NUM = 1 + (FUNCTION RANDOM) * 19.
+           IF (WK-NUM < 1) OR (WK-NUM) > 20 THEN
+               MOVE 15 TO WK-NUM
+           END-IF.
+           MOVE R-CITY(WK-NUM) TO MERCHANT-CITY(TRAN-NUM).
+           MOVE R-COUNTRY(WK-NUM) TO MERCHANT-COUNTRY(TRAN-NUM).
+       FILL-CITY-COUNTRY-EXIT.  EXIT.
+
+       ACCT-NUM-ERROR.
+           MOVE 0 TO TRAN-COUNT.
+           MOVE 123 TO ERRNUM.
+           MOVE SPACES TO ERRDESC.
+           MOVE SPACES TO ERRSRC.
+           MOVE 'NON NUMERIC ACCOUNT NUM' TO ERRDESC.
+           MOVE ACCTNUM-AREA TO ERRSRC.
+
+       ACCT-NUM-ERROR-EXIT.  EXIT.
+

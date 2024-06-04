@@ -1,0 +1,67 @@
+Sign an Assembly with a Strong Name
+
+1. Create an assembly
+
+//Sample.cs
+namespace Mathematics
+{
+    class Maths
+    {
+	public int IntegerSquare(int Number)
+        {
+	    return Number * Number;	   
+        }	
+    }
+}
+
+2. Create sample dll and sample module
+
+//The /target:library option causes the compiler to create a dynamic-link library (DLL) rather than an executable file (EXE).
+>csc /t:library Sample.cs
+
+//This option causes the compiler to not generate an assembly manifest.
+//A file that does not have an assembly manifest cannot be loaded by the .NET Framework common language runtime. 
+//However, such a file can be incorporated into the assembly manifest of an assembly by means of /addmodule.
+>csc /t:modlue Sample.cs
+
+
+3. The Strong Name tool (Sn.exe) helps sign assemblies with strong names. Sn.exe provides options for key management, signature generation, and signature verification.
+
+//The Strong Name tool is automatically installed with Visual Studio. To start the tool, use the Visual Studio and Windows SDK Command Prompts. 
+
+
+The following command creates a new, random key pair and stores it in keyPair.snk.
+
+sn -k keyPair.snk
+
+
+4. Sign an Assembly with a Strong Name - Using the Assembly Linker (Al.exe) provided by the Windows SDK
+
+>al /out:Sample.dll Sample.netmodule /keyfile:keyPair.snk
+
+
+5. Sign an Assembly with a Strong Name - Using Attribute
+
+/*
+In a code module, add the AssemblyKeyFileAttribute or the AssemblyKeyNameAttribute, specifying the name of the file or container that contains the key pair to use when signing the assembly with a strong name.
+
+The following code example uses the AssemblyKeyFileAttribute with a key file called keyPair.snk, located in the directory where the assembly is compiled.
+*/
+
+//SampleUsingAttribute.cs
+[assembly:AssemblyKeyFileAttribute("keyPair.snk")]
+namespace Mathematics
+{  
+    class Maths
+    {
+	public int IntegerSquare(int Number)
+        {
+	    return Number * Number;	   
+        }	
+    }
+}
+
+
+sn -vf SampleUsingAttribute.dll
+
+sn -v SampleUsingAttribute.dll

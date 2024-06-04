@@ -1,0 +1,13 @@
+﻿<UserControl x:Class="SILV4_ClientApplication.Views.viewGetAllEmployees"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="874" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+    
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Button Content="Lod All Employees" Height="43" HorizontalAlignment="Left" Margin="89,24,0,0" Name="btnLoadEmployee" VerticalAlignment="Top" Width="629" Click="btnLoadEmployee_Click" />
+        <sdk:DataGrid AutoGenerateColumns="True" Height="195" HorizontalAlignment="Left" Margin="94,79,0,0" Name="dgEmp" VerticalAlignment="Top" Width="624" />
+    </Grid>
+</UserControl>

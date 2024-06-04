@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Schema Namespace="LinqCookBook.EFUsingPOCO" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+	<EntityContainer Name="NorthwindEntities">
+		<EntitySet Name="Customers" EntityType="LinqCookBook.EFUsingPOCO.Customer" />
+		<EntitySet Name="Orders" EntityType="LinqCookBook.EFUsingPOCO.Order" />
+		<AssociationSet Name="CustomerOrders" Association="LinqCookBook.EFUsingPOCO.CustomerOrders">
+			<End Role="Customer" EntitySet="Customers" />
+			<End Role="Orders" EntitySet="Orders" />
+		</AssociationSet>
+	</EntityContainer>
+	<Association Name="CustomerOrders">
+		<End Role="Customer" Type="LinqCookBook.EFUsingPOCO.Customer" Multiplicity="0..1" />
+		<End Role="Orders" Type="LinqCookBook.EFUsingPOCO.Order" Multiplicity="*" />
+	</Association>
+	<EntityType Name="Customer">
+		<Key>
+			<PropertyRef Name="CustomerID" />
+		</Key>
+		<Property Name="CustomerID" Type="String" Nullable="false"  />
+		<Property Name="ContactTitle" Type="String"  />
+		<Property Name="CompanyName" Type="String" Nullable="false"  />
+		<NavigationProperty Name="Orders" 
+			Relationship="LinqCookBook.EFUsingPOCO.CustomerOrders" 
+			FromRole="Customer" ToRole="Orders" />
+	</EntityType>
+	<EntityType Name="Order">
+		<Key>
+			<PropertyRef Name="OrderID"/>
+		</Key>
+		<Property Name="OrderID" Type="Int32" Nullable="false" />
+		<Property Name="OrderDate" Type="DateTime" />
+		<Property Name="ShipCity" Type="String" />
+		<NavigationProperty Name="Customer" 
+		Relationship="LinqCookBook.EFUsingPOCO.CustomerOrders" 
+		FromRole="Orders" ToRole="Customer" />
+	</EntityType>
+</Schema>

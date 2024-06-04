@@ -1,0 +1,40 @@
+﻿<Window x:Class="WFP40_COMInterop_Enhancement.Window_SalesGraph"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        Title="Window_SalesGraph" Height="635" Width="1029" Loaded="Window_Loaded">
+    <Window.Resources>
+        <DataTemplate x:Key="CompanyNameTemplate">
+            <TextBlock Text="{Binding CompanyName}"></TextBlock>
+        </DataTemplate>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="65*" />
+            <RowDefinition Height="262*" />
+        </Grid.RowDefinitions>
+        <TextBlock Height="55" HorizontalAlignment="Left" 
+                   Margin="230,17,0,0" Name="textBlock1" 
+                   Text="Company Wise Sales Inforamtion"
+                   VerticalAlignment="Top" Width="589" 
+                    TextAlignment="Center" FontSize="30"
+                    Foreground="Red" FontWeight="ExtraBold" Grid.RowSpan="2" />
+        <ComboBox Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="125,26,0,0"
+                  Name="lstCompanyName" VerticalAlignment="Top" Width="120" ItemsSource="{Binding}"
+                   ItemTemplate="{StaticResource CompanyNameTemplate}" SelectionChanged="lstCompanyName_SelectionChanged" />
+        <TextBlock Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="12,26,0,0" 
+                   Name="textBlock2" Text="CompanyName" VerticalAlignment="Top" Width="94" />
+        <chartingToolkit:Chart  Height="450" HorizontalAlignment="Left" Margin="338,16,0,0" 
+                                Name="chartSales" 
+                                Title="Company wise Sales" VerticalAlignment="Top" Width="600" Grid.Row="1">
+            <chartingToolkit:Chart.Series>
+                <chartingToolkit:PieSeries x:Name="pieSeries" DependentValuePath="Value" IndependentValuePath="Key" 
+                                            />
+            </chartingToolkit:Chart.Series>
+        </chartingToolkit:Chart>
+        <Button Content="Generate Excel" 
+                Grid.Row="1" Height="23" HorizontalAlignment="Left" Margin="31,160,0,0" 
+                Name="btnGenerateExcelreport" VerticalAlignment="Top" Width="274" 
+                 Click="btnGenerateExcelreport_Click"/>
+    </Grid>
+</Window>

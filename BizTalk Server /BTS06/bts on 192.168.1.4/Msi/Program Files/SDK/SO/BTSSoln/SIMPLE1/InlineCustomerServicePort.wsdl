@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s1="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.CustomerServiceRequest" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.CustomerServiceResponse" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns="http://Microsoft.Samples.BizTalk.WoodgroveBank.CustomerService" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.CustomerService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.CustomerService">
+      <s:import namespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.CustomerServiceRequest" />
+      <s:import namespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.CustomerServiceResponse" />
+      <s:element name="GetAccountInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:CustomerServiceRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetAccountInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:CustomerServiceResponse" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.CustomerServiceRequest">
+      <s:element name="CustomerServiceRequest" type="s1:CustomerServiceRequest" />
+      <s:complexType name="CustomerServiceRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Body" type="s1:CustomerServiceRequestBody" />
+        </s:sequence>
+        <s:attribute name="RequestType" type="s:string" />
+        <s:attribute name="RequestSource" type="s:string" />
+        <s:attribute name="RequestID" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CustomerServiceRequestBody">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="AuthenticationInfo" type="s1:CustomerServiceRequestBodyAuthenticationInfo" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CustomerServiceRequestBodyAuthenticationInfo">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="DataElementName" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="DataElementValue" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.CustomerServiceResponse">
+      <s:element name="CustomerServiceResponse" type="s2:CustomerServiceResponse" />
+      <s:complexType name="CustomerServiceResponse">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Customer" type="s2:CustomerServiceResponseCustomer" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Account" type="s2:CustomerServiceResponseAccount" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="ResponseStatus" type="s2:CustomerServiceResponseResponseStatus" />
+        </s:sequence>
+        <s:attribute name="RequestType" type="s:string" />
+        <s:attribute name="RequestSource" type="s:string" />
+        <s:attribute name="RequestID" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CustomerServiceResponseCustomer">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="s:string" />
+        </s:sequence>
+        <s:attribute name="Name" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CustomerServiceResponseAccount">
+        <s:attribute name="CreditAccountBalance" type="s:decimal" />
+        <s:attribute name="CreditLimit" type="s:decimal" />
+        <s:attribute name="TotalLastPaymentAmount" type="s:decimal" />
+        <s:attribute name="TotalPendingTransactionAmount" type="s:decimal" />
+        <s:attribute name="CashAdvanceLimitAmount" type="s:decimal" />
+      </s:complexType>
+      <s:complexType name="CustomerServiceResponseResponseStatus">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="Error" type="s2:CustomerServiceResponseResponseStatusError" />
+        </s:sequence>
+        <s:attribute name="Result" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CustomerServiceResponseResponseStatusError">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="SAPError" type="s2:CustomerServiceResponseResponseStatusErrorSAPError" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="PaymentTrackingError" type="s2:CustomerServiceResponseResponseStatusErrorPaymentTrackingError" />
+          <s:element minOccurs="0" maxOccurs="1" form="unqualified" name="PendingTransactionsError" type="s2:CustomerServiceResponseResponseStatusErrorPendingTransactionsError" />
+        </s:sequence>
+        <s:attribute name="ErrorNumber" type="s:string" />
+        <s:attribute name="ErrorDescription" type="s:string" />
+        <s:attribute name="ErrorSource" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CustomerServiceResponseResponseStatusErrorSAPError">
+        <s:attribute name="ErrorNumber" type="s:string" />
+        <s:attribute name="ErrorDescription" type="s:string" />
+        <s:attribute name="ErrorSource" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CustomerServiceResponseResponseStatusErrorPaymentTrackingError">
+        <s:attribute name="ErrorNumber" type="s:string" />
+        <s:attribute name="ErrorDescription" type="s:string" />
+        <s:attribute name="ErrorSource" type="s:string" />
+      </s:complexType>
+      <s:complexType name="CustomerServiceResponseResponseStatusErrorPendingTransactionsError">
+        <s:attribute name="ErrorNumber" type="s:string" />
+        <s:attribute name="ErrorDescription" type="s:string" />
+        <s:attribute name="ErrorSource" type="s:string" />
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GetAccountInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAccountInfo" />
+  </wsdl:message>
+  <wsdl:message name="GetAccountInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAccountInfoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="Microsoft_Samples_BizTalk_WoodgroveBank_Orchestrations_Inline_CustomerServiceNativeRequestResponse_CustomerServicePortSoap">
+    <wsdl:operation name="GetAccountInfo">
+      <wsdl:input message="tns:GetAccountInfoSoapIn" />
+      <wsdl:output message="tns:GetAccountInfoSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Microsoft_Samples_BizTalk_WoodgroveBank_Orchestrations_Inline_CustomerServiceNativeRequestResponse_CustomerServicePortSoap" type="tns:Microsoft_Samples_BizTalk_WoodgroveBank_Orchestrations_Inline_CustomerServiceNativeRequestResponse_CustomerServicePortSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="GetAccountInfo">
+      <soap:operation soapAction="http://Microsoft.Samples.BizTalk.WoodgroveBank.CustomerService/Microsoft_Samples_BizTalk_WoodgroveBank_Orchestrations_Inline_CustomerServiceNativeRequestResponse_CustomerServicePort/GetAccountInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Microsoft_Samples_BizTalk_WoodgroveBank_Orchestrations_Inline_CustomerServiceNativeRequestResponse_CustomerServicePort">
+    <documentation xmlns="http://schemas.xmlsoap.org/wsdl/">BizTalk assembly "Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Inline, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a1054514fc67bded" published web service.</documentation>
+    <wsdl:port name="Microsoft_Samples_BizTalk_WoodgroveBank_Orchestrations_Inline_CustomerServiceNativeRequestResponse_CustomerServicePortSoap" binding="tns:Microsoft_Samples_BizTalk_WoodgroveBank_Orchestrations_Inline_CustomerServiceNativeRequestResponse_CustomerServicePortSoap">
+      <soap:address location="http://localhost/Microsoft.Samples.BizTalk.WoodgroveBank.OrchProxy.Inline/CustomerServicePort.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

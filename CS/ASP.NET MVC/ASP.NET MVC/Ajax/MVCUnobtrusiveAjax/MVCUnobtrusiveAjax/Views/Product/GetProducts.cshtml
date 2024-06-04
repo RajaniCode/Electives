@@ -1,0 +1,71 @@
+﻿@using MVCUnobtrusiveAjax.Models
+@model string
+@{
+    ViewBag.Title = "Get Products";
+    AjaxOptions ajaxOptions = new AjaxOptions
+    {
+        UpdateTargetId = "productsTable",
+        LoadingElementId = "loadingProducts",
+        LoadingElementDuration = 1000,
+        Confirm = "Do you really want to display products?"
+    };
+}
+
+<script type="text/javascript">
+    function OnAjaxRequestBegin() {
+        alert("This is the OnBegin Callback");
+    }
+    function OnAjaxRequestSuccess(data) {
+        alert("This is the OnSuccessCallback: " + data);
+    }
+    function OnAjaxRequestFailure(request, error) {
+        alert("This is the OnFailure Callback:" + error);
+    }
+    function OnAjaxRequestComplete(request, status) {
+        alert("This is the OnComplete Callback: " + status);
+    }
+</script>
+
+<h2>Get Products</h2>
+
+<div id="loadingProducts" style="background-color: cadetblue; display: none">
+    <p>Loading Products...</p>
+</div>
+
+<table style="background-color: lightcoral">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Category</th>
+            <th>Price</th>
+        </tr>
+    </thead>
+    <tbody id="productsTable">
+        @Html.Action("GetProductData", new { selectedCategory = Model })
+    </tbody>
+</table>
+<hr />
+<div>
+    @foreach (string category in Enum.GetNames(typeof(Category)))
+    {
+        <div class="ajaxLink">
+            @Ajax.ActionLink(category, "GetProductData",
+                new { selectedCategory = category },
+                new AjaxOptions { UpdateTargetId = "productsTable",
+                OnBegin = "OnAjaxRequestBegin",
+                OnFailure = "OnAjaxRequestFailure",
+                OnSuccess = "OnAjaxRequestSuccess",
+                OnComplete = "OnAjaxRequestComplete"})
+        </div>
+    }
+</div>
+@using (Ajax.BeginForm("GetProductData", ajaxOptions))
+{
+    <div>
+        @Html.DropDownList("selectedCategory", new SelectList(
+            new[] { "All" }.Concat(Enum.GetNames(typeof(Category)))))
+        <button type="submit">Submit</button>
+    </div>
+}

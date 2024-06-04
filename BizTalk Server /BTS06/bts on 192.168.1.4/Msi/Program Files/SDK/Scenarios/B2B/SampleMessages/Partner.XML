@@ -1,0 +1,268 @@
+﻿<PartnerObject xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+  <ActiveStatus>1</ActiveStatus>
+  <Currency>USD</Currency>
+  <Description>TestPartner</Description>
+  <DunsNumber>NONE</DunsNumber>
+  <GlEntityDestCode>NONE</GlEntityDestCode>
+  <LastModified>2005-05-06T13:58:40</LastModified>
+  <PartnerId>TestPartner</PartnerId>
+  <PartnerIdCrossReference>Other</PartnerIdCrossReference>
+  <PartnerRating>Gold</PartnerRating>
+  <PaymentMethod>Cash</PaymentMethod>
+  <Properties>
+    <ns1:Property xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+      <ns1:Name>EDI</ns1:Name>
+      <ns1:Description>TestPartner</ns1:Description>
+      <ns1:Qualifier>EDI</ns1:Qualifier>
+      <ns1:Value>EDI://7654321:ZZ:7654321</ns1:Value>
+      <ns1:AlternateValue>
+      </ns1:AlternateValue>
+      <ns1:Deployed>true</ns1:Deployed>
+    </ns1:Property>
+  </Properties>
+  <TaxExempt>1</TaxExempt>
+  <TaxId>NONE</TaxId>
+  <TechnicalInfo>
+    <ns1:GlobalPorts xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+      <ns1:GlobalPort name="VendorA_FILE">
+        <ns1:MappedPortName>VendorA_FILE</ns1:MappedPortName>
+      </ns1:GlobalPort>
+      <ns1:GlobalPort name="EDISP">
+        <ns1:MappedPortName>EDISP</ns1:MappedPortName>
+      </ns1:GlobalPort>
+    </ns1:GlobalPorts>
+    <ns1:definitions xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+      <wsdl:definitions xmlns:file="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/" xmlns:slnk="http://schemas.xmlsoap.org/ws/2002/07/service-link/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wss="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" name="Microsoft.Samples.BizTalk.Litware.Orchestrations-Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithBroker-Microsoft.Samples.BizTalk.Litware.Orchestrations.BrokerLinkType" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <wsdl:types />
+        <wsdl:message name="InputMessage" />
+        <wsdl:message name="OutputMessage" />
+        <wsdl:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactBrokerPortType">
+          <wsdl:operation name="Operation_ContactBroker">
+            <wsdl:input name="InputParam" message="tns:InputMessage" />
+            <wsdl:output name="OutputParam" message="tns:OutputMessage" />
+          </wsdl:operation>
+        </wsdl:portType>
+        <wsdl:binding name="Operation_ContactBroker-VendorA_FILE" type="tns:Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactBrokerPortType">
+          <KwTpmMappedPort xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+            <MappedPortName>VendorA_FILE</MappedPortName>
+            <GlobalPortName>VendorA_FILE</GlobalPortName>
+          </KwTpmMappedPort>
+          <wsdl:operation name="Operation_ContactBroker" />
+        </wsdl:binding>
+        <wsdl:service name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithBroker">
+          <wsdl:port name="Operation_ContactBroker-VendorA_FILE" binding="tns:Operation_ContactBroker-VendorA_FILE" />
+        </wsdl:service>
+        <slnk:serviceLinkType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.BrokerLinkType">
+          <slnk:role name="ContactBroker_Role">
+            <slnk:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactBrokerPortType" />
+          </slnk:role>
+        </slnk:serviceLinkType>
+      </wsdl:definitions>
+      <wsdl:definitions xmlns:file="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/" xmlns:slnk="http://schemas.xmlsoap.org/ws/2002/07/service-link/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wss="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" name="Microsoft.Samples.BizTalk.Litware.Orchestrations-Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrder-Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrderLinkType" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <wsdl:types />
+        <wsdl:message name="InputMessage" />
+        <wsdl:message name="OutputMessage" />
+        <wsdl:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactBrokerPortType">
+          <wsdl:operation name="Operation_ContactBroker">
+            <wsdl:input name="InputParam" message="tns:InputMessage" />
+            <wsdl:output name="OutputParam" message="tns:OutputMessage" />
+          </wsdl:operation>
+        </wsdl:portType>
+        <wsdl:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.OrderAckPortType">
+          <wsdl:operation name="Operation_OrderAck">
+            <wsdl:input name="InputParam" message="tns:InputMessage" />
+            <wsdl:output name="OutputParam" message="tns:OutputMessage" />
+          </wsdl:operation>
+        </wsdl:portType>
+        <wsdl:binding name="Operation_ContactBroker-VendorA_FILE" type="tns:Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactBrokerPortType">
+          <KwTpmMappedPort xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+            <MappedPortName>VendorA_FILE</MappedPortName>
+            <GlobalPortName>VendorA_FILE</GlobalPortName>
+          </KwTpmMappedPort>
+          <wsdl:operation name="Operation_ContactBroker" />
+        </wsdl:binding>
+        <wsdl:binding name="Operation_OrderAck-VendorA_FILE" type="tns:Microsoft.Samples.BizTalk.Litware.Orchestrations.OrderAckPortType">
+          <KwTpmMappedPort xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+            <MappedPortName>VendorA_FILE</MappedPortName>
+            <GlobalPortName>VendorA_FILE</GlobalPortName>
+          </KwTpmMappedPort>
+          <wsdl:operation name="Operation_OrderAck" />
+        </wsdl:binding>
+        <wsdl:service name="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrder">
+          <wsdl:port name="Operation_ContactBroker-VendorA_FILE" binding="tns:Operation_ContactBroker-VendorA_FILE" />
+          <wsdl:port name="Operation_OrderAck-VendorA_FILE" binding="tns:Operation_OrderAck-VendorA_FILE" />
+        </wsdl:service>
+        <slnk:serviceLinkType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrderLinkType">
+          <slnk:role name="ResponseRole">
+            <slnk:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactBrokerPortType" />
+            <slnk:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.OrderAckPortType" />
+          </slnk:role>
+        </slnk:serviceLinkType>
+      </wsdl:definitions>
+      <wsdl:definitions xmlns:file="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/" xmlns:slnk="http://schemas.xmlsoap.org/ws/2002/07/service-link/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wss="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" name="Microsoft.Samples.BizTalk.Litware.Orchestrations-Microsoft.Samples.BizTalk.Litware.Orchestrations.GetProfile-Microsoft.Samples.BizTalk.Litware.Orchestrations.GetPartnerProfileLinkType" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <wsdl:types />
+        <wsdl:message name="InputMessage" />
+        <wsdl:message name="OutputMessage" />
+        <wsdl:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfilePortType">
+          <wsdl:operation name="Operation_Profile">
+            <wsdl:input name="InputParam" message="tns:InputMessage" />
+            <wsdl:output name="OutputParam" message="tns:OutputMessage" />
+          </wsdl:operation>
+        </wsdl:portType>
+        <wsdl:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfileStatusPortType">
+          <wsdl:operation name="Operation_Status">
+            <wsdl:input name="InputParam" message="tns:InputMessage" />
+            <wsdl:output name="OutputParam" message="tns:OutputMessage" />
+          </wsdl:operation>
+        </wsdl:portType>
+        <wsdl:binding name="Operation_Profile-VendorA_FILE" type="tns:Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfilePortType">
+          <KwTpmMappedPort xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+            <MappedPortName>VendorA_FILE</MappedPortName>
+            <GlobalPortName>VendorA_FILE</GlobalPortName>
+          </KwTpmMappedPort>
+          <wsdl:operation name="Operation_Profile" />
+        </wsdl:binding>
+        <wsdl:binding name="Operation_Status-VendorA_FILE" type="tns:Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfileStatusPortType">
+          <KwTpmMappedPort xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+            <MappedPortName>VendorA_FILE</MappedPortName>
+            <GlobalPortName>VendorA_FILE</GlobalPortName>
+          </KwTpmMappedPort>
+          <wsdl:operation name="Operation_Status" />
+        </wsdl:binding>
+        <wsdl:service name="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetProfile">
+          <wsdl:port name="Operation_Profile-VendorA_FILE" binding="tns:Operation_Profile-VendorA_FILE" />
+          <wsdl:port name="Operation_Status-VendorA_FILE" binding="tns:Operation_Status-VendorA_FILE" />
+        </wsdl:service>
+        <slnk:serviceLinkType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetPartnerProfileLinkType">
+          <slnk:role name="ResponseRole">
+            <slnk:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfilePortType" />
+            <slnk:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfileStatusPortType" />
+          </slnk:role>
+        </slnk:serviceLinkType>
+      </wsdl:definitions>
+      <wsdl:definitions xmlns:file="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/" xmlns:slnk="http://schemas.xmlsoap.org/ws/2002/07/service-link/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wss="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" name="Microsoft.Samples.BizTalk.Litware.Orchestrations-Microsoft.Samples.BizTalk.Litware.Orchestrations.UpdateUserProfileBAS-Microsoft.Samples.BizTalk.Litware.Orchestrations.UserProfileLinkType" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <wsdl:types />
+        <wsdl:message name="InputMessage" />
+        <wsdl:message name="OutputMessage" />
+        <wsdl:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfileStatusPortType">
+          <wsdl:operation name="Operation_Status">
+            <wsdl:input name="InputParam" message="tns:InputMessage" />
+            <wsdl:output name="OutputParam" message="tns:OutputMessage" />
+          </wsdl:operation>
+        </wsdl:portType>
+        <wsdl:binding name="Operation_Status-VendorA_FILE" type="tns:Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfileStatusPortType">
+          <KwTpmMappedPort xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+            <MappedPortName>VendorA_FILE</MappedPortName>
+            <GlobalPortName>VendorA_FILE</GlobalPortName>
+          </KwTpmMappedPort>
+          <wsdl:operation name="Operation_Status" />
+        </wsdl:binding>
+        <wsdl:service name="Microsoft.Samples.BizTalk.Litware.Orchestrations.UpdateUserProfileBAS">
+          <wsdl:port name="Operation_Status-VendorA_FILE" binding="tns:Operation_Status-VendorA_FILE" />
+        </wsdl:service>
+        <slnk:serviceLinkType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.UserProfileLinkType">
+          <slnk:role name="UpdateStatus_Role">
+            <slnk:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ProfileStatusPortType" />
+          </slnk:role>
+        </slnk:serviceLinkType>
+      </wsdl:definitions>
+      <wsdl:definitions xmlns:file="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/" xmlns:slnk="http://schemas.xmlsoap.org/ws/2002/07/service-link/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:wss="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" name="Microsoft.Samples.BizTalk.Litware.Orchestrations-Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithVendors-Microsoft.Samples.BizTalk.Litware.Orchestrations.VendorLinkType" targetNamespace="http://tempuri.org" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+        <wsdl:types />
+        <wsdl:message name="InputMessage" />
+        <wsdl:message name="OutputMessage" />
+        <wsdl:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactVendorPortType">
+          <wsdl:operation name="Operation_ContactVendor">
+            <wsdl:input name="InputParam" message="tns:InputMessage" />
+            <wsdl:output name="OutputParam" message="tns:OutputMessage" />
+          </wsdl:operation>
+        </wsdl:portType>
+        <wsdl:binding name="Operation_ContactVendor-VendorA_FILE" type="tns:Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactVendorPortType">
+          <KwTpmMappedPort xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+            <MappedPortName>VendorA_FILE</MappedPortName>
+            <GlobalPortName>VendorA_FILE</GlobalPortName>
+          </KwTpmMappedPort>
+          <wsdl:operation name="Operation_ContactVendor" />
+        </wsdl:binding>
+        <wsdl:service name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithVendors">
+          <wsdl:port name="Operation_ContactVendor-VendorA_FILE" binding="tns:Operation_ContactVendor-VendorA_FILE" />
+        </wsdl:service>
+        <slnk:serviceLinkType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.VendorLinkType">
+          <slnk:role name="ContactVendor_Role">
+            <slnk:portType name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ContactVendorPortType" />
+          </slnk:role>
+        </slnk:serviceLinkType>
+      </wsdl:definitions>
+    </ns1:definitions>
+  </TechnicalInfo>
+  <TermId>NONE</TermId>
+  <Addresses>
+    <Address xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+      <AddressId>30fdd5da-86bb-4b54-9171-4c9fa26c3d69</AddressId>
+      <City>Redmond</City>
+      <County />
+      <Description />
+      <Emails>
+        <ns1:Email xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+          <ns1:EmailAddress>someone@microsoft.com</ns1:EmailAddress>
+          <ns1:Description>someone@microsoft.com</ns1:Description>
+        </ns1:Email>
+      </Emails>
+      <Faxes>
+        <ns1:Fax xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+          <ns1:FaxNumber>9999999999</ns1:FaxNumber>
+          <ns1:Description>9999999999</ns1:Description>
+        </ns1:Fax>
+      </Faxes>
+      <LastModified>2005-05-06T13:58:40</LastModified>
+      <Lines>
+        <ns1:Line xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">XX XXX XXXXXX XXX</ns1:Line>
+      </Lines>
+      <PostalCode>98052</PostalCode>
+      <Region />
+      <StateOrProvince>WA</StateOrProvince>
+      <TaxJurisdiction />
+      <Telephones>
+        <ns1:Telephone xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+          <ns1:TelephoneNumber>9999999999</ns1:TelephoneNumber>
+          <ns1:Description>9999999999</ns1:Description>
+        </ns1:Telephone>
+      </Telephones>
+      <Type>TestPartner</Type>
+      <WebAddresses>
+        <ns1:WebAddress xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+          <ns1:URL>http://www.Litware.com/Partners</ns1:URL>
+          <ns1:Description>http://Litware.com/Partners</ns1:Description>
+        </ns1:WebAddress>
+      </WebAddresses>
+    </Address>
+  </Addresses>
+  <Contacts>
+    <Contact xmlns="http://www.microsoft.com/BizTalk/KwTpm">
+      <ContactId>eb398d38-1dd5-45a7-85df-fdb72cd6c8d1</ContactId>
+      <Description>TestPartner</Description>
+      <Emails>
+        <ns1:Email xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+          <ns1:EmailAddress>someone@microsoft.com</ns1:EmailAddress>
+          <ns1:Description>someone@microsoft.com</ns1:Description>
+        </ns1:Email>
+      </Emails>
+      <Faxes>
+        <ns1:Fax xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+          <ns1:FaxNumber>9999999999</ns1:FaxNumber>
+          <ns1:Description>9999999999</ns1:Description>
+        </ns1:Fax>
+      </Faxes>
+      <LastModified>2005-05-06T13:58:41</LastModified>
+      <Name>TestPartner</Name>
+      <Password>Password</Password>
+      <Telephones>
+        <ns1:Telephone xmlns:ns1="http://www.microsoft.com/BizTalk/KwTpm">
+          <ns1:TelephoneNumber>9999999999</ns1:TelephoneNumber>
+          <ns1:Description>9999999999</ns1:Description>
+        </ns1:Telephone>
+      </Telephones>
+      <Type>Paersonal</Type>
+      <UserName>User</UserName>
+    </Contact>
+  </Contacts>
+</PartnerObject>

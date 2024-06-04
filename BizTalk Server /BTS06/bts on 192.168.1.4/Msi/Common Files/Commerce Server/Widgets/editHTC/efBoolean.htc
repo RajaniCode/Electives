@@ -1,0 +1,374 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.efBoolean' tagName="efboolean" lightweight=true>
+	<PUBLIC>
+		<EVENT NAME='onError'		ID='evtError'></EVENT><!-- fired when developer error occurs -->
+		<EVENT NAME='onChange'		ID='evtChange'></EVENT>
+		<EVENT NAME='onBrowse'		ID='evtBrowse'></EVENT>
+		<EVENT NAME='onBeginChange'	ID='evtBeginChange'></EVENT>
+
+		<METHOD NAME='initialize' />
+		<METHOD NAME='focus'		INTERNALNAME='onFocus' />
+		<METHOD NAME='resetDefault'	INTERNALNAME='ResetDefault' />
+	<!-- UNSUPPORTED: PRIVATE METHODS -->
+		<METHOD NAME='resetReadOnly' />
+
+		<PROPERTY NAME='dirty'		GET='bGetDirty'		/>
+		<PROPERTY NAME='required'	GET='bGetRequired'	/>
+		<PROPERTY NAME='valid'		GET='bGetValid'		/>
+		<PROPERTY NAME='disabled'	GET='bGetDisabled'	PUT='SetDisabled' />
+		<PROPERTY NAME='readonly'	GET='bGetReadonly'	PUT='SetReadonly' />
+		<PROPERTY NAME='value'		GET='sGetData'		PUT='SetData' />
+		<PROPERTY NAME='prompt' /><!-- not used: here for consistency with other widgets -->
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_Yes_Text = "Yes"
+		const L_PickerButtonWidth_Number = 16	'width in pixels of arrow/ellipsis buttons
+
+		dim m_bDirty, m_bDebug, m_bDisabled, m_bReadonly, m_bBrowse, m_bValid, _
+			m_bRequired, m_bMasterReadOnly, m_bBrowseReadonly, m_bFieldRequired, _
+			m_elCheckbox, m_elLabel, m_elBrowseBtn, m_elHidden, m_sType, m_sError, _
+			m_fnOnError, m_fnOnBrowse, m_fnOnChange, m_sDefault
+
+		'button name constants (webdings)
+		const ELLIPSIS = "&hellip;"
+		'keycode constants
+		const KEYCODE_ESC = 27
+		const KEYCODE_ENTER = 13
+		const KEYCODE_SPACE = 32
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		m_bDirty = false			'true if control's value has changed
+		m_bRequired = false			'always false for boolean
+		m_bValid = true				'always true for boolean
+		set m_elBrowseBtn = nothing	'holds browse button, if any
+
+		sub Initialize(xmlNode, sValue)
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			dim xmlTemp, sTemp, sLabel, elTable, elRow, elCell
+
+			m_sType = "boolean"
+			element.innerText = ""
+
+			'get label or set default
+			set xmlTemp = xmlNode.selectSingleNode("label")
+			if not xmlTemp is nothing then sLabel = xmlTemp.text
+			if sLabel = "" then sLabel = L_Yes_Text
+			element.title = sLabel
+			'style is like readonly for other subcontrols
+			element.className = element.className & " efReadOnly"
+
+			'get event handler function names
+			m_fnOnBrowse = xmlNode.getAttribute("onbrowse")
+			m_fnOnChange = xmlNode.getAttribute("onchange")
+			m_fnOnError = xmlNode.getAttribute("onerror")
+			'check if browse enabled
+			sTemp = xmlNode.getAttribute("browse")
+			m_bBrowse = CBool(not isNull(m_fnOnBrowse) or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+			sTemp = xmlNode.getAttribute("browsereadonly")
+			m_bBrowseReadonly = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+
+			'default to 0 if no value or invalid and no default set
+			m_sDefault = xmlNode.getAttribute("default")
+			if sValue = "" and not isNull(m_sDefault) then sValue = m_sDefault
+			if sValue = "" or sValue <> "1" then
+				sValue = 0
+			else
+				sValue = 1
+			end if
+
+			'create container table
+			set elTable = element.appendChild(element.document.createElement("TABLE"))
+			with elTable
+				.style.tableLayout = "fixed"
+				.width = "100%"
+				.cellSpacing = 0
+				.cellPadding = 0
+			end with
+			set elRow = elTable.insertRow()
+			set elCell = elRow.insertCell()
+			elCell.width = L_PickerButtonWidth_Number
+			elCell.style.padding = 0
+			'create checkbox
+			set m_elCheckbox = element.document.createElement("INPUT")
+			m_elCheckbox.type = "checkbox"
+			set m_elCheckbox = elCell.appendChild(m_elCheckbox)
+			with m_elCheckbox
+				.id = "prop_" & element.id
+				.checked = CBool(sValue)
+				.tabindex = -1
+				.style.backgroundColor = "transparent"
+				.style.margin = -1
+				.attachEvent "onclick", GetRef("onChange")
+				.attachEvent "onfocus", GetRef("onFocus")
+			end with
+
+			set elCell = elRow.insertCell()
+			'create label for checkbox
+			set m_elLabel = elCell.appendChild(element.document.createElement("LABEL"))
+			with m_elLabel
+				.style.whiteSpace = "nowrap"
+				.htmlFor = "prop_" & element.id
+				.innerText = sLabel
+				.attachEvent "onkeydown", GetRef("onKeyDown")
+			end with
+
+			if m_bBrowse then
+				'if browsable then add browse button and attach browse event
+				set elCell = elRow.insertCell()
+				elCell.style.padding = 0
+				elCell.width = L_PickerButtonWidth_Number
+				set m_elBrowseBtn = elCell.appendChild(element.document.createElement("BUTTON"))
+				with m_elBrowseBtn
+					.id = "browse_" & element.id
+					.disabled = true
+					.attachEvent "onclick", GetRef("onBrowseClick")
+					.className = "efEllipsisBtn"
+					.innerHTML = ELLIPSIS
+					.attachEvent "onkeydown", GetRef("onBrowseKeyDown")
+					set xmlTemp = xmlNode.selectSingleNode("browsetooltip")
+					if not xmlTemp is nothing then .title = xmlTemp.text
+				end with
+				if not isNull(m_fnOnBrowse) then element.attachEvent "onbrowse", GetRef("CallBrowseHandler")
+			end if
+
+			'hidden input for holding value (this way, unlike HTML checkbox,
+			'  will always post a value of 1 or 0)
+			set m_elHidden = element.document.createElement("INPUT")
+			m_elHidden.type = "hidden"
+			with m_elHidden
+				.id = "hidden_" & element.id
+				.name = element.id
+				.value = sValue
+				.attachEvent "onchange", GetRef("onChange")
+			end with
+			set m_elHidden = element.appendChild(m_elHidden)
+
+			'get readonly and disabled
+			sTemp = xmlNode.getAttribute("readonly")
+			m_bMasterReadOnly = CBool(m_bBrowseReadonly or (not isNull(sTemp) and LCase(sTemp) = "yes"))
+			readonly = m_bMasterReadOnly
+			sTemp = xmlNode.getAttribute("disabled")
+			disabled = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+			'attach event handlers
+			if not isNull(m_fnOnChange) then element.attachEvent "onchange", GetRef("CallChangeHandler")
+			if not isNull(m_fnOnError) then element.attachEvent "onerror", GetRef("CallErrorHandler")
+		end sub
+
+		sub onBrowseKeyDown()
+			if m_bDisabled then exit sub
+			if window.event.keyCode = KEYCODE_ENTER then
+				'enter same as click item
+				onBrowseClick()
+				window.event.returnValue = false
+			end if
+		end sub
+
+		sub onKeyDown()
+			dim evt
+			set evt = window.event
+			if m_bReadOnly or m_bDisabled then exit sub
+			if evt.keyCode = KEYCODE_ENTER or _
+				evt.keyCode = KEYCODE_SPACE then
+				'enter same as click item
+				m_elCheckbox.click()
+				evt.returnValue = false
+				evt.cancelBubble = true
+			elseif evt.keyCode = KEYCODE_ESC then
+				evt.returnValue = false
+				evt.cancelBubble = true
+			end if
+		end sub
+
+		sub onBrowseClick()
+			dim evt
+			if not m_bDisabled then
+				'fire browse event
+				set evt = createEventObject()
+				evt.setAttribute "value", CInt(CBool(m_elCheckbox.checked))
+				evt.setAttribute "type", "browse"
+				evtBrowse.fire(evt)
+			end if
+		end sub
+
+		sub CallBrowseHandler()
+			if window.event.type <> "browse" then exit sub
+			on error resume next
+			execute("call window." & m_fnOnBrowse)
+			on error goto 0
+		end sub
+
+		sub CallChangeHandler()
+			on error resume next
+			execute("call window." & m_fnOnChange)
+			on error goto 0
+		end sub
+
+		sub CallErrorHandler()
+			on error resume next
+			execute("call window." & m_fnOnError)
+			on error goto 0
+		end sub
+
+		function bGetDisabled()
+			bGetDisabled = m_bDisabled
+		end function
+
+		sub SetDisabled(bDisabled)
+			m_bDisabled = bDisabled
+			if not m_bReadonly or m_bBrowseReadonly then
+				m_elCheckbox.disabled = m_bDisabled
+				if m_bDisabled then
+					element.style.cursor = "default"
+					m_elCheckbox.style.cursor = "default"
+					m_elLabel.style.cursor = "default"
+					m_elLabel.tabIndex = -1
+				else
+					element.style.cursor = ""
+					m_elCheckbox.style.cursor = "hand"
+					m_elLabel.style.cursor = "hand"
+					m_elLabel.tabIndex = 0
+				end if
+			end if
+			if m_bDisabled then
+				element.className = element.className & " efDisabled"
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = -1
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "none"
+				end if
+			else
+				m_bDirty = false
+				element.className = replace(element.className, " efDisabled", "")
+				if m_bBrowse then
+					m_elBrowseBtn.tabIndex = 0
+					m_elBrowseBtn.disabled = bDisabled
+					if m_bBrowseReadonly then m_elBrowseBtn.style.display = "block"
+				end if
+			end if
+		end sub
+
+		function bGetReadonly()
+			bGetReadonly = m_bReadOnly
+		end function
+
+		sub SetReadonly(bReadOnly)
+			m_bReadOnly = bReadOnly
+			m_elCheckbox.disabled = m_bReadOnly
+			if m_bReadOnly then
+				if inStr(element.className, "efRead") then
+					if m_bBrowseReadOnly then
+						element.className = replace(element.className, "efReadWrite", "efBrowseReadOnly")
+					else
+						element.className = replace(element.className, "efReadWrite", "efReadOnly")
+					end if
+				else
+					if m_bBrowseReadOnly then
+						element.className = element.className & " efBrowseReadOnly"
+					else
+						element.className = element.className & " efReadOnly"
+					end if
+				end if
+				m_elCheckbox.style.cursor = "default"
+				m_elLabel.style.cursor = "default"
+				m_elLabel.tabIndex = -1
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = "none"
+					m_elBrowseBtn.tabIndex = -1
+				end if
+			else
+				m_bDirty = false
+				if inStr(element.className, "efRead") then
+					element.className = replace(element.className, "efReadOnly", "efReadWrite")
+					element.className = replace(element.className, "efBrowseReadOnly", "efReadWrite")
+				else
+					element.className = element.className & " efReadWrite"
+				end if
+				m_elCheckbox.style.cursor = "hand"
+				m_elLabel.style.cursor = "hand"
+				m_elLabel.tabIndex = 0
+				if m_bBrowse then
+					m_elBrowseBtn.style.display = ""
+					m_elBrowseBtn.tabIndex = 0
+				end if
+			end if
+			if m_bBrowse then m_elBrowseBtn.disabled = bReadOnly
+		end sub
+
+		sub ResetReadOnly()
+			SetReadonly(m_bMasterReadOnly)
+		end sub
+
+		function sGetData()
+			sGetData = m_elHidden.value
+		end function
+
+		sub ResetDefault()
+			'reset to default or empty
+			if not isNull(m_sDefault) then
+				SetData(m_sDefault)
+			else
+				SetData("")
+			end if
+		end sub
+
+		sub SetData(sValue)
+			dim evt
+			if sValue = m_elHidden.value then exit sub
+			if m_bBrowse then
+				if m_elBrowseBtn.disabled then exit sub
+			end if
+			'value is 0 or 1 (default=0)
+			if sValue <> "1" then
+				m_elHidden.value = 0
+			else
+				m_elHidden.value = 1
+			end if
+			m_elCheckbox.checked = CBool(m_elHidden.value)
+			if not m_bDisabled then
+				set evt = createEventObject()
+				evt.setAttribute "type", "beginchange"
+				evtBeginChange.fire(evt)
+				evt.setAttribute "type", "change"
+				evtChange.fire(evt)
+				m_bDirty = true
+			end if
+		end sub
+
+		function bGetRequired()
+			bGetRequired = m_bRequired
+		end function
+
+		function bGetValid()
+			bGetValid = m_bValid
+		end function
+
+		function bGetDirty()
+			bGetDirty = m_bDirty
+		end function
+
+		sub onFocus()
+			if (m_bDisabled or m_bReadonly) and m_bBrowse then
+				if not m_elBrowseBtn.disabled then m_elBrowseBtn.focus()
+			end if
+			if not m_bDisabled and not m_bReadonly then
+				m_elLabel.focus()
+			end if
+		end sub
+
+		sub onChange()
+			'always 0 or 1
+			if m_elCheckbox.checked then
+				SetData(1)
+			else
+				SetData(0)
+			end if
+		end sub
+	</SCRIPT>
+</PUBLIC:COMPONENT>

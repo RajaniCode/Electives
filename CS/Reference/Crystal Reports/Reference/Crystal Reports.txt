@@ -1,0 +1,31 @@
+1
+DateDiff ("d", ShiftDateTime ({AcpDailyWellData.Date}, ",000" , PrintTimeZone), CurrentDate - 1) = 0
+
+
+
+
+2
+DateTimeValue (ToText(PrintDate) + " " + ToText(PrintTime))
+
+
+
+
+3
+CurrentDate
+
+
+
+4
+BooleanVar bFailed := ({Wells.rtuStatus} = 2) And ({Wells.scanInhibit} = false);
+
+if bFailed then
+
+	"Failed"
+
+else
+
+	"Good"
+
+
+5.
+Column Max value in crystal reports, use Summary option

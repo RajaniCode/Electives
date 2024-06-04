@@ -1,0 +1,17 @@
+﻿<Window x:Class="WPF40_FileUploadContainer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ccFileUpload="clr-namespace:WPF40_FileUploadCustonControl;assembly=WPF40_FileUploadCustonControl"
+        Title="MainWindow" Height="481" Width="667">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="112*" />
+            <RowDefinition Height="330*" />
+        </Grid.RowDefinitions>
+        <ccFileUpload:FileUploadCustomControl x:Name="fileUpload" 
+                                              Width="600" Margin="12,29,34,0" Height="56" 
+                                              VerticalAlignment="Top"
+                                               FileNameChanged="fileUpload_FileNameChanged"></ccFileUpload:FileUploadCustomControl>
+        <Image Grid.Row="1" Height="264" HorizontalAlignment="Left" Margin="30,24,0,0" Name="imgUploaded" Stretch="Fill" VerticalAlignment="Top" Width="589" />
+    </Grid>
+</Window>

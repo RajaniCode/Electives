@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+    Layout = "~/Views/Shared/SiteMaster.cshtml";
+}
+<script type="text/javascript">
+   function  changeValues() {
+
+       $.ajax(
+                 {
+                     type: "GET",
+                     url: "/Home/PartialData",
+                     data: "change=1",
+                     dataType: "html",
+                     success: function (result) {
+                         // alert(result);
+                         var domElement = $(result); // create element from html
+                         document.getElementById("dvUpdate").innerHTML = result; //refresh the inner HTML    
+                         
+                     }
+                 });
+
+    }
+</script>
+
+<div id="dvPartialData">
+     @Html.Action("PartialData","Home")
+</div>
+<div>
+    <input type="button" value="change Partial Data" onclick="changeValues();" />
+</div>

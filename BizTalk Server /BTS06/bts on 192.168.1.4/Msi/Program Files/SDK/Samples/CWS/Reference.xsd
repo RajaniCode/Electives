@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:tns="http://Microsoft.Samples.BizTalk.ConsumeWebService/webservices/" elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.ConsumeWebService/webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="InboundPO" nillable="true" type="tns:InboundPO" />
+  <xs:complexType name="InboundPO">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="PO_Num" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Date" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Invoice" nillable="true" type="tns:Invoice" />
+  <xs:complexType name="Invoice">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="InvoiceNumber" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- ===================================================================================== -->
+<!--                                                                                       -->
+<!-- Microsoft.Samples.BizTalk.WoodgroveBank.PaymentTracker                                -->
+<!-- End to end Service Oriented Scenatio sample for BizTalk Server.                       -->
+<!--                                                                                       -->
+<!-- This file represents the PayementTracker SSO affiliate appliaction. Use this          -->
+<!-- file with the ssomanage command line tool to create the PaymentTracker Affiliate app. -->
+<!--                                                                                       -->
+<!-- Copyright (C) Microsoft Corporation. All rights reserved.                        -->
+<!-- THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,          -->
+<!-- EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES      -->
+<!-- OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.                           -->
+<!--                                                                                       -->
+<!-- ===================================================================================== -->
+
+<SSO>
+		<application name="WoodgroveBank.PaymentTracker">
+		<description>SSO Affiliate application for the Payment Tracking Back End system </description>
+    <contact>someone@microsoft.com</contact>
+
+		<appUserAccount>
+			<!--	
+				Include the name of the groups that are allowed to use this affiliate application
+				as the value of this element.  In a single server environment, this is typically
+				BizTalk Application Users, referring to this group in the local machine.  In a 
+				multi server environment, this is typically %DomainName%\BizTalk Application Users 
+			-->
+				BizTalk Application Users 
+		</appUserAccount>
+
+		<appAdminAccount>
+			<!--	
+				Include the name of the groups that are allowed to administer this affiliate application
+				as the value of this element.  In a single server environment, this is typically
+				BizTalk Server Administrators, referring to this group in the local machine.  In a 
+				multi server environment, this is typically %DomainName%\BizTalk Server Administrators
+			-->
+				BizTalk Server Administrators
+		</appAdminAccount>
+
+    <field ordinal="0" label="user ID" masked="no" />
+    <field ordinal="1" label="password" masked="yes" />
+    <flags groupApp="no" configStoreApp="no" allowTickets="yes" validateTickets="yes" allowLocalAccounts="yes" timeoutTickets="yes" adminAccountSame="yes" enableApp="yes" />
+  </application>
+</SSO>

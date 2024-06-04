@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <appSettings>
+     <add key="BdaoConnectionString" value="Provider=SQLOLEDB;Integrated Security=SSPI;database=TPM;Server=(local);network library=dbnetlib;"/>
+     <add key="CsOleDbConnectionString" value="Provider=CSOLEDB;server=(local);database=TPM;Integrated Security=SSPI;"/>
+     <add key="ProviderConnectionString" value="provider=commerce.dso.1;data source=mscop://inprocconnect/server=(local):Database=TPM:catalog=Profile Definitions:Trusted_Connection=True:"/>
+     <add key="SchemaLocation" value="SCHEMAS FOLDER"/>
+     <add key="Microsoft.BizTalk.KwTpm.Stsws.StsWebService" value="http://localhost/StsWebService/StsWebService.asmx"/>
+     <add key="InternalPortsRootUrl" value="http://localhost/"/>
+     <add key="TPMDBConnectionString" value="Server=.;Database=TPM;Integrated Security=SSPI;"/>
+     <add key="STSWSEnabled" value="1"/>
+     <add key="KWBusinessUser" value="BUSINESS USER GROUP" />
+     <add key="KWBusinessManager" value="BUSINESS MANAGER GROUP" />
+     <add key="KWBusinessAdmin" value="BUSINESS ADMIN GROUP" />
+     <add key="BizTalkAdmin" value="BIZTALK ADMIN GROUP" />
+     <add key="BizTalkHostGroup" value="BIZTALK HOST GROUP" />
+	 <add key="SharePointAdapterTimeout" value="100000" />
+	 <add key="SharePointAdapterPort" value="8090" />
+  </appSettings>    
+
+  <system.web>
+        <httpModules>
+            <clear />
+            <add name="WindowsAuthentication" type="System.Web.Security.WindowsAuthenticationModule" />
+            <add name="UrlAuthorization" type="System.Web.Security.UrlAuthorizationModule" />
+            <add name="FileAuthorization" type="System.Web.Security.FileAuthorizationModule" />
+        </httpModules>
+
+    <!--  DYNAMIC DEBUG COMPILATION
+          Set compilation debug="true" to enable ASPX debugging.  Otherwise, setting this value to
+          false will improve runtime performance of this application. 
+          Set compilation debug="true" to insert debugging symbols (.pdb information)
+          into the compiled page. Because this creates a larger file that executes
+          more slowly, you should set this value to true only when debugging and to
+          false at all other times. For more information, refer to the documentation about
+          debugging ASP .NET files.
+    -->
+    <compilation 
+         defaultLanguage="c#"
+         debug="false"
+    />
+    <!--  CUSTOM ERROR MESSAGES
+          Set customError mode values to control the display of user-friendly 
+          error messages to users instead of error details (including a stack trace):
+
+          "On" Always display custom (friendly) messages  
+          "Off" Always display detailed ASP.NET error information.
+          "RemoteOnly" Display custom (friendly) messages only to users not running 
+          on the local Web server. This setting is recommended for security purposes, so 
+          that you do not display application detail information to remote clients.
+    -->
+    <customErrors 
+    mode="RemoteOnly" 
+    /> 
+
+    <!--  AUTHENTICATION 
+          This section sets the authentication policies of the application. Possible modes are "Windows", "Forms", 
+          "Passport" and "None"
+    -->
+    <authentication mode="Windows" /> 
+
+    <!--  APPLICATION-LEVEL TRACE LOGGING
+          Application-level tracing enables trace log output for every page within an application. 
+          Set trace enabled="true" to enable application trace logging.  If pageOutput="true", the
+          trace information will be displayed at the bottom of each page.  Otherwise, you can view the 
+          application trace log by browsing the "trace.axd" page from your web application
+          root. 
+    -->
+    <trace
+        enabled="false"
+        requestLimit="10"
+        pageOutput="false"
+        traceMode="SortByTime"
+		localOnly="true"
+    />
+
+    <!--  SESSION STATE SETTINGS
+          By default ASP .NET uses cookies to identify which requests belong to a particular session. 
+          If cookies are not available, a session can be tracked by adding a session identifier to the URL. 
+          To disable cookies, set sessionState cookieless="true".
+    -->
+    <sessionState 
+            mode="InProc"
+            cookieless="false" 
+            timeout="20" 
+    />
+
+    <!--  GLOBALIZATION
+          This section sets the globalization settings of the application. 
+    -->
+    <globalization 
+            requestEncoding="utf-8" 
+            responseEncoding="utf-8" 
+   />
+   <identity impersonate="true"
+    userName="registry:HKLM\SOFTWARE\Microsoft\BizTalk Server\3.0\TPPubWS\identity\ASPNET_SETREG,userName" 
+    password="registry:HKLM\SOFTWARE\Microsoft\BizTalk Server\3.0\TPPubWS\identity\ASPNET_SETREG,password"/>
+
+   <httpRuntime executionTimeout="3600" />        <!-- setting the web service timeout in seconds-->
+
+   <webServices> 
+		<protocols> 
+			<remove name="Documentation" />
+		</protocols> 
+   </webServices>
+	<authorization>
+		<allow roles="BUSINESS USER GROUP" verbs="GET, HEAD, POST"/> 
+		<allow roles="BUSINESS MANAGER GROUP" verbs="GET, HEAD, POST"/> 
+		<allow roles="BUSINESS ADMIN GROUP" verbs="GET, HEAD, POST"/> 
+		<allow roles="BIZTALK HOST GROUP" verbs="GET, HEAD, POST"/> 
+		<allow roles="BIZTALK ADMIN GROUP" verbs="GET, HEAD, POST"/> 
+		<deny users="*" />
+	</authorization>
+	<trust level="Full" originUrl="" />
+ </system.web>
+ <!-- Trace Switch -->
+ <!-- 0: Off       -->
+ <!-- 1: On        -->
+ <system.diagnostics>
+	<!--  UNCOMMENT this 
+	<trace autoflush="true" indentsize="0">
+		<listeners>
+			<add name="TPPubWSTrace" type="System.Diagnostics.TextWriterTraceListener" initializeData="c:\temp\TPPubWS_AuditLog.log" />
+		</listeners>
+	</trace>
+	-->	
+	<switches>
+		<add name="Microsoft.BizTalk.KwTpm.TpmWebService" value="0"/>
+	</switches>
+ </system.diagnostics>
+</configuration>

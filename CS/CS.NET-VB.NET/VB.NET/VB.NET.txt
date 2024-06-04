@@ -1,0 +1,49 @@
+C#
+0xF = 15
+
+VB.NET
+&HF = 15
+
+
+A Static variable in VB.NET is a local variable that retains its value between method calls.
+
+
+Methods (Subroutines, Functions) cannot be Static, however, can be Shared
+
+Subroutines cannot return
+
+
+Functions can return:
+
+Private [Shared] Function myFunction() [As String]
+    Return "String"
+End Function
+
+Private Shared Function myFunction() [As String]
+    myFunction = "String"
+End Function
+
+
+[Shared] Methods can have its Form controls 
+ONLY USING the Form controls' [Object]
+[Note: Result will not be as sama as Shared]
+
+
+[Shared] Event Subroutines can call [Non Shared] Methods (Subroutines, Functions)
+ONLY USING the Methods' [Object] 
+[Note: Result will not be as sama as Shared]
+
+
+[Non Shared] Event Subroutines can call [Shared/Non Shared] Methods (Subroutines, Functions)
+[Note: if in the same class [Class/Object] prefixes are not required]
+
+VB.NET Value                         Unicode Value               Description
+
+ControlChars.Cr                      x000D                       Carriage Return
+ControlChars.Lf                      x000A                       Line Feed
+ControlChars.CrLf                    x000D & x000A               Carriage Return|Line Feed
+ControlChars.NewLine                 x000D & x000A               "        "
+ControlChars.Tab                     x0009                       Tab
+ControlChars.Quote                   x0022                       Quotation Mark
+ControlChars.Back                    x0008                       BackSpace
+ControlChars.NullChar                x0000                       0

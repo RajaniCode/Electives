@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:b="urn:schemas-microsoft-com:BizTalkServer" xmlns="http://www.microsoft.com/BizTalk/KwTpm" xmlns:mstns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:include schemaLocation="MessageProcessing.xsd" />
+	<xs:import namespace="http://schemas.xmlsoap.org/wsdl/http/" schemaLocation="HttpBinding.xsd"/>
+	<xs:import namespace="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/" schemaLocation="FileBinding.xsd"/>
+	<xs:import namespace="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" schemaLocation="WssBinding.xsd" />
+	<xs:import namespace="http://schemas.xmlsoap.org/wsdl/" schemaLocation="wsdl.xsd" />
+	<xs:import namespace="http://schemas.xmlsoap.org/ws/2002/07/service-link/" schemaLocation="ServiceLinkType.xsd"/>
+	<xs:complexType name="TechnicalInfoType">
+		<xs:sequence>
+			<xs:element name="SignatureCertificate" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="GlobalPorts" type="GlobalPortsType" minOccurs="0">
+				<xs:unique name="UniqueMappedPortName">
+					<xs:selector xpath=".//mstns:GlobalPort" />
+					<xs:field xpath="mstns:MappedPortName" />
+				</xs:unique>
+				<xs:unique name="UniqueGlobalPortName">
+					<xs:selector xpath=".//mstns:GlobalPort" />
+					<xs:field xpath="@name" />
+				</xs:unique>
+			</xs:element>
+			<xs:element name="definitions" type="definitionsType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="definitionsType">
+		<xs:sequence>
+			<xs:element ref="wsdl:definitions" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="GlobalPortsType">
+		<xs:sequence>
+			<xs:element name="GlobalPort" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:choice>
+							<xs:element name="ProtocolInformation" type="KwTpmMessageProcessingType" />
+							<xs:element name="MappedPortName" type="MappedPortNameType" />
+						</xs:choice>
+					</xs:sequence>
+					<xs:attribute name="name">
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:minLength value="1" />
+								<xs:maxLength value="256" />
+								<xs:pattern value="[^`~!@#$%^&amp;*()+=\[\]{}\|;'&quot;&gt;&lt;,\?\\]+"></xs:pattern>
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:annotation>
+		<xs:appinfo />
+	</xs:annotation>
+	<xs:element name="PartnerObject" type="PartnerType" />
+	<xs:complexType name="PartnerType">
+		<xs:annotation>
+			<xs:documentation>Partner Type</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="PartnerId" type="PartnerId" />
+			<xs:element name="ActiveStatus" type="ActiveStatus" nillable="true" minOccurs="0" />
+			<xs:element name="Currency" type="Currency" minOccurs="0" />
+			<xs:element name="Description" type="Description" minOccurs="0" />
+			<xs:element name="DunsNumber" type="DunsNumber" minOccurs="0" />
+			<xs:element name="GlEntityDestCode" type="GlEntityDestCode" minOccurs="0" />
+			<xs:element name="PartnerIdCrossReference" type="PartnerId" />
+			<xs:element name="PartnerRating" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="PaymentMethod" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TaxExempt" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="32" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TaxId" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="TermId" type="TermId" minOccurs="0" />
+			<xs:element name="FriendlyNames" type="FriendlyNamesType" minOccurs="0" />
+			<xs:element name="LastModified" type="xs:dateTime" nillable="true" minOccurs="0" />
+			<xs:element name="Properties" type="PropertiesType" minOccurs="0">
+				<xs:unique name="Unique_Property_Qualifier_Value">
+					<xs:selector xpath="./*" />
+					<xs:field xpath="mstns:Qualifier" />
+					<xs:field xpath="mstns:Value" />
+				</xs:unique>
+			</xs:element>
+			<xs:element name="Addresses" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Address" type="Address" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Contacts" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Contact" type="Contact" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+				<xs:unique name="AliasName">
+					<xs:selector xpath=".//Aliases" />
+					<xs:field xpath="Name" />
+				</xs:unique>
+			</xs:element>
+			<xs:element name="TechnicalInfo" type="TechnicalInfoType" minOccurs="0" />
+		</xs:all>
+		<xs:attribute name="ignoreLastModified" type="xs:boolean" use="optional" />
+	</xs:complexType>
+	<xs:complexType name="FriendlyNamesType">
+		<xs:annotation>
+			<xs:documentation>Friendly Names Type</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="FriendlyName" minOccurs="0" maxOccurs="unbounded">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PropertiesType">
+		<xs:sequence>
+			<xs:element name="Property" type="PropertyType" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PropertyType">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:maxLength value="128" />
+						<xs:minLength value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Description" type="Description" minOccurs="0" />
+			<xs:element name="Qualifier" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:maxLength value="64" />
+						<xs:minLength value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Value">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="AlternateValue" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Deployed" type="xs:boolean" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Address">
+		<xs:annotation>
+			<xs:documentation>Address of partner</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="AddressId" type="AddressId" nillable="true" minOccurs="0" />
+			<xs:element name="Lines" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Line" type="AddressLine" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Type" type="AddressType" minOccurs="0" />
+			<xs:element name="City" type="City" minOccurs="0" />
+			<xs:element name="Country" type="Country" minOccurs="0" />
+			<xs:element name="County" type="County" minOccurs="0" />
+			<xs:element name="Description" type="Description" minOccurs="0" />
+			<xs:element name="PostalCode" type="PostalCode" minOccurs="0" />
+			<xs:element name="Region" type="Region" minOccurs="0" />
+			<xs:element name="StateOrProvince" type="StateOrProvince" minOccurs="0" />
+			<xs:element name="TaxJurisdiction" type="TaxJurisdiction" minOccurs="0" />
+			<xs:element name="LastModified" type="xs:dateTime" nillable="true" minOccurs="0" />
+			<xs:element name="Telephones" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Telephone" type="Telephone" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Faxes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Fax" type="Fax" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Emails" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Email" type="Email" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="WebAddresses" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="WebAddress" type="WebAddress" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="Contact">
+		<xs:annotation>
+			<xs:documentation>Partner's Contact</xs:documentation>
+		</xs:annotation>
+		<xs:all>
+			<xs:element name="ContactId" type="ContactId" nillable="true" minOccurs="0" />
+			<xs:element name="Name" type="Name" />
+			<xs:element name="Type" type="ContactType" minOccurs="0" />
+			<xs:element name="Description" type="Description" minOccurs="0" />
+			<xs:element name="LastModified" type="xs:dateTime" nillable="true" minOccurs="0" />
+			<xs:element name="Telephones" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Telephone" type="Telephone" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Faxes" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Fax" type="Fax" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Emails" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Email" type="Email" minOccurs="0" maxOccurs="unbounded" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:all>
+	</xs:complexType>
+	<xs:complexType name="Email">
+		<xs:sequence>
+			<xs:element name="EmailAddress" type="EmailAddressType" />
+			<xs:element name="Description" type="Description" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Fax">
+		<xs:sequence>
+			<xs:element name="FaxNumber" type="FaxNumber" />
+			<xs:element name="Description" type="Description" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Telephone">
+		<xs:sequence>
+			<xs:element name="TelephoneNumber" type="TelephoneNumber" />
+			<xs:element name="Description" type="Description" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WebAddress">
+		<xs:sequence>
+			<xs:element name="URL" type="xs:string" />
+			<xs:element name="Description" type="Description" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="PartnerId">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="128" />
+			<xs:minLength value="1" />
+			<xs:pattern value="[^`~!@#$%^&amp;*()+=\[\]{}\|;'&quot;&gt;&lt;,\?\\]+"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PostalCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Region">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="StateOrProvince">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TaxJurisdiction">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TelephoneNumber">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="TermId">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="URI">
+		<xs:restriction base="xs:anyURI" />
+	</xs:simpleType>
+	<xs:simpleType name="ActiveStatus">
+		<xs:annotation>
+			<xs:documentation>Indicates whether partner is active or not</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:short" />
+	</xs:simpleType>
+	<xs:simpleType name="Currency">
+		<xs:annotation>
+			<xs:documentation>Currency to be used with the partner</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="6" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Description">
+		<xs:annotation>
+			<xs:documentation>Changed to complex type to accommodate inline markup</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="255" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DunsNumber">
+		<xs:annotation>
+			<xs:documentation>DUNS number</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmailAddressType">
+		<xs:annotation>
+			<xs:documentation>E-mail address</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GlEntityDestCode">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Name">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContactType">
+		<xs:annotation>
+			<xs:documentation>Base type for contact</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="EmailAddress">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+			<xs:pattern value="\w+([-+.]\w+)*@\w+([-.]\w+)*" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FaxNumber">
+		<xs:restriction base="TelephoneNumber">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressId">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ContactId">
+		<xs:restriction base="xs:string">
+			<xs:pattern value="[0-9A-Za-z]{8}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{4}-[0-9A-Za-z]{12}"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AddressType">
+		<xs:annotation>
+			<xs:documentation>base type for address</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="City">
+		<xs:annotation>
+			<xs:documentation>City schema</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="Country">
+		<xs:annotation>
+			<xs:documentation>Country schema</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="County">
+		<xs:annotation>
+			<xs:documentation>County Schema</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="AddressLine">
+		<xs:annotation>
+			<xs:documentation>Address lines within an address</xs:documentation>
+		</xs:annotation>
+		<xs:simpleContent>
+			<xs:extension base="xs:string" />
+		</xs:simpleContent>
+	</xs:complexType>
+</xs:schema>

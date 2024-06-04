@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?> 
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/"
+                  xmlns:file="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/"
+                  xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="address" type="file:addressType"></xs:element>
+	<xs:complexType name="addressType">
+      <xs:attribute name="destinationLocation" type="file:DestinationLocationType" use="required"/>
+      <xs:attribute name="fileName" type="file:FileNameType" use="required"/>
+    </xs:complexType>
+	<xs:simpleType name="DestinationLocationType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FileNameType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

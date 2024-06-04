@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="8a85bf26-342f-4321-857c-bb2f7c515d92" name="swalther@SWLAPTOP 2009-02-13 19:11:40" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="3325093e-d4b7-4e8b-a087-89640380c5b0">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter03 - Understanding Controllers\Code\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-02-13 19_11_40">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter03 - Understanding Controllers\Code\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-02-13T19:11:40.3890000-08:00" queuing="2009-02-13T19:11:41.7760000-08:00" start="2009-02-13T19:11:42.0410000-08:00" finish="2009-02-13T19:11:42.8800000-08:00" />
+  <TestDefinitions>
+    <UnitTest name="TestMethod1" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter03 - understanding controllers\code\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="7065f294-a829-2179-9154-a9cb6a9a32b6">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1eb8cbfe-497b-4e3c-b463-fde9999eddfd" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter03 - Understanding Controllers\Code\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Controllers.WorkControllerTest, MvcApplication1.Tests" name="TestMethod1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="7065f294-a829-2179-9154-a9cb6a9a32b6" executionId="1eb8cbfe-497b-4e3c-b463-fde9999eddfd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="1eb8cbfe-497b-4e3c-b463-fde9999eddfd" testId="7065f294-a829-2179-9154-a9cb6a9a32b6" testName="TestMethod1" computerName="SWLAPTOP" duration="00:00:00.1472874" startTime="2009-02-13T19:11:42.1390000-08:00" endTime="2009-02-13T19:11:42.7900000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method MvcApplication1.Tests.Controllers.WorkControllerTest.TestMethod1 threw exception:  System.InvalidOperationException: The RouteData must contain an item named 'action' with a non-empty string value..</Message>
+          <StackTrace>    at System.Web.Routing.RouteData.GetRequiredString(String valueName)
+   at System.Web.Mvc.ViewResultBase.ExecuteResult(ControllerContext context)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResult(ControllerContext controllerContext, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass11.&lt;InvokeActionResultWithFilters&gt;b__e()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultFilter(IResultFilter filter, ResultExecutingContext preContext, Func`1 continuation)
+   at System.Web.Mvc.ControllerActionInvoker.&lt;&gt;c__DisplayClass11.&lt;&gt;c__DisplayClass13.&lt;InvokeActionResultWithFilters&gt;b__10()
+   at System.Web.Mvc.ControllerActionInvoker.InvokeActionResultWithFilters(ControllerContext controllerContext, IList`1 filters, ActionResult actionResult)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at MvcApplication1.Tests.Controllers.WorkControllerTest.TestMethod1() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter03 - Understanding Controllers\Code\CS\MvcApplication1\MvcApplication1.Tests\Controllers\WorkControllerTest.cs:line 27
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="e6106f2b-fa60-4754-bf97-dc5c3d4c0a93" name="swalther@SWLAPTOP 2009-05-02 20:12:23" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="b42321e1-3d6c-4dd3-8c95-028fe1a7e7ed">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-05-02 20_12_23">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-05-02T20:12:23.1609842-07:00" queuing="2009-05-02T20:12:24.8206522-07:00" start="2009-05-02T20:12:25.1065950-07:00" finish="2009-05-02T20:12:25.8864390-07:00" />
+  <TestDefinitions>
+    <UnitTest name="JackCanAccessIndex" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter12 - authenticating users\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="5410798d-2017-6886-9bdf-2a69bd226e83">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="ce9dab9f-1222-425a-8351-933fc0d6dfa0" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Controllers.CompanyControllerTests, MvcApplication1.Tests" name="JackCanAccessIndex" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="5410798d-2017-6886-9bdf-2a69bd226e83" executionId="ce9dab9f-1222-425a-8351-933fc0d6dfa0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="ce9dab9f-1222-425a-8351-933fc0d6dfa0" testId="5410798d-2017-6886-9bdf-2a69bd226e83" testName="JackCanAccessIndex" computerName="SWLAPTOP" duration="00:00:00.0809907" startTime="2009-05-02T20:12:25.1945774-07:00" endTime="2009-05-02T20:12:25.8064550-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Assert.AreEqual failed. Expected:&lt;Jack&gt;. Actual:&lt;Jack,Jill&gt;. </Message>
+          <StackTrace>   at MvcApplication1.Tests.Controllers.CompanyControllerTests.JackCanAccessIndex() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1.Tests\Controllers\JackControllerTests.cs:line 22
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

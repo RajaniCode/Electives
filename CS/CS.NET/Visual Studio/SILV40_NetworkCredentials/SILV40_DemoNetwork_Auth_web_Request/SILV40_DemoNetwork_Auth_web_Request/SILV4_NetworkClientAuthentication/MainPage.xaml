@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="SILV4_NetworkClientAuthentication.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="600" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk">
+
+    <Grid x:Name="LayoutRoot" Background="White" Width="569">
+        <Button Content="Get Names" 
+                Height="23" HorizontalAlignment="Left"
+                Margin="88,60,0,0" Name="btnGetNames" VerticalAlignment="Top" 
+                Width="348" Click="btnGetNames_Click"/>
+        <TextBox Height="200" HorizontalAlignment="Left" Margin="27,92,0,0" Name="txtdata" VerticalAlignment="Top" Width="502" VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible" TextWrapping="Wrap" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="29,21,0,0" Name="textBlock1" Text="User Name:" VerticalAlignment="Top" Width="91" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="123,22,0,0" Name="txtUname" VerticalAlignment="Top" Width="120" />
+        <TextBlock Height="23" HorizontalAlignment="Left" Margin="269,21,0,0" Name="textBlock2" Text="Password:" VerticalAlignment="Top" Width="86" />
+        <PasswordBox Height="23" HorizontalAlignment="Left" Margin="382,21,0,0" Name="txtPassword" VerticalAlignment="Top" Width="120" />
+    </Grid>
+</UserControl>

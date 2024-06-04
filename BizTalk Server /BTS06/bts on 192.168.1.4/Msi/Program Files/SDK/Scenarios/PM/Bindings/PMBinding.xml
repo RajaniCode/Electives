@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BindingInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Assembly="Microsoft.BizTalk.Deployment, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.0.1.0" BindingStatus="NoBindings" BoundEndpoints="0" TotalEndpoints="0">
+  <Timestamp>2004-11-17T09:43:59.3281250-08:00</Timestamp>
+  <ModuleRefCollection>
+	  <ModuleRef Name="Microsoft.Samples.BizTalk.WingtipToys.PMPipelines" Version="1.0.0.0" Culture="neutral" PublicKeyToken="7c613da897e0d8e7" 
+		  FullName="Microsoft.Samples.BizTalk.WingtipToys.PMPipelines, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7c613da897e0d8e7">
+      <Services />
+    </ModuleRef>
+  </ModuleRefCollection>
+  <SendPortCollection>
+    <SendPort Name="PMSendPort_Compressed" IsStatic="true" IsTwoWay="false">
+	    <TransmitPipeline Name="Microsoft.Samples.BizTalk.WingtipToys.PMPipelines.CompressionOnSend" FullyQualifiedName="Microsoft.Samples.BizTalk.WingtipToys.PMPipelines.CompressionOnSend, Microsoft.Samples.BizTalk.WingtipToys.PMPipelines, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7c613da897e0d8e7" Type="2" />
+      <PrimaryTransport>
+	      <Address>__PM_FILEDROP_LOC__\SendCompressed\%MessageID%.gz</Address>
+        <TransportType Name="FILE" Capabilities="16395" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%MessageID%.gz&lt;/FileName&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2004-11-17T00:00:00.0000000-08:00</FromTime>
+        <ToTime>2004-11-17T23:59:59.0000000-08:00</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2004-11-17T00:00:00.0000000-08:00</FromTime>
+        <ToTime>2004-11-17T23:59:59.0000000-08:00</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+      </SecondaryTransport>
+      <ReceivePipelineData xsi:nil="true" />
+      <Tracking>0</Tracking>
+      <Filter>&lt;Filter&gt;&lt;Group&gt;&lt;Statement Property="BTS.ReceivePortName" Operator="0" Value="PMReceivePort_Normal"/&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+	<ApplicationName>BTSScn.PM.CompresssionPipelines</ApplicationName>
+    </SendPort>
+    <SendPort Name="PMSendPort_Normal" IsStatic="true" IsTwoWay="false">
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" />
+      <PrimaryTransport>
+        <Address>__PM_FILEDROP_LOC__\SendNormal\%MessageID%.xml</Address>
+        <TransportType Name="FILE" Capabilities="16395" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;CopyMode vt="19"&gt;1&lt;/CopyMode&gt;&lt;FileName vt="8"&gt;%MessageID%.xml&lt;/FileName&gt;&lt;AllowCacheOnWrite vt="11"&gt;0&lt;/AllowCacheOnWrite&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2004-11-17T00:00:00.0000000-08:00</FromTime>
+        <ToTime>2004-11-17T23:59:59.0000000-08:00</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2004-11-17T00:00:00.0000000-08:00</FromTime>
+        <ToTime>2004-11-17T23:59:59.0000000-08:00</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+      </SecondaryTransport>
+      <ReceivePipelineData xsi:nil="true" />
+      <Tracking>0</Tracking>
+      <Filter>&lt;Filter&gt;&lt;Group&gt;&lt;Statement Property="BTS.ReceivePortName" Operator="0" Value="PMReceivePort_Compressed"/&gt;&lt;/Group&gt;&lt;/Filter&gt;</Filter>
+      <Transforms />
+	<ApplicationName>BTSScn.PM.CompresssionPipelines</ApplicationName>
+    </SendPort>
+  </SendPortCollection>
+  <DistributionListCollection />
+  <ReceivePortCollection>
+    <ReceivePort Name="PMReceivePort_Compressed" IsTwoWay="false">
+      <ReceiveLocations>
+        <ReceiveLocation Name="PMReceiveLocation_Compressed">
+          <Address>__PM_FILEDROP_LOC__\ReceiveCompressed\*.gz</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="16395" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;FileMask vt="8"&gt;*.gz&lt;/FileMask&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="Microsoft.Samples.BizTalk.WingtipToys.PMPipelines.DecompressionOnReceive" FullyQualifiedName="Microsoft.Samples.BizTalk.WingtipToys.PMPipelines.DecompressionOnReceive, Microsoft.Samples.BizTalk.WingtipToys.PMPipelines, Version=1.0.0.0, Culture=neutral, PublicKeyToken=7c613da897e0d8e7" Type="1" />
+
+          <ReceivePipelineData xsi:nil="true" />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="BizTalkServerApplication">
+            <TransportType Name="FILE" Capabilities="16395" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      <SendPipelineData xsi:nil="true" />
+      <Authentication>0</Authentication>
+      <Tracking>0</Tracking>
+      <Transforms />
+	<ApplicationName>BTSScn.PM.CompresssionPipelines</ApplicationName>
+    </ReceivePort>
+    <ReceivePort Name="PMReceivePort_Normal" IsTwoWay="false">
+      <ReceiveLocations>
+        <ReceiveLocation Name="PMReceiveLocation_Normal">
+          <Address>__PM_FILEDROP_LOC__\ReceiveNormal\*.*</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="16395" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;FileMask vt="8"&gt;*.*&lt;/FileMask&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;BatchSize vt="19"&gt;20&lt;/BatchSize&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="Microsoft.BizTalk.DefaultPipelines.PassThruReceive" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.PassThruReceive, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" />
+          <ReceivePipelineData xsi:nil="true" />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="BizTalkServerApplication">
+            <TransportType Name="FILE" Capabilities="16395" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      <SendPipelineData xsi:nil="true" />
+      <Authentication>0</Authentication>
+      <Tracking>0</Tracking>
+      <Transforms />
+	<ApplicationName>BTSScn.PM.CompresssionPipelines</ApplicationName>
+    </ReceivePort>
+  </ReceivePortCollection>
+  <PartyCollection />
+</BindingInfo>

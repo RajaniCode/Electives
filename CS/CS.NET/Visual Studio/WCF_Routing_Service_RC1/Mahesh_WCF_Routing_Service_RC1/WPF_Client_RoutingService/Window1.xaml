@@ -1,0 +1,28 @@
+﻿<Window x:Class="WPF_Client_RoutingService.Window1"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Window1" Height="300" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="374*" />
+            <ColumnDefinition Width="404*" />
+        </Grid.ColumnDefinitions>
+
+        <DataGrid x:Name="dgQtrwiseSales" Grid.Column="0" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding CompanyId}" Header="CompanyId" ></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding CompanyName}" Header="CompanyName" ></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding Q1}" Header="Q1" ></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding Q2}" Header="Q2" ></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding Q3}" Header="Q3" ></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding Q4}" Header="Q4" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid x:Name="dgSalesData" Grid.Column="1" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn  Binding="{Binding ItemName}" Header="ItemName" ></DataGridTextColumn>
+                <DataGridTextColumn  Binding="{Binding SalesQty}" Header="SalesQty" ></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

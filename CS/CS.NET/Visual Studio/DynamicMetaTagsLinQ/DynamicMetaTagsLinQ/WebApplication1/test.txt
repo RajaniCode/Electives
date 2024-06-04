@@ -1,0 +1,45 @@
+<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="WebForm15.aspx.cs" Inherits="WebApplication4.WebForm15" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title></title>
+    <script language="javascript" type="text/javascript" src="jquery-1.3.2.js"></script>
+    <script language="javascript" type="text/javascript">
+        $(document).ready(function() {
+            $("#Button1").click(function() {
+                var data = $("#result").load("/Links.htm", 
+                    function(responseText, textStatus, XMLHttpRequest) {
+                        $("#google").attr("title", $("#result #googleTag").text());
+                        $("#microsoft").attr("title", $("#result #microsoftTag").text());
+                    });
+            });
+
+            $("a").each(function() {
+                $(this).attr("title", $(this).text());
+                $(this).attr("target", "_blank");
+            });
+            $("a").hover(
+                function() {
+                    var data = "<span id=tt>***</span>";
+                    $(this).fadeIn('slow').after(data);
+                },
+                function() {
+                    $("#tt").remove();
+                }
+            );
+        });
+    </script>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div>
+        <a href="http://www.google.com" id="google">Google website</a><br />
+        <a href="http://www.microsoft.com" id="microsoft">Microsoft website</a>
+        
+        <div id="result" style="display:none"></div>
+        <input id="Button1" type="button" value="button" />
+    </div>
+    </form>
+</body>
+</html>

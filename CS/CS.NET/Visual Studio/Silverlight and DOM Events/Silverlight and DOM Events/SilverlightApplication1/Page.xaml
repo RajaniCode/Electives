@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="SilverlightApplication1.Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="200" Height="100">
+    <Grid x:Name="LayoutRoot" Background="White">        
+        <StackPanel Orientation="Vertical" Margin="5">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Mouse Coordinates" Margin="5" FontSize="14" Foreground="Blue" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="txtClientX" Width="50" Height="25" Text="ClientX:" />
+                <TextBlock x:Name="txtClientXValue" Width="50" Height="25" Foreground="Red" />
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock x:Name="txtClientY" Width="50" Height="25" Text="ClientY:" />
+                <TextBlock x:Name="txtClientYValue" Width="50" Height="25" Foreground="Red" />
+            </StackPanel>
+        </StackPanel>        
+    </Grid>
+</UserControl>

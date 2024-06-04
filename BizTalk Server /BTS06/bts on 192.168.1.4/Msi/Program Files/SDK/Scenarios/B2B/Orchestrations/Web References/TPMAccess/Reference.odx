@@ -1,0 +1,105 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="57540d9f-887b-4016-a119-03e7b6ea14cf" LowerBound="1.1" HigherBound="37.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess_" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="MethodMessageType" OID="00000000-0000-0000-0000-000000000000" ParentLink="Module_MessageType">
+            <om:Property Name="Url" Value="http://localhost/TPMAccess/TPMAccess.asmx" />
+            <om:Property Name="TypeModifier" Value="Public" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MethodMessageOperation" OID="c36068f5-2f42-4dc1-8578-2fbd76ac6843" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="GetPartner" />
+                <om:Property Name="OperationDirection" Value="Request" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="GetPartner_request" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="85b7fe61-035e-4074-8132-0006741ab21d" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="System.String" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="partnerID" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MethodMessageOperation" OID="0a0df157-29ab-401a-bd09-423a7c7b09e8" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="GetPartner" />
+                <om:Property Name="OperationDirection" Value="Response" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="GetPartner_response" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="a77a01f5-891f-40a9-9ea4-8d7b802f4405" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="System.String" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="GetPartnerResult" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MethodMessageOperation" OID="7b33eaf1-96c0-40c5-96a2-6b05e7e620c5" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="UpdatePartner" />
+                <om:Property Name="OperationDirection" Value="Request" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="UpdatePartner_request" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="bdcc7887-3c01-4505-91a4-5d7914b3cf84" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="System.String" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="partnerXml" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MethodMessageOperation" OID="7f3ddc55-5981-4214-a2d9-980c3f6a4836" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="UpdatePartner" />
+                <om:Property Name="OperationDirection" Value="Response" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="UpdatePartner_response" />
+                <om:Property Name="Signal" Value="False" />
+            </om:Element>
+        </om:Element>
+        <om:Element Type="TargetXMLNamespaceAttribute" OID="0d274922-38ec-407a-994a-30ee45ade488" ParentLink="Module_CLRAttribute" LowerBound="2.1" HigherBound="3.1">
+            <om:Property Name="TargetXMLNamespace" Value="http://TPMAccess/WS/" />
+            <om:Property Name="Signal" Value="False" />
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(true)]
+[Microsoft.XLANGs.BaseTypes.TargetXmlNamespaceAttribute("http://TPMAccess/WS/")]
+module Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess_
+{
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess), "GetPartner", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eRequest)]
+    public messagetype GetPartner_request
+    {
+        body System.String partnerID;
+    };
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess), "GetPartner", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eResponse)]
+    public messagetype GetPartner_response
+    {
+        body System.String GetPartnerResult;
+    };
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess), "UpdatePartner", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eRequest)]
+    public messagetype UpdatePartner_request
+    {
+        body System.String partnerXml;
+    };
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess), "UpdatePartner", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eResponse)]
+    public messagetype UpdatePartner_response
+    {
+    };
+    [Microsoft.XLANGs.BaseTypes.WSDLProxyName(typeof(Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess))]
+    public porttype TPMAccess
+    {
+        requestresponse GetPartner
+        {
+            Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess_.GetPartner_request, Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess_.GetPartner_response
+        };
+        requestresponse UpdatePartner
+        {
+            Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess_.UpdatePartner_request, Microsoft.Samples.BizTalk.Litware.Orchestrations.TPMAccess.TPMAccess_.UpdatePartner_response
+        };
+    };
+}
+

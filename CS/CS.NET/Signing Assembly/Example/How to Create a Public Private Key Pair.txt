@@ -1,0 +1,26 @@
+To sign an assembly with a strong name, you must have a public/private key pair. This public and private cryptographic key pair is used during compilation to create a strong-named assembly. You can create a key pair using the Strong Name tool (Sn.exe). Key pair files usually have an .snk extension.
+
+To create a key pair
+
+At the command prompt, type the following command: 
+
+sn –k <file name> 
+
+In this command, file name is the name of the output file containing the key pair. 
+
+
+The following example creates a key pair called sgKey.snk.
+
+sn -k sgKey.snk
+ 
+If you intend to delay sign an assembly and you control the whole key pair (which is unlikely outside test scenarios), you can use the following commands to generate a key pair and then extract the public key from it into a separate file. First, create the key pair:
+
+sn -k keypair.snk
+ 
+Next, extract the public key from the key pair and copy it to a separate file:
+
+
+sn -p keypair.snk public.snk
+ 
+Once you create the key pair, you must put the file where the strong name signing tools can find it
+

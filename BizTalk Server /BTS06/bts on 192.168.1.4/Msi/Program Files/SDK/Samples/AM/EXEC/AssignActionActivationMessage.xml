@@ -1,0 +1,70 @@
+<ns0:HwsMessage xmlns:ns0="http://tempuri.org/Hws_AssignTask_Activate">
+	<HwsSection HwsMessageType="Hws_Activate">
+		<ActivityFlowID>00000000-0000-0000-0000-000000000000</ActivityFlowID>
+		<ActivityFlowDescription>blah</ActivityFlowDescription>
+		<InitiatingActor>yourDomain\yourId</InitiatingActor>
+		<ActionTypeID>00000000-0000-0000-0000-000000000000</ActionTypeID>
+		<ActionInstanceID>00000000-0000-0000-0000-000000000000</ActionInstanceID>
+		<ActionInstanceDescription>ActionInstanceDescription_0</ActionInstanceDescription>
+		<ParentActionInstanceID>00000000-0000-0000-0000-000000000000</ParentActionInstanceID>
+		<ParentTaskID>00000000-0000-0000-0000-000000000000</ParentTaskID>
+		<ActivityModelTypeID>00000000-0000-0000-0000-000000000000</ActivityModelTypeID>
+		<ActivityModelInstanceID>00000000-0000-0000-0000-000000000000</ActivityModelInstanceID>
+		<ActivityModelStepID>10</ActivityModelStepID>
+		<IsDependentOnParent>false</IsDependentOnParent>
+		<ActivityFlowProperties>
+			<Property Name="Name_0" Description="Description_1" Type="Type_2">Property_0</Property>
+			<Property Name="Name_0" Description="Description_1" Type="Type_2">Property_1</Property>
+			<Property Name="Name_0" Description="Description_1" Type="Type_2">Property_2</Property>
+		</ActivityFlowProperties>
+		<ActionProperties>
+			<Property Name="Name_0" Description="Description_1" Type="Type_2">Property_0</Property>
+			<Property Name="Name_0" Description="Description_1" Type="Type_2">Property_1</Property>
+			<Property Name="Name_0" Description="Description_1" Type="Type_2">Property_2</Property>
+		</ActionProperties>
+		<HwsWebServiceUrl>HwsWebServiceUrl_0</HwsWebServiceUrl>
+	</HwsSection>
+	<ActionSection>
+		<Task>
+			<Name>Name_0</Name>
+			<Description>Description_0</Description>
+			<Status>10</Status>
+			<Target>BTS03STE\Susan</Target>
+			<SecondaryTarget>SecondaryTarget_0</SecondaryTarget>
+			<Priority>10</Priority>
+			<IsOptional>false</IsOptional>
+			<StartDate>1999-05-31T13:20:00.000-05:00</StartDate>
+			<Deadline>1999-05-31T13:20:00.000-05:00</Deadline>
+			<ReminderInterval>P1Y2M3DT10H30M12.3S</ReminderInterval>
+			<Comments>Comments_0</Comments>
+			<AdditionalTaskParameters>
+				<Name>Name_0</Name>
+				<TypeCode>10</TypeCode>
+				<TypeName>TypeName_0</TypeName>
+				<Description>Description_0</Description>
+				<StringVal>00000000-0000-0000-0000-000000000001</StringVal>
+				<IntVal>1</IntVal>
+				<FloatVal>1</FloatVal>
+				<DateVal>1999-05-31</DateVal>
+				<TimeVal>13:20:00.000-05:00</TimeVal>
+				<DateTimeVal>2004-05-31T13:20:00.000-05:00</DateTimeVal>
+			</AdditionalTaskParameters>
+		</Task>
+		<Threshold>10</Threshold>
+		<AdditionalActionParameters>
+			<Name>name_0</Name>
+			<TypeCode>10</TypeCode>
+			<TypeName>TypeName_0</TypeName>
+			<Description>Description_0</Description>
+			<StringVal>Val</StringVal>
+			<IntVal>10</IntVal>
+			<FloatVal>10</FloatVal>
+			<DateVal>1999-05-31</DateVal>
+			<TimeVal>13:20:00.000-05:00</TimeVal>
+			<DateTimeVal>1999-05-31T13:20:00.000-05:00</DateTimeVal>
+		</AdditionalActionParameters>
+	</ActionSection>
+	<Payloads>
+		<Payload ID="ID_0"></Payload>
+	</Payloads>
+</ns0:HwsMessage>

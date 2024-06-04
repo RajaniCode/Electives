@@ -1,0 +1,788 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.XMLView'>
+
+<PUBLIC:METHOD NAME='Refresh'		  />
+<PUBLIC:METHOD NAME='RefreshNode'	  />
+
+<PUBLIC:METHOD NAME='DeleteItem'	   />
+<PUBLIC:METHOD NAME='ExpandGroupItem'  />
+<PUBLIC:METHOD NAME='IsExpanded'	   />
+<PUBLIC:METHOD NAME='IsSelected'	   />
+<PUBLIC:METHOD NAME='SelectItem'	   />
+<PUBLIC:METHOD NAME='GetSelectedCount' />
+<PUBLIC:METHOD NAME='GetSelectedItems' />
+<PUBLIC:METHOD NAME='ClearSelections'  />
+
+<PUBLIC:EVENT NAME='onSelectItem'   ID='evtSelectItem'></PUBLIC:EVENT>
+<PUBLIC:EVENT NAME='onDeselectItem' ID='evtDeselectItem'></PUBLIC:EVENT>
+
+<PUBLIC:ATTACH EVENT='ondocumentready' FOR='element' ONEVENT='Initialize()'		 />
+<PUBLIC:ATTACH EVENT='onclick'		 FOR='element' ONEVENT='onClickHandler()'	 />
+<PUBLIC:ATTACH EVENT='ondblclick'	  FOR='element' ONEVENT='onDblClickHandler()'	 />
+<PUBLIC:ATTACH EVENT='onmouseover'	 FOR='element' ONEVENT='onMouseOverHandler()' />
+<PUBLIC:ATTACH EVENT='onmouseout'	  FOR='element' ONEVENT='onMouseOutHandler()'  />
+
+<PUBLIC:ATTACH EVENT='onkeydown'	   FOR='element' ONEVENT='keyHandler()' />
+
+<SCRIPT LANGUAGE='VBScript'>
+Option Explicit
+
+Dim m_sdSelectedItems   ' Scripting.Dictionary of currently-selected items.
+Dim m_sdOpenGroupItems  ' Scripting.Dictionary of currently-opened group items.
+
+Dim m_bMultiselect
+Dim m_itemHilite		' Currently hilited item
+
+Dim m_strXMLDataID, m_xmlData, m_strXSLViewID, m_xslView
+
+Sub Initialize()
+	Dim xmlisDataXML, xmlisViewXSL, objEvent, xmlFirstNode, sName, bSelect
+
+	' Initialize internal variables:
+	Set m_sdSelectedItems  = CreateObject("Scripting.Dictionary")
+	Set m_sdOpenGroupItems = CreateObject("Scripting.Dictionary")
+	Set m_itemHilite = Nothing
+
+	' General configuration:
+
+	m_bMultiselect = element.getAttribute("Multi")
+	If isNull(m_bMultiselect) Then
+		m_bMultiselect = False
+	Else
+		m_bMultiselect = CBool(m_bMultiselect)
+	End If
+
+	m_strXMLDataID = element.getAttribute("XMLDataID")
+	m_strXSLViewID = element.getAttribute("XSLViewID")
+
+	Set xmlisDataXML = element.document.all(m_strXMLDataID)
+	Set xmlisViewXSL = element.document.all(m_strXSLViewID)
+
+	If Not ((xmlisDataXML Is Nothing) Or (xmlisViewXSL Is Nothing)) Then
+		' Everything is okay
+		Set m_xmlData = xmlisDataXML.XMLDocument
+		Set m_xslView = xmlisViewXSL.XMLDocument
+
+		Call Refresh()
+
+		if bSelect Then
+			Set objEvent = createEventObject()
+			'objEvent.setAttribute "itemPath", sName
+			evtSelectItem.fire objEvent
+		End If
+
+	End if
+End Sub
+
+'	Refresh
+'
+'	Description:
+'		Rerenders the entire UI by applying the XSL transform to the XML DOM.
+'		Selected-state and expanded-state are both maintained across the
+'		refresh.
+
+Sub Refresh
+	Dim divNewContents, divNewRoot, rgstrSelectedItems, rgstrExpandedItems
+	Dim elemItem, xmllistItems, i
+
+	' Create a DIV to do the transform into.
+	Set divNewContents = element.document.createElement("DIV")
+	divNewContents.innerHTML = m_xmlData.transformNode(m_xslView)
+	Set divNewRoot = divNewContents.all("xvRoot")
+
+	' Apply selected-state.
+	rgstrSelectedItems = m_sdSelectedItems.Keys()
+	For i = 0 To UBound(rgstrSelectedItems)
+		Set elemItem = getHTMLElemFromPath(rgstrSelectedItems(i), divNewRoot)
+
+		If Not(elemItem Is Nothing) Then
+			' Previously-selected item is still present.  Make it look
+			' selected again.
+
+			doItemSelect elemItem, rgstrSelectedItems(i), True, True
+		Else
+			' Previously-selected item is now gone.  Remove it from the
+			' dictionary.
+
+			m_sdSelectedItems.Remove rgstrSelectedItems(i)
+		End If
+	Next
+
+	' Apply expanded-state.
+	rgstrExpandedItems = m_sdOpenGroupItems.Keys()
+	For i = 0 To UBound(rgstrExpandedItems)
+		Set elemItem = getHTMLElemFromPath(rgstrExpandedItems(i), divNewRoot)
+
+		If Not(elemItem Is Nothing) Then
+			' Previously-expanded group-item is still present.  Make it look
+			' expanded again.
+
+			doGroupExpand elemItem, rgstrExpandedItems(i), True
+		Else
+			' Previously-expanded item is now gone.  Remove it from the
+			' dictionary.
+
+			m_sdOpenGroupItems.Remove rgstrExpandedItems(i)
+		End If
+	Next
+
+	' Delete original contents of element.
+	For Each elemItem In element.children
+		elemItem.removeNode True
+	Next
+
+	' Copy in new contents of element.
+	For each elemItem in divNewContents.children
+		element.appendChild elemItem
+	Next
+
+	' Attach focus/blur events for all items
+	Set xmllistItems = element.getElementsByTagName("DIV")
+	For each elemItem in xmllistItems
+	  elemItem.attachEvent "onfocus", GetRef("onElemFocus")
+	  elemItem.attachEvent "onblur", GetRef("onElemBlur")
+	Next
+End Sub
+
+Function IsExpanded(strItemPath)
+	IsExpanded = m_sdOpenGroupItems.Exists(strItemPath)
+End Function
+
+Sub ExpandGroupItem(strItemPath, bExpand)
+	Dim elemNode
+	Set elemNode = getHTMLElemFromPath(strItemPath, element.all("xvRoot"))
+	If Not(elemNode Is Nothing) Then
+		doGroupExpand elemNode, strItemPath, bExpand
+	End If
+End Sub
+
+Sub doGroupExpand(elemGroupItem, strGroupItemPath, bExpand)
+	Dim elemGroup, elemMarker
+
+	If Not(elemGroupItem Is Nothing) And _
+		(ElemHasClass(elemGroupItem, "clsXVGroup") Or _
+		ElemHasClass(elemGroupItem, "clsXVGroupNoSel"))Then
+
+		' Open / Close the group.
+
+		Set elemGroup  = elemGroupItem.children("xvGroup")
+		Set elemMarker = elemGroupItem.all.tags("NOBR")(0).children("xvMarker")
+
+		If bExpand Then
+			' Expand the group.
+
+			elemGroup.className = "clsXVOpen"
+			If elemMarker.innerText = "4" Then
+				elemMarker.innerText = "6"
+			End If
+
+			If Not(m_sdOpenGroupItems.Exists(strGroupItemPath)) Then
+				' Record that the group is open.
+				m_sdOpenGroupItems.Add strGroupItemPath, strGroupItemPath
+			End If
+		Else
+			' Collapse the group.
+			elemGroup.className = "clsXVClosed"
+			If elemMarker.innerText = "6" Then
+				elemMarker.innerText = "4"
+			End If
+
+			If m_sdOpenGroupItems.Exists(strGroupItemPath) Then
+				' Record that the group is closed.
+				m_sdOpenGroupItems.Remove strGroupItemPath
+			End If
+		End If
+	End If
+End Sub
+
+Function IsSelected(strItemPath)
+	IsSelected =  m_sdSelectedItems.Exists(strItemPath)
+End Function
+
+'	GetSelectedCount
+'
+'	Description:
+'		Returns the number of items currently selected.
+
+Function GetSelectedCount()
+	GetSelectedCount = m_sdSelectedItems.Count
+End Function
+
+'	GetSelectedItems
+'
+'	Description:
+'		Returns the paths of all selected items in a SAFEARRAY.
+
+Function GetSelectedItems()
+	GetSelectedItems = m_sdSelectedItems.Keys
+End Function
+
+'	ClearSelections
+'
+'	Description:
+'		Deselects all items in the UI.
+
+Sub ClearSelections()
+	Dim rgstrItems, elemItem, i
+
+	rgstrItems = m_sdSelectedItems.Keys
+	For i = 0 To UBound(rgstrItems)
+		Set elemItem = getHTMLElemFromPath(rgstrItems(i), _
+			element.all("xvRoot"))
+		ElemDelClass elemItem, "clsXVSelected"
+	Next
+	m_sdSelectedItems.RemoveAll
+End Sub
+
+Sub onClickHandler()
+	Call DisplayItem(window.event.srcElement, window.event.ctrlKey)
+End Sub
+
+Sub DisplayItem(elemSrc, bMulti)
+	Dim elemGroup, bClosing, strItemPath, bSelect, objEvent
+
+	Do While Not(elemSrc Is element)
+		If elemSrc.id = "xvMarker" Then
+			Set elemSrc = elemSrc.parentElement.parentElement
+			If ElemHasClass(elemSrc, "clsXVGroup") Or _
+				ElemHasClass(elemSrc, "clsXVGroupNoSel") Then
+				' Toggle the open/closed state of the group.
+				strItemPath = getPathFromHTMLElem(elemSrc, element.all("xvRoot"))
+				doGroupExpand elemSrc, strItemPath, _
+					Not(m_sdOpenGroupItems.Exists(strItemPath))
+
+				Exit Do
+			End If
+		Elseif ElemHasClass(elemSrc, "clsXVGroupNoSel") Then
+			' Toggle the open/closed state of the group.
+			strItemPath = getPathFromHTMLElem(elemSrc, element.all("xvRoot"))
+			doGroupExpand elemSrc, strItemPath, _
+				Not(m_sdOpenGroupItems.Exists(strItemPath))
+
+			Exit Do
+
+		Elseif ElemHasClass(elemSrc, "clsXVItem") Or _
+			ElemHasClass(elemSrc, "clsXVGroup") Then
+
+			If Not(ElemHasClass(elemSrc, "clsXVDisabled")) Then
+				' Toggle item/group selection.
+				strItemPath = getPathFromHTMLElem(elemSrc, element.all("xvRoot"))
+				bSelect = Not(m_sdSelectedItems.Exists(strItemPath))
+
+				If Not bSelect And Not bMulti Then bSelect = True
+					If Not (Not bSelect And m_sdSelectedItems.Count = 0) Then
+						'Do selection internally
+						doItemSelect elemSrc, strItemPath, bSelect, bMulti
+
+						' Fire the appropriate event.
+						Set objEvent = createEventObject()
+						objEvent.setAttribute "itemPath", strItemPath
+						If bSelect Then
+							' Fire a select event.
+							evtSelectItem.fire objEvent
+						Else
+							' Fire a deselect event.
+							evtDeselectItem.fire objEvent
+						End If
+					End If
+				End If
+			Exit Do
+		Else
+			Set elemSrc = elemSrc.parentElement
+		End If
+	Loop
+
+	If elemSrc Is element Then
+		' Nothing was selected, so deselect all
+		' ClearSelections
+		' Fire a deselect event.
+		' Set objEvent = createEventObject()
+		' evtDeselectItem.fire objEvent
+	End If
+End Sub
+
+Sub onDblClickHandler()
+	Dim elemSrc, elemGroup, bClosing, strItemPath, bSelect, bMulti, objEvent
+
+	Set elemSrc = window.event.srcElement
+	Do While Not(elemSrc Is element)
+
+		If elemSrc.id = "xvMarker" Then
+			Set elemSrc = elemSrc.parentElement.parentElement
+			If ElemHasClass(elemSrc, "clsXVGroup") Or _
+				ElemHasClass(elemSrc, "clsXVGroupNoSel") Then
+				' Toggle the open/closed state of the group.
+				strItemPath = getPathFromHTMLElem(elemSrc, element.all("xvRoot"))
+				doGroupExpand elemSrc, strItemPath, _
+					Not(m_sdOpenGroupItems.Exists(strItemPath))
+
+				Exit Do
+			End If
+		ElseIf ElemHasClass(elemSrc, "clsXVGroup") Or _
+			ElemHasClass(elemSrc, "clsXVGroupNoSel") Then
+			' Toggle the open/closed state of the group.
+			strItemPath = getPathFromHTMLElem(elemSrc, element.all("xvRoot"))
+			doGroupExpand elemSrc, strItemPath, _
+				Not(m_sdOpenGroupItems.Exists(strItemPath))
+
+			Exit Do
+		ElseIf ElemHasClass(elemSrc, "clsXVItem") Then
+			Exit Do
+		Else
+			Set elemSrc = elemSrc.parentElement
+		End If
+	Loop
+End Sub
+
+Sub SelectItem(strItemPath, bSelect)
+	Dim elemItem
+
+	Set elemItem = getHTMLElemFromPath(strItemPath, element.all("xvRoot"))
+	If Not(elemItem Is Nothing) Then
+		doItemSelect elemItem, strItemPath, bSelect, True
+	End If
+End Sub
+
+Sub doItemSelect(elemItem, strItemPath, bSelect, bMulti)
+	If bSelect Then
+		' If we're only allowing single-select, deselect all other items.
+		If Not m_bMultiselect Or Not bMulti Then ClearSelections
+
+		' Select the item.
+		ElemAddClass elemItem, "clsXVSelected"
+
+		' Record the selection, if the fact is not already recorded.
+		If Not(m_sdSelectedItems.Exists(strItemPath)) Then
+			m_sdSelectedItems.Add strItemPath, strItemPath
+		End If
+	ElseIf bMulti Then
+		' Deselect the item.
+		ElemDelClass elemItem, "clsXVSelected"
+
+		If m_sdSelectedItems.Exists(strItemPath) Then
+			m_sdSelectedItems.Remove strItemPath
+		End If
+	End If
+End Sub
+
+'	getPathFromHTMLElem
+'
+'	Description:
+'		Takes the passed-in HTML element in the UI and returns the
+'		dot-annotated path to that element.  Returns "" if the HTML element is
+'		somehow invalid.
+
+Function getPathFromHTMLElem(elemItem, elemRoot)
+	Dim strPath, elemCurr
+
+	strPath = ""
+
+	If elemRoot.id = "xvRoot" And elemRoot.contains(elemItem) Then
+		Set elemCurr = elemItem
+
+		Do While elemCurr.id <> "xvRoot"
+			If (Not(ElemHasClass(elemCurr, "clsXVGroup"))) And _
+				(Not(ElemHasClass(elemCurr, "clsXVGroupNoSel"))) And _
+				(Not(ElemHasClass(elemCurr, "clsXVItem"))) Then
+				Set elemCurr = elemCurr.parentElement
+			End If
+
+			If strPath <> "" Then
+				strPath = elemCurr.id & "." & strPath
+			Else
+				strPath = elemCurr.id
+			End If
+
+			Set elemCurr = elemCurr.parentElement
+		Loop
+	End If
+
+	getPathFromHTMLElem = strPath
+End Function
+
+'	getHTMLElemFromPath
+'
+'	Description:
+'		Takes the dot-annotated path to an HTML element in the UI and returns
+'		a reference to the HTML element.  Returns Nothing if the element can't
+'		be found.
+
+Function getHTMLElemFromPath(strPath, elemRoot)
+	Dim rgstrPathParts, elemCurr, elemNext, i
+
+	Set elemCurr = Nothing
+
+	' Divide the path into its component parts.
+	rgstrPathParts = Split(strPath, ".")
+
+	' There should only be one root.  Start there.
+	Set elemCurr = elemRoot
+	For i = 0 To UBound(rgstrPathParts)
+		Set elemNext = elemCurr.children(rgstrPathParts(i))
+		If Not(elemNext Is Nothing) Then
+			If (ElemHasClass(elemNext, "clsXVGroup") Or _
+				ElemHasClass(elemNext, "clsXVGroupNoSel")) And _
+				i <> UBound(rgstrPathParts) Then
+				' Go into group in preparation for next step.
+				Set elemNext = elemNext.children("xvGroup")
+			End If
+		End If
+
+		Set elemCurr = elemNext
+		If elemCurr Is Nothing Then
+			Exit For
+		End If
+	Next
+
+	Set getHTMLElemFromPath = elemCurr
+End Function
+
+'	onElemFocus
+'
+'	Description:
+'		Called when onFocus() event is fired for an item in the list.
+'		If this item cannot take the focus, it shifts it to the next item in the list
+
+Sub onElemFocus()
+	Call Hilite(window.event.srcElement, True)
+	window.event.cancelBubble = True
+End Sub
+
+'	onElemBlur
+'
+'	Description:
+'		Called when onBlur() event is fired for an item in the list.
+'		Calls Hilite() with parameter of 'False' to remove hilite
+
+Sub onElemBlur()
+	Call Hilite(window.event.srcElement, False)
+	window.event.cancelBubble = True
+End Sub
+
+'	onMouseOverHandler
+'
+'	Description:
+'		Call hilite on the source item
+
+Sub onMouseOverHandler()
+	Dim elemSrc
+
+	Set elemSrc = window.event.srcElement
+	Do Until (elemSrc Is element) Or elemSrc.id = "xvGroup" Or _
+	ElemHasClass(elemSrc, "clsXVItem") Or _
+	ElemHasClass(elemSrc, "clsXVGroup") Or _
+	ElemHasClass(elemSrc, "clsXVGroupNoSel")
+	Set elemSrc = elemSrc.parentNode
+	Loop
+
+	Call Hilite(elemSrc, True)
+	window.event.cancelBubble = True
+End Sub
+
+'	onMouseOutHandler
+'
+'	Description:
+'		Remove the mouse-over hilite.
+
+Sub onMouseOutHandler()
+	Dim elemSrc
+
+	Set elemSrc = window.event.srcElement
+	Do Until (elemSrc Is element) Or ElemHasClass(elemSrc, "clsXVItem") Or _
+		ElemHasClass(elemSrc, "clsXVGroup") Or _
+		ElemHasClass(elemSrc, "clsXVGroupNoSel")
+		Set elemSrc = elemSrc.parentNode
+	Loop
+
+	Call Hilite(elemSrc, False)
+	window.event.cancelBubble = True
+End Sub
+
+'	Hilite
+'
+'	Description:
+'		Show/Remove the item's hilite
+'		elemSrc = Item to be hilited
+'		bHilite = True means hilite, False means unhilite
+
+Sub Hilite(elemSrc, bHilite)
+
+	If bHilite Then
+		' Unhilite old item, if exists
+		If Not (m_itemHilite Is Nothing) Then
+			ElemDelClass m_itemHilite, "clsXVHilite"
+		End If
+
+		' Hilite this item
+		If ElemHasClass(elemSrc, "clsXVItem") Or _
+			ElemHasClass(elemSrc, "clsXVGroup") Or _
+			ElemHasClass(elemSrc, "clsXVGroupNoSel") Then
+			If Not(ElemHasClass(elemSrc, "clsXVSelected")) And _
+				Not(ElemHasClass(elemSrc, "clsXVDisabled")) Then
+				ElemAddClass elemSrc, "clsXVHilite"
+			End If
+		End If
+		Set m_itemHilite = elemSrc
+	Else
+		'Remove this item's hilite
+		If Not(elemSrc Is element) Then
+			ElemDelClass elemSrc, "clsXVHilite"
+			Set m_itemHilite = Nothing
+		End If
+	End If
+End Sub
+
+'	keyHandler
+'
+'	Description:
+'		Handles all the keystrokes for this control
+'		Up Arrow -- Previous item in list
+'		Down Arrow -- Next item in list
+'		Tab -- Move to next control
+'		Shift-Tab -- Move to previous control
+'		Enter, Space -- Select current item
+'		Shift-Enter -- Multi-select current item
+
+Sub keyHandler()
+	Dim bKeyHandled,i, rgItems, elemItem, elemFirst, elemParent, sStdMenu, strItemPath
+
+	Set elemItem = Nothing
+	bKeyHandled = True
+
+	Select Case window.event.keyCode
+		Case 40	  ' Down-arrow
+			' Select the next item in the list.
+			If m_itemHilite Is Nothing Then
+				' No item has focus; select the first item
+				Set elemItem = element.all("xvRoot").firstChild
+			Else
+				' Find the next item in the list
+				strItemPath = getPathFromHTMLElem(m_itemHilite, element.all("xvRoot"))
+				If IsExpanded(strItemPath) Then
+					' This is an open group. Go to first child
+					Set elemItem = m_itemHilite.lastChild.firstChild
+				Else
+					Set elemItem = m_itemHilite.nextSibling
+				End If
+
+				'Skip over any disabled items
+				If Not (elemItem Is Nothing) Then
+					Do While ElemHasClass(elemItem, "clsXVDisabled")
+						strItemPath = getPathFromHTMLElem(elemItem, element.all("xvRoot"))
+						If IsExpanded(strItemPath) Then
+							' This is an open group. Go to first child
+							Set elemItem = elemItem.lastChild.firstChild
+						Else
+							Set elemItem = elemItem.nextSibling
+						End If
+						If elemItem Is Nothing Then
+							Exit Do
+						End If
+					Loop
+				End If
+
+				Set elemParent = m_itemHilite
+				Do While elemItem Is Nothing And _
+					Not (elemParent Is element)
+					Set elemItem = elemParent.nextSibling
+					If Not (elemItem Is Nothing) Then
+						strItemPath = getPathFromHTMLElem(elemItem, element.all("xvRoot"))
+						Do While IsExpanded(strItemPath) And _
+							ElemHasClass(elemItem, "clsXVDisabled")
+							' This is an open group. Go to first child
+							Set elemItem = elemItem.lastChild.firstChild
+							strItemPath = getPathFromHTMLElem(elemItem, element.all("xvRoot"))
+						Loop
+						If ElemHasClass(elemItem, "clsXVDisabled") Then
+							Set elemParent = elemItem
+							Set elemItem = Nothing
+						End If
+					Else
+						Set elemParent = elemParent.parentNode.ParentNode
+						Set elemItem = Nothing
+					End If
+				Loop
+			End If
+
+			If Not (elemItem Is Nothing) Then
+				Call elemItem.focus()
+			End If
+		Case 38	 ' Up-arrow
+			' Select the previous item in the list.
+			If m_itemHilite Is Nothing Then
+				' No item has focus; select the first item
+				Set elemItem = element.all("xvRoot").firstChild
+			Else
+				' Find the previous item in the list
+				Set elemItem = m_itemHilite.previousSibling
+				strItemPath = getPathFromHTMLElem(elemItem, element.all("xvRoot"))
+				If IsExpanded(strItemPath) Then
+					' This is an open group. Go to last child
+					Set elemItem = elemItem.lastChild.lastChild
+				End If
+
+				'Skip over any disabled items
+				If Not (elemItem Is Nothing) Then
+					Do While ElemHasClass(elemItem, "clsXVDisabled")
+						Set elemItem = elemItem.previousSibling
+						If elemItem Is Nothing Then
+							Exit Do
+						End If
+					Loop
+				End If
+				Set elemParent = m_itemHilite.parentNode.parentNode
+				Do While elemItem Is Nothing And _
+					Not (elemParent Is element)
+					Set elemItem = elemParent
+					If ElemHasClass(elemItem, "clsXVDisabled") Then
+						Set elemItem = elemParent.previousSibling
+						If Not (elemItem Is Nothing) Then
+							strItemPath = getPathFromHTMLElem(elemItem, element.all("xvRoot"))
+							Do While IsExpanded(strItemPath)
+								' This is an open group. Go to last child
+								Set elemItem = elemItem.lastChild.lastChild
+								strItemPath = getPathFromHTMLElem(elemItem, element.all("xvRoot"))
+							Loop
+							If ElemHasClass(elemItem, "clsXVDisabled") Then
+								Set elemParent = elemItem
+								Set elemItem = Nothing
+							End If
+						Else
+							Set elemParent = elemParent.parentNode.parentNode
+						End If
+					End If
+				Loop
+			End If
+
+			If Not (elemItem Is Nothing) Then
+				Call elemItem.focus()
+			End If
+		Case 9 'Tab key
+			' Save off the hilited item for later
+			Set elemFirst = m_itemHilite
+			If window.event.shiftKey Then
+				' Move focus to the first item
+				Set elemItem = element.all("xvRoot").firstChild
+			Else
+				' Move focus to the last item
+				Set elemParent = element.all("xvRoot")
+				Set elemItem = elemParent.lastChild
+				strItemPath = getPathFromHTMLElem(elemItem, elemParent)
+				Do While Not (elemItem Is Nothing) And _
+					IsExpanded(strItemPath)
+						Set elemParent = elemItem
+						Set elemItem = elemItem.lastChild.lastChild
+						strItemPath = getPathFromHTMLElem(elemItem, element.all("xvRoot"))
+				Loop
+				If elemItem Is Nothing Then
+					Set elemItem = elemParent
+				End If
+			End If
+
+			If Not (elemItem Is Nothing) Then
+				Call elemItem.focus()
+				If Not (elemFirst Is Nothing) Then
+					' Move the old item back into view
+					Call elemFirst.scrollIntoView()
+				End If
+			End If
+
+			' Let focus move to the next tab stop
+			bKeyHandled = False
+		Case 39 'Right Arrow
+			'Expand the group
+			If Not m_itemHilite Is Nothing Then
+				strItemPath = getPathFromHTMLElem(m_itemHilite, element.all("xvRoot"))
+				Call doGroupExpand(m_itemHilite, strItemPath, True)
+			End If
+		Case 37 'Left Arrow
+			'Collapse the group
+			If Not m_itemHilite Is Nothing Then
+				strItemPath = getPathFromHTMLElem(m_itemHilite, element.all("xvRoot"))
+				Call doGroupExpand(m_itemHilite, strItemPath, False)
+			End If
+		Case 13, 32 ' Enter key, Space key
+			' If there is currently an item hilited, display it
+			If Not m_itemHilite Is Nothing Then
+				Call DisplayItem(m_itemHilite, window.event.ctrlKey)
+				Call m_itemHilite.focus() 'Retain focus
+			End If
+		Case Else
+			bKeyHandled = False
+	End Select
+
+	' If we handled the keypress, make sure it doesn't go anywhere.
+	If bKeyHandled Then
+		window.event.cancelBubble = True
+		window.event.returnValue = False
+	End If
+
+End Sub
+
+'	onFocus
+'
+'	Description:
+'		If the element gets focus, shift focus to the first selected item.
+'		If no item is selected, select the first item
+
+Sub onFocus()
+	Dim rgSelItems, elemItem
+	rgSelItems = m_sdSelectedItems.Keys()
+
+	If UBound(rgSelItems) > -1 Then
+		'Focus to the first selected item
+		Set elemItem = getHTMLElemFromPath(rgSelItems(0), element.all("xvRoot"))
+		Call elemItem.focus()
+	Else
+		'Focus to the first item in the list
+		Set elemItem = element.all("xvRoot").firstChild
+		If Not (elemItem Is Nothing) Then
+			Call elemItem.focus()
+		End If
+	End If
+
+End Sub
+
+Function ElemHasClass(elemItem, strClass)
+	Dim rgstrClasses, bHasClass, i
+
+	bHasClass = False
+	rgstrClasses = Split(elemItem.className, " ")
+	For i = 0 To UBound(rgstrClasses)
+		If rgstrClasses(i) = strClass Then
+			bHasClass = True
+			Exit For
+		End If
+	Next
+
+	ElemHasClass = bHasClass
+End Function
+
+
+Sub ElemAddClass(elemItem, strClass)
+	If Not(ElemHasClass(elemItem, strClass)) Then
+		elemItem.className = elemItem.className & " " & strClass
+	End If
+End Sub
+
+
+Sub ElemDelClass(elemItem, strClass)
+	Dim strClasses, nLoc, nLen
+
+	If ElemHasClass(elemItem, strClass) Then
+		strClasses = elemItem.className
+		nLoc = InStr(1, strClasses, strClass, 1)
+		nLen = Len(strClass)
+		If nLoc <> 1 Then
+			' Trim leading space, too.
+			nLoc = nLoc - 1
+			nLen = nLen + 1
+		End If
+
+		strClasses = Left(strClasses, nLoc - 1) & _
+			Right(strClasses, Len(strClasses) - (nLoc + nLen - 1))
+		elemItem.className = strClasses
+	End If
+End Sub
+
+</SCRIPT>
+</PUBLIC:COMPONENT>

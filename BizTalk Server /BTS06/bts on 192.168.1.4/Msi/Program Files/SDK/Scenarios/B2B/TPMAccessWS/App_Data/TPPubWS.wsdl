@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+   xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s0="http://www.microsoft.com/BizTalk/KwTpm"
+   xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/"
+   xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" targetNamespace="http://www.microsoft.com/BizTalk/KwTpm"
+   xmlns="http://schemas.xmlsoap.org/wsdl/">
+   <types>
+      <s:schema elementFormDefault="qualified" targetNamespace="http://www.microsoft.com/BizTalk/KwTpm">
+         <s:element name="GetPartner">
+            <s:complexType>
+            <s:sequence>
+               <s:element minOccurs="0" maxOccurs="1" name="partnerId" type="s:string" />
+            </s:sequence>
+            </s:complexType>
+         </s:element>
+         <s:element name="GetPartnerResponse">
+            <s:complexType>
+            <s:sequence>
+               <s:element minOccurs="0" maxOccurs="1" name="GetPartnerResult" type="s:string" />
+            </s:sequence>
+            </s:complexType>
+         </s:element>
+         <s:element name="UpdatePartner">
+            <s:complexType>
+               <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" name="partnerXml" type="s:string" />
+               </s:sequence>
+            </s:complexType>
+         </s:element>
+         <s:element name="UpdatePartnerResponse">
+            <s:complexType />
+         </s:element>
+      </s:schema>
+   </types>
+   <message name="GetPartnerSoapIn">
+      <part name="parameters" element="s0:GetPartner" />
+   </message>
+   <message name="GetPartnerSoapOut">
+      <part name="parameters" element="s0:GetPartnerResponse" />
+   </message>
+   <message name="UpdatePartnerSoapIn">
+      <part name="parameters" element="s0:UpdatePartner" />
+   </message>
+   <message name="UpdatePartnerSoapOut">
+      <part name="parameters" element="s0:UpdatePartnerResponse" />
+   </message>
+   <portType name="TPPubWSSoap">
+      <operation name="GetPartner">
+         <input message="s0:GetPartnerSoapIn" />
+         <output message="s0:GetPartnerSoapOut" />
+      </operation>
+      <operation name="UpdatePartner">
+         <input message="s0:UpdatePartnerSoapIn" />
+         <output message="s0:UpdatePartnerSoapOut" />
+      </operation>
+   </portType>
+   <binding name="TPPubWSSoap" type="s0:TPPubWSSoap">
+      <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+      <operation name="GetPartner">
+         <soap:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/GetPartner" style="document" />
+         <input>
+            <soap:body use="literal" />
+         </input>
+         <output>
+            <soap:body use="literal" />
+         </output>
+      </operation>
+      <operation name="UpdatePartner">
+         <soap:operation soapAction="http://www.microsoft.com/BizTalk/KwTpm/UpdatePartner" style="document" />
+         <input>
+            <soap:body use="literal" />
+         </input>
+         <output>
+            <soap:body use="literal" />
+         </output>
+      </operation>
+   </binding>
+   <service name="TPPubWS">
+      <port name="TPPubWSSoap" binding="s0:TPPubWSSoap">
+         <soap:address location="http://localhost/tppubws/tppubws.asmx" />
+      </port>
+   </service>
+</definitions>

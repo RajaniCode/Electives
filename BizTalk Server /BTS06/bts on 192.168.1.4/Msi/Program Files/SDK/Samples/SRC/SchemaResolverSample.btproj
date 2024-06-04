@@ -1,0 +1,109 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.4902"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{72FA47A9-E6D9-49B9-B258-2EEF1D363CC4}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\SchemaResolver.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "Microsoft.Samples.BizTalk"
+                    AssemblyName = "Microsoft.Samples.BizTalk.SchemaResolver"
+                />
+                <Config
+                    Name = "Development"
+		    ApplicationName = "SchemaResolverApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+		    ApplicationName = "SchemaResolverApplication"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "SchemaResolverFlatFileDasm"
+                    AssemblyName = "SchemaResolverFlatFileDasm"
+                    HintPath = "..\..\..\..\..\Pipeline Components\Microsoft.Samples.BizTalk.SchemaResolverFlatFileDasm.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "PurchaseOrder.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "SchemaResolverSample"
+                    Type = "PurchaseOrder"
+                />
+                <File
+                    RelPath = "PurchaseRequest.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "SchemaResolverSample"
+                    Type = "PurchaseRequest"
+                />
+                <File
+                    RelPath = "SalesOrder.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "SchemaResolverSample"
+                    Type = "SalesOrder"
+                />
+                <File
+                    RelPath = "SalesRequest.xsd"
+                    BuildAction = "Compile"
+                    Namespace = "SchemaResolverSample"
+                    Type = "SalesRequest"
+                />
+                <File
+                    RelPath = "SchemaResolverRP.btp"
+                    BuildAction = "Compile"
+                    Namespace = "Microsoft.Samples.BizTalk.SchemaResolverPipeline"
+                    Type = "SchemaResolverRP"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

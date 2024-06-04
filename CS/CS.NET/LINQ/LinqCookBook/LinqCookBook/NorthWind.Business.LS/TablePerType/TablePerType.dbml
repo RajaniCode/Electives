@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="Ecommerce" EntityNamespace="NorthWind.Business.LS.TablePerType" ContextNamespace="NorthWind.Business.LS.TablePerType" Class="TablePerTypeDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=Ecommerce;Integrated Security=True" SettingsObjectName="NorthWind.Business.LS.Properties.Settings" SettingsPropertyName="EcommerceConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.vwEmployees" Member="Employees">
+    <Type Name="Employee">
+      <Column Name="EmployeeId" Type="System.Int32" DbType="Int NOT NULL" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Name" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="EType" Type="System.String" DbType="VarChar(2) NOT NULL" CanBeNull="false" IsDiscriminator="true" />
+      <Type Name="HourlyEmployee" InheritanceCode="HE" IsInheritanceDefault="true">
+        <Column Name="Hours" Type="System.Int32" DbType="Int" CanBeNull="true" />
+        <Column Name="Rate" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      </Type>
+      <Type Name="SalariedEmployee" InheritanceCode="SE">
+        <Column Name="Salary" Type="System.Int32" DbType="Int" CanBeNull="true" />
+        <Column Name="VacationDays" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      </Type>
+      <Type Name="CommissionedEmployee" InheritanceCode="CE">
+        <Column Name="CommPerc" Type="System.Int32" DbType="Int" CanBeNull="true" />
+        <Column Name="ItemsSold" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      </Type>
+    </Type>
+  </Table>
+  <Function Name="dbo.DeleteHourlyEmployee" Method="DeleteHourlyEmployee">
+    <Parameter Name="empid" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.InsertCommissionedEmployee" Method="InsertCommissionedEmployee">
+    <Parameter Name="EmployeeId" Parameter="employeeId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="CommPerc" Parameter="commPerc" Type="System.Int32" DbType="Int" />
+    <Parameter Name="ItemsSold" Parameter="itemsSold" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.InsertHourlyEmployee" Method="InsertHourlyEmployee">
+    <Parameter Name="EmployeeId" Parameter="employeeId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Hours" Parameter="hours" Type="System.Int32" DbType="Int" />
+    <Parameter Name="Rate" Parameter="rate" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.InsertSalariedEmployee" Method="InsertSalariedEmployee">
+    <Parameter Name="EmployeeId" Parameter="employeeId" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Parameter Name="Name" Parameter="name" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Email" Parameter="email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="Salary" Parameter="salary" Type="System.Int32" DbType="Int" />
+    <Parameter Name="VacationDays" Parameter="vacationDays" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

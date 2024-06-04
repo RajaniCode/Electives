@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>En este ejemplo se muestra c&#243;mo usar</title>
+    <link href="description/Galleries.css" type="text/css" rel="Stylesheet" /><link href="description/Layout.css" type="text/css" rel="Stylesheet" /><link href="description/Brand.css" type="text/css" rel="Stylesheet" />
+    <link href="description/iframedescription.css" rel="Stylesheet" type="text/css" />
+    <script src="description/offline.js" type="text/javascript"></script>
+    <style type="text/css">
+        #projectInfo {
+            overflow: auto;
+        }
+        #longDesc {
+            clear:both;
+            margin: 25px 0 10px 0;
+        }
+
+        #SampleIndexList{
+        margin-left: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div id="offlineDescription">
+        <div id="projectInfo">
+            <div class="section">
+                    <div class="itemBarLong tagsContainer">
+                        <label for="Tecnolog&#237;as">Tecnolog&#237;as</label>
+                        <div id="Tecnolog&#237;as">
+                            .NET Framework
+                        </div>
+                    </div>
+                    <div class="itemBarLong tagsContainer">
+                        <label for="Temas">Temas</label>
+                        <div id="Temas">
+                            Language Samples, Office Interio
+                        </div>
+                    </div>
+                <div class="itemBar">
+                    <label for="LastUpdated">&#218;ltima actualizaci&#243;n</label>
+                    <div id="LastUpdated">28/11/2011</div>
+                </div>
+                <div class="itemBarLong">
+                    <label for="License">Licencia</label>
+                    <div id="License">
+                        <a href="license.rtf">MS-LPL</a></div>
+                </div>
+            </div>
+        </div>
+        
+                   
+<script type="text/javascript">
+    function initializePage() {
+        var otherTabClass = 'otherTab';
+        var hiddenPreClass = 'hidden';
+
+        var htmlDecode = function(encodedData) {
+            var decodedData = "";
+            if (encodedData) {
+                var div = document.createElement('div');
+                div.innerHTML = encodedData;
+                decodedData = div.firstChild.nodeValue.replace( /\\r\\n/ig , '\r\n');
+            }
+            return decodedData;
+        };
+                
+        Galleries.iterateElem(Galleries.findElem(null, 'div', 'scriptcode'), function (index, scriptBlock) {
+            var titleElem = Galleries.findElem(scriptBlock, 'div', 'title')[0];
+            var labelElems = Galleries.findElem(titleElem, 'span');
+            if (labelElems.length == 0) {
+                labelElems = titleElem;
+            }
+            var languageSpans = Galleries.findElem(scriptBlock, 'span', 'hidden');
+            var pres = Galleries.findElem(scriptBlock, 'pre');
+            if (languageSpans.length > 0 && pres.length > 1) {
+                Galleries.iterateElem(labelElems, function(index, elem) {
+                    var codePre = pres[index];
+                    var labelSpan = elem;
+                    var languageSpan = languageSpans[index];
+                            
+                    elem.code = codePre.innerHTML.replace( /(\r(\n)?)|((\r)?\n)/ig , '\\r\\n');
+                            
+                    codePre.className = codePre.className.replace(hiddenPreClass, '');
+                            
+                    languageSpan.parentNode.removeChild(languageSpan);
+                });
+
+                pres = Galleries.findElem(scriptBlock, 'pre');
+                Galleries.iterateElem(labelElems, function(index, elem) {
+                    var codePre = pres[index];
+                    var labelSpan = elem;
+                    if (index == 0) {
+                        scriptBlock.activeTab = 0;
+                    }
+                    else {
+                        labelSpan.className += otherTabClass;
+                        codePre.className += hiddenPreClass;
+                    }
+                    Galleries.attachEventHandler(labelSpan, 'click', function(e) {
+                        var activeTab = scriptBlock.activeTab;
+                        labelElems[activeTab].className += otherTabClass;
+                        pres[activeTab].className += hiddenPreClass;
+
+                        codePre.className = codePre.className.replace(hiddenPreClass, '');
+                        labelSpan.className = labelSpan.className.replace(otherTabClass, '');
+                        scriptBlock.activeTab = index;
+                    });
+                });
+
+                var preview = Galleries.findElem(scriptBlock, 'div', 'preview');
+                if (preview.length == 0) {
+                    preview.push(pres[pres.length - 1]);
+                }
+                Galleries.iterateElem(preview, function(index, elem) {
+                    elem.parentNode.removeChild(elem);
+                });
+
+                if (window.clipboardData && clipboardData.setData) {
+                    var copyLink = document.createElement('a');
+                    copyLink.href = 'javascript:void(0);';
+                    copyLink.className = 'copyCode';
+                    copyLink.innerHTML = 'Copiar c&#243;digo';
+                    Galleries.attachEventHandler(copyLink, 'click', function (e) {
+                        clipboardData.setData("Text", htmlDecode(labelElems[scriptBlock.activeTab].code));
+                        return false;
+                    });
+                    scriptBlock.insertBefore(copyLink, scriptBlock.childNodes[0]);
+                }
+            }
+        });
+    }
+
+    Galleries.onWindowLoad(function(){
+        initializePage();
+    });
+
+</script>
+<div id="longDesc">
+    
+<p>En este ejemplo se muestra cómo usar las características de C# 4.0 denominadas
+<em>COM Interop</em>, <em>omisión de <strong>ref</strong>, propiedades indizadas</em> y
+<em>parámetros con nombre y opcionales</em> para crear una aplicación de C# que se comunica con Microsoft Office. Tradicionalmente, los desarrolladores de C# tenían que escribir código relativamente detallado para poder tener acceso a las aplicaciones de Microsoft
+ Office, como Word o Excel.&nbsp; Las nuevas características de C# 4.0 facilitan mucho las llamadas a las API de Office.</p>
+<p>Considere esta declaración para un método de Microsoft Office usado en este ejemplo:</p>
+<p>void PasteSpecial(<span class="style1"></span>IconIndex = <span class="style1">
+</span>, <span class="style1"></span>Link = <span class="style1"></span>, <br>
+&nbsp;&nbsp;&nbsp; <span class="style1"></span>Placement = <span class="style1">
+</span>, <span class="style1"></span>DisplayAsIcon = <span class="style1"></span>,<span class="style1"></span><br>
+<span class="style1"></span>DataType = <span class="style1"></span>, <span class="style1">
+</span>IconFileName = <span class="style1"></span>, <br>
+<span class="style1"></span>IconLabel = <span class="style1"></span>);</p>
+<p>Como puede ver, este método usa un número bastante elevado de parámetros. En C#, los desarrolladores tenían que rellenar cada parámetro, aunque los desarrolladores de esta llamada pretendieran simplificar su uso admitiendo parámetros opcionales. Como C#
+ 4.0 admite parámetros con nombre y opcionales, los desarrolladores pueden especificar únicamente los parámetros que les interesa y tomar los valores predeterminados de los demás parámetros:</p>
+<p>word.Selection.PasteSpecial(Link: <span class="style1"></span>, DisplayAsIcon:
+<span class="style1"></span>);</p>
+<p>En la llamada al método <strong>PasteSpecial</strong>, se asigna un nombre explícito a los parámetros
+<strong>Link</strong> y <strong>DisplayAsIcon</strong>, y su valor se establece como
+<span class="style5"><strong>true</strong></span>. Todos los demás parámetros toman como valor predeterminado los valores especificados internamente por los desarrolladores de la API de Office, tal y como se muestra en la firma anterior.</p>
+<p>Puede crear sus propias llamadas que admiten parámetros con nombre y opcionales. Considere este ejemplo:</p>
+<p class="style2"><span class="style1"></span>M(<span class="style1"></span> x,
+<span class="style1"></span>y = 5, <span class="style1"></span>z = 7) { }</p>
+<p>En este método, se asigna el valor predeterminado a los parámetros y a z. Las llamadas a este método podrían ser similares a ésta:</p>
+<p>M(<span class="style3">1</span>, <span class="style3">2</span>, <span class="style3">
+3</span>); <span class="style4">// llamada normal a M</span><br>
+M(<span class="style3">1</span>, 2);<span class="style4"> // omite z – equivale a M(1, 2, 7)</span><br>
+M(<span class="style3">1</span>);&nbsp; <span class="style4">// omite ambos y z – equivale a M(1, 5, 7)</span><br>
+M(<span class="style3">1</span>, z:<span class="style3"> 3</span>); <span class="style4">
+// pasa z por nombre</span><br>
+M(x: <span class="style3">1</span>, z:<span class="style3"> 3</span>); <span class="style4">
+// pasa x y z por nombre</span><br>
+M(z:<span class="style3"> 3</span>, x:<span class="style3"> 1</span>); <span class="style4">
+// invierte el orden de los argumentos</span></p>
+<p>Una nueva característica dinámica de C# 4.0 hace que Office sea mucho más fácil de usar para los desarrolladores de C#. Ahora, los tipos que se usan en Office se presentan a los desarrolladores de C# como si se declararan con el tipo
+<strong>dynamic</strong>. Ésta es la manera tradicional de establecer una propiedad Cell:</p>
+<p class="style2">((Excel.Range)excel.Cells[1, 1]).Value2 = &quot;ID&quot;;</p>
+<p>Ahora, en C# 4.0 los desarrolladores pueden escribir código similar al siguiente:</p>
+<p class="style2">X1.Cells[<span class="style3">1</span>, <span class="style3">
+1</span>].Value =<span class="style3"> &quot;ID&quot;</span>;</p>
+<p>Una característica denominada <em>Propiedades del índice</em> permite simplificar aún más la llamada, que será similar a ésta:</p>
+<p class="style2">xl.Cells[1, 1] = &quot;ID&quot;;</p>
+<p>Una última característica interesante para los desarrolladores de Office es No-PIA. Los ensamblados de interoperabilidad primarios se generan a partir de interfaces COM y ofrecen compatibilidad para tipos en tiempo de diseño. Sin embargo, en tiempo de ejecución
+ aumentan el tamaño del programa y pueden causar problemas de versiones. La característica No-PIA permite continuar usando ensamblados de interoperabilidad primarios (PIA) en tiempo de diseño y omitirlos en tiempo de ejecución. El compilador de C# incluirá
+ la pequeña parte del PIA que un programa usa en realidad directamente en su ensamblado. Ya no necesitará incluir PIA en la distribución de sus programas.</p>
+
+</div>
+
+
+    </div>
+</body>
+</html>

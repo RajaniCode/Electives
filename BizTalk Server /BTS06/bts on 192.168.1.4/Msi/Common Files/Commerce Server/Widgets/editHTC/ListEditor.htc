@@ -1,0 +1,625 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.ListEditor' tagName="listeditor">
+	<PUBLIC>
+		<!-- ids of xml data and meta-data islands -->
+		<PROPERTY NAME='DataXML' />
+		<PROPERTY NAME='MetaXML' />
+		<!-- read-only scriptable property: returns entire XML data list -->
+		<PROPERTY NAME='xmlList'	GET='xmlGetList' />
+		<!-- read-only scriptable property: value changed = true -->
+		<PROPERTY NAME='dirty'		GET='bGetDirty' />
+
+	<!-- UNSUPPORTED: PRIVATE PROPERTIES: used by CIS to get list of all but deleted items (this is the list used for data binding) -->
+		<PROPERTY NAME='xmlDisplayList' Get='xmlGetDisplayList' />
+
+		<EVENT NAME='onError'		ID='evtError'></EVENT><!-- fired when developer error occurs -->
+		<EVENT NAME='onChange'		ID='evtChange'></EVENT><!-- fired when field contents change -->
+		<EVENT NAME='onNew'			ID='evtNew'></EVENT><!-- fired when new button clicked -->
+		<EVENT NAME='onEdit'		ID='evtEdit'></EVENT><!-- fired when row clicked to edit it -->
+		<EVENT NAME='onCancel'		ID='evtCancel'></EVENT><!-- fired when cancel button clicked -->
+		<EVENT NAME='onValid'		ID='evtValid'></EVENT><!-- fired when start and end editing -->
+		<EVENT NAME='OnNewPage'		ID='evtNewPage'></EVENT><!-- fired when page button clicked on or new page entered in page input -->
+		<EVENT NAME='OnHeaderClick'	ID='evtHeaderClicked'></EVENT><!-- fired when column heading clicked on -->
+
+		<!-- returns a field control element given the field's dataID -->
+		<METHOD NAME='field'	INTERNALNAME='elGetField' />
+		<METHOD NAME='reload'	INTERNALNAME='Reload' />
+
+	<!-- UNSUPPORTED: PRIVATE METHODS: used by CIS to add and replace records in displaylist - wrapper for ListSheet methods -->
+		<METHOD NAME='addRecord' /><!-- add a given record node to the displaylist -->
+		<METHOD NAME='replaceRecord' /><!-- replace a record at a given index in the displaylist, with the given record node -->
+		<METHOD NAME='editRecord' /><!-- edit a record at a given index in the displaylist -->
+		<METHOD NAME='deleteRecord' /><!-- delete a record at a given index in the displaylist -->
+	<PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_AbandonChanges_Message = "Abandon your changes to this item?"
+		const L_AbandonChanges_DialogTitle = "Abandon changes?"
+		const L_LoadingList_Text = "loading list, please wait..."
+		const L_LoadingProperties_Text = "loading properties, please wait..."
+		const L_DoneBtn_ToolTip = "Update the table with this entry"
+		const L_DoneBtn_Button = "Done"
+		const L_CancelBtn_ToolTip = "Abandon changes to this item."
+		const L_CancelBtn_Button = "Cancel"
+		const L_NewBtn_ToolTip = "Add a new row"
+		const L_NewBtn_Button = "New"
+		const L_RemoveBtn_ToolTip = "Remove the selected row"
+		const L_RemoveBtn_Button = "Remove"
+		const L_AbortControl_ErrorMessage = "The control could not load.  Please contact your system administrator"
+		const L_ControlURNandID_ErrorMessage = "Error in ListEditor with id: ""%1"""
+		const L_IDNotFound_ErrorMessage = "element not found in document with id: ""%1"""
+		const L_IDNotUnique_ErrorMessage = "element id not unique in document: ""%1"""
+		const L_MetaXMLErrorAtCharLine_ErrorMessage = "MetaXML ""%1"" at char %2 in line %3:"
+		const L_DataXMLErrorAtCharLine_ErrorMessage = "DataXML ""%1"" at char %2 in line %3:"
+		const L_SourceCode_ErrorMessage = "Source code:"
+
+		Dim m_xmlDataDoc, m_xmlMetaDoc, m_bDebug, m_elEditSheet, m_elListSheet, _
+			m_btnNew, m_btnRemove, m_btnDone, m_btnCancel, m_nCurrentRecord, _
+			m_bDirty, m_bValid, m_bLEDirty, m_sUniqueID, m_bControlAborted, m_bESDisabled
+
+		'flag value for when recordnumber not set
+		const UNINITIALIZED = -999
+		'flag value for when recordnumber is a newly added item
+		const NEW_RECORD = -1
+		'keycode constants
+		const KEYCODE_ENTER = 13
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		m_bValid = true
+		m_bDirty = false	'true if any control's value has changed
+		m_bLEDirty = false	'true if LE control's value has changed (row added, deleted, or changed)
+		set m_xmlDataDoc = nothing		'used to hold data document
+		set m_xmlMetaDoc = nothing		'used to hold meta-data document
+		m_bControlAborted = false		'true when errors have forced the control to abort running
+		m_nCurrentRecord = UNINITIALIZED	'holds current record being edited - init with flag
+		m_bESDisabled = true				'disabled state of EditSheet
+
+		Initialize()
+
+		sub Initialize()
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			dim elButton, elDiv, elTable, elRow, elCell, elCells, xmlGlobal, sESDataID, _
+				xmlMetaCol
+
+			if isNull(MetaXML) then
+				'if no meta-data xml id defined then report error and abort control
+				ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(MetaXML)))
+				AbortControl()
+				exit sub
+			elseif isNull(DataXML) then
+				'if no data xml id defined then report error and abort control
+				ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(DataXML)))
+				AbortControl()
+				exit sub
+			end if
+			'get meta-data and data elemen`ts
+			set m_xmlMetaDoc = element.document.all(MetaXML)
+			set m_xmlDataDoc = element.document.all(DataXML)
+			if typename(m_xmlMetaDoc) = "DispHTMLElementCollection" then
+				'if no meta-data id returns a collection then report error and abort control
+				ReportError(sFormatString(L_IDNotUnique_ErrorMessage, Array(MetaXML)))
+				AbortControl()
+				exit sub
+			elseif m_xmlMetaDoc is nothing then
+				'if no meta-data id is not found then report error and abort control
+				ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(MetaXML)))
+				AbortControl()
+				exit sub
+			elseif m_xmlMetaDoc.XMLDocument.parseError.errorCode <> 0 then
+				'if no meta-data xml returns a parse error then report error and abort control
+				ShowXMLError "meta", m_xmlMetaDoc
+				AbortControl()
+				exit sub
+			elseif typename(m_xmlDataDoc) = "DispHTMLElementCollection" then
+				'if no data id returns a collection then report error and abort control
+				ReportError(sFormatString(L_IDNotUnique_ErrorMessage, Array(DataXML)))
+				AbortControl()
+				exit sub
+			elseif m_xmlDataDoc is nothing then
+				'if no data id is not found then report error and abort control
+				ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(DataXML)))
+				AbortControl()
+				exit sub
+			elseif m_xmlDataDoc.XMLDocument.parseError.errorCode <> 0 then
+				'if no data xml returns a parse error then report error and abort control
+				ShowXMLError "data", m_xmlDataDoc
+				AbortControl()
+				exit sub
+			end if
+			'get meta document element
+			set m_xmlMetaDoc = m_xmlMetaDoc.XMLDocument.documentElement
+			'check for recordcount and remove if found
+			m_xmlDataDoc.removeAttribute("recordcount")
+			if not m_xmlDataDoc.hasChildNodes then m_xmlDataDoc.appendChild(m_xmlDataDoc.ownerDocument.createElement("record"))
+			set xmlGlobal = m_xmlMetaDoc.selectSingleNode("global")
+			if xmlGlobal is nothing then
+				'create a global node and set attributes for ListSheetF and EditSheet config
+				set xmlGlobal = m_xmlMetaDoc.appendChild(m_xmlMetaDoc.ownerDocument.createElement("global"))
+			end if
+			with xmlGlobal
+				.setAttribute "title", "no"			'turn off titles in EditSheet
+				.setAttribute "autogenids", "yes"	'turn on autogen ids in EditSheet
+				.setAttribute "lock", "yes"			'turn on lock in EditSheet (so it will come up disabled)
+			end with
+
+			'get a unique id for creating ids for ListSheet and EditSheet controls
+			m_sUniqueID = element.document.uniqueID
+
+			'create template button and widget DIV for cloning
+			set elButton = element.document.createElement("BUTTON")
+			elButton.className = "bdbutton"
+			elButton.style.width = "75px"
+			set elDiv = element.document.createElement("DIV")
+			elDiv.setAttribute "DataXML", DataXML
+			elDiv.setAttribute "MetaXML", MetaXML
+
+			'create an empty data document to initially link EditSheet to
+			sESDataID = element.document.uniqueID
+			element.innerHTML = "<xml id='" & sESDataID & "'><document><record/></document></xml>"
+			'create a table for layout of controls (two rows with two cells per row)
+			set elTable = element.appendChild(element.document.createElement("TABLE"))
+			elTable.cellSpacing = 0
+			elTable.cellPadding = 0
+			set elRow = elTable.insertRow()
+
+			'upper left
+			set elCell = elRow.insertCell()
+			elCell.vAlign = "top"
+			'ListSheetF
+			elCell.id = "leListContainer"
+			elCell.width = "80%"
+			set m_elListSheet = elCell.appendChild(elDiv.cloneNode(true))
+			with m_elListSheet
+				.id = "listSheet" & m_sUniqueID
+				.innerText = L_LoadingList_Text
+				.attachEvent "onreadystatechange", GetRef("onReadyStateChange")
+				.className = "listSheetF"
+			end with
+
+			'upper right
+			set elCell = elRow.insertCell()
+			elCell.vAlign = "top"
+			'new and remove buttons
+			with elCell
+				set m_btnNew = .appendChild(elButton.cloneNode(true))
+				with m_btnNew
+					.id = "btnNew"
+					.style.marginLeft = 0
+					.title = L_NewBtn_ToolTip
+					.innerHTML = L_NewBtn_Button
+					.attachEvent "onclick", GetRef("onNew")
+				end with
+				.appendChild(element.document.createElement("BR"))
+				set m_btnRemove = .appendChild(elButton.cloneNode(true))
+				with m_btnRemove
+					.id = "btnRemove"
+					.title = L_RemoveBtn_ToolTip
+					.style.marginLeft = 0
+					.innerHTML = L_RemoveBtn_Button
+					.attachEvent "onclick", GetRef("onRemove")
+					.attachEvent "onkeydown", GetRef("onKeyDown")
+					.disabled = true
+					.style.marginTop = "8px"
+				end with
+			end with
+
+			'lower left
+			set elRow = elTable.insertRow()
+			set elCell = elRow.insertCell()
+			elCell.vAlign = "top"
+			'EditSheet
+			elCell.id = "leEditContainer"
+			set m_elEditSheet = elCell.appendChild(elDiv.cloneNode(true))
+			with m_elEditSheet
+				.id = "editSheet" & m_sUniqueID
+				.setAttribute "DataXML", sESDataID
+				.innerText = L_LoadingProperties_Text
+				.attachEvent "onreadystatechange", GetRef("onReadyStateChange")
+				.className = "editSheet"
+			end with
+
+			'lower right
+			set elCell = elRow.insertCell()
+			elCell.vAlign = "top"
+			'Done and Cancel buttons
+			elCell.style.padding = "4px"
+			set m_btnDone = elCell.appendChild(elButton.cloneNode(true))
+			with m_btnDone
+				.id = "btnDone"
+				.innerHTML = L_DoneBtn_Button
+				.title = L_DoneBtn_ToolTip
+				.attachEvent "onclick", GetRef("onDone")
+				.attachEvent "onkeydown", GetRef("onKeyDown")
+				.disabled = true
+			end with
+			elCell.appendChild(element.document.createElement("BR"))
+			set m_btnCancel = elCell.appendChild(elButton.cloneNode(true))
+			with m_btnCancel
+				.id = "btnCancel"
+				.innerHTML = L_CancelBtn_Button
+				.title = L_CancelBtn_ToolTip
+				.style.marginTop = "8px"
+				.attachEvent "onclick", GetRef("onCancel")
+				.attachEvent "onkeydown", GetRef("onKeyDown")
+				.disabled = true
+			end with
+		end sub
+
+		sub AbortControl()
+			dim elFont
+			'sets flag for aborted control and displays error text in element
+			m_bControlAborted = true
+			element.innerText = ""
+			set elFont = element.appendChild(element.document.createElement("SPAN"))
+			elFont.style.color = "red"
+			elFont.style.fontWeight = "bold"
+			element.title = L_AbortControl_ErrorMessage
+			elFont.innerText = L_AbortControl_ErrorMessage
+		end sub
+
+		sub ShowXMLError(sType, xml)
+			Dim sBuffer
+			'create xml error text and then call ReportError with it
+			if sType = "meta" then
+				sBuffer = sFormatString(L_MetaXMLErrorAtCharLine_ErrorMessage, Array(metaXML, xml.parseError.linePos, xml.parseError.line))
+			else
+				sBuffer = sFormatString(L_DataXMLErrorAtCharLine_ErrorMessage, Array(dataXML, xml.parseError.linePos, xml.parseError.line))
+			end if
+			sBuffer = sBuffer & vbCrLf & xml.parseError.reason & vbCrLf
+			sBuffer = sBuffer & L_SourceCode_ErrorMessage & vbCrLf
+			sBuffer = sBuffer & xml.parseError.srcText
+			ReportError(sBuffer)
+		end sub
+
+		Function sFormatString(sFormat, aArgs)
+			dim nArg, sNewString
+			'formats strings like C format using numbered arguments (%1, %2, &tc.)
+			'call like: sText = sFormatString(sOriginalText, Array(sArg1, sArg2, ...))
+			sNewString = sFormat
+			for nArg = LBound(aArgs) to UBound(aArgs)
+				sNewString = Replace(sNewString, "%" & nArg + 1, aArgs(nArg))
+			next
+			sFormatString = sNewString
+		End Function
+
+		sub ReportError(strMessage)
+			dim evt
+			strMessage = sFormatString(L_ControlURNandID_ErrorMessage, Array(element.id)) & vbCrLf & vbCrLf & strMessage
+			' Display the message if in debug-mode.
+			if m_bDebug = true then alert(strMessage)
+			'set result on error event and then fire it
+			set evt = createEventObject()
+			evt.setAttribute "error", strMessage
+			evt.type = "error"
+			evtError.fire(evt)
+		end sub
+
+		sub onReadyStateChange()
+			dim elSource
+
+			if not m_bDebug then on error resume next
+			'this routine runs for each control at least once - until readyState is complete
+			set elSource = window.event.srcElement
+			if elSource.readyState = "complete" then
+				elSource.detachEvent "onreadystatechange", GetRef("onReadyStateChange")
+				'check id agains uniquely constructed ids
+				select case elSource.id
+					case "editSheet" & m_sUniqueID
+						'attach require and change event handlers to EditSheet
+						m_elEditSheet.attachEvent "onchange", GetRef("onChange")
+						m_elEditSheet.attachEvent "onvalid", GetRef("onChange")
+						m_elEditSheet.attachEvent "onrequire", GetRef("onChange")
+						m_elEditSheet.attachEvent "onkeypress", GetRef("onChange")
+						m_elEditSheet.attachEvent "onclick", GetRef("EnableDoneBtn")
+					case "listSheet" & m_sUniqueID
+						'attach select and unselect event handlers to ListSheet
+						m_elListSheet.attachEvent "OnRowSelect", GetRef("setRow")
+						m_elListSheet.attachEvent "OnRowUnselect", GetRef("unsetRow")
+						m_elListSheet.attachEvent "OnNewPage", GetRef("OnNewPage")
+						m_elListSheet.attachEvent "OnHeaderClick", GetRef("OnHeaderClick")
+				end select
+			end if
+		end sub
+
+		sub OnNewPage()
+			dim evt
+			set evt = createEventObject()
+			evt.setAttribute "page", window.event.page
+			evt.type = "newpage"
+			evtNewPage.fire(evt)
+			m_bLEDirty = false
+		end sub
+
+		sub OnHeaderClick()
+			dim evt
+			set evt = createEventObject()
+			evt.setAttribute "sortcol", window.event.sortcol
+			evt.setAttribute "sortdir", window.event.sortdir
+			evt.type = "headerclick"
+			evtHeaderClicked.fire(evt)
+			m_bLEDirty = false
+		end sub
+
+		sub FireChange()
+			dim evt, xmlList, i, nCurrentRecord
+			'get current XMLlist from ListSheet
+			set xmlList = m_elListSheet.xmlList
+			'look for active record (last changed) if not found return -1 as recordnumber (new record)
+			nCurrentRecord = -1
+			for i = 0 to xmlList.childNodes.length - 1
+				if xmlList.childNodes(i).getAttribute("active") = "yes" then nCurrentRecord = i
+			next
+			'create event, add XMLlist and record number and fire it
+			set evt = createEventObject()
+			evt.setAttribute "XMLlist", xmlList
+			evt.setAttribute "recordNumber", nCurrentRecord
+			evt.type = "change"
+			evtChange.fire(evt)
+			m_bValid = true
+			set evt = createEventObject()
+			evt.type = "valid"
+			evt.setAttribute "valid", m_bValid
+			evtValid.fire(evt)
+			'clear the ES dirty flag
+			m_bDirty = false
+			'set the LE dirty flag (row deleted/changed/added)
+			m_bLEDirty = true
+			'reset the current record number
+			m_nCurrentRecord = UNINITIALIZED
+			'clear dirty flag
+			m_bDirty = false
+		end sub
+
+		sub AddRecord(xmlRecord)
+			'use ListSheet addRow to add new record
+			m_elListSheet.addRow(xmlRecord)
+		end sub
+
+		sub ReplaceRecord(nRecordNumber, xmlRecord)
+			'use ListSheet replaceRow to replace the record at index recordnumber with the updated record
+			m_elListSheet.replaceRow nRecordNumber, xmlRecord
+		end sub
+
+		sub RemoveRecord(nRecordNumber)
+			'use ListSheet DeleteRow to delete the record at index recordnumber
+			m_elListSheet.DeleteRow nRecordNumber
+		end sub
+
+		sub EditRecord(nRecordNumber)
+			'use ListSheet SelectRow to select the record at index recordnumber and then edit
+			m_elListSheet.SelectRow nRecordNumber
+		end sub
+
+		function xmlGetList()
+			'return the XMLlist from the ListSheet
+			set xmlGetList = m_elListSheet.xmlList
+		end function
+
+		function xmlGetDisplayList()
+			'gets list not including the deleted records (used by CIS)
+			set xmlGetDisplayList = m_elListSheet.xmlDisplayList
+		end function
+
+		function bAbandonChanges()
+			dim nResult
+			'show msgbox for aba\ndon changes prompt
+			nResult = msgbox(L_AbandonChanges_Message, vbYesNo, L_AbandonChanges_DialogTitle)
+			'if answer is yes then abandon changes = true
+			bAbandonChanges = Cbool(nResult = vbYes)
+		end function
+
+		function elGetField(sDataID)
+			'gets a field element from the EditSheet given the dataID of the field (id in meta-data)
+			set elGetField = m_elEditSheet.field(sDataID)
+		end function
+
+		function Reload(sOp)
+			Reload = m_elListSheet.reload(sOp)
+			m_bLEDirty = false
+		end function
+
+		sub UnsetRow()
+			dim evt
+			'ListSheet unselect row event caught
+			'clear and disable the EditSheet
+			m_bESDisabled = true
+			m_elEditSheet.clearAll()
+			m_elEditSheet.disableAll(m_bESDisabled)
+			'set flag for new record
+			m_nCurrentRecord = UNINITIALIZED
+			'disable remove and done and enable new
+			m_btnRemove.disabled = true
+			m_btnNew.disabled = false
+			m_btnDone.disabled = true
+			m_btnCancel.disabled = true
+			m_bDirty = false
+			m_bValid = true
+			set evt = createEventObject()
+			'fire cancel because rowunselected
+			evt.type = "cancel"
+			evtCancel.fire(evt)
+			'now fire valid
+			evt.type = "valid"
+			evt.setAttribute "valid", m_bValid
+			evtValid.fire(evt)
+		end sub
+
+		sub SetRow()
+			dim evt
+			'ListSheet select row event caught; check if need to abandon changes
+			if m_nCurrentRecord <> UNINITIALIZED and m_bDirty then
+				if not bAbandonChanges() then exit sub
+			end if
+			m_bValid = false
+			set evt = createEventObject()
+			'fire cancel because row may be unselected
+			evt.type = "cancel"
+			evtCancel.fire(evt)
+			evt.type = "valid"
+			evt.setAttribute "valid", m_bValid
+			evtValid.fire(evt)
+			'disable done button and enable new and remove
+			m_btnRemove.disabled = false
+			m_btnNew.disabled = false
+			m_btnDone.disabled = true
+			m_btnCancel.disabled = false
+			'enable the EditSheet, set the record from the event and set the focus (on first ES control)
+			m_bESDisabled = false
+			with m_elEditSheet
+				.disableAll(m_bESDisabled)
+				.XMLrecord = window.event.XMLrecord
+				.resetDirty()
+				.focus()
+			end with
+			EnableDoneBtn()
+			'set current record from the event
+			m_nCurrentRecord = window.event.recordNumber
+			'fire edit event with current record and recordnumber
+			set evt = createEventObject()
+			evt.setAttribute "recordNumber", m_nCurrentRecord
+			evt.setAttribute "xmlRecord", window.event.XMLrecord
+			evt.type = "edit"
+			evtEdit.fire(evt)
+			'clear dirty flag
+			m_bDirty = false
+		end sub
+
+		sub onNew()
+			dim evt
+			'new button clicked; check if need to abandon changes
+			if m_nCurrentRecord <> UNINITIALIZED and m_bDirty then
+				if not bAbandonChanges() then exit sub
+			end if
+			'if current record number uninitialized the set flag for new
+			if m_nCurrentRecord = UNINITIALIZED then m_nCurrentRecord = NEW_RECORD
+			'if current record is not set as new record then unselect the selected row and reset
+			if m_nCurrentRecord <> NEW_RECORD then
+				m_elListSheet.UnselectRow(m_nCurrentRecord)
+				m_nCurrentRecord = NEW_RECORD
+			end if
+			m_bValid = false
+			set evt = createEventObject()
+			evt.type = "valid"
+			evt.setAttribute "valid", m_bValid
+			evtValid.fire(evt)
+			'disable remove and new buttons and enable done
+			m_btnRemove.disabled = true
+			m_btnNew.disabled = true
+			m_btnDone.disabled = false
+			m_btnCancel.disabled = false
+			'enable and clear all fields in the EditSheet and set the focus (on first ES control)
+			m_bESDisabled = false
+			with m_elEditSheet
+				.disableAll(m_bESDisabled)
+				.ResetDefault()
+				.resetDirty()
+				.focus()
+			end with
+			'fire New event; returning -1 for record number and an empty XMLrecord
+			set evt = createEventObject()
+			evt.setAttribute "recordNumber", m_nCurrentRecord
+			evt.setAttribute "xmlRecord", m_elEditSheet.XMLrecord
+			evt.type = "new"
+			evtNew.fire(evt)
+			EnableDoneBtn()
+			'clear the dirty flag
+			m_bDirty = false
+		end sub
+
+		sub onRemove()
+			'remove button clicked; check if need to abandon changes
+			if m_bDirty then
+				if not bAbandonChanges() then exit sub
+			end if
+			'if current record is new then exit (no row to remove)
+			if m_nCurrentRecord = NEW_RECORD then exit sub
+			'delete the selected row in the ListSheet
+			m_elListSheet.deleteRow(m_nCurrentRecord)
+			'clear the EditSheet and disable it
+			m_bESDisabled = true
+			m_elEditSheet.clearAll()
+			m_elEditSheet.disableAll(m_bESDisabled)
+			'disable the remove and done buttons and enable the new button
+			m_btnRemove.disabled = true
+			m_btnNew.disabled = false
+			m_btnDone.disabled = true
+			m_btnCancel.disabled = true
+			'fire the change event
+			FireChange()
+		end sub
+
+		sub onCancel()
+			dim evt
+			set evt = createEventObject()
+			evt.type = "cancel"
+			evtCancel.fire(evt)
+			if m_nCurrentRecord <> NEW_RECORD then m_elListSheet.UnselectRow(m_nCurrentRecord)
+			UnsetRow()
+		end sub
+
+		sub onDone()
+			dim xmlRecord
+			'done button clicked
+			'get XMLRecord from EditSheet (if empty record then exit sub - nothing to add)
+			set xmlRecord = m_elEditSheet.XMLrecord
+			if not xmlRecord.hasChildNodes then exit sub
+			if m_nCurrentRecord = NEW_RECORD then
+				'new record so add record to ListSheet
+				m_elListSheet.addRow(xmlRecord)
+			else
+				'not new record so update record at index in ListSheet & reset current record
+				m_elListSheet.replaceRow m_nCurrentRecord, xmlRecord
+			end if
+			'clear and disable EditSheet
+			m_bESDisabled = true
+			m_elEditSheet.clearAll()
+			m_elEditSheet.disableAll(m_bESDisabled)
+			'disable remove and done buttons and enable new button
+			m_btnRemove.disabled = true
+			m_btnNew.disabled = false
+			m_btnDone.disabled = true
+			m_btnCancel.disabled = true
+			'fire the change event
+			FireChange()
+		end sub
+
+		sub onChange()
+			'set dirty bit when EditSheet change event fires
+			m_bDirty = true
+			EnableDoneBtn()
+		end sub
+
+		sub EnableDoneBtn()
+			if not m_bESDisabled and _
+				(m_elEditSheet.dirty and _
+				not m_elEditSheet.required and m_elEditSheet.valid) then
+				m_btnDone.disabled = false
+			else
+				m_btnDone.disabled = true
+			end if
+		end sub
+
+		sub onKeyDown()
+			dim evt
+			'when remove or done clicked set focus to new button
+			set evt = window.event
+			if evt.keyCode = KEYCODE_ENTER then
+				'set focus to new button if enter on remove or done button
+				evt.srcElement.click()
+				m_btnNew.focus()
+				evt.cancelBubble = true
+				evt.returnValue = false
+			end if
+		end sub
+
+		function bGetDirty()
+			bGetDirty = m_bLEDirty
+		end function
+	</SCRIPT>
+</PUBLIC:COMPONENT>

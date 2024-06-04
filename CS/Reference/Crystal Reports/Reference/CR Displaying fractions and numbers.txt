@@ -1,0 +1,79 @@
+Get rid of trailing zeros
+
+Format function for displaying fractions and numbers. Only those decimals that are not an end 0 are shown.
+Thus 123,450 is 123,45
+Thus 123,40 is 123,4
+
+Includes the option to specify number of decimals. Default value is 5 decimals.
+Any number shorter than 2 decimals will be formatted to #.#0
+
+So 123,4 is 123,40
+And 123 is 123,00
+
+Note that this uses , for decimals and . for thousands separator. This is done in the final 2 variable of the ToText function. Simply switch the , & . if need be like UK or US formats.
+
+Function  (NumberVar dbPrice, Optional NumberVar decimals := 5)
+
+    Local StringVar Result;
+
+    if dbPrice = Truncate(dbPrice) then
+    (
+        Trim(ToText((dbPrice), 2, '.', ','))
+    )
+    else
+    (
+        // Round to max number of decimal places
+        Round(dbPrice, decimals);        
+
+        // Eat decimal zero from the end.
+
+        Result := Trim(ToText((dbPrice), decimals, '.', ','));
+
+        Local NumberVar Pos := Length(Result);
+ 
+        while (Result[Pos] = '0') do
+        (
+            Pos := Pos - 1;
+        );
+        
+        Result := Left(Result, Pos);
+
+        if Length(Result) < Length(Trim(ToText((dbPrice), 2, '.', ','))) then
+            Result := Trim(ToText((dbPrice), 2, '.', ','));
+        Result;
+    )
+
+
+Your solution works, but it does the same thing as placing the following formula in the customize number->decimals->x+2 box:
+
+[Note:
+
+Format Field
+
+Number
+
+Custom Style
+
+Customize...
+
+Decimals: 1.0000000000
+
+Rounding: 0.0000000001]
+
+Decimals: X-2:
+
+numbervar dec := 9; //9 is the maximum decimals CR will handle
+numbervar i;
+numbervar j := dec + 1;
+numbervar x;
+
+for i := 1 to j do (
+if val(right(totext(currentfieldvalue,j,""),i)) = 0 then
+x := j  - i);
+x
+
+In the rounding box (below the decimals), you would put:
+
+numbervar dec;
+
+It works for negative numbers, too. The results are exactly the same as your method (I did switch the periods and commas). I guess the difference is you are formatting the field right in a main report formula, while the above formulas are used in the customize formatting area for numbers.

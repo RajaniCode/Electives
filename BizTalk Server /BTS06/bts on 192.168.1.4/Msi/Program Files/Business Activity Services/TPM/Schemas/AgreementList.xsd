@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<xs:schema id="AgreementList" targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" xmlns="http://www.microsoft.com/BizTalk/KwTpm" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:complexType name="AgreementInfo">
+		<xs:sequence>
+			<xs:element name="AgreementId">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:maxLength value="256" />
+						<xs:minLength value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Description">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Status">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:maxLength value="16" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AgreementInfo" type="AgreementInfo"/>
+	<xs:complexType name="AgreementList">
+		<xs:sequence>
+			<xs:element ref="AgreementInfo" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AgreementList" type="AgreementList"/>
+</xs:schema>

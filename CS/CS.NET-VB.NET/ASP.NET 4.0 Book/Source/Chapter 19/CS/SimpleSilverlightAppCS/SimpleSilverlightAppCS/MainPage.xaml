@@ -1,0 +1,61 @@
+﻿<UserControl x:Class="SimpleSilverlightAppCS.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="300" d:DesignWidth="400">
+
+    <Grid Background="Yellow">
+        <Grid x:Name="LayoutRoot" Height="300" Width="600">
+            <Ellipse x:Name="face" Height="70" Width="70" Fill="Red" VerticalAlignment="Top"
+		Margin="15"/>
+            <Ellipse x:Name="body" Height="140" Width="100" Fill="LightSkyBlue"
+ 		VerticalAlignment="Center" Margin="0,5,0,0"/>
+            <Ellipse x:Name="hand1"  Height="85" Width="25" Fill="Red" Margin="0,30,80,0">
+                <Ellipse.RenderTransform>
+                    <RotateTransform Angle="60"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="hand2" Height="85" Width="25" Fill="Red" Margin="100,50,0,0">
+                <Ellipse.RenderTransform>
+                    <RotateTransform Angle="-25"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="leg1" Height="85" Width="25" Fill="Red" Margin="0,205,0,0">
+                <Ellipse.RenderTransform>
+                    <RotateTransform Angle="-20"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Ellipse x:Name="leg2" Height="85" Width="25" Fill="Red" Margin="0,215,0,0">
+                <Ellipse.RenderTransform>
+                    <RotateTransform Angle="45"/>
+                </Ellipse.RenderTransform>
+            </Ellipse>
+            <Path Stroke="Black" StrokeThickness="3"  Data="M 10,50 A 100,50 75 0 0 50,50" 
+ 		HorizontalAlignment="Center" Margin="0,10,10,0"/>
+            <Ellipse x:Name="button1" Height="10" Width="10" Fill="Black" Margin="0,0,0,75"/>
+            <Ellipse x:Name="button2" Height="10" Width="10" Fill="Black" Margin="0,0,0,25"/>
+            <Ellipse x:Name="button3" Height="10" Width="10" Fill="Black" Margin="0,0,0,-25"/>
+            <Ellipse x:Name="eye1" Height="10" Width="10" Fill="Black" Margin="-25,0,0,215"/>
+            <Ellipse x:Name="eye2" Height="10" Width="10" Fill="Black" Margin="25,0,0,215"/>
+            <Rectangle x:Name="shorts1" Height="50" Width="97" Fill="Orange"
+ 		Margin="0,95,0,0"/>
+            <Rectangle x:Name="shorts2" Height="55" Width="55" Fill="Orange" Margin="-30,140,0,0">
+                <Rectangle.RenderTransform>
+                    <RotateTransform Angle="20"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="shorts3" Height="55" Width="55" Fill="Orange" 
+ 		Margin="35,165,0,0">
+                <Rectangle.RenderTransform>
+                    <RotateTransform Angle="-10"/>
+                </Rectangle.RenderTransform>
+            </Rectangle>
+            <Rectangle x:Name="belt" Height="20" Width="96" Fill="ForestGreen" 
+ 		Margin="0,0,0,-65"/>
+            <Ellipse Height="50" Width="50" Fill="Chocolate" Margin="0,225,-175,0"/>
+            <Rectangle Height="30" Width="600" Fill="Green" Margin="0,285,0,0"/>
+        </Grid>
+    </Grid>
+</UserControl>

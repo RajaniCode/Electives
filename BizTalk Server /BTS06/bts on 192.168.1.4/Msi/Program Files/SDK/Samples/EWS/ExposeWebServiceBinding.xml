@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BindingInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Assembly="Microsoft.BizTalk.Deployment, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.0.1.0" BindingStatus="FullyBound" BoundEndpoints="1" TotalEndpoints="1">
+  <ModuleRefCollection>
+    <ModuleRef Name="ExposeWebService" Version="1.0.0.0" Culture="" PublicKeyToken="" FullName="ExposeWebService, Version=1.0.0.0">
+      <Services>
+        <Service Name="Microsoft.Samples.BizTalk.ExposeWebService.ProcessClientRequest">
+          <Ports>
+            <Port Name="SOAPPort" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="ExposeWebServicePort" />
+            </Port>
+          </Ports>
+          <Roles />
+        </Service>
+      </Services>
+    </ModuleRef>
+  </ModuleRefCollection>
+  <SendPortCollection />
+  <DistributionListCollection />
+  <ReceivePortCollection>
+    <ReceivePort Name="ExposeWebServicePort" IsTwoWay="true">
+      <ReceiveLocations>
+        <ReceiveLocation Name="ExposeWebServiceLocation">
+          <Address>/ExposeWebService_proxy/Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPort.asmx</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationTransportType Name="SOAP" Capabilities="899" ConfigurationClsid="7e104b2f-003c-4d9f-a6a5-168f727289f0" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;URI vt="8"&gt;/ExposeWebService_proxy/Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPort.asmx&lt;/URI&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="XMLReceive" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines:3.0.1.0:Microsoft.BizTalk.DefaultPipelines.XMLReceive" Type="1" />
+          <ReceivePipelineData xsi:nil="true" />
+          <Enable>true</Enable>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      <TransmitPipeline Name="XMLTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines:3.0.1.0:Microsoft.BizTalk.DefaultPipelines.XMLTransmit" Type="2" />
+      <SendPipelineData xsi:nil="true" />
+      <Authentication>0</Authentication>
+      <Tracking>0</Tracking>
+    </ReceivePort>
+  </ReceivePortCollection>
+  <PartyCollection />
+</BindingInfo>

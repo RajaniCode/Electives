@@ -1,0 +1,66 @@
+﻿<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:DataServices xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" m:DataServiceVersion="1.0">
+    <Schema Namespace="BlogModel" xmlns:d="http://schemas.microsoft.com/ado/2007/08/dataservices" xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+      <EntityContainer Name="BlogContext" p7:LazyLoadingEnabled="true" m:IsDefaultEntityContainer="true" xmlns:p7="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
+        <EntitySet Name="Blogs" EntityType="BlogModel.Blog" />
+        <EntitySet Name="Posts" EntityType="BlogModel.Post" />
+        <EntitySet Name="Tags" EntityType="BlogModel.Tag" />
+        <AssociationSet Name="BlogPost" Association="BlogModel.BlogPost">
+          <End Role="Blog" EntitySet="Blogs" />
+          <End Role="Post" EntitySet="Posts" />
+        </AssociationSet>
+        <AssociationSet Name="PostTag" Association="BlogModel.PostTag">
+          <End Role="Post" EntitySet="Posts" />
+          <End Role="Tag" EntitySet="Tags" />
+        </AssociationSet>
+      </EntityContainer>
+      <EntityType Name="Blog">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" Nullable="false" />
+        <Property Name="Owner" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Posts" Relationship="BlogModel.BlogPost" FromRole="Blog" ToRole="Post" />
+      </EntityType>
+      <EntityType Name="Post">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="CreatedDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="ModifiedDate" Type="Edm.DateTime" Nullable="false" />
+        <Property Name="PostContent" Type="Edm.String" Nullable="false" />
+        <Property Name="Title" Type="Edm.String" Nullable="false" />
+        <Property Name="BlogBlogID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Public" Type="Edm.Boolean" Nullable="false" />
+        <NavigationProperty Name="Blog" Relationship="BlogModel.BlogPost" FromRole="Post" ToRole="Blog" />
+        <NavigationProperty Name="Tags" Relationship="BlogModel.PostTag" FromRole="Post" ToRole="Tag" />
+      </EntityType>
+      <EntityType Name="Tag">
+        <Key>
+          <PropertyRef Name="ID" />
+        </Key>
+        <Property Name="ID" Type="Edm.Int32" Nullable="false" />
+        <Property Name="Name" Type="Edm.String" Nullable="false" />
+        <NavigationProperty Name="Posts" Relationship="BlogModel.PostTag" FromRole="Tag" ToRole="Post" />
+      </EntityType>
+      <Association Name="BlogPost">
+        <End Role="Blog" Type="BlogModel.Blog" Multiplicity="1" />
+        <End Role="Post" Type="BlogModel.Post" Multiplicity="*" />
+        <ReferentialConstraint>
+          <Principal Role="Blog">
+            <PropertyRef Name="ID" />
+          </Principal>
+          <Dependent Role="Post">
+            <PropertyRef Name="BlogBlogID" />
+          </Dependent>
+        </ReferentialConstraint>
+      </Association>
+      <Association Name="PostTag">
+        <End Role="Post" Type="BlogModel.Post" Multiplicity="*" />
+        <End Role="Tag" Type="BlogModel.Tag" Multiplicity="*" />
+      </Association>
+    </Schema>
+  </edmx:DataServices>
+</edmx:Edmx>

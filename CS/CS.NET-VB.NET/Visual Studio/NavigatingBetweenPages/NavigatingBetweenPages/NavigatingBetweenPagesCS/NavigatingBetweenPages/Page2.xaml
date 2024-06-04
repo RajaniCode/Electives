@@ -1,0 +1,9 @@
+﻿<UserControl x:Class="NavigatingBetweenPages.Page2"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="400" Height="300">
+    <Grid x:Name="LayoutRoot" Background="White">
+        <TextBlock x:Name="lblDisplay" Text="Welcome"/>
+        <Button Height="50" x:Name="btnPage1Go" Click="btnPage1Go_Click" Content="Go Back to Page1"></Button>
+    </Grid>
+</UserControl>

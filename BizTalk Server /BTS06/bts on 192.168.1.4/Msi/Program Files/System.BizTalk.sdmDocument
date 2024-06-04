@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SystemDefinitionModel xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Name="System.BizTalk" Version="1.0.0.0" xmlns="http://schemas.microsoft.com/SystemDefinitionModel/2003/10">
+    <Import Alias="System" Name="System" Version="1.0.0.0" />
+    <Manager Name="BizTalkBuiltinManager" AssemblyName="Microsoft.BizTalk.ResourceManagers, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.0.1.0" SourcePath="Microsoft.BizTalk.ResourceManagers.dll" />
+    <Manager Name="BizTalkBasResourceManager" AssemblyName="Microsoft.BizTalk.ApplicationDeployment.BasResourceManager, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.0.1.0" SourcePath="Microsoft.BizTalk.ApplicationDeployment.BasResourceManager.dll" />
+    <ResourceDefinition Name="File" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.FileResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="PreProcessingScript" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.ScriptResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="Certificate" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.CertificateResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="WebDirectory" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.WebDirectoryResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="Com" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.ComResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="Assembly" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.AssemblyResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="BizTalkAssembly" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.BizTalkAssemblyResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="Bam" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.BamResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="Rules" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.BizTalkRulesResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="Bas" Extends="System:ResourceDefinition" Manager="BizTalkBasResourceManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.Bas.BasResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="BizTalkBinding" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.BizTalkBindingResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+    <ResourceDefinition Name="PostProcessingScript" Extends="System:ResourceDefinition" Manager="BizTalkBuiltinManager" ClrClassName="Microsoft.BizTalk.ApplicationDeployment.ScriptResourceManager" >
+        <SettingDeclaration Name="Name" Definition="System:String" Access="ReadWrite"/>
+    </ResourceDefinition>
+</SystemDefinitionModel>

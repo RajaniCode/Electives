@@ -1,0 +1,276 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="CreateSourceQuery.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="CreateSourceQueryStoreContainer">
+          <EntitySet Name="Administrator" EntityType="CreateSourceQuery.Store.Administrator" store:Type="Tables" Schema="crs" />
+          <EntitySet Name="Course" EntityType="CreateSourceQuery.Store.Course" store:Type="Tables" Schema="crs" />
+          <EntitySet Name="Person" EntityType="CreateSourceQuery.Store.Person" store:Type="Tables" Schema="crs" />
+          <EntitySet Name="School" EntityType="CreateSourceQuery.Store.School" store:Type="Tables" Schema="crs" />
+          <EntitySet Name="Student" EntityType="CreateSourceQuery.Store.Student" store:Type="Tables" Schema="crs" />
+          <EntitySet Name="StudentCourses" EntityType="CreateSourceQuery.Store.StudentCourses" store:Type="Tables" Schema="crs" />
+          <AssociationSet Name="FK_Administrator_Person" Association="CreateSourceQuery.Store.FK_Administrator_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Administrator" EntitySet="Administrator" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Person_School" Association="CreateSourceQuery.Store.FK_Person_School">
+            <End Role="School" EntitySet="School" />
+            <End Role="Person" EntitySet="Person" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Person" Association="CreateSourceQuery.Store.FK_Student_Person">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Student" EntitySet="Student" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourses_Course" Association="CreateSourceQuery.Store.FK_StudentCourses_Course">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="StudentCourses" EntitySet="StudentCourses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourses_Student" Association="CreateSourceQuery.Store.FK_StudentCourses_Student">
+            <End Role="Student" EntitySet="Student" />
+            <End Role="StudentCourses" EntitySet="StudentCourses" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Administrator">
+          <Key>
+            <PropertyRef Name="AdministratorId" />
+          </Key>
+          <Property Name="AdministratorId" Type="int" Nullable="false" />
+          <Property Name="YearsOfExp" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="SchoolId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolId" />
+          </Key>
+          <Property Name="SchoolId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="EnrollmentDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="StudentCourses">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Administrator_Person">
+          <End Role="Person" Type="CreateSourceQuery.Store.Person" Multiplicity="1" />
+          <End Role="Administrator" Type="CreateSourceQuery.Store.Administrator" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Administrator">
+              <PropertyRef Name="AdministratorId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Person_School">
+          <End Role="School" Type="CreateSourceQuery.Store.School" Multiplicity="1" />
+          <End Role="Person" Type="CreateSourceQuery.Store.Person" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School">
+              <PropertyRef Name="SchoolId" />
+            </Principal>
+            <Dependent Role="Person">
+              <PropertyRef Name="SchoolId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Person">
+          <End Role="Person" Type="CreateSourceQuery.Store.Person" Multiplicity="1" />
+          <End Role="Student" Type="CreateSourceQuery.Store.Student" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="PersonId" />
+            </Principal>
+            <Dependent Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourses_Course">
+          <End Role="Course" Type="CreateSourceQuery.Store.Course" Multiplicity="1" />
+          <End Role="StudentCourses" Type="CreateSourceQuery.Store.StudentCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Course">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="StudentCourses">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourses_Student">
+          <End Role="Student" Type="CreateSourceQuery.Store.Student" Multiplicity="1" />
+          <End Role="StudentCourses" Type="CreateSourceQuery.Store.StudentCourses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Student">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentCourses">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CreateSourceQuery" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="CRSContainer">
+          <EntitySet Name="Course" EntityType="CreateSourceQuery.Course" />
+          <EntitySet Name="Persons" EntityType="CreateSourceQuery.Person" />
+          <AssociationSet Name="StudentCourses" Association="CreateSourceQuery.StudentCourses">
+            <End Role="Course" EntitySet="Course" />
+            <End Role="Student" EntitySet="Persons" />
+          </AssociationSet>
+          <EntitySet Name="Schools" EntityType="CreateSourceQuery.School" />
+          <AssociationSet Name="FK_Person_School" Association="CreateSourceQuery.FK_Person_School">
+            <End Role="School" EntitySet="Schools" />
+            <End Role="Person" EntitySet="Persons" /></AssociationSet></EntityContainer>
+        <EntityType Name="Administrator" BaseType="CreateSourceQuery.Person">
+          <Property Name="YearsOfExp" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Student" Relationship="CreateSourceQuery.StudentCourses" FromRole="Course" ToRole="Student" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="School" Relationship="CreateSourceQuery.FK_Person_School" FromRole="Person" ToRole="School" /></EntityType>
+        <EntityType Name="Student" BaseType="CreateSourceQuery.Person">
+          <Property Name="EnrollmentDate" Type="DateTime" Nullable="false" />
+          <NavigationProperty Name="Courses" Relationship="CreateSourceQuery.StudentCourses" FromRole="Student" ToRole="Course" />
+        </EntityType>
+        <Association Name="StudentCourses">
+          <End Role="Course" Type="CreateSourceQuery.Course" Multiplicity="*" />
+          <End Role="Student" Type="CreateSourceQuery.Student" Multiplicity="*" />
+        </Association>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolId" /></Key>
+          <Property Name="SchoolId" Type="Int32" Nullable="false" />
+          <Property Name="SchoolName" Type="String" Nullable="false" />
+          <NavigationProperty Name="Persons" Relationship="CreateSourceQuery.FK_Person_School" FromRole="School" ToRole="Person" /></EntityType>
+        <Association Name="FK_Person_School">
+          <End Type="CreateSourceQuery.School" Role="School" Multiplicity="1" />
+          <End Type="CreateSourceQuery.Person" Role="Person" Multiplicity="*" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="CreateSourceQueryStoreContainer" CdmEntityContainer="CRSContainer">
+          <EntitySetMapping Name="Course">
+            <EntityTypeMapping TypeName="IsTypeOf(CreateSourceQuery.Course)">
+              <MappingFragment StoreEntitySet="Course">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="IsTypeOf(CreateSourceQuery.Person)">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          <EntityTypeMapping TypeName="IsTypeOf(CreateSourceQuery.Administrator)">
+              <MappingFragment StoreEntitySet="Administrator">
+                <ScalarProperty Name="PersonId" ColumnName="AdministratorId" />
+                <ScalarProperty Name="YearsOfExp" ColumnName="YearsOfExp" />
+              </MappingFragment>
+            </EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(CreateSourceQuery.Student)">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="PersonId" ColumnName="StudentId" />
+                <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+        <AssociationSetMapping Name="StudentCourses" TypeName="CreateSourceQuery.StudentCourses" StoreEntitySet="StudentCourses">
+            <EndProperty Name="Student">
+              <ScalarProperty Name="PersonId" ColumnName="StudentId" /></EndProperty>
+            <EndProperty Name="Course">
+              <ScalarProperty Name="CourseId" ColumnName="CourseId" /></EndProperty></AssociationSetMapping>
+          <EntitySetMapping Name="Schools">
+            <EntityTypeMapping TypeName="IsTypeOf(CreateSourceQuery.School)">
+              <MappingFragment StoreEntitySet="School">
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="SchoolId" ColumnName="SchoolId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="FK_Person_School" TypeName="CreateSourceQuery.FK_Person_School" StoreEntitySet="Person">
+            <EndProperty Name="Person">
+              <ScalarProperty Name="PersonId" ColumnName="PersonId" /></EndProperty>
+            <EndProperty Name="School">
+              <ScalarProperty Name="SchoolId" ColumnName="SchoolId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="CreateSourceQuery.Administrator" Width="1.5" PointX="8.125" PointY="3.125" Height="1.2110807291666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="CreateSourceQuery.Course" Width="1.5" PointX="4.25" PointY="4.5" Height="1.5956835937500002" IsExpanded="true" />
+        <EntityTypeShape EntityType="CreateSourceQuery.Person" Width="1.5" PointX="7" PointY="1.125" Height="1.4033821614583331" IsExpanded="true" />
+        <EntityTypeShape EntityType="CreateSourceQuery.Student" Width="1.5" PointX="6" PointY="3.125" Height="1.4033821614583335" IsExpanded="true" />
+        <AssociationConnector Association="CreateSourceQuery.StudentCourses" ManuallyRouted="false">
+          <ConnectorPoint PointX="5" PointY="4.5" />
+          <ConnectorPoint PointX="5" PointY="3.8124995" />
+          <ConnectorPoint PointX="6" PointY="3.8124995" /></AssociationConnector>
+        <InheritanceConnector EntityType="CreateSourceQuery.Administrator">
+          <ConnectorPoint PointX="8.3125" PointY="2.72068359375" />
+          <ConnectorPoint PointX="8.3125" PointY="3.125" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="CreateSourceQuery.Student">
+          <ConnectorPoint PointX="7.25" PointY="2.72068359375" />
+          <ConnectorPoint PointX="7.25" PointY="3.125" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="CreateSourceQuery.School" Width="1.5" PointX="4.625" PointY="0.625" Height="1.59568359375" IsExpanded="true" />
+        <AssociationConnector Association="CreateSourceQuery.FK_Person_School" >
+          <ConnectorPoint PointX="6.125" PointY="1.672841796875" />
+          <ConnectorPoint PointX="7" PointY="1.672841796875" />
+          </AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

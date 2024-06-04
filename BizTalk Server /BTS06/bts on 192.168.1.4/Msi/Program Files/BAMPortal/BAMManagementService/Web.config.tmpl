@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+
+<!-- Note: As an alternative to hand editing this file you can use the web admin tool to
+	 configure settings for your application. Use the Website->Asp.Net Configuration option 
+	 in Visual Studio.
+     A full list of settings and comments can be found in machine.config.comments usually
+     located in \Windows\Microsoft.Net\Frameworks\v2.x\Config -->
+
+<configuration>
+      
+    <appSettings>
+        <add key="BamServer" value="localhost"/>
+        <add key="BamDatabase" value="BAMPrimaryImport"/>
+<!--   
+        Uncomment the following line to change the default retry time interval. This is the time 
+        in minutes during which a remote server is considered offline if a connection to it has failed once.
+        
+        <add key="ServerRetryInterval" value="5"/>
+-->        
+    </appSettings>
+
+    <connectionStrings />
+        
+    <system.web>
+	<httpModules>
+		<add name="UrlAuthorization" type="System.Web.Security.UrlAuthorizationModule" />
+        </httpModules>
+
+        <identity impersonate="true"
+                  userName="registry:HKLM\SOFTWARE\Microsoft\BizTalk Server\3.0\BAM\WebServices\identity\ASPNET_SETREG,userName"
+                  password="registry:HKLM\SOFTWARE\Microsoft\BizTalk Server\3.0\BAM\WebServices\identity\ASPNET_SETREG,password" />        
+
+        <!--
+            Set compilation debug="true" to insert debugging symbols into the compiled page.
+            Because this affects performance, set this value to true only during development.
+        -->
+        <compilation debug="false" />
+              
+
+        <!--
+            The <authentication> section enables configuration of the security authentication
+            mode used by ASP.NET to identify an incoming user. 
+        -->
+        <authentication mode="Windows" />
+
+        <!--
+    
+                The <authorization> section enables developers/administrators to configure 
+                whether a user or role has access to a particular page or resource.  This is 
+                accomplished by adding "<allow>" and "<deny>" sub-tags beneath the <authorization> 
+                section - specifically detailing the users/roles allowed or denied access.
+    
+                Note: The "?" character indicates "anonymous" users (ie: non authenticated users).  
+                The "*" character indicates "all" users. 
+        -->
+        <authorization>
+            <allow roles="Everyone" />
+            <deny users="*" />
+        </authorization>
+       
+        <!--
+            The <customErrors> section enables configuration of what to do if/when an unhandled
+            error occurs during the execution of a request.  Specifically, it enables developers
+            to configure html error pages to be displayed in place of a error stack trace.
+        -->
+        <customErrors mode="RemoteOnly" defaultRedirect="GenericErrorPage.htm">
+        <!-- 
+            <error statusCode="403" redirect="NoAccess.htm"/>
+            <error statusCode="404" redirect="FileNotFound.htm"/>
+        -->
+        </customErrors>
+        
+		<trust level="Full" originUrl=""/> 
+    </system.web>
+    
+<!-- To turn on BAM Management Service tracing, remove this comment. Make sure that the
+     IIS worker process user account (usually Network Service or ASPNET) and the web service
+     user have write permissions for the trace log file directory (C:\temp below).
+        
+    <system.diagnostics>
+        <switches>
+            <add name="Microsoft.BizTalk.Bam.Management" value="1" />
+            <add name="Microsoft.BizTalk.Bam.WebServices" value="1" />
+            <add name="Microsoft.BizTalk.Bam.WebServices.Management" value="1" />
+        </switches>
+        <trace autoflush="true" indentsize="4">
+            <listeners>
+                <add name="BamTraceListener" type="System.Diagnostics.TextWriterTraceListener" initializeData="C:\temp\BamManagementServiceTrace.log" />
+            </listeners>
+        </trace>
+    </system.diagnostics>
+ -->
+    
+</configuration>

@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="INHTPCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="INHTPCModelStoreContainer">
+          <EntitySet Name="Company" EntityType="INHTPCModel.Store.Company" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="School" EntityType="INHTPCModel.Store.School" store:Type="Tables" Schema="dbo" />
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyId" />
+          </Key>
+          <Property Name="CompanyId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="President" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="School">
+          <Key>
+            <PropertyRef Name="SchoolId" />
+          </Key>
+          <Property Name="SchoolId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Principal" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="INHTPCModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="TPCEntities">
+          <EntitySet Name="Locations" EntityType="INHTPCModel.Location" /></EntityContainer>
+        <EntityType Name="Company" BaseType="INHTPCModel.Location">
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+          <Property Name="President" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="School" BaseType="INHTPCModel.Location">
+          <Property Name="SchoolName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Principal" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Location" Abstract="true">
+          <Key>
+            <PropertyRef Name="LocationId" /></Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="INHTPCModelStoreContainer" CdmEntityContainer="TPCEntities">
+          <EntitySetMapping Name="Locations">
+			  <EntityTypeMapping TypeName="IsTypeOf(INHTPCModel.Company)">
+              <MappingFragment StoreEntitySet="Company">
+				  <ScalarProperty Name="LocationId" ColumnName="CompanyId" />
+				  <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="President" ColumnName="President" />
+              </MappingFragment>
+            </EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(INHTPCModel.School)">
+              <MappingFragment StoreEntitySet="School">
+				  <ScalarProperty Name="LocationId" ColumnName="SchoolId" />
+				  <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="SchoolName" ColumnName="SchoolName" />
+                <ScalarProperty Name="Principal" ColumnName="Principal" />
+              </MappingFragment>
+            </EntityTypeMapping>
+		  </EntitySetMapping>
+		</EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="INHTBC">
+        <EntityTypeShape EntityType="INHTPCModel.Company" Width="1.5" PointX="2" PointY="4.25" Height="1.2636116536458326" IsExpanded="true" />
+        <EntityTypeShape EntityType="INHTPCModel.School" Width="1.5" PointX="4" PointY="4.25" Height="1.2636116536458326" IsExpanded="true" />
+        <EntityTypeShape EntityType="INHTPCModel.Location" Width="1.5" PointX="2.875" PointY="2" Height="1.099264322916667" />
+        <InheritanceConnector EntityType="INHTPCModel.Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.1875" PointY="3.2636116536458335" />
+          <ConnectorPoint PointX="3.1875" PointY="4.25" /></InheritanceConnector>
+        <InheritanceConnector EntityType="INHTPCModel.School" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.1875" PointY="3.2636116536458335" />
+          <ConnectorPoint PointX="4.1875" PointY="4.25" /></InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,30 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head runat="server">
+    <title>Antonio.Suarez@grupoKino.com - Gridview</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <table border="0" cellpadding="0" cellspacing="0" style="width: 100%">
+            <tr>
+                <td style="font-size: 1.5em; color: blue; font-family: verdana">
+                    <asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+                        Scrollable Gridview with Freeze header and sort image that works inside and outside of UpdatePanel.
+                        It works in Firefox and Internet Explorer too.
+                        <br />
+                    </asp:contentplaceholder>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+                    </asp:ContentPlaceHolder>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

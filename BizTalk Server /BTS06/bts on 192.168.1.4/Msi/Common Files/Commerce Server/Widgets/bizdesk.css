@@ -1,0 +1,1431 @@
+﻿BODY {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	MARGIN: 0;
+	MARGIN-BOTTOM: 20px;
+	PADDING: 0;
+	SCROLLBAR-BASE-COLOR: #cccccc;
+	CURSOR: default;
+}
+FORM {
+	DISPLAY: inline;
+}
+BUTTON {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER-COLOR: white;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+}
+LABEL {
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+}
+INPUT,
+SELECT,
+OPTION,
+TEXTAREA {
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	BACKGROUND-COLOR: white;
+	COLOR: black;
+}
+TH,
+TD {
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-WEIGHT: normal;
+	PADDING-LEFT: 5px;
+	PADDING-RIGHT: 5px
+}
+P,
+SPAN,
+DIV {
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+}
+STRONG {
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-WEIGHT: bold;
+}
+A {
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	TEXT-DECORATION: underline
+}
+H1 {
+	FONT-SIZE: 16pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-WEIGHT: bold;
+}
+H2 {
+	FONT-SIZE: 14pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-WEIGHT: bold;
+}
+H3 {
+	FONT-SIZE: 12pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-WEIGHT: bold;
+}
+H4 {
+	FONT-SIZE: 10pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-WEIGHT: bold;
+}
+H5 {
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-WEIGHT: bold;
+}
+H6 {
+	FONT-SIZE: 6pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-WEIGHT: bold;
+}
+DIV.filtertext {
+	MARGIN-LEFT: 25px;
+	MARGIN-TOP: 10px;
+	HEIGHT: 24pt;
+	PADDING: 3px
+}
+.bdbutton {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER-COLOR: white;
+	CURSOR: hand;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	MARGIN-LEFT: 5px;
+	MARGIN-RIGHT: 5px;
+	MARGIN-TOP: 2px
+}
+.webdings {
+	FONT-SIZE: 10pt;
+	LINE-HEIGHT: 10pt;
+	FONT-FAMILY: webdings
+}
+#bdcontentarea,
+.editPageContainer {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER-BOTTOM: none;
+	BORDER-LEFT: none;
+	BORDER-RIGHT: none;
+	BORDER-TOP: 1px gray solid;
+	CURSOR: default;
+	HEIGHT: 100%;
+	OVERFLOW: auto;
+	PADDING: 4px;
+	WIDTH: 100%;
+	MARGIN: 0;
+}
+.listPageContainer {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER-BOTTOM: none;
+	BORDER-LEFT: none;
+	BORDER-RIGHT: none;
+	BORDER-TOP: 1px gray solid;
+	CURSOR: default;
+	HEIGHT: 100%;
+	OVERFLOW: auto;
+	PADDING: 20px;
+	WIDTH: 100%;
+	MARGIN: 0;
+}
+#bdstatusbar {
+	CURSOR: default;
+	HEIGHT: 20px;
+	LEFT: 0;
+	MARGIN: 0;
+	PADDING-LEFT: 10px;
+	PADDING-TOP: 3px;
+	WIDTH: 100%;
+	POSITION: absolute
+}
+#bdstatusbar NOBR {
+	COLOR: white;
+}
+#bdtitlebar {
+	CURSOR: default;
+	HEIGHT: 28px;
+	LEFT: 0;
+	MARGIN: 0;
+	PADDING-LEFT: 10px;
+	PADDING-TOP: 0;
+	POSITION: absolute;
+	WIDTH: 100%;
+	TOP: 0
+}
+#bdtitletext {
+	COLOR: white;
+	FONT-SIZE: 13pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+}
+#bdtaskbar {
+	BACKGROUND-COLOR: #999999;
+	COLOR: black;
+	CURSOR: default;
+	LEFT: 0;
+	MARGIN: 0;
+	MARGIN-TOP: -2px;
+	PADDING: 0;
+	POSITION: absolute;
+	WIDTH: 100%;
+	TOP: 28px;
+}
+#bdtaskarea {
+	CURSOR: default;
+	PADDING: 0;
+	PADDING-TOP: 1px;
+	PADDING-LEFT: 10px;
+	VERTICAL-ALIGN: top;
+}
+.bdtasktable {
+	MARGIN-TOP: 1px
+}
+.bdtasktable TD {
+	PADDING-LEFT: 2px;
+	PADDING-RIGHT: 2px
+}
+#bdtaskbtnhelp {
+	MARGIN-RIGHT: 15px
+}
+#bdlanguageselect {
+	PADDING: 4px;
+	VERTICAL-ALIGN: top;
+}
+#bdhelparea {
+	CURSOR: default;
+	MARGIN: 0;
+	PADDING: 0;
+	PADDING-TOP: 2px;
+	VERTICAL-ALIGN: top;
+}
+#bdwaitdisplay IMG {
+	FILTER: invert;
+	HEIGHT: 36px;
+	WIDTH: 36px;
+}
+DIV#bdfindby {
+	BACKGROUND-COLOR: #999999;
+	BORDER: thin inset;
+	COLOR: white;
+	CURSOR: default;
+	DISPLAY: none;
+	HEIGHT: 150px;
+	LEFT: 2px;
+	MARGIN: 0;
+	POSITION: absolute;
+	WIDTH: 100%;
+	TOP: 57px
+}
+#bdfindbytitlebar {
+	BACKGROUND-COLOR: #666666;
+	COLOR: black;
+	HEIGHT: 22px;
+	WIDTH: 100%;
+	LEFT: 0;
+	POSITION: absolute;
+	TOP: 0;
+	TABLE-LAYOUT: fixed;
+}
+#bdfindbytitle {
+	CURSOR: default;
+	DISPLAY: inline;
+	FONT-SIZE: 12pt;
+	HEIGHT: 100%;
+	WIDTH: 100%;
+	MARGIN: 0;
+	PADDING: 0;
+	PADDING-LEFT: 10px;
+	COLOR: white;
+}
+#bdfindbycontent,
+.findByContent {
+	DISPLAY: none;
+	LEFT: 15px;
+	POSITION: absolute;
+}
+#bdtaskbtnfindclose {
+	COLOR: white;
+	FONT-WEIGHT: bold
+}
+#bdfindbybody {
+	BACKGROUND: white no-repeat right top;
+	HEIGHT: 124px;
+	LEFT: 0;
+	OVERFLOW: auto;
+	POSITION: absolute;
+	WIDTH: 100%;
+	TOP: 22px
+}
+#bdfindbyclose {
+	BORDER-LEFT: white thin solid;
+	CURSOR: default;
+	DISPLAY: inline;
+	HEIGHT: 100%;
+	MARGIN: 0;
+	PADDING: 0;
+	WIDTH: 30px
+}
+.bdcolorbar {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white;
+}
+.bdeditmode .bdcolorbar {
+	BACKGROUND-COLOR: #660033;
+	COLOR: white;
+}
+.bdcolorbar IMG {
+	DISPLAY: none
+}
+.bdeditmode .bdcolorbar IMG {
+	MARGIN-TOP: 3px;
+	DISPLAY: inline
+}
+#bdstatusbar IMG {
+	MARGIN-TOP: 0;
+	DISPLAY: inline
+}
+.bdtaskbutton,
+.bdtaskbuttonmenu,
+.bdtasktextbuttonmenu,
+.bdtasktextbutton {
+	BACKGROUND-COLOR: transparent;
+	COLOR: black;
+	BORDER-STYLE: solid;
+	BORDER-COLOR: #999999;
+	BORDER-WIDTH: 1px;
+	CURSOR: hand;
+	HEIGHT: 24px;
+	MARGIN: 0;
+	PADDING: 0;
+	POSITION: relative;
+}
+.bdtaskbuttonmenu {
+	WIDTH: 33px;
+}
+.bdtaskbutton {
+	WIDTH: 24px;
+}
+.bdtasktextbuttonmenu,
+.bdtasktextbutton {
+	WIDTH: 100%;
+}
+.bdtaskbutton IMG,
+.bdtasktextbutton IMG,
+.bdtasktextbuttonmenu IMG,
+.bdtaskbuttonmenu IMG {
+	MARGIN-TOP: -1px;
+	MARGIN-LEFT: -1px
+}
+BUTTON.bdtaskdisabled {
+	BORDER-STYLE: solid;
+	BORDER-COLOR: #999999;
+}
+.bdtaskdisabled {
+	CURSOR: default;
+	FILTER: alpha(opacity=50)
+}
+.bdtaskdisabled IMG {
+	CURSOR: default;
+	FILTER: alpha(opacity=50)
+		dropShadow(color=#cccccc,offX=1,offY=1,positive=1)
+}
+BUTTON.bdtaskover {
+	BORDER-COLOR: #cccccc;
+	BORDER-STYLE: outset;
+	BORDER-WIDTH: 1px;
+}
+.bdtaskpress {
+	BORDER-COLOR: #cccccc;
+	BORDER-STYLE: inset!important;
+	BORDER-WIDTH: 1px;
+}
+.bdtaskmenu {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER: thin outset;
+	DISPLAY: none;
+	PADDING-BOTTOM: 3px;
+	PADDING-LEFT: 1px;
+	PADDING-RIGHT: 1px;
+	PADDING-TOP: 3px;
+	POSITION: absolute;
+	TOP: 21px;
+	Z-INDEX: 100;
+}
+.bdtaskmenu DIV {
+	CURSOR: hand;
+	PADDING-LEFT: 15px;
+	PADDING-RIGHT: 10px;
+	PADDING-TOP: 2px;
+	PADDING-BOTTOM: 2px;
+	HEIGHT: 12pt;
+	WIDTH: 100%;
+}
+.selected, .selected INPUT {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white;
+}
+SPAN.bdexpandicon {
+	FONT-FAMILY: webdings;
+	FONT-SIZE: 10pt;
+	TEXT-ALIGN: center
+}
+.bdDebug {
+	COLOR: yellow;
+	FONT-SIZE: 9pt;
+}
+.bdcontextmenuitem {
+	CURSOR: hand;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	WIDTH: 100%;
+	PADDING-LEFT: 10;
+	PADDING-RIGHT: 10;
+	PADDING-TOP: 1;
+	PADDING-BOTTOM:2;
+	BACKGROUND-COLOR: menu;
+	COLOR: menutext;
+}
+.bdcontextmenuitem U {
+	TEXT-DECORATION: none;
+}
+.bdcontextmenuitemhighlight {
+	CURSOR: hand;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	WIDTH: 100%;
+	PADDING-LEFT: 10;
+	PADDING-RIGHT: 10;
+	PADDING-TOP: 1;
+	PADDING-BOTTOM: 2;
+	BACKGROUND-COLOR: highlight;
+	COLOR: highlighttext;
+}
+.bdcontextmenuitemhighlight U {
+	TEXT-DECORATION: none;
+}
+.bdcontextmenu {
+	POSITION: absolute;
+	BORDER: 2px outset;
+	BACKGROUND-COLOR: menu;
+}
+.calendar {
+	BEHAVIOR: url(/widgets/editHTC/Calendar.htc)
+}
+.treeView {
+	BEHAVIOR: url(/widgets/listHTC/TreeView.htc)
+}
+.listEditor {
+	BEHAVIOR: url(/widgets/editHTC/ListEditor.htc)
+}
+.dynamicTable {
+	BEHAVIOR: url(/widgets/editHTC/DynamicTable.htc);
+	HEIGHT: 135px
+}
+.editSheet {
+	BEHAVIOR: url(/widgets/editHTC/EditSheet.htc)
+}
+.editField {
+	BEHAVIOR: url(/widgets/editHTC/EditField.htc)
+}
+.efText {
+	BEHAVIOR: url(/widgets/editHTC/efText.htc);
+	DISPLAY: inline;
+	HEIGHT: 20px;
+	VERTICAL-ALIGN: top
+}
+.efTextLong {
+	BEHAVIOR: url(/widgets/editHTC/efText.htc);
+	DISPLAY: inline;
+	HEIGHT: 58px;
+	VERTICAL-ALIGN: top
+}
+.efTextLong .efPrompt {
+	HEIGHT: 56px;
+}
+.efTextLong TEXTAREA {
+	HEIGHT: 54px;
+}
+.efNumeric {
+	BEHAVIOR: url(/widgets/editHTC/efNumeric.htc);
+	DISPLAY: inline;
+	HEIGHT: 20px;
+	VERTICAL-ALIGN: top
+}
+.efBoolean {
+	BEHAVIOR: url(/widgets/editHTC/efBoolean.htc);
+	DISPLAY: inline;
+	HEIGHT: 20px;
+	VERTICAL-ALIGN: top
+}
+.efDate {
+	BEHAVIOR: url(/widgets/editHTC/efDate.htc);
+	DISPLAY: inline;
+	HEIGHT: 20px;
+	VERTICAL-ALIGN: top
+}
+.efTime {
+	BEHAVIOR: url(/widgets/editHTC/efTime.htc);
+	DISPLAY: inline;
+	HEIGHT: 20px;
+	VERTICAL-ALIGN: top
+}
+.efSelect {
+	BEHAVIOR: url(/widgets/editHTC/efSelect.htc);
+	CURSOR: hand;
+	DISPLAY: inline;
+	HEIGHT: 20px;
+	VERTICAL-ALIGN: top
+}
+.listSheet {
+	BEHAVIOR: url(/widgets/listHTC/ListSheet.htc);
+	HEIGHT: 200px;
+	MARGIN-LEFT: 20px
+}
+.listBox {
+	BEHAVIOR: url(/widgets/listHTC/ListBox.htc);
+	HEIGHT: 110px;
+	WIDTH: 200px;
+	BORDER: inset 3px;
+	BACKGROUND-COLOR: white;
+	COLOR: black;
+}
+.lbDisabled {
+	BACKGROUND-COLOR: #dddddd;
+	COLOR: #999999;
+}
+.listBox .lbHighlighted {
+	BACKGROUND-COLOR: #999999!important;
+	COLOR: black;
+}
+.listSheetF {
+	BEHAVIOR: url(/widgets/listHTC/ListSheetF.htc);
+	HEIGHT: 200px;
+	MARGIN-LEFT: 20px
+}
+.WholeCalendar {
+	BACKGROUND-COLOR: transparent;
+	COLOR: black;
+	BORDER: none;
+	CURSOR: default;
+	HEIGHT: 180px;
+	WIDTH: 180px
+}
+.WholeCalendar .DateControls {
+	BACKGROUND-COLOR: transparent;
+	COLOR: black;
+	TEXT-ALIGN: center
+}
+.WholeCalendar .CalTable {
+	BORDER: #cccccc thin ridge;
+	HEIGHT: 100%;
+	WIDTH: 100%
+}
+.WholeCalendar .DayTitle {
+	BACKGROUND-COLOR: #cccccc;
+	BORDER: none;
+	COLOR: white;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-SIZE: 9pt;
+	FONT-WEIGHT: bold;
+	HEIGHT: 1px;
+	TEXT-ALIGN: center;
+	WIDTH: 14%
+}
+.WholeCalendar .OffDay {
+	BACKGROUND-COLOR: white;
+	BORDER: none;
+	COLOR: #cccccc;
+	CURSOR: hand;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-SIZE: 9pt;
+	FONT-WEIGHT: normal;
+	TEXT-ALIGN: center;
+	VERTICAL-ALIGN: middle;
+	WIDTH: 14%
+}
+.WholeCalendar .Day {
+	BACKGROUND-COLOR: white;
+	BORDER: none;
+	COLOR: black;
+	CURSOR: hand;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-SIZE: 9pt;
+	FONT-WEIGHT: normal;
+	TEXT-ALIGN: center;
+	VERTICAL-ALIGN: middle;
+	WIDTH: 14%
+}
+.WholeCalendar .DaySelected {
+	BACKGROUND-COLOR: darkblue;
+	BORDER: none;
+	COLOR: white;
+	CURSOR: hand;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	FONT-SIZE: 9pt;
+	FONT-WEIGHT: normal;
+	TEXT-ALIGN: center;
+	VERTICAL-ALIGN: middle;
+	WIDTH: 14%
+}
+.wait DIV,
+.wait SPAN,
+.wait TD,
+.wait TH,
+.wait BUTTON,
+.wait INPUT {
+	CURSOR: wait!important
+}
+.treeView DIV DIV {
+	COLOR: black;
+	MARGIN-LEFT: 1em;
+	PADDING: 0
+}
+.treeView SPAN {
+	LINE-HEIGHT: 4pt;
+	FONT-SIZE: 7pt;
+	VERTICAL-ALIGN: baseline;
+	FONT-FAMILY: Tahoma;
+	TEXT-ALIGN: center;
+	WIDTH: 1em;
+	BACKGROUND-COLOR: white;
+	BORDER: 1px black solid;
+	MARGIN-RIGHT: 3px;
+	MARGIN-LEFT: 3px;
+	PADDING-RIGHT: 0;
+	PADDING-LEFT: 0;
+	PADDING-TOP: 1px;
+	PADDING-BOTTOM: 1px;
+	COLOR: black;
+}
+.treeView LABEL {
+	LINE-HEIGHT: 10pt;
+	WIDTH: 100%
+}
+.treeView DIV.tvOver {
+	BACKGROUND-COLOR: #999999;
+	COLOR: black;
+	TEXT-DECORATION: underline;
+}
+.treeView DIV.tvDisabled {
+	COLOR: #999999;
+	CURSOR: default
+}
+.treeView DIV.tvGroupOver {
+	BACKGROUND-COLOR: transparent;
+	COLOR: #666600;
+	TEXT-DECORATION: underline;
+}
+.treeView DIV.tvSkip DIV {
+	MARGIN-LEFT: 0
+}
+.treeView DIV.tvSkip DIV DIV {
+	MARGIN-LEFT: 1em
+}
+.treeView DIV.tvSkip DIV SPAN,
+.treeView DIV.tvSkip DIV LABEL {
+	DISPLAY: inline
+}
+.treeView DIV.tvHide,
+.treeView DIV.tvClosed DIV,
+.treeView DIV.tvSkip SPAN,
+.treeView DIV.tvSkip LABEL,
+.treeView DIV.tvSkip DIV.tvClosed DIV,
+.treeView DIV.tvSkip DIV.tvDisabled DIV,
+.treeView DIV.tvSkip DIV.tvHide DIV {
+	DISPLAY: none
+}
+.treeView LABEL.tvSelected {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white
+}
+.efHide {
+	WIDTH: 0
+}
+.efField {
+	BORDER: 1px inset;
+	BACKGROUND-COLOR: white;
+	COLOR: black;
+	MARGIN-LEFT: 0;
+	MARGIN-RIGHT: 0;
+	PADDING: 0;
+	PADDING-LEFT: 3px;
+}
+.efPrompt {
+	COLOR: darkgray;
+	FONT-STYLE: italic;
+	OVERFLOW: hidden;
+	TEXT-OVERFLOW: ellipsis;
+	CURSOR: text;
+	MARGIN: 0;
+	WIDTH: 100%;
+}
+.efReadWrite {
+	BACKGROUND-COLOR: white;
+	COLOR: black;
+	BORDER: #cccccc 1px inset;
+}
+.efBrowseReadOnly {
+	BACKGROUND-COLOR: #dddddd!important;
+	COLOR: black;
+	BORDER: #cccccc 1px inset;
+	CURSOR: default
+}
+.efBrowseReadOnly INPUT,
+.efBrowseReadOnly TEXTAREA {
+	BACKGROUND-COLOR: #dddddd!important;
+	COLOR: black;
+}
+.efInvalid {
+	BACKGROUND-COLOR: #ffff99!important;
+	COLOR: black!important;
+	CURSOR: default
+}
+.efInvalid INPUT,
+.efInvalid LABEL,
+.efInvalid TEXTAREA,
+.efInvalid TD DIV {
+	BACKGROUND-COLOR: #ffff99!important;
+	COLOR: black!important;
+}
+.efReadOnly {
+	BACKGROUND-COLOR: #dddddd!important;
+	COLOR: black!important;
+	BORDER: #cccccc 1px inset;
+	CURSOR: default
+}
+.efReadOnly INPUT,
+.efReadOnly LABEL,
+.efReadOnly TEXTAREA,
+.efReadOnly TD DIV {
+	BACKGROUND-COLOR: #dddddd!important;
+	COLOR: black;
+}
+.efDisabled {
+	BACKGROUND-COLOR: #dddddd!important;
+	COLOR: #999999!important;
+	CURSOR: default;
+}
+.efDisabled INPUT,
+.efDisabled LABEL,
+.efDisabled TEXTAREA,
+.efDisabled TD DIV {
+	BACKGROUND-COLOR: #dddddd!important;
+	COLOR: #999999!important
+}
+.efSelectScroll {
+	HEIGHT: 90px;
+	OVERFLOW-Y: auto;
+	OVERFLOW-X: hidden;
+	TEXT-OVERFLOW: ellipsis;
+}
+.efBorderless {
+	BORDER: none;
+	MARGIN: 0;
+	PADDING: 0;
+	WIDTH: 100%;
+}
+.efBoolean INPUT {
+	BACKGROUND-COLOR: transparent!important;
+	COLOR: black;
+}
+.efOption {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	PADDING-LEFT: 5px;
+	WIDTH: 100%
+}
+.efOptionSelect {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white
+}
+.efDownBtn {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER-COLOR: #cccccc;
+	CURSOR: hand;
+	LINE-HEIGHT: 5pt;
+	FONT-SIZE: 9pt;
+	VERTICAL-ALIGN: baseline;
+	FONT-FAMILY: webdings;
+	HEIGHT: 12pt;
+	MARGIN: 0;
+	PADDING: 0;
+	WIDTH: 16px
+}
+.efEllipsisBtn {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER-COLOR: #cccccc;
+	CURSOR: hand;
+	LINE-HEIGHT: 5pt;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	HEIGHT: 12pt;
+	MARGIN: 0;
+	PADDING: 0;
+	WIDTH: 16px
+}
+.efDatePicker {
+	TEXT-ALIGN: center;
+	WIDTH: 190px
+}
+.efDropDown {
+	BACKGROUND-COLOR: #cccccc;
+	BORDER: 2px outset;
+	COLOR: black;
+	CURSOR: hand;
+	POSITION: absolute
+}
+DIV.esContainer {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	MARGIN: 0;
+	PADDING-BOTTOM: 4px;
+	PADDING-LEFT: 0;
+	PADDING-RIGHT: 0;
+	PADDING-TOP: 4px;
+}
+.esEditgroup {
+	COLOR: black
+}
+.esEditgroup DIV.esContainer {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER-BOTTOM: #999999 thin solid;
+	MARGIN: 0;
+	PADDING-BOTTOM: 4px;
+	PADDING-LEFT: 0;
+	PADDING-RIGHT: 0;
+	PADDING-TOP: 4px;
+}
+SPAN.esEditbar {
+	BACKGROUND-COLOR: #999999;
+	COLOR: black;
+	CURSOR: hand;
+	HEIGHT: 18px;
+	PADDING-LEFT: 5px;
+}
+DIV.esEdittitle {
+	BACKGROUND-COLOR: #999999;
+	COLOR: black;
+	CURSOR: hand;
+	DISPLAY: inline;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	TEXT-DECORATION: none
+}
+.esEditgroup SPAN.esEditbar {
+	BACKGROUND-COLOR: transparent;
+	COLOR: black;
+	CURSOR: hand;
+	HEIGHT: 18px
+}
+.esEditgroup DIV.esEdittitle {
+	BACKGROUND-COLOR: transparent;
+	COLOR: black;
+	CURSOR: hand;
+	DISPLAY: inline;
+	TEXT-DECORATION: none
+}
+.esEditgroup SPAN.bdexpandicon {
+	COLOR: black
+}
+DIV.esExpanded {
+	COLOR: black
+}
+DIV.esCollapsed {
+	COLOR: black
+}
+DIV.esExpanded DIV.esEditgroup {
+	DISPLAY: block;
+	PADDING-LEFT: 15px
+}
+DIV.esCollapsed DIV.esEditgroup {
+	DISPLAY: none
+}
+TABLE.esTableStyle {
+	MARGIN-LEFT: 0;
+	MARGIN-RIGHT: 7px;
+	MARGIN-TOP: 5px;
+}
+.esTableStyle .esLabelCell {
+	COLOR: black;
+	FONT-SIZE: 9pt;
+	FONT-WEIGHT: normal;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	PADDING-LEFT: 2px;
+	PADDING-RIGHT: 3px;
+	TEXT-ALIGN: left;
+	VERTICAL-ALIGN: top;
+	WIDTH: 35%
+}
+.esTableStyle .esDataCell {
+	BACKGROUND-COLOR: white;
+	COLOR: black;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	MARGIN-LEFT: 0;
+	MARGIN-RIGHT: 0;
+	MARGIN-TOP: 2px;
+	PADDING-LEFT: 5px;
+	PADDING-RIGHT: 0;
+	WIDTH: 60%
+}
+.esTableStyle .reqIcon {
+	BACKGROUND-COLOR: transparent;
+	COLOR: black;
+	BORDER: none;
+	TEXT-ALIGN: center;
+	WIDTH: 5%
+}
+.dtTableStyle {
+	TABLE-LAYOUT: fixed;
+	BORDER-COLLAPSE: collapse
+}
+.dtContainer {
+	BORDER: #999999 1px solid;
+	BACKGROUND-COLOR: white;
+	COLOR: black;
+}
+.dtTableStyle DIV.dtContainer {
+	HEIGHT: 70px;
+	OVERFLOW-X: hidden;
+	OVERFLOW-Y: scroll;
+	TEXT-OVERFLOW: ellipsis;
+}
+.dtTableStyle .efDisabled {
+	BORDER-LEFT: #999999 1px solid;
+	BORDER-RIGHT: #999999 1px solid;
+	BORDER-TOP: #999999 1px solid;
+}
+.dtDataRow TD.dtCell {
+	PADDING-TOP: 2px!important;
+	PADDING-LEFT: 5px!important;
+	PADDING-RIGHT: 5px!important;
+	PADDING-BOTTOM: 2px!important;
+}
+.dtTableStyle .dtDataRow {
+	BACKGROUND-COLOR: white;
+	COLOR: black;
+}
+.dtTableStyle .lsRowOver TD {
+	BACKGROUND-COLOR: #999999;
+	COLOR: black
+}
+.dtTableStyle TR.lsRowSelected TD,
+.dtTableStyle TR.lsRowSelected INPUT {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white
+}
+.dtBtn {
+	MARGIN: 0 0 0 5px;
+	WIDTH: 70px
+}
+.dtHeaderTable TR {
+	LINE-HEIGHT: 14pt
+}
+.dtHeaderTable TD {
+	BORDER: #666666 1px solid;
+}
+.dtTableStyle TH.dtCell {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	FONT-SIZE: 9pt;
+	FONT-WEIGHT: normal;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	OVERFLOW: hidden;
+	TEXT-OVERFLOW: ellipsis;
+	PADDING-LEFT: 5px;
+	PADDING-RIGHT: 5px;
+	TEXT-ALIGN: left
+}
+.lsSpacer {
+	MARGIN: 0;
+	PADDING: 0;
+	BACKGROUND-COLOR: #999999;
+	COLOR: black;
+	CURSOR: move
+}
+.lsSpacer {
+	CURSOR: col-resize;
+}
+TABLE.lsTableStyle {
+	CURSOR: hand;
+	MARGIN: 0;
+	PADDING: 0;
+	TABLE-LAYOUT: fixed
+}
+.lsListArea {
+	BACKGROUND-COLOR: white;
+	COLOR: black;
+	BORDER: #999999 1px inset;
+	OVERFLOW-X: hidden;
+	OVERFLOW-Y: scroll;
+	TEXT-OVERFLOW: ellipsis;
+}
+#objectTable TR TH.lsNoSort {
+	FONT-WEIGHT: normal;
+	BORDER: #666666 1px solid
+}
+.lsTableStyle TD.lsCell {
+	BORDER-TOP: 1px white solid;
+	BORDER-BOTTOM: 1px white solid;
+}
+.lsTableStyle .lsRowOver TD.lsCell {
+	BORDER-TOP: 1px #999999 solid;
+	BORDER-BOTTOM: 1px #999999 solid;
+}
+.lsTableStyle .lsRowSelected TD.lsCell {
+	BORDER-TOP: 1px #003366 solid;
+	BORDER-BOTTOM: 1px #003366 solid;
+}
+.lsTableStyle TR.lsRowOverSel TD.lsCell {
+	BORDER-TOP: 1px gray dotted;
+	BORDER-BOTTOM: 1px gray dotted;
+}
+TABLE.selected TD.lsCell {
+	BORDER-TOP: 1px #003366 solid!important;
+	BORDER-BOTTOM: 1px #003366 solid!important;
+	BACKGROUND-COLOR: #003366;
+	COLOR: white
+}
+TABLE.selected #objectTable TR .lsCell {
+	BACKGROUND-COLOR: white;
+	COLOR: black
+}
+TABLE.selected #objectTable TR TH.lsNoSort {
+	FONT-WEIGHT: normal;
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black!important
+}
+.lsTableStyle TR.lsRowOver {
+	BACKGROUND-COLOR: #999999;
+	COLOR: black
+}
+.lsTableStyle TR.lsRowSelected,
+.lsTableStyle TR.lsRowSelected INPUT {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white
+}
+.listSheetF TR {
+	HEIGHT: 12pt;
+	OVERFLOW: hidden;
+	TEXT-OVERFLOW: ellipsis;
+}
+.listSheet #btnSelectAll, .listSheet #btnUnselectAll {
+	width: 11em
+}
+.lsTableStyle .lsRowClosed TD {
+	BORDER-BOTTOM: #cccccc thin solid
+}
+.lsTableStyle TR TR.lsRowClosed TD {
+	BORDER-BOTTOM: none
+}
+.lsTableStyle TD.lsCell SPAN {
+	LINE-HEIGHT: 12pt;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	PADDING-RIGHT: 5px;
+}
+.lsTableStyle TH.lsCell {
+	LINE-HEIGHT: 12pt;
+	FONT-SIZE: 9pt;
+	FONT-WEIGHT: normal;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	PADDING: 0
+}
+.lsTableStyle TD.lsCell SPAN.bdexpandicon {
+	LINE-HEIGHT: 4pt;
+	FONT-SIZE: 7pt;
+	VERTICAL-ALIGN: baseline;
+	FONT-FAMILY: Tahoma;
+	TEXT-ALIGN: center;
+	WIDTH: 1em;
+	BACKGROUND-COLOR: white;
+	BORDER: 1px black solid;
+	MARGIN-RIGHT: 3px;
+	MARGIN-LEFT: 3px;
+	PADDING-RIGHT: 0;
+	PADDING-LEFT: 0;
+	PADDING-TOP: 1px;
+	PADDING-BOTTOM: 1px;
+	COLOR: black;
+}
+.lsTableStyle TD.lsObjectCell {
+	BORDER: #cccccc 1px solid;
+	CURSOR: default
+}
+.lsTableStyle THEAD TR {
+	HEIGHT: 15pt
+}
+.lsTableStyle .lsNoSort,
+.lsTableStyle .lsSortButton {
+	BACKGROUND-COLOR: #cccccc;
+	COLOR: black;
+	BORDER-WIDTH: 1px;
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	OVERFLOW: hidden;
+	TEXT-OVERFLOW: ellipsis;
+	PADDING-LEFT: 5px;
+	PADDING-RIGHT: 5px;
+	TEXT-ALIGN: left;
+}
+.listSheet .lsPageButton, .listSheetF .lsPageButton {
+	FONT-FAMILY: webdings;
+	HEIGHT: 20px;
+	LINE-HEIGHT: 6pt;
+	MARGIN: 0;
+	WIDTH: 20px
+}
+.listSheet .lsPageText, .listSheetF .lsPageText {
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+	TEXT-ALIGN: center;
+	WIDTH: 40px
+}
+.listSheet .lsSelectButtons, .listSheetF .lsSelectButtons {
+	MARGIN-BOTTOM: 3px;
+	TEXT-ALIGN: right
+}
+.listSheet #lsgroupcell {
+	BORDER-BOTTOM: thin solid #cccccc;
+}
+.listSheet #lsheadtable {
+	BORDER: #666666 1px solid;
+	WIDTH: 100%;
+}
+.listSheet #lspagecontrols {
+	BORDER: 1px #666666 solid;
+}
+.listSheet #objectTable {
+	BORDER: 1px #666666 solid;
+	BORDER-COLLAPSE: collapse;
+	MARGIN-RIGHT: 20px;
+	MARGIN-LEFT: 20px;
+}
+.waitDisplay {
+	POSITION: absolute;
+	TEXT-ALIGN: center;
+	PADDING: 30px;
+	BORDER: outset 1px;
+	BACKGROUND-COLOR: silver;
+	COLOR: black;
+	FONT-SIZE: 16pt;
+	CURSOR: wait;
+}
+.waitDisplay SPAN {
+	BACKGROUND-COLOR: silver;
+	COLOR: black;
+	FONT-SIZE: 16pt;
+	CURSOR: wait;
+}
+.listEditor #leListContainer {
+	HEIGHT: 120px;
+	MARGIN-RIGHT: 0
+}
+.listEditor .listSheetF {
+	HEIGHT: 100px;
+	MARGIN-LEFT: 5px
+}
+.listEditor .lsNoSort {
+	BORDER: #666666 1px solid
+}
+.clsQueryBldr {
+	BACKGROUND-COLOR: #cccccc;
+	BORDER: 1px inset;
+	PADDING: 10px
+}
+.clsExprBldr {
+	BACKGROUND-COLOR: #cccccc;
+	BORDER: 1px solid;
+	PADDING: 10px
+}
+.clsExprBldr TD,
+.clsExprBldr TH,
+.clsQueryBldr TD,
+.clsQueryBldr TR {
+	MARGIN: 0;
+	PADDING: 0
+}
+.clsQueryBldr #menuitem {
+	HEIGHT: 14px;
+	PADDING-LEFT: 6px;
+	PADDING-RIGHT: 6px
+}
+.clsQueryBldr #popupmenu {
+	BACKGROUND-COLOR: #cccccc;
+	BORDER: 2px outset;
+	COLOR: black;
+	DISPLAY: none;
+	PADDING-BOTTOM: 5px;
+	PADDING-TOP: 5px;
+	POSITION: absolute
+}
+.clsQueryBldr #submenumark {
+	FLOAT: right;
+	FONT-FAMILY: webdings;
+	MARGIN: 0;
+	PADDING: 0;
+	POSITION: relative;
+	TOP: -2pt
+}
+.clsClauseBldr {
+	BACKGROUND-COLOR: TRANSPARENT;
+	COLOR: black
+}
+.clsClauseList {
+	BACKGROUND-COLOR: #ffffff
+}
+.clsClauseList TR {
+	BACKGROUND-COLOR: TRANSPARENT;
+	MARGIN: 0;
+	PADDING-BOTTOM: 5px;
+	PADDING-LEFT: 0;
+	PADDING-RIGHT: 0;
+	PADDING-TOP: 5px;
+	HEIGHT: 18px
+}
+.clsPMClosed {
+	DISPLAY: none
+}
+#pmMarker {
+	FONT-FAMILY: Webdings
+}
+#pmProfile {
+	LIST-STYLE: none;
+	MARGIN-LEFT: 10px
+}
+#pmGroup {
+	LIST-STYLE: none;
+	PADDING-LEFT: 25px
+}
+.clsXVClosed {
+	CURSOR: hand;
+	DISPLAY: none
+}
+.clsXVGroup,
+.clsXVGroupNoSel {
+	CURSOR: hand;
+	FONT-WEIGHT: bold;
+	COLOR: black
+}
+.clsXVItem {
+	CURSOR: hand;
+	FONT-WEIGHT: normal;
+	PADDING-LEFT: 2px;
+	COLOR: black
+}
+.clsXVOpen {
+	CURSOR: hand;
+}
+.clsExprRef {
+	COLOR: #0000FF;
+	TEXT-DECORATION: underline;
+	CURSOR: hand;
+}
+#xvMarker {
+	FONT-FAMILY: Webdings;
+	FONT-WEIGHT: normal
+}
+#xvGroup {
+	BACKGROUND-COLOR: white;
+	PADDING-LEFT: 25px
+}
+.clsQueryBldr .clsSelected, .clsQueryBldr .clsSelected TD {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white!important;
+}
+.clsQueryBldr .clsDisabled,
+.clsQueryBldr .clsDisabled A {
+	COLOR: gray
+}
+#qbtable {
+	MARGIN: 0;
+	PADDING: 0;
+	WIDTH: 100%;
+}
+#spaceHolder {
+	HEIGHT: 24px;
+}
+#divClauseBldr {
+	BACKGROUND-COLOR: white;
+	BORDER: 1px inset silver;
+	POSITION: relative;
+}
+#tblClauseBldr {
+	WIDTH: 100%;
+	TABLE-LAYOUT: fixed;
+}
+#divLHS {
+	BORDER: 1px solid white;
+}
+#divClauseList {
+	BORDER: thin inset;
+	HEIGHT: 80px;
+	OVERFLOW-Y: scroll;
+}
+#tblClauseList {
+	WIDTH: 100%;
+	TABLE-LAYOUT: fixed;
+}
+#qbarrowbtns {
+	PADDING-LEFT: 10px;
+	WIDTH: 20px;
+}
+#qbarrowbtns BUTTON {
+	WIDTH: 100%;
+}
+#qbclausebtns BUTTON,
+#ebbtntable BUTTON {
+	WIDTH: 80px;
+}
+.clsArrows {
+	FONT-SIZE: 9pt;
+	FONT-FAMILY: webdings;
+}
+#btnBrowse {
+	MARGIN: 0;
+	PADDING: 0;
+	WIDTH: 16px;
+	HEIGHT: 100%;
+}
+#btnBrowse SPAN {
+	POSITION: relative;
+	TOP: -5pt;
+}
+.clsXVDisabled {
+	COLOR: #999999;
+	CURSOR: default
+}
+.clsPMHilite {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white;
+	CURSOR: hand
+}
+.clsXVHilite {
+	BACKGROUND-COLOR: #999999;
+	CURSOR: hand
+}
+.clsXVSelected {
+	BACKGROUND-COLOR: #003366;
+	COLOR: white;
+	CURSOR: hand
+}
+.clsProfDesigner {
+	PADDING: 10px
+}
+.clsProfDesigner TD,
+.clsProfDesigner TH {
+	MARGIN: 0;
+	PADDING: 0
+}
+.clsBtnDrop {
+	FONT-SIZE: 9pt; 
+	FONT-FAMILY: webdings;
+	LINE-HEIGHT: 9pt;
+	MARGIN: 0px;
+	PADDING: 0px;
+	WIDTH: 16px;
+	HEIGHT: 18px
+}
+.clsDropDown {
+	BORDER: none;
+	MARGIN: 0px;
+	HEIGHT: 18px;
+}
+.clsClauseInput {
+	BORDER: none;
+	MARGIN: 0px;
+	HEIGHT: 18px;
+	WIDTH: 100%;
+}
+#divCustomAttrsDT {
+	MARGIN-TOP: 8px;
+	MARGIN-BOTTOM: 8px;
+	WIDTH: 95%;
+}
+#pdoutertable {
+	WIDTH: 100%;
+	HEIGHT: 100%;
+}
+#pdheadrow {
+	HEIGHT: 24px;
+}
+#thHeader {
+	WIDTH: 30%;
+}
+#thHeader2 {
+	WIDTH: 70%;
+}
+#divProfileView {
+	HEIGHT: 100%;
+	WIDTH: 100%;
+	BORDER: inset 2px;
+	OVERFLOW: auto;
+	BACKGROUND-COLOR: white;
+}
+#pdright {
+	HEIGHT: 100%;
+	WIDTH: 100%;
+	BORDER: inset 2px;
+	PADDING: 0;
+	BACKGROUND-COLOR: #CCCCCC;
+}
+#pdtableright {
+	WIDTH: 100%;
+	HEIGHT: 100%;
+	TABLE-LAYOUT: fixed;
+}
+#divDetailView {
+	WIDTH: 100%;
+	HEIGHT: 100%;
+	OVERFLOW: auto;
+}
+#pddetailbtnrow {
+	HEIGHT: 44px;
+}
+#divDetailViewBtns {
+	PADDING-TOP: 5px;
+	PADDING-LEFT: 10px;
+	PADDING-RIGHT: 10px;
+	PADDING-BOTTOM: 10px;
+	BORDER-TOP: thin outset;
+	WIDTH: 100%;
+}
+#divDetailViewBtns BUTTON,
+#pdouterbtns BUTTON {
+	HEIGHT: 24px;
+	WIDTH: 80px;
+}
+#pdbtnrow {
+	HEIGHT: 24px;
+}
+#pdouterbtns {
+	WIDTH: 30%;
+}
+#pdouterbtns #btnMoveUp {
+	MARGIN-LEFT: 10px;
+}
+#pdouterbtns #btnMoveUp,
+#pdouterbtns #btnMoveDown {
+	WIDTH: 24px;
+}
+#btnCancelDetail {
+	MARGIN-LEFT: 10px;
+}
+#profileedithtm
+{
+    FONT: 9pt arial windowtext;
+    MARGIN: 0px;
+    PADDING: 10px;
+    BACKGROUND-COLOR: window;
+}

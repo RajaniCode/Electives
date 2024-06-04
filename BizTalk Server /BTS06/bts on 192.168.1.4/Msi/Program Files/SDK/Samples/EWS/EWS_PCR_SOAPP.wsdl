@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s1="http://ExposeWebService.ClientRequest" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:s2="http://ExposeWebService.CompanyRequest" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">BizTalk assembly "ExposeWebService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2ed6b64dfff780b4" published web service.</wsdl:documentation>
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:import namespace="http://ExposeWebService.ClientRequest" />
+      <s:import namespace="http://ExposeWebService.CompanyRequest" />
+      <s:element name="Operation_1">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:ClientRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="Operation_1Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s2:CompanyRequest" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ExposeWebService.ClientRequest">
+      <s:element name="ClientRequest" type="s1:ClientRequest" />
+      <s:complexType name="ClientRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="AppraisalValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s1:ClientRequestAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CoverageRequested" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="ClientRequestAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://ExposeWebService.CompanyRequest">
+      <s:element name="CompanyRequest" type="s2:CompanyRequest" />
+      <s:complexType name="CompanyRequest">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s2:CompanyRequestAddress" />
+          <s:element minOccurs="0" maxOccurs="1" name="LocationCode" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="CoverageRequested" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="AppraisalValue" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="CompanyRequestAddress">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Street" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="City" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="State" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Zip" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="Operation_1SoapIn">
+    <wsdl:part name="parameters" element="tns:Operation_1" />
+  </wsdl:message>
+  <wsdl:message name="Operation_1SoapOut">
+    <wsdl:part name="parameters" element="tns:Operation_1Response" />
+  </wsdl:message>
+  <wsdl:portType name="Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap">
+    <wsdl:operation name="Operation_1">
+      <wsdl:input message="tns:Operation_1SoapIn" />
+      <wsdl:output message="tns:Operation_1SoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap" type="tns:Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="Operation_1">
+      <soap:operation soapAction="http://tempuri.org/Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPort/Operation_1" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap12" type="tns:Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document" />
+    <wsdl:operation name="Operation_1">
+      <soap12:operation soapAction="http://tempuri.org/Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPort/Operation_1" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPort">
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">BizTalk assembly "ExposeWebService, Version=1.0.0.0, Culture=neutral, PublicKeyToken=2ed6b64dfff780b4" published web service.</wsdl:documentation>
+    <wsdl:port name="Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap" binding="tns:Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap">
+      <soap:address location="http://localhost/ExposeWebService_Proxy/Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPort.asmx" />
+    </wsdl:port>
+    <wsdl:port name="Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap12" binding="tns:Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPortSoap12">
+      <soap12:address location="http://localhost/ExposeWebService_Proxy/Microsoft_Samples_BizTalk_ExposeWebService_ProcessClientRequest_SOAPPort.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

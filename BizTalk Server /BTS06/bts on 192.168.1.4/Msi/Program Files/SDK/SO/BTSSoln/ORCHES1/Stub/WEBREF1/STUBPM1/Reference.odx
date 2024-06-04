@@ -1,0 +1,72 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="389eed89-73e4-4948-b277-2d3c8184213a" LowerBound="1.1" HigherBound="24.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.StubPaymentTrackerWebService_" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="MethodMessageType" OID="00000000-0000-0000-0000-000000000000" ParentLink="Module_MessageType">
+            <om:Property Name="Url" Value="http://localhost:4020/PaymentTrack/StubPmntTrckWS.asmx" />
+            <om:Property Name="TypeModifier" Value="Public" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.StubPaymentTrackerWebService" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MethodMessageOperation" OID="cd5f5942-7a02-430b-9b74-d1298440d32a" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="GetLastPayments" />
+                <om:Property Name="OperationDirection" Value="Request" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="GetLastPayments_request" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="68c5626d-de93-42e8-8f43-6c288d144ef6" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.Reference" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="LastPaymentRequest" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MethodMessageOperation" OID="c3b66f4e-aead-4010-a47f-81991d581d33" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="GetLastPayments" />
+                <om:Property Name="OperationDirection" Value="Response" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="GetLastPayments_response" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="84c7065c-f5d7-469f-add9-a4fb96fafd11" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.Reference1.LastPaymentResponse" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="GetLastPaymentsResult" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="TargetXMLNamespaceAttribute" OID="23c684db-6910-43af-aea0-385aadaa985c" ParentLink="Module_CLRAttribute" LowerBound="2.1" HigherBound="3.1">
+            <om:Property Name="TargetXMLNamespace" Value="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PaymentTracker/" />
+            <om:Property Name="Signal" Value="False" />
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(true)]
+[Microsoft.XLANGs.BaseTypes.TargetXmlNamespaceAttribute("http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PaymentTracker/")]
+module Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.StubPaymentTrackerWebService_
+{
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.StubPaymentTrackerWebService), "GetLastPayments", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eRequest)]
+    public messagetype GetLastPayments_request
+    {
+        body Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.Reference LastPaymentRequest;
+    };
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.StubPaymentTrackerWebService), "GetLastPayments", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eResponse)]
+    public messagetype GetLastPayments_response
+    {
+        body Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.Reference1.LastPaymentResponse GetLastPaymentsResult;
+    };
+    [Microsoft.XLANGs.BaseTypes.WSDLProxyName(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.StubPaymentTrackerWebService))]
+    public porttype StubPaymentTrackerWebService
+    {
+        requestresponse GetLastPayments
+        {
+            Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.StubPaymentTrackerWebService_.GetLastPayments_request, Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPmntTrckWS.StubPaymentTrackerWebService_.GetLastPayments_response
+        };
+    };
+}
+

@@ -1,0 +1,28 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<h1>Getting the most out of WebGrid in ASP.NET MVC</h1>
+This is the sample code to accompany the MSDN Magazine article.
+<h2>Pre-requisites:</h2>
+<ul>
+    <li>Visual Studio 2010</li>
+    <li>SQL Server 2008 (Express or better)</li>
+    <li><a href="http://www.asp.net/mvc/mvc3">ASP.NET MVC 3</a></li>
+</ul>
+<h2>Steps to build and run:</h2>
+<ol>
+    <li>The solution is set up to run against a local SQL Express instance (named SQLExpress) and attach the database in the App_Data directory. You can change the instance that is targetted by modifying the connection string for AdventureWorksLTEntities in web.config</li>
+    <li>Build and run!</li>
+</ol>
+<h2>Examples</h2>
+<ul>
+    <li>@Html.ActionLink("Basic Web Grid", "BasicWebGrid", "Product")</li>
+    <li>@Html.ActionLink("Basic Strongly-Typed Web Grid", "BasicStronglyTypedWebGrid", "Product")</li>
+    <li>@Html.ActionLink("Default Paging And Sorting", "DefaultPagingAndSorting", "Product")</li>
+    <li>@Html.ActionLink("Server Paging", "ServerPaging", "Product")</li>
+    <li>@Html.ActionLink("Server Paging And Sorting", "ServerPagingAndSorting", "Product")</li>
+    <li>@Html.ActionLink("Standard Ajax", "StandardAjax", "Product")</li>
+    <li>@Html.ActionLink("Custom Ajax", "CustomAjax", "Product")</li>
+    <li>@Html.ActionLink("Basic Web Grid (WebForms)", "BasicWebGridWebForms", "Product")</li>
+    <li>@Html.ActionLink("Basic Strongly-Typed Web Grid (WebForms)", "BasicStronglyTypedWebGridWebForms", "Product")</li>
+</ul>

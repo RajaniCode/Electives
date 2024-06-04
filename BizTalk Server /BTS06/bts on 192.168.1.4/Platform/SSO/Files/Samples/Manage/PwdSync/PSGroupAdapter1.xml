@@ -1,0 +1,25 @@
+<!-- This file is used with the "ssops -create" command to create the prototype group adapter named "PSGroupAdapter01". 
+Group Adapters are used to allow initialization of multiple password sync adapters at the same time. You can associate individual password sync adapters with a group adapter using "ssops -addToGroup" command. -->
+
+<sso>
+
+	<adapter name="PSGroupAdapter01">
+
+		<description>A Group Password Sync Adapter. </description>
+
+		<computer>COMPUTERNAME.DOMAIN.COM</computer>
+
+		<appUserAccount>DomainName\PwdSyncUserGroup</appUserAccount>
+
+		<appAdminAccount>DomainName\PwdSyncAdminGroup</appAdminAccount>
+
+		<properties file="Properties_GroupAdapter1.xml" localize="yes"/>
+
+		<flags 
+			groupAdapter="yes"
+		/>
+
+	</adapter>
+
+</sso>
+

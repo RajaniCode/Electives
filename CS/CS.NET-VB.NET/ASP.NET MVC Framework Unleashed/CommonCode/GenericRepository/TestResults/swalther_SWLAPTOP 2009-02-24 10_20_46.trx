@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="a98228d6-606e-4187-b288-d87d14957e54" name="swalther@SWLAPTOP 2009-02-24 10:20:46" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Local Test Run" id="6dc16b7c-7cab-48b5-9232-85d908d632fa">
+    <Description>This is a default test run configuration for a local test run.</Description>
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\TestResults\swalther_SWLAPTOP 2009-02-24 10_20_46">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository\bin\Debug\GenericRepository.dll" />
+    </Deployment>
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Error">
+    <Counters total="4" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="4" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="SWLAPTOP" outcome="Warning" timestamp="2009-02-24T10:20:47.8800000-08:00">
+        <Text>The process cannot access the file 'C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\TestResults\swalther_SWLAPTOP 2009-02-24 10_20_46\Out\GenericRepository.dll' because it is being used by another process.</Text>
+        <Exception>System.IO.IOException: The process cannot access the file 'C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\TestResults\swalther_SWLAPTOP 2009-02-24 10_20_46\Out\GenericRepository.dll' because it is being used by another process.
+
+Server stack trace: 
+   at System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   at System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy)
+   at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, String msgPath, Boolean bFromProxy)
+   at Microsoft.VisualStudio.TestTools.Common.QTFileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, IQTFileStreamCallback callback)
+   at Microsoft.VisualStudio.TestTools.Common.FileCopyService.OpenQTFile(String fileNameAndPath)
+   at System.Runtime.Remoting.Messaging.StackBuilderSink._PrivateProcessMessage(IntPtr md, Object[] args, Object server, Int32 methodPtr, Boolean fExecuteInContext, Object[]&amp; outArgs)
+   at System.Runtime.Remoting.Messaging.StackBuilderSink.PrivateProcessMessage(RuntimeMethodHandle md, Object[] args, Object server, Int32 methodPtr, Boolean fExecuteInContext, Object[]&amp; outArgs)
+   at System.Runtime.Remoting.Messaging.StackBuilderSink.SyncProcessMessage(IMessage msg, Int32 methodPtr, Boolean fExecuteInContext)
+
+Exception rethrown at [0]: 
+   at System.Runtime.Remoting.Proxies.RealProxy.HandleReturnMessage(IMessage reqMsg, IMessage retMsg)
+   at System.Runtime.Remoting.Proxies.RealProxy.PrivateInvoke(MessageData&amp; msgData, Int32 type)
+   at Microsoft.VisualStudio.TestTools.Common.FileCopyService.OpenQTFile(String fileNameAndPath)
+   at Microsoft.VisualStudio.TestTools.Execution.DeploymentQueue.CopyFiles(DeploymentJob job)
+   at Microsoft.VisualStudio.TestTools.Execution.DeploymentQueue.DeploymentQueueThread()</Exception>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <Times creation="2009-02-24T10:20:46.2070000-08:00" queuing="2009-02-24T10:20:47.3940000-08:00" start="2009-02-24T10:20:46.2070000-08:00" finish="2009-02-24T10:20:47.9790000-08:00" />
+  <TestDefinitions>
+    <UnitTest name="IdentityIncrements" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\commoncode\genericrepository\genericrepository.tests\bin\debug\genericrepository.tests.dll" id="a3bb9cda-e3d0-d7c1-329a-9b01ff46ea5c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="0dc35abf-1976-4c64-9e76-e93e266d181e" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository.Tests\bin\Debug\GenericRepository.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="GenericRepository.Tests.FakeGenericRepositoryTests.InsertTests, GenericRepository.Tests" name="IdentityIncrements" />
+    </UnitTest>
+    <UnitTest name="InsertIncrementsId" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\commoncode\genericrepository\genericrepository.tests\bin\debug\genericrepository.tests.dll" id="040209d1-e85c-52d8-f936-b4d861f2e936">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository.Tests\bin\Debug\GenericRepository.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="GenericRepository.Tests.MemoryDatabaseTests.InsertTests, GenericRepository.Tests" name="InsertIncrementsId" />
+    </UnitTest>
+    <UnitTest name="InsertFirstListFirst" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\commoncode\genericrepository\genericrepository.tests\bin\debug\genericrepository.tests.dll" id="b44d18ab-e69d-4cf7-17d1-2bfdff5df367">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository.Tests\bin\Debug\GenericRepository.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="GenericRepository.Tests.MemoryDatabaseTests.InsertTests, GenericRepository.Tests" name="InsertFirstListFirst" />
+    </UnitTest>
+    <UnitTest name="AfterFirstInsertIdIs1" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\commoncode\genericrepository\genericrepository.tests\bin\debug\genericrepository.tests.dll" id="dcce2324-4851-1198-b92d-3d92c9786d3c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\GenericRepository\GenericRepository.Tests\bin\Debug\GenericRepository.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="GenericRepository.Tests.MemoryDatabaseTests.InsertTests, GenericRepository.Tests" name="AfterFirstInsertIdIs1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="040209d1-e85c-52d8-f936-b4d861f2e936" executionId="cafd3146-fe4e-461a-aa56-841ba8599e7a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a3bb9cda-e3d0-d7c1-329a-9b01ff46ea5c" executionId="d10da141-5815-4314-bade-3f0f1407b0df" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b44d18ab-e69d-4cf7-17d1-2bfdff5df367" executionId="4f6b1033-d6d6-48b8-944f-5a7130adaf79" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="dcce2324-4851-1198-b92d-3d92c9786d3c" executionId="60036dc2-327a-4e28-9d17-d8dd926dc25d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="cafd3146-fe4e-461a-aa56-841ba8599e7a" testId="040209d1-e85c-52d8-f936-b4d861f2e936" testName="InsertIncrementsId" computerName="SWLAPTOP" duration="00:00:00" startTime="0001-01-01T00:00:00.0000000-08:00" endTime="0001-01-01T00:00:00.0000000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    </UnitTestResult>
+    <UnitTestResult executionId="d10da141-5815-4314-bade-3f0f1407b0df" testId="a3bb9cda-e3d0-d7c1-329a-9b01ff46ea5c" testName="IdentityIncrements" computerName="SWLAPTOP" duration="00:00:00" startTime="0001-01-01T00:00:00.0000000-08:00" endTime="0001-01-01T00:00:00.0000000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    </UnitTestResult>
+    <UnitTestResult executionId="4f6b1033-d6d6-48b8-944f-5a7130adaf79" testId="b44d18ab-e69d-4cf7-17d1-2bfdff5df367" testName="InsertFirstListFirst" computerName="SWLAPTOP" duration="00:00:00" startTime="0001-01-01T00:00:00.0000000-08:00" endTime="0001-01-01T00:00:00.0000000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    </UnitTestResult>
+    <UnitTestResult executionId="60036dc2-327a-4e28-9d17-d8dd926dc25d" testId="dcce2324-4851-1198-b92d-3d92c9786d3c" testName="AfterFirstInsertIdIs1" computerName="SWLAPTOP" duration="00:00:00" startTime="0001-01-01T00:00:00.0000000-08:00" endTime="0001-01-01T00:00:00.0000000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+    </UnitTestResult>
+  </Results>
+</TestRun>

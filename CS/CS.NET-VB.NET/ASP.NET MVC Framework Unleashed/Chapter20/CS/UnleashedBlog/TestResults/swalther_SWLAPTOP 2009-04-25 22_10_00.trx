@@ -1,0 +1,314 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="b2dbdda9-8b7b-4598-9c50-d7e9c059b87c" name="swalther@SWLAPTOP 2009-04-25 22:10:00" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="f9c5091e-c2ef-4031-a097-66e6ccb5dc86">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\TestResults\swalther_SWLAPTOP 2009-04-25 22_10_00">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog\bin\UnleashedBlog.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\System.ComponentModel.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Downloads\AspNetMvcReleases\RTM\DataAnnotationsModelBinder\src\bin\Debug\Microsoft.Web.Mvc.DataAnnotations.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\RouteDebugger\RouteDebugger\bin\Debug\RouteDebugger.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="22" executed="22" passed="22" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-04-25T22:10:00.8340000-07:00" queuing="2009-04-25T22:10:05.3210000-07:00" start="2009-04-25T22:10:05.6320000-07:00" finish="2009-04-25T22:10:07.0190000-07:00" />
+  <TestDefinitions>
+    <UnitTest name="CreateNameIsValid" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="a371d235-dc0b-4d12-d600-db6e161b5338">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="2f8ffc6c-1f81-41fd-9094-290d8a600530" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateNameIsValid" />
+    </UnitTest>
+    <UnitTest name="Index_AjaxReturnsPartialViewResult" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="43fdb3cc-cecc-6727-01d8-c4f4a6a733fb">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="b94cab30-14f0-4f33-9b3b-9a4f8b3b3a6a" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="Index_AjaxReturnsPartialViewResult" />
+    </UnitTest>
+    <UnitTest name="IndexAcceptsPage" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="f57dcbe0-c07d-72e8-a818-e9a18b364894">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="413d8784-01e3-4acd-801b-30e98011c896" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexAcceptsPage" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesByDay" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="8db8b103-f679-e45e-c57f-eaad82eb12aa">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="2765ca44-9dde-4f3f-9cb1-eb3e8491183e" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByDay" />
+    </UnitTest>
+    <UnitTest name="CreateTextRequired" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="393de100-2b43-659f-e85a-377c33ec1014">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="f525291f-7dcd-4afc-8fb7-3d36fd00872a" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateTextRequired" />
+    </UnitTest>
+    <UnitTest name="CreateTitleMaximumLength500" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="816fee86-e4c6-f66a-8367-34afbe81dea1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="6b9bb35e-1b89-4f91-b03a-0f057304c855" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateTitleMaximumLength500" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesByYear" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="8575298e-a3af-44da-f02a-80c71bfa25b2">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="474ca919-5a67-4e28-9028-7b9a3e0c925a" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByYear" />
+    </UnitTest>
+    <UnitTest name="Index_AjaxReturnsPartialViewResult" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="7397d620-77fa-41fe-b949-c2dcd25b4dfe">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="141a6310-4256-4fc5-8134-b81684c3076d" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="Index_AjaxReturnsPartialViewResult" />
+    </UnitTest>
+    <UnitTest name="CreateTitleRequired" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="026d23a0-0f2f-e420-eb4a-d0257988d821">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="740fc5d9-8642-4e4a-8ce5-ffe303bf5b2a" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateTitleRequired" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntryByName" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="9cd2d8b0-5e13-5da4-773b-45607ed534f2">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="8f7866b4-3b37-419d-82ed-038020e64584" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntryByName" />
+    </UnitTest>
+    <UnitTest name="CreateBlogEntry" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="cddc7caf-da78-b76d-6452-22ab4badf897">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="436b3fb8-ad35-4067-a54d-43f7bbba3915" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateBlogEntry" />
+    </UnitTest>
+    <UnitTest name="CreateNameFromTitle" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="b978bd0a-bc7a-0cab-0427-0737a45fcbe6">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="95a93a38-b44c-45c4-bfbd-8c1d9ec9ebe0" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="CreateNameFromTitle" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsLessThan6BlogEntries" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="8d70758f-3c97-3a4e-1b0e-531880b8fed6">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="faf19b0f-d15f-43ed-ab01-a770a14d0a85" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexReturnsLessThan6BlogEntries" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonthDay" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="2b21ad28-1d0b-ac19-85ec-db7aaf58c558">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="7d403133-0989-4080-b11d-4be6f54c5d3b" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonthDay" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesInOrderOfDatePublished" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="f1a41de8-2cf9-41fc-969b-9ec1344e1bdd" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesInOrderOfDatePublished" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonthDayName" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="a4e681db-28c1-5812-ac7f-21097a8a356c">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="ee00c24a-4b3e-4739-87c1-d087c07f89bb" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonthDayName" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsPagedListForPage" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="bb2c80e7-902a-25e8-8499-75000ac0f166">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="8fa1853e-45cb-4cdb-8a3b-f4b98dbc9619" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="IndexReturnsPagedListForPage" />
+    </UnitTest>
+    <UnitTest name="ArchiveYearMonth" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="3d109e96-d6b0-e1f2-4592-7f307cb1809f">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="bf02013b-3614-4649-9716-4a65821bdd64" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="ArchiveYearMonth" />
+    </UnitTest>
+    <UnitTest name="ShowNewBlogEntries" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="9a1a712c-80f0-6dd6-fcde-89e2b48a68f1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="c68833be-a225-41b9-8d09-c6cf8b4c4283" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.BlogControllerTests, UnleashedBlog.Tests" name="ShowNewBlogEntries" />
+    </UnitTest>
+    <UnitTest name="IndexReturnsBlogEntriesByMonth" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="ff1c42f4-0f67-ac38-b2f5-2a2b13f18f3b">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a5e384d3-e3b3-48b1-8934-2b57f94e9f39" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Controllers.ArchiveControllerTests, UnleashedBlog.Tests" name="IndexReturnsBlogEntriesByMonth" />
+    </UnitTest>
+    <UnitTest name="ArchiveYear" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="2974ea07-7de4-4e6c-4a19-e3002dba59a1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="27b9f843-dd9f-41c2-b9b1-0be017e15995" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="ArchiveYear" />
+    </UnitTest>
+    <UnitTest name="DefaultRoute" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter20 - views and ajax\cs\unleashedblog\unleashedblog.tests\bin\debug\unleashedblog.tests.dll" id="61b7311d-ab65-b688-47ad-3f6effc369f9">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="a5631e52-5cc9-4252-8e14-4ab690e648d0" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter20 - Views and Ajax\CS\UnleashedBlog\UnleashedBlog.Tests\bin\Debug\UnleashedBlog.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="UnleashedBlog.Tests.Routes.RouteTests, UnleashedBlog.Tests" name="DefaultRoute" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="026d23a0-0f2f-e420-eb4a-d0257988d821" executionId="740fc5d9-8642-4e4a-8ce5-ffe303bf5b2a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2974ea07-7de4-4e6c-4a19-e3002dba59a1" executionId="27b9f843-dd9f-41c2-b9b1-0be017e15995" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="2b21ad28-1d0b-ac19-85ec-db7aaf58c558" executionId="7d403133-0989-4080-b11d-4be6f54c5d3b" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="393de100-2b43-659f-e85a-377c33ec1014" executionId="f525291f-7dcd-4afc-8fb7-3d36fd00872a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3d109e96-d6b0-e1f2-4592-7f307cb1809f" executionId="bf02013b-3614-4649-9716-4a65821bdd64" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="43fdb3cc-cecc-6727-01d8-c4f4a6a733fb" executionId="b94cab30-14f0-4f33-9b3b-9a4f8b3b3a6a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="61b7311d-ab65-b688-47ad-3f6effc369f9" executionId="a5631e52-5cc9-4252-8e14-4ab690e648d0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7397d620-77fa-41fe-b949-c2dcd25b4dfe" executionId="141a6310-4256-4fc5-8134-b81684c3076d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="816fee86-e4c6-f66a-8367-34afbe81dea1" executionId="6b9bb35e-1b89-4f91-b03a-0f057304c855" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8575298e-a3af-44da-f02a-80c71bfa25b2" executionId="474ca919-5a67-4e28-9028-7b9a3e0c925a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8d70758f-3c97-3a4e-1b0e-531880b8fed6" executionId="faf19b0f-d15f-43ed-ab01-a770a14d0a85" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8db8b103-f679-e45e-c57f-eaad82eb12aa" executionId="2765ca44-9dde-4f3f-9cb1-eb3e8491183e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a1a712c-80f0-6dd6-fcde-89e2b48a68f1" executionId="c68833be-a225-41b9-8d09-c6cf8b4c4283" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9cd2d8b0-5e13-5da4-773b-45607ed534f2" executionId="8f7866b4-3b37-419d-82ed-038020e64584" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c" executionId="f1a41de8-2cf9-41fc-969b-9ec1344e1bdd" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a371d235-dc0b-4d12-d600-db6e161b5338" executionId="2f8ffc6c-1f81-41fd-9094-290d8a600530" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a4e681db-28c1-5812-ac7f-21097a8a356c" executionId="ee00c24a-4b3e-4739-87c1-d087c07f89bb" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b978bd0a-bc7a-0cab-0427-0737a45fcbe6" executionId="95a93a38-b44c-45c4-bfbd-8c1d9ec9ebe0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="bb2c80e7-902a-25e8-8499-75000ac0f166" executionId="8fa1853e-45cb-4cdb-8a3b-f4b98dbc9619" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cddc7caf-da78-b76d-6452-22ab4badf897" executionId="436b3fb8-ad35-4067-a54d-43f7bbba3915" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f57dcbe0-c07d-72e8-a818-e9a18b364894" executionId="413d8784-01e3-4acd-801b-30e98011c896" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ff1c42f4-0f67-ac38-b2f5-2a2b13f18f3b" executionId="a5e384d3-e3b3-48b1-8934-2b57f94e9f39" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="740fc5d9-8642-4e4a-8ce5-ffe303bf5b2a" testId="026d23a0-0f2f-e420-eb4a-d0257988d821" testName="CreateTitleRequired" computerName="SWLAPTOP" duration="00:00:00.0146079" startTime="2009-04-25T22:10:05.7290000-07:00" endTime="2009-04-25T22:10:06.3750000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="27b9f843-dd9f-41c2-b9b1-0be017e15995" testId="2974ea07-7de4-4e6c-4a19-e3002dba59a1" testName="ArchiveYear" computerName="SWLAPTOP" duration="00:00:00.0615066" startTime="2009-04-25T22:10:06.3940000-07:00" endTime="2009-04-25T22:10:06.4600000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="7d403133-0989-4080-b11d-4be6f54c5d3b" testId="2b21ad28-1d0b-ac19-85ec-db7aaf58c558" testName="ArchiveYearMonthDay" computerName="SWLAPTOP" duration="00:00:00.0007764" startTime="2009-04-25T22:10:06.4800000-07:00" endTime="2009-04-25T22:10:06.4850000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f525291f-7dcd-4afc-8fb7-3d36fd00872a" testId="393de100-2b43-659f-e85a-377c33ec1014" testName="CreateTextRequired" computerName="SWLAPTOP" duration="00:00:00.0005134" startTime="2009-04-25T22:10:06.4900000-07:00" endTime="2009-04-25T22:10:06.4950000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="bf02013b-3614-4649-9716-4a65821bdd64" testId="3d109e96-d6b0-e1f2-4592-7f307cb1809f" testName="ArchiveYearMonth" computerName="SWLAPTOP" duration="00:00:00.0007744" startTime="2009-04-25T22:10:06.4990000-07:00" endTime="2009-04-25T22:10:06.5030000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="b94cab30-14f0-4f33-9b3b-9a4f8b3b3a6a" testId="43fdb3cc-cecc-6727-01d8-c4f4a6a733fb" testName="Index_AjaxReturnsPartialViewResult" computerName="SWLAPTOP" duration="00:00:00.0470277" startTime="2009-04-25T22:10:06.5110000-07:00" endTime="2009-04-25T22:10:06.5630000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a5631e52-5cc9-4252-8e14-4ab690e648d0" testId="61b7311d-ab65-b688-47ad-3f6effc369f9" testName="DefaultRoute" computerName="SWLAPTOP" duration="00:00:00.0006481" startTime="2009-04-25T22:10:06.5690000-07:00" endTime="2009-04-25T22:10:06.5730000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="141a6310-4256-4fc5-8134-b81684c3076d" testId="7397d620-77fa-41fe-b949-c2dcd25b4dfe" testName="Index_AjaxReturnsPartialViewResult" computerName="SWLAPTOP" duration="00:00:00.0155631" startTime="2009-04-25T22:10:06.5790000-07:00" endTime="2009-04-25T22:10:06.5980000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="6b9bb35e-1b89-4f91-b03a-0f057304c855" testId="816fee86-e4c6-f66a-8367-34afbe81dea1" testName="CreateTitleMaximumLength500" computerName="SWLAPTOP" duration="00:00:00.0004056" startTime="2009-04-25T22:10:06.6180000-07:00" endTime="2009-04-25T22:10:06.6230000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="474ca919-5a67-4e28-9028-7b9a3e0c925a" testId="8575298e-a3af-44da-f02a-80c71bfa25b2" testName="IndexReturnsBlogEntriesByYear" computerName="SWLAPTOP" duration="00:00:00.0268301" startTime="2009-04-25T22:10:06.6310000-07:00" endTime="2009-04-25T22:10:06.6710000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="faf19b0f-d15f-43ed-ab01-a770a14d0a85" testId="8d70758f-3c97-3a4e-1b0e-531880b8fed6" testName="IndexReturnsLessThan6BlogEntries" computerName="SWLAPTOP" duration="00:00:00.0030002" startTime="2009-04-25T22:10:06.6770000-07:00" endTime="2009-04-25T22:10:06.6840000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2765ca44-9dde-4f3f-9cb1-eb3e8491183e" testId="8db8b103-f679-e45e-c57f-eaad82eb12aa" testName="IndexReturnsBlogEntriesByDay" computerName="SWLAPTOP" duration="00:00:00.0100574" startTime="2009-04-25T22:10:06.6900000-07:00" endTime="2009-04-25T22:10:06.7050000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="c68833be-a225-41b9-8d09-c6cf8b4c4283" testId="9a1a712c-80f0-6dd6-fcde-89e2b48a68f1" testName="ShowNewBlogEntries" computerName="SWLAPTOP" duration="00:00:00.0033253" startTime="2009-04-25T22:10:06.7170000-07:00" endTime="2009-04-25T22:10:06.7360000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="8f7866b4-3b37-419d-82ed-038020e64584" testId="9cd2d8b0-5e13-5da4-773b-45607ed534f2" testName="IndexReturnsBlogEntryByName" computerName="SWLAPTOP" duration="00:00:00.0049280" startTime="2009-04-25T22:10:06.7420000-07:00" endTime="2009-04-25T22:10:06.7500000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="f1a41de8-2cf9-41fc-969b-9ec1344e1bdd" testId="9fcc2892-b4ef-fd32-4fec-b0a5d5f7c32c" testName="IndexReturnsBlogEntriesInOrderOfDatePublished" computerName="SWLAPTOP" duration="00:00:00.0028498" startTime="2009-04-25T22:10:06.7570000-07:00" endTime="2009-04-25T22:10:06.7640000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="2f8ffc6c-1f81-41fd-9094-290d8a600530" testId="a371d235-dc0b-4d12-d600-db6e161b5338" testName="CreateNameIsValid" computerName="SWLAPTOP" duration="00:00:00.0032891" startTime="2009-04-25T22:10:06.7700000-07:00" endTime="2009-04-25T22:10:06.7770000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ee00c24a-4b3e-4739-87c1-d087c07f89bb" testId="a4e681db-28c1-5812-ac7f-21097a8a356c" testName="ArchiveYearMonthDayName" computerName="SWLAPTOP" duration="00:00:00.0009104" startTime="2009-04-25T22:10:06.7830000-07:00" endTime="2009-04-25T22:10:06.7880000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="95a93a38-b44c-45c4-bfbd-8c1d9ec9ebe0" testId="b978bd0a-bc7a-0cab-0427-0737a45fcbe6" testName="CreateNameFromTitle" computerName="SWLAPTOP" duration="00:00:00.0048190" startTime="2009-04-25T22:10:06.7940000-07:00" endTime="2009-04-25T22:10:06.8030000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="8fa1853e-45cb-4cdb-8a3b-f4b98dbc9619" testId="bb2c80e7-902a-25e8-8499-75000ac0f166" testName="IndexReturnsPagedListForPage" computerName="SWLAPTOP" duration="00:00:00.0027845" startTime="2009-04-25T22:10:06.8080000-07:00" endTime="2009-04-25T22:10:06.8160000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="436b3fb8-ad35-4067-a54d-43f7bbba3915" testId="cddc7caf-da78-b76d-6452-22ab4badf897" testName="CreateBlogEntry" computerName="SWLAPTOP" duration="00:00:00.0022678" startTime="2009-04-25T22:10:06.8210000-07:00" endTime="2009-04-25T22:10:06.8280000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="413d8784-01e3-4acd-801b-30e98011c896" testId="f57dcbe0-c07d-72e8-a818-e9a18b364894" testName="IndexAcceptsPage" computerName="SWLAPTOP" duration="00:00:00.0021974" startTime="2009-04-25T22:10:06.8670000-07:00" endTime="2009-04-25T22:10:06.8730000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="a5e384d3-e3b3-48b1-8934-2b57f94e9f39" testId="ff1c42f4-0f67-ac38-b2f5-2a2b13f18f3b" testName="IndexReturnsBlogEntriesByMonth" computerName="SWLAPTOP" duration="00:00:00.0073621" startTime="2009-04-25T22:10:06.8780000-07:00" endTime="2009-04-25T22:10:06.8890000-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

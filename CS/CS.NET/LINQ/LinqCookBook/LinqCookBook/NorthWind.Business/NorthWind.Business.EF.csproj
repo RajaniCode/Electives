@@ -1,0 +1,612 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{5E884BF4-5FEF-4D2D-B54D-C6BA4B2CA925}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>NorthWind.Business.EF</RootNamespace>
+    <AssemblyName>NorthWind.Business.EF</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EFExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AdventureWorksLT\AdventureWorksLT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AdventureWorksLT.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="AdventureWorksLT\Product.cs" />
+    <Compile Include="Category.cs" />
+    <Compile Include="ComplexType\ComplexTypeExample.cs" />
+    <Compile Include="ComplexType\NestedComplexTypeExample.cs" />
+    <Compile Include="Customer.cs" />
+    <Compile Include="DefiningQuery\DDQ.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DDQ.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DefiningQuery\DQForeign.Designer.cs">
+      <DependentUpon>DQForeign.edmx</DependentUpon>
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+    </Compile>
+    <Compile Include="DefiningQuery\DQReadonly.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DQReadonly.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DefiningQuery\MultipleAssociations.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultipleAssociations.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EagerLoading\IncludeTPT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IncludeTPT.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EagerLoading\IncludeTPT.GeneratedViews.cs" />
+    <Compile Include="Ecommerce.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Ecommerce.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EcommerceEntities.cs" />
+    <Compile Include="EntitySplitting\EntitySplitting.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EntitySplitting.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EventTiming.cs" />
+    <Compile Include="functions\UsingFunctionsModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsingFunctionsModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\AuditTPC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AuditTPC.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\EmployeeTPH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EmployeeTPH.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\EmployeeTPHTPT.cs" />
+    <Compile Include="Inheritance\InheritanceWithQueryView.cs" />
+    <Compile Include="Inheritance\INHTBC.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>INHTBC.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\IsNullInh.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IsNullInh.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\MapToDisColumn.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MapToDisColumn.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\MediaTBHAndTBT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MediaTBHAndTBT.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\MultipleConditions.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultipleConditions.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\ProductsHiearchy.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProductsHiearchy.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\QVForeign.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QVForeign.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\SimpleTablePerTypeInheritance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SimpleTablePerTypeInheritance.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\TPHA.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TPHA.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\TPHQV.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TPHQV.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Inheritance\TwoTPT.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>TwoTPT.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="LazyLoading\LazyLoading.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>LazyLoading.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ManyToManyRelationship\ManyToManyExample.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ManyToManyExample.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="ManyToManyRelationship\MultipleAssocations.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MultipleAssocations.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MappingProcToCrud\ComplexType\SpMappingComplex.cs" />
+    <Compile Include="MappingProcToCrud\Concurrency\SpConcurrency.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SpConcurrency.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MappingProcToCrud\MappingStoredProc.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MappingStoredProc.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="MappingProcToCrud\ProcMappingToInheritance.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ProcMappingToInheritance.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneos\Candidate.cs" />
+    <Compile Include="Miscellaneos\CreateSourceQuery.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CreateSourceQuery.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneos\CRQ.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRQ.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneos\DelayLoading.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DelayLoading.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneos\GuidsAsIdentity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GuidsAsIdentity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneos\MMStudentCourse.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MMStudentCourse.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneos\ReturningXml.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ReturningXml.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Miscellaneos\StComputed.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>StComputed.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="NorthWind.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NorthWind.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="NorthwindEFEntities.cs" />
+    <Compile Include="NorthWindFull\NorthWindFullModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NorthWindFullModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="OneToMany\OneToMany.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>OneToMany.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="QueryView\QueryView.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QueryView.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="QueryView\QueryViewWithFitler.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QueryViewWithFitler.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="QueryView\QueryViewWithManyToMany.cs" />
+    <Compile Include="RelationshipSpan\RsCustomer.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>RsCustomer.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="SelfReferencing\MediaSF.Designer.cs">
+      <DependentUpon>MediaSF.edmx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="SelfReferencing\MMSF.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MMSF.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="SelfReferencing\SFCTETPH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SFCTETPH.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="SelfReferencing\SFTPH.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SFTPH.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="StoredProcedure\NorthwindEntities.cs" />
+    <Compile Include="StoredProcedure\UsingStoredProcedure.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UsingStoredProcedure.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="TradeShow.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="NorthWind.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NorthWind.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>NorthWind.Business.EF</CustomToolNamespace>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.9.2">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2005 Express Edition SP2 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="Ecommerce.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Ecommerce.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>NorthWind.Business.EF</CustomToolNamespace>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="AdventureWorksLT\AdventureWorksLT.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AdventureWorksLT.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="App.Config" />
+    <None Include="ComplexType\NorthWindEFNestedComplexType.ssdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ComplexType\NorthWindEFNestedComplexType.msl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="ComplexType\NorthWindEFNestedComplexType.csdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EntityDeploy Include="DefiningQuery\DQForeign.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DQForeign.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="ManyToManyRelationship\ManyToManyExample.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ManyToManyExample.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="ManyToManyRelationship\MultipleAssocations.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MultipleAssocations.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\SimpleTablePerTypeInheritance.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SimpleTablePerTypeInheritance.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\MediaTBHAndTBT.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MediaTBHAndTBT.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>Inheritance.TBTAndTBH</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\EmployeeTPH.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EmployeeTPH.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>EmInheritance.TPTTPH</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\AuditTPC.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>AuditTPC.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="EntitySplitting\EntitySplitting.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EntitySplitting.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="DefiningQuery\DDQ.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DDQ.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="DefiningQuery\DQReadonly.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DQReadonly.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="DefiningQuery\MultipleAssociations.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MultipleAssociations.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="EagerLoading\IncludeTPT.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IncludeTPT.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Inheritance\InheritanceWithQueryView.csdl" />
+    <None Include="Inheritance\InheritanceWithQueryView.msl" />
+    <None Include="Inheritance\InheritanceWithQueryView.ssdl" />
+    <EntityDeploy Include="Inheritance\IsNullInh.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>IsNullInh.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>NullInheritance</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\INHTBC.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>INHTBC.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\MapToDisColumn.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MapToDisColumn.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MapToDisColumn</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\QVForeign.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QVForeign.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>InhQVForeign</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\TPHQV.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TPHQV.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\TwoTPT.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TwoTPT.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>TwoTPT</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\TPHA.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>TPHA.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\ProductsHiearchy.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProductsHiearchy.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>ProductHiearachy</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="Inheritance\MultipleConditions.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MultipleConditions.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MultipleConditions</CustomToolNamespace>
+    </EntityDeploy>
+    <None Include="MappingProcToCrud\ComplexType\SpMappingComplex.csdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <EntityDeploy Include="Miscellaneos\ReturningXml.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ReturningXml.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="OneToMany\OneToMany.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>OneToMany.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Miscellaneos\GuidsAsIdentity.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GuidsAsIdentity.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Miscellaneos\StComputed.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>StComputed.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Miscellaneos\CreateSourceQuery.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CreateSourceQuery.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Miscellaneos\CRQ.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CRQ.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Miscellaneos\DelayLoading.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>DelayLoading.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="Miscellaneos\MMStudentCourse.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MMStudentCourse.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>MM</CustomToolNamespace>
+    </EntityDeploy>
+    <None Include="QueryView\QueryViewWithManyToMany.csdl" />
+    <None Include="QueryView\QueryViewWithManyToMany.msl" />
+    <None Include="QueryView\QueryViewWithManyToMany.ssdl" />
+    <EntityDeploy Include="RelationshipSpan\RsCustomer.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>RsCustomer.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="SelfReferencing\MMSF.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MMSF.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="SelfReferencing\SFCTETPH.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SFCTETPH.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>SFCTE</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="SelfReferencing\SFTPH.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SFTPH.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="SelfReferencing\MediaSF.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MediaSF.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="QueryView\QueryViewWithFitler.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QueryViewWithFitler.Designer.cs</LastGenOutput>
+      <CustomToolNamespace>QueryViewWithFilter</CustomToolNamespace>
+    </EntityDeploy>
+    <EntityDeploy Include="QueryView\QueryView.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>QueryView.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="MappingProcToCrud\Concurrency\SpConcurrency.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SpConcurrency.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="MappingProcToCrud\ProcMappingToInheritance.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ProcMappingToInheritance.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EmbeddedResource Include="MappingProcToCrud\ComplexType\SpMappingComplex.msl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MappingProcToCrud\ComplexType\SpMappingComplex.ssdl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EntityDeploy Include="MappingProcToCrud\MappingStoredProc.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>MappingStoredProc.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="functions\UsingFunctionsModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UsingFunctionsModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="StoredProcedure\UsingStoredProcedure.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UsingStoredProcedure.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EmbeddedResource Include="ComplexType\NorthWindEFComplexType.csdl" />
+    <EmbeddedResource Include="ComplexType\NorthWindEFComplexType.msl" />
+    <EmbeddedResource Include="ComplexType\NorthWindEFComplexType.ssdl" />
+    <EntityDeploy Include="NorthWindFull\NorthWindFullModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>NorthWindFullModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="LazyLoading\LazyLoading.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>LazyLoading.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EFExtensions\EFExtensions.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

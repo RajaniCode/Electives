@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="b49fd086-7cf1-490d-9b56-af4dad63b0a6" name="swalther@SWLAPTOP 2009-02-21 23:02:02" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="70d45067-ec92-414a-b4e9-40b039e8e7f1">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter04 - Understanding Views\Code\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-02-21 23_02_02">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter04 - Understanding Views\Code\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-02-21T23:02:02.8610000-08:00" queuing="2009-02-21T23:02:04.7180000-08:00" start="2009-02-21T23:02:04.9720000-08:00" finish="2009-02-21T23:02:29.2090000-08:00" />
+  <TestDefinitions>
+    <UnitTest name="IndexView" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter04 - understanding views\code\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="efe0ff90-0131-f5d5-6dd1-83fb83b983df">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="b56cc654-4464-445c-8b5f-144b87aca342" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter04 - Understanding Views\Code\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Controllers.SimpleControllerTest, MvcApplication1.Tests" name="IndexView" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="efe0ff90-0131-f5d5-6dd1-83fb83b983df" executionId="b56cc654-4464-445c-8b5f-144b87aca342" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="b56cc654-4464-445c-8b5f-144b87aca342" testId="efe0ff90-0131-f5d5-6dd1-83fb83b983df" testName="IndexView" computerName="SWLAPTOP" duration="00:00:23.3404921" startTime="2009-02-21T23:02:05.0780000-08:00" endTime="2009-02-21T23:02:29.1440000-08:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method MvcApplication1.Tests.Controllers.SimpleControllerTest.IndexView threw exception:  System.NullReferenceException: Object reference not set to an instance of an object..</Message>
+          <StackTrace>    at MvcApplication1.Tests.Controllers.SimpleControllerTest.IndexView() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter04 - Understanding Views\Code\CS\MvcApplication1\MvcApplication1.Tests\Controllers\SimpleControllerTest.cs:line 38
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

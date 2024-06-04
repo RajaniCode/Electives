@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="3a8b3df1-f97e-447c-ad16-ce195f67daed" name="swalther@SWLAPTOP 2009-05-02 19:33:31" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="d2c06db9-3471-4ed7-9ea1-4bdc182a67aa">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-05-02 19_33_31">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\CommonCode\MvcFakes\MvcFakes\bin\Debug\MvcFakes.dll" />
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-05-02T19:33:31.2060315-07:00" queuing="2009-05-02T19:33:32.6801789-07:00" start="2009-05-02T19:33:32.9952104-07:00" finish="2009-05-02T19:33:33.8502959-07:00" />
+  <TestDefinitions>
+    <UnitTest name="JillCanAccessSuperSecrets" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter12 - authenticating users\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="65fab5fa-5fd6-16b7-e7ab-9d608189f2b1">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="d241fb10-2a9e-43c4-8cf5-b5e31c94ecf2" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Controllers.CompanyControllerTests, MvcApplication1.Tests" name="JillCanAccessSuperSecrets" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="65fab5fa-5fd6-16b7-e7ab-9d608189f2b1" executionId="d241fb10-2a9e-43c4-8cf5-b5e31c94ecf2" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="d241fb10-2a9e-43c4-8cf5-b5e31c94ecf2" testId="65fab5fa-5fd6-16b7-e7ab-9d608189f2b1" testName="JillCanAccessSuperSecrets" computerName="SWLAPTOP" duration="00:00:00.1094799" startTime="2009-05-02T19:33:33.1072216-07:00" endTime="2009-05-02T19:33:33.7492858-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method MvcApplication1.Tests.Controllers.CompanyControllerTests.JillCanAccessSuperSecrets threw exception:  System.NotImplementedException: The method or operation is not implemented..</Message>
+          <StackTrace>    at System.Web.HttpCachePolicyBase.SetProxyMaxAge(TimeSpan delta)
+   at System.Web.Mvc.AuthorizeAttribute.OnAuthorization(AuthorizationContext filterContext)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAuthorizationFilters(ControllerContext controllerContext, IList`1 filters, ActionDescriptor actionDescriptor)
+   at System.Web.Mvc.ControllerActionInvoker.InvokeAction(ControllerContext controllerContext, String actionName)
+   at MvcApplication1.Tests.Controllers.CompanyControllerTests.JillCanAccessSuperSecrets() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\CS\MvcApplication1\MvcApplication1.Tests\Controllers\CompanyControllerTests.cs:line 19
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

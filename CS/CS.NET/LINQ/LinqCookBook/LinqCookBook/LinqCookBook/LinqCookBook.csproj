@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>9.0.30729</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{B68A5400-6346-4FEE-998C-9D9270E51099}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>LinqCookBook</RootNamespace>
+    <AssemblyName>LinqCookBook</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EFExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Entity.Design">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Design" />
+    <Reference Include="System.Runtime.Serialization">
+      <RequiredTargetFramework>3.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Extensions.Design">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="DefiningQuery\DefiningQueryExample.cs" />
+    <Compile Include="DefiningQuery\DummyQueryViewExample.cs" />
+    <Compile Include="DefiningQuery\MultipleAssociationsExample.cs" />
+    <Compile Include="DefiningQuery\ReadOnlyExample.cs" />
+    <Compile Include="EFQueryExamples.cs" />
+    <Compile Include="EFUsingPOCO\Customer.cs" />
+    <Compile Include="EFUsingPOCO\CustomerORders.cs" />
+    <Compile Include="EFUsingPOCO\NorthwindEntities.cs" />
+    <Compile Include="EFUsingPOCO\Order.cs" />
+    <Compile Include="EntitySplitting\EntitySplittingExample.cs" />
+    <Compile Include="Examples\ComplexTypeExample.cs" />
+    <Compile Include="Examples\UsingEFExtensions.cs" />
+    <Compile Include="Functions\FunctionExamples.cs" />
+    <Compile Include="IncludeExample\IncludeExample1.cs" />
+    <Compile Include="IncludeExample\IncludeExample2.cs" />
+    <Compile Include="Inheritance\MultipleConditions.cs" />
+    <Compile Include="Inheritance\ProductExample.cs" />
+    <Compile Include="Inheritance\THPExample.cs" />
+    <Compile Include="Inheritance\EmployeeInheritanceExample.cs" />
+    <Compile Include="Inheritance\ExampleInhMpDisColEntities.cs" />
+    <Compile Include="Inheritance\ExampleTPHQV.cs" />
+    <Compile Include="Inheritance\InheritanceWithQueryView.cs" />
+    <Compile Include="Inheritance\NullInheritanceExample.cs" />
+    <Compile Include="Inheritance\TablePerConcreteType.cs" />
+    <Compile Include="Inheritance\TablePerType.cs" />
+    <Compile Include="Inheritance\ExampleTablePerTypeWithTPH.cs" />
+    <Compile Include="Inheritance\TablePerTypeOnForeignExample.cs" />
+    <Compile Include="Inheritance\TPCAuditExample.cs" />
+    <Compile Include="Inheritance\TwoTablePerTypeExample.cs" />
+    <Compile Include="ManyToManyMapping\ManyToManyExample.cs" />
+    <Compile Include="MappingProcsToCrud\CrudMapping.cs" />
+    <Compile Include="Miscellaneos\CompiledQueryExample.cs" />
+    <Compile Include="Miscellaneos\CompiledQueryExample2.cs" />
+    <Compile Include="Miscellaneos\LazyLoadingExample.cs" />
+    <Compile Include="Miscellaneos\SettingForeignKeyExample2.cs" />
+    <Compile Include="Miscellaneos\CreateSourceQuery.cs" />
+    <Compile Include="Miscellaneos\DelayLoading.cs" />
+    <Compile Include="Miscellaneos\MergeOptionExample.cs" />
+    <Compile Include="Miscellaneos\SettingForeignKey.cs" />
+    <Compile Include="Miscellaneos\UsingXmlWithEF.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QueryViewExamples\QueryViewExample.cs" />
+    <Compile Include="QueryViewExamples\QueryViewWithManyToMany.cs" />
+    <Compile Include="RelationShipSpan\RelationshipSpanExample.cs" />
+    <Compile Include="SelfReferencing\MMSFExample.cs" />
+    <Compile Include="SelfReferencing\SelfReferencingExample.cs" />
+    <Compile Include="SelfReferencing\SFCTEExample.cs" />
+    <Compile Include="SelfReferencing\SFTPHExample.cs" />
+    <Compile Include="StoredProcedure\CallingStoredProcedure.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ViewGeneration\Example1.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DB\NorthwindEF.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="DB\NorthwindEF_log.ldf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <DependentUpon>NorthwindEF.mdf</DependentUpon>
+    </Content>
+    <Content Include="EFExtensions\EFExtensions.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 2.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.0">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.0 %28x86%29</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.SQL.Server.Compact.3.5">
+      <Visible>False</Visible>
+      <ProductName>SQL Server Compact 3.5</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Sql.Server.Express.9.2">
+      <Visible>False</Visible>
+      <ProductName>SQL Server 2005 Express Edition SP2 %28x86%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="EFUsingPOCO\Schemas\NorthWindEFModel.csdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="EFUsingPOCO\Schemas\NorthwindEFModel.msl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="EFUsingPOCO\Schemas\NorthwindEFModel.ssdl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\NorthWind.Business\NorthWind.Business.EF.csproj">
+      <Project>{5E884BF4-5FEF-4D2D-B54D-C6BA4B2CA925}</Project>
+      <Name>NorthWind.Business.EF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

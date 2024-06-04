@@ -1,0 +1,2 @@
+﻿// Seeing this comment implies that the code generation for file 'C:\Users\Avantika\Desktop\ASP.NET 4.0 BB\CodeFiles\Chapter 12\C#\WorkingEntitiesCS\App_Code\Model.edmx'
+// failed. See the ErrorList for details.

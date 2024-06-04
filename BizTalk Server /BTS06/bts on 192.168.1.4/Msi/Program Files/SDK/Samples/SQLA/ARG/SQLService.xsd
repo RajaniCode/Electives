@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://Microsoft.BTS2004.Sample.SQL_Adapter" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:annotation>
+    <xs:appinfo>
+      <msbtssql:sqlScript value="select * from Agents,Loans, Customers &#xD;&#xA;where Agents.AgentID = Loans.AgentID&#xD;&#xA; and Loans.CustomerID = Customers.CustomerID&#xD;&#xA;order by Agents.AgentID for xml auto" xmlns:msbtssql="http://schemas.microsoft.com/BizTalk/2003" />
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="Report">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" name="Agents" xmlns:q1="http://Microsoft.BTS2004.Sample.SQL_Adapter" type="q1:AgentsType" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:complexType name="AgentsType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element maxOccurs="unbounded" name="Loans" xmlns:q2="http://Microsoft.BTS2004.Sample.SQL_Adapter" type="q2:LoansType" />
+    </xs:choice>
+    <xs:attribute name="AgentID" type="xs:string" />
+    <xs:attribute name="FirstName" type="xs:string" />
+    <xs:attribute name="LastName" type="xs:string" />
+    <xs:attribute name="RegionID" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="LoansType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element maxOccurs="unbounded" name="Customers" xmlns:q3="http://Microsoft.BTS2004.Sample.SQL_Adapter" type="q3:CustomersType" />
+    </xs:choice>
+    <xs:attribute name="LoanID" type="xs:string" />
+    <xs:attribute name="CustomerID" type="xs:string" />
+    <xs:attribute name="AgentID" type="xs:string" />
+    <xs:attribute name="RequestAmt" type="xs:string" />
+    <xs:attribute name="Interest" type="xs:decimal" />
+    <xs:attribute name="Status" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="CustomersType">
+    <xs:attribute name="CustomerID" type="xs:string" />
+    <xs:attribute name="FirstName" type="xs:string" />
+    <xs:attribute name="LastName" type="xs:string" />
+    <xs:attribute name="StreetAddress" type="xs:string" />
+    <xs:attribute name="City" type="xs:string" />
+    <xs:attribute name="State" type="xs:string" />
+    <xs:attribute name="Rating" type="xs:string" />
+  </xs:complexType>
+</xs:schema>

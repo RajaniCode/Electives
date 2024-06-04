@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:b="urn:schemas-microsoft-com:BizTalkServer" xmlns="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0">
+	<xs:include schemaLocation="Addendum.xsd" />
+	<xs:element name="AgreementMappingInfo" type="AgreementMappingInfoType" />
+	<xs:complexType name="AgreementMappingInfoType">
+		<xs:sequence>
+			<xs:element name="PartnerMapping" type="PartnerMappingType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="PartnerMappingType">
+		<xs:sequence>
+			<xs:element name="Addendum" type="AddendumMappingType" minOccurs="0" maxOccurs="unbounded" />
+			<xs:element name="GlobalPorts" type="GlobalPortNamesType" />
+		</xs:sequence>
+		<xs:attribute name="name" type="PartnerId" use="required" />
+	</xs:complexType>
+	<xs:complexType name="AddendumMappingType">
+		<xs:sequence>
+			<xs:element name="ServiceLink" type="ServiceLinkMappingType" />
+		</xs:sequence>
+		<xs:attribute name="name" type="AddendumIdType" use="required" />
+		<xs:attribute name="assembly" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:maxLength value="256" />
+					<xs:minLength value="1" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="service" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:maxLength value="256" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="ServiceLinkMappingType">
+		<xs:sequence>
+			<xs:element name="Role" type="RoleMappingType" minOccurs="1" maxOccurs="2"/>
+		</xs:sequence>
+		<xs:attribute name="name" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:token">
+					<xs:maxLength value="256" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+	<xs:complexType name="RoleMappingType">
+		<xs:sequence>
+			<xs:element name="portType" type="PortTypeMappingType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="RoleIdType" use="required" />
+	</xs:complexType>
+	<xs:complexType name="PortTypeMappingType">
+		<xs:sequence>
+			<xs:element name="operation" type="OperationMappingType" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="PortTypeNameType" use="required" />
+	</xs:complexType>
+	<xs:complexType name="OperationMappingType">
+		<xs:attribute name="name" type="OperationNameType" use="required"/>
+		<xs:attribute name="port" type="PortNameType" use="optional" />
+	</xs:complexType>
+	<xs:simpleType name="PortTypeNameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="PortNameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="OperationNameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="GlobalPortNamesType">
+		<xs:sequence>
+			<xs:element name="GlobalPort" minOccurs="0" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:attribute name="name">
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:maxLength value="256" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:attribute>
+					<xs:attribute name="isMappedPort" type="xs:boolean" use="optional" />
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

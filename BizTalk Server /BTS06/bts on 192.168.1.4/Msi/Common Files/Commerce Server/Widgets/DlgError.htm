@@ -1,0 +1,106 @@
+﻿<HTML>
+<HEAD>
+	<TITLE ID='L_ErrDlg_DialogTitle'>An Error Occurred!</TITLE>
+	<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=utf-8'>
+	<STYLE>
+		BODY {
+			BACKGROUND-COLOR: #cccccc;
+			COLOR: black;
+			FONT-SIZE: 9pt;
+			FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+			SCROLLBAR-BASE-COLOR: #cccccc;
+			CURSOR: default;
+			MARGIN: 0px;
+			PADDING: 0px;
+			OVERFLOW: hidden
+		}
+		BUTTON {
+			BACKGROUND-COLOR: #cccccc;
+			BORDER-COLOR: white;
+			FONT-SIZE: 9pt;
+			FONT-FAMILY: Tahoma, MS Sans Serif, sans-serif;
+			WIDTH: 9em;
+		}
+		#divErrorMsg {
+			HEIGHT: 45px;
+			OVERFLOW: auto;
+		}
+		#divErrorMsg, #divDetails, .clsdlgbuttons {
+			MARGIN: 16px;
+			WIDTH: 370px;
+		}
+		#L_Details_Button {
+			MARGIN-left: 4px
+		}
+		#divDetails {
+			HEIGHT: 200px;
+			PADDING: 4px;
+			BORDER: 2px inset;
+			DISPLAY: none;
+			OVERFLOW: auto
+		}
+		.clsdlgbuttons TD {
+			MARGIN:0;
+			PADDING:0;
+		}
+	</STYLE>
+	<SCRIPT LANGUAGE='VBScript'>
+
+		option explicit
+
+		sub initDialog()
+			' Get the dialog arguments, and populate the dialog.
+			dim dictArgs
+			set dictArgs = window.dialogArguments
+
+			divErrorMsg.innerHTML = dictArgs.Item("error")
+			if inStr(dictArgs.Item("details"), "<HTML>") then
+				divDetails.innerHTML = Replace(Replace(Replace(dictArgs.Item("details"), "&", "&amp;"), "<", "&lt;"), ">", "&gt;")
+			else
+				divDetails.innerHTML = dictArgs.Item("details")
+			end if
+		end sub
+
+		sub resizeDialog()
+			window.dialogHeight = CStr(document.body.scrollHeight + 42) & "px"
+			window.dialogWidth = CStr(document.body.scrollWidth) & "px"
+		end sub
+
+		sub toggleDetails()
+			if divDetails.style.display = "none" then
+				divDetails.style.display = "block"
+			else
+				divDetails.style.display = "none"
+			end if
+
+			call resizeDialog()
+		end sub
+
+		sub onClose()
+			call window.close()
+		end sub
+	</SCRIPT>
+</HEAD>
+<BODY LANGUAGE="VBScript" onload='initDialog' ONKEYUP="if window.event.keyCode = 27 then L_Details_Button.click">
+
+<DIV>
+	<DIV ID='divErrorMsg'></DIV>
+
+	<TABLE CLASS='clsdlgbuttons'><TR><TD WIDTH="100%"></TD><TD>
+		<BUTTON ID='L_Close_Button' onclick='onClose()'>Close</BUTTON>
+	</TD><TD>
+		<BUTTON ID='L_Details_Button' onclick='toggleDetails()'>Details</BUTTON>
+	</TD></TR></TABLE>
+
+
+	<DIV ID='divDetails' STYLE="DISPLAY: none"></DIV>
+</DIV>
+<script language=VBScript>
+<!--
+	window.dialogHeight = "144px"
+	window.dialogWidth = "402px"
+'-->
+</script>
+
+</BODY>
+</HTML>

@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Conference.Models.Speaker>
+
+<script>
+	$(function () { // shortcut "cool kid way" of doing document.ready
+		$("#speakers").accordion();
+	});
+</script>
+
+<div id="speakers">
+	@foreach (var speaker in Model) {
+		<h3>@speaker.Name</h3>
+		@Html.Action("_GetForSpeaker", "Session", new { speakerID = speaker.SpeakerID })
+	}
+</div>

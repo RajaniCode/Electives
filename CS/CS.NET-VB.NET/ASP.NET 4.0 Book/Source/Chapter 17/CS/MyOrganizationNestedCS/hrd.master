@@ -1,0 +1,15 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="hrd.master.cs" Inherits="hrd" %>
+
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+    <asp:Label ID="Label1" runat="server" BackColor="Aqua" BorderColor="Black" 
+ 	BorderWidth="2px"
+	BorderStyle="Solid" Font-Size="Large" Text="Human Resource Department"
+	Visible="true">
+</asp:Label>
+	<br />
+	<br />
+    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+	</asp:ContentPlaceHolder>
+
+</asp:Content>
+

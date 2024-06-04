@@ -1,0 +1,95 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.7256"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{C46E0A37-2D64-432A-B08B-997CE16319AD}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\ComposedMessageProcessor.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "CMP.Orchestration"
+                    AssemblyName = "CMP.Orchestration"
+                />
+                <Config
+                    Name = "Development"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.Pipeline"
+                    AssemblyName = "Microsoft.BizTalk.Pipeline"
+                    HintPath = "..\..\..\..\Program Files\Microsoft BizTalk Server 2006\Microsoft.BizTalk.Pipeline.dll"
+                />
+                <Reference
+                    Name = "Microsoft.XLANGs.Pipeline"
+                    AssemblyName = "Microsoft.XLANGs.Pipeline"
+                    HintPath = "..\..\..\..\Program Files\Microsoft BizTalk Server 2006\Microsoft.XLANGs.Pipeline.dll"
+                />
+                <Reference
+                    Name = "CMP.PipelinesAndSchemas"
+                    AssemblyName = "CMP.PipelinesAndSchemas"
+                    HintPath = "..\PipelinesAndSchemas\bin\Deployment\CMP.PipelinesAndSchemas.dll"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "CMP.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "SuspendMessage.odx"
+                    BuildAction = "Compile"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

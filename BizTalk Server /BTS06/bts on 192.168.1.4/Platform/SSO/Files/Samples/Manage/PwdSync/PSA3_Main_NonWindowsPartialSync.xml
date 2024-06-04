@@ -1,0 +1,25 @@
+<!-- This file is used with the "ssops -create" command to create the prototype adapter named "PSAdapter03". This adapter sends the password change from a non-Windows system to the SSO Services to update the SSO mapping in SSO credential database.  -->
+
+<sso>
+
+	<adapter name="PSAdapter03">
+
+		<description>A Partial SynchronizationPassword Sync Adapter that receives password change from a non-Windows system.</description>
+
+		<computer>COMPUTERNAME.DOMAIN.COM</computer>
+
+		<appUserAccount>DomainName\PwdSyncUserGroup3</appUserAccount>
+
+		<appAdminAccount>DomainName\PwdSyncAdminGroup3</appAdminAccount>
+
+		<properties file="Properties_PSA3.xml" localize="yes"/>
+
+		<flags 
+			syncFromAdapter="yes"
+			verifyOldPassword="no"
+			changeWindowsPassword="no"
+			syncToAdapter="no"
+			sendOldPassword="no"
+		/>
+	</adapter>
+</sso>

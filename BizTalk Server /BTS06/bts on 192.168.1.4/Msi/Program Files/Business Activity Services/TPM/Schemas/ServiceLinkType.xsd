@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" xmlns:slnk="http://schemas.xmlsoap.org/ws/2002/07/service-link/" targetNamespace="http://schemas.xmlsoap.org/ws/2002/07/service-link/" elementFormDefault="qualified">
+   <element name="serviceLinkType" type="slnk:tServiceLinkType"/>
+   <complexType name="tServiceLinkType">
+      <sequence>
+         <element name="role" type="slnk:tRole" minOccurs="1" maxOccurs="2"/>
+      </sequence>
+      <attribute name="name" type="token" use="required"/>
+   </complexType>
+   <complexType name="tRole">
+      <sequence>
+         <element name="portType" minOccurs="1" maxOccurs="unbounded">
+            <complexType>
+               <attribute name="name" type="QName" use="required"/>
+            </complexType>
+         </element>
+      </sequence>
+      <attribute name="name" type="token" use="required"/>
+   </complexType>
+</schema>

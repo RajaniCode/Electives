@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" xmlns:wss="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="address" type="wss:addressType"/>
+	<xs:complexType name="addressType">
+		<xs:attribute name="siteUrl" type="wss:SiteUrlType" use="required"/>
+		<xs:attribute name="location" type="wss:LocationType" use="required"/>
+		<xs:attribute name="uri" type="wss:UriType" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="SiteUrlType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="260"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="LocationType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UriType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="260"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>

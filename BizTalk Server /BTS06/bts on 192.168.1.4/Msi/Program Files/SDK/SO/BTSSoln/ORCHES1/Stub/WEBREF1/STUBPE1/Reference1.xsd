@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:tns="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsResponse" elementFormDefault="qualified" targetNamespace="http://Microsoft.Samples.BizTalk.WoodgroveBank.Schemas.PendingTransactionsResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="PendingTransactionsResponsePendingTransaction" nillable="true" type="tns:PendingTransactionsResponsePendingTransaction" />
+  <xs:complexType name="PendingTransactionsResponsePendingTransaction">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="DatePosted" type="xs:date" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="AmountPosted" type="xs:decimal" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MerchantName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MerchantCity" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="MerchantCountry" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PendingTransactionsResponseResponseStatusError" nillable="true" type="tns:PendingTransactionsResponseResponseStatusError" />
+  <xs:complexType name="PendingTransactionsResponseResponseStatusError">
+    <xs:attribute name="ErrorNumber" type="xs:string" />
+    <xs:attribute name="ErrorDescription" type="xs:string" />
+    <xs:attribute name="ErrorSource" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="PendingTransactionsResponseResponseStatus" nillable="true" type="tns:PendingTransactionsResponseResponseStatus" />
+  <xs:complexType name="PendingTransactionsResponseResponseStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Error" type="tns:PendingTransactionsResponseResponseStatusError" />
+    </xs:sequence>
+    <xs:attribute name="Result" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="PendingTransactionsResponse" nillable="true" type="tns:PendingTransactionsResponse" />
+  <xs:complexType name="PendingTransactionsResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ResponseStatus" type="tns:PendingTransactionsResponseResponseStatus" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="PendingTransaction" type="tns:PendingTransactionsResponsePendingTransaction" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

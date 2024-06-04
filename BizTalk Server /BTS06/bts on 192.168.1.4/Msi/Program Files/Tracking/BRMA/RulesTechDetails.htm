@@ -1,0 +1,145 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!--  -->
+<!-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, -->
+<!-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED -->
+<!-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. -->
+<!-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE -->
+<!-- AND INFORMATION REMAINS WITH THE USER. -->
+<!--  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<link rel="Configuration" href="HATcfg.xml"/>
+		<TITLE>
+			Policy Execution Details
+		</TITLE>
+		<META CONTENT="Microsoft Visual Studio 7.0" name="GENERATOR">
+		<META CONTENT="C#" NAME="CODE_LANGUAGE">
+		<META CONTENT="JavaScript" NAME="vs_defaultClientScript">
+		<META CONTENT="http://schemas.microsoft.com/intellisense/ie5" NAME="vs_targetSchema">
+		<LINK REL="stylesheet" TYPE="text/css" HREF="default.css" ID="brma_ss">
+		<script language="jscript">
+		var oRulesTrackingViewCtrl, SqlSrv, SqlDB, Group, AppType;
+		var ErrMsg="";
+		var ControlsInstalled = false;
+		
+		function PageLoad()
+		{
+			var oNavCtrl = document.CollapsibleCtrl;
+
+			SqlSrv 	= oNavCtrl.GetViewParameter("sqlSrv");
+			SqlDB 	= oNavCtrl.GetViewParameter("sqlDB"); 
+			Group 	= oNavCtrl.GetViewParameter("group");
+			AppType	= oNavCtrl.GetViewParameter("AppType");
+			inst =  oNavCtrl.GetViewParameter("inst")
+				
+			try
+			{
+				re_toa_PolicyExecutionDetails.innerText = oNavCtrl.GetWebPageResourceString("re_toa_PolicyExecutionDetails");
+				re_toa_ScheduleInstanceID.innerText = oNavCtrl.GetWebPageResourceString("re_toa_ScheduleInstanceID");
+				re_toa_ExecTimestamp.innerText = oNavCtrl.GetWebPageResourceString("re_toa_ExecTimestamp");
+				re_toa_PolicyID.innerText = oNavCtrl.GetWebPageResourceString("re_toa_PolicyID");
+
+				oRulesTrackingViewCtrl = document.all("Registered");
+				oRulesTrackingViewCtrl.setAllValues(oNavCtrl.EncodeForUrl(SqlSrv),oNavCtrl.EncodeForUrl(SqlDB), "","", "","", oNavCtrl.EncodeForUrl(Group),oNavCtrl.EncodeForUrl(AppType), "","");
+
+				var oDbUtil = document.DbUtil;
+				var sResServiceInstance="Service/Name";//brma.Resources.GetDbString("SVF_COL_SVC_NAME");
+				re_toa_ServiceName.innerText = oNavCtrl.GetWebPageResourceString("re_toa_ServiceName");
+				m_sResServiceName.innerText = oRulesTrackingViewCtrl.GetServiceNameByInstance(oNavCtrl.GetViewParameter("inst"));
+			}
+			catch(e)
+			{
+				var sErrMsg = oNavCtrl.GetWebPageResourceString("err_GenericError") + "\n";
+				sErrMsg += e.description;
+				alert(sErrMsg);
+			}
+
+			var urlParams = "SqlSrv=" + oNavCtrl.EncodeForUrl(SqlSrv) + "&SqlDB=" + oNavCtrl.EncodeForUrl(SqlDB);
+			urlParams += "&Group=&AppType=&inst=" + oNavCtrl.GetViewParameter("inst");
+			urlParams += "&ExecTime=" + oNavCtrl.GetViewParameter("ExecTime");
+			urlParams += "&PolicyID=" + oNavCtrl.GetViewParameter("PolicyID");
+			urlParams += "&AssocID=" + oNavCtrl.GetViewParameter("AssocID");
+			
+			m_sResInstanceID.innerText = oRulesTrackingViewCtrl.DecodeForDisplay(oNavCtrl.GetViewParameter("inst"));
+			m_sExecTimestamp.innerText = oRulesTrackingViewCtrl.DecodeForDisplay(oNavCtrl.GetViewParameter("ExecTime"));
+			m_sPolicyID.innerText = oRulesTrackingViewCtrl.DecodeForDisplay(oNavCtrl.GetViewParameter("PolicyID"));
+
+			m_sFactActivity.innerText = oNavCtrl.GetWebPageResourceString("re_toa_FactActivity");
+			m_sFactActivity.href = "RulesFactDetails.htm?" + urlParams;
+			m_sRulesThatFired.innerText = oNavCtrl.GetWebPageResourceString("re_toa_RulesThatFired");
+			m_sRulesThatFired.href = "RulesFiringDetails.htm?" + urlParams + "&bFiredRules=" + "true";
+			m_sRulesThatDidNotFire.innerText = oNavCtrl.GetWebPageResourceString("re_toa_RulesThatDidNotFire");
+			m_sRulesThatDidNotFire.href = "RulesFiringDetails.htm?" + urlParams + "&bFiredRules=" + "false";
+			m_sConditionsEvaluated.innerText = oNavCtrl.GetWebPageResourceString("re_toa_ConditionsEvaluated");
+			m_sConditionsEvaluated.href = "RulesConditionsEvaluated.htm?" + urlParams;
+			m_sAgendaUpdates.innerText = oNavCtrl.GetWebPageResourceString("re_toa_AgendaUpdates");
+			m_sAgendaUpdates.href = "RulesAgendaUpdates.htm?" + urlParams;
+		}
+		
+		</script>
+	</HEAD>
+	<body MS_POSITIONING="GridLayout" bgColor="#ffffff" onload="PageLoad();">
+		<FORM ID="RulesTrackingTOA" METHOD="post" RUNAT="server">
+			<!-- buttons for communication between Hat Application and IE. -->
+			<INPUT type="button" ID="HelpBtn" style="DISPLAY:none;" onclick='ShowPageHelp();'>
+
+			<TABLE STYLE="padding-left:5;margin-top:15;width:*;" CELLSPACING="0" CELLPADDING="0">
+				<TR>
+					<TD STYLE="width:*;"><B><A id="re_toa_PolicyExecutionDetails"/></B></TD>
+				</TR>
+			</TABLE>
+			<TABLE STYLE="padding-left:5;margin-top:15;width:*;" CELLSPACING="0" CELLPADDING="0">
+				<TR>
+					<TD><A id="re_toa_ServiceName"/></TD>
+					<TD><A ID="m_sResServiceName"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A id="re_toa_ScheduleInstanceID"/></TD>
+					<TD><A ID="m_sResInstanceID"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A id="re_toa_ExecTimestamp"/></TD>
+					<TD><A ID="m_sExecTimestamp"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A id="re_toa_PolicyID"/></TD>
+					<TD><A ID="m_sPolicyID"></A>&nbsp;</TD>
+				</TR>
+			</TABLE>
+			
+			<TABLE STYLE="padding-left:5;margin-top:15;width:*;" CELLSPACING="0" CELLPADDING="0">
+				<TR>
+					<TD><A ID="m_sFactActivity"></A>&nbsp;</TD>
+					
+				</TR>
+				<TR>
+					<TD><A ID="m_sRulesThatFired"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A ID="m_sRulesThatDidNotFire"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A ID="m_sConditionsEvaluated"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A ID="m_sAgendaUpdates"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD>&nbsp;</TD>
+				</TR>
+			</TABLE>
+			
+			<DIV id="RulesTrackingViewCtrl" style="DISPLAY:none">
+				<OBJECT ID="Registered" CLASSID="clsid:DC615974-9A2E-4efe-B032-9AA9B172E0E9" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="Help" classid="clsid:DAC40761-C9C8-4653-AB49-C4D4AE4FF042" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="CollapsibleCtrl" CLASSID="clsid:12BBC156-5455-4a61-8DC8-82F56838CB99" VIEWASTEXT>
+				</OBJECT>		
+			</DIV>
+		</FORM>
+	</body>
+</HTML>

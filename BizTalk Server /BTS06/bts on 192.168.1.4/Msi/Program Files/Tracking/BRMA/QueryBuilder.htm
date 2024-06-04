@@ -1,0 +1,301 @@
+<!-- Copyright (c) Microsoft Corporation.  All rights reserved. -->
+<!--  -->
+<!-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, -->
+<!-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED -->
+<!-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. -->
+<!-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE -->
+<!-- AND INFORMATION REMAINS WITH THE USER. -->
+<!--  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<META CONTENT="Microsoft Visual Studio 7.0" name="GENERATOR">
+		<META CONTENT="C#" NAME="CODE_LANGUAGE">
+		<META CONTENT="JavaScript" NAME="vs_defaultClientScript">
+		<META CONTENT="http://schemas.microsoft.com/intellisense/ie5" NAME="vs_targetSchema">
+		<LINK REL="stylesheet" TYPE="text/css" HREF="default.css" ID="brma_ss">
+		<script language="JavaScript" src="CommonUtils.js"></script>
+		<script language="JavaScript" src="resultsutil.js"></script>
+		<script language="VBScript" src="CommonUtils.vbs"></script> 
+
+		<script language="JavaScript">
+		var sQNamespace="";
+		var ErrMsg="";
+		var LastSuccessfullyExecutedQuery = "";
+		HelpTopic = "cshidQueryBuilderPage"; // Set ID of the help topic for this page
+
+		function PageLoad()
+		{
+			var SavedQuery;
+			var oNavCtrl = document.all("CollapsibleCtrl");
+			var oQBCtrl = document.all("QueryBuilderCtrl");
+			
+			try
+			{
+				SavedQuery = oNavCtrl.LastSavedQueryPath;
+				if(null == SavedQuery)
+					SavedQuery = oNavCtrl.GetViewParameter("SavedQuery");
+					
+				// Initialize static strings
+				var title = oNavCtrl.GetWebPageResourceString("title_QueryBuilderView");;
+				ChangeTitle(title);
+					
+				PivotTableHeader.innerHTML = oNavCtrl.GetWebPageResourceString("msg_ToAccessViews");
+
+				oNavCtrl.LoadConfig();
+				oQBCtrl.InitHtml(oNavCtrl.SqlServer, oNavCtrl.SQLDatabase, "DynData");
+
+				// If initialization of oQBCtrl is successful
+				if ( oQBCtrl.Enabled == true )
+				{
+					// Execute SavedQuery if it has been supplied
+					var LoadFromQuerySucceeded = false;
+					if("" != SavedQuery)
+					{
+						LoadFromQuerySucceeded = LoadViewFromQuery(SavedQuery);
+					}
+					
+					if(!LoadFromQuerySucceeded)
+					{
+						oQBCtrl.Expand();
+					}
+				}
+			}
+			catch(e)
+			{
+				alertErr(e.description);
+			}
+		}
+		
+		
+		function PageUnload()
+		{
+			try
+			{
+				document.all("QueryBuilderCtrl").uninitHTML();
+				document.ScriptEventBroadcaster.Dispose();
+			}
+			catch(e)
+			{
+				var sErrMsg = oNavCtrl.GetWebPageResourceString("err_GenericError") + "\n";
+				sErrMsg += e.description;
+				alertErr(sErrMsg);
+			}
+		}
+
+		function OnExecQueryBtn_Click()
+		{	
+			//user hit 'Execute' button in query builder control
+
+			var pt = document.all("ptable1");
+			var oNavCtrl = document.all("CollapsibleCtrl");
+			var oQBCtrl = document.all("QueryBuilderCtrl");
+			var PtXmlData4LastQuery = "";
+			
+			// Only preserve pivot table formatting	when query didn't change
+			if( "" != LastSuccessfullyExecutedQuery && LastSuccessfullyExecutedQuery == oQBCtrl.Query ) // is query still the same?
+				PtXmlData4LastQuery = pt.XMLData;
+
+			// clear result list that may be there from the previous query
+			ResetPTableBeforeExectingQuery();			
+			
+			var bSuccess = ExecQuery(true);
+			if (!bSuccess)
+			{
+				LastSuccessfullyExecutedQuery = "";
+				return;
+			}
+
+			// Re-apply previous formatting when user hits "Execute Query" for a query
+			if( (LastSuccessfullyExecutedQuery == oQBCtrl.Query) && ("" != PtXmlData4LastQuery)) // is query still the same?
+			{
+				pt.XMLData = PtXmlData4LastQuery; // keep updated query formatting
+			}
+			else
+			{
+				window.setTimeout("DoPivotTableLayout();", 10);
+			}
+
+			LastSuccessfullyExecutedQuery = oQBCtrl.Query;
+		}
+
+		function LoadViewFromQuery(queryName)
+		{
+			var oNavCtrl = document.all("CollapsibleCtrl");
+			var oQBCtrl = document.all("QueryBuilderCtrl");
+			var pt = document.all("ptable1");
+
+			try
+			{
+				oNavCtrl.LoadQueryByPath(oNavCtrl.DecodeFromUrl(queryName), true);
+				oQBCtrl.Query = oNavCtrl.GetQueryParam(3); // may fail when user cancel the query
+			}catch (e){
+				return false;
+			}
+			
+			oQBCtrl.CollapsedState = oNavCtrl.GetQueryParam(4);
+			
+			var bSuccess = ExecQuery(false);
+			if (!bSuccess)
+				return false;
+
+			pt.XMLData = oNavCtrl.GetQueryParam(5);
+			var newFormatStr = document.all("CollapsibleCtrl").GetLocalDateTimeFormatWithMilliseconds();
+			UpdateDateTimeFormatInPivotTable(pt, newFormatStr);
+
+			LastSuccessfullyExecutedQuery = oQBCtrl.Query;  // Query can be re-formatted within the QB control.
+			
+			var title = oNavCtrl.GetWebPageResourceString("title_QueryBuilderView");;
+			var queryName=oNavCtrl.GetQueryParam(1);
+			ChangeTitle(oNavCtrl.GetTitle(title, queryName));
+			return true;
+		}
+
+		var attached=false;
+	
+		function ExecQuery(bScrollPageToPTable)
+		{
+			// Disable "Save Query" button
+			EnableSaveAs(false);
+			
+			try
+			{
+				var oNavCtrl = document.all("CollapsibleCtrl");
+				var oQBCtrl = document.all("QueryBuilderCtrl");
+
+				var bSuccess = oQBCtrl.ExecuteQuery();
+				if(!bSuccess)
+				{
+					return false;
+				}
+			
+				sQNamespace="";//document.all("QueryBuilderCtrl").Namespace(SqlSrv,SqlDB);
+				var rsQueryResult = document.all("QueryBuilderCtrl").QueryResult;
+						
+				SetPtableView();
+				var pt = document.all("ptable1");
+				if(attached==false)
+				{
+					pt.attachEvent("BeforeContextMenu", caselist_BeforeContextMenu);
+//					pt.attachEvent("CommandExecute", caselist_CommandExecute);
+					attached=true;
+				}
+				pt.ActiveView.TitleBar.Caption = oNavCtrl.GetWebPageResourceString("STR_CASELIST");
+				pt.UseRemoteProvider = true;
+				if (rsQueryResult != null)
+				{
+                    var header = oNavCtrl.GetWebPageResourceString("msg_ToAccessViewsWithCount");
+                    header = oNavCtrl.FormatString1(header, rsQueryResult.RecordCount);
+			        PivotTableHeader.innerHTML = header;
+					pt.DataSource = rsQueryResult;
+					pt.DataMember = "";
+				}
+
+				pt.ActiveView.AutoLayout();
+				//show pivot table...
+				divShow("PivotTable");
+				
+				//scroll to the bottom to show the newly opened pivot table
+				if(bScrollPageToPTable)
+					window.scrollTo(0,document.body.scrollHeight);
+
+				// Enable "SaveAs" button
+				EnableSaveAs(true);
+			}
+			catch(e)
+			{
+				ErrMsg=oNavCtrl.GetWebPageResourceString("err_qb_WhileExecYQuery");
+				ErrMsg+="\n";
+				ErrMsg+=e.description;
+				alertErr(ErrMsg);
+				return false;
+			}
+			return true;
+		}
+		
+
+//______________________________________________________________
+
+		function OnSaveAs()
+		{
+			var oNavCtrl = document.all("CollapsibleCtrl");
+			var oQBCtrl = document.all("QueryBuilderCtrl");
+			var pt = document.all("ptable1");
+
+			if( LastSuccessfullyExecutedQuery == oQBCtrl.Query ) 
+			{// query is still the same
+				oNavCtrl.ClearQueryParams();
+				oNavCtrl.AddQueryParam("QueryBuilder.htm?View=2");
+				oNavCtrl.AddQueryParam(oQBCtrl.Query);
+				oNavCtrl.AddQueryParam(oQBCtrl.CollapsedState);
+				oNavCtrl.AddQueryParam(pt.XMLData);
+				var saveSucceeded = oNavCtrl.SaveQueryAs();
+				if(saveSucceeded)
+				{
+					var title = oNavCtrl.GetWebPageResourceString("title_QueryBuilderView");
+					ChangeTitle(oNavCtrl.GetTitle(title, oNavCtrl.LastSavedQueryDescription));
+				}
+			}
+			else
+			{//query has changed
+				var ErrMsg=oNavCtrl.GetWebPageResourceString("err_qb_NeedToRunBeforeSaving");
+				alertErr(ErrMsg);
+			}
+		}
+
+		</script>
+
+		<SCRIPT language="JavaScript" for="ScriptEventBroadcaster" Event="ExecQuery">
+			OnExecQueryBtn_Click();
+		</SCRIPT>
+		
+		<SCRIPT language="JavaScript" for="ScriptEventBroadcaster" Event="SaveAs">
+			if(!document.all("SaveAsBtn").disabled)
+			{
+				OnSaveAs();
+			}
+		</SCRIPT>
+
+		<SCRIPT language="JavaScript" for="ScriptEventBroadcaster" Event="ShowHelp">
+			ShowPageHelp();
+		</SCRIPT>
+		
+	</HEAD>
+	<body MS_POSITIONING="GridLayout" onload="PageLoad();" onunload="PageUnload();" STYLE="background-color:#ffffff;">
+		<form id="QueryBuilder" method="post" runat="server" STYLE="background-color:#ffffff;">
+			<!-- buttons for communication between Hat Application and IE. -->
+			<INPUT type="button" ID="SaveAsBtn" disabled style="DISPLAY:none;" onclick='OnSaveAs();'>
+			<INPUT type="button" ID="HelpBtn" style="DISPLAY:none;" onclick='ShowPageHelp();'>
+
+			<DIV id="QueryBuilderCtrlDiv" style="DISPLAY:block">
+				<OBJECT id="QueryBuilderCtrl" width="100%" classid="clsid:BB2A24DC-7F7A-49fa-8CF8-CF638025DAE5" VIEWASTEXT>
+				</OBJECT>
+			</DIV>
+			<DIV id="PivotTable" style="display:none;font-family:MS Shell Dlg;font-size:80%;">
+				<hr>
+				<A ID="PivotTableHeader">&nbsp;</A>
+				<BR>
+				<OBJECT id="ptable1" name="ptable1" width="100%" height="90%" classid="clsid:0002E55A-0000-0000-C000-000000000046" VIEWASTEXT>
+					<PARAM NAME="XMLData" VALUE='<xml xmlns:x=\"urn:schemas-microsoft-com:office:excel\">&#13;&#10; <x:PivotTable>&#13;&#10;  <x:OWCVersion>10.0.0.2621         </x:OWCVersion>&#13;&#10;  <x:DisplayScreenTips/>&#13;&#10;  <x:NoAutoFit/>&#13;&#10;  <x:Height>300</x:Height>&#13;&#10;  <x:Width>692</x:Width>&#13;&#10;  <x:CubeProvider>msolap.2</x:CubeProvider>&#13;&#10;  <x:DisplayFieldList/>&#13;&#10;  <x:CacheDetails/>&#13;&#10;  <x:PivotView>&#13;&#10;   <x:IsNotFiltered/>&#13;&#10;  &lt;x:NotVisible/&gt; </x:PivotView>&#13;&#10; </x:PivotTable>&#13;&#10;</xml>'>
+					<param name="AutoFit" value="true">
+					<param name="DisplayToolbar" value="false">
+					<param name="DisplayPropertyToolbox" value="false">
+					<param name="DisplayFieldList" value="false">
+				</OBJECT>
+			</DIV>
+			<DIV id="HelperObjectsDiv" style="DISPLAY: none">
+				<OBJECT id="Admin" classid="clsid:124B0FB8-DF1E-46b0-97B1-FD698C35C497" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="Help" classid="clsid:DAC40761-C9C8-4653-AB49-C4D4AE4FF042" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="CollapsibleCtrl" CLASSID="clsid:12BBC156-5455-4a61-8DC8-82F56838CB99" VIEWASTEXT>
+				</OBJECT>
+
+				<OBJECT id="ScriptEventBroadcaster" CLASSID="clsid:1708739A-1EBE-4c62-9B7E-2FA131FFCB5C" VIEWASTEXT>
+				</OBJECT>
+			</DIV>
+		</form>
+	</body>
+</HTML>

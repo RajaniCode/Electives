@@ -1,0 +1,93 @@
+﻿<UserControl xmlns:my="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"  x:Class="SubjectScheduleAppCS.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    d:DesignHeight="450" d:DesignWidth="600">
+    <UserControl.Resources>
+        <Style TargetType="TextBlock" x:Name="textStyle">
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="Maroon"/>
+        </Style>
+    </UserControl.Resources>
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Rectangle x:Name="back" Height="450" Width="600">
+            <Rectangle.Fill>
+                <LinearGradientBrush SpreadMethod="Reflect">
+                    <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0.25" Color="Beige"/>
+                        <GradientStop Offset="0.75" Color="BurlyWood"/>
+                    </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        <TextBlock x:Name="text1" FontSize="30" Text="Make Your Own Schedule"
+ 		Margin="125,10,0,0" Foreground="Maroon" />
+        <ListBox x:Name="list1" Margin="20,101,20,74">
+            <ListBoxItem Background="HotPink">
+                <Grid>
+                    <TextBlock Text="Subjects"  FontSize="24"
+ 					Foreground="LightYellow" Margin="10,0,0,0"></TextBlock>
+                    <TextBlock Text="Select Date" FontSize="24"
+ 					Foreground="LightYellow" Margin="250,0,0,0"></TextBlock>
+                </Grid>
+            </ListBoxItem>
+            <ListBoxItem x:Name="bioItem" Background="LightBlue">
+                <StackPanel>
+                    <TextBlock x:Name="bioText" Text="Biology"
+ 				Style="{StaticResource textStyle}" Margin="10,0,0,0"/>
+                    <my:DatePicker x:Name="bioDate"  Height="30"  Width="200"
+ 				Margin="200,-20,0,0"  IsDropDownOpen="False"
+ 				SelectedDateFormat="Long"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem x:Name="chemItem"  Background="LightBlue">
+                <StackPanel>
+                    <TextBlock x:Name="chemText" Text="Chemistry"
+ 				Style="{StaticResource textStyle}" Margin="10,0,0,0"/>
+                    <my:DatePicker x:Name="chemDate" Height="30" Width="200"
+ 				Margin="200,-20,0,0" IsDropDownOpen="False"
+ 				SelectedDateFormat="Long"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem x:Name="engItem"  Background="LightBlue">
+                <StackPanel>
+                    <TextBlock x:Name="engText" Text="English"
+ 				Style="{StaticResource textStyle}" Margin="10,0,0,0"/>
+                    <my:DatePicker x:Name="engDate" Height="30" Width="200"
+ 				Margin="200,-20,0,0" IsDropDownOpen="False"
+ 				SelectedDateFormat="Long"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem x:Name="finItem"  Background="LightBlue">
+                <StackPanel>
+                    <TextBlock x:Name="finText" Text="Finance"
+ 				Style="{StaticResource textStyle}" Margin="10,0,0,0"/>
+                    <my:DatePicker x:Name="finDate" Height="30" Width="200"
+ 				Margin="200,-20,0,0" IsDropDownOpen="False"
+ 				SelectedDateFormat="Long"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem x:Name="mathItem"  Background="LightBlue">
+                <StackPanel>
+                    <TextBlock x:Name="mathText" Text="Mathematics"
+ 				Style="{StaticResource textStyle}" Margin="10,0,0,0"/>
+                    <my:DatePicker x:Name="mathDate" Height="30" Width="200"
+ 				Margin="200,-20,0,0" IsDropDownOpen="False" 
+ 				SelectedDateFormat="Long"/>
+                </StackPanel>
+            </ListBoxItem>
+            <ListBoxItem x:Name="phyItem"  Background="LightBlue">
+                <StackPanel>
+                    <TextBlock x:Name="phyText" Text="Physics" Style="{StaticResource
+ 				textStyle}" Margin="10,0,0,0"/>
+                    <my:DatePicker x:Name="phyDate" Height="30" Width="200"
+ 				Margin="200,-20,0,0" IsDropDownOpen="False" 
+ 				SelectedDateFormat="Long"/>
+                </StackPanel>
+            </ListBoxItem>
+        </ListBox>
+    </Grid>
+</UserControl>
+

@@ -1,0 +1,16 @@
+﻿<UserControl xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data" 
+             x:Class="SILV3_DataPresenter.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="240"
+              Loaded="UserControl_Loaded">
+      <Grid x:Name="LayoutRoot" Height="470">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition Height="200"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="The Filtered Data"></TextBlock>
+        <data:DataGrid x:Name="dgData" Grid.Row="1"></data:DataGrid> 
+      </Grid>
+</UserControl>

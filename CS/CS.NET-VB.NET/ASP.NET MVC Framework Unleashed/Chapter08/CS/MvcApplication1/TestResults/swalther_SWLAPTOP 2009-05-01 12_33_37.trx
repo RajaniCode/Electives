@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="1bc60d44-9a84-4855-b0c0-64b3b366d5ff" name="swalther@SWLAPTOP 2009-05-01 12:33:37" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="b8c3ab41-1cc1-4f2f-a4c3-902572739dcd">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter08 - Validation\CS\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-05-01 12_33_37">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter08 - Validation\CS\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Failed">
+    <Counters total="1" executed="1" error="0" failed="1" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-05-01T12:33:37.5026228-07:00" queuing="2009-05-01T12:33:44.6451452-07:00" start="2009-05-01T12:33:45.1344140-07:00" finish="2009-05-01T12:33:47.6248724-07:00" />
+  <TestDefinitions>
+    <UnitTest name="TestMethod1" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter08 - validation\cs\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="a3fd79dd-448c-f06f-28fd-80c1890718bf">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="1a2066c2-5063-40bd-99a3-3312044a86b1" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter08 - Validation\CS\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.Controllers.MovieControllerTests, MvcApplication1.Tests" name="TestMethod1" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="a3fd79dd-448c-f06f-28fd-80c1890718bf" executionId="1a2066c2-5063-40bd-99a3-3312044a86b1" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="1a2066c2-5063-40bd-99a3-3312044a86b1" testId="a3fd79dd-448c-f06f-28fd-80c1890718bf" testName="TestMethod1" computerName="SWLAPTOP" duration="00:00:01.0179530" startTime="2009-05-01T12:33:45.2988404-07:00" endTime="2009-05-01T12:33:47.3040404-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Failed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+        <ErrorInfo>
+          <Message>Test method MvcApplication1.Tests.Controllers.MovieControllerTests.TestMethod1 threw exception:  System.ArgumentException: The specified named connection is either not found in the configuration, not intended to be used with the EntityClient provider, or not valid..</Message>
+          <StackTrace>    at System.Data.EntityClient.EntityConnection.ChangeConnectionString(String newConnectionString)
+   at System.Data.EntityClient.EntityConnection..ctor(String connectionString)
+   at System.Data.Objects.ObjectContext.CreateEntityConnection(String connectionString)
+   at System.Data.Objects.ObjectContext..ctor(String connectionString, String defaultContainerName)
+   at MvcApplication1.Models.MoviesDBEntities..ctor() in c:\users\swalther\documents\books\aspnetmvcunleashed\chapter08 - validation\cs\mvcapplication1\mvcapplication1\models\moviedatamodel.designer.cs:line 26
+   at MvcApplication1.Controllers.MovieController..ctor() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter08 - Validation\CS\MvcApplication1\MvcApplication1\Controllers\MovieController.cs:line 9
+   at MvcApplication1.Tests.Controllers.MovieControllerTests.TestMethod1() in C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter08 - Validation\CS\MvcApplication1\MvcApplication1.Tests\Controllers\MovieControllerTests.cs:line 20
+</StackTrace>
+        </ErrorInfo>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

@@ -1,0 +1,86 @@
+﻿<%@ Master Language="VB" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title></title>
+    <style type="text/css">
+    html
+    {
+        background-color: Blue;
+    }
+    
+    .main
+    {
+        width: 600px;
+        margin: auto;
+    }
+    
+    .header
+    {
+        padding: 10px;
+        background-color: White;
+        border: 1px solid black;
+    }
+    
+    .menu, .menu li
+    {
+        padding:0px;
+        margin: 0px;
+        display:inline;
+    }
+    
+    .banner
+    {
+        margin: 10px 150px;
+    }
+    
+    .column 
+    {
+        width: 45%;
+        min-height: 200px;
+        border: solid 1px black;
+        padding: 10px;
+        background-color:White;
+    }
+    
+    .left
+    {
+        float:left;
+    }
+    
+    .right
+    {
+        float:right;
+    }
+    
+    </style>
+</head>
+<body>
+<div class="main">
+
+    <div class="header">
+        <ul class="menu">
+            <li><a href="/master/">Home</a></li>
+            <li><a href="/master/">Products</a></li>
+            <li><a href="/master/">Services</a></li>
+        </ul>        
+    </div>
+
+    <img 
+        class="banner" 
+        src="/Content/BannerAd.png" 
+        alt="Buy Something" />
+
+    <div class="column left">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        </asp:ContentPlaceHolder>    
+    </div>
+    
+    <div class="column right">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder2" runat="server">
+        </asp:ContentPlaceHolder>    
+    </div>
+    
+</div>
+</body>
+</html>

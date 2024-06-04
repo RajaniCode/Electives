@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfAnyType xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <anyType xsi:type="xsd:string">1</anyType>
+  <anyType _locID="1" xsi:type="xsd:string">Message counts</anyType>
+  <anyType xsi:type="xsd:string">QueryBuilder.htm?View=2</anyType>
+  <anyType xsi:type="xsd:string">
+-- Copyright (c) Microsoft Corporation.  All rights reserved.
+--
+-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
+-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
+-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
+-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE 
+-- AND INFORMATION REMAINS WITH THE USER.  
+
+-- Note: Joins are used for localized strings only
+-- This query uses heuristic and may provide imprecise numbers in some cases (e.g. when pass-through pipelines are used).
+-- This query excludes internal messages and counts external messages only 
+-- @LocalMidNightInUtc variable used for calculating period of time to retrieve data. It is next midnight in UTC time
+-- 0.5 added to @LocalMidNightInUtc in order for rounding to work correctly
+
+DECLARE @LocalMidNightInUtc as datetime
+DECLARE @LocalMidNightInLocal as datetime
+set @LocalMidNightInLocal = cast (cast (GETUTCDATE() + 0.5 + ((1.0 * @UtcOffsetMin)/60.0)/24.0 as bigint) as datetime)
+set @LocalMidNightInUtc = @LocalMidNightInLocal - ((1.0 * @UtcOffsetMin)/60.0)/24.0
+
+DECLARE @nMsgFail1 as int, @nMsgFail2 as int, @nMsgFail7 as int, @nMsgFail14 as int, @nMsgFailAll as int
+DECLARE @nMsgSent1 as int, @nMsgSent2 as int, @nMsgSent7 as int, @nMsgSent14 as int, @nMsgSentAll as int
+DECLARE @nMsgReceived1 as int, @nMsgReceived2 as int, @nMsgReceived7 as int, @nMsgReceived14 as int, @nMsgReceivedAll as int
+
+-- Count Failures--
+SELECT
+	@nMsgFail1  = sum(CASE cast(@LocalMidNightInUtc - mioe.dtTimestamp - 0.5 as int) when 0 then 1 else 0 END),
+	@nMsgFail2  = sum(CASE cast(@LocalMidNightInUtc - mioe.dtTimestamp - 0.5 as int)/2 when 0 then 1 else 0 END),
+	@nMsgFail7  = sum(CASE cast(@LocalMidNightInUtc - mioe.dtTimestamp - 0.5 as int)/7 when 0 then 1 else 0 END),
+	@nMsgFail14 = sum(CASE cast(@LocalMidNightInUtc - mioe.dtTimestamp - 0.5 as int)/14 when 0 then 1 else 0 END),
+	@nMsgFailAll = count(*)
+FROM dbo.dta_MessageInOutEvents mioe WITH (READPAST)
+WHERE mioe.nStatus = 5 -- Transmission failure
+
+-- Count messages sent to the outside world
+SELECT
+	@nMsgSent1  = sum(CASE cast(@LocalMidNightInUtc - mioe.dtTimestamp - 0.5 as int) when 0 then 1 else 0 END),
+	@nMsgSent2  = sum(CASE cast(@LocalMidNightInUtc - mioe.dtTimestamp - 0.5 as int)/2 when 0 then 1 else 0 END),
+	@nMsgSent7  = sum(CASE cast(@LocalMidNightInUtc - mioe.dtTimestamp - 0.5 as int)/7 when 0 then 1 else 0 END),
+	@nMsgSent14 = sum(CASE cast(@LocalMidNightInUtc - mioe.dtTimestamp - 0.5 as int)/14 when 0 then 1 else 0 END),
+	@nMsgSentAll = count(*)
+FROM dbo.dta_MessageInOutEvents mioe WITH (READPAST)
+WHERE 
+	mioe.nStatus = 1 -- Send
+	-- include only messages that were sent and participated in 1 activity only
+	AND mioe.uidMessageInstanceId IN
+(
+	SELECT mioe2.uidMessageInstanceId
+	FROM dbo.dta_MessageInOutEvents mioe2 WITH (READPAST)
+	GROUP BY mioe2.uidMessageInstanceId
+	HAVING count (distinct cast (mioe2.uidActivityId as varchar(36))) = 1 -- message participated in single activity only
+		AND min((mioe2.nStatus-1)*(mioe2.nStatus-1)) = 0 -- at least one send (nStatus=1)
+)
+
+-- Count messages received from the outside world
+SELECT
+	@nMsgReceived1  = sum(CASE cast(@LocalMidNightInUtc  - mioe.dtTimestamp - 0.5 as int) when 0 then 1 else 0 END),
+	@nMsgReceived2  = sum(CASE cast(@LocalMidNightInUtc  - mioe.dtTimestamp - 0.5 as int)/2 when 0 then 1 else 0 END),
+	@nMsgReceived7  = sum(CASE cast(@LocalMidNightInUtc  - mioe.dtTimestamp - 0.5 as int)/7 when 0 then 1 else 0 END),
+	@nMsgReceived14 = sum(CASE cast(@LocalMidNightInUtc  - mioe.dtTimestamp - 0.5 as int)/14 when 0 then 1 else 0 END),
+	@nMsgReceivedAll = count(*)
+FROM dbo.dta_MessageInOutEvents mioe WITH (READPAST)
+WHERE 
+	mioe.nStatus = 0 -- Receive
+	-- include only messages that were received and participated in 1 activity only
+	AND mioe.uidMessageInstanceId IN
+(
+	SELECT mioe2.uidMessageInstanceId
+	FROM dbo.dta_MessageInOutEvents mioe2 WITH (READPAST)
+	GROUP BY mioe2.uidMessageInstanceId
+	HAVING count (distinct cast (mioe2.uidActivityId as varchar(36))) = 1 -- message participated in single activity only
+		AND min(mioe2.nStatus) = 0 -- at least one send
+)
+SELECT N'Today' as N'Period',	1 as 'Days', @nMsgFail1 as 'Message Transmission Failures', @nMsgSent1 as N'Messages Sent', @nMsgReceived1 as N'Messages Received'
+	UNION SELECT N'Last 2 days',	2, @nMsgFail2, @nMsgSent2, @nMsgReceived2
+	UNION SELECT N'Last 7 days',	7, @nMsgFail7, @nMsgSent7, @nMsgReceived7
+	UNION SELECT N'Last 14 days',	14,@nMsgFail14, @nMsgSent14, @nMsgReceived14
+	UNION SELECT N'Total', 		99,@nMsgFailAll, @nMsgSentAll, @nMsgReceivedAll
+ORDER BY Days
+</anyType>
+  <anyType xsi:type="xsd:string">1</anyType>
+  <anyType xsi:type="xsd:string">&lt;xml xmlns:x="urn:schemas-microsoft-com:office:excel"&gt;
+ &lt;x:PivotTable&gt;
+  &lt;x:OWCVersion&gt;10.0.0.5605         &lt;/x:OWCVersion&gt;
+  &lt;x:NoDisplayToolbar/&gt;
+  &lt;x:DisplayScreenTips/&gt;
+  &lt;x:CubeProvider&gt;msolap.2&lt;/x:CubeProvider&gt;
+  &lt;x:CacheDetails/&gt;
+  &lt;x:Name&gt;Result list&lt;/x:Name&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Period&lt;/x:Name&gt;
+   &lt;x:PLDataOrientation/&gt;
+   &lt;x:EncodedType&gt;adVarWChar&lt;/x:EncodedType&gt;
+   &lt;x:CompareOrderedMembersBy&gt;UniqueName&lt;/x:CompareOrderedMembersBy&gt;
+   &lt;x:DetailFormat Style='font-family:Arial;font-size:10pt;font-weight:700;
+    background:whitesmoke;color:black'/&gt;
+   &lt;x:GroupedFormat Style='font-family:Arial;font-size:10pt;font-weight:700'/&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Days&lt;/x:Name&gt;
+   &lt;x:DataType&gt;Integer&lt;/x:DataType&gt;
+   &lt;x:EncodedType&gt;adInteger&lt;/x:EncodedType&gt;
+   &lt;x:CompareOrderedMembersBy&gt;UniqueName&lt;/x:CompareOrderedMembersBy&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Message Transmission Failures&lt;/x:Name&gt;
+   &lt;x:DataType&gt;Integer&lt;/x:DataType&gt;
+   &lt;x:PLDataOrientation/&gt;
+   &lt;x:PLPosition&gt;2&lt;/x:PLPosition&gt;
+   &lt;x:EncodedType&gt;adInteger&lt;/x:EncodedType&gt;
+   &lt;x:CompareOrderedMembersBy&gt;UniqueName&lt;/x:CompareOrderedMembersBy&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Messages Sent&lt;/x:Name&gt;
+   &lt;x:DataType&gt;Integer&lt;/x:DataType&gt;
+   &lt;x:PLDataOrientation/&gt;
+   &lt;x:PLPosition&gt;3&lt;/x:PLPosition&gt;
+   &lt;x:EncodedType&gt;adInteger&lt;/x:EncodedType&gt;
+   &lt;x:CompareOrderedMembersBy&gt;UniqueName&lt;/x:CompareOrderedMembersBy&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Messages Received&lt;/x:Name&gt;
+   &lt;x:DataType&gt;Integer&lt;/x:DataType&gt;
+   &lt;x:PLDataOrientation/&gt;
+   &lt;x:PLPosition&gt;4&lt;/x:PLPosition&gt;
+   &lt;x:EncodedType&gt;adInteger&lt;/x:EncodedType&gt;
+   &lt;x:CompareOrderedMembersBy&gt;UniqueName&lt;/x:CompareOrderedMembersBy&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotField&gt;
+   &lt;x:Name&gt;Data&lt;/x:Name&gt;
+   &lt;x:Orientation&gt;Column&lt;/x:Orientation&gt;
+   &lt;x:Position&gt;-1&lt;/x:Position&gt;
+   &lt;x:DataField/&gt;
+  &lt;/x:PivotField&gt;
+  &lt;x:PivotData&gt;
+   &lt;x:Top&gt;0&lt;/x:Top&gt;
+   &lt;x:TopOffset&gt;0&lt;/x:TopOffset&gt;
+   &lt;x:Left&gt;0&lt;/x:Left&gt;
+   &lt;x:LeftOffset&gt;0&lt;/x:LeftOffset&gt;
+   &lt;x:SeqNum&gt;384&lt;/x:SeqNum&gt;
+   &lt;x:Expanded/&gt;
+  &lt;/x:PivotData&gt;
+  &lt;x:PivotView&gt;
+   &lt;x:HeaderFormat Style='font-family:Arial;font-size:10pt;background:gainsboro'/&gt;
+   &lt;x:Label&gt;
+    &lt;x:Caption&gt;Result list&lt;/x:Caption&gt;
+    &lt;x:NotVisible/&gt;
+   &lt;/x:Label&gt;
+   &lt;x:AllowEdits&gt;false&lt;/x:AllowEdits&gt;
+   &lt;x:AllowAdditions&gt;false&lt;/x:AllowAdditions&gt;
+   &lt;x:AllowDeletions&gt;false&lt;/x:AllowDeletions&gt;
+  &lt;/x:PivotView&gt;
+  &lt;x:PivotAxis&gt;
+   &lt;x:Orientation&gt;Filter&lt;/x:Orientation&gt;
+   &lt;x:Label&gt;
+    &lt;x:Caption&gt;Drop Filter Fields Here&lt;/x:Caption&gt;
+    &lt;x:NotVisible/&gt;
+   &lt;/x:Label&gt;
+  &lt;/x:PivotAxis&gt;
+  &lt;x:PivotAxis&gt;
+   &lt;x:Orientation&gt;Row&lt;/x:Orientation&gt;
+   &lt;x:Label&gt;
+    &lt;x:Caption&gt;Drop Row Fields Here&lt;/x:Caption&gt;
+    &lt;x:NotVisible/&gt;
+   &lt;/x:Label&gt;
+  &lt;/x:PivotAxis&gt;
+  &lt;x:PivotAxis&gt;
+   &lt;x:Orientation&gt;Column&lt;/x:Orientation&gt;
+   &lt;x:Label&gt;
+    &lt;x:Caption&gt;Drop Column Fields Here&lt;/x:Caption&gt;
+    &lt;x:NotVisible/&gt;
+   &lt;/x:Label&gt;
+  &lt;/x:PivotAxis&gt;
+ &lt;/x:PivotTable&gt;
+&lt;/xml&gt;</anyType>
+</ArrayOfAnyType>

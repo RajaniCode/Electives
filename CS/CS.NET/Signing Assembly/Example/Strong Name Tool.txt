@@ -1,0 +1,35 @@
+Sn.exe (Strong Name Tool)
+
+The Strong Name tool (Sn.exe) helps sign assemblies with strong names. Sn.exe provides options for key management, signature generation, and signature verification.
+
+The Strong Name tool is automatically installed with Visual Studio. To start the tool, use the Visual Studio and Windows SDK Command Prompts. 
+
+
+The following command creates a new, random key pair and stores it in keyPair.snk.
+
+sn -k keyPair.snk
+ 
+
+The following command stores the key in keyPair.snk in the container MyContainer in the strong name CSP.
+
+sn -i keyPair.snk MyContainer
+
+
+The following command extracts the public key from keyPair.snk and stores it in publicKey.snk.
+
+sn -p keyPair.snk publicKey.snk
+
+ 
+The following command displays the public key and the token for the public key contained in publicKey.snk.
+
+sn -tp publicKey.snk
+
+ 
+The following command verifies the assembly MyAsm.dll.
+
+sn -v MyAsm.dll
+
+ 
+The following command deletes MyContainer from the default CSP.
+
+sn -d MyContainer

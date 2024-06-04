@@ -1,0 +1,56 @@
+﻿<UserControl x:Class="WPF_ADONET_EF_Commanding.EmployeeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:viewModel="clr-namespace:WPF_ADONET_EF_Commanding"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="514">
+    <UserControl.Resources>
+        <viewModel:CreateEmployeeViewModel x:Key="EmpCreateNew"></viewModel:CreateEmployeeViewModel>
+    </UserControl.Resources>
+    <Grid x:Name="grdMain" DataContext="{Binding Source={StaticResource EmpCreateNew}}">
+        <Grid x:Name="grdChild" DataContext="{Binding Path=NewEmployee}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="43*" />
+            <RowDefinition Height="49*" />
+            <RowDefinition Height="47*" />
+            <RowDefinition Height="50*" />
+            <RowDefinition Height="111*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="238*" />
+            <ColumnDefinition Width="276*" />
+        </Grid.ColumnDefinitions>
+        
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="11,12,0,0" Name="textBlock1" Text="EmpNo" VerticalAlignment="Top" Width="180" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="11,16,0,0" Name="textBlock2" Text="EmpName" VerticalAlignment="Top" Width="180" Grid.Row="1" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,16,0,0" Name="textBlock3" Text="Salary" VerticalAlignment="Top" Width="180" Grid.Row="2" />
+            <TextBlock Height="23" HorizontalAlignment="Left" Margin="10,14,0,0" Name="textBlock4" Text="DeptNo" VerticalAlignment="Top" Width="180" Grid.Row="3" />
+            <TextBox Grid.Column="1" Height="23"
+                     HorizontalAlignment="Left" Margin="70,14,0,0"
+                     Name="txteno" VerticalAlignment="Top" 
+                     Width="120" 
+                     Text="{Binding EmpNo,Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Grid.Row="1" 
+                     Height="23" HorizontalAlignment="Left" 
+                     Margin="70,13,0,0" Name="txtename" 
+                     VerticalAlignment="Top" Width="120"
+                      Text="{Binding EmpName,Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Grid.Row="2" Height="23"
+                     HorizontalAlignment="Left" Margin="70,16,0,0" 
+                     Name="txtsalary" VerticalAlignment="Top" Width="120" 
+                      Text="{Binding Salary,Mode=TwoWay}"/>
+            <TextBox Grid.Column="1" Grid.Row="3" Height="23"
+                     HorizontalAlignment="Left" Margin="70,14,0,0"
+                     Name="txtdno" VerticalAlignment="Top" Width="120" 
+                      Text="{Binding DeptNo, Mode=TwoWay}"/>
+            <Button Content="Create Employee" Grid.Column="1" 
+                    Grid.Row="4" Height="41" HorizontalAlignment="Left" 
+                    Margin="62,26,0,0" Name="btnCreateEmployee" 
+                    VerticalAlignment="Top" Width="144" 
+                     Command="{Binding Path=DataContext.CreateNewEmployee,ElementName=grdMain}"
+                     CommandParameter="{Binding Path=NewEmployee,ElementName=grdChild}"/>
+        </Grid>
+    </Grid>
+</UserControl>

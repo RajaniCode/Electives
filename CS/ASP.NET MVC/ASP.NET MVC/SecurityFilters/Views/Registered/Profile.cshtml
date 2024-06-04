@@ -1,0 +1,10 @@
+﻿@model string
+
+<h2>Profile</h2>
+<p>@Html.Raw(Model)</p>
+
+<h3>Update profile</h3>
+<form action="/Registered/Profile" method="post">
+    Profile:<textarea id="profile" name="profile" rows="10" cols="40">@Model</textarea>
+    <input type="submit" name="Save" value="Save" />
+</form>

@@ -1,0 +1,30 @@
+﻿@inherits System.Web.Mvc.WebViewPage<MvcApplication9.Models.Order>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Edit</title>
+</head>
+<body>
+	<form method="post" action="/Order/Edit">
+        <fieldset>
+            <legend>Fields</legend>
+			            
+            @Html.EditorForModel();
+            
+            <p>
+                <input type="submit" value="Save" />
+            </p>
+        </fieldset>
+    </form>
+
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
+
+	<script language="javascript" type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.4.1.js")"></script>  
+	<script type="text/javascript" src="@Url.Content("/Scripts/HijaxForm.js")"></script>
+</body>
+</html>
+

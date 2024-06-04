@@ -1,0 +1,269 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MediaSelfModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="MediaSelfModelStoreContainer">
+          <EntitySet Name="Article" EntityType="MediaSelfModel.Store.Article" store:Type="Tables" Schema="sr" />
+          <EntitySet Name="Media" EntityType="MediaSelfModel.Store.Media" store:Type="Tables" Schema="sr" />
+          <EntitySet Name="MediaCategory" EntityType="MediaSelfModel.Store.MediaCategory" store:Type="Tables" Schema="sr" />
+          <EntitySet Name="MediaInCategories" EntityType="MediaSelfModel.Store.MediaInCategories" store:Type="Tables" Schema="sr" />
+          <EntitySet Name="Video" EntityType="MediaSelfModel.Store.Video" store:Type="Tables" Schema="sr" />
+          <AssociationSet Name="FK_Article_Media" Association="MediaSelfModel.Store.FK_Article_Media">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="Article" EntitySet="Article" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MediaCategory_MediaCategory" Association="MediaSelfModel.Store.FK_MediaCategory_MediaCategory">
+            <End Role="MediaCategory" EntitySet="MediaCategory" />
+            <End Role="MediaCategory1" EntitySet="MediaCategory" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MediaInCategories_Media" Association="MediaSelfModel.Store.FK_MediaInCategories_Media">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="MediaInCategories" EntitySet="MediaInCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_MediaInCategories_MediaCategory" Association="MediaSelfModel.Store.FK_MediaInCategories_MediaCategory">
+            <End Role="MediaCategory" EntitySet="MediaCategory" />
+            <End Role="MediaInCategories" EntitySet="MediaInCategories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Video_Media" Association="MediaSelfModel.Store.FK_Video_Media">
+            <End Role="Media" EntitySet="Media" />
+            <End Role="Video" EntitySet="Video" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Article">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" />
+          <Property Name="ArticleContent" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Media">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="MediaCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="128" />
+          <Property Name="ParentCategoryId" Type="int" />
+        </EntityType>
+        <EntityType Name="MediaInCategories">
+          <Key>
+            <PropertyRef Name="MediaId" />
+            <PropertyRef Name="MediaCategoryId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" />
+          <Property Name="MediaCategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Video">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" />
+          <Property Name="Rating" Type="int" />
+        </EntityType>
+        <Association Name="FK_Article_Media">
+          <End Role="Media" Type="MediaSelfModel.Store.Media" Multiplicity="1" />
+          <End Role="Article" Type="MediaSelfModel.Store.Article" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Article">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MediaCategory_MediaCategory">
+          <End Role="MediaCategory" Type="MediaSelfModel.Store.MediaCategory" Multiplicity="0..1" />
+          <End Role="MediaCategory1" Type="MediaSelfModel.Store.MediaCategory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="MediaCategory1">
+              <PropertyRef Name="ParentCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MediaInCategories_Media">
+          <End Role="Media" Type="MediaSelfModel.Store.Media" Multiplicity="1" />
+          <End Role="MediaInCategories" Type="MediaSelfModel.Store.MediaInCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="MediaInCategories">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_MediaInCategories_MediaCategory">
+          <End Role="MediaCategory" Type="MediaSelfModel.Store.MediaCategory" Multiplicity="1" />
+          <End Role="MediaInCategories" Type="MediaSelfModel.Store.MediaInCategories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="MediaCategory">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="MediaInCategories">
+              <PropertyRef Name="MediaCategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Video_Media">
+          <End Role="Media" Type="MediaSelfModel.Store.Media" Multiplicity="1" />
+          <End Role="Video" Type="MediaSelfModel.Store.Video" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Media">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Video">
+              <PropertyRef Name="MediaId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MediaSelfModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="MediaSelfRefEntities">
+          <EntitySet Name="Medias" EntityType="MediaSelfModel.Media" />
+          <EntitySet Name="MediaCategories" EntityType="MediaSelfModel.MediaCategory" />
+          <AssociationSet Name="FK_MediaCategory_MediaCategory" Association="MediaSelfModel.FK_MediaCategory_MediaCategory">
+            <End Role="MediaCategory" EntitySet="MediaCategories" />
+            <End Role="MediaCategory1" EntitySet="MediaCategories" />
+          </AssociationSet>
+          <AssociationSet Name="MediaInCategories" Association="MediaSelfModel.MediaInCategories">
+            <End Role="Media" EntitySet="Medias" />
+            <End Role="MediaCategory" EntitySet="MediaCategories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Article" BaseType="MediaSelfModel.Media">
+          <Property Name="ArticleContent" Type="String" Nullable="true" MaxLength="1000" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Media" Abstract="true">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="255" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="MediaCategory" Relationship="MediaSelfModel.MediaInCategories" FromRole="Media" ToRole="MediaCategory" />
+        </EntityType>
+        <EntityType Name="MediaCategory">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="SubCategories" Relationship="MediaSelfModel.FK_MediaCategory_MediaCategory" FromRole="MediaCategory" ToRole="MediaCategory1" />
+          <NavigationProperty Name="Category" Relationship="MediaSelfModel.FK_MediaCategory_MediaCategory" FromRole="MediaCategory1" ToRole="MediaCategory" />
+          <NavigationProperty Name="Medias" Relationship="MediaSelfModel.MediaInCategories" FromRole="MediaCategory" ToRole="Media" />
+        </EntityType>
+        <EntityType Name="Video" BaseType="MediaSelfModel.Media">
+          <Property Name="Rating" Type="Int32" Nullable="true" />
+        </EntityType>
+        <Association Name="FK_MediaCategory_MediaCategory">
+          <End Role="MediaCategory" Type="MediaSelfModel.MediaCategory" Multiplicity="0..1" />
+          <End Role="MediaCategory1" Type="MediaSelfModel.MediaCategory" Multiplicity="*" />
+        </Association>
+        <Association Name="MediaInCategories">
+          <End Role="Media" Type="MediaSelfModel.Media" Multiplicity="*" />
+          <End Role="MediaCategory" Type="MediaSelfModel.MediaCategory" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="MediaSelfModelStoreContainer" CdmEntityContainer="MediaSelfRefEntities">
+          <EntitySetMapping Name="Medias">
+            <EntityTypeMapping TypeName="IsTypeOf(MediaSelfModel.Media)">
+              <MappingFragment StoreEntitySet="Media">
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          <EntityTypeMapping TypeName="IsTypeOf(MediaSelfModel.Article)">
+              <MappingFragment StoreEntitySet="Article">
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+                <ScalarProperty Name="ArticleContent" ColumnName="ArticleContent" />
+              </MappingFragment>
+            </EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(MediaSelfModel.Video)">
+              <MappingFragment StoreEntitySet="Video">
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+              </MappingFragment>
+            </EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="MediaCategories">
+            <EntityTypeMapping TypeName="IsTypeOf(MediaSelfModel.MediaCategory)">
+              <MappingFragment StoreEntitySet="MediaCategory">
+                <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_MediaCategory_MediaCategory" TypeName="MediaSelfModel.FK_MediaCategory_MediaCategory" StoreEntitySet="MediaCategory">
+            <EndProperty Name="MediaCategory">
+              <ScalarProperty Name="CategoryId" ColumnName="ParentCategoryId" />
+            </EndProperty>
+            <EndProperty Name="MediaCategory1">
+              <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
+            </EndProperty>
+            <Condition ColumnName="ParentCategoryId" IsNull="false" />
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="MediaInCategories" TypeName="MediaSelfModel.MediaInCategories" StoreEntitySet="MediaInCategories">
+            <EndProperty Name="Media">
+              <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+            </EndProperty>
+            <EndProperty Name="MediaCategory">
+              <ScalarProperty Name="CategoryId" ColumnName="MediaCategoryId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="MediaSF">
+        <EntityTypeShape EntityType="MediaSelfModel.Article" Width="1.5" PointX="5.625" PointY="3.875" Height="1.2110807291666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediaSelfModel.Media" Width="1.5" PointX="4.625" PointY="1.25" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediaSelfModel.MediaCategory" Width="1.5" PointX="2.375" PointY="0.875" Height="1.9802864583333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediaSelfModel.Video" Width="1.5" PointX="3.5" PointY="3.75" Height="1.2110807291666665" IsExpanded="true" />
+        <AssociationConnector Association="MediaSelfModel.FK_MediaCategory_MediaCategory" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.9069230769230767" PointY="2.8552864583333335" />
+          <ConnectorPoint PointX="2.9069230769230767" PointY="3.1052864583333335" />
+          <ConnectorPoint PointX="3.3534615384615383" PointY="3.1052864583333335" />
+          <ConnectorPoint PointX="3.3534615384615383" PointY="2.8552864583333335" /></AssociationConnector>
+        <AssociationConnector Association="MediaSelfModel.MediaInCategories" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.625" PointY="2.047841796875" />
+          <ConnectorPoint PointX="3.875" PointY="2.047841796875" />
+          </AssociationConnector>
+        <InheritanceConnector EntityType="MediaSelfModel.Article">
+          <ConnectorPoint PointX="5.875" PointY="2.84568359375" />
+          <ConnectorPoint PointX="5.875" PointY="3.875" /></InheritanceConnector>
+        <InheritanceConnector EntityType="MediaSelfModel.Video">
+          <ConnectorPoint PointX="4.8125" PointY="2.84568359375" />
+          <ConnectorPoint PointX="4.8125" PointY="3.75" />
+          </InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

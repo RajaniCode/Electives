@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MultipleConditionModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="MultipleConditionModelStoreContainer">
+          <EntitySet Name="Customer" EntityType="MultipleConditionModel.Store.Customer" store:Type="Tables" Schema="inh" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Phone" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ClubDues" Type="int" />
+          <Property Name="ClubDiscount" Type="int" />
+        </EntityType>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MultipleConditionModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="MultipleConditionEntities">
+          <EntitySet Name="Customer" EntityType="MultipleConditionModel.Customer" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Phone" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          </EntityType>
+        <EntityType Name="ClubMember" BaseType="MultipleConditionModel.Customer" >
+          <Property Name="ClubDues" Type="Int32" Nullable="false" />
+          <Property Name="ClubDiscount" Type="Int32" Nullable="false" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="MultipleConditionModelStoreContainer" CdmEntityContainer="MultipleConditionEntities">
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="IsTypeOf(MultipleConditionModel.ClubMember)">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="ClubDiscount" ColumnName="ClubDiscount" />
+                <ScalarProperty Name="ClubDues" ColumnName="ClubDues" />
+                <Condition ColumnName="ClubDiscount" IsNull="false" />
+                <Condition ColumnName="ClubDues" IsNull="false" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="MultipleConditionModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <Condition ColumnName="ClubDiscount" IsNull="true" />
+                <Condition ColumnName="ClubDues" IsNull="true" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="MultipleConditions">
+        <EntityTypeShape EntityType="MultipleConditionModel.Customer" Width="1.5" PointX="4.75" PointY="1.25" Height="1.59568359375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MultipleConditionModel.ClubMember" Width="1.5" PointX="7.375" PointY="3" Height="1.4033821614583326" />
+        <InheritanceConnector EntityType="MultipleConditionModel.ClubMember">
+          <ConnectorPoint PointX="6.25" PointY="2.047841796875" />
+          <ConnectorPoint PointX="8.125" PointY="2.047841796875" />
+          <ConnectorPoint PointX="8.125" PointY="3" /></InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

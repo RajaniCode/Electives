@@ -1,0 +1,173 @@
+<Schema Namespace="InhQVLocationModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+  <EntityContainer Name="InhQVLocationModelStoreContainer">
+    <EntitySet Name="Actors" EntityType="InhQVLocationModel.Store.Actors" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="EventLocation" EntityType="InhQVLocationModel.Store.EventLocation" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="GunClubs" EntityType="InhQVLocationModel.Store.GunClubs" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Locations" EntityType="InhQVLocationModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ShootingRange" EntityType="InhQVLocationModel.Store.ShootingRange" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_EventLocation_Locations" Association="InhQVLocationModel.Store.FK_EventLocation_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="EventLocation" EntitySet="EventLocation" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GunClubs_Locations" Association="InhQVLocationModel.Store.FK_GunClubs_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="GunClubs" EntitySet="GunClubs" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ShootingRange_Locations" Association="InhQVLocationModel.Store.FK_ShootingRange_Locations">
+      <End Role="Locations" EntitySet="Locations" />
+      <End Role="ShootingRange" EntitySet="ShootingRange" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Actors">
+    <Key>
+      <PropertyRef Name="ActorId" />
+    </Key>
+    <Property Name="ActorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="EventLocation">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="int" Nullable="false" />
+    <Property Name="LocationName" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="GunClubs">
+    <Key>
+      <PropertyRef Name="ClubId" />
+    </Key>
+    <Property Name="ClubId" Type="int" Nullable="false" />
+    <Property Name="ClubName" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Locations">
+    <Key>
+      <PropertyRef Name="LocationId" />
+    </Key>
+    <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="Address" Type="varchar" Nullable="false" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="ShootingRange">
+    <Key>
+      <PropertyRef Name="RangeId" />
+    </Key>
+    <Property Name="RangeId" Type="int" Nullable="false" />
+    <Property Name="RangeName" Type="varchar" Nullable="false" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_EventLocation_Locations">
+    <End Role="Locations" Type="InhQVLocationModel.Store.Locations" Multiplicity="1" />
+    <End Role="EventLocation" Type="InhQVLocationModel.Store.EventLocation" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="EventLocation">
+        <PropertyRef Name="LocationId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GunClubs_Locations">
+    <End Role="Locations" Type="InhQVLocationModel.Store.Locations" Multiplicity="1" />
+    <End Role="GunClubs" Type="InhQVLocationModel.Store.GunClubs" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="GunClubs">
+        <PropertyRef Name="ClubId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ShootingRange_Locations">
+    <End Role="Locations" Type="InhQVLocationModel.Store.Locations" Multiplicity="1" />
+    <End Role="ShootingRange" Type="InhQVLocationModel.Store.ShootingRange" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="Locations">
+        <PropertyRef Name="LocationId" />
+      </Principal>
+      <Dependent Role="ShootingRange">
+        <PropertyRef Name="RangeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="InsertEvent" IsComposable="false" Schema="dbo">
+    <CommandText>
+          declare @locid int
+          insert into Locations(Address) values (@Address)
+          set @locid = SCOPE_IDENTITY()
+          insert into EventLocation(LocationId,LocationName) values (@locid,@LocationName)
+          select @locid as LocationId
+        </CommandText>
+    <Parameter Name="LocationName" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateEvent" IsComposable="false" Schema="dbo">
+    <CommandText>
+          update Locations set Address = @Address where locationid = @LocationId
+          update eventlocation set locationname = @LocationName where LocationId =@LocationId
+        </CommandText>
+    <Parameter Name="LocationName" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteEvent" IsComposable="false" Schema="dbo">
+    <CommandText>
+          delete Locations where LocationId = @LocationId
+          delete eventlocation where locationid = @LocationId
+        </CommandText>
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+  </Function>
+  <!-- club crud -->
+  <Function Name="InsertClub" IsComposable="false" Schema="dbo">
+    <CommandText>
+          declare @locid int
+          insert into Locations(Address) values (@Address)
+          set @locid = SCOPE_IDENTITY()
+          insert into GunClubs(ClubId,ClubName) values (@locid,@ClubName)
+          select @locid as LocationId
+        </CommandText>
+    <Parameter Name="ClubName" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateClub" IsComposable="false" Schema="dbo">
+    <CommandText>
+          update Locations set Address = @Address where locationid = @LocationId
+          update GunClubs set ClubName = @ClubName where LocationId =@LocationId
+        </CommandText>
+    <Parameter Name="ClubName" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteClub" IsComposable="false" Schema="dbo">
+    <CommandText>
+          delete GunClubs where ClubId = @LocationId
+        </CommandText>
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+  </Function>
+  <!-- Shooting Range -->
+  <Function Name="InsertRange" IsComposable="false" Schema="dbo">
+    <CommandText>
+          declare @locid int
+          insert into Locations(Address) values (@Address)
+          set @locid = SCOPE_IDENTITY()
+          insert into ShootingRange(RangeId,RangeName) values (@locid,@RangeName)
+          select @locid as LocationId
+        </CommandText>
+    <Parameter Name="RangeName" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="UpdateRange" IsComposable="false" Schema="dbo">
+    <CommandText>
+          update Locations set Address = @Address where locationid = @LocationId
+          update ShootingRange set RangeName = @RangeName where RangeId =@LocationId
+        </CommandText>
+    <Parameter Name="RangeName" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="varchar" Mode="In" />
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="DeleteRange" IsComposable="false" Schema="dbo">
+    <CommandText>
+          delete ShootingRange where RangeId = @LocationId
+        </CommandText>
+    <Parameter Name="LocationId" Type="int" Mode="In" />
+  </Function>
+</Schema>

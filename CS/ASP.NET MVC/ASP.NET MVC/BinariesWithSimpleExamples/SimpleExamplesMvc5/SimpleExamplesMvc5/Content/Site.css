@@ -1,0 +1,130 @@
+﻿body {
+    padding: 0 5px 20px 5px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* styles for validation helpers */
+.field-validation-error {
+    color: #b94a48;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+input.input-validation-error {
+    border: 1px solid #b94a48;
+}
+
+input[type="checkbox"].input-validation-error {
+    border: 0 none;
+}
+
+.validation-summary-errors {
+    color: #b94a48;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+.watermark
+{
+    background-color: #CCFFFF;
+    color: #669999;
+    font-style:italic;
+}
+.normalRow 
+{
+    background-color: #FFFF66 !important; 
+}
+.alternateRow
+{ 
+    background-color: #FF99FF !important; 
+}
+.inverted
+{
+    color:White;
+    background-color: Black;
+}
+.normal
+{
+    color:Black;
+    background-color: White;
+}
+div.editor-field
+{
+    margin: 5px 5px 5px 5px;
+}
+.editor-field > input[type="text"]
+{
+    width: 200px !important;
+}
+table.centered tr
+{
+    vertical-align:middle
+}
+table.centered td
+{
+    text-align: center;
+}
+ul.SortableList
+{
+    list-style-type: none; 
+    margin: 0; 
+    padding: 0; 
+}
+
+ul.SortableList li
+{
+    margin: 0 3px 3px 3px; 
+    padding: 0.4em; 
+    padding-left: 1.5em;
+    width: 35em;
+    background-color:Silver;
+}
+ul.SortableList li div
+{
+    background-color:White;
+}
+table.grid td{
+    border:solid 1px Gray;
+}
+.NormalHeaderToDo
+{
+    
+    margin: 0px 0px 0px 0px;
+    border-style:none;
+    color:Black;
+    cursor:pointer;
+    
+}
+.AscendingHeaderToDo 
+{
+    
+     margin: 0px 0px 0px 0px;
+     border-style:none;
+     color:Blue;
+     cursor:pointer;
+}
+
+.DescendingHeaderToDo
+{
+     
+     margin: 0px 0px 0px 0px;
+     border-style:none;
+     color:Red;
+     cursor:pointer;
+}

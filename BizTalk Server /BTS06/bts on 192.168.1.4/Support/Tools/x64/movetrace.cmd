@@ -1,0 +1,1 @@
+move Btstrace.bin output\BtsTrace.bin

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<configuration>
+  <system.diagnostics>
+    <!-- To turn on HWS tracing, set the following switches' value to 1 -->
+    <switches>
+      <add name="HwsAllTrace" value="0" />
+      <add name="HwsConfigurations.dll" value="0" />
+      <add name="HwsService.dll" value="0" />
+      <add name="Auth.dll" value="0" />
+      <add name="ActionManager.dll" value="0" />
+      <add name="ActivityFlowDictionary.dll" value="0" />
+      <add name="ActivityFlowRetriever.dll" value="0" />
+      <add name="ActivityModelManager.dll" value="0" />
+      <add name="HwsMessageEvent.dll" value="0" />
+      <add name="HwsMessageInterceptor.dll" value="0" />
+      <add name="CompositionManager.dll" value="0" />
+      <add name="ConstraintManager.dll" value="0" />
+      <add name="FactStoreManager.dll" value="0" />
+    </switches>
+
+    <!-- To register a listener, uncomment the following trace tag.
+      <trace autoflush="true" indentsize="4">
+  	  <listeners>
+  	    <add name="HwsTraceListener" type="System.Diagnostics.TextWriterTraceListener" initializeData="HwsTrace.log" />
+  	  </listeners>
+      </trace>
+    -->
+
+  </system.diagnostics>
+  <system.web>
+    <!--  DYNAMIC DEBUG COMPILATION
+          Set compilation debug="true" to enable ASPX debugging.  Otherwise, setting this value to
+          false will improve runtime performance of this application. 
+          Set compilation debug="true" to insert debugging symbols (.pdb information)
+          into the compiled page. Because this creates a larger file that executes
+          more slowly, you should set this value to true only when debugging and to
+          false at all other times. For more information, refer to the documentation about
+          debugging ASP .NET files.
+    -->
+    <compilation 
+         defaultLanguage="c#"
+         debug="false" >
+	    <assemblies>
+	        <add assembly="Microsoft.BizTalk.Hws.HwsService, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" />
+	    </assemblies>
+    </compilation>
+    <!--  CUSTOM ERROR MESSAGES
+          Set customError mode values to control the display of user-friendly 
+          error messages to users instead of error details (including a stack trace):
+
+          "On" Always display custom (friendly) messages  
+          "Off" Always display detailed ASP.NET error information.
+          "RemoteOnly" Display custom (friendly) messages only to users not running 
+          on the local Web server. This setting is recommended for security purposes, so 
+          that you do not display application detail information to remote clients.
+    -->
+    <customErrors 
+    mode="RemoteOnly" 
+    /> 
+
+    <!--  AUTHENTICATION 
+          This section sets the authentication policies of the application. Possible modes are "Windows", "Forms", 
+          "Passport" and "None"
+    -->
+    <authentication mode="Windows" />
+    <authorization>
+      <deny users="?" />
+    </authorization>
+
+    <!--  APPLICATION-LEVEL TRACE LOGGING
+          Application-level tracing enables trace log output for every page within an application. 
+          Set trace enabled="true" to enable application trace logging.  If pageOutput="true", the
+          trace information will be displayed at the bottom of each page.  Otherwise, you can view the 
+          application trace log by browsing the "trace.axd" page from your web application
+          root. 
+    -->
+    <trace
+        enabled="false"
+        requestLimit="10"
+        pageOutput="false"
+        traceMode="SortByTime"
+		localOnly="true"
+    />
+
+    <!--  SESSION STATE SETTINGS
+          By default ASP .NET uses cookies to identify which requests belong to a particular session. 
+          If cookies are not available, a session can be tracked by adding a session identifier to the URL. 
+          To disable cookies, set sessionState cookieless="true".
+    -->
+    <sessionState 
+            mode="InProc"
+            stateConnectionString="tcpip=127.0.0.1:42424"
+            sqlConnectionString="data source=127.0.0.1;Trusted_Connection=yes"
+            cookieless="false" 
+            timeout="20" 
+    />
+
+    <!--  GLOBALIZATION
+          This section sets the globalization settings of the application. 
+    -->
+    <globalization 
+            requestEncoding="utf-8" 
+            responseEncoding="utf-8" 
+   />
+
+   <identity impersonate="true" 
+	userName="registry:HKLM\SOFTWARE\Microsoft\BizTalk Server\3.0\Hws\WebService\Identity\ASPNET_SETREG,userName"
+	password="registry:HKLM\SOFTWARE\Microsoft\BizTalk Server\3.0\Hws\WebService\Identity\ASPNET_SETREG,password"
+	/>
+   
+   <trust level="Full" originUrl="" />
+ </system.web>
+
+</configuration>

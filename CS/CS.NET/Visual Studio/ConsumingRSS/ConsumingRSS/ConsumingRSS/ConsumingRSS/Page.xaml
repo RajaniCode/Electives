@@ -1,0 +1,31 @@
+﻿<UserControl xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"  x:Class="ConsumingRSS.Page"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+   xmlns:local="clr-namespace:SilverlightHtmlTextBlock;assembly=HtmlTextBlock" >
+    <Grid x:Name="LayoutRoot" Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <TextBox x:Name="txtFeedLoc" Width="450" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" ></TextBox>
+        <Button x:Name="btnFetch" Grid.Row="0" Content="Fetch RSS" Width="100" HorizontalAlignment="Left" Grid.Column="1"  Click="btnFetch_Click"></Button>
+        <data:DataGrid x:Name="dGrid" AutoGenerateColumns="False" IsReadOnly="True" CanUserSortColumns="True" Grid.Row="1" Grid.ColumnSpan="2">
+            <data:DataGrid.Columns>
+                <data:DataGridTemplateColumn>
+                    <data:DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <HyperlinkButton Content="{Binding Title}" NavigateUri="{Binding NavURL}" TargetName="_blank"/>
+                                <local:HtmlTextBlock Text="{Binding Description}" TextWrapping="Wrap" UseLayoutRounding="True"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </data:DataGridTemplateColumn.CellTemplate>
+                </data:DataGridTemplateColumn>
+            </data:DataGrid.Columns>
+        </data:DataGrid>
+    </Grid>
+</UserControl>

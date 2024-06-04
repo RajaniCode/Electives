@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DDQModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+		  <EntityContainer Name="DDQModelStoreContainer">
+			  <EntitySet Name="GetCusSales" EntityType="DDQModel.Store.GetCusSale">
+				  <DefiningQuery>
+					  select null CustomerID, cast(0 as decimal) TotalSales
+					  where 1 = 2
+				  </DefiningQuery>
+			  </EntitySet>
+		  </EntityContainer>
+		  <EntityType Name="GetCusSale">
+			  <Key>
+				  <PropertyRef Name="CustomerID" />
+			  </Key>
+			  <Property Name="CustomerID" Type="varchar" Nullable="false" />
+			  <Property Name="TotalSales" Type="decimal" Nullable="false" />
+		  </EntityType>
+        <Function Name="GetCusSales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DDQModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="DDQEntities" >
+          <EntitySet Name="CustomerSales" EntityType="DDQModel.CustomerSale" />
+          <FunctionImport Name="GetCusSales" EntitySet="CustomerSales" ReturnType="Collection(DDQModel.CustomerSale)" /></EntityContainer>
+        <EntityType Name="CustomerSale">
+          <Key>
+            <PropertyRef Name="CustomerID" /></Key>
+          <Property Name="CustomerID" Type="String" Nullable="false" />
+          <Property Name="TotalSales" Type="Decimal" Nullable="false" />
+		</EntityType>
+	  </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="DDQModelStoreContainer" CdmEntityContainer="DDQEntities" >
+          <FunctionImportMapping FunctionImportName="GetCusSales" FunctionName="DDQModel.Store.GetCusSales" />
+          <EntitySetMapping Name="CustomerSales">
+            <EntityTypeMapping TypeName="IsTypeOf(DDQModel.CustomerSale)">
+              <MappingFragment StoreEntitySet="GetCusSales">
+                <ScalarProperty Name="TotalSales" ColumnName="TotalSales" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" /></MappingFragment></EntityTypeMapping></EntitySetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="DDQ" >
+        <EntityTypeShape EntityType="DDQModel.CustomerSale" Width="1.5" PointX="5.25" PointY="1.375" Height="1.4033821614583331" /></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

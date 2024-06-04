@@ -1,0 +1,707 @@
+<!- (c) Microsoft Corporation -->
+<HTML DIR="LTR">
+	<HEAD>
+		<TITLE>
+			C# Add Class Wizard
+		</TITLE>
+		<META NAME="vs_targetSchema" CONTENT="http://schemas.microsoft.com/intellisense/ie5">
+		<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+		<STYLE TYPE="text/css">
+			@import url();
+		</STYLE>
+		
+		<SCRIPT>
+		var strURL = "../../../";
+		strURL += window.external.GetHostLocale();
+		strURL += "/NewStyles.css";
+		document.styleSheets(0).imports(0).href = strURL;
+		</SCRIPT>
+		
+		<SYMBOL NAME="CLASS_NAME" TYPE=text VALUE="">
+		</SYMBOL>
+		<SYMBOL NAME="CLASS_NAMESPACE" TYPE=text VALUE="">
+		</SYMBOL>
+		<SYMBOL NAME="BASE_CLASS_NAME" TYPE=text VALUE="None">
+		</SYMBOL>
+		<SYMBOL NAME="BASE_CLASS_NAMESPACE" TYPE=text VALUE="">
+		</SYMBOL>
+		<SYMBOL NAME="INTERFACE_NAMESPACE" TYPE=text VALUE="">
+		</SYMBOL>
+		<SYMBOL NAME="FILENAME" TYPE=text VALUE="">
+		</SYMBOL>
+		<SYMBOL NAME="ACCESS" TYPE="select-one" VALUE=1>
+		</SYMBOL>
+		<SYMBOL NAME="MODIFIER_NONE" TYPE=checkbox VALUE=true>
+		</SYMBOL>
+		<SYMBOL NAME="ABSTRACT" TYPE=checkbox VALUE=false>
+		</SYMBOL>
+		<SYMBOL NAME="SEALED" TYPE=checkbox VALUE=false>
+		</SYMBOL>
+		<SYMBOL NAME="COMMENT" TYPE=text VALUE="">
+		</SYMBOL>
+		<SYMBOL NAME="IMPLEMENT_INTERFACES_LIST" TYPE=text VALUE="">
+		</SYMBOL>
+	</HEAD>
+	<BODY BGCOLOR="buttonface" TOPMARGIN="0" LEFTMARGIN="0" RIGHTMARGIN="0" BOTTOMMARGIN="0" ONLOAD="InitDocument(document);" ONKEYDOWN="OnKey();" ONKEYPRESS="OnPress()">
+		<TABLE CLASS="ONE" HEIGHT="100%" WIDTH="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+				<COL WIDTH="178">
+					<COL>
+						<!--OPEN OF INTRODUCTORY INFORMATION TABLE//-->
+						<TR VALIGN="top">
+							<TD HEIGHT="79" WIDTH="100%" COLSPAN="2">
+								<TABLE CLASS="TWO" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+										<COL WIDTH="12">
+											<COL>
+												<COL WIDTH="12">
+													<TR>
+														<TD VALIGN="top" HEIGHT="12" WIDTH="12">
+															&nbsp;
+														</TD>
+														<TD VALIGN="top" HEIGHT="12">
+															&nbsp;
+														</TD>
+														<TD VALIGN="top" HEIGHT="12" WIDTH="12">
+															&nbsp;
+														</TD>
+														<TD CLASS="IMAGE" VALIGN="bottom" WIDTH="110" ROWSPAN="2">
+															<DIV CLASS="SMALLA" ID="Layer0">
+																<IMG CLASS="SMALLEST" SRC="../../Images/CsCls.gif" WIDTH="63" HEIGHT="63" ALT="" BORDER="0">
+															</DIV>
+														</TD>
+														<TD VALIGN="top" HEIGHT="12" WIDTH="6" ROWSPAN="2">
+															&nbsp;
+														</TD>
+													</TR>
+													<TR>
+														<TD VALIGN="top" HEIGHT="65" WIDTH="12">
+															&nbsp;
+														</TD>
+														<TD VALIGN="top" HEIGHT="65">
+															<H4 CLASS="HEAD" ID="HEAD">Welcome to the C# Add Class Wizard</H4>
+															<P CLASS="SUBHEAD" ID="SUBHEAD">
+																This wizard adds a C# class to your project.
+															</P>
+														</TD>
+														<TD VALIGN="top" HEIGHT="65" WIDTH="12">
+															&nbsp;
+														</TD>
+													</TR>
+													<TR>
+														<TD VALIGN="top" CLASS="RULE" COLSPAN="5" HEIGHT="2">
+															<TABLE BORDER="0" WIDTH="100%" HEIGHT="1" CELLPADDING="0" CELLSPACING="0">
+																<TR VALIGN="top">
+																	<TD HEIGHT="1" WIDTH="100%" BGCOLOR="buttonshadow"></TD>
+																	<TD HEIGHT="1" WIDTH="1" BGCOLOR="window"></TD>
+																</TR>
+															</TABLE>
+														</TD>
+													</TR>
+								</TABLE>
+							</TD>
+						</TR>
+						<!--CLOSE OF INTRODUCTORY INFORMATION TABLE//-->
+						<!--OPEN OF NAVIGATION, CONTENT, AND BUTTON TABLES//-->
+						<TR VALIGN="top">
+							<TD CLASS="Three" VALIGN="TOP" HEIGHT="100%" WIDTH="178">
+								<TABLE CLASS="fixedSize" HEIGHT="100%" WIDTH="178" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+									<TR VALIGN="TOP">
+										<TD CLASS="threeCustom" VALIGN="TOP" STYLE="BACKGROUND-IMAGE: url(../../Images/CsClsBg.gif)">
+											<!--OPEN OF NAVIGATION TABLE//-->
+											<TABLE CLASS="THREE" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+												
+													<COL WIDTH="12">
+														<COL WIDTH="166">
+															<COL WIDTH="1">
+																<TR>
+																	<TD VALIGN="top" COLSPAN="3" HEIGHT="12">
+																		&nbsp;
+																	</TD>
+																</TR>
+																<TR>
+																	<TD VALIGN="top" HEIGHT="100%" WIDTH="12">
+																		&nbsp;
+																	</TD>
+																	<TD VALIGN="top" HEIGHT="100%" WIDTH="165">
+																		<!--OPEN OF NAVIGATIONAL LINKS//-->
+																		<DIV CLASS="LINKSELECTED">
+																			<SPAN CLASS="VERTLINE1">
+																				<IMG SRC="../../Images/spacer.gif" WIDTH="1" HEIGHT="1" ALT="" BORDER="0">
+																			</SPAN>
+																			<SPAN CLASS="HORILINE1">
+																				<TABLE WIDTH="167" HEIGHT="100%" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+																					<TR VALIGN="top">
+																						<TD CLASS="DOTTEDLINE" HEIGHT="1">
+																						</TD>
+																					</TR>
+																					<TR VALIGN="top">
+																						<TD HEIGHT="100%">
+																							<IMG SRC="../../Images/spacer.gif" WIDTH="1" HEIGHT="28" ALT="" BORDER="0">
+																						</TD>
+																					</TR>
+																					<TR VALIGN="top">
+																						<TD CLASS="DOTTEDLINE" HEIGHT="1">
+																						</TD>
+																					</TR>
+																				</TABLE>
+																			</SPAN>
+																			<TABLE WIDTH="160" HEIGHT="28" BORDER="0" CELLPADDING="0" CELLSPACING="0" CLASS="LINKTEXTSELECTED">
+																				<TR VALIGN="center">
+																					<TD WIDTH="156">
+																						<SPAN ID="Default" TITLE="Specify class and file names.">
+																							Class Options
+																						</SPAN>
+																					</TD>
+																					<TD WIDTH="4"><IMG SRC="../../Images/spacer.gif" HEIGHT="1" WIDTH="4"></TD>
+																				</TR>
+																			</TABLE>
+																		</DIV>
+																		<DIV CLASS="LINK">
+																			<TABLE WIDTH="166" HEIGHT="28" BORDER="0" CELLPADDING="0" CELLSPACING="0" CLASS="LINKTEXT">
+																				<TR VALIGN="center">
+																					<TD WIDTH="162">
+																						<SPAN CLASS="ACTIVELINK" ID="BaseClass" TITLE="" onClick="Next(document, 'BaseClass.htm');" TABINDEX="1">
+																							Base Class
+																						</SPAN>
+																					</TD>
+																					<TD WIDTH="4">
+																						<IMG SRC="../../Images/spacer.gif" HEIGHT="1" WIDTH="4"></TD>
+																				</TR>
+																			</TABLE>
+																		</DIV>
+																		<DIV CLASS="LINK">
+																			<TABLE WIDTH="166" HEIGHT="28" BORDER="0" CELLPADDING="0" CELLSPACING="0" CLASS="LINKTEXT">
+																				<TR VALIGN="center">
+																					<TD WIDTH="162">
+																						<SPAN CLASS="ACTIVELINK" ID="Inheritance" TITLE="" onClick="Next(document, 'inheritance.htm');" TABINDEX="2">
+																							Inheritance
+																						</SPAN>
+																					</TD>
+																					<TD WIDTH="4">
+																						<IMG SRC="../../Images/spacer.gif" HEIGHT="1" WIDTH="4"></TD>
+																				</TR>
+																			</TABLE>
+																		</DIV>
+																		<!--CLOSE OF NAVIGATIONAL LINKS//-->
+																	</TD>
+																	<TD WIDTH="1">
+																		<DIV CLASS="VERTLINE">
+																			<IMG SRC="../../Images/spacer.gif" WIDTH="1" HEIGHT="1" ALT="" BORDER="0">
+																		</DIV>
+																	</TD>
+																</TR>
+											</TABLE>
+										</TD>
+									</TR>
+								</TABLE>
+								<!--CLOSE OF NAVIGATION TABLE//-->
+							</TD>
+							<TD VALIGN="top" HEIGHT="100%">
+								<!--OPEN OF CONTENT AND BUTTON TABLE//-->
+								<TABLE CLASS="ONE" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+									
+										<COL WIDTH="100%">
+											<TR VALIGN="top">
+												<TD HEIGHT="100%">
+													<!--OPEN OF CONTENT//-->
+													<TABLE CLASS="CONTENT" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+														
+															<COL WIDTH="12">
+																<COL WIDTH="193">
+																	<COL WIDTH="12">
+																		<COL WIDTH="193">
+																			<COL WIDTH="12">
+																				<TR>
+																					<TD VALIGN="top" HEIGHT="12" COLSPAN="3">
+																						&nbsp;
+																					</TD>
+																				</TR>
+																				<TR>
+																					<TD VALIGN="top" WIDTH="12">
+																						&nbsp;
+																					</TD>
+																					<TD VALIGN="top">
+																						<SPAN CLASS="itemTextTop" TITLE="">
+																							<LABEL FOR="CLASS_NAME" ID="CLASS_NAME_LABEL">
+																								C<U>l</U>ass name:</LABEL>
+																							<BR>
+																							<INPUT CLASS="sideBtn" ID="CLASS_NAME" TYPE="text" ACCESSKEY="L" TITLE="" onPropertychange="OnClassName();" TABINDEX="3">
+																						</SPAN>
+																						<P CLASS="ElementSpacer12">
+																							&nbsp;
+																						</P>
+																						<NOBR>
+																							<SPAN CLASS="itemText" TITLE="">
+																								<LABEL FOR="FILENAME" ID="FILENAME_LABEL">
+																									F<U>i</U>le name:</LABEL>
+																								<BR>
+																								<INPUT CLASS="sideBtn2" ID="FILENAME" ACCESSKEY="I" TITLE="" TYPE="text" TABINDEX="5">
+																							</SPAN>
+																							<BUTTON CLASS="buttonClass3" ID="BrowseBtn" TYPE="button" TITLE="" onClick="OnBrowseFile();" TABINDEX="6">
+																								...
+																							</BUTTON>
+																						</NOBR>
+																						<P CLASS="ElementSpacer2">
+																							&nbsp;
+																						</P>
+																						<SPAN CLASS="itemText" ID="CLASS_MODIFIERS_SPAN">
+																							Class modifiers:
+																							<P CLASS="Spacer">
+																								&nbsp;
+																							</P>
+																							<INPUT TYPE="radio" CLASS="Radio" NAME="abstract" ID="MODIFIER_NONE" ACCESSKEY="O" TITLE="" TABINDEX="8">
+																							<DIV CLASS="itemTextRadioB" TITLE="" ID="abstract_title">
+																								<LABEL FOR="MODIFIER_NONE" ID="MODIFIER_NONE_LABEL">
+																									N<U>o</U>ne</LABEL>
+																							</DIV>
+																							<BR>
+																							<INPUT TYPE="radio" CLASS="Radio" NAME="abstract" ID="ABSTRACT" ACCESSKEY="B" TITLE="" TABINDEX="8">
+																							<DIV CLASS="itemTextRadioB" TITLE="" ID="abstract_title2">
+																								<LABEL FOR="ABSTRACT" ID="ABSTRACT_LABEL">
+																									A<U>b</U>stract</LABEL>
+																							</DIV>
+																							<BR>
+																							<INPUT TYPE="radio" CLASS="Radio" NAME="abstract" ID="SEALED" ACCESSKEY="S" TITLE="" TABINDEX="8">
+																							<DIV CLASS="itemTextRadioB" TITLE="" ID=Div1>
+																								<LABEL FOR="SEALED" ID="SEALED_LABEL">
+																									<U>S</U>ealed</LABEL>
+																							</DIV>
+																						</SPAN>
+																						<P CLASS="ElementSpacer18">
+																							&nbsp;
+																						</P>
+																						<SPAN CLASS="itemText" TITLE="">
+																							<NOBR>
+																								<LABEL FOR="COMMENT" ID="COMMENT_LABEL">
+																									Co<U>m</U>ment (// notation not required):</LABEL>
+																							</NOBR>
+																							<BR>
+																							<INPUT CLASS="COMMENTA" TYPE="text" ID="COMMENT" ACCESSKEY="M" TITLE="" TABINDEX="9">
+																						</SPAN>
+																					</TD>
+																					<TD VALIGN="top" WIDTH="12">
+																						&nbsp;
+																					</TD>
+																					<TD VALIGN="top">
+																						<SPAN CLASS="itemTextTop" TITLE="">
+																							<LABEL FOR="ClassNamespace" ID="ClassNamespace_LABEL">
+																								<U>N</U>amespace:</LABEL>
+																							<BR>
+																							<INPUT ID="CLASS_NAMESPACE" TYPE="hidden">
+																							</INPUT>
+																							<OBJECT CLASS="itemText" ID="ClassNamespace" ACCESSKEY="N" TABINDEX=4 CLASSID="CLSID:BFD56283-7546-4dfe-8C5E-AE4FEDC08656" VIEWASTEXT>
+	</OBJECT>
+																						</SPAN>
+																						<P CLASS="ElementSpacer12">
+																							&nbsp;
+																						</P>
+																						<SPAN CLASS="itemText" TITLE="">
+																							<LABEL FOR="ACCESS" ID="ACCESS_LABEL">
+																								<U>A</U>ccess:</LABEL>
+																							<BR>
+																							<SELECT CLASS="sideBtn" ID="ACCESS" SIZE="1" ACCESSKEY="A" TITLE="" VALUE="16" TABINDEX="7">
+																								&lt;-- vsCMAccessDefault = 16 --&gt;
+																								<OPTION value=1 ID="PUBLIC_OPTION" SELECTED>
+																									public
+																								</OPTION>
+																								&lt;-- vsCMAccessPublic = 1 --&gt;
+																								<OPTION value=4 ID="INTERNAL_OPTION">
+																									internal
+																								</OPTION>
+																								&lt;-- vsCMAccessProject = 4 --&gt;
+																							</SELECT>
+																						</SPAN>
+																					</TD>
+																					<TD VALIGN="top" WIDTH="12">
+																						&nbsp;
+																					</TD>
+																				</TR>
+													</TABLE>
+													<!--CLOSE OF CONTENT//-->
+												</TD>
+											</TR>
+											<TR VALIGN="bottom">
+												<TD HEIGHT="48">
+													<!--OPEN OF BUTTON HTML//-->
+													<TABLE HEIGHT="48" BORDER="0" CELLPADDING="0" CELLSPACING="0">
+														
+															<COL WIDTH="12">
+																<COL>
+																	<COL WIDTH="75">
+																		<COL WIDTH="4">
+																			<COL WIDTH="75">
+																				<COL WIDTH="4">
+																					<COL WIDTH="75">
+																						<COL WIDTH="12">
+																							<TR>
+																								<TD VALIGN="top" CLASS="RULE" COLSPAN="8" HEIGHT="2">
+																									<TABLE BORDER="0" WIDTH="100%" HEIGHT="1" CELLPADDING="0" CELLSPACING="0">
+																										<TR VALIGN="top">
+																											<TD HEIGHT="1" WIDTH="100%" BGCOLOR="buttonshadow"></TD>
+																											<TD HEIGHT="1" WIDTH="1" BGCOLOR="window"></TD>
+																										</TR>
+																									</TABLE>
+																								</TD>
+																							</TR>
+																							<TR>
+																								<TD VALIGN="top" HEIGHT="11" COLSPAN="8">
+																									&nbsp;
+																								</TD>
+																							</TR>
+																							<TR>
+																								<TD VALIGN="center" HEIGHT="23" WIDTH="12">
+																									&nbsp;
+																								</TD>
+																								<TD VALIGN="top" HEIGHT="23">
+																									&nbsp;
+																								</TD>
+																								<TD VALIGN="center" HEIGHT="23" WIDTH="75">
+																									<BUTTON CLASS="BUTTONS" ID="FinishBtn" onClick="OnFinish(document);" type=button>
+																										Finish
+																									</BUTTON>
+																								</TD>
+																								<TD VALIGN="center" HEIGHT="23" WIDTH="4">
+																									&nbsp;
+																								</TD>
+																								<TD VALIGN="center" HEIGHT="23" WIDTH="75">
+																									<BUTTON CLASS="BUTTONS" ID="CancelBtn" onClick="window.external.Finish(document, 'cancel');" type=button>
+																										Cancel
+																									</BUTTON>
+																								</TD>
+																								<TD VALIGN="center" HEIGHT="23" WIDTH="4">
+																									&nbsp;
+																								</TD>
+																								<TD VALIGN="center" HEIGHT="23" WIDTH="75">
+																									<BUTTON CLASS="BUTTONS" ID="HelpBtn" onClick="window.external.OnHelp('vc.codewiz.class.cs.overview');" type=button>
+																										Help
+																									</BUTTON>
+																								</TD>
+																								<TD VALIGN="center" HEIGHT="23" WIDTH="12">
+																									&nbsp;
+																								</TD>
+																							</TR>
+																							<TR>
+																								<TD VALIGN="top" HEIGHT="12" COLSPAN="8">
+																									&nbsp;
+																								</TD>
+																							</TR>
+													</TABLE>
+													<!--CLOSE OF BUTTON HTML//-->
+												</TD>
+											</TR>
+								</TABLE>
+								<!--CLOSE OF NAVIGATION, CONTENT, AND BUTTON TABLES//-->
+							</TD>
+						</TR>
+		</TABLE>
+	</BODY>
+</HTML>
+<SCRIPT LANGUAGE="JSCRIPT">
+
+var tab_array = new Array();
+tab_array[0] = Default;
+tab_array[1] = BaseClass;
+tab_array[2] = Inheritance;
+
+function InitDocument(document)
+{
+	setDirection();
+	var bFirst = window.external.FindSymbol("DOCUMENT_FIRST_LOAD");
+	if (bFirst)
+	{
+		var L_WizardDialogTitle_Text = "C# Class Wizard";
+		window.external.AddSymbol("WIZARD_DIALOG_TITLE", L_WizardDialogTitle_Text);
+		window.external.SetDefaults(document);
+		window.external.AddSymbol("BASE_CLASS_NAME_STRING", "");
+		window.external.AddSymbol("INTERFACE_LIST_STRING", "");
+		window.external.AddSymbol("BASE_INTERFACE_NAME_STRING", "");
+		window.external.AddSymbol("ADD_CLASS_MERGE", false);		
+	}
+
+
+	window.external.Load(document);
+
+	PopulateNamespaces();
+	if (bFirst)
+	{
+		try
+		{
+			ClassNamespace.Value = window.external.ParentObject.Parent.Properties("RootNamespace").Value;
+		}
+		catch (e)
+		{
+			ClassNamespace.Value = "";
+		}
+	}
+	else
+		ClassNamespace.Value = window.external.FindSymbol("CLASS_NAMESPACE");
+
+	CLASS_NAME.focus();
+}
+
+function Next(document, linkto)
+{
+	UpdateSymbols();
+	if (!ValidateInput())
+		return;
+	window.external.Next(document, linkto);
+}
+
+function UpdateSymbols()
+{
+	CLASS_NAMESPACE.value = ClassNamespace.Value;
+	window.external.AddSymbol("ITEM_NAME", FILENAME.value);
+
+	var oAccess = document.all.tags("SELECT").item("ACCESS");
+	strAccess = oAccess.options[oAccess.selectedIndex].text;
+	window.external.AddSymbol("ACCESS_STRING", strAccess);
+}
+
+function OnFinish(document)
+{
+	UpdateSymbols();
+
+	if (!ValidateInput())
+		return;
+
+	var strBaseClass = window.external.FindSymbol("BASE_CLASS_NAME_STRING");
+	var strInterfacesName = window.external.FindSymbol("INTERFACE_LIST_STRING");
+	if(strBaseClass)
+		if (strInterfacesName)
+			window.external.AddSymbol("BASE_INTERFACE_NAME_STRING", strBaseClass + ", " + strInterfacesName);
+		else
+			window.external.AddSymbol("BASE_INTERFACE_NAME_STRING", strBaseClass);
+	else if (strInterfacesName)
+		window.external.AddSymbol("BASE_INTERFACE_NAME_STRING", " : " + strInterfacesName);
+
+	OnWizFinish(document);
+}
+
+function IsStandardNamespace(strName)
+{
+	if(strName != "")
+	{
+		var re = /Microsoft/i;
+		var index = strName.search(re);
+		if(index >= 0)
+			return true;
+		else
+		{
+			re = /System/i;
+			index = strName.search(re);
+			if(index >= 0)
+				return true;
+		}
+	}
+	return false;
+}
+
+function PopulateNamespaces()
+{
+	ClassNamespace.Clear();
+	var oCodeElements = window.external.ProjectObject.CodeModel.CodeElements;
+	var i;
+	for (i = 1; i <= oCodeElements.Count; i++)
+	{
+		var oCodeElement = oCodeElements(i);
+		if ((oCodeElement.Kind == vsCMElementNamespace) && (!IsStandardNamespace(oCodeElement.Name)))
+		{
+			PopulateChildNamespaces(oCodeElement, "")
+		}
+	}
+}
+
+function PopulateChildNamespaces(oNS, strParent) {
+	var oCodeElements = oNS.Members;
+	var i;
+	var strCodeElement;
+	if(strParent == "")
+		strCodeElement = oNS.Name;
+	else
+		strCodeElement = strParent + "." + oNS.Name;
+
+	ClassNamespace.AddItem(strCodeElement);
+	
+	for (i = 1; i <= oCodeElements.Count; i++)
+	{
+		var oCodeElement = oCodeElements(i);
+		if ((oCodeElement.Kind) && (oCodeElement.Kind == vsCMElementNamespace))
+		{
+			PopulateChildNamespaces(oCodeElement, strCodeElement);
+		}
+	}
+}
+
+function OnClassName()
+{
+	var strClassName = CLASS_NAME.value;
+	var strLen = strClassName.length;
+
+	if (strLen)
+		FILENAME.value = strClassName + ".cs";
+	else
+		FILENAME.value = "";
+}
+
+function OnBrowseFile()
+{
+	var strFile;
+	var strPath;
+	var iIndex;
+	try
+	{
+		L_Title1_Text = "VS Wizards Select File";
+		L_Title2_Text = "C# Files (*.cs)\0*.cs\0\0";
+		strFile = window.external.GetOpenFileNameViaDlg(L_Title1_Text, window.external.FindSymbol("PROJECT_PATH"), L_Title2_Text, FILENAME.value);
+		iIndex = strFile.lastIndexOf("\\");
+		strPath = strFile.substr(0, iIndex);
+		if(strPath != window.external.FindSymbol("PROJECT_PATH")) {
+			var Local_Err_Text = "You must select a file within the current project!";
+			alert(Local_Err_Text);
+			FILENAME.focus();
+			return;
+		}
+	}
+	catch(e)
+	{
+		if (e.number != OLE_E_PROMPTSAVECANCELLED)
+		{
+			L_Err1_Text = "Error: ";
+			window.external.ReportError(L_Err1_Text + e.description);
+		}
+		return;
+	}
+	FILENAME.value = strFile.substr(iIndex + 1);
+}
+
+function ValidateInput()
+{
+	var oInvalid = null;
+
+	if (!Validate(CLASS_NAME))
+		oInvalid = CLASS_NAME;
+
+	if (oInvalid == null)
+	{
+		if (!Validate(CLASS_NAMESPACE))
+			oInvalid = ClassNamespace;
+	}
+
+	if (oInvalid == null)
+	{
+		if (!Validate(FILENAME))
+			oInvalid = FILENAME;
+	}
+
+	if (oInvalid != null)
+	{
+		oInvalid.focus();
+		return false;
+	}
+	return true;
+}
+
+function Validate(obj)
+{
+	var bValid = true;
+	switch(obj.id)
+	{
+		case "CLASS_NAME":
+		{
+			if(""!=CLASS_NAME.value)
+			{
+				bValid = window.external.ValidateCSharpClass(ClassNamespace.Value, obj.value);
+				if(!bValid)
+					window.external.ReportError();
+			}
+			else
+			{
+				L_Err2_Text = "Class name cannot be empty.";
+				window.external.ReportError(L_Err2_Text);
+				bValid = false;
+			}
+		}
+		break;
+		case "CLASS_NAMESPACE":
+		{
+			if(""!=ClassNamespace.Value)
+			{
+				var lstTok = ClassNamespace.Value;
+				lstTok = lstTok.split(".");
+
+				for(i = 0; i < lstTok.length; i++)
+				{
+					if(!window.external.ValidateCLRIdentifier(lstTok[i]))
+					{
+						window.external.ReportError();
+						bValid = false;
+						break;
+					}
+				}
+
+			}
+			else
+			{
+				L_Err3_Text = "Namespace cannot be empty.";
+				window.external.ReportError(L_Err3_Text);
+				bValid = false;
+			}
+		}
+		break;
+		case "FILENAME":
+		{
+			if(""!=TrimStr(FILENAME.value))
+			{
+				var strExt;
+				var strName = FILENAME.value.substring(0, FILENAME.value.lastIndexOf("."));
+				if(!strName)
+				{
+					strName = FILENAME.value;
+					var strExt = "";
+				}
+				else
+				{
+					strExt = FILENAME.value.substr(FILENAME.value.lastIndexOf("."))
+				}
+				if(!strExt || ((strExt.length == 1) && (strExt.charAt(0) == '.')))
+					strExt = ".cs";
+				var strFileName = strName + strExt;
+				bValid = window.external.ValidateCSharpFile(strFileName);
+				if(bValid)
+					FILENAME.value = strFileName;
+				else
+					window.external.ReportError();
+			}
+			else
+			{
+				L_Err4_Text = "Filename can not be empty.";
+				window.external.ReportError(L_Err4_Text);
+				bValid = false;
+			}
+		}
+		break;
+		default:
+			break;
+	}
+
+	if (typeof(bValid) == "undefined")
+		bValid = false;
+
+	return bValid;
+}
+
+</SCRIPT>
+<SCRIPT ID="INCLUDE_SCRIPT" LANGUAGE="JSCRIPT">
+</SCRIPT>
+<SCRIPT ID="INCLUDE_COMMON" LANGUAGE="JSCRIPT">
+</SCRIPT>
+<SCRIPT>
+	var strPath = "../../../";
+	strPath += window.external.GetHostLocale();
+	var strScriptPath = strPath + "/Script.js";
+	var strCommonPath = strPath + "/Common.js";
+	document.scripts("INCLUDE_SCRIPT").src = strScriptPath;
+	document.scripts("INCLUDE_COMMON").src = strCommonPath;
+</SCRIPT>
+<SCRIPT FOR="ClassNamespace" EVENT="KeyDown(nKeyCode)">
+	OnWizComboKeyDown(nKeyCode);
+</SCRIPT>

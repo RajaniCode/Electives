@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="AuditTPCModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="AuditTPCModelStoreContainer">
+          <EntitySet Name="Category" EntityType="AuditTPCModel.Store.Category" store:Type="Tables" Schema="tpt" />
+          <EntitySet Name="Products" EntityType="AuditTPCModel.Store.Products" store:Type="Tables" Schema="tpt" />
+          <AssociationSet Name="FK_Products_Category" Association="AuditTPCModel.Store.FK_Products_Category">
+            <End Role="Category" EntitySet="Category" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="CategoryId" />
+          </Key>
+          <Property Name="CategoryId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="ProductId" />
+          </Key>
+          <Property Name="ProductId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="CreateDate" Type="date" Nullable="false" />
+          <Property Name="CreatedBy" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="ModifiedDate" Type="date" Nullable="false" />
+          <Property Name="CategoryId" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Products_Category">
+          <End Role="Category" Type="AuditTPCModel.Store.Category" Multiplicity="1" />
+          <End Role="Products" Type="AuditTPCModel.Store.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="CategoryId" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="CategoryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AuditTPCModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="AuditTPCEntities">
+          <AssociationSet Name="FK_Products_Category" Association="AuditTPCModel.FK_Products_Category">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+			<EntitySet Name="Categories" EntityType="AuditTPCModel.Category" />
+			<EntitySet Name="Products" EntityType="AuditTPCModel.Product" />
+		</EntityContainer>
+        <EntityType Name="Category" BaseType="AuditTPCModel.Audit">
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Products" Relationship="AuditTPCModel.FK_Products_Category" FromRole="Category" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Product" BaseType="AuditTPCModel.Audit">
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Category" Relationship="AuditTPCModel.FK_Products_Category" FromRole="Products" ToRole="Category" />
+        </EntityType>
+        <Association Name="FK_Products_Category">
+          <End Role="Category" Type="AuditTPCModel.Category" Multiplicity="1" />
+          <End Role="Products" Type="AuditTPCModel.Product" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Audit" Abstract="true">
+          <Key>
+            <PropertyRef Name="Id" /></Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ModifiedDate" Type="DateTime" Nullable="false" />
+          <Property Name="CreatedBy" Type="String" Nullable="false" />
+          <Property Name="CreateDate" Type="DateTime" Nullable="false" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="AuditTPCModelStoreContainer" CdmEntityContainer="AuditTPCEntities">
+          <EntitySetMapping Name="Categories">
+			  <EntityTypeMapping TypeName="IsTypeOf(AuditTPCModel.Category)">
+              <MappingFragment StoreEntitySet="Category">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+				  <ScalarProperty Name="Id" ColumnName="CategoryId" />
+				  <ScalarProperty Name="CreateDate" ColumnName="CreateDate"/>
+				  <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy"/>
+				  <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate"/>
+                </MappingFragment>
+            </EntityTypeMapping>
+		  </EntitySetMapping>
+			<EntitySetMapping Name="Products">
+				<EntityTypeMapping TypeName="IsTypeOf(AuditTPCModel.Product)">
+					<MappingFragment StoreEntitySet="Products">
+						<ScalarProperty Name="Name" ColumnName="Name" />
+						<ScalarProperty Name="Id" ColumnName="ProductId" />
+						<ScalarProperty Name="CreateDate" ColumnName="CreateDate"/>
+						<ScalarProperty Name="CreatedBy" ColumnName="CreatedBy"/>
+						<ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate"/>
+					</MappingFragment>
+				</EntityTypeMapping>
+			</EntitySetMapping>
+          <AssociationSetMapping Name="FK_Products_Category" TypeName="AuditTPCModel.FK_Products_Category" StoreEntitySet="Products">
+			  <EndProperty Name="Category">
+				  <ScalarProperty Name="Id" ColumnName="CategoryId"/>
+			  </EndProperty>
+			  <EndProperty Name="Products">
+				  <ScalarProperty Name="Id" ColumnName="ProductId" />
+			  </EndProperty>
+            </AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="false" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="AuditTPC">
+        <EntityTypeShape EntityType="AuditTPCModel.Category" Width="1.5" PointX="1.5" PointY="4.375" Height="1.2636116536458335" IsExpanded="true" />
+        <EntityTypeShape EntityType="AuditTPCModel.Product" Width="1.5" PointX="4.125" PointY="4.375" Height="1.2636116536458335" IsExpanded="true" />
+        <AssociationConnector Association="AuditTPCModel.FK_Products_Category" ManuallyRouted="false">
+          <ConnectorPoint PointX="3" PointY="5.0068058268229167" />
+          <ConnectorPoint PointX="4.125" PointY="5.0068058268229167" />
+          </AssociationConnector>
+        <EntityTypeShape EntityType="AuditTPCModel.Audit" Width="1.5" PointX="2.875" PointY="2.125" Height="1.099264322916667" />
+        <InheritanceConnector EntityType="AuditTPCModel.Category">
+          <ConnectorPoint PointX="2.875" PointY="2.6746321614583337" />
+          <ConnectorPoint PointX="2.1874995" PointY="2.6746321614583337" />
+          <ConnectorPoint PointX="2.1874995" PointY="4.375" /></InheritanceConnector>
+        <InheritanceConnector EntityType="AuditTPCModel.Product" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.25" PointY="3.224264322916667" />
+          <ConnectorPoint PointX="4.25" PointY="4.375" />
+          </InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

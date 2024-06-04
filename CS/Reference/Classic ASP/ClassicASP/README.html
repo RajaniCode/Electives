@@ -1,0 +1,1742 @@
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns:st1="urn:schemas-microsoft-com:office:smarttags"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=utf-8">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 11">
+<meta name=Originator content="Microsoft Word 11">
+<link rel=File-List href="README_files/filelist.xml">
+<link rel=Edit-Time-Data href="README_files/editdata.mso">
+<!--[if !mso]>
+<style>
+v\:* {behavior:url(#default#VML);}
+o\:* {behavior:url(#default#VML);}
+w\:* {behavior:url(#default#VML);}
+.shape {behavior:url(#default#VML);}
+</style>
+<![endif]-->
+<title>NVP API Web Samples Using Classic ASP</title>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="City"/>
+<o:SmartTagType namespaceuri="urn:schemas-microsoft-com:office:smarttags"
+ name="place"/>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>eBay</o:Author>
+  <o:LastAuthor>eBay</o:LastAuthor>
+  <o:Revision>2</o:Revision>
+  <o:TotalTime>0</o:TotalTime>
+  <o:Created>2009-10-15T05:37:00Z</o:Created>
+  <o:LastSaved>2009-10-15T05:37:00Z</o:LastSaved>
+  <o:Pages>1</o:Pages>
+  <o:Words>3346</o:Words>
+  <o:Characters>19076</o:Characters>
+  <o:Company>eBay Inc.,</o:Company>
+  <o:Lines>158</o:Lines>
+  <o:Paragraphs>44</o:Paragraphs>
+  <o:CharactersWithSpaces>22378</o:CharactersWithSpaces>
+  <o:Version>11.9999</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:WordDocument>
+  <w:SpellingState>Clean</w:SpellingState>
+  <w:GrammarState>Clean</w:GrammarState>
+  <w:ValidateAgainstSchemas/>
+  <w:SaveIfXMLInvalid>false</w:SaveIfXMLInvalid>
+  <w:IgnoreMixedContent>false</w:IgnoreMixedContent>
+  <w:AlwaysShowPlaceholderText>false</w:AlwaysShowPlaceholderText>
+  <w:BrowserLevel>MicrosoftInternetExplorer4</w:BrowserLevel>
+ </w:WordDocument>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <w:LatentStyles DefLockedState="false" LatentStyleCount="156">
+ </w:LatentStyles>
+</xml><![endif]--><!--[if !mso]><object
+ classid="clsid:38481807-CA0E-42D2-BF39-B33AF135CC4D" id=ieooui></object>
+<style>
+st1\:*{behavior:url(#ieooui) }
+</style>
+<![endif]-->
+<style>
+<!--
+ /* Font Definitions */
+ @font-face
+	{font-family:Helvetica;
+	panose-1:2 11 6 4 2 2 2 2 2 4;
+	mso-font-charset:0;
+	mso-generic-font-family:swiss;
+	mso-font-pitch:variable;
+	mso-font-signature:536902279 -2147483648 8 0 511 0;}
+@font-face
+	{font-family:Wingdings;
+	panose-1:5 0 0 0 0 0 0 0 0 0;
+	mso-font-charset:2;
+	mso-generic-font-family:auto;
+	mso-font-pitch:variable;
+	mso-font-signature:0 268435456 0 0 -2147483648 0;}
+ /* Style Definitions */
+ p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h2
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+h3
+	{mso-margin-top-alt:auto;
+	margin-right:0in;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:3;
+	font-size:13.5pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+p
+	{font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+code
+	{font-family:"Courier New";
+	mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+pre
+	{margin-top:0in;
+	margin-bottom:0in;
+	margin-bottom:.0001pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Times New Roman";}
+span.SpellE
+	{mso-style-name:"";
+	mso-spl-e:yes;}
+span.GramE
+	{mso-style-name:"";
+	mso-gram-e:yes;}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+ @list l0
+	{mso-list-id:850530491;
+	mso-list-template-ids:745845670;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:·;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1
+	{mso-list-id:1164516482;
+	mso-list-template-ids:-1471491094;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:·;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l2
+	{mso-list-id:1478448112;
+	mso-list-template-ids:-1312004188;}
+@list l2:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:·;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 10]>
+<style>
+ /* Style Definitions */
+ table.MsoNormalTable
+	{mso-style-name:"Table Normal";
+	mso-tstyle-rowband-size:0;
+	mso-tstyle-colband-size:0;
+	mso-style-noshow:yes;
+	mso-style-parent:"";
+	mso-padding-alt:0in 5.4pt 0in 5.4pt;
+	mso-para-margin:0in;
+	mso-para-margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:10.0pt;
+	font-family:"Times New Roman";
+	mso-ansi-language:#0400;
+	mso-fareast-language:#0400;
+	mso-bidi-language:#0400;}
+</style>
+<![endif]-->
+</head>
+
+
+
+<body lang=EN-US link=blue vlink=blue style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<h1><span style='font-family:Helvetica'>NVP&nbsp;API&nbsp;Web Samples Using
+Classic ASP<o:p></o:p></span></h1>
+
+<p><span style='font-family:Helvetica'>This document describes web samples that
+use Classic ASP to send Name-Value Pair (NVP)&nbsp;API requests to a PayPal
+server.<o:p></o:p></span></p>
+
+<p><span style='font-family:Helvetica'>This document contains the following
+sections:<o:p></o:p></span></p>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#requiredsoftware">Required Software</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#installation">Installing the Samples</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#runningsamples">Running the Samples</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#enablingproxy">Enabling the Proxy for Samples</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#sampledescription">Description of Samples</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l2 level1 lfo1;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#APIDocumentation">API Documentation</a> <o:p></o:p></span></li>
+</ul>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Helvetica'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h2><span style='font-family:Helvetica'>Required Software<a
+name=requiredsoftware id=requiredsoftware></a><o:p></o:p></span></h2>
+
+<p><span style='font-family:Helvetica'>No additional software is required.<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Helvetica'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h2><span style='font-family:Helvetica'>Installing the Samples<a
+name=installation id=installation></a><o:p></o:p></span></h2>
+
+<p><span style='font-family:Helvetica'>The samples must be installed in IIS.
+The samples require IIS version 5.1 or above.<o:p></o:p></span></p>
+
+<p><span style='font-family:Helvetica'>Create a virtual directory named </span><span
+class=SpellE><code><span style='font-size:10.0pt'>PayPalClassicAspNvpSamples</span></code></span><span
+style='font-family:Helvetica'> in IIS <span class=GramE>that points</span> to <span
+class=SpellE><var><span style='font-family:Helvetica'>Samples_Root</span></var></span>.<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Helvetica'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h2><span style='font-family:Helvetica'>Running the Samples<a
+name=runningsamples id=runningsamples></a><o:p></o:p></span></h2>
+
+<p><span style='font-family:Helvetica'>First, make sure that you have installed
+the required software and the samples.<o:p></o:p></span></p>
+
+<p><span style='font-family:Helvetica'>You can run the samples by entering the
+following address in a web browser:<o:p></o:p></span></p>
+
+<pre>http://name_of_Server:port/PayPalClassicAspNvpSamples/Default.htm</pre>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Helvetica'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h2><span style='font-family:Helvetica'>Enabling the Proxy for Samples<a
+name=enablingproxy id=enablingproxy></a><o:p></o:p></span></h2>
+
+<p><span style='font-family:Helvetica'><a href="#constants"><span class=SpellE><span
+class=GramE>constants.asp</span></span></a> is the configuration file for Proxy
+setup.<o:p></o:p></span></p>
+
+<p><span style='font-family:Helvetica'>Update the following variables in <a
+href="#constants"><span class=SpellE>constants.asp</span></a> for Proxy
+configuration.<o:p></o:p></span></p>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><span style='font-family:
+     Helvetica'>USE_PROXY&nbsp;&nbsp;&nbsp; - Set this variable to TRUE to
+     route all the API requests through <span class=GramE>Proxy(</span>by
+     default it is FALSE). <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><span style='font-family:
+     Helvetica'>PROXY_HOST - Set this variable to Proxy Server name or IP
+     address <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l1 level1 lfo2;tab-stops:list .5in'><span style='font-family:
+     Helvetica'>PROXY_PORT - Set this variable to Proxy Server port <o:p></o:p></span></li>
+</ul>
+
+<h2><span style='font-family:Helvetica'>Description of Samples<a
+name=sampledescription id=sampledescription></a><o:p></o:p></span></h2>
+
+<p><span style='font-family:Helvetica'>The web samples consist of the
+following:<o:p></o:p></span></p>
+
+<ul type=disc>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#directpayment">Charging a Credit Card Using Direct
+     Payment</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#expresscheckout">Accepting PayPal in Express Checkout</a>
+     <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#capture">Capturing the amount of the authorization </a><o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#void">Void the authorization</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#reauthorization">Reauthorizing for a different amount</a>
+     <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#transactiondetails">Getting Transaction Details</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#transactionsearch">Searching for a Transaction</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#refundtransaction">Refunding the amount</a> <o:p></o:p></span></li>
+<li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l3 level1 lfo9;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#recurringpayment">Recurring Payments</a><o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#masspay">Mass Payment</a> <o:p></o:p></span></li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l0 level1 lfo3;tab-stops:list .5in'><span style='font-family:
+     Helvetica'><a href="#commonfiles">Common Files</a><o:p></o:p></span></li>
+</ul>
+
+<p><span style='font-family:Helvetica'>The main page of the samples, <a
+href="#index">Default.htm</a>, contains links to each sample.<o:p></o:p></span></p>
+
+<h3><span style='font-family:Helvetica'>Charging a Credit Card Using Direct
+Payment<a name=directpayment id=directpayment></a><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use Direct
+Payment to charge a credit card. Access this sample from the following choices
+displayed on Default.htm:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>DoDirectPayment</span></strong></span><strong><span
+  style='font-family:Helvetica'> - <st1:City w:st="on"><st1:place w:st="on">Sale</st1:place></st1:City></span></strong><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Charge a credit card. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>In the </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>DoDirectPayment</span></code></span><span
+  style='font-family:Helvetica'> request, the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'> parameter is set to </span><st1:City w:st="on"><st1:place w:st="on"><code><span
+    style='font-size:10.0pt'>Sale</span></code></st1:place></st1:City><span
+  style='font-family:Helvetica'>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>DoDirectPayment</span></strong></span><strong><span
+  style='font-family:Helvetica'> - Authorization</span></strong><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Authorize a credit
+  card for later sale. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>In the </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>DoDirectPayment</span></code></span><span
+  style='font-family:Helvetica'> request, the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'> parameter is set to </span><code><span style='font-size:10.0pt'>Authorization</span></code><span
+  style='font-family:Helvetica'>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>DoDirectPayment.asp</span></code></span><a
+  name=DoDirectPayment id=DoDirectPayment></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main web
+  page for the <span class=SpellE>DoDirectPayment</span> sample. This page
+  allows the user to enter name, address, amount, and credit card information.
+  It also <span class=GramE>accept</span> input variable </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>paymentType</span></code></span><span
+  style='font-family:Helvetica'> which becomes the value of the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'>&nbsp;parameter. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>When the user clicks the <strong><span
+  style='font-family:Helvetica'>Submit</span></strong> button, <span
+  class=SpellE>DoDirectPaymentReceipt.asp</span> is called.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#index">Default.htm</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls&nbsp;<a
+  href="#DoDirectPaymentReceipt"><span class=SpellE>DoDirectPaymentReceipt.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>DoDirectPaymentReceipt.asp</span></code></span><a
+  name=DoDirectPaymentReceipt id=DoDirectPaymentReceipt></a><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Submits a credit card
+  transaction to PayPal using a </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>DoDirectPayment</span></code></span><span
+  style='font-family:Helvetica'> request. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code collects transaction
+  parameters from the form displayed by <span class=SpellE>DoDirectPayment.asp</span>
+  then constructs and sends the </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>DoDirectPayment</span></code></span><span
+  style='font-family:Helvetica'>&nbsp;request string to the PayPal server. The </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>paymentType</span></code></span><span
+  style='font-family:Helvetica'> variable becomes the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'>&nbsp;parameter of the request string.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>After the PayPal server returns the
+  response, the code displays the API request and response in the browser. If
+  the response from PayPal was a success, it displays the response parameters.
+  If the response was an error, it displays the errors.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#DoDirectPayment"><span
+  class=SpellE>DoDirectPayment.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h3><span style='font-family:Helvetica'>Accepting PayPal in Express Checkout<a
+name=expresscheckout id=expresscheckout></a><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use Express
+Checkout to accept payments using PayPal. Access this sample from the following
+choices displayed on Default.htm:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>ExpressCheckout</span></strong></span><strong><span
+  style='font-family:Helvetica'> - <st1:City w:st="on"><st1:place w:st="on">Sale</st1:place></st1:City></span></strong><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Do basic checkout with
+  PayPal. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>In the </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>SetExpressCheckout</span></code></span><span
+  style='font-family:Helvetica'> request, the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'> parameter is set to </span><st1:City w:st="on"><st1:place w:st="on"><code><span
+    style='font-size:10.0pt'>Sale</span></code></st1:place></st1:City><span
+  style='font-family:Helvetica'>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>ExpressCheckout</span></strong></span><strong><span
+  style='font-family:Helvetica'> - Authorization</span></strong><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Authorize for a single
+  capture. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>In the </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>SetExpressCheckout</span></code></span><span
+  style='font-family:Helvetica'> request, the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'> parameter is set to </span><code><span style='font-size:10.0pt'>Authorization</span></code><span
+  style='font-family:Helvetica'>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>ExpressCheckout</span></strong></span><strong><span
+  style='font-family:Helvetica'> - Order</span></strong><span style='font-family:
+  Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Authorize for multiple
+  captures. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>In the </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>SetExpressCheckout</span></code></span><span
+  style='font-family:Helvetica'> request, the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'> parameter is set to </span><code><span style='font-size:10.0pt'>Order</span></code><span
+  style='font-family:Helvetica'>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>SetExpressCheckout.asp</span></code></span><a
+  name=SetExpressCheckout id=SetExpressCheckout></a><span style='font-family:
+  Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main web
+  page for the Express Checkout sample. The page allows the user to enter
+  amount and currency type. It also <span class=GramE>accept</span> input
+  variable </span><span class=SpellE><code><span style='font-size:10.0pt'>paymentType</span></code></span><span
+  style='font-family:Helvetica'> which becomes the value of the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'>&nbsp;parameter. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>When the user clicks the <strong><span
+  style='font-family:Helvetica'>Submit</span></strong> button, <span
+  class=SpellE>ReviewOrder.asp</span> is called.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by&nbsp;<a href="#index">Default.htm</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#ReviewOrder"><span
+  class=SpellE>ReviewOrder.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>ReviewOrder.asp</span></code></span><a
+  name=ReviewOrder id=ReviewOrder></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This file is called
+  after the user clicks on a button during the checkout process to use PayPal's
+  Express Checkout. The user logs in to their PayPal account. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>This file is called twice.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>On the first pass, the code executes
+  the if statement:<o:p></o:p></span></p>
+  <pre>if (! <span class=SpellE>isset</span> ($token))</pre>
+  <p><span style='font-family:Helvetica'>The code collects transaction
+  parameters from the form displayed by <span class=SpellE>SetExpressCheckout.asp</span>
+  then constructs and sends a </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>SetExpressCheckout</span></code></span><span
+  style='font-family:Helvetica'> request string to the PayPal server. The </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>paymentType</span></code></span><span
+  style='font-family:Helvetica'> variable becomes the </span><code><span
+  style='font-size:10.0pt'>PAYMENTACTION</span></code><span style='font-family:
+  Helvetica'>&nbsp;parameter of the request string. The </span><code><span
+  style='font-size:10.0pt'>RETURNURL</span></code><span style='font-family:
+  Helvetica'> parameter is set to this file; this is how <span class=SpellE>ReviewOrder.asp</span>
+  is called twice.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>On the second pass, the code executes
+  the else statement.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>On the first pass, the buyer completed
+  the authorization in their PayPal account; now the code gets the payer
+  details by sending a </span><span class=SpellE><code><span style='font-size:
+  10.0pt'>GetExpressCheckoutDetails</span></code></span><span style='font-family:
+  Helvetica'> request to the PayPal server. Then the code calls <span
+  class=SpellE>GetExpressCheckoutDetails.asp</span>.<o:p></o:p></span></p>
+  <p><b><span style='font-family:Helvetica;color:red'>Note:</span></b><span
+  style='font-family:Helvetica'>&nbsp;Be sure to check the value of </span><code><span
+  style='font-size:10.0pt'>PAYPAL_URL</span></code><span style='font-family:
+  Helvetica'>. The buyer is sent to this URL to authorize payment with their
+  PayPal account. For testing purposes, this should be set to the PayPal
+  sandbox.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#SetExpressCheckout"><span
+  class=SpellE>SetExpressCheckout.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a
+  href="#GetExpressCheckoutDetails"><span class=SpellE>GetExpressCheckoutDetails.asp</span></a>,
+  <a href="#CallerService"><span class=SpellE>CallerService.asp</span></a>, and
+  <a href="#ApiError"><span class=SpellE>APIError.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>GetExpressCheckoutDetails.asp</span></code></span><a
+  name=GetExpressCheckoutDetails id=GetExpressCheckoutDetails></a><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p><span style='font-family:Helvetica'>This functionality is called after the
+  buyer returns from PayPal and has authorized the payment.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Displays the payer details returned by
+  the </span><span class=SpellE><code><span style='font-size:10.0pt'>GetExpressCheckoutDetails</span></code></span><span
+  style='font-family:Helvetica'> response and calls <span class=SpellE>DoExpressCheckoutPayment.asp</span>
+  to complete the payment authorization.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#ReviewOrder"><span
+  class=SpellE>ReviewOrder.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#ECReceipt"><span
+  class=SpellE>DoExpressCheckoutPayment.asp</span></a> and <a
+  href="#CallerService"><span class=SpellE>CallerService.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>DoExpressCheckoutPayment.asp</span></code></span><a
+  name=ECReceipt id=ECReceipt></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This functionality is
+  called to complete the payment with PayPal and display the result to the
+  buyer. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code constructs and sends the </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>DoExpressCheckoutPayment</span></code></span><span
+  style='font-family:Helvetica'> request string to the PayPal server.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a
+  href="#GetExpressCheckoutDetails"><span class=SpellE>GetExpressCheckoutDetails.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h3><span style='font-family:Helvetica'>Getting Transaction Details<a
+name=TransactionDetails id=transactiondetails><o:p></o:p></a></span></h3>
+
+<p><span style='mso-bookmark:TransactionDetails'><span style='font-family:Helvetica'>This
+sample shows how to use the </span></span><span style='mso-bookmark:TransactionDetails'><span
+class=SpellE><code><span style='font-size:10.0pt'>GetTransactionDetails</span></code></span></span><span
+style='mso-bookmark:TransactionDetails'><span style='font-family:Helvetica'>
+request. Access this sample from the following choice displayed on Default.htm:<o:p></o:p></span></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>GetTransactionDetails</span></strong></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Gets transaction
+  details for a specific transaction ID. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The main page displays a text box where
+  the user enters a transaction ID. When the user clicks the <strong><span
+  style='font-family:Helvetica'>Submit</span></strong> button, the code
+  constructs an NVP&nbsp;API request to </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>GetTransactionDetails</span></code></span><span
+  style='font-family:Helvetica'> and sends it to the PayPal server.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='mso-bookmark:TransactionDetails'><span style='font-family:Helvetica'>The
+primary files for this sample are:<o:p></o:p></span></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>GetTransactionDetails.asp</span></code></span><a
+  name=GetTransactionDetails id=GetTransactionDetails></a><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main page
+  for <span class=SpellE>GetTransactionDetails</span> sample. This page
+  displays a text box where the user enters a transaction ID and a <strong><span
+  style='font-family:Helvetica'>Submit</span></strong> button that calls <span
+  class=SpellE>TransactionDetails.asp</span>. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#TransactionDetails"><span
+  class=SpellE>TransactionDetails.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>TransactionDetails.asp</span></code></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Sends a </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>GetTransactionDetails</span></code></span><span
+  style='font-family:Helvetica'> NVP&nbsp;API&nbsp;request to PayPal. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code retrieves the transaction ID
+  and constructs the NVP API&nbsp;request&nbsp;string to send to the PayPal
+  server. The request to PayPal uses an API&nbsp;Signature.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>After receiving the response from the
+  PayPal server, the code displays the request and response in the browser. If
+  the response was a success, it displays the response parameters. If the
+  response was an error, it displays the errors received.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a
+  href="#GetTransactionDetails"><span class=SpellE>GetTransactionDetails.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<span style='mso-bookmark:TransactionDetails'></span>
+
+<h3><span class=SpellE><span style='font-family:Helvetica'>DoCapture</span></span><a
+name=capture id=capture></a><span style='font-family:Helvetica'><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use the </span><span
+class=SpellE><code><span style='font-size:10.0pt'>DoCapture</span></code></span><span
+style='font-family:Helvetica'> request. Access this sample from the following
+choice displayed on Default.htm:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table1>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>DoCapture</span></strong></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Settle an order or
+  previously authorized transaction and obtain payment for either the complete
+  amount or any portion of it. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The main page displays text boxes
+  where the user enters a authorization <span class=SpellE>ID<span class=GramE>,amount,invoice</span></span>
+  ID and drop downs where the user can select <span class=SpellE>completecodetype,currency</span>
+  code. When the user clicks the <strong><span style='font-family:Helvetica'>Submit</span></strong>
+  button, the code constructs an NVP API request to </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>DoCapture</span></code></span><span
+  style='font-family:Helvetica'> and sends it to the PayPal server.<o:p></o:p></span></p>
+  <p><b><span style='font-family:Helvetica;color:red'>Note:</span></b><span
+  style='font-family:Helvetica'> <span class=SpellE>DoCapture</span> request is
+  for use with both basic and order authorizations.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table2>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>DoCapture.asp</span></code></span><a
+  name=DoCapture id=DoCapture></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main page
+  for <span class=SpellE>DoCapture</span> sample. This page displays text boxes
+  where the user enters a authorization <span class=SpellE>ID<span class=GramE>,amount,invoice</span></span>
+  ID and drop down boxes where the user can select <span class=SpellE>completecodetype,currency</span>
+  code. When the user clicks the <strong><span style='font-family:Helvetica'>Submit</span></strong>
+  button that calls <span class=SpellE>DoCaptureReceipt.asp</span>. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#index">Default.htm</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#DoCaptureReceipt"><span
+  class=SpellE>DoCaptureReceipt.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>DoCaptureReceipt.asp</span></code></span><a
+  name=DoCaptureReceipt id=DoCaptureReceipt></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Sends a </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>DoCapture</span></code></span><span
+  style='font-family:Helvetica'> NVP API request to PayPal. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code retrieves the authorization <span
+  class=SpellE>ID<span class=GramE>,amount,invoice</span></span> <span
+  class=SpellE>ID,completecodetype,currency</span> code and constructs the NVP
+  API request string to send to the PayPal server. The request to PayPal uses an
+  API Signature.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>After receiving the response from the
+  PayPal server, the code displays the request and response in the browser. If
+  the response was a success, it displays the response parameters. If the
+  response was an error, it displays the errors received in <span class=SpellE>APIError.asp</span>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#DoCapture"><span
+  class=SpellE>DoCapture.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a><span class=SpellE>and</span> <a
+  href="#ApiError"><span class=SpellE>APIError.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h3><span class=SpellE><span style='font-family:Helvetica'>DoVoid</span></span><a
+name=void id=void></a><span style='font-family:Helvetica'><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use the </span><span
+class=SpellE><code><span style='font-size:10.0pt'>DoVoid</span></code></span><span
+style='font-family:Helvetica'> request. Access this sample from the following
+choice displayed on Default.htm:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table3>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>DoVoid</span></strong></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Void the
+  authorization, if you need to cancel the transaction. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The main page displays text box where
+  the user enters <span class=GramE>a</span> authorization ID. When the user
+  clicks the <strong><span style='font-family:Helvetica'>Submit</span></strong>
+  button, the code constructs an NVP API request to </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>DoVoid</span></code></span><span style='font-family:
+  Helvetica'> and sends it to the PayPal server.<o:p></o:p></span></p>
+  <p><b><span style='font-family:Helvetica;color:red'>IMPORTANT:</span></b><span
+  style='font-family:Helvetica'> The <span class=SpellE>AuthorizationID</span>
+  value on <span class=SpellE>DoVoid</span> request must be the original
+  authorization identification number, not the value of <span class=SpellE>AuthorizationID</span>
+  returned by <span class=SpellE>DoReauthorizationResponse</span>. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>By definition, when the authorization
+  period expires, the authorization or reauthorization of a transaction is
+  implicitly voided. <o:p></o:p></span></p>
+  <p><b><span style='font-family:Helvetica;color:red'>Note:</span></b><span
+  style='font-family:Helvetica'> <span class=SpellE>DoVoid</span> request is
+  for use with both basic and order authorizations.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table4>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>DoVoid.asp</span></code></span><a
+  name=DoVoid id=DoVoid></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main page
+  for <span class=SpellE>DoCapture</span> sample. This page displays text box
+  where the user enters <span class=GramE>a</span> authorization ID. When the
+  user clicks the <strong><span style='font-family:Helvetica'>Submit</span></strong>
+  button that calls <span class=SpellE>DoCaptureReceipt.asp</span>. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#index">Default.htm</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#DoVoidReceipt"><span
+  class=SpellE>DoVoidReceipt.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>DoVoidReceipt.asp</span></code></span><a
+  name=DoVoidReceipt id=DoVoidReceipt></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Sends a </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>DoVoid</span></code></span><span
+  style='font-family:Helvetica'> NVP API request to PayPal. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code retrieves the authorization ID
+  and constructs the NVP API request string to send to the PayPal server. The
+  request to PayPal uses an API Signature.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>After receiving the response from the
+  PayPal server, the code displays the request and response in the browser. If
+  the response was a success, it displays the response parameters. If the
+  response was an error, it displays the errors received in <span class=SpellE>APIError.asp</span>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#DoVoid"><span
+  class=SpellE>DoVoid.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a><span class=SpellE>and</span> <a
+  href="#ApiError"><span class=SpellE>APIError.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h3><span class=SpellE><span style='font-family:Helvetica'>DoReauthorization</span></span><a
+name=reauthorization id=reauthorization></a><span style='font-family:Helvetica'><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use the </span><span
+class=SpellE><code><span style='font-size:10.0pt'>DoReauthorization</span></code></span><span
+style='font-family:Helvetica'> request. Access this sample from the following
+choice displayed on Default.htm:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table5>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>DoReauthorization</span></strong></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Reauthorize for a
+  different amount: You can reauthorize for up to 115% of the originally
+  authorized amount, not to exceed an increase of $75 USD. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The main page displays text boxes
+  where the user enters a authorization <span class=SpellE>ID<span class=GramE>,amount</span></span>
+  and a drop down where the user can select currency code. When the user clicks
+  the <strong><span style='font-family:Helvetica'>Submit</span></strong>
+  button, the code constructs an NVP API request to </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>DoReauthorization</span></code></span><span
+  style='font-family:Helvetica'> and sends it to the PayPal server.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>To use <span class=SpellE>DoReauthorization</span>
+  you must have previously authorized a transaction. <o:p></o:p></span></p>
+  <p><b><span style='font-family:Helvetica;color:red'>Note:</span></b><span
+  style='font-family:Helvetica'> <span class=SpellE>DoReauthorizationRequest</span>
+  is for use only with basic authorizations, not order authorizations.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table6>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>DoReauthorization.html</span></code><a
+  name=DoReauthorization id=DoReauthorization></a><span style='font-family:
+  Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main page
+  for <span class=SpellE>DoReauthorization</span> sample. This page displays
+  text boxes where the user enters a authorization <span class=SpellE>ID<span
+  class=GramE>,amount</span></span> and drop down where the user can select
+  currency code. When the user clicks the <strong><span style='font-family:
+  Helvetica'>Submit</span></strong> button that calls <span class=SpellE>DoReauthorizationReceipt.asp</span>.
+  <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#index">Default.htm</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#ReauthorizationReceipt"><span
+  class=SpellE>DoReauthorizationReceipt.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>DoReauthorizationReceipt.asp</span></code></span><a
+  name=ReauthorizationReceipt id=ReauthorizationReceipt></a><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Sends a </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>DoReauthorization</span></code></span><span
+  style='font-family:Helvetica'> NVP API request to PayPal. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code retrieves the authorization <span
+  class=SpellE>ID<span class=GramE>,amount,currency</span></span> code and
+  constructs the NVP API request string to send to the PayPal server. The
+  request to PayPal uses an API Signature.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>After receiving the response from the
+  PayPal server, the code displays the request and response in the browser. If
+  the response was a success, it displays the response parameters. If the
+  response was an error, it displays the errors received in <span class=SpellE>APIError.asp</span>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#DoReauthorization"><span
+  class=SpellE>DoReauthorization.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a><span class=SpellE>and</span> <a
+  href="#ApiError"><span class=SpellE>APIError.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h3><span class=SpellE><span style='font-family:Helvetica'>TransactionSearch</span></span><a
+name=transactionsearch id=transactionsearch></a><span style='font-family:Helvetica'><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use the </span><span
+class=SpellE><code><span style='font-size:10.0pt'>TransactionSearch</span></code></span><span
+style='font-family:Helvetica'> request. Access this sample from the following
+choice displayed on Default.htm:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table7>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>TransactionSearch</span></strong></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><span style='font-family:Helvetica'>Serching</span></span><span
+  style='font-family:Helvetica'> for a transaction. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The main page displays text boxes
+  where the user enters a <span class=SpellE>startdate<span class=GramE>,enddate</span></span>
+  and Transaction ID. When the user clicks the <strong><span style='font-family:
+  Helvetica'>Submit</span></strong> button, the code constructs an NVP API
+  request to </span><span class=SpellE><code><span style='font-size:10.0pt'>TransactionSearch</span></code></span><span
+  style='font-family:Helvetica'> and sends it to the PayPal server.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>With <span class=SpellE>TransactionSearch</span>
+  request, you must always set the <span class=SpellE>StartDate</span> for your
+  <span class=SpellE>search.The</span> effect of setting other elements is
+  additive or can alter the search <span class=SpellE>criteria.TransactionSearch</span>
+  response returns up to 100 exact matches.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table8>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>TransactionSearch.asp</span></code></span><a
+  name=DoTransactionSearch id=DoTransactionSearch></a><span style='font-family:
+  Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main page
+  for <span class=SpellE>TransactionSearch</span> sample. This page displays
+  text boxes where the user enters <span class=SpellE>startdate<span
+  class=GramE>,enddate</span></span> and transaction ID. When the user clicks
+  the <strong><span style='font-family:Helvetica'>Submit</span></strong> button
+  that calls <span class=SpellE>TransactionSearchResults.asp</span>. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#index">Default.htm</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a
+  href="#TransactionSearchResults"><span class=SpellE>TransactionSearchResults.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>TransactionSearchResults.asp</span></code></span><a
+  name=TransactionSearchResults id=TransactionSearchResults></a><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Sends a </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>TransactionSearch</span></code></span><span
+  style='font-family:Helvetica'> NVP API request to PayPal. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code retrieves the <span
+  class=SpellE>startdate<span class=GramE>,enddate,transaction</span></span> ID
+  and constructs the NVP API request string to send to the PayPal server. The
+  request to PayPal uses an API Signature.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>After receiving the response from the
+  PayPal server, the code displays the request and response in the browser. If
+  the response was a success, it displays the response parameters. If the
+  response was an error, it displays the errors received in <span class=SpellE>APIError.asp</span>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a
+  href="#DoTransactionSearch"><span class=SpellE>TransactionSearch.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a><span class=SpellE>and</span> <a
+  href="#ApiError"><span class=SpellE>APIError.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h3><span class=SpellE><span style='font-family:Helvetica'>RefundTransaction</span></span><a
+name=refundtransaction id=refundtransaction></a><span style='font-family:Helvetica'><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use the </span><span
+class=SpellE><code><span style='font-size:10.0pt'>RefundTransaction</span></code></span><span
+style='font-family:Helvetica'> request. Access this sample from the following
+choice displayed on Default.htm:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table9>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>RefundTransaction</span></strong></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Use the <span
+  class=SpellE>RefundTransaction</span> API to make either full or partial
+  refunds. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The main page displays text boxes
+  where the user enters a transaction <span class=SpellE>ID<span class=GramE>,amount</span></span>
+  and drop downs where the user can select refund <span class=SpellE>type,currency</span>
+  code. When the user clicks the <strong><span style='font-family:Helvetica'>Submit</span></strong>
+  button, the code constructs an NVP API request to </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>RefundTransaction</span></code></span><span
+  style='font-family:Helvetica'> and sends it to the PayPal server.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>With <span class=SpellE>RefundTransaction</span>
+  request, you must always pass the values of Transaction ID and <span
+  class=SpellE>RefundType</span>. If <span class=SpellE>RefundType</span> is
+  set to Full, you must not set Amount; however, if <span class=SpellE>RefundType</span>
+  is Partial, you must set Amount.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table10>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>RefundTransaction.asp</span></code></span><a
+  name=DoRefundTransaction id=DoRefundTransaction></a><span style='font-family:
+  Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main page
+  for <span class=SpellE>RefundTransaction</span> sample. This page displays
+  text boxes where the user enters a transaction <span class=SpellE>ID<span
+  class=GramE>,amount</span></span> and drop downs where the user can select
+  refund <span class=SpellE>type,currency</span> code. When the user clicks the
+  <strong><span style='font-family:Helvetica'>Submit</span></strong> button
+  that calls <span class=SpellE>RefundReceipt.asp</span>. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#index">Default.htm</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#RefundReceipt"><span
+  class=SpellE>RefundReceipt.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>RefundReceipt.asp</span></code></span><a
+  name=RefundReceipt id=RefundReceipt></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Sends a </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>RefundTransaction</span></code></span><span
+  style='font-family:Helvetica'> NVP API request to PayPal. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code retrieves the transaction <span
+  class=SpellE>ID<span class=GramE>,amount,refund</span></span> <span
+  class=SpellE>type,currency</span> code and constructs the NVP API request
+  string to send to the PayPal server. The request to PayPal uses an API
+  Signature.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>After receiving the response from the
+  PayPal server, the code displays the request and response in the browser. If
+  the response was a success, it displays the response parameters. If the
+  response was an error, it displays the errors received in <span class=SpellE>APIError.asp</span>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a
+  href="#DoRefundTransaction"><span class=SpellE>RefundTransaction.asp</span></a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a><span class=SpellE>and</span> <a
+  href="#ApiError"><span class=SpellE>APIError.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h3><span class=SpellE><span style='font-family:Helvetica'>MassPay</span></span><a
+name=masspay id=masspay></a><span style='font-family:Helvetica'><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use the </span><span
+class=SpellE><code><span style='font-size:10.0pt'>MassPay</span></code></span><span
+style='font-family:Helvetica'> request. Access this sample from the following
+choice displayed on Default.htm:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table11>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><strong><span style='font-family:Helvetica'>MassPay</span></strong></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>The <span
+  class=SpellE>MassPay</span> API is the programmatic counterpart to the Mass
+  Payment feature available through the PayPal website. You can include up to
+  250 payments per <span class=SpellE>MassPay</span> <span class=SpellE>request.The</span>
+  <span class=SpellE>MassPay</span> API triggers the sending of an Instant
+  Payment Notification email to the recipient of the funds. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The main page displays text boxes
+  where the user enters a <span class=SpellE>emailsubject<span class=GramE>,recievertype,reciever</span></span>
+  <span class=SpellE>email,amount,unique</span> <span class=SpellE>ID,note</span>
+  and drop down where the user can select currency code. When the user clicks
+  the <strong><span style='font-family:Helvetica'>Submit</span></strong>
+  button, the code constructs an NVP API request to </span><span class=SpellE><code><span
+  style='font-size:10.0pt'>MassPay</span></code></span><span style='font-family:
+  Helvetica'> and sends it to the PayPal server.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>You must have a PayPal balance in each
+  currency in which you want to make a payment and have sufficient funds to
+  cover the entire Mass Payment amount and fee. You cannot mix currencies in the
+  same <span class=SpellE>MassPayRequest</span>; a separate request is required
+  for each currency.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table12>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>MassPay.html</span></code><a
+  name=DoMassPay id=DoMassPay></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the main page
+  for <span class=SpellE>MassPay</span> sample. This page displays text boxes
+  where the user enters a <span class=SpellE>emailsubject</span>, <span
+  class=SpellE>recievertype<span class=GramE>,reciever</span></span> <span
+  class=SpellE>email,amount,unique</span> <span class=SpellE>ID,note</span> and
+  drop down where the user can select currency code. When the user clicks the <strong><span
+  style='font-family:Helvetica'>Submit</span></strong> button that calls <span
+  class=SpellE>MassPayReceipt.asp</span>. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#index">Default.htm</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#MassPayReceipt"><span
+  class=SpellE>MassPayReceipt.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>MassPayReceipt.asp</span></code></span><a
+  name=MassPayReceipt id=MassPayReceipt></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Sends a </span><span
+  class=SpellE><code><span style='font-size:10.0pt'>MassPay</span></code></span><span
+  style='font-family:Helvetica'> NVP API request to PayPal. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code retrieves the <span
+  class=SpellE>emailsubject<span class=GramE>,recievertype,reciever</span></span>
+  <span class=SpellE>email,amount,unique</span> <span class=SpellE>ID,note,currency</span>
+  code and constructs the NVP API request string to send to the PayPal server.
+  The request to PayPal uses an API Signature.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>After receiving the response from the
+  PayPal server, the code displays the request and response in the browser. If
+  the response was a success, it displays the response parameters. If the
+  response was an error, it displays the errors received in <span class=SpellE>APIError.asp</span>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#DoMassPay">MassPay.html</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a><span class=SpellE>and</span> <a
+  href="#ApiError"><span class=SpellE>APIError.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+<h3><span style='font-family:Helvetica'>Recurring Payments<a
+name=recurringpayment id=recurringpayment></a><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>This sample shows how to use Recurring payments. Access this sample from the following
+choices displayed on RecurringPayments.asp page, link for this page is available in index.html file <o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+   <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><strong><span style='font-family:Helvetica'>Create Recurring Payments Profile </span></strong><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>creating profile for making recurring payments<o:p></o:p></span></p>
+  </p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><strong><span style='font-family:Helvetica'>Manage Recurring Payments Profile Status </span></strong><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>After creating Recurring payment profile its status can be changed to cancel, suspend, reactivate<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><strong><span style='font-family:Helvetica'>Get Recurring Payments Profile Details </span></strong><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>After creating reurring payment profile, profile Id will be received which can be used to get the details about the profile<o:p></o:p></span></p>
+  </td>
+ </tr>
+  <tr style='mso-yfti-irow:2;mso-yfti-lastrow:yes'>
+  <td valign=top style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><strong><span style='font-family:Helvetica'>Bill Outstanding Amount</span></strong><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Bill the buyer for the outstanding balance associated with a recurring payments profile<o:p></o:p></span></p>
+  </td>
+ </tr>
+
+</table>
+
+<p><span style='font-family:Helvetica'>The primary files for this sample are:<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File<o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>RecurringPayments.asp</span></code><a
+  name=recurringpaymentIndex id=recurringpaymentIndex></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This page contains the link for create recurringpayments, Manage recurring payments, Get recurring payment Profile details,Bill outstanding amount</span></p>
+  <p><span style='font-family:Helvetica'>Called by&nbsp;<a href="#index">Index.html</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>CreateRecurringPaymentsProfile.asp</span></code><a
+  name=RPcreateProfile id=RPcreateProfile></a><span style='font-family:
+  Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This page allows the user to enter necessary details to create recurring payment profile like first name, last name, card details, profile description and billing address</span></p>
+  <p><span style='font-family:Helvetica'>When the user clicks the <strong><span
+  style='font-family:Helvetica'>Submit</span></strong> button, CreateRecurringPaymentsProfileReceipt.asp page
+  is called.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by&nbsp;<a href="#recurringpaymentIndex">RecurringPayments.asp</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#rpProfile">CreateRecurringPaymentsProfileReceipt.asp</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>CreateRecurringPaymentsProfileReceipt.asp</span></code><a
+  name=rpProfile id=rpProfile></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This file is called
+  after the user clicks on the submit button in CreateRecurringPaymentsProfile.asp page<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code collects transaction parameters
+  from the form displayed by CreateRecurringPaymentsProfile.asp then constructs and sends a
+  </span><code><span style='font-size:10.0pt'>CreateRecurringPaymentsProfile</span></code><span
+  style='font-family:Helvetica'> request string to the PayPal server then a recurring payment profile is created and the server returns the profile Id and its description.</span></code></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#RPcreateProfile">CreateRecurringPaymentsProfile.asp</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a
+  href="#CallerService">CallerService.asp</a> and <a href="#ApiError">APIError.asp</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+
+
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>GetRecurringPaymentsProfileDetails.asp</span></code><a
+  name=RPgetProfileDetails id=RPgetProfileDetails></a><span style='font-family:
+  Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This page allows the user to enter recurring payment profile ID so that he can see the entire profile details of that profile Id</span></p>
+  <p><span style='font-family:Helvetica'>When the user clicks the <strong><span
+  style='font-family:Helvetica'>Submit</span></strong> button, GetRecurringPaymentsProfileDetails.asp page
+  is called.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by&nbsp;<a href="#recurringpaymentIndex">RecurringPayments.asp</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#RPprofileDetails">GetRecurringPaymentsProfileDetailsReceipt.asp</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>GetRecurringPaymentsProfileDetailsReceipt.asp</span></code><a
+  name=RPprofileDetails id=RPprofileDetails></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This file is called
+  after the user clicks on the submit button in GetRecurringPaymentsProfileDetails.asp page<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code gets the profile ID from GetRecurringPaymentsProfileDetails.asp page then constructs and sends a
+  </span><code><span style='font-size:10.0pt'>GetRecurringPaymentsProfileDetails</span></code><span
+  style='font-family:Helvetica'> request string to the PayPal server then server returns entire profile details.</span></code></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#RPgetProfileDetails">GetRecurringPaymentsProfileDetails.asp</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a
+  href="#CallerService">CallerService.asp</a> and <a href="#ApiError">APIError.asp</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+
+
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>ManageRecurringPaymentsProfileStatus.asp</span></code><a
+  name=RPmanageProfile id=RPmanageProfile></a><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p><span style='font-family:Helvetica'>This page is used to manage the existing recurring payment Profiles, <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>we can cancel, suspend or reactivate a profile</span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#recurringpaymentIndex">RecurringPayments.asp</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#RPmanageProfileStatus">ManageRecurringPaymentsProfileStatusReceipt.asp</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>ManageRecurringPaymentsProfileStatusReceipt.asp</span></code><a
+  name=RPmanageProfileStatus id=RPmanageProfileStatus></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This file is called
+  after the user clicks on the submit button in ManageRecurringPaymentsProfileStatus.asp page <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code constructs and sends the </span><code><span
+  style='font-size:10.0pt'>ManageRecurringPaymentsProfileStatus</span></code><span
+  style='font-family:Helvetica'> request string to the PayPal server<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a
+  href="#RPmanageProfile">ManageRecurringPaymentsProfileStatus.asp</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService">CallerService.asp</a>and
+  <a href="#ApiError">APIError.asp</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+  <tr style='mso-yfti-irow:3'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>BillOutStandingAmount.asp</span></code><a
+  name=BillOutStandingAmt id=BillOutStandingAmt></a><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p><span style='font-family:Helvetica'>This page is used to Bill the buyer for the outstanding balance associated with a recurring payments profile<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Profile Id and outstanding bill amount should be given as input in this page</span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#recurringpaymentIndex">RecurringPayments.asp</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#OutstandingAmtReceipt">BillOutStandingAmountReceipt.asp</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt'>BillOutStandingAmountReceipt.asp</span></code><a
+  name=OutstandingAmtReceipt id=OutstandingAmtReceipt></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This file is called
+  after the user clicks on the submit button in BillOutStandingAmount.asp page <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>The code constructs and sends the </span><code><span
+  style='font-size:10.0pt'>BillOutstandingAmount</span></code><span
+  style='font-family:Helvetica'> request string to the PayPal server<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a
+  href="#BillOutStandingAmt">BillOutStandingAmount.asp</a>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#CallerService">CallerService.asp</a>and
+  <a href="#ApiError">APIError.asp</a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<h3><span style='font-family:Helvetica'>Common Files<a name=commonfiles
+id=commonfiles></a><o:p></o:p></span></h3>
+
+<p><span style='font-family:Helvetica'>The following files are common to the
+samples.<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>File <o:p></o:p></span></b></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal align=center style='text-align:center'><b><span
+  style='font-family:Helvetica'>Description<o:p></o:p></span></b></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p><code><span style='font-size:10.0pt'>Default.htm</span></code><a
+  name=index id=index></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>The main web page with
+  links to each sample. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#DoDirectPayment"><span
+  class=SpellE>DoDirectPayment.asp</span></a>, <a href="#SetExpressCheckout"><span
+  class=SpellE>SetExpressCheckout.asp</span></a>, and <a
+  href="#GetTransactionDetails"><span class=SpellE>GetTransactionDetails.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:2'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>sdk.css</span></code></span><span
+  style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>Cascading Style Sheet
+  (CSS) used by Default.htm.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:3'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>CallerService.asp</span></code></span><a
+  name=CallerService id=CallerService></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p><span style='font-family:Helvetica'>Each API uses this page to submit <span
+  class=SpellE>NVPRequest</span>.<o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>This Page reads the credential
+  information from <span class=SpellE>constants.asp</span> to connect with
+  Server, submit <span class=SpellE>NVPRequest</span> and <br>
+  return <span class=SpellE>NVPResponse</span> from the Server after
+  de-formatting to display in response page. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Calls <a href="#constants"><span
+  class=SpellE>constants.asp</span></a> <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a href="#TransactionDetails"><span
+  class=SpellE>TransactionDetails.asp</span></a>, <a href="#ReviewOrder"><span
+  class=SpellE>ReviewOrder.asp</span></a><span class=SpellE><span class=GramE>,</span><a
+  href="#ECReceipt">DoExpressCheckoutPayment.asp</a></span></span></p>
+  <span style='font-size:12.0pt;font-family:Helvetica;mso-fareast-font-family:
+  "Times New Roman";mso-ansi-language:EN-US;mso-fareast-language:EN-US;
+  mso-bidi-language:AR-SA'><span style='mso-spacerun:yes'> </span>and <a
+  href="#DoDirectPaymentReceipt"><span class=SpellE>DoDirectPaymentReceipt.asp</span></a>.<o:p></o:p></span>
+  <p><span style='font-family:Helvetica'>&nbsp;<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:4'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>APIError.asp</span></code></span><a
+  name=ApiError id=ApiError></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>If there is an error,
+  displays error parameters and error messages. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>Called by <a
+  href="#DoDirectPaymentReceipt"><span class=SpellE>DoDirectPaymentReceipt.asp</span></a>,
+  <a href="#TransactionDetails"><span class=SpellE>TransactionDetails.asp</span></a>,
+  and <a href="#ECReceipt"><span class=SpellE>DoExpressCheckoutPayment.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:5;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span class=SpellE><code><span style='font-size:10.0pt'>constants.asp</span></code></span><a
+  name=constants id=constants></a><span style='font-family:Helvetica'><o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>This is the
+  configuration file for the <span class=SpellE>samples.This</span> file
+  contains the parameters needed to make an API call and parameters needed for
+  proxy setup. <o:p></o:p></span></p>
+  <p><span style='font-family:Helvetica'>PayPal includes the following API
+  Signature for making API calls to the PayPal sandbox:<o:p></o:p></span></p>
+  <table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:
+   1.5pt;mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table13>
+   <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+    <td colspan=2 style='border:none;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal align=center style='text-align:center'><span
+    style='font-family:Helvetica'>API Signature<o:p></o:p></span></p>
+    </td>
+   </tr>
+   <tr style='mso-yfti-irow:1'>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><span style='font-family:Helvetica'>API Username<o:p></o:p></span></p>
+    </td>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><code><span style='font-size:10.0pt'>sdk-three_api1.sdk.com</span></code><span
+    style='font-family:Helvetica'><o:p></o:p></span></p>
+    </td>
+   </tr>
+   <tr style='mso-yfti-irow:2'>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><span style='font-family:Helvetica'>API Password<o:p></o:p></span></p>
+    </td>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><code><span style='font-size:10.0pt'>QFZCWN5HZM8VBG7Q</span></code><span
+    style='font-family:Helvetica'><o:p></o:p></span></p>
+    </td>
+   </tr>
+   <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><span style='font-family:Helvetica'>API Signature<o:p></o:p></span></p>
+    </td>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><code><span style='font-size:10.0pt'>A-IzJhZZjhg29XQ2qnhapuwxIDzyAZQ92FRP5dqBzVesOkzbdUONzmOU</span></code><span
+    style='font-family:Helvetica'><o:p></o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <p class=MsoNormal><span style='font-family:Helvetica;display:none;
+  mso-hide:all'><o:p>&nbsp;</o:p></span></p>
+  <table class=MsoNormalTable border=1 cellpadding=0 style='mso-cellspacing:
+   1.5pt;mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt' id=Table14>
+   <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+    <td colspan=2 style='border:none;padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal align=center style='text-align:center'><span
+    style='font-family:Helvetica'>Proxy Parameters<o:p></o:p></span></p>
+    </td>
+   </tr>
+   <tr style='mso-yfti-irow:1'>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><span style='font-family:Helvetica'>USE_PROXY<o:p></o:p></span></p>
+    </td>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><code><span style='font-size:10.0pt'>Proxy will be
+    enabled only when this set to TRUE.</span></code><span style='font-family:
+    Helvetica'><o:p></o:p></span></p>
+    </td>
+   </tr>
+   <tr style='mso-yfti-irow:2'>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><span style='font-family:Helvetica'>HTTPREQUEST_PROXYSETTING_SERVER<o:p></o:p></span></p>
+    </td>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><code><span style='font-size:10.0pt'>Proxy Server name
+    or the IP address.</span></code><span style='font-family:Helvetica'><o:p></o:p></span></p>
+    </td>
+   </tr>
+   <tr style='mso-yfti-irow:3;mso-yfti-lastrow:yes'>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><span style='font-family:Helvetica'>HTTPREQUEST_PROXYSETTING_PORT<o:p></o:p></span></p>
+    </td>
+    <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+    <p class=MsoNormal><code><span style='font-size:10.0pt'>Proxy Server port.</span></code><span
+    style='font-family:Helvetica'><o:p></o:p></span></p>
+    </td>
+   </tr>
+  </table>
+  <p><span style='font-family:Helvetica'>Called by <a href="#CallerService"><span
+  class=SpellE>CallerService.asp</span></a>.<o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p><span style='font-family:Helvetica'>&nbsp;<o:p></o:p></span></p>
+
+<div class=MsoNormal align=center style='text-align:center'><span
+style='font-family:Helvetica'>
+
+<hr size=2 width="100%" align=center>
+
+</span></div>
+
+<h2><span style='font-family:Helvetica'>API&nbsp;Documentation<a
+name=APIDocumentation id=APIDocumentation></a><o:p></o:p></span></h2>
+
+<p><span style='font-family:Helvetica'>The <i>Name-Value Pair API Developer
+Guide and Reference</i> is available in HTML and PDF format.<o:p></o:p></span></p>
+
+<table class=MsoNormalTable border=0 cellpadding=0 style='mso-cellspacing:1.5pt;
+ mso-padding-alt:3.75pt 3.75pt 3.75pt 3.75pt'>
+ <tr style='mso-yfti-irow:0;mso-yfti-firstrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>HTML<o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'><a href= "https://www.paypal.com/en_US/ebook/PP_NVPAPI_DeveloperGuide/index.html">https://www.paypal.com/en_US/ebook/PP_NVPAPI_DeveloperGuide/index.html</a><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr style='mso-yfti-irow:1;mso-yfti-lastrow:yes'>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'>PDF<o:p></o:p></span></p>
+  </td>
+  <td style='padding:3.75pt 3.75pt 3.75pt 3.75pt'>
+  <p class=MsoNormal><span style='font-family:Helvetica'><a
+  href="https://www.paypal.com/en_US/pdf/PP_NVPAPI_DeveloperGuide.pdf">https://www.paypal.com/en_US/pdf/PP_NVPAPI_DeveloperGuide.pdf</a><o:p></o:p></span></p>
+  </td>
+ </tr>
+</table>
+
+<p class=MsoNormal><o:p>&nbsp;</o:p></p>
+
+</div>
+
+</body>
+
+</html>

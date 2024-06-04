@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl" Alias="Self" Namespace="EcommerceModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008">
+        <EntityContainer Name="EcommerceModelStoreContainer">
+          <EntitySet Name="Employee" EntityType="EcommerceModel.Store.Employee" Schema="sr" store:Type="Tables" />
+          <AssociationSet Name="FK_Employee_Employee" Association="EcommerceModel.Store.FK_Employee_Employee">
+            <End EntitySet="Employee" Role="Employee" />
+            <End EntitySet="Employee" Role="Employee1" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property StoreGeneratedPattern="Identity" Name="EmployeeID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="HireDate" Type="datetime" />
+          <Property Name="ReportsTo" Type="int" />
+          <Property Name="EmployeeType" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Commission" Type="int" />
+          <Property Name="Salary" Type="int" />
+        </EntityType>
+        <Association Name="FK_Employee_Employee">
+          <End Type="EcommerceModel.Store.Employee" Multiplicity="0..1" Role="Employee" />
+          <End Type="EcommerceModel.Store.Employee" Multiplicity="*" Role="Employee1" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="EmployeeID" />
+            </Principal>
+            <Dependent Role="Employee1">
+              <PropertyRef Name="ReportsTo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="GetSubEmployees" IsComposable="false">
+			<CommandText>
+				with emps as
+				(
+				select e1.*
+				from sr.Employee e1
+				where EmployeeId = @EmployeeId
+				union all
+				select e2.*
+				from emps join sr.Employee e2 on emps.EmployeeId = e2.ReportsTo
+				)
+				select * from emps where employeeid != @EmployeeId
+			</CommandText>
+          <Parameter Name="EmployeeId" Type="int" Mode="In" />
+        </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SelfReferencing" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="SFCTEPHEntities">
+          <EntitySet Name="Employees" EntityType="SelfReferencing.Employee" />
+          <FunctionImport Name="GetSubEmployees" EntitySet="Employees"  ReturnType="Collection(SelfReferencing.Employee)">
+            <Parameter Name="EmployeeId" Mode="In" Type="Int32" /></FunctionImport>
+          <AssociationSet Name="FK_Employee_Employee" Association="SelfReferencing.FK_Employee_Employee">
+            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee1" EntitySet="Employees" /></AssociationSet></EntityContainer>
+        <EntityType Name="Employee" Abstract="false">
+          <Key>
+            <PropertyRef Name="EmployeeID" />
+          </Key>
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="HireDate" Type="DateTime" />
+          <NavigationProperty Name="Employees" Relationship="SelfReferencing.FK_Employee_Employee" FromRole="Employee" ToRole="Employee1" />
+          <NavigationProperty Name="ReportsTo" Relationship="SelfReferencing.FK_Employee_Employee" FromRole="Employee1" ToRole="Employee" /></EntityType>
+        <EntityType Name="SalesAgent" BaseType="SelfReferencing.Employee" >
+          <Property Name="Commission" Type="Int32" Nullable="true" /></EntityType>
+        <Association Name="FK_Employee_Employee">
+          <End Type="SelfReferencing.Employee" Role="Employee" Multiplicity="0..1" />
+          <End Type="SelfReferencing.Employee" Role="Employee1" Multiplicity="*" /></Association>
+        <EntityType Name="Manager" BaseType="SelfReferencing.Employee" >
+          <Property Name="Salary" Type="Int32" Nullable="true" /></EntityType>
+        <EntityType Name="Supervisor" BaseType="SelfReferencing.Employee" >
+          <Property Name="Salary" Type="Int32" Nullable="true" /></EntityType>
+        <EntityType Name="President" BaseType="SelfReferencing.Employee" >
+          <Property Name="Salary" Type="Int32" Nullable="true" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="EcommerceModelStoreContainer" CdmEntityContainer="SFCTEPHEntities">
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="IsTypeOf(SelfReferencing.SalesAgent)">
+              <MappingFragment StoreEntitySet="Employee" >
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <Condition ColumnName="EmployeeType" Value="SalesAgent" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="SelfReferencing.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <Condition ColumnName="EmployeeType" Value="Employee" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SelfReferencing.Manager)">
+              <MappingFragment StoreEntitySet="Employee" >
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <Condition ColumnName="EmployeeType" Value="Manager" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SelfReferencing.Supervisor)">
+              <MappingFragment StoreEntitySet="Employee" >
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <Condition ColumnName="EmployeeType" Value="Supervisor" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SelfReferencing.President)">
+              <MappingFragment StoreEntitySet="Employee" >
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+                <Condition ColumnName="EmployeeType" Value="President" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+			<FunctionImportMapping FunctionImportName="GetSubEmployees" FunctionName="EcommerceModel.Store.GetSubEmployees">
+				<ResultMapping>
+					<EntityTypeMapping TypeName="SelfReferencing.SalesAgent">
+						<Condition ColumnName="EmployeeType" Value="SalesAgent" />
+					</EntityTypeMapping>
+					<EntityTypeMapping TypeName="SelfReferencing.Manager">
+						<Condition ColumnName="EmployeeType" Value="Manager" />
+					</EntityTypeMapping>
+					<EntityTypeMapping TypeName="SelfReferencing.Supervisor">
+						<Condition ColumnName="EmployeeType" Value="Supervisor" />
+					</EntityTypeMapping>
+					<EntityTypeMapping TypeName="SelfReferencing.President">
+						<Condition ColumnName="EmployeeType" Value="President" />
+					</EntityTypeMapping>
+				</ResultMapping>
+			</FunctionImportMapping>
+          <AssociationSetMapping Name="FK_Employee_Employee" TypeName="SelfReferencing.FK_Employee_Employee" StoreEntitySet="Employee">
+            <EndProperty Name="Employee1">
+              <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" /></EndProperty>
+            <EndProperty Name="Employee">
+              <ScalarProperty Name="EmployeeID" ColumnName="ReportsTo" /></EndProperty>
+            <Condition ColumnName="ReportsTo" IsNull="false" /></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="Model1">
+        <EntityTypeShape EntityType="SelfReferencing.Employee" Width="1.5" PointX="5.75" PointY="1.125" Height="1.9802864583333331" IsExpanded="true" />
+        <EntityTypeShape EntityType="SelfReferencing.SalesAgent" Width="1.5" PointX="3.625" PointY="1.125" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="SelfReferencing.SalesAgent" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.75" PointY="1.7305403645833333" />
+          <ConnectorPoint PointX="5.125" PointY="1.7305403645833333" />
+          </InheritanceConnector>
+        <AssociationConnector Association="SelfReferencing.FK_Employee_Employee" >
+          <ConnectorPoint PointX="6.2819230769230767" PointY="1.125" />
+          <ConnectorPoint PointX="6.2819230769230767" PointY="0.875" />
+          <ConnectorPoint PointX="6.7284615384615378" PointY="0.875" />
+          <ConnectorPoint PointX="6.7284615384615378" PointY="1.125" /></AssociationConnector>
+        <EntityTypeShape EntityType="SelfReferencing.Manager" Width="1.5" PointX="3.75" PointY="2.75" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="SelfReferencing.Manager" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.75" PointY="2.9276432291666667" />
+          <ConnectorPoint PointX="5.25" PointY="2.9276432291666667" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="SelfReferencing.Supervisor" Width="1.5" PointX="5.5" PointY="4.125" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="SelfReferencing.Supervisor" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.265625" PointY="3.1052864583333331" />
+          <ConnectorPoint PointX="6.265625" PointY="4.125" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="SelfReferencing.President" Width="1.5" PointX="7.5" PointY="3.625" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="SelfReferencing.President" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.15625" PointY="3.1052864583333331" />
+          <ConnectorPoint PointX="7.15625" PointY="3.84375" />
+          <ConnectorPoint PointX="7.5" PointY="3.84375" />
+          </InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

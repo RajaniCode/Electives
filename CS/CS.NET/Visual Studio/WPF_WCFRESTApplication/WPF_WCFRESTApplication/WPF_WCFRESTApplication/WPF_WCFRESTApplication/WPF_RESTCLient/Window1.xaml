@@ -1,0 +1,110 @@
+﻿<Window x:Class="WPF_RESTCLient.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Window1" Height="700" Width="700" 
+        xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit">
+    <Window.Resources>
+        <DataTemplate x:Key="EmployeeDataTemplate">
+            <Border BorderBrush="Red" Margin="2" BorderThickness="1" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Width="100" Text="{Binding EmpNo}"></TextBlock>
+                    <TextBlock Width="150" Text="{Binding EmpName}"></TextBlock>
+                    <TextBlock Width="100" Text="{Binding Salary}"></TextBlock>
+                    <TextBlock Width="100" Text="{Binding DeptNo}"></TextBlock>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+        <Style  TargetType="ListViewItem">
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="true">
+                    <Setter Property="Background" Value="Red"></Setter>
+                    <Setter Property="FontSize" Value="20"></Setter>
+                    <Setter Property="FontWeight" Value="Bold"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    <Grid Height="{Binding Path=ActualHeight}" Width="{Binding Path=ActualWidht}" ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="350"></RowDefinition>
+            <RowDefinition Height="350"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="350"></ColumnDefinition>
+            <ColumnDefinition Width="350"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="grdEmp" Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="320"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Employee Information" TextAlignment="Center" Grid.Row="0" Width="350" TextWrapping="Wrap"
+                        Foreground="Blue" FontFamily="Times New Roman" FontSize="25" FontWeight="Bold" FontStyle="Italic"
+                        Background="Gold"></TextBlock>
+
+            <ListView Grid.Row="1"
+                 Name="lstEmpData" ItemsSource="{Binding}" ItemTemplate="{StaticResource EmployeeDataTemplate}">
+           </ListView>
+          </Grid>  
+        <Grid Grid.Column="0" Grid.Row="0" x:Name="grdQtewiseChart">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="320"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Quarter Wise Sales Statics" TextAlignment="Center" Grid.Row="0" Width="350" TextWrapping="Wrap"
+                        Foreground="Blue" FontFamily="Times New Roman" FontSize="25" FontWeight="Bold" FontStyle="Italic"
+                        Background="Gold"></TextBlock>
+           
+                
+            <chartingToolkit:Chart Grid.Row="1"
+                               Name="chartQtrwiseSalesColumn" >
+                <chartingToolkit:Chart.Series>
+                    <chartingToolkit:ColumnSeries x:Name="columnQtrWiseSalesChart"
+                                                  DependentValuePath="Value"
+                                                  IndependentValuePath="Key"
+                                                  IsSelectionEnabled="True">
+                    </chartingToolkit:ColumnSeries>
+                </chartingToolkit:Chart.Series>
+            </chartingToolkit:Chart>
+        </Grid>
+        <Grid Grid.Column="1" Grid.Row="0" x:Name="grdSalesDataChart">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="320"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Itemwise Sales Statics" TextAlignment="Center" Grid.Row="0" Width="350" TextWrapping="Wrap"
+                        Foreground="Blue" FontFamily="Times New Roman" FontSize="25" FontWeight="Bold" FontStyle="Italic"
+                        Background="Gold"></TextBlock>
+            
+            <chartingToolkit:Chart Grid.Row="1"
+                               Name="chartSalesDataColumn" Width="350" >
+                <chartingToolkit:Chart.Series>
+                    <chartingToolkit:LineSeries x:Name="lineSalesDataChart"
+                                                  DependentValuePath="Value"
+                                                  IndependentValuePath="Key"
+                                                  IsSelectionEnabled="True">
+                    </chartingToolkit:LineSeries>
+                </chartingToolkit:Chart.Series>
+            </chartingToolkit:Chart>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="1" x:Name="grdStatewiseSales">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"></RowDefinition>
+                <RowDefinition Height="320"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Text="State Sales Statics" TextAlignment="Center" Grid.Row="0" Width="350" TextWrapping="Wrap"
+                        Foreground="Blue" FontFamily="Times New Roman" FontSize="25" FontWeight="Bold" FontStyle="Italic"
+                        Background="Gold"></TextBlock>
+            <chartingToolkit:Chart Grid.Row="1"
+                               Name="chartStatewiseSalesColumn" Width="350" >
+                <chartingToolkit:Chart.Series>
+                    <chartingToolkit:PieSeries x:Name="pieStateSalesChart"
+                                                  DependentValuePath="Value"
+                                                  IndependentValuePath="Key"
+                                                  IsSelectionEnabled="True">
+                    </chartingToolkit:PieSeries>
+                </chartingToolkit:Chart.Series>
+            </chartingToolkit:Chart>
+        </Grid>
+    </Grid>
+</Window>

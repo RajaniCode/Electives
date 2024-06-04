@@ -1,0 +1,356 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InhQVLocationModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="InhQVLocationModelStoreContainer">
+          <EntitySet Name="Actors" EntityType="InhQVLocationModel.Store.Actors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="EventLocation" EntityType="InhQVLocationModel.Store.EventLocation" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="GunClubs" EntityType="InhQVLocationModel.Store.GunClubs" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Locations" EntityType="InhQVLocationModel.Store.Locations" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ShootingRange" EntityType="InhQVLocationModel.Store.ShootingRange" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_EventLocation_Locations" Association="InhQVLocationModel.Store.FK_EventLocation_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="EventLocation" EntitySet="EventLocation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GunClubs_Locations" Association="InhQVLocationModel.Store.FK_GunClubs_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="GunClubs" EntitySet="GunClubs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ShootingRange_Locations" Association="InhQVLocationModel.Store.FK_ShootingRange_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="ShootingRange" EntitySet="ShootingRange" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="EventLocation">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="LocationName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="GunClubs">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="ClubName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="ShootingRange">
+          <Key>
+            <PropertyRef Name="RangeId" />
+          </Key>
+          <Property Name="RangeId" Type="int" Nullable="false" />
+          <Property Name="RangeName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_EventLocation_Locations">
+          <End Role="Locations" Type="InhQVLocationModel.Store.Locations" Multiplicity="1" />
+          <End Role="EventLocation" Type="InhQVLocationModel.Store.EventLocation" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="EventLocation">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GunClubs_Locations">
+          <End Role="Locations" Type="InhQVLocationModel.Store.Locations" Multiplicity="1" />
+          <End Role="GunClubs" Type="InhQVLocationModel.Store.GunClubs" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="GunClubs">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ShootingRange_Locations">
+          <End Role="Locations" Type="InhQVLocationModel.Store.Locations" Multiplicity="1" />
+          <End Role="ShootingRange" Type="InhQVLocationModel.Store.ShootingRange" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="LocationId" />
+            </Principal>
+            <Dependent Role="ShootingRange">
+              <PropertyRef Name="RangeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      <Function Name="InsertEvent" IsComposable="false" Schema="dbo">
+        <CommandText>
+          declare @locid int
+          insert into Locations(Address) values (@Address)
+          set @locid = SCOPE_IDENTITY()
+          insert into EventLocation(LocationId,LocationName) values (@locid,@LocationName)
+          select @locid as LocationId
+        </CommandText>
+        <Parameter Name="LocationName" Type="varchar" Mode="In" />
+        <Parameter Name="Address" Type="varchar" Mode="In" />
+      </Function>
+      <Function Name="UpdateEvent" IsComposable="false" Schema="dbo">
+        <CommandText>
+          update Locations set Address = @Address where locationid = @LocationId
+          update eventlocation set locationname = @LocationName where LocationId =@LocationId
+        </CommandText>
+        <Parameter Name="LocationName" Type="varchar" Mode="In" />
+        <Parameter Name="Address" Type="varchar" Mode="In" />
+        <Parameter Name="LocationId" Type="int" Mode="In" />
+      </Function>
+      <Function Name="DeleteEvent" IsComposable="false" Schema="dbo">
+        <CommandText>
+          delete Locations where LocationId = @LocationId
+          delete eventlocation where locationid = @LocationId
+        </CommandText>
+        <Parameter Name="LocationId" Type="int" Mode="In" />
+      </Function>
+      <!-- club crud -->
+      <Function Name="InsertClub" IsComposable="false" Schema="dbo">
+        <CommandText>
+          declare @locid int
+          insert into Locations(Address) values (@Address)
+          set @locid = SCOPE_IDENTITY()
+          insert into GunClubs(ClubId,ClubName) values (@locid,@ClubName)
+          select @locid as LocationId
+        </CommandText>
+        <Parameter Name="ClubName" Type="varchar" Mode="In" />
+        <Parameter Name="Address" Type="varchar" Mode="In" />
+      </Function>
+      <Function Name="UpdateClub" IsComposable="false" Schema="dbo">
+        <CommandText>
+          update Locations set Address = @Address where locationid = @LocationId
+          update GunClubs set ClubName = @ClubName where LocationId =@LocationId
+        </CommandText>
+        <Parameter Name="ClubName" Type="varchar" Mode="In" />
+        <Parameter Name="Address" Type="varchar" Mode="In" />
+        <Parameter Name="LocationId" Type="int" Mode="In" />
+      </Function>
+      <Function Name="DeleteClub" IsComposable="false" Schema="dbo">
+        <CommandText>
+          delete GunClubs where ClubId = @LocationId
+        </CommandText>
+        <Parameter Name="LocationId" Type="int" Mode="In" />
+      </Function>
+      <!-- Shooting Range -->
+      <Function Name="InsertRange" IsComposable="false" Schema="dbo">
+        <CommandText>
+          declare @locid int
+          insert into Locations(Address) values (@Address)
+          set @locid = SCOPE_IDENTITY()
+          insert into ShootingRange(RangeId,RangeName) values (@locid,@RangeName)
+          select @locid as LocationId
+        </CommandText>
+        <Parameter Name="RangeName" Type="varchar" Mode="In" />
+        <Parameter Name="Address" Type="varchar" Mode="In" />
+      </Function>
+      <Function Name="UpdateRange" IsComposable="false" Schema="dbo">
+        <CommandText>
+          update Locations set Address = @Address where locationid = @LocationId
+          update ShootingRange set RangeName = @RangeName where RangeId =@LocationId
+        </CommandText>
+        <Parameter Name="RangeName" Type="varchar" Mode="In" />
+        <Parameter Name="Address" Type="varchar" Mode="In" />
+        <Parameter Name="LocationId" Type="int" Mode="In" />
+      </Function>
+      <Function Name="DeleteRange" IsComposable="false" Schema="dbo">
+        <CommandText>
+          delete ShootingRange where RangeId = @LocationId
+        </CommandText>
+        <Parameter Name="LocationId" Type="int" Mode="In" />
+      </Function>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InhQVLocationModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="InhQVLocation">
+          <EntitySet Name="Locations" EntityType="InhQVLocationModel.Location" />
+          <EntitySet Name="Actors" EntityType="InhQVLocationModel.Actors" /></EntityContainer>
+        <EntityType Name="EventLocation" BaseType="InhQVLocationModel.Location">
+          <Property Name="LocationName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="GunClub" BaseType="InhQVLocationModel.Organization">
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Location" Abstract="true">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="100" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="ShootingRange" BaseType="InhQVLocationModel.Organization">
+          <Property Name="RangeName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Organization" BaseType="InhQVLocationModel.Location" Abstract="true" />
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ActorId" /></Key>
+          <Property Name="ActorId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="InhQVLocationModelStoreContainer" CdmEntityContainer="InhQVLocation">
+          <EntitySetMapping Name="Locations">
+            <QueryView>
+              select value
+              case
+              when (el.LocationId is not null) then
+              InhQVLocationModel.EventLocation(l.LocationId,l.Address,el.LocationName)
+              when (gc.ClubId  is not null) then
+              InhQVLocationModel.GunClub(l.LocationId,l.Address,gc.ClubName)
+              when (range.RangeId is not null) then
+              InhQVLocationModel.ShootingRange(l.LocationId,l.Address,range.RangeName)
+              END
+              from InhQVLocationModelStoreContainer.Locations as l
+              left join InhQVLocationModelStoreContainer.EventLocation as el on l.LocationId = el.LocationId
+              left join InhQVLocationModelStoreContainer.GunClubs as gc on l.LocationId = gc.ClubId
+              left join InhQVLocationModelStoreContainer.ShootingRange as range on l.LocationId = range.RangeId
+            </QueryView>
+			  <QueryView TypeName="IsTypeOf(InhQVLocationModel.EventLocation)">
+				  select value
+				  InhQVLocationModel.EventLocation(l.LocationId,l.Address,el.LocationName)
+				  from InhQVLocationModelStoreContainer.Locations as l
+				  left join InhQVLocationModelStoreContainer.EventLocation as el on l.LocationId = el.LocationId
+			  </QueryView>
+			  <QueryView TypeName="IsTypeOf(InhQVLocationModel.GunClub)">
+				  select value
+				  InhQVLocationModel.GunClub(l.LocationId,l.Address,gc.ClubName)
+				  from InhQVLocationModelStoreContainer.Locations as l
+				  left join InhQVLocationModelStoreContainer.GunClubs as gc on l.LocationId = gc.ClubId
+			  </QueryView>
+			  <QueryView TypeName="IsTypeOf(InhQVLocationModel.ShootingRange)">
+				  select value
+				  InhQVLocationModel.ShootingRange(l.LocationId,l.Address,range.RangeName)
+				  from InhQVLocationModelStoreContainer.Locations as l
+				  left join InhQVLocationModelStoreContainer.ShootingRange as range on l.LocationId = range.RangeId
+			  </QueryView>
+			  <QueryView TypeName="IsTypeOf(InhQVLocationModel.Organization)">
+				  select value
+				  case
+				  when (gc.ClubId  is not null) then
+				  InhQVLocationModel.GunClub(l.LocationId,l.Address,gc.ClubName)
+				  when (range.RangeId is not null) then
+				  InhQVLocationModel.ShootingRange(l.LocationId,l.Address,range.RangeName)
+				  END
+				  from InhQVLocationModelStoreContainer.Locations as l
+				  left join InhQVLocationModelStoreContainer.GunClubs as gc on l.LocationId = gc.ClubId
+				  left join InhQVLocationModelStoreContainer.ShootingRange as range on l.LocationId = range.RangeId
+			  </QueryView>
+            <EntityTypeMapping TypeName="InhQVLocationModel.EventLocation">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="InhQVLocationModel.Store.InsertEvent">
+                  <ScalarProperty Name="LocationName" ParameterName="LocationName"/>
+                  <ScalarProperty Name="Address" ParameterName="Address" />
+                  <ResultBinding Name="LocationId" ColumnName="LocationId"/>
+                </InsertFunction>
+                <UpdateFunction FunctionName="InhQVLocationModel.Store.UpdateEvent">
+                  <ScalarProperty Name="LocationName" ParameterName="LocationName" Version="Current"/>
+                  <ScalarProperty Name="Address" ParameterName="Address" Version="Current" />
+                  <ScalarProperty Name="LocationId" ParameterName="LocationId" Version="Current"/>
+                </UpdateFunction>
+                <DeleteFunction FunctionName="InhQVLocationModel.Store.DeleteEvent">
+                  <ScalarProperty Name="LocationId" ParameterName="LocationId"/>
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="InhQVLocationModel.GunClub">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="InhQVLocationModel.Store.InsertClub">
+                  <ScalarProperty Name="ClubName" ParameterName="ClubName"/>
+                  <ScalarProperty Name="Address" ParameterName="Address" />
+                  <ResultBinding Name="LocationId" ColumnName="LocationId"/>
+                </InsertFunction>
+                <UpdateFunction FunctionName="InhQVLocationModel.Store.UpdateClub">
+                  <ScalarProperty Name="ClubName" ParameterName="ClubName" Version="Current"/>
+                  <ScalarProperty Name="Address" ParameterName="Address" Version="Current"/>
+                  <ScalarProperty Name="LocationId" ParameterName="LocationId" Version="Current"/>
+                </UpdateFunction>
+                <DeleteFunction FunctionName="InhQVLocationModel.Store.DeleteClub">
+                  <ScalarProperty Name="LocationId" ParameterName="LocationId"/>
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="InhQVLocationModel.ShootingRange">
+              <ModificationFunctionMapping>
+                <InsertFunction FunctionName="InhQVLocationModel.Store.InsertRange">
+                  <ScalarProperty Name="RangeName" ParameterName="RangeName"/>
+                  <ScalarProperty Name="Address" ParameterName="Address" />
+                  <ResultBinding Name="LocationId" ColumnName="LocationId"/>
+                </InsertFunction>
+                <UpdateFunction FunctionName="InhQVLocationModel.Store.UpdateRange">
+                  <ScalarProperty Name="RangeName" ParameterName="RangeName" Version="Current"/>
+                  <ScalarProperty Name="Address" ParameterName="Address" Version="Current" />
+                  <ScalarProperty Name="LocationId" ParameterName="LocationId" Version="Current"/>
+                </UpdateFunction>
+                <DeleteFunction FunctionName="InhQVLocationModel.Store.DeleteRange">
+                  <ScalarProperty Name="LocationId" ParameterName="LocationId"/>
+                </DeleteFunction>
+              </ModificationFunctionMapping>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="IsTypeOf(InhQVLocationModel.Actors)">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" /></MappingFragment></EntityTypeMapping></EntitySetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="InheritanceWithQueryView">
+        <EntityTypeShape EntityType="InhQVLocationModel.EventLocation" Width="1.5" PointX="4.375" PointY="3.25" Height="1.211080729166667" IsExpanded="true" />
+        <EntityTypeShape EntityType="InhQVLocationModel.GunClub" Width="1.5" PointX="3.5" PointY="5.375" Height="1.0992643229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="InhQVLocationModel.Location" Width="1.5" PointX="2.375" PointY="2" Height="1.2636116536458326" IsExpanded="true" />
+        <EntityTypeShape EntityType="InhQVLocationModel.ShootingRange" Width="1.5" PointX="1.125" PointY="5.25" Height="1.0992643229166665" IsExpanded="true" />
+        <InheritanceConnector EntityType="InhQVLocationModel.EventLocation" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.875" PointY="2.6249995000000004" />
+          <ConnectorPoint PointX="5.125" PointY="2.6249995000000004" />
+          <ConnectorPoint PointX="5.125" PointY="3.25" /></InheritanceConnector>
+        <EntityTypeShape EntityType="InhQVLocationModel.Organization" Width="1.5" PointX="2.375" PointY="3.75" Height="0.9349169921875" />
+        <InheritanceConnector EntityType="InhQVLocationModel.Organization">
+          <ConnectorPoint PointX="3.125" PointY="3.2636116536458326" />
+          <ConnectorPoint PointX="3.125" PointY="3.75" /></InheritanceConnector>
+        <InheritanceConnector EntityType="InhQVLocationModel.GunClub">
+          <ConnectorPoint PointX="3.6875" PointY="4.6849169921875" />
+          <ConnectorPoint PointX="3.6875" PointY="5.375" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="InhQVLocationModel.ShootingRange">
+          <ConnectorPoint PointX="2.5" PointY="4.6849169921875" />
+          <ConnectorPoint PointX="2.5" PointY="5.25" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="InhQVLocationModel.Actors" Width="1.5" PointX="9.25" PointY="1.5" Height="1.4033821614583333" /></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

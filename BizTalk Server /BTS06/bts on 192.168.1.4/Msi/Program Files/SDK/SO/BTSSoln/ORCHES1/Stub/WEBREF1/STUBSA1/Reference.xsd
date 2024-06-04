@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:tns="http://schemas.microsoft.com/BizTalk/2003" elementFormDefault="qualified" targetNamespace="http://schemas.microsoft.com/BizTalk/2003" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="BAPI_BANKACCT_GET_DETAIL_Request" nillable="true" type="tns:BAPI_BANKACCT_GET_DETAIL_Request" />
+  <xs:complexType name="BAPI_BANKACCT_GET_DETAIL_Request">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="I_ACCOUNT" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="I_BANKKEY" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="I_COUNTRY" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="I_LANGUAGE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="T_BALANCE" type="tns:BAPI_BANKACCT_GET_DETAIL_RequestT_BALANCE" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="T_LIMIT" type="tns:BAPI_BANKACCT_GET_DETAIL_RequestT_LIMIT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BAPI_BANKACCT_GET_DETAIL_RequestT_BALANCE">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BALDATE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BALANCE" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BAPI_BANKACCT_GET_DETAIL_RequestT_LIMIT">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIMTYPE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TXTLIMTYPE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIMSUM" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIM_CUR" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REFLIMIT" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TXTREFLIM" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="VALID_FROM" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="VALID_TO" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIM_OK" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BAPI_BANKACCT_GET_DETAIL_RequestT_BALANCE" nillable="true" type="tns:BAPI_BANKACCT_GET_DETAIL_RequestT_BALANCE" />
+  <xs:element name="BAPI_BANKACCT_GET_DETAIL_ResponseT_LIMIT" nillable="true" type="tns:BAPI_BANKACCT_GET_DETAIL_ResponseT_LIMIT" />
+  <xs:complexType name="BAPI_BANKACCT_GET_DETAIL_ResponseT_LIMIT">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIMTYPE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TXTLIMTYPE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIMSUM" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIM_CUR" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="REFLIMIT" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TXTREFLIM" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="VALID_FROM" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="VALID_TO" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="LIM_OK" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BAPI_BANKACCT_GET_DETAIL_ResponseT_BALANCE" nillable="true" type="tns:BAPI_BANKACCT_GET_DETAIL_ResponseT_BALANCE" />
+  <xs:complexType name="BAPI_BANKACCT_GET_DETAIL_ResponseT_BALANCE">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BALDATE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BALANCE" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BAPI_BANKACCT_GET_DETAIL_ResponseE_ACCOUNT" nillable="true" type="tns:BAPI_BANKACCT_GET_DETAIL_ResponseE_ACCOUNT" />
+  <xs:complexType name="BAPI_BANKACCT_GET_DETAIL_ResponseE_ACCOUNT">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="BANKAREA" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="COMPANY" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="OPENDATE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="DELDATE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="STATUS_ADD" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="IBAN" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ACCTYPE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="TXTACCTYPE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ACCTEXT" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CURRENCY" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CURRENCY_OLD" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="NOSTRO" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="PRODEXT" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="VERSION" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BAPI_BANKACCT_GET_DETAIL_Response" nillable="true" type="tns:BAPI_BANKACCT_GET_DETAIL_Response" />
+  <xs:complexType name="BAPI_BANKACCT_GET_DETAIL_Response">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="E_ACCOUNT" type="tns:BAPI_BANKACCT_GET_DETAIL_ResponseE_ACCOUNT" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="E_BALANCE" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="E_RC" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="T_BALANCE" type="tns:BAPI_BANKACCT_GET_DETAIL_ResponseT_BALANCE" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="T_LIMIT" type="tns:BAPI_BANKACCT_GET_DETAIL_ResponseT_LIMIT" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BAPI_BANKACCT_GET_DETAIL_RequestT_LIMIT" nillable="true" type="tns:BAPI_BANKACCT_GET_DETAIL_RequestT_LIMIT" />
+</xs:schema>

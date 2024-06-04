@@ -1,0 +1,41 @@
+Microsoft Visual Studio Solution File, Format Version 8.00
+Project("{85F619EE-C78D-42B0-BF7E-261A02623F29}") = "HISTIComponent", "HISTIComponent\HISTIComponent.tiproj", "{3806CD9C-83C7-47BA-9217-753D0F5FA8CF}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HISTISimpleTester", "HISTISimpleTester\HISTISimpleTester.csproj", "{95A1185C-2708-44D4-902D-A0D30FE82EF9}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PendingTransactions", "http://localhost/PendingTransactions/PendingTransactions.csproj", "{25817445-111E-47D4-94D6-3B9DCEF32BF8}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchemaClasses", "SchemaClasses\SchemaClasses.csproj", "{90CD251D-6AE3-4B75-9C9D-18C810E7B478}"
+	ProjectSection(ProjectDependencies) = postProject
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		Debug = Debug
+		Release = Release
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{95A1185C-2708-44D4-902D-A0D30FE82EF9}.Debug.ActiveCfg = Debug|.NET
+		{95A1185C-2708-44D4-902D-A0D30FE82EF9}.Debug.Build.0 = Debug|.NET
+		{95A1185C-2708-44D4-902D-A0D30FE82EF9}.Release.ActiveCfg = Release|.NET
+		{95A1185C-2708-44D4-902D-A0D30FE82EF9}.Release.Build.0 = Release|.NET
+		{25817445-111E-47D4-94D6-3B9DCEF32BF8}.Debug.ActiveCfg = Debug|.NET
+		{25817445-111E-47D4-94D6-3B9DCEF32BF8}.Debug.Build.0 = Debug|.NET
+		{25817445-111E-47D4-94D6-3B9DCEF32BF8}.Release.ActiveCfg = Release|.NET
+		{25817445-111E-47D4-94D6-3B9DCEF32BF8}.Release.Build.0 = Release|.NET
+		{90CD251D-6AE3-4B75-9C9D-18C810E7B478}.Debug.ActiveCfg = Debug|.NET
+		{90CD251D-6AE3-4B75-9C9D-18C810E7B478}.Debug.Build.0 = Debug|.NET
+		{90CD251D-6AE3-4B75-9C9D-18C810E7B478}.Release.ActiveCfg = Release|.NET
+		{90CD251D-6AE3-4B75-9C9D-18C810E7B478}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal

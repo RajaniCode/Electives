@@ -1,0 +1,108 @@
+﻿<HTML>
+<HEAD>
+<TITLE ID='L_AddItem_DialogTitle'>Add</TITLE>
+<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=utf-8'>
+<LINK REL='stylesheet' TYPE='text/css' HREF='/widgets/bizdesk.css' ID='mainstylesheet'>
+
+<SCRIPT LANGUAGE='VBScript'>
+Option Explicit
+
+Const L_SiteTermAddProp_RadioButton = "Add a new site-term"
+Const L_ProfileAddProp_RadioButton = "Add a new property"
+
+Dim g_strRetVal
+Dim g_strHelpPath
+Dim winHelpWindow
+'----------------------------------------------------------------------------
+' initDialog
+'
+' Description:
+'     Sets up the dialog with the appropriate display info given the
+'     passed-in arguments.
+'----------------------------------------------------------------------------
+Sub initDialog()
+    Dim strProfType
+    Dim sdArgs
+    Dim btnhelp
+    
+    Set sdArgs = window.dialogArguments
+    g_strRetVal = ""
+    g_strHelpPath = ""
+
+    ' Get dialog-arguments.
+    strProfType = sdArgs.Item("profileType")
+    g_strHelpPath = sdArgs.Item("helpPath")
+
+    If g_strHelpPath = "" Then
+      ' Hide the help button
+        Set btnhelp = L_Help_Button
+        btnHelp.style.display = "none"
+    End If
+    
+    If strProfType = "siteterm" Then
+        spnAddProp.innerText = L_SiteTermAddProp_RadioButton
+        g_strHelpPath = g_strHelpPath & "docs/default.asp?helptopic=cs_ft_usersgrps_ADUC.htm"
+    Else
+        spnAddProp.innerText = L_ProfileAddProp_RadioButton
+        g_strHelpPath = g_strHelpPath & "docs/default.asp?helptopic=cs_ft_usersgrps_LINV.htm"
+    End If
+
+    ' This is such a dirty trick -- resizeTo won't work, though.
+    window.dialogWidth = CStr(oBodyDiv.scrollWidth + 28) & "px"
+    window.dialogHeight = CStr(oBodyDiv.scrollHeight + 58) & "px"
+End Sub
+
+
+' Handler for "Yes" button onClick event.  Causes window to fire the
+' onUnload event.
+Sub onYesBtnClicked()
+    Dim rdoItem
+
+    For Each rdoItem In rdoAddItems
+        If rdoItem.checked Then
+            g_strRetVal = rdoItem.value
+            Exit For
+        End If
+    Next
+
+    window.close
+End Sub
+
+
+' Handler for "No" button onClick event.  Causes window to fire the
+' onUnload event.
+Sub onNoBtnClicked()
+    g_strRetVal = ""
+    window.close
+End Sub
+
+Sub onHelpBtnClicked()
+    if typename(winHelpWindow) = "HTMLWindow2" then winHelpWindow.close
+		set winHelpWindow = window.open(g_strHelpPath, "winHelpWindow", _
+						 "height=500,width=700,status=no,toolbar=yes,menubar:no,resizable=yes")
+End Sub
+
+
+' Handler for the window's onUnload event.
+Sub closeDialog()
+    window.returnValue = g_strRetVal
+End Sub
+
+</SCRIPT>
+
+</HEAD>
+<DIV id="oBodyDiv">
+<BODY STYLE="PADDING-RIGHT: 16px; PADDING-LEFT: 16px; PADDING-BOTTOM: 16px; MARGIN: 0px; OVERFLOW: hidden; PADDING-TOP: 16px" onload='initDialog()' onunload='closeDialog()'>
+
+<INPUT TYPE='radio' ID='rdoAddItems1' NAME='rdoAddItems' VALUE='property' CHECKED STYLE="BACKGROUND: none transparent scroll repeat 0% 0%"><LABEL ID='spnAddProp' FOR='rdoAddItems1'></LABEL>
+<BR>
+<INPUT TYPE='radio' ID='rdoAddItems2' NAME='rdoAddItems' VALUE='group' STYLE="BACKGROUND: none transparent scroll repeat 0% 0%"><LABEL ID = 'L_AddGroup_RadioButton' FOR='rdoAddItems2'>Add a new group</LABEL>
+
+<DIV ALIGN='right' STYLE="PADDING-TOP: 16px">
+<BUTTON ID='L_Yes_Button' onclick='onYesBtnClicked()' STYLE="WIDTH: 80px">OK</BUTTON>
+<BUTTON ID='L_No_Button' onclick='onNoBtnClicked()' STYLE="WIDTH: 80px">Cancel</BUTTON> 
+<BUTTON id=L_Help_Button style="WIDTH: 80px" onclick=onHelpBtnClicked()>Help</BUTTON>
+</DIV>
+</DIV>
+</BODY>
+</HTML>

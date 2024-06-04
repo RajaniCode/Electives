@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<configuration>
+  <appSettings>
+    <!--
+        Urls to BAM Web Services
+    -->
+    <add key="BamQueryWSUrl" value="http://localhost/BAM/BamQueryService/BamQueryService.asmx"/>
+    <add key="BamManagementWSUrl" value="http://localhost/BAM/BamManagementService/BamManagementService.asmx"/>
+    <!-- 
+       Instance Query Timeout in seconds. Default value = 45 seconds.
+    -->
+    <add key="QueryServiceTimeout" value="45"/>
+    <!--
+        The MainPageContentUrl allows administrators to inject the content of any Url into the home page.
+        An empty value leaves the main page's content empty.
+        The default value is "~/MainPageContent.htm", the "Getting Started" BAM Portal page.
+     -->
+    <add key="MainPageContentUrl" value="~/MainPageContent.htm"/>
+    <!--
+        The AlertNotificationOptions key allows administrators to customize how alert
+        notification are presented in the Portal. It is a comma separated list of values.
+        For instance: "Email, File". Possible keys:
+             
+            * File, Email: File and E-mail option are displayed. In the drop down, File comes first and then E-mail.
+            * Email, File: File and E-mail option are displayed. In the drop down, E-mail comes first and then File.
+            * File:      Only File is available.
+            * Email:     Only Email is available.
+              
+        An empty value displays all notification options available on the server in the order returned by the server.
+        Any unrecognized value is equivalent to an empty value.
+    -->
+    <add key="AlertNotificationOptions" value=""/>
+  </appSettings>
+  <!--  
+        TRACING: To turn tracing on:
+          
+            1) Uncomment this tag and specify a file path for trace output
+            2) Uncomment the <trace tag> under <system.web>
+         
+        The trace will be saved to the file pointed to by "initializeData" below.
+        Ensure that the target directory exists (C:\temp by default).
+         
+        Make sure that the IIS worker process user account (usually Network Service or ASPNET)
+        and the BAM Portal user have write permissions for the trace log file directory (C:\temp below).
+         
+        To turn tracing on, you will need to uncomment the <trace> tag under <system.web>
+    
+    <system.diagnostics>
+      <trace autoflush="true" indentsize="2">
+        <listeners>
+          <add name="BAMPortalListener"
+                type="System.Diagnostics.TextWriterTraceListener"
+                initializeData="C:\temp\BAMPortalTrace.log" />
+        </listeners>
+      </trace>
+    </system.diagnostics>
+  -->
+  <system.web>
+    <httpModules>
+	<add name="UrlAuthorization" type="System.Web.Security.UrlAuthorizationModule" />
+    </httpModules>
+
+    <!--  
+        DYNAMIC DEBUG COMPILATION
+        Set compilation debug="true" to insert debugging symbols (.pdb information)
+        into the compiled page. Because this creates a larger file that executes
+        more slowly, you should set this value to true only when debugging and to
+        false at all other times. For more information, refer to the documentation about
+        debugging ASP.NET files.
+    -->
+    <compilation debug="false"/>
+    <!--
+        The <customErrors> section enables configuration of what to do if/when an 
+        unhandled error occurs during the execution of a request.  Specifically, it 
+        enables developers to configure html error pages to be displayed in place of 
+        a error stack trace.
+    -->
+    <customErrors mode="On"/>
+    <!--  
+        TRACING: To turn tracing on:
+          
+            1) Uncomment this tag
+            2) Uncomment the <system.diagnostics> tag above and specify a file path for trace output
+        
+        <trace enabled="true"
+               requestLimit="40"
+               pageOutput="false"
+               traceMode="SortByTime"
+               localOnly="true"
+               writeToDiagnosticsTrace="true" />
+    -->
+    <!-- 
+         The <authentication> section enables configuration of the security authentication 
+         mode used by ASP.NET to identify an incoming user.  It supports a "mode" 
+         attribute with four valid values: "Windows", "Forms", "Passport" and "None". 
+
+         The <forms> section is a sub-section of the <authentication> section, 
+         and supports configuring the authentication values used when Forms 
+         authentication is enabled above:
+    -->
+    <identity impersonate="true"/>
+    <authentication mode="Windows"></authentication>
+    <!--
+         The <authorization> section enables developers/administrators to configure 
+         whether a user or role has access to a particular page or resource.  This is 
+         accomplished by adding "<allow>" and "<deny>" sub-tags beneath the <authorization> 
+         section - specifically detailing the users/roles allowed or denied access.
+
+         Note: The "?" character indicates "anonymous" users (ie: non authenticated users).  
+         The "*" character indicates "all" users. 
+    -->
+    <authorization>
+      <allow roles="Everyone"/>
+      <deny users="*"/>
+    </authorization>
+    <!-- 
+         GLOBALIZATION
+           
+         This section sets the globalization settings of the application. 
+         See http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/gngrfglobalizationsection.asp
+    -->
+    <globalization requestEncoding="utf-8" responseEncoding="utf-8" culture="en-US" uiCulture="en"/>
+    <!--
+         SECURITY POLICY:
+          
+         Custom security policy so the portal does not run full trust.
+    -->
+    <securityPolicy>
+      <trustLevel name="BAMPortal_Minimal" policyFile="BAMPortal_Minimal.config"/>
+    </securityPolicy>
+    <!--
+         TRUST LEVEL:
+          
+         We specify the trust level to be the one defined by our custom security policy above.
+         Default value: BAMPortal_Minimal.
+    -->
+    <trust level="BAMPortal_Minimal" originUrl=""/>
+
+  </system.web>
+</configuration>

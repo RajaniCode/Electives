@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="SL4_DataGrid_Custom_Command_Behavior.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:src="clr-namespace:SL4_DataGrid_Custom_Command_Behavior"         
+    mc:Ignorable="d"
+    d:DesignHeight="420" d:DesignWidth="950" xmlns:sdk="http://schemas.microsoft.com/winfx/2006/xaml/presentation/sdk" xmlns:toolkit="http://schemas.microsoft.com/winfx/2006/xaml/presentation/toolkit">
+
+    <UserControl.Resources>
+        <src:ViewModel x:Key="EmpVM"></src:ViewModel>
+    </UserControl.Resources>
+    <Grid Height="410" Width="940">
+        
+            
+        <Grid x:Name="LayoutRoot" Background="White" DataContext="{Binding Source={StaticResource EmpVM}}" Width="900" Height="390" Margin="20,10">
+            <sdk:DataGrid AutoGenerateColumns="False" Height="231" 
+                          HorizontalAlignment="Left" Margin="39,71,0,0" Name="dgEmployee"
+                          VerticalAlignment="Top" Width="804" 
+                          ItemsSource="{Binding Path=Employees,Mode=TwoWay}" 
+                          ColumnWidth="*" 
+                          src:RowEditEnded.Command="{Binding Path=UpdateEmployeeCommand}" 
+                          src:RowEditEnded.CommandParameter="{Binding RelativeSource={RelativeSource Self},Path=SelectedItem,Mode=TwoWay}">
+                <sdk:DataGrid.Columns>
+                    <sdk:DataGridTextColumn Header="EmpNo" Binding="{Binding EmpNo}" IsReadOnly="True"></sdk:DataGridTextColumn>
+                    <sdk:DataGridTextColumn Header="EmpName" Binding="{Binding EmpName}"></sdk:DataGridTextColumn>
+                    <sdk:DataGridTextColumn Header="Salary" Binding="{Binding Salary}"></sdk:DataGridTextColumn>
+                    <sdk:DataGridTextColumn Header="DeptName" Binding="{Binding DeptName}"></sdk:DataGridTextColumn>
+                    <sdk:DataGridTextColumn Header="Designation" Binding="{Binding Designation}"></sdk:DataGridTextColumn>
+                </sdk:DataGrid.Columns>
+            </sdk:DataGrid>
+            <TextBlock Height="41" HorizontalAlignment="Left" Margin="26,12,0,0" Name="textBlock1" Text="Employee Information System" VerticalAlignment="Top" Width="610" TextAlignment="Center" FontSize="32" />
+            <Button Content="Load Employees" Height="23" HorizontalAlignment="Left" Margin="48,308,0,0" Name="btnLoadEmployees" VerticalAlignment="Top" Width="180" Command="{Binding Path=LoadEmployeeCommand}" />
+            <TextBlock Height="49" HorizontalAlignment="Left" Margin="47,337,0,0" Name="txtOperationStatus" Text="{Binding Path=StrOperationStatus,Mode=OneWay}" VerticalAlignment="Top" Width="804" FontSize="26" FontWeight="ExtraBold" Visibility="Collapsed" />
+            <Button Content="Delete Employee" Height="23" HorizontalAlignment="Left" Margin="671,308,0,0" Name="btnDeleteEmployee" VerticalAlignment="Top" Width="180" Command="{Binding Path=DeleteEmployeeCommand}" CommandParameter="{Binding ElementName=dgEmployee, Path=SelectedItem}" />
+            <Button Content="Insert Employee" Height="23" HorizontalAlignment="Left" Margin="343,308,0,0" Name="btnInsertEmployee" VerticalAlignment="Top" Width="180" Command="{Binding Path=InsertEmployeeCommand}" />
+        </Grid>
+      
+    </Grid>    
+</UserControl> 

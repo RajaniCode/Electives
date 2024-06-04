@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BindingInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Assembly="Microsoft.BizTalk.Deployment, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.0.1.0" BindingStatus="FullyBound" BoundEndpoints="8" TotalEndpoints="8">
+  <Timestamp>2005-09-15T04:22:43.6190159-07:00</Timestamp>
+  <ModuleRefCollection>
+    <ModuleRef Name="[Application:BTSScn.BPM.CableOrderApp]" Version="" Culture="" PublicKeyToken="" FullName="[Application:BTSScn.BPM.CableOrderApp], Version=, Culture=, PublicKeyToken=">
+      <Services />
+      <TrackedSchemas />
+    </ModuleRef>
+    <ModuleRef Name="Microsoft.Samples.BizTalk.SouthridgeVideo.OrderManager" Version="1.0.0.0" Culture="neutral" PublicKeyToken="XXXXXXXXXXXXXXXX" FullName="Microsoft.Samples.BizTalk.SouthridgeVideo.OrderManager, Version=1.0.0.0, Culture=neutral, PublicKeyToken=XXXXXXXXXXXXXXXX">
+      <Services>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.OrderManager.CheckInterruptOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.OrderManager.ErrorHandlerOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="BadOrderPort" Modifier="1" BindingOption="4">
+              <SendPortRef Name="BadOrderNotification-DSP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+            <Port Name="ErrorNotificationPort" Modifier="1" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef Name="OrderErrors-SPG" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+            <Port Name="ErrorResponsePort" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="BadOrderResponse-RP" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.OrderManager.ExceptionHandlerOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.OrderManager.InterrupterOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.OrderManager.OrderManagerOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="OperatorPort" Modifier="1" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef Name="OrderErrors-SPG" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+            <Port Name="CSRCompletionPort" Modifier="1" BindingOption="4">
+              <SendPortRef Name="CSRCompletion-DSP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+      </Services>
+      <TrackedSchemas />
+    </ModuleRef>
+    <ModuleRef Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderActions" Version="1.0.0.0" Culture="neutral" PublicKeyToken="XXXXXXXXXXXXXXXX" FullName="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderActions, Version=1.0.0.0, Culture=neutral, PublicKeyToken=XXXXXXXXXXXXXXXX">
+      <Services>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderActions.ActivateOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderActions.AnalyzeOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderActions.CancelOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderActions.ChangeOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderActions.Complete" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderActions.ValidateOrch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports />
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+      </Services>
+      <TrackedSchemas />
+    </ModuleRef>
+    <ModuleRef Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderStage1" Version="1.0.0.0" Culture="neutral" PublicKeyToken="XXXXXXXXXXXXXXXX" FullName="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderStage1, Version=1.0.0.0, Culture=neutral, PublicKeyToken=XXXXXXXXXXXXXXXX">
+      <Services>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.Stage1.CableOrder1Orch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="FacilitiesRequestPort" Modifier="1" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef Name="Facilities-SPG" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+            <Port Name="FacilitiesResponsePort" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="Facilities-RP" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+      </Services>
+      <TrackedSchemas />
+    </ModuleRef>
+    <ModuleRef Name="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderStage2" Version="1.0.0.0" Culture="neutral" PublicKeyToken="XXXXXXXXXXXXXXXX" FullName="Microsoft.Samples.BizTalk.SouthridgeVideo.CableOrderStage2, Version=1.0.0.0, Culture=neutral, PublicKeyToken=XXXXXXXXXXXXXXXX">
+      <Services>
+        <Service Name="Microsoft.Samples.BizTalk.SouthridgeVideo.Stage2.CableOrder2Orch" State="Started" TrackingOption="ServiceStartEnd MessageSendReceive OrchestrationEvents">
+          <Ports>
+            <Port Name="UpdateHistoryPort" Modifier="1" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef Name="HistoryUpdate-SPG" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" Trusted="true" />
+        </Service>
+      </Services>
+      <TrackedSchemas />
+    </ModuleRef>
+  </ModuleRefCollection>
+  <SendPortCollection>
+    <SendPort Name="HistoryUpdate-SP" IsStatic="true" IsTwoWay="false" BindingOption="0">
+      <Description>Updates the history of orders</Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="ServiceStartEnd MessageSendReceive PipelineEvents" Description="" />
+      <PrimaryTransport>
+        <Address>SQL://./SouthridgeVideoHistory/</Address>
+        <TransportType Name="SQL" Capabilities="15627" ConfigurationClsid="6e688659-1374-4f37-90dc-40cb6dd3c73d" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;AdapterConfig vt="8"&gt;&amp;lt;Send xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&amp;gt;&amp;lt;connectionString&amp;gt;Provider=SQLOLEDB.1;Integrated Security=SSPI;Persist Security Info=False;Initial Catalog=SouthridgeVideoHistory;Data Source=.&amp;lt;/connectionString&amp;gt;&amp;lt;outputRootElementName&amp;gt;Response&amp;lt;/outputRootElementName&amp;gt;&amp;lt;documentTargetNamespace&amp;gt;http://Microsoft.Samples.BizTalk.SouthridgeVideo&amp;lt;/documentTargetNamespace&amp;gt;&amp;lt;uri&amp;gt;SQL://./SouthridgeVideoHistory/&amp;lt;/uri&amp;gt;&amp;lt;/Send&amp;gt;&lt;/AdapterConfig&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2005-08-23T00:00:00-07:00</FromTime>
+        <ToTime>2005-08-23T23:59:59-07:00</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="BizTalkServerApplication">
+          <TransportType Name="SQL" Capabilities="15627" ConfigurationClsid="6e688659-1374-4f37-90dc-40cb6dd3c73d" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2005-08-23T00:00:00-07:00</FromTime>
+        <ToTime>2005-08-23T23:59:59-07:00</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      <ReceivePipelineData xsi:nil="true" />
+      <Tracking>0</Tracking>
+      <Filter />
+      <Transforms>
+        <Transform FullName="Microsoft.Samples.BizTalk.SouthridgeVideo.Maps.Order_To_SQLUpdateStatusMap" AssemblyQualifiedName="Microsoft.Samples.BizTalk.SouthridgeVideo.Maps.Order_To_SQLUpdateStatusMap,Microsoft.Samples.BizTalk.SouthridgeVideo.Maps, Version=1.0.0.0, Culture=neutral, PublicKeyToken=XXXXXXXXXXXXXXXX" />
+      </Transforms>
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>BTSScn.BPM.CableOrderApp</ApplicationName>
+    </SendPort>
+    <SendPort Name="Facilities-SP" IsStatic="true" IsTwoWay="false" BindingOption="0">
+      <Description>Sends orders to the facilities system over MSMQ</Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.PassThruTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="ServiceStartEnd MessageSendReceive PipelineEvents" Description="" />
+      <PrimaryTransport>
+        <Address>FORMATNAME:DIRECT=OS:.\PRIVATE$\TOFACILITIESQ</Address>
+        <TransportType Name="MSMQ" Capabilities="13579" ConfigurationClsid="ff5cee87-fd92-4422-b47d-f7d033311693" />
+        <TransportTypeData>&lt;CustomProps&gt;&lt;AdapterConfig vt="8"&gt;&amp;lt;Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&amp;gt;&amp;lt;queue&amp;gt;FORMATNAME:DIRECT=OS:.\PRIVATE$\TOFACILITIESQ&amp;lt;/queue&amp;gt;&amp;lt;uri&amp;gt;FORMATNAME:DIRECT=OS:.\PRIVATE$\TOFACILITIESQ&amp;lt;/uri&amp;gt;&amp;lt;maximumMessageSize&amp;gt;1024&amp;lt;/maximumMessageSize&amp;gt;&amp;lt;acknowledgeType&amp;gt;None&amp;lt;/acknowledgeType&amp;gt;&amp;lt;timeOut&amp;gt;4&amp;lt;/timeOut&amp;gt;&amp;lt;priority&amp;gt;Normal&amp;lt;/priority&amp;gt;&amp;lt;recoverable&amp;gt;false&amp;lt;/recoverable&amp;gt;&amp;lt;encryptionAlgorithm&amp;gt;None&amp;lt;/encryptionAlgorithm&amp;gt;&amp;lt;useAuthentication&amp;gt;false&amp;lt;/useAuthentication&amp;gt;&amp;lt;segmentationSupport&amp;gt;false&amp;lt;/segmentationSupport&amp;gt;&amp;lt;transactional&amp;gt;true&amp;lt;/transactional&amp;gt;&amp;lt;useJournalQueue&amp;gt;false&amp;lt;/useJournalQueue&amp;gt;&amp;lt;useDeadLetterQueue&amp;gt;true&amp;lt;/useDeadLetterQueue&amp;gt;&amp;lt;ackTypeEnumsValue&amp;gt;0&amp;lt;/ackTypeEnumsValue&amp;gt;&amp;lt;timeOutUnits&amp;gt;Days&amp;lt;/timeOutUnits&amp;gt;&amp;lt;bodyType&amp;gt;0&amp;lt;/bodyType&amp;gt;&amp;lt;/Config&amp;gt;&lt;/AdapterConfig&gt;&lt;/CustomProps&gt;</TransportTypeData>
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2005-08-23T00:00:00-07:00</FromTime>
+        <ToTime>2005-08-23T23:59:59-07:00</ToTime>
+        <Primary>true</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler Name="BizTalkServerApplication">
+          <TransportType Name="MSMQ" Capabilities="13579" ConfigurationClsid="ff5cee87-fd92-4422-b47d-f7d033311693" />
+        </SendHandler>
+      </PrimaryTransport>
+      <SecondaryTransport>
+        <Address />
+        <RetryCount>3</RetryCount>
+        <RetryInterval>5</RetryInterval>
+        <ServiceWindowEnabled>false</ServiceWindowEnabled>
+        <FromTime>2005-08-23T00:00:00-07:00</FromTime>
+        <ToTime>2005-08-23T23:59:59-07:00</ToTime>
+        <Primary>false</Primary>
+        <OrderedDelivery>false</OrderedDelivery>
+        <DeliveryNotification>1</DeliveryNotification>
+        <SendHandler xsi:nil="true" />
+      </SecondaryTransport>
+      <ReceivePipelineData xsi:nil="true" />
+      <Tracking>0</Tracking>
+      <Filter />
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>BTSScn.BPM.CableOrderApp</ApplicationName>
+    </SendPort>
+    <SendPort Name="CSRCompletion-DSP" IsStatic="false" IsTwoWay="false" BindingOption="-4">
+      <Description>Completion order status messages are sent back to the CSR via this dynamic port.</Description>
+      <TransmitPipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLTransmit" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLTransmit, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="2" TrackingOption="ServiceStartEnd MessageSendReceive PipelineEvents" Description="" />
+      <SendPipelineData>&lt;Root xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"&gt;&lt;Stages&gt;&lt;Stage CategoryId="9d0e4107-4cce-4536-83fa-4a5040674ad6"&gt;&lt;Components&gt;&lt;Component Name="Microsoft.BizTalk.Component.XmlAsmComp"&gt;&lt;Properties&gt;&lt;EnvelopeDocSpecNames vt="8"&gt;Microsoft.Samples.BizTalk.SouthridgeVideo.MessagingSchemas.OrderStatusEnvelopeSchema, Microsoft.Samples.BizTalk.SouthridgeVideo.MessagingSchemas, Version=1.0.0.0, Culture=neutral, PublicKeyToken=XXXXXXXXXXXXXXXX&lt;/EnvelopeDocSpecNames&gt;&lt;/Properties&gt;&lt;/Component&gt;&lt;/Components&gt;&lt;/Stage&gt;&lt;/Stages&gt;&lt;/Root&gt;</SendPipelineData>
+      <ReceivePipelineData xsi:nil="true" />
+      <Tracking>0</Tracking>
+      <Filter />
+      <Transforms />
+      <OrderedDelivery>false</OrderedDelivery>
+      <Priority>5</Priority>
+      <StopSendingOnFailure>false</StopSendingOnFailure>
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>BTSScn.BPM.CableOrderApp</ApplicationName>
+    </SendPort>
+  </SendPortCollection>
+  <DistributionListCollection>
+    <DistributionList Name="Facilities-SPG">
+      <SendPorts>
+        <SendPortRef Name="Facilities-SP" />
+        <SendPortRef Name="Facilities-Test-SP" />
+      </SendPorts>
+      <Filter />
+      <ApplicationName>BTSScn.BPM.CableOrderApp</ApplicationName>
+      <Description>Request messages for the facilites system go through this port group.  Typically the test send port would be unenlisted until needed.</Description>
+    </DistributionList>
+    <DistributionList Name="HistoryUpdate-SPG">
+      <SendPorts>
+        <SendPortRef Name="HistoryUpdate-SP" />
+        <SendPortRef Name="HistoryUpdate-Test-SP" />
+      </SendPorts>
+      <Filter />
+      <ApplicationName>BTSScn.BPM.CableOrderApp</ApplicationName>
+      <Description>Updates the history database.  The test send port is typically unelisted until needed.</Description>
+    </DistributionList>
+  </DistributionListCollection>
+  <ReceivePortCollection>
+    <ReceivePort Name="Facilities-RP" IsTwoWay="false" BindingOption="1">
+      <Description>Response messages are received from the facilities system from this receive port.</Description>
+      <ReceiveLocations>
+        <ReceiveLocation Name="Facilities-RP-TestRL">
+          <Description>This is a test file receive location where you can drop the facilities response message to.</Description>
+          <Address>C:\BPMTest\Facilities-RP-TestRL\*.xml</Address>
+          <PublicAddress />
+          <Primary>false</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2005-05-19T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2005-05-20T00:00:00</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;RemoveReceivedFileRetryCount vt="19"&gt;5&lt;/RemoveReceivedFileRetryCount&gt;&lt;RemoveReceivedFileMaxInterval vt="19"&gt;300000&lt;/RemoveReceivedFileMaxInterval&gt;&lt;FileMask vt="8"&gt;*.xml&lt;/FileMask&gt;&lt;BatchSizeInBytes vt="19"&gt;102400&lt;/BatchSizeInBytes&gt;&lt;PollingInterval vt="19"&gt;60000&lt;/PollingInterval&gt;&lt;BatchSize vt="19"&gt;5&lt;/BatchSize&gt;&lt;FileNetFailRetryInt vt="19"&gt;5&lt;/FileNetFailRetryInt&gt;&lt;RemoveReceivedFileDelay vt="19"&gt;10&lt;/RemoveReceivedFileDelay&gt;&lt;RenameReceivedFiles vt="11"&gt;0&lt;/RenameReceivedFiles&gt;&lt;FileNetFailRetryCount vt="19"&gt;5&lt;/FileNetFailRetryCount&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLReceive" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLReceive, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" TrackingOption="ServiceStartEnd MessageSendReceive PipelineEvents" Description="" />
+          <ReceivePipelineData xsi:nil="true" />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData xsi:nil="true" />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="BizTalkServerApplication">
+            <TransportType Name="FILE" Capabilities="11" ConfigurationClsid="5e49e3a6-b4fc-4077-b44c-22f34a242fdb" />
+          </ReceiveHandler>
+        </ReceiveLocation>
+        <ReceiveLocation Name="Facilities-RP-RL">
+          <Description>Response messages are received from the facilities system on this queue.</Description>
+          <Address>FORMATNAME:DIRECT=OS:.\PRIVATE$\FROMFACILITIESQ</Address>
+          <PublicAddress />
+          <Primary>true</Primary>
+          <ReceiveLocationServiceWindowEnabled>false</ReceiveLocationServiceWindowEnabled>
+          <ReceiveLocationFromTime>2000-01-01T00:00:00</ReceiveLocationFromTime>
+          <ReceiveLocationToTime>2000-01-01T23:59:59</ReceiveLocationToTime>
+          <ReceiveLocationStartDateEnabled>false</ReceiveLocationStartDateEnabled>
+          <ReceiveLocationStartDate>2005-05-25T00:00:00</ReceiveLocationStartDate>
+          <ReceiveLocationEndDateEnabled>false</ReceiveLocationEndDateEnabled>
+          <ReceiveLocationEndDate>2005-05-26T00:00:00</ReceiveLocationEndDate>
+          <ReceiveLocationTransportType Name="MSMQ" Capabilities="13579" ConfigurationClsid="ff5cee87-fd92-4422-b47d-f7d033311693" />
+          <ReceiveLocationTransportTypeData>&lt;CustomProps&gt;&lt;AdapterConfig vt="8"&gt;&amp;lt;Config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&amp;gt;&amp;lt;queue&amp;gt;FORMATNAME:DIRECT=OS:.\PRIVATE$\FROMFACILITIESQ&amp;lt;/queue&amp;gt;&amp;lt;uri&amp;gt;FORMATNAME:DIRECT=OS:.\PRIVATE$\FROMFACILITIESQ&amp;lt;/uri&amp;gt;&amp;lt;batchSize&amp;gt;20&amp;lt;/batchSize&amp;gt;&amp;lt;transactional&amp;gt;true&amp;lt;/transactional&amp;gt;&amp;lt;serialProcessing&amp;gt;false&amp;lt;/serialProcessing&amp;gt;&amp;lt;onFailure&amp;gt;suspendResumable&amp;lt;/onFailure&amp;gt;&amp;lt;/Config&amp;gt;&lt;/AdapterConfig&gt;&lt;/CustomProps&gt;</ReceiveLocationTransportTypeData>
+          <ReceivePipeline Name="Microsoft.BizTalk.DefaultPipelines.XMLReceive" FullyQualifiedName="Microsoft.BizTalk.DefaultPipelines.XMLReceive, Microsoft.BizTalk.DefaultPipelines, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Type="1" TrackingOption="ServiceStartEnd MessageSendReceive PipelineEvents" Description="" />
+          <ReceivePipelineData xsi:nil="true" />
+          <SendPipeline xsi:nil="true" />
+          <SendPipelineData xsi:nil="true" />
+          <Enable>true</Enable>
+          <ReceiveHandler Name="BizTalkServerApplication">
+            <TransportType Name="MSMQ" Capabilities="13579" ConfigurationClsid="ff5cee87-fd92-4422-b47d-f7d033311693" />
+          </ReceiveHandler>
+        </ReceiveLocation>
+      </ReceiveLocations>
+      <SendPipelineData xsi:nil="true" />
+      <Authentication>0</Authentication>
+      <Tracking>0</Tracking>
+      <Transforms />
+      <RouteFailedMessage>true</RouteFailedMessage>
+      <ApplicationName>BTSScn.BPM.CableOrderApp</ApplicationName>
+    </ReceivePort>
+  </ReceivePortCollection>
+  <PartyCollection />
+</BindingInfo>

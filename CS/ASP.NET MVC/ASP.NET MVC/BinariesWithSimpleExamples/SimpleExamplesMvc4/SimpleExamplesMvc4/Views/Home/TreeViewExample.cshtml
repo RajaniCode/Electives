@@ -1,0 +1,82 @@
+﻿@model SimpleExamples.Models.TreeViewExampleViewModel
+@using SimpleExamples.Models
+@{
+    ViewBag.Title = "TreeView Example";
+    Layout = "~/Views/Shared/_LayoutServer.cshtml";
+}
+@section Header{
+    <link href="~/Content/MVCControlToolkit.Controls.ServerTreeview-3.0.0.css" rel="stylesheet" />
+}
+@section Scripts{
+    
+    <script src="~/Scripts/MVCControlToolkit.Controls.ServerTreeview-3.0.0.min.js"></script>
+}
+<h2>TreeView Example</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false, "There are some errors")
+    <div id="treetobind">
+        @Html.TreeViewFor(
+                    m => m.EmailFolders,
+                    i => i == 0 ? "Children" : null,
+                    ExternalContainerType.span,
+                               "filetree treeview-red treeToedit",
+                    new object[]
+                    {//Function based templates. See here: https://mvccontrolstoolkit.codeplex.com/wikipage?title=Use%20of%20Templates 
+                        _S.L<EmailFolder>(h =>
+                            "<span class='folder'>" +h.DisplayFor(m => m.Name).ToString()+"</span>"),
+
+                        _S.L<EmailDocument>(h =>
+                            "<span class='file'>" +h.DisplayFor(m => m.Name).ToString()+"</span>")
+                    },
+                    (x, y) => x is EmailFolder ? 0 : 1,
+                    "filetree treeview-red treeToedit",
+                    new object[]
+                    {//Razor Helper based templates. See here: https://mvccontrolstoolkit.codeplex.com/wikipage?title=Use%20of%20Templates
+                        _S.H<EmailFolder>(
+                            @<div class='folder' >
+                                 @item.TypedEditDisplayFor(m => m.Name, simpleClick: true)
+                                 @item.TreeViewDeleteButton(Url.Content("~/Content/images/folder_delete_16.png"),
+                                    ManipulationButtonStyle.Image)
+                                 @item.TreeViewAddButton(1, Url.Content("~/Content/images/document_add_16.png"),
+                                    ManipulationButtonStyle.Image)
+                                 @item.TreeViewAddButton(0, Url.Content("~/Content/images/folder_add_16.png"),
+                                    ManipulationButtonStyle.Image)
+                                 @item.Hidden("IsFolder", true)
+                            </div>  
+                        ),
+                        _S.H<EmailDocument>(
+                            @<div class='file'>
+                                @item.TypedEditDisplayFor(m => m.Name, simpleClick: true, editEnabled: true)
+                                @item.TreeViewDeleteButton(Url.Content("~/Content/images/document_delete_16.png"),
+                                    ManipulationButtonStyle.Image)
+                                @item.Hidden("IsFolder", false)
+                            </div>
+                        )
+                    },
+                     (x, y) => x is EmailFolder ? 0 : 1,
+                     TreeViewMode.Display,
+                     (x) => "allnodes",
+                     (x, y) => TreeViewItemStatus.initializeShow)
+    </div>
+    
+    <div style="margin: 10px 10px 10px 10px">
+        @Html.TreeViewToggleEditButtonFor(
+                 m => m.EmailFolders,
+                 "Edit Folders", "TreeViewEdit",
+                 "Undo Changes", "TreeViewUndo",
+                 "Redo Changes", "TreeViewRedo")
+       <input type="submit" value="Submit" />
+    </div>
+    <div style="margin-top:50px">
+        <p>
+            <strong>
+            Read more about the TreeView <a href="https://mvccontrolstoolkit.codeplex.com/wikipage?title=TreeView">here</a>
+            </strong>
+        </p>
+        <p>
+            A sophisticated completely out-of-the-box client-based TreeView  is available in the <a href="http://www.mvc-controls.com/controls/treeviews">commercial version of the Mvc Controls Toolkit</a>.
+        </p>
+    </div>
+}

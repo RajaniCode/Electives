@@ -1,0 +1,182 @@
+/**
+ * jQuery Simple Dialog 
+ */
+.sd_container{
+ font-family: arial,helvetica,sans-serif;
+ margin:0 auto;
+ padding: 0;
+ position: absolute;
+ background-color: #EEEEEE;
+ border: solid 1px black;
+ text-align:left;
+ height: inherit;
+}
+.sd_header{
+ font-size: 0.8em;
+ font-weight: bold;
+ margin: 0 auto 5px auto;
+ text-align: left;
+ background-color: #F6AE38;
+ padding-left: 8px;
+ padding-top: 4px;
+ padding-bottom: 4px;
+ color: white;
+  font-family: verdana;
+  border-bottom: 2px solid #E78F08;
+}
+.sd_content{
+	margin: 0 3px 0 3px;
+	text-align: left;
+	height:inherit;
+}
+.sd_footer{
+ color: #a0a0a0;
+	 margin: 2px -3px 0 -3px;
+	text-align: center;
+background-color: #EEEEEE; /* #FFD09B; */
+ padding-top: 5px;
+ padding-bottom: 6px;
+}
+
+.sd_overlay{
+ position: absolute;
+ margin:0;
+ padding: 0;
+ top: 0;
+ left: 0;
+ background-color: #00004D;
+}
+/**/
+.sd_loading{
+ background: #fff url('../../images/progress-indicator-alpha.gif') no-repeat center center;   
+}
+
+.sd_closelabel{
+ position:absolute;
+ width:0;
+ height:0;
+ line-height:0;
+ top:0;
+ left:0;
+ margin-left: -13px;
+  margin-top: 2px;
+ padding:0;
+ text-align:center;
+ background-color:#EEEEEE;
+}
+.sd_closelabel a {
+ text-decoration:none;
+ color: #222;
+ font-size: 16px;
+ font-weight:bold;
+}
+.sd-edit-set 
+{
+    padding: 0 0 10px 10px;
+    width: 420px;
+    background-color: #F5E6C9;
+    margin: 5px 5px 5px 5px;
+    border: 3px double #8F8F8F;
+}
+.sd-editor-field {
+    padding: 1px;  
+    border: 1px solid #8F8F8F;
+    background-color: #FFFFFF;    
+    width: 96%; 
+}
+.sd-editor-field-hidden {
+    display: none;
+}
+.sd-editor-field input{
+    font-family: Tahoma;
+    font-size: 0.85em;
+    padding: 2px;  
+    border-style: none; 
+    width: 98%; 
+    background-color: transparent;
+}
+table.tedit-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-style: none;
+    border-spacing: 0;
+	/* background-color: white; */
+}
+td.tedit-label {
+    font-family: Tahoma;
+    font-size: 10pt;
+    padding: 3px 3px 3px 8px;    
+    border: 1px solid #8F8F8F;
+    width: 130px;
+}
+td.tedit-field {   
+    font-family: Tahoma;
+    font-size: 10pt;
+    padding: 0;  
+    border: 1px solid #8F8F8F;
+}
+input.tedit-textbox {
+	width: 99%;
+	font-family: Tahoma;
+    font-size: 10pt;
+	border-style: none;
+	padding: 3px 1px 3px 4px;
+}
+.tedit-dropdown {
+	width: 100%;
+	font-family: Tahoma;
+    font-size: 10pt;
+	border: 1px solid #C9C9C9;
+	padding: 3px 1px 3px 1px;
+}
+.read-only {
+	background-color: #D7D7D7;
+}
+.tedit_btn {
+	font-family: arial;
+    font-size: 8pt;
+    border: 1px solid #006;
+    background: #EEEEEE;
+	height: 22px;
+	padding-bottom: 1px;
+	color: #0064AE;
+}
+.tedit_btn:hover {
+    border: 1px solid #670000;
+    background: #F6DFB9;
+	color: #E55C00;
+}
+div.editor-label {
+    padding: 3px 0 1px 0; 
+    margin: 0;
+}
+div.editor-label label{
+    font-family: Tahoma;
+    font-size: 10pt;
+}
+
+div.editor-field  {   
+    margin: 0;
+	padding: 0;
+}
+
+div.editor-field  input{   
+    font-family: Tahoma;
+    font-size: 10pt;
+    padding: 2px 0 2px 3px;	
+    border: 1px solid #8F8F8F;
+    width: 460px;	
+}
+div.btn-footer  
+{
+    height: 20px;
+    padding-top: 12px;
+}
+div.btn-footer a 
+{
+    font-family: arial;
+    font-size: 9pt;
+    font-weight: bold;
+	color: #0064AE;
+	/* text-decoration: none; */
+}

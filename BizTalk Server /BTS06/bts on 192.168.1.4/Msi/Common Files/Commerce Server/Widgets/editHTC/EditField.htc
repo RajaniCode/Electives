@@ -1,0 +1,275 @@
+﻿<PUBLIC:COMPONENT URN='Commerce.EditField' tagName="editfield">
+	<PUBLIC>
+		<!-- ids of xml data and meta-data islands -->
+		<PROPERTY NAME='DataXML' />
+		<PROPERTY NAME='MetaXML' />
+
+		<EVENT NAME='onError' ID='evtError'></EVENT><!-- fired when developer error occurs -->
+
+		<ATTACH EVENT='oncontentready' ONEVENT='Initialize()' />
+	</PUBLIC>
+
+	<SCRIPT LANGUAGE='VBScript'>
+		Option Explicit
+
+		'define all localizable strings
+		const L_AbortControl_ErrorMessage = "The control could not load.  Please contact your system administrator"
+		const L_ControlURNandID_ErrorMessage = "Error in EditField with ID: ""%1"""
+		const L_IDNotFound_ErrorMessage = "element not found in document with id: ""%1"""
+		const L_IDNotFoundInMeta_ErrorMessage = "Field node not found in MetaXML with id: ""%1"""
+		const L_IDNotUnique_ErrorMessage = "element id not unique in document: ""%1"""
+		const L_MetaXMLErrorAtCharLine_ErrorMessage = "MetaXML ""%1"" at char %2 in line %3:"
+		const L_DataXMLErrorAtCharLine_ErrorMessage = "DataXML ""%1"" at char %2 in line %3:"
+		const L_SourceCode_ErrorMessage = "Source code:"
+
+		dim m_sID, m_xmlDataDoc, m_xmlMetaDoc, m_xmlMetaNode, _
+			m_bDebug
+
+		' when true all developer errors will display in an alert
+		m_bDebug = false
+
+		set m_xmlDataDoc = nothing		'used to hold data document
+		set m_xmlMetaDoc = nothing		'used to hold meta-data document
+		m_xmlMetaNode = null			'used to hold field meta-data node
+
+		'the following are used exclusively when loading the XML documents
+		dim m_bMetaXMLReady, m_bDataXMLReady, m_bControlInitialized, m_bControlAborted
+		m_bMetaXMLReady = false			'true when meta-data XML is loaded and parsed
+		m_bDataXMLReady = false			'true when data XML is loaded and parsed
+		m_bControlInitialized = false	'true when all data is loaded initialization has started
+		m_bControlAborted = false		'true when errors have forced the control to abort running
+
+		const READYSTATE_COMPLETE = 4	'constant used to check XML document's readyState
+
+		sub Initialize()
+			'if not in debug mode then hide errors
+			if not m_bDebug then on error resume next
+
+			if bIsXMLOK(MetaXML) then
+				'if meta-data XML island looks ok load the XML document
+				LoadXML MetaXML, m_bMetaXMLReady
+				'if data XML island looks ok load the XML document
+				if not m_bControlAborted then LoadXML DataXML, m_bDataXMLReady
+				if not m_bControlAborted and m_bMetaXMLReady and m_bDataXMLReady then
+					'if all XML loaded and no abort errors found, go initialize control
+					InitControl()
+				'else = otherwise InitControl will be run by onXMLReadyStateChange or control was aborted
+				end if
+			end if
+		end sub
+
+		sub LoadXML(sXML, bReady)
+			dim elXML, xmlDoc
+			'when this routine complete either XML is loaded, control aborted or
+			'event attached for async load
+			if bIsXMLOK(sXML) then
+				'get data island element
+				set elXML = element.document.all(sXML)
+				'get XML document
+				set xmlDoc = elXML.xmlDocument
+				'attach onReadyStateChange event for async load of XML
+				elXML.attachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+				'check if already complete
+				if elXML.readyState = "complete" then
+					if xmlDoc.parseError.errorCode = 0 then
+						'readyState is complete and no parse errors
+						bReady = true
+					else
+						'parse errors: detach event, show error, and abort control
+						elXML.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+						ShowXMLError sXML, xmlDoc
+						AbortControl()
+					end if
+				end if
+			end if
+		end sub
+
+		function bIsXMLOK(oXML)
+			dim elXML
+			'when this routine complete we know id is OK and references unique element
+			'otherwise control is aborted after displaying error
+			bIsXMLOK = true
+			if isNull(oXML) then
+				'if id is bad or missing
+				ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(oXML)))
+				AbortControl()
+				bIsXMLOK = false
+			else
+				set elXML = element.document.all(oXML)
+				if elXML is nothing then
+					'if id is not found in the document
+					ReportError(sFormatString(L_IDNotFound_ErrorMessage, Array(oXML)))
+					AbortControl()
+					bIsXMLOK = false
+				elseif typename(elXML) = "DispHTMLElementCollection" then
+					'if id is not unique in the document
+					ReportError(sFormatString(L_IDNotUnique_ErrorMessage, Array(oXML)))
+					AbortControl()
+					bIsXMLOK = false
+				end if
+			end if
+		end function
+
+		sub onXMLReadyStateChange
+			dim elSource
+			'this routine completes async load of XML document
+			set elSource = window.event.srcElement
+			if elSource.readyState = "complete" then
+				if elSource.XMLdocument.parseError.errorCode = 0 then
+					'readyState is complete and no parse errors
+					'document is loaded and parsed so detach event
+					elSource.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+					'mark XML source as ready
+					select case elSource.id
+						case MetaXML
+							m_bMetaXMLReady = true
+						case DataXML
+							m_bDataXMLReady = true
+					end select
+				else
+					'parse errors: detach event, show error, and abort control
+					elXML.detachEvent "onreadystatechange", GetRef("onXMLReadyStateChange")
+					ShowXMLError sXML, elSource.XMLdocument
+					AbortControl()
+				end if
+			end if
+			if not m_bControlAborted and m_bMetaXMLReady and m_bDataXMLReady then
+				'when all XML loaded, go initialize control
+				InitControl()
+			'else = otherwise wait for next event
+			end if
+		end sub
+
+		sub InitControl()
+			dim xmlDoc
+			'ensure InitControl is only run once
+			if m_bControlInitialized then exit sub
+			m_bControlInitialized = true
+			'get documentElement's for XML already loaded
+			set m_xmlMetaDoc = element.document.all(MetaXML).xmlDocument.documentElement
+			if m_xmlMetaDoc is nothing then
+				'workwround code:
+				set xmlDoc = CreateObject("MSXML.DOMDocument")
+				xmlDoc.loadXML(element.document.all(MetaXML).innerHTML)
+				set m_xmlMetaDoc = xmlDoc.documentElement
+			end if
+			set m_xmlDataDoc = element.document.all(DataXML).xmlDocument.documentElement
+			if m_xmlDataDoc is nothing then
+				'workwround code:
+				set xmlDoc = CreateObject("MSXML.DOMDocument")
+				xmlDoc.loadXML(element.document.all(DataXML).innerHTML)
+				set m_xmlDataDoc = xmlDoc.documentElement
+			end if
+			if not m_xmlDataDoc.hasChildNodes then m_xmlDataDoc.appendChild(m_xmlDataDoc.ownerDocument.createElement("record"))
+
+			dim bFieldHidden, sType, sTemp, nMinlength
+
+			'get meta-data for this field
+			set m_xmlMetaNode = m_xmlMetaDoc.selectSingleNode("//*[@id $ieq$ '" & element.id & "']")
+			if m_xmlMetaNode is nothing then
+				'if not found report error and abort control
+				ReportError(sFormatString(L_IDNotFoundInMeta_ErrorMessage, Array(element.id)))
+				AbortControl()
+				exit sub
+			else
+				with m_xmlMetaNode
+					m_sID = .getAttribute("id")
+					sTemp = .getAttribute("hide")
+					bFieldHidden = CBool(not isNull(sTemp) and LCase(sTemp) = "yes")
+					'default type to text
+					sTemp = .nodeName
+					if not isNull(sTemp) then sType = LCase(sTemp) else sType = "text"
+					if sType = "boolean" or sType = "select" or bFieldHidden then .removeAttribute("required")
+					if sType = "text" then
+						nMinlength = .getAttribute("minlen")
+						if isNull(nMinlength) or nMinlength = "" then
+						elseif not isNumeric(nMinlength) or nMinlength <= 0 then
+						else
+							'treat as required if minlen > 0
+							.setAttribute "required", "yes"
+						end if
+					end if
+				end with
+
+				'attach directly to element and clear innerText (should be faster than innerHTML)
+				'note: this means that the id of the original element is overwritten
+				element.innerText = ""
+				element.attachEvent "onreadystatechange", GetRef("onReadyStateChange")
+				if sType = "text" and m_xmlMetaNode.getAttribute("subtype") = "long" then
+					'textlong class adds taller height to reduce redraw
+					element.className = "efField efTextLong"
+				else
+					element.className = "efField ef" & sType
+				end if
+				'hide if hidden
+				if bFieldHidden then element.style.display = "none"
+			end if
+		end sub
+
+		sub AbortControl()
+			dim elFont
+			'sets flag for aborted control and displays error text in element
+			m_bControlAborted = true
+			element.innerText = ""
+			set elFont = element.appendChild(element.document.createElement("SPAN"))
+			elFont.style.color = "red"
+			elFont.style.fontWeight = "bold"
+			element.title = L_AbortControl_ErrorMessage
+			elFont.innerText = L_AbortControl_ErrorMessage
+		end sub
+
+		sub onReadyStateChange()
+			dim elSource, sValue, xmlDataNode
+
+			if not m_bDebug then on error resume next
+			set elSource = window.event.srcElement
+			if elSource.readyState = "complete" then
+				elSource.detachEvent "onreadystatechange", GetRef("onReadyStateChange")
+				set xmlDataNode = m_xmlDataDoc.firstChild.selectSingleNode("./*[nodeName() $ieq$ """ & m_sID & """]")
+				if xmlDataNode is nothing then
+					sValue = ""
+				else
+					sValue = xmlDataNode.text
+				end if
+				elSource.initialize m_xmlMetaNode, sValue
+			end if
+		end sub
+
+		Function sFormatString(sFormat, aArgs)
+			dim nArg, sNewString
+			'formats strings like C format using numbered arguments (%1, %2, &tc.)
+			'call like: sText = sFormatString(sOriginalText, Array(sArg1, sArg2, ...))
+			sNewString = sFormat
+			for nArg = LBound(aArgs) to UBound(aArgs)
+				sNewString = Replace(sNewString, "%" & nArg + 1, aArgs(nArg))
+			next
+			sFormatString = sNewString
+		End Function
+
+		sub ReportError(strMessage)
+			dim evt
+			strMessage = sFormatString(L_ControlURNandID_ErrorMessage, Array(element.id)) & vbCrLf & vbCrLf & strMessage
+			' Display the message if in debug-mode.
+			if m_bDebug = true then alert(strMessage)
+			'set result on error event and then fire it
+			set evt = createEventObject()
+			evt.setAttribute "error", strMessage
+			evt.type = "error"
+			evtError.fire(evt)
+		end sub
+
+		sub ShowXMLError(sType, xml)
+			Dim sBuffer
+			'create xml error text and then call ReportError with it
+			if sType = "meta" then
+				sBuffer = sFormatString(L_MetaXMLErrorAtCharLine_ErrorMessage, Array(metaXML, xml.parseError.linePos, xml.parseError.line))
+			else
+				sBuffer = sFormatString(L_DataXMLErrorAtCharLine_ErrorMessage, Array(dataXML, xml.parseError.linePos, xml.parseError.line))
+			end if
+			sBuffer = sBuffer & vbCrLf & xml.parseError.reason & vbCrLf
+			sBuffer = sBuffer & L_SourceCode_ErrorMessage & vbCrLf
+			sBuffer = sBuffer & xml.parseError.srcText
+			ReportError(sBuffer)
+		end sub
+	</SCRIPT>
+</PUBLIC:COMPONENT>

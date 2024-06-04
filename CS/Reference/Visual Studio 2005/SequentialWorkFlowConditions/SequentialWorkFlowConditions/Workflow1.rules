@@ -1,0 +1,69 @@
+﻿<?Mapping XmlNamespace="ComponentModel" ClrNamespace="System.Workflow.ComponentModel" Assembly="System.Workflow.ComponentModel" ?>
+<?Mapping XmlNamespace="Compiler" ClrNamespace="System.Workflow.ComponentModel.Compiler" Assembly="System.Workflow.ComponentModel" ?>
+<?Mapping XmlNamespace="Activities" ClrNamespace="System.Workflow.Activities" Assembly="System.Workflow.Activities" ?>
+<?Mapping XmlNamespace="RuleConditions" ClrNamespace="System.Workflow.Activities.Rules" Assembly="System.Workflow.Activities" ?>
+<?Mapping XmlNamespace="System_CodeDom" ClrNamespace="System.CodeDom" Assembly="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ?>
+<?Mapping XmlNamespace="System" ClrNamespace="System" Assembly="mscorlib, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ?>
+<?Mapping XmlNamespace="System_Collections_Specialized" ClrNamespace="System.Collections.Specialized" Assembly="System, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" ?>
+<rule:RuleConditionCollection xmlns:rule="RuleConditions">
+    <rule:RuleExpressionCondition Name="old">
+        <rule:RuleExpressionCondition.Expression>
+            <ns0:CodeBinaryOperatorExpression Operator="LessThan" xmlns:ns0="System_CodeDom">
+                <ns0:CodeBinaryOperatorExpression.Left>
+                    <ns0:CodeFieldReferenceExpression FieldName="age">
+                        <ns0:CodeFieldReferenceExpression.TargetObject>
+                            <ns0:CodeThisReferenceExpression />
+                        </ns0:CodeFieldReferenceExpression.TargetObject>
+                    </ns0:CodeFieldReferenceExpression>
+                </ns0:CodeBinaryOperatorExpression.Left>
+                <ns0:CodeBinaryOperatorExpression.Right>
+                    <ns0:CodePrimitiveExpression>
+                        <ns0:CodePrimitiveExpression.Value>
+                            <ns1:Int32 xmlns:ns1="System">21</ns1:Int32>
+                        </ns0:CodePrimitiveExpression.Value>
+                    </ns0:CodePrimitiveExpression>
+                </ns0:CodeBinaryOperatorExpression.Right>
+            </ns0:CodeBinaryOperatorExpression>
+        </rule:RuleExpressionCondition.Expression>
+    </rule:RuleExpressionCondition>
+    <rule:RuleExpressionCondition Name="young">
+        <rule:RuleExpressionCondition.Expression>
+            <ns0:CodeBinaryOperatorExpression Operator="GreaterThanOrEqual" xmlns:ns0="System_CodeDom">
+                <ns0:CodeBinaryOperatorExpression.Left>
+                    <ns0:CodeFieldReferenceExpression FieldName="age">
+                        <ns0:CodeFieldReferenceExpression.TargetObject>
+                            <ns0:CodeThisReferenceExpression />
+                        </ns0:CodeFieldReferenceExpression.TargetObject>
+                    </ns0:CodeFieldReferenceExpression>
+                </ns0:CodeBinaryOperatorExpression.Left>
+                <ns0:CodeBinaryOperatorExpression.Right>
+                    <ns0:CodePrimitiveExpression>
+                        <ns0:CodePrimitiveExpression.Value>
+                            <ns1:Int32 xmlns:ns1="System">21</ns1:Int32>
+                        </ns0:CodePrimitiveExpression.Value>
+                    </ns0:CodePrimitiveExpression>
+                </ns0:CodeBinaryOperatorExpression.Right>
+            </ns0:CodeBinaryOperatorExpression>
+        </rule:RuleExpressionCondition.Expression>
+    </rule:RuleExpressionCondition>
+    <rule:RuleExpressionCondition Name="exit">
+        <rule:RuleExpressionCondition.Expression>
+            <ns0:CodeBinaryOperatorExpression Operator="ValueEquality" xmlns:ns0="System_CodeDom">
+                <ns0:CodeBinaryOperatorExpression.Left>
+                    <ns0:CodeFieldReferenceExpression FieldName="age">
+                        <ns0:CodeFieldReferenceExpression.TargetObject>
+                            <ns0:CodeThisReferenceExpression />
+                        </ns0:CodeFieldReferenceExpression.TargetObject>
+                    </ns0:CodeFieldReferenceExpression>
+                </ns0:CodeBinaryOperatorExpression.Left>
+                <ns0:CodeBinaryOperatorExpression.Right>
+                    <ns0:CodePrimitiveExpression>
+                        <ns0:CodePrimitiveExpression.Value>
+                            <ns1:Int32 xmlns:ns1="System">-1</ns1:Int32>
+                        </ns0:CodePrimitiveExpression.Value>
+                    </ns0:CodePrimitiveExpression>
+                </ns0:CodeBinaryOperatorExpression.Right>
+            </ns0:CodeBinaryOperatorExpression>
+        </rule:RuleExpressionCondition.Expression>
+    </rule:RuleExpressionCondition>
+</rule:RuleConditionCollection>

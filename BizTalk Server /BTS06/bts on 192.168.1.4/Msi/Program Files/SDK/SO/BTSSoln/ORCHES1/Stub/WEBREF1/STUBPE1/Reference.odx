@@ -1,0 +1,72 @@
+﻿#if __DESIGNER_DATA
+#error Do not define __DESIGNER_DATA.
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<om:MetaModel MajorVersion="1" MinorVersion="3" Core="2b131234-7959-458d-834f-2dc0769ce683" ScheduleModel="66366196-361d-448d-976f-cab5e87496d2" xmlns:om="http://schemas.microsoft.com/BizTalk/2003/DesignerData">
+    <om:Element Type="Module" OID="d666f215-834c-4fa7-b183-776e807b842f" LowerBound="1.1" HigherBound="24.1">
+        <om:Property Name="ReportToAnalyst" Value="True" />
+        <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.StubPendingTransactionsWebService_" />
+        <om:Property Name="Signal" Value="False" />
+        <om:Element Type="MethodMessageType" OID="00000000-0000-0000-0000-000000000000" ParentLink="Module_MessageType">
+            <om:Property Name="Url" Value="http://localhost:4022/PendingTrans/StubPendTransWS.asmx" />
+            <om:Property Name="TypeModifier" Value="Public" />
+            <om:Property Name="ReportToAnalyst" Value="True" />
+            <om:Property Name="Name" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.StubPendingTransactionsWebService" />
+            <om:Property Name="Signal" Value="False" />
+            <om:Element Type="MethodMessageOperation" OID="654a679c-6780-41ef-a716-259d55764a69" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="GetPendingTransactions" />
+                <om:Property Name="OperationDirection" Value="Request" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="GetPendingTransactions_request" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="90edfc72-ab7e-4a56-9495-0ab52150bb8a" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.Reference" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="PendingTransactionsRequest" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+            <om:Element Type="MethodMessageOperation" OID="ad9f1f07-1e47-42a6-a815-d6dccbdaa564" ParentLink="MethodMessageType_MethodMessageOperation">
+                <om:Property Name="OperationName" Value="GetPendingTransactions" />
+                <om:Property Name="OperationDirection" Value="Response" />
+                <om:Property Name="ReportToAnalyst" Value="True" />
+                <om:Property Name="Name" Value="GetPendingTransactions_response" />
+                <om:Property Name="Signal" Value="False" />
+                <om:Element Type="WebOperationPart" OID="56554d27-7773-4f33-98fa-aff1b4d57919" ParentLink="MethodMessageOperation_WebOperationPart">
+                    <om:Property Name="ClassName" Value="Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.Reference1.PendingTransactionsResponse" />
+                    <om:Property Name="ReportToAnalyst" Value="True" />
+                    <om:Property Name="Name" Value="GetPendingTransactionsResult" />
+                    <om:Property Name="Signal" Value="False" />
+                </om:Element>
+            </om:Element>
+        </om:Element>
+        <om:Element Type="TargetXMLNamespaceAttribute" OID="6c77b827-1544-4147-903e-4277e6fe057f" ParentLink="Module_CLRAttribute" LowerBound="2.1" HigherBound="3.1">
+            <om:Property Name="TargetXMLNamespace" Value="http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PendingTransactions" />
+            <om:Property Name="Signal" Value="False" />
+        </om:Element>
+    </om:Element>
+</om:MetaModel>
+#endif // __DESIGNER_DATA
+[Microsoft.XLANGs.BaseTypes.BPELExportable(true)]
+[Microsoft.XLANGs.BaseTypes.TargetXmlNamespaceAttribute("http://Microsoft.Samples.Biztalk.WoodgroveBank.CustomerService/PendingTransactions")]
+module Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.StubPendingTransactionsWebService_
+{
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.StubPendingTransactionsWebService), "GetPendingTransactions", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eRequest)]
+    public messagetype GetPendingTransactions_request
+    {
+        body Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.Reference PendingTransactionsRequest;
+    };
+    [Microsoft.XLANGs.BaseTypes.WebPortBinding(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.StubPendingTransactionsWebService), "GetPendingTransactions", Microsoft.XLANGs.BaseTypes.EXLangSMessageInfo.eResponse)]
+    public messagetype GetPendingTransactions_response
+    {
+        body Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.Reference1.PendingTransactionsResponse GetPendingTransactionsResult;
+    };
+    [Microsoft.XLANGs.BaseTypes.WSDLProxyName(typeof(Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.StubPendingTransactionsWebService))]
+    public porttype StubPendingTransactionsWebService
+    {
+        requestresponse GetPendingTransactions
+        {
+            Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.StubPendingTransactionsWebService_.GetPendingTransactions_request, Microsoft.Samples.BizTalk.WoodgroveBank.Orchestrations.Stubbed.StubPendTransWS.StubPendingTransactionsWebService_.GetPendingTransactions_response
+        };
+    };
+}
+

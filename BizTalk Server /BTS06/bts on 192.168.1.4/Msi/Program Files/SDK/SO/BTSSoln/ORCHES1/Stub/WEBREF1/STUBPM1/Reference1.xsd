@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<xs:schema xmlns:tns="http://Microsoft.Sampsles.BizTalk.WoodgroveBank.Schemas.LastPaymentResponse" elementFormDefault="qualified" targetNamespace="http://Microsoft.Sampsles.BizTalk.WoodgroveBank.Schemas.LastPaymentResponse" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="LastPaymentResponsePayment" nillable="true" type="tns:LastPaymentResponsePayment" />
+  <xs:complexType name="LastPaymentResponsePayment">
+    <xs:sequence>
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="DateLastPayment" type="xs:date" />
+      <xs:element minOccurs="1" maxOccurs="1" form="unqualified" name="AmountLastPayment" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LastPaymentResponseResponseStatusError" nillable="true" type="tns:LastPaymentResponseResponseStatusError" />
+  <xs:complexType name="LastPaymentResponseResponseStatusError">
+    <xs:attribute name="ErrorNumber" type="xs:string" />
+    <xs:attribute name="ErrorDescription" type="xs:string" />
+    <xs:attribute name="ErrorSource" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="LastPaymentResponseResponseStatus" nillable="true" type="tns:LastPaymentResponseResponseStatus" />
+  <xs:complexType name="LastPaymentResponseResponseStatus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="Error" type="tns:LastPaymentResponseResponseStatusError" />
+    </xs:sequence>
+    <xs:attribute name="Result" type="xs:string" />
+  </xs:complexType>
+  <xs:element name="LastPaymentResponse" nillable="true" type="tns:LastPaymentResponse" />
+  <xs:complexType name="LastPaymentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="ResponseStatus" type="tns:LastPaymentResponseResponseStatus" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" form="unqualified" name="Payment" type="tns:LastPaymentResponsePayment" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="CustomerName" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" form="unqualified" name="AccountNumber" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

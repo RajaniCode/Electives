@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="6f7f647b-d354-4d81-a4c3-400e8ded4a4f" name="swalther@SWLAPTOP 2009-05-02 23:13:07" runUser="REDMOND\swalther" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2006">
+  <TestRunConfiguration name="Default Run Configuration" id="ac51f7bb-953f-47c3-bf20-982423d4ca81">
+    <Deployment runDeploymentRoot="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\VB\MvcApplication1\TestResults\swalther_SWLAPTOP 2009-05-02 23_13_07">
+      <DeploymentItem filename="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\VB\MvcApplication1\MvcApplication1\bin\MvcApplication1.dll" />
+    </Deployment>
+    <Hosts skipUnhostableTests="false" />
+    <TestTypeSpecific />
+  </TestRunConfiguration>
+  <ResultSummary outcome="Completed">
+    <Counters total="2" executed="2" passed="2" error="0" failed="0" timeout="0" aborted="0" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="0" disconnected="0" warning="0" completed="0" inProgress="0" pending="0" />
+  </ResultSummary>
+  <Times creation="2009-05-02T23:13:07.8815071-07:00" queuing="2009-05-02T23:13:09.1694431-07:00" start="2009-05-02T23:13:09.4599775-07:00" finish="2009-05-02T23:13:10.2087775-07:00" />
+  <TestDefinitions>
+    <UnitTest name="JillCanAccessIndex" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter12 - authenticating users\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="8b003afd-6db2-d87a-d20c-0321d06e8517">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="ad597ed5-72c4-43ea-98bd-0842f988f77c" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.JillControllerTests, MvcApplication1.Tests" name="JillCanAccessIndex" />
+    </UnitTest>
+    <UnitTest name="JackCannotAccessIndex" storage="c:\users\swalther\documents\books\aspnetmvcunleashed\chapter12 - authenticating users\vb\mvcapplication1\mvcapplication1.tests\bin\debug\mvcapplication1.tests.dll" id="5af26a69-b226-f750-b504-af03aff5236b">
+      <Css projectStructure="" iteration="" />
+      <Owners>
+        <Owner name="" />
+      </Owners>
+      <Execution id="cf823403-e703-458f-b26c-34b2f3dca2b4" />
+      <TestMethod codeBase="C:\Users\swalther\Documents\Books\AspNetMvcUnleashed\Chapter12 - Authenticating Users\VB\MvcApplication1\MvcApplication1.Tests\bin\Debug\MvcApplication1.Tests.dll" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=9.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="MvcApplication1.Tests.JillControllerTests, MvcApplication1.Tests" name="JackCannotAccessIndex" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="5af26a69-b226-f750-b504-af03aff5236b" executionId="cf823403-e703-458f-b26c-34b2f3dca2b4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8b003afd-6db2-d87a-d20c-0321d06e8517" executionId="ad597ed5-72c4-43ea-98bd-0842f988f77c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="cf823403-e703-458f-b26c-34b2f3dca2b4" testId="5af26a69-b226-f750-b504-af03aff5236b" testName="JackCannotAccessIndex" computerName="SWLAPTOP" duration="00:00:00.0543594" startTime="2009-05-02T23:13:09.5638111-07:00" endTime="2009-05-02T23:13:10.1249119-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+    <UnitTestResult executionId="ad597ed5-72c4-43ea-98bd-0842f988f77c" testId="8b003afd-6db2-d87a-d20c-0321d06e8517" testName="JillCanAccessIndex" computerName="SWLAPTOP" duration="00:00:00.0004157" startTime="2009-05-02T23:13:10.1309023-07:00" endTime="2009-05-02T23:13:10.1358943-07:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Passed" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d">
+      <Output>
+      </Output>
+    </UnitTestResult>
+  </Results>
+</TestRun>

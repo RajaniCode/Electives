@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="SimpleTPTInheritance.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="SimpleTPTInheritanceStoreContainer">
+          <EntitySet Name="Articles" EntityType="SimpleTPTInheritance.Store.Articles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Medias" EntityType="SimpleTPTInheritance.Store.Medias" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Videos" EntityType="SimpleTPTInheritance.Store.Videos" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employees" EntityType="SimpleTPTInheritance.Store.Employees" store:Type="Tables" Schema="TBH" />
+          <EntitySet Name="Contacts" EntityType="SimpleTPTInheritance.Store.Contacts" store:Type="Tables" Schema="tbhc" />
+          <AssociationSet Name="FK_Articles_Medias" Association="SimpleTPTInheritance.Store.FK_Articles_Medias">
+            <End Role="Medias" EntitySet="Medias" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Videos_Medias" Association="SimpleTPTInheritance.Store.FK_Videos_Medias">
+            <End Role="Medias" EntitySet="Medias" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="ArticleId" Type="int" Nullable="false" />
+          <Property Name="ArticleContent" Type="varchar" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Medias">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Name="VideoId" Type="int" Nullable="false" />
+          <Property Name="ResourcePath" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="50" />
+          <Property Name="Hours" Type="int" />
+          <Property Name="Rate" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Salary" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="Type" Type="char" Nullable="false" MaxLength="2" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="IsClubMember" Type="bit" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <Association Name="FK_Articles_Medias">
+          <End Role="Medias" Type="SimpleTPTInheritance.Store.Medias" Multiplicity="1" />
+          <End Role="Articles" Type="SimpleTPTInheritance.Store.Articles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Medias">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Videos_Medias">
+          <End Role="Medias" Type="SimpleTPTInheritance.Store.Medias" Multiplicity="1" />
+          <End Role="Videos" Type="SimpleTPTInheritance.Store.Videos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Medias">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SimpleTPTInheritance" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="STPTInh">
+          <EntitySet Name="Medias" EntityType="SimpleTPTInheritance.Media" />
+          <EntitySet Name="Employees" EntityType="SimpleTPTInheritance.Employee" />
+          </EntityContainer>
+        <EntityType Name="Article" BaseType="SimpleTPTInheritance.Media">
+          <Property Name="ArticleContent" Type="String" Nullable="false" MaxLength="8000" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Media" Abstract="true">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Description" Type="String" Nullable="true" MaxLength="100" Unicode="false" FixedLength="false" />
+          </EntityType>
+        <EntityType Name="Video" BaseType="SimpleTPTInheritance.Media">
+          <Property Name="ResourcePath" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Employee" Abstract="true">
+          <Key>
+            <PropertyRef Name="EmployeeId" /></Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <Property Name="Email" Type="String" Nullable="true" />
+          </EntityType>
+        <EntityType Name="HourlyEmployee" BaseType="SimpleTPTInheritance.Employee" >
+          <Property Name="Hours" Type="Int32" Nullable="true" />
+          <Property Name="Rate" Type="Decimal" Nullable="true" /></EntityType>
+        <EntityType Name="SalariedEmployee" BaseType="SimpleTPTInheritance.Employee" >
+          <Property Name="Salary" Type="Decimal" Nullable="true" /></EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="SimpleTPTInheritanceStoreContainer" CdmEntityContainer="STPTInh">
+          <EntitySetMapping Name="Medias">
+            <EntityTypeMapping TypeName="IsTypeOf(SimpleTPTInheritance.Media)">
+              <MappingFragment StoreEntitySet="Medias">
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          <EntityTypeMapping TypeName="IsTypeOf(SimpleTPTInheritance.Video)">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="MediaId" ColumnName="VideoId" />
+                <ScalarProperty Name="ResourcePath" ColumnName="ResourcePath" />
+              </MappingFragment>
+              </EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(SimpleTPTInheritance.Article)">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="MediaId" ColumnName="ArticleId" />
+                <ScalarProperty Name="ArticleContent" ColumnName="ArticleContent" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="IsTypeOf(SimpleTPTInheritance.Employee)">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SimpleTPTInheritance.HourlyEmployee)">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <Condition ColumnName="Type" Value="HE" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(SimpleTPTInheritance.SalariedEmployee)">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <Condition ColumnName="Type" Value="SE" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="SimpleTablePerTypeInheritance">
+        <EntityTypeShape EntityType="SimpleTPTInheritance.Article" Width="1.5" PointX="2.75" PointY="3.875" Height="1.0992643229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimpleTPTInheritance.Media" Width="1.5" PointX="1.625" PointY="1.375" Height="1.427958984375" IsExpanded="true" />
+        <EntityTypeShape EntityType="SimpleTPTInheritance.Video" Width="1.5" PointX="0.5" PointY="3.875" Height="1.0992643229166665" IsExpanded="true" />
+        <InheritanceConnector EntityType="SimpleTPTInheritance.Video">
+          <ConnectorPoint PointX="1.8125" PointY="2.802958984375" />
+          <ConnectorPoint PointX="1.8125" PointY="3.875" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="SimpleTPTInheritance.Article">
+          <ConnectorPoint PointX="2.9375" PointY="2.802958984375" />
+          <ConnectorPoint PointX="2.9375" PointY="3.875" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="SimpleTPTInheritance.Employee" Width="1.5" PointX="8.125" PointY="4" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="SimpleTPTInheritance.HourlyEmployee" Width="1.5" PointX="9.5" PointY="6.125" Height="1.4033821614583335" />
+        <InheritanceConnector EntityType="SimpleTPTInheritance.HourlyEmployee">
+          <ConnectorPoint PointX="8.8124995000000013" PointY="5.59568359375" />
+          <ConnectorPoint PointX="8.8124995000000013" PointY="6.8266910807291667" />
+          <ConnectorPoint PointX="9.5" PointY="6.8266910807291667" /></InheritanceConnector>
+        <EntityTypeShape EntityType="SimpleTPTInheritance.SalariedEmployee" Width="1.5" PointX="6.5" PointY="6.25" Height="1.2110807291666665" />
+        <InheritanceConnector EntityType="SimpleTPTInheritance.SalariedEmployee">
+          <ConnectorPoint PointX="8.125" PointY="4.797841796875" />
+          <ConnectorPoint PointX="7.25" PointY="4.797841796875" />
+          <ConnectorPoint PointX="7.25" PointY="6.25" /></InheritanceConnector>
+        </Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,10 @@
+﻿@model Conference.Models.Session
+
+<h3>
+	@Model.Title
+</h3>
+<div>
+	@Model.Abstract
+</div>
+
+@Html.Action("_GetForSession", "Comment", new { SessionID = Model.SessionID })

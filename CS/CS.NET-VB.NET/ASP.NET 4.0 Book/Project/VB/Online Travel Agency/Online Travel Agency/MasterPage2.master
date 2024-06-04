@@ -1,0 +1,118 @@
+﻿<%@ Master Language="VB" AutoEventWireup="false" CodeBehind="MasterPage2.master.vb" Inherits="Online_Travel_Agency.MasterPage2" %>
+
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="asp" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <link href="StyleSheet.css" rel="stylesheet" type="text/css" />
+    <title></title>
+     <style type="text/css">        
+        .style2
+        {
+            width: 313px;
+        }
+        .style5
+        {
+            width: 7px;
+        }
+        .style6
+        {
+            width: 7px;
+        }
+        body
+        {
+            background: #7A674C;
+            font-size: .80em;
+            font-family: "Helvetica Neue" , "Lucida Grande" , "Segoe UI" , Arial, Helvetica, Verdana, sans-serif;
+            margin: 0px;
+            padding: 0px;
+            color: Black;
+        }
+        .page
+        {
+            width: 800px;
+            background-color: #fff;
+            margin: 20px auto 0px auto;
+            border: 1px solid #496077;
+        }
+        .footer
+        {
+            background-color: #7C0104;
+            color: White;
+            padding: 8px 0px 0px 0px;
+            margin: 0px auto;
+            text-align: Left;
+            line-height: normal;
+            height: 20px;
+            width: 799px;
+        }
+    </style>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <div class="page">
+      <%--  <asp:ScriptManager ID="ScriptManager1" runat="server">
+        </asp:ScriptManager>--%>
+        <asp:ToolkitScriptManager ID="ToolkitScriptManager1" runat="server">
+        </asp:ToolkitScriptManager>
+        <div>
+            &nbsp;&nbsp;&nbsp;
+            <asp:Image ID="Image1" runat="server" ImageUrl="~/Resources/Logo.gif" Width="762px"
+                Height="113px" />
+
+        </div>
+        <table style="width: 788px;">
+            <tr>
+                <td class="style5" align="left" valign="top">
+                    <asp:Image ID="Image3" runat="server" ImageUrl="~/Resources/dubaitour.gif" />
+                </td>
+                <td valign="top" rowspan="2">                
+                    <div style="background-color: #7C0104">
+                        <asp:Menu ID="Menu1" runat="server" Font-Size="Medium" ForeColor="White"
+                            Height="35px" Font-Bold="True" Font-Italic="False" Font-Names="Times New Roman"
+                            Orientation="Horizontal" EnableViewState="False" >
+                            <StaticMenuStyle BackColor="#7C0104" HorizontalPadding="10px" />
+                <StaticSelectedStyle BackColor="#7A674C" ForeColor="Black" />
+                <StaticMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                <StaticHoverStyle BackColor="#7A674C" ForeColor="Black" />
+                            <Items>
+                                <asp:MenuItem Text="Home" Value="Home" NavigateUrl="~/Home_User.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Car" Value="New Item" NavigateUrl="~/Car.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Bus" Value="New Item" NavigateUrl="~/Bus.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Train" Value="New Item" NavigateUrl="~/Train.aspx"></asp:MenuItem>
+                                <asp:MenuItem Text="Feedback" Value="New Item" NavigateUrl="~/Feedback.aspx">
+                                </asp:MenuItem>
+                            </Items>
+                        </asp:Menu>
+                    </div>
+                    <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                    </asp:ContentPlaceHolder>
+                    &nbsp;
+                </td>
+            </tr>
+            <tr>
+                <td valign="top" class="style6">
+                    &nbsp;
+                    </td>
+            </tr>
+            <tr>
+                <td>
+                    &nbsp;
+                </td>
+                <td class="style2">
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+        <br />
+    </div>
+    <div class="footer">
+        Copyright © DreamtechPress
+    </div>
+    </form>
+</body>
+</html>

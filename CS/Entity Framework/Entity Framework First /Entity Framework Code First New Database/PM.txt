@@ -1,0 +1,38 @@
+Each package is licensed to you by its owner. Microsoft is not responsible for, nor does it grant any licenses to, third-party packages. Some packages may include dependencies which are governed by additional licenses. Follow the package source (feed) URL to determine any dependencies.
+
+Package Manager Console Host Version 2.8.50313.46
+
+Type 'get-help NuGet' to see all available NuGet commands.
+/***********************************CodeFirst Migrations***********************************/
+PM> Enable-Migrations
+Checking if the context targets an existing database...
+Detected database created with a database initializer. Scaffolded migration '201407161119443_InitialCreate' corresponding to existing database. To use an automatic migration instead, delete the Migrations folder and re-run Enable-Migrations specifying the -EnableAutomaticMigrations parameter.
+Code First Migrations enabled for project CodeFirstNewDatabase2013.
+PM> Add-Migration AddUrl
+Scaffolding migration 'AddUrl'.
+The Designer Code for this migration file includes a snapshot of your current Code First model. This snapshot is used to calculate the changes to your model when you scaffold the next migration. If you make additional changes to your model that you want to include in this migration, then you can re-scaffold it by running 'Add-Migration AddUrl' again.
+PM> Update-Database
+Specify the '-Verbose' flag to view the SQL statements being applied to the target database.
+Applying explicit migrations: [201407161131341_AddUrl].
+Applying explicit migration: 201407161131341_AddUrl.
+Running Seed method.
+/***********************************Override Conventions in CodeFirst - DataAnnotations***********************************/
+PM> Add-Migration AddUser
+Scaffolding migration 'AddUser'.
+The Designer Code for this migration file includes a snapshot of your current Code First model. This snapshot is used to calculate the changes to your model when you scaffold the next migration. If you make additional changes to your model that you want to include in this migration, then you can re-scaffold it by running 'Add-Migration AddUser' again.
+PM> Update-Database
+Specify the '-Verbose' flag to view the SQL statements being applied to the target database.
+Applying explicit migrations: [201407161141288_AddUser].
+Applying explicit migration: 201407161141288_AddUser.
+Running Seed method.
+/***********************************Override Conventions in CodeFirst - Fluent API***********************************/
+PM> Add-Migration ChangeDisplayName
+Scaffolding migration 'ChangeDisplayName'.
+The Designer Code for this migration file includes a snapshot of your current Code First model. This snapshot is used to calculate the changes to your model when you scaffold the next migration. If you make additional changes to your model that you want to include in this migration, then you can re-scaffold it by running 'Add-Migration ChangeDisplayName' again.
+PM> Update-Database
+Specify the '-Verbose' flag to view the SQL statements being applied to the target database.
+Applying explicit migrations: [201407161149409_ChangeDisplayName].
+Applying explicit migration: 201407161149409_ChangeDisplayName.
+Caution: Changing any part of an object name could break scripts and stored procedures.
+Running Seed method.
+PM> 

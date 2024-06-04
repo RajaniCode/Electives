@@ -1,0 +1,112 @@
+﻿<VisualStudioProject>
+    <BIZTALK
+        ProductVersion = "3.0.4901"
+        SchemaVersion = "1.0"
+        ProjectGuid = "{176ECC5A-7C94-45C8-AD1C-02634F03D6A9}"
+    >
+        <Build>
+            <Settings>
+                <EditorCommon/>
+                <ProjectCommon
+                    AssemblyKeyName = ""
+                    AssemblyKeyFile = "..\..\..\..\BPELShipping.snk"
+                    AssemblyDelaySign = "False"
+                    AssemblyTitle = ""
+                    AssemblyDescription = ""
+                    AssemblyDefaultAlias = ""
+                    AssemblyConfiguration = ""
+                    AssemblyTrademark = ""
+                    AssemblyProduct = ""
+                    AssemblyInformationalVersion = "1.0.0.0"
+                    AssemblyFileVersion = "1.0.0.0"
+                    AssemblyCopyright = ""
+                    AssemblyCompany = ""
+                    AssemblyVersion = "1.0.0.0"
+                    DefaultNamespace = "ShipperProcess"
+                    AssemblyName = "ShipperProcess"
+                />
+                <Config
+                    Name = "Development"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "True"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Development\"
+                />
+                <Config
+                    Name = "Deployment"
+                    BpelCompliance = "True"
+                    GenerateDebuggingInformation = "False"
+                    EmbedTrackingInformation = "True"
+                    TreatWarningsAsErrors = "False"
+                    WarningLevel = "4"
+                    OutputPath = "bin\Deployment\"
+                />
+            </Settings>
+            <References>
+                <Reference
+                    Name = "System"
+                    AssemblyName = "System"
+                />
+                <Reference
+                    Name = "System.XML"
+                    AssemblyName = "System.Xml"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.DefaultPipelines"
+                    AssemblyName = "Microsoft.BizTalk.DefaultPipelines"
+                />
+                <Reference
+                    Name = "Microsoft.BizTalk.GlobalPropertySchemas"
+                    AssemblyName = "Microsoft.BizTalk.GlobalPropertySchemas"
+                />
+                <Reference
+                    Name = "ShippingSchemas"
+                    Project = "{D7F73FCB-B2E2-47D0-86BF-D9F8FF87F895}"
+                    Package = "{EF7E3281-CD33-11D4-8326-00C04FA0CE8D}"
+                    Private = "False"
+                />
+            </References>
+        </Build>
+        <Files>
+            <Include>
+                <File
+                    RelPath = "Invoice2PaymentConfirmation.btm"
+                    BuildAction = "Compile"
+                    Namespace = "ShipperProcess"
+                    Type = "Invoice2PaymentConfirmation"
+                />
+                <File
+                    RelPath = "Order2Invoice.btm"
+                    BuildAction = "Compile"
+                    Namespace = "ShipperProcess"
+                    Type = "Order2Invoice"
+                />
+                <File
+                    RelPath = "Order2PickupNotification.btm"
+                    BuildAction = "Compile"
+                    Namespace = "ShipperProcess"
+                    Type = "Order2PickupNotification"
+                />
+                <File
+                    RelPath = "Request2ShippingDone.btm"
+                    BuildAction = "Compile"
+                    Namespace = "ShipperProcess"
+                    Type = "Request2ShippingDone"
+                />
+                <File
+                    RelPath = "ShipperProcess.odx"
+                    BuildAction = "Compile"
+                />
+                <File
+                    RelPath = "ShipRequest2Ack.btm"
+                    BuildAction = "Compile"
+                    Namespace = "ShipperProcess"
+                    Type = "ShipRequest2Ack"
+                />
+            </Include>
+        </Files>
+    </BIZTALK>
+</VisualStudioProject>
+

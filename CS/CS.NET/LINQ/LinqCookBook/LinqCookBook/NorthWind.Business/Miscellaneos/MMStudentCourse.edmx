@@ -1,0 +1,155 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="MMStudentCoursesModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="MMStudentCoursesModelStoreContainer">
+          <EntitySet Name="Courses" EntityType="MMStudentCoursesModel.Store.Courses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StudentCourse" EntityType="MMStudentCoursesModel.Store.StudentCourse" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Students" EntityType="MMStudentCoursesModel.Store.Students" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_StudentCourse_Courses" Association="MMStudentCoursesModel.Store.FK_StudentCourse_Courses">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentCourse_Students" Association="MMStudentCoursesModel.Store.FK_StudentCourse_Students">
+            <End Role="Students" EntitySet="Students" />
+            <End Role="StudentCourse" EntitySet="StudentCourse" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Courses">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CourseName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="StudentCourse">
+          <Key>
+            <PropertyRef Name="StudentId" />
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" />
+          <Property Name="CourseId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Students">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_StudentCourse_Courses">
+          <End Role="Courses" Type="MMStudentCoursesModel.Store.Courses" Multiplicity="1" />
+          <End Role="StudentCourse" Type="MMStudentCoursesModel.Store.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Courses">
+              <PropertyRef Name="CourseId" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="CourseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentCourse_Students">
+          <End Role="Students" Type="MMStudentCoursesModel.Store.Students" Multiplicity="1" />
+          <End Role="StudentCourse" Type="MMStudentCoursesModel.Store.StudentCourse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Students">
+              <PropertyRef Name="StudentId" />
+            </Principal>
+            <Dependent Role="StudentCourse">
+              <PropertyRef Name="StudentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MM.MMStudentCoursesModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="MMStudentCoursesEntities">
+          <EntitySet Name="Courses" EntityType="MM.MMStudentCoursesModel.Course" />
+          <EntitySet Name="Students" EntityType="MM.MMStudentCoursesModel.Student" />
+          <AssociationSet Name="StudentCourse" Association="MM.MMStudentCoursesModel.StudentCourse">
+            <End Role="Courses" EntitySet="Courses" />
+            <End Role="Students" EntitySet="Students" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="Int32" Nullable="false" />
+          <Property Name="CourseName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Students" Relationship="MM.MMStudentCoursesModel.StudentCourse" FromRole="Courses" ToRole="Students" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Courses" Relationship="MM.MMStudentCoursesModel.StudentCourse" FromRole="Students" ToRole="Courses" />
+        </EntityType>
+        <Association Name="StudentCourse">
+          <End Role="Courses" Type="MM.MMStudentCoursesModel.Course" Multiplicity="*" />
+          <End Role="Students" Type="MM.MMStudentCoursesModel.Student" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="MMStudentCoursesModelStoreContainer" CdmEntityContainer="MMStudentCoursesEntities">
+          <EntitySetMapping Name="Courses">
+            <EntityTypeMapping TypeName="IsTypeOf(MM.MMStudentCoursesModel.Course)">
+              <MappingFragment StoreEntitySet="Courses">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="CourseName" ColumnName="CourseName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="IsTypeOf(MM.MMStudentCoursesModel.Student)">
+              <MappingFragment StoreEntitySet="Students">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="StudentCourse" TypeName="MM.MMStudentCoursesModel.StudentCourse" StoreEntitySet="StudentCourse">
+            <EndProperty Name="Courses">
+              <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+            </EndProperty>
+            <EndProperty Name="Students">
+              <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="MMStudentCourse">
+        <EntityTypeShape EntityType="MM.MMStudentCoursesModel.Course" Width="1.5" PointX="0.75" PointY="0.875" Height="1.427958984375" IsExpanded="true" />
+        <EntityTypeShape EntityType="MM.MMStudentCoursesModel.Student" Width="1.5" PointX="3" PointY="0.875" Height="1.427958984375" IsExpanded="true" />
+        <AssociationConnector Association="MM.MMStudentCoursesModel.StudentCourse" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.5889794921875" />
+          <ConnectorPoint PointX="3" PointY="1.5889794921875" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

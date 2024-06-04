@@ -1,0 +1,383 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xs:schema targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" elementFormDefault="qualified"
+	attributeFormDefault="unqualified" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.microsoft.com/BizTalk/KwTpm" xmlns:file="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/"
+	xmlns:wss="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/"
+	xmlns:http="http://schemas.xmlsoap.org/wsdl/http/">
+	<xs:import namespace="http://schemas.xmlsoap.org/wsdl/http/" schemaLocation="HttpBinding.xsd" />
+	<xs:import namespace="http://schemas.xmlsoap.org/wsdl/soap/" schemaLocation="SoapBinding.xsd" />
+	<xs:import namespace="http://www.microsoft.com/BizTalk/KwTpm/wsdl/file/" schemaLocation="FileBinding.xsd" />
+	<xs:import namespace="http://www.microsoft.com/BizTalk/KwTpm/wsdl/wss/" schemaLocation="WssBinding.xsd" />
+	<xs:element name="KwTpmMessageProcessing" type="KwTpmMessageProcessingType">
+		<xs:annotation>
+			<xs:documentation>This is an extension element to be used in WSDL:Service for additional information</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:element name="MessageProcessing" type="MessageProcessingType" />
+	<xs:element name="KwTpmMappedPort" type="KwTpmMappedPortType">
+		<xs:annotation>
+			<xs:documentation>This is an extension element to be used in WSDL:Service for additional information</xs:documentation>
+		</xs:annotation>
+	</xs:element>
+	<xs:complexType name="CertificateType">
+		<xs:sequence>
+			<xs:element name="Name">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:maxLength value="256" />
+						<xs:minLength value="1" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Protocol" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="Version" type="xs:decimal" minOccurs="0" />
+			<xs:element name="CertType" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="KeyLength" type="xs:int" minOccurs="0" />
+			<xs:element name="CertSource" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="IssuerName" minOccurs="0">
+				<xs:simpleType>
+					<xs:restriction base="xs:token">
+						<xs:maxLength value="256" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="KwTpmMappedPortType">
+		<xs:annotation>
+			<xs:documentation>Mapped port information</xs:documentation>
+		</xs:annotation>
+		<xs:sequence>
+			<xs:element name="MappedPortName" type="MappedPortNameType" />
+			<xs:element name="GlobalPortName" type="GlobalPortNameType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="KwTpmMessageProcessingType">
+		<xs:annotation>
+			<xs:documentation>Type of pipeline</xs:documentation>
+		</xs:annotation>
+		<xs:complexContent>
+			<xs:extension base="MessageProcessingType">
+			<xs:sequence>
+					<xs:element name="Name" minOccurs="0">
+						<xs:simpleType>
+							<xs:restriction base="xs:token">
+								<xs:maxLength value="256" />
+							</xs:restriction>
+						</xs:simpleType>
+					</xs:element>
+					<xs:element name="FullyQualifiedName" type="AssemblyNameType" />
+					<xs:element name="ReceiveFullyQualifiedName" type="AssemblyNameType" minOccurs="0" />
+					<xs:element name="RetryCount" type="RetryCountType" />
+					<xs:element name="RetryInterval" type="RetryIntervalType" />
+					<xs:element name="ServiceWindow" minOccurs="0">
+						<xs:complexType>
+							<xs:sequence>
+								<xs:element name="From" type="xs:time" />
+								<xs:element name="To" type="xs:time" />
+							</xs:sequence>
+						</xs:complexType>
+					</xs:element>
+					<xs:element name="GlobalPortName" type="GlobalPortNameType" minOccurs="0" />
+					<xs:element name="TransportType" type="TransportTypeType" />
+					<xs:element name="TransportInfo" type="TransportInfoType" />
+				</xs:sequence>
+			</xs:extension>
+		</xs:complexContent>
+	</xs:complexType>
+	<xs:simpleType name="TransportTypeType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="32" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RetryCountType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="1000" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="RetryIntervalType">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="0" />
+			<xs:maxInclusive value="525600" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="GlobalPortNameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="TransportInfoType">
+		<xs:sequence>
+			<xs:element name="HttpBinding" type="HttpBindingType" minOccurs="0" />
+			<xs:element name="FileBinding" type="FileBindingType" minOccurs="0" />
+			<xs:element name="SoapBinding" type="SoapBindingType" minOccurs="0" />
+			<xs:element name="WssBinding" type="WssBindingType" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="HttpBindingType">
+		<xs:sequence>
+			<!-- HTTP Transport Information -->
+			<xs:element name="Address" type="UrlType" />
+			<xs:element name="RequestTimeout" type="xs:int" minOccurs="0" />
+			<xs:element name="MaxRedirects" type="xs:int" minOccurs="0" />
+			<xs:element name="ContentType" type="ContentTypeType" minOccurs="0" />
+			<xs:element name="HttpsClientCert" type="HttpsClientCertType" minOccurs="0" />
+			<xs:element name="UseKerberosAuthentication" type="xs:boolean" minOccurs="0" />
+			<xs:element name="Direction" type="DirectionType" minOccurs="0" maxOccurs="1" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ContentTypeType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AuthenticationUsernameType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AuthenticationPasswordType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HttpsClientCertType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="1024" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AffiliateApplicationsType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="256" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="FileBindingType">
+		<xs:sequence>
+			<!-- FILE Transport Information -->
+			<xs:element name="DestinationLocation" type="DestinationLocationType" />
+			<xs:element name="FileName" type="FileNameType" />
+			<xs:element name="CopyMode" type="xs:int" minOccurs="0" />
+			<xs:element name="AllowCacheOnWrite" type="xs:boolean" minOccurs="0" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DestinationLocationType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="FileNameType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="SoapBindingType">
+		<xs:sequence>
+			<xs:element name="Address" type="UrlType" />
+			<xs:element name="Direction" type="DirectionType" minOccurs="1" maxOccurs="1" />
+			<xs:element name="Certificate" type="CertificateNameType" minOccurs="0" />
+			<xs:element name="AuthenticationScheme" type="AuthenticationSchemeType" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="CertificateNameType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="DirectionType">
+		<xs:restriction base="xs:token">
+			<xs:maxLength value="32" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AuthenticationSchemeType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="32" />
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="MessageProcessingType">
+		<xs:sequence>
+			<xs:element name="Encryption" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="EncryptionAlgorithm" minOccurs="0">
+							<xs:complexType />
+						</xs:element>
+						<xs:element name="EncryptionCertificate" type="CertificateType" />
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AssemblyNameType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="256" />
+			<xs:minLength value="1" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="UrlType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="512" />
+			<xs:pattern value="([h|H][t|T][t|T][p|P]|[h|H][t|T][t|T][p|P][s|S])\://[\w]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])*([:]([0-9])+)?([/]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])+)*([\?]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])+)?" />
+			<xs:pattern value="[\w]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])*([:]([0-9])+)?([/]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])+)*([\?]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])+)?" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="WssUrlType">
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="512" />
+			<xs:pattern value="([w|W][s|S][s|S]|[w|W][s|S][s|S][s|S])\://[\w]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])*([:]([0-9])+)?([/]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])+)*([\?]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])+)?" />
+			<xs:pattern value="[\w]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])*([:]([0-9])+)?([/]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])+)*([\?]([\w\$_\-\@\.&amp;\+\!\*\(\)\,&quot;\'\%])+)?" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MappedPortNameType">
+		<xs:restriction base="xs:token">
+			<xs:minLength value="1" />
+			<xs:maxLength value="256" />
+			<xs:pattern value="[^`~!@#$%^&amp;*()+=\[\]{}\|;'&quot;&gt;&lt;,\?\\]+"></xs:pattern>
+		</xs:restriction>
+	</xs:simpleType>
+
+    <xs:complexType name="WssBindingType">
+      <xs:sequence>
+        <xs:element minOccurs="1"  name="SiteUrl" type="SiteUrlType"/>
+        <xs:element minOccurs="1"  name="WssLocation" type="WssLocationType"/>
+        <xs:element minOccurs="1"  name="Overwrite" type="WssOverwriteType"/>
+	<xs:element minOccurs="0"  name="OrphanedMessagesFolder" type="WssLocationType"/>
+        <xs:element minOccurs="0"  name="OrphanedMessagesUrl" type="SiteUrlType"/>
+        <xs:element minOccurs="0" name="NamespaceAliases" type="xs:string"/>
+        <xs:element minOccurs="0" name="FileName" type="xs:string"/>
+        <xs:element minOccurs="1" name="OfficeIntegration" type="OfficeIntegrationType"/>
+        <xs:element minOccurs="0" name="TemplatesDocLib" type="TemplatesDocLibType"/>
+        <xs:element minOccurs="0" name="TemplatesNamespaceCol" type="TemplatesNamespaceColType"/>
+        <xs:element minOccurs="0" name="CustomTemplatesDocLib" type="CustomTemplatesDocLibType"/>
+        <xs:element minOccurs="0" name="CustomTemplatesNamespaceCol" type="CustomTemplatesNamespaceColType"/>
+        <xs:element minOccurs="0" name="PropertyName1" type="PropertyNameType"/>
+        <xs:element minOccurs="0" name="PropertySource1" type="xs:string"/>
+        <xs:element minOccurs="0" name="PropertyName2" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource2" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName3" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource3" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName4" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource4" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName5" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource5" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName6" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource6" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName7" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource7" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName8" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource8" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName9" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource9" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName10" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource10" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName11" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource11" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName12" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource12" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName13" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource13" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName14" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource14" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName15" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource15" type="xs:string" />
+        <xs:element minOccurs="0" name="PropertyName16" type="PropertyNameType" />
+        <xs:element minOccurs="0" name="PropertySource16" type="xs:string" />
+        <xs:element minOccurs="1" name="Timeout" type="WssTimeoutType" default="100000"/>
+        <xs:element minOccurs="1" name="AdapterWSPort" type="AdapterWsPortType" default="80" />
+      	<!-- Required URI property for all endpoint schemas -->
+        <xs:element minOccurs="1" name="uri" type="xs:string">
+        </xs:element>        
+      </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="PropertyNameType">
+	    <xs:restriction base="xs:string">
+			    <xs:minLength value="0" />
+			    <xs:maxLength value="260" />
+	    </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="WssTimeoutType">
+	    <xs:restriction base="xs:int"> <!-- Adapter framework does not support int derived xs types -->
+			    <xs:minInclusive value="0" />
+	    </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="AdapterWsPortType">
+	    <xs:restriction base="xs:int"> <!-- Adapter framework does not support int derived xs types -->
+			    <xs:minInclusive value="1" />
+			    <xs:maxInclusive value="65535" />
+	    </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="SiteUrlType">
+	    <xs:restriction base="xs:string">
+			    <xs:minLength value="8" />
+			    <xs:maxLength value="260" />
+	    </xs:restriction>
+    </xs:simpleType>     
+    <xs:simpleType name="WssLocationType">
+	    <xs:restriction base="xs:string">
+			    <xs:minLength value="1" />
+			    <xs:maxLength value="260" />
+	    </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="WssOverwriteType">
+	    <xs:restriction base="xs:string">
+	    <xs:pattern value="yes" />
+	    <xs:pattern value="no" />
+	    <xs:pattern value="orchestration" />
+	    </xs:restriction>
+    </xs:simpleType>          
+    <xs:simpleType name="OfficeIntegrationType">
+    <xs:restriction base="xs:string">
+	    <xs:pattern value="yes" />
+	    <xs:pattern value="no" />
+	    <xs:pattern value="orchestration" />
+    </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TemplatesDocLibType">
+    <xs:restriction base="xs:string">
+	    <xs:minLength value="0" />
+	    <xs:maxLength value="260" />
+    </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="TemplatesNamespaceColType">
+    <xs:restriction base="xs:string">
+	    <xs:minLength value="0" />
+	    <xs:maxLength value="260" />
+    </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CustomTemplatesDocLibType">
+    <xs:restriction base="xs:string">
+	    <xs:minLength value="0" />
+	    <xs:maxLength value="260" />
+    </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="CustomTemplatesNamespaceColType">
+    <xs:restriction base="xs:string">
+	    <xs:minLength value="0" />
+	    <xs:maxLength value="260" />
+    </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

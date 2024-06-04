@@ -1,0 +1,46 @@
+<UpdateConfiguration>
+	<MessageBoxDB oldDBName="BizTalkMsgboxDb" oldDBServer="SourceServer" newDBName="BizTalkMsgboxDb" newDBServer="DestinationServer" IsMaster="1"/>
+	<TrackingDB oldDBName="BizTalkDTADb" oldDBServer="SourceServer" newDBName="BizTalkDTADb" newDBServer="DestinationServer"/>
+	<ManagementDB oldDBName="BizTalkMgmtDb" oldDBServer="SourceServer" newDBName="BizTalkMgmtDb" newDBServer="DestinationServer"/>
+<!--
+	<AnalysisDB oldDBName="AnalysisDb" oldDBServer="SourceServer" newDBName="AnalysisDb" newDBServer="DestinationServer"/>
+	<BAM>
+		<DeploymentUnit Name="OldPrimaryImportDatabase">
+			<Property Name="ServerName">SourceServer</Property>
+			<Property Name="DatabaseName">BAMPrimaryImport</Property>
+		</DeploymentUnit>
+		<DeploymentUnit Name="PrimaryImportDatabase">
+			<Property Name="ServerName">DestinationServer</Property>
+			<Property Name="DatabaseName">BAMPrimaryImport</Property>
+		</DeploymentUnit>
+		<DeploymentUnit Name="ArchivingDatabase">
+			<Property Name="ServerName">DestinationServer</Property>
+			<Property Name="DatabaseName">BAMArchive</Property>
+		</DeploymentUnit>
+		<DeploymentUnit Name="AnalysisDatabase">
+			<Property Name="ServerName">DestinationServer</Property>
+			<Property Name="DatabaseName">BAMAnalysis</Property>
+		</DeploymentUnit>
+		<DeploymentUnit Name="StarSchemaDatabase">
+			<Property Name="ServerName">DestinationServer</Property>
+			<Property Name="DatabaseName">BAMStarSchema</Property>
+		</DeploymentUnit>
+		<DeploymentUnit Name="Alert">
+			<Property Name="DBServer">DestinationServer</Property>
+			<Property Name="InstanceDatabaseName">BAMAlerts</Property>
+		</DeploymentUnit>
+	</BAM>
+	<RuleEngineDB oldDBName="BizTalkRuleEngineDb" oldDBServer="SourceServer" newDBName="BizTalkRuleEngineDb" newDBServer="DestinationServer"/>
+-->
+	<OtherDatabases>
+<!--
+		<Database Name="HWS Administration DB" oldDBName="BizTalkHWSDb" oldDBServer="SourceServer" newDBName="BizTalkHWSDb" newDBServer="DestinationServer"/>
+		<Database Name="EDI" oldDBName="BizTalkEDIDb" oldDBServer="SourceServer" newDBName="BizTalkEDIDb" newDBServer="DestinationServer"/>
+-->		
+		<Database Name="SSO" oldDBName="SSODB" oldDBServer="SourceServer" newDBName="SSODB" newDBServer="DestinationServer"/>
+	</OtherDatabases>
+</UpdateConfiguration>
+
+
+
+

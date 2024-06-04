@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<BindingInfo xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Assembly="Microsoft.BizTalk.Deployment, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" Version="3.0.1.0" BindingStatus="FullyBound" BoundEndpoints="15" TotalEndpoints="15">
+  <Timestamp>2005-04-27T16:23:17.7843013-07:00</Timestamp>
+  <ModuleRefCollection>
+    <ModuleRef Name="Microsoft.Samples.BizTalk.Litware.Orchestrations" Version="1.0.0.0" Culture="neutral" PublicKeyToken="xxxxxxxxxxxxxxxx" FullName="Microsoft.Samples.BizTalk.Litware.Orchestrations, Version=1.0.0.0, Culture=neutral, PublicKeyToken=xxxxxxxxxxxxxxxx">
+      <Services>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.CheckOrderExists" State="Unenlisted">
+          <Ports>
+            <Port Name="OrderInquiryPort" Modifier="1" BindingOption="1">
+              <SendPortRef Name="SendToOrderSystem_HTTP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithBroker" State="Unenlisted">
+          <Ports>
+            <Port Name="SendBrokerEmail" Modifier="1" BindingOption="4">
+              <SendPortRef Name="Microsoft.Samples.BizTalk.Litware.Orchestrations_1.0.0.0_Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithBroker_SendBrokerEmail_xxxxxxxxxxxxxxxx" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles>
+            <Role Name="ContactBroker_Role" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.BrokerLinkType" RoleType="Uses">
+              <EnlistedParties />
+            </Role>
+          </Roles>
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithVendors" State="Unenlisted">
+          <Ports>
+            <Port Name="SendVendorEmail" Modifier="1" BindingOption="4">
+              <SendPortRef Name="Microsoft.Samples.BizTalk.Litware.Orchestrations_1.0.0.0_Microsoft.Samples.BizTalk.Litware.Orchestrations.ConfirmOrderWithVendors_SendVendorEmail_xxxxxxxxxxxxxxxx" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles>
+            <Role Name="ContactVendor_Role" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.VendorLinkType" RoleType="Uses">
+              <EnlistedParties />
+            </Role>
+          </Roles>
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.EDIXmlToBasket" State="Unenlisted">
+          <Ports>
+            <Port Name="Receive850" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="EDIRP" />
+            </Port>
+            <Port Name="SendBasketReq" Modifier="1" BindingOption="1">
+              <SendPortRef Name="EDISP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrder" State="Unenlisted">
+          <Ports>
+            <Port Name="__OrderRequestRoleLink_OrderRequestPortType" Modifier="2" BindingOption="5">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="GetOrderRP" />
+            </Port>
+          </Ports>
+          <Roles>
+            <Role Name="ResponseRole" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrderLinkType" RoleType="Uses">
+              <EnlistedParties />
+            </Role>
+            <Role Name="RequestRole" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetOrderLinkType" RoleType="Implements">
+              <EnlistedParties />
+            </Role>
+          </Roles>
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetProfile" State="Unenlisted">
+          <Ports>
+            <Port Name="__GetProfileRoleLink_PartnerRequestPortType" Modifier="2" BindingOption="5">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="GetProfileRP" />
+            </Port>
+          </Ports>
+          <Roles>
+            <Role Name="ResponseRole" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetPartnerProfileLinkType" RoleType="Uses">
+              <EnlistedParties />
+            </Role>
+            <Role Name="RequestRole" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetPartnerProfileLinkType" RoleType="Implements">
+              <EnlistedParties />
+            </Role>
+          </Roles>
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetPurchaseOrder" State="Unenlisted">
+          <Ports>
+            <Port Name="GetOrderPort" Modifier="1" BindingOption="1">
+              <SendPortRef Name="SendToOrderSystem_HTTP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.GetUserProfile" State="Unenlisted">
+          <Ports>
+            <Port Name="GetProfilePort" Modifier="1" BindingOption="1">
+              <SendPortRef Name="TPMWrapperAccess_SOAP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.NewOrder" State="Unenlisted">
+          <Ports>
+            <Port Name="RecvBasketPort" Modifier="2" BindingOption="1">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="NewOrderPickupRP" />
+            </Port>
+            <Port Name="SendBasketPort" Modifier="1" BindingOption="1">
+              <SendPortRef Name="SendToOrderSystem_HTTP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+          </Ports>
+          <Roles />
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.UpdateOrder" State="Unenlisted">
+          <Ports>
+            <Port Name="SendOrderChg" Modifier="1" BindingOption="1">
+              <SendPortRef Name="SendToOrderSystem_HTTP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+            <Port Name="__POChangeRoleLink_RecvPOChgType" Modifier="2" BindingOption="5">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="UpdateOrderPickupRP" />
+            </Port>
+          </Ports>
+          <Roles>
+            <Role Name="RequestRole" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.UpdatePORoleLinkType" RoleType="Implements">
+              <EnlistedParties />
+            </Role>
+          </Roles>
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+        <Service Name="Microsoft.Samples.BizTalk.Litware.Orchestrations.UpdateUserProfileBAS" State="Unenlisted">
+          <Ports>
+            <Port Name="UpdateProfilePort" Modifier="1" BindingOption="1">
+              <SendPortRef Name="TPMWrapperAccess_SOAP" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef xsi:nil="true" />
+            </Port>
+            <Port Name="__UpdateProfileRoleLink_ProfilePortType" Modifier="2" BindingOption="5">
+              <SendPortRef xsi:nil="true" />
+              <DistributionListRef xsi:nil="true" />
+              <ReceivePortRef Name="UpdateUserBASRP" />
+            </Port>
+          </Ports>
+          <Roles>
+            <Role Name="UpdateStatus_Role" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.UserProfileLinkType" RoleType="Uses">
+              <EnlistedParties />
+            </Role>
+            <Role Name="UpdateProfile_Role" RoleLinkTypeName="Microsoft.Samples.BizTalk.Litware.Orchestrations.UserProfileLinkType" RoleType="Implements">
+              <EnlistedParties />
+            </Role>
+          </Roles>
+          <Host Name="BizTalkServerApplication" NTGroupName="BizTalk Application Users" Type="1" />
+        </Service>
+      </Services>
+      <TrackedSchemas />
+    </ModuleRef>
+  </ModuleRefCollection>
+  <SendPortCollection />
+  <DistributionListCollection />
+  <ReceivePortCollection />
+  <PartyCollection />
+</BindingInfo>

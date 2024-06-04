@@ -1,0 +1,21 @@
+﻿<Window x:Class="WPF_PatientDetailsApp.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:dg="clr-namespace:Microsoft.Windows.Controls;assembly=WpfToolkit"
+    Title="Window1" Height="392" Width="920"
+        Loaded="Window_Loaded" >
+    <Grid>
+        <Button Height="43" Margin="12,12,36,0" 
+                Name="btnLoadPatientInfo" 
+                VerticalAlignment="Top"
+                 Click="btnLoadPatientInfo_Click">Load Patient Info</Button>
+        <dg:DataGrid x:Name="dgPatient" Margin="12,74,36,12" AutoGenerateColumns="False">
+            <dg:DataGrid.Columns>
+                <dg:DataGridTextColumn Header="Patient Id" Binding="{Binding PatientId}" Width="100"></dg:DataGridTextColumn>
+                <dg:DataGridTextColumn Header="Patient Name" Binding="{Binding PatientName}" Width="200"></dg:DataGridTextColumn>
+                <dg:DataGridTextColumn Header="Patient Address" Binding="{Binding PatientId}" Width="300"></dg:DataGridTextColumn>
+                <dg:DataGridTextColumn Header="Patient Age" Binding="{Binding PatientAge}" Width="100"></dg:DataGridTextColumn>
+            </dg:DataGrid.Columns>
+        </dg:DataGrid>
+    </Grid>
+</Window>

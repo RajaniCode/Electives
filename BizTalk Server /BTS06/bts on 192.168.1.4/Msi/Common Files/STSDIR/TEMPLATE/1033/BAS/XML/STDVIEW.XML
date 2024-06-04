@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- _lcid="1033" _version="11.0.5529" _dal="1" -->
+<!-- _LocalBinding -->
+<View xmlns:ows="Microsoft SharePoint">
+<Toolbar Type="Standard">
+<HTML><![CDATA[
+  <SCRIPT>
+  var varPageUrl]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[ = "]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/></ScriptQuote><HTML><![CDATA[";
+  </SCRIPT>]]></HTML>
+  <HTML><![CDATA[
+  <TABLE cellpadding=2 cellspacing=0 class="ms-toolbar" style="margin-left: 3px;">
+   <TR>
+]]></HTML>
+<Switch> 
+<Expr><GetVar Name="GridView"/></Expr> 
+<Case Value="1">
+<Switch><Expr><GetVar Name="ModListAllItemsView"/></Expr>
+<Case Value="1">
+</Case>
+<Default> 
+<HTML><![CDATA[  
+    	<TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidGridNewRow class="ms-toolbar" title=]]></HTML><HTML>"New Row"</HTML><HTML><![CDATA[ ACCESSKEY=N href="javascript:" onclick="javaScript:]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[GridNewRow();javascript:return false;" target=_self><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/newitem.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"New Row"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidGridNewRow class="ms-toolbar" ACCESSKEY=N href="javascript:" onclick="javaScript:]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[GridNewRow();javascript:return false;" target=_self>
+            <LocID ID="L_GridNewRow">]]></HTML><HTML>New Row</HTML><HTML><![CDATA[</LocID>
+    	</a> </td> </tr> </table> </TD>
+]]></HTML>
+</Default>
+</Switch>
+</Case>
+<Default> <HTML><![CDATA[
+       <TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidIONewItem class="ms-toolbar" title=]]></HTML><HTML>"New"</HTML><HTML><![CDATA[ ACCESSKEY=N href="]]></HTML><URL Cmd="New"/><HTML><![CDATA[" onclick="javascript:NewItem(']]></HTML><URL Cmd="New"/><HTML><![CDATA[', false);javascript:return false;" target=_self><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/newitem.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"New"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidIONewItem class="ms-toolbar" ACCESSKEY=N href="]]></HTML><URL Cmd="New"/><HTML><![CDATA[" onclick="javascript:NewItem(']]></HTML><URL Cmd="New"/><HTML><![CDATA[', false);javascript:return false;" target=_self>
+           <LocID ID="L_NewItem">]]></HTML><HTML>New Item</HTML><HTML><![CDATA[</LocID>
+       </a> </td> </tr> </table> </TD>
+]]></HTML></Default>
+</Switch> 
+<HTML><![CDATA[
+]]></HTML>
+		<Switch><Expr><GetVar Name="CalView"/></Expr>
+		<Case Value="1">
+		</Case>
+		<Default>
+		<Switch><Expr><GetVar Name="GridView"/></Expr>
+		<Case Value="1"/>
+		<Default>
+		<HTML><![CDATA[
+    	<TD class=ms-separator>|</td> 
+       <TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidFilterButton class="ms-toolbar" title=]]></HTML><HTML>"Filter"</HTML><HTML><![CDATA[ ACCESSKEY=L href="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><FilterLink Paged="FALSE"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/tbfilter.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"Filter"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidFilterButton class="ms-toolbar" ACCESSKEY=L href="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><FilterLink Paged="FALSE"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>
+                 ]]></HTML><Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"><HTML>Hide Filter Choices</HTML></Case> <Default> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""><HTML>Filter</HTML></Case> <Default><HTML>Change Filter</HTML></Default> </Switch> </Default> </Switch><HTML><![CDATA[
+       </a> </td> </tr> </table> </TD>
+		]]></HTML></Default>
+		</Switch>
+		</Default>
+		</Switch>
+<HTML><![CDATA[
+]]></HTML>
+<Switch>
+    <Expr><ListProperty Select="MultipleMtgDataList"/></Expr>
+    <Case Value="1">
+        <Switch>
+            <Expr><MeetingProperty Select="MeetingCount"/></Expr>
+            <Case Value="0"/>
+            <Case Value="1"/>
+            <Default>
+                <Switch>
+                    <Expr><GetVar Name="GridView"/></Expr>
+                    <Case Value="1"/>
+                    <Default>
+                        <Switch>
+                            <Expr><GetVar Name="InstanceID"/></Expr>
+                            <Case Value="ALL">
+                                <HTML><![CDATA[
+                                    <TD class=ms-separator>|</TD>
+                                       <TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidAllMtgsButton class="ms-toolbar" title=]]></HTML><HTML>"Show Data from This Meeting only"</HTML><HTML><![CDATA[ ACCESSKEY=T href="javascript:" onclick="javascript:SubmitFormPost(']]></HTML><PageUrl/><HTML><![CDATA[?InstanceID=&View=]]></HTML><GetVar Name="View"/><HTML><![CDATA[');javascript:return false;"><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/thismeet.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"Show Data from This Meeting only"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidAllMtgsButton class="ms-toolbar" ACCESSKEY=T href="javascript:" onclick="javascript:SubmitFormPost(']]></HTML><PageUrl/><HTML><![CDATA[?InstanceID=&View=]]></HTML><GetVar Name="View"/><HTML><![CDATA[');javascript:return false;">
+                                             ]]></HTML><HTML>This Meeting</HTML><HTML><![CDATA[
+                                       </a> </td> </tr> </table> </TD>
+                                ]]></HTML>
+                            </Case>
+                            <Default>
+                                <HTML><![CDATA[
+                                    <TD class=ms-separator>|</TD>
+                                       <TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidAllMtgsButton class="ms-toolbar" title=]]></HTML><HTML>"Show Data from All Meetings"</HTML><HTML><![CDATA[ ACCESSKEY=T href="javascript:" onclick="javascript:SubmitFormPost(']]></HTML><PageUrl/><HTML><![CDATA[?InstanceID=ALL&View=]]></HTML><GetVar Name="View"/><HTML><![CDATA[');javascript:return false;"><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/allmeet.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"Show Data from All Meetings"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidAllMtgsButton class="ms-toolbar" ACCESSKEY=T href="javascript:" onclick="javascript:SubmitFormPost(']]></HTML><PageUrl/><HTML><![CDATA[?InstanceID=ALL&View=]]></HTML><GetVar Name="View"/><HTML><![CDATA[');javascript:return false;">
+                                             ]]></HTML><HTML>All Meetings</HTML><HTML><![CDATA[
+                                       </a> </td> </tr> </table> </TD>
+                                ]]></HTML>
+                            </Default>
+                        </Switch>        
+                    </Default>
+                </Switch>        
+            </Default>
+        </Switch>        
+    </Case>
+</Switch>
+<HTML><![CDATA[
+]]></HTML>
+<Switch>
+    <Expr><GetVar Name="OrderedView"/></Expr>
+    <Case Value="1"><HTML><![CDATA[
+       <TD class=ms-separator>|</TD>
+        <TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidChangeOrderButton class="ms-toolbar" title=]]></HTML><HTML>"Change Order"</HTML><HTML><![CDATA[ ACCESSKEY=R href="javascript:" onclick="javaScript:GoToPage(']]></HTML><HttpVDir/><HTML><![CDATA[/_layouts/[%=System.Threading.Thread.CurrentThread.CurrentUICulture.LCID%]/Reorder.aspx?List=]]></HTML><ListProperty Select="Name" URLEncode="TRUE"/><HTML><![CDATA[');javascript:return false;" target=_self><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/reorder.gif" ]]></HTML><HTML><![CDATA[ ID="tbbuttonstart1" alt=]]></HTML><HTML>"Change Order"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidChangeOrderButton class="ms-toolbar" ACCESSKEY=R href="javascript:" onclick="javaScript:GoToPage(']]></HTML><HttpVDir/><HTML><![CDATA[/_layouts/[%=System.Threading.Thread.CurrentThread.CurrentUICulture.LCID%]/Reorder.aspx?List=]]></HTML><ListProperty Select="Name" URLEncode="TRUE"/><HTML><![CDATA[');javascript:return false;" target=_self>
+				]]></HTML><HTML>Change Order</HTML><HTML><![CDATA[	       
+		</a> </td> </tr> </table> </TD>
+		]]></HTML>
+    </Case>
+    <Default/>
+</Switch>
+<HTML><![CDATA[
+]]></HTML>
+<Switch><Expr><GetVar Name="CalView"/></Expr>
+<Case Value="1">
+</Case>
+<Default>
+<Switch><Expr><GetVar Name="GridSwitch"/></Expr>
+<Case Value="Unavailable">
+</Case>
+<Default>
+<Switch><Expr><GetVar Name="InstanceID"/></Expr>
+<Case Value="ALL">
+</Case>
+<Default>
+<Switch><Expr><GetVar Name="GridView"/></Expr>
+<Case Value="1">
+	<Switch><Expr><GetVar Name="ModListAllItemsView"/></Expr>
+	<Case Value="1">
+	</Case>
+	<Default>
+		<HTML><![CDATA[
+			<TD class=ms-separator>|</TD>
+		]]></HTML>
+	</Default>
+	</Switch>
+	<HTML><![CDATA[
+	       <TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidEditInGridButton class="ms-toolbar" title=]]></HTML><HTML>"Show in Standard View"</HTML><HTML><![CDATA[ ACCESSKEY=X href="javascript:ExitGrid(varPageUrl]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[)"><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src=]]></HTML><HTML><![CDATA[ "/_layouts/images/exitgrid.gif" ]]></HTML><HTML><![CDATA[ ID="tbbuttonstart1" alt=]]></HTML><HTML>"Show in Standard View"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidEditInGridButton class="ms-toolbar" ACCESSKEY=X href="javascript:ExitGrid(varPageUrl]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[)">]]></HTML><HTML>Show in Standard View</HTML><HTML><![CDATA[
+	       </a> </td> </tr> </table> </TD>
+	]]></HTML>
+</Case>
+<Default>
+	<HTML><![CDATA[
+	    <TD class=ms-separator>|</TD>
+	       <TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidEditInGridButton class="ms-toolbar" title=]]></HTML><HTML>"Edit in Datasheet"</HTML><HTML><![CDATA[ ACCESSKEY=G href="javascript:" onclick="javascript:EditInGrid(varPageUrl]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[,']]></HTML><GetVar Name="View"/><HTML><![CDATA[');javascript:return false;" target=_self><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/editgrid.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"Edit in Datasheet"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidEditInGridButton class="ms-toolbar" ACCESSKEY=G href="javascript:" onclick="javascript:EditInGrid(varPageUrl]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[,']]></HTML><GetVar Name="View"/><HTML><![CDATA[');javascript:return false;" target=_self>
+                 ]]></HTML><HTML>Edit in Datasheet</HTML><HTML><![CDATA[
+	       </a> </td> </tr> </table> </TD>
+	]]></HTML>
+</Default>
+</Switch> 
+</Default>
+</Switch> 
+</Default>
+</Switch>
+</Default>
+</Switch>
+<HTML><![CDATA[
+]]></HTML>
+<Switch><Expr><GetVar Name="CalView"/></Expr>
+<Case Value="1">
+<HTML><![CDATA[
+    <TD class=ms-separator>|</TD>
+    <TD class="ms-toolbar" nowrap>
+    <table cellpadding=1 cellspacing=0 border=0>
+    <tr>
+        <td nowrap>
+			<a class="ms-toolbar" tabindex=0 ACCESSKEY=S ID=diidCalTodayButton HREF="javascript:cal.MoveToToday();">
+			<LocID ID="L_CalToday">]]></HTML><HTML>Today</HTML><HTML><![CDATA[</LocID>
+		</a>
+		</td>
+    </tr>
+    </table>
+    </TD>
+]]></HTML></Case>
+<Default/>
+</Switch> 
+<HTML><![CDATA[
+]]></HTML>
+<Switch><Expr><GetVar Name="CalView"/></Expr>
+<Case Value="1">
+<HTML><![CDATA[
+    <TD class=ms-separator>|</TD>
+    <TD class="ms-toolbar" nowrap>
+    <table cellpadding=1 cellspacing=0 border=0>
+    <tr>
+        <td nowrap>
+			<a class="ms-toolbar" tabindex=0 ACCESSKEY=S ID=diidCalViewByDayButton HREF="javascript:cal.MoveDay(0);">
+			<LocID ID="L_ByDay">]]></HTML><HTML>View by Day</HTML><HTML><![CDATA[</LocID>
+		</a>
+		</td>
+    </tr>
+    </table>
+    </TD>
+]]></HTML></Case>
+<Default/>
+</Switch> 
+<HTML><![CDATA[
+]]></HTML>
+<Switch><Expr><GetVar Name="CalView"/></Expr>
+<Case Value="1">
+<HTML><![CDATA[
+    <TD class=ms-separator>|</TD>
+    <TD class="ms-toolbar" nowrap>
+    <table cellpadding=1 cellspacing=0 border=0>
+    <tr>
+        <td nowrap>
+			<a class="ms-toolbar" tabindex=0 ACCESSKEY=S ID=diidCalViewByWeekButton HREF="javascript:cal.MoveWeek(0);">
+			<LocID ID="L_ByWeek">]]></HTML><HTML>View by Week</HTML><HTML><![CDATA[</LocID>
+		</a>
+		</td>
+    </tr>
+    </table>
+    </TD>
+]]></HTML></Case>
+<Default/>
+</Switch> 
+<HTML><![CDATA[
+]]></HTML>
+<Switch><Expr><GetVar Name="CalView"/></Expr>
+<Case Value="1">
+<HTML><![CDATA[
+    <TD class=ms-separator>|</TD>
+    <TD class="ms-toolbar" nowrap>
+    <table cellpadding=1 cellspacing=0 border=0>
+    <tr>
+        <td nowrap>
+        <a class="ms-toolbar" tabindex=0 ACCESSKEY=S ID=diidCalViewByMonthButton HREF="javascript:cal.MoveMonth(0);">
+			<LocID ID="L_ByMonth">]]></HTML><HTML>View by Month</HTML><HTML><![CDATA[</LocID>
+		</a>
+		</td>
+    </tr>
+    </table>
+    </TD>
+]]></HTML></Case>
+<Default/>
+</Switch> 
+<HTML><![CDATA[
+]]></HTML>
+<Switch><Expr><GetVar Name="GridView"/></Expr>
+<Case Value="1">
+<Switch><Expr><GetVar Name="ShowInGrid"/></Expr>
+	<Case Value="True">
+		<HTML><![CDATA[
+			<TD class=ms-separator>|</TD>
+		]]></HTML>
+	</Case>
+	<Default>
+		<Switch><Expr><GetVar Name="ModListAllItemsView"/></Expr>
+		<Case Value="1">
+		</Case>
+		<Default>
+		<HTML><![CDATA[
+			<TD class=ms-separator>|</TD>
+		]]></HTML>
+		</Default>
+		</Switch>
+	</Default>
+</Switch>
+<HTML><![CDATA[
+    	<TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidShowHideTaskPane class="ms-toolbar" title=]]></HTML><HTML>"Task Pane"</HTML><HTML><![CDATA[ ACCESSKEY=S href="javascript:" onclick="javaScript:]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[ShowHideTaskPane();javascript:return false;" target=_self><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/taskpane.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"Task Pane"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidShowHideTaskPane class="ms-toolbar" ACCESSKEY=S href="javascript:" onclick="javaScript:]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[ShowHideTaskPane();javascript:return false;" target=_self>
+            <LocID ID="L_ShowHideTaskPane">]]></HTML><HTML>Task Pane</HTML><HTML><![CDATA[</LocID>
+    	</a> </td> </tr> </table> </TD>
+    <TD class=ms-separator>|</TD>
+    	<TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidShowHideTotalsRow class="ms-toolbar" title=]]></HTML><HTML>"Totals"</HTML><HTML><![CDATA[ ACCESSKEY=O href="javascript:" onclick="javaScript:]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[ShowHideTotalsRow();javascript:return false;" target=_self><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/totalrow.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"Totals"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidShowHideTotalsRow class="ms-toolbar" ACCESSKEY=O href="javascript:" onclick="javaScript:]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[ShowHideTotalsRow();javascript:return false;" target=_self>
+            <LocID ID="L_ShowHideTotalsRow">]]></HTML><HTML>Totals</HTML><HTML><![CDATA[</LocID>
+    	</a> </td> </tr> </table> </TD>
+    <TD class=ms-separator>|</TD>
+    	<TD class="ms-toolbar"> <table cellpadding=1 cellspacing=0 border=0> <tr> <td class="ms-toolbar" nowrap> <a tabindex=2 ID=diidRefresh class="ms-toolbar" title=]]></HTML><HTML>"Refresh Data"</HTML><HTML><![CDATA[ ACCESSKEY=R href="javascript:" onclick="javaScript:]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[Refresh();javascript:return false;" target=_self><!-- _locID@title="idbtnSttitle1" _locComment="{StringCategory=TXT}" --> <img src="/_layouts/images/grefresh.gif" ID="tbbuttonstart1" alt=]]></HTML><HTML>"Refresh Data"</HTML><HTML><![CDATA[ border=0 width=16 height=16><!-- _locID@alt="idbtnSttitle2" _locComment="{StringCategory=TXT}" --></a></td> <td nowrap> <a tabindex=2 ID=diidRefresh class="ms-toolbar" ACCESSKEY=R href="javascript:" onclick="javaScript:]]></HTML><GetVar Name="WPQ"/><HTML><![CDATA[Refresh();javascript:return false;" target=_self>
+            <LocID ID="L_Refresh">]]></HTML><HTML>Refresh Data</HTML><HTML><![CDATA[</LocID>
+    	</a> </td> </tr> </table> </TD>
+]]></HTML></Case>
+<Default/>
+</Switch> 
+<HTML><![CDATA[
+    <TD width=99% class="ms-toolbar">&nbsp;</TD>
+   </TR>
+  </TABLE>
+  <table width=100% border=0 cellpadding=0 cellspacing=2>
+  <tr>
+   <td colspan=8 height=3><IMG SRC="/_layouts/images/blank.gif" width=1 height=3 alt=""></td>
+  </tr>
+  </table>
+]]></HTML>
+</Toolbar>
+<GroupByHeader> <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML> </GroupByHeader>
+<GroupByFooter> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch> </GroupByFooter>
+<ViewHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+    <HTML><![CDATA[" width="100%" border=0 cellspacing=0 cellpadding=1 rules=rows><TR VALIGN=TOP>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH nowrap class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+            <Case Value=""><Switch><Expr><Property Select="Type"/><PresenceEnabled/></Expr>
+                            <Case Value="UserTRUE"><HTML><![CDATA[<TH nowrap class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+                            <Default><HTML><![CDATA[<TH nowrap class="ms-vh2">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+                           </Switch>
+            </Case>
+            <Default><HTML><![CDATA[<TH nowrap class="ms-vh-icon">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+</ViewHeader>
+<ViewBody>
+    <HTML><![CDATA[<TR>]]></HTML>
+    <Fields>
+        <HTML><![CDATA[<TD Class="]]></HTML>
+	<FieldSwitch> <Expr><Property Select="ClassInfo"/></Expr> <Case Value="Menu"><HTML><![CDATA[ms-vb-title" height="100%]]></HTML></Case> <Case Value="Icon">ms-vb-icon</Case> <Default> <FieldSwitch> <Expr><Property Select="Type"/><PresenceEnabled/></Expr> <Case Value="UserTRUE">ms-vb-user</Case> <Default>ms-vb2</Default> </FieldSwitch> </Default> </FieldSwitch>
+        <HTML><![CDATA[">]]></HTML>
+        <Field/>
+        <HTML><![CDATA[</TD>]]></HTML>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+</ViewBody>
+<ViewFooter>
+<HTML><![CDATA[</TABLE>]]></HTML>
+<HTML><![CDATA[</td></tr></table>]]></HTML>
+</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+<RowLimit Paged="TRUE">100</RowLimit>
+<ViewEmpty>
+    <HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0><tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 width="100%" Summary="]]></HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML><![CDATA[" ]]></HTML>
+    <HTML><![CDATA[border=0 rules=rows><TR>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+            <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+            <Default><HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+    <HTML><![CDATA[</TABLE>]]></HTML>
+    <HTML><![CDATA[</td></tr>]]></HTML>
+    <HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ]]></HTML>
+ <HTML><![CDATA[ width=100% ]]></HTML>
+<HTML><![CDATA[ border=0 rules=rows><TR>]]></HTML>
+    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+    <HTML>There are no items to show in this view of the "</HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+    <HTML><![CDATA[</TD>]]></HTML>
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+    <HTML><![CDATA[</td></tr></TABLE>]]></HTML>
+</ViewEmpty>
+<ViewBidiHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+    <HTML><![CDATA[" width="100%" border=0 cellspacing=0 cellpadding=1 rules=rows dir="]]></HTML>
+    <ListProperty Select="Direction"/>
+    <HTML><![CDATA["><TR VALIGN=TOP>]]></HTML>
+    <Switch>
+    <Expr><ListProperty Select='Direction'/></Expr>
+    <Case Value="LTR">
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-left"/>
+    </Case>
+    <Case Value="RTL">
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-right"/>
+    </Case>
+    <Default>
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh"/>
+    </Default>
+    </Switch>    
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH nowrap class="]]></HTML>
+            <GetVar Name="MsVhDirection"/>
+            <HTML><![CDATA[">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+            <Case Value=""><Switch><Expr><Property Select="Type"/><PresenceEnabled/></Expr>
+                            <Case Value="UserTRUE"><HTML><![CDATA[<TH nowrap class="]]></HTML><GetVar Name="MsVhDirection"/><HTML><![CDATA[">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+                            <Default><HTML><![CDATA[<TH nowrap class="]]></HTML><GetVar Name="MsVhDirection"/><HTML><![CDATA[">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+                           </Switch>
+            </Case>
+            <Default><HTML><![CDATA[<TH nowrap class="]]></HTML><GetVar Name="MsVhDirection"/><HTML><![CDATA[">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+</ViewBidiHeader>
+</View>

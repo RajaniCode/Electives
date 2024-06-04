@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns="http://www.microsoft.com/BizTalk/KwTpm" xmlns:b="http://schemas.microsoft.com/BizTalk/2003" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://www.microsoft.com/BizTalk/KwTpm" version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="BizTalkRegistrationInfo" type="BizTalkRegistrationInfoType" />
+  <xs:complexType name="BizTalkRegistrationInfoType">
+    <xs:sequence>
+      <xs:element name="Name" type="NameType" />
+      <xs:element name="Server" type="ServerType" />
+      <xs:element name="Database" type="DatabaseType" />
+      <xs:element name="OutboxReceiveLocHost" type="HostType" />
+      <xs:element name="ParamSvcHost" type="HostType" />
+      <xs:element name="ReceiveLocationUri" type="ReceiveLocationUriType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="NameType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="128" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ServerType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="128" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="DatabaseType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="128" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="HostType">
+    <xs:restriction base="xs:string">
+      <xs:minLength value="1" />
+      <xs:maxLength value="80" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="ReceiveLocationUriType">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="255" />
+      <xs:minLength value="1" />
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>

@@ -1,0 +1,538 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MediaQWModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="MediaQWModelStoreContainer">
+          <EntitySet Name="Orders" EntityType="MediaQWModel.Store.Orders" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Persons" EntityType="MediaQWModel.Store.Persons" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Articles" EntityType="MediaQWModel.Store.Articles" store:Type="Tables" Schema="TBH" />
+          <EntitySet Name="Medias" EntityType="MediaQWModel.Store.Medias" store:Type="Tables" Schema="TBH" />
+          <EntitySet Name="Videos" EntityType="MediaQWModel.Store.Videos" store:Type="Tables" Schema="TBH" />
+          <EntitySet Name="Company" EntityType="MediaQWModel.Store.Company" store:Type="Tables" Schema="tbhc" />
+          <EntitySet Name="Contacts" EntityType="MediaQWModel.Store.Contacts" store:Type="Tables" Schema="tbhc" />
+          <EntitySet Name="Employees" EntityType="MediaQWModel.Store.Employees" store:Type="Tables" Schema="tbhc" />
+          <EntitySet Name="Locations" EntityType="MediaQWModel.Store.Locations" store:Type="Tables" Schema="tbhc" />
+          <EntitySet Name="ManufacturerLocations" EntityType="MediaQWModel.Store.ManufacturerLocations" store:Type="Tables" Schema="tbhc" />
+          <EntitySet Name="Manufacturers" EntityType="MediaQWModel.Store.Manufacturers" store:Type="Tables" Schema="tbhc" />
+          <AssociationSet Name="FK_Articles_Medias" Association="MediaQWModel.Store.FK_Articles_Medias">
+            <End Role="Medias" EntitySet="Medias" />
+            <End Role="Articles" EntitySet="Articles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Company_Locations" Association="MediaQWModel.Store.FK_Company_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="Company" EntitySet="Company" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufacturerLocations_Locations" Association="MediaQWModel.Store.FK_ManufacturerLocations_Locations">
+            <End Role="Locations" EntitySet="Locations" />
+            <End Role="ManufacturerLocations" EntitySet="ManufacturerLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ManufacturerLocations_Manufacturers" Association="MediaQWModel.Store.FK_ManufacturerLocations_Manufacturers">
+            <End Role="Manufacturers" EntitySet="Manufacturers" />
+            <End Role="ManufacturerLocations" EntitySet="ManufacturerLocations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Videos_Medias" Association="MediaQWModel.Store.FK_Videos_Medias">
+            <End Role="Medias" EntitySet="Medias" />
+            <End Role="Videos" EntitySet="Videos" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" Nullable="false" />
+          <Property Name="CustomerID" Type="nchar" Nullable="false" MaxLength="5" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Persons">
+          <Key>
+            <PropertyRef Name="PersonId" />
+          </Key>
+          <Property Name="PersonId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="EnrollmentDate" Type="date" />
+          <Property Name="HireDate" Type="date" />
+          <Property Name="IsClubMember" Type="bit" />
+          <Property Name="Type" Type="varchar" Nullable="false" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="ArticleId" />
+          </Key>
+          <Property Name="ArticleId" Type="int" Nullable="false" />
+          <Property Name="ArticleContent" Type="varchar" Nullable="false" MaxLength="200" />
+          <Property Name="ArticleType" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="TotalComments" Type="int" />
+          <Property Name="Author" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsFictious" Type="bit" />
+        </EntityType>
+        <EntityType Name="Medias">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Title" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Videos">
+          <Key>
+            <PropertyRef Name="VideoId" />
+          </Key>
+          <Property Name="VideoId" Type="int" Nullable="false" />
+          <Property Name="ResourcePath" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="VideoType" Type="varchar" Nullable="false" MaxLength="20" />
+          <Property Name="Instructor" Type="varchar" MaxLength="50" />
+          <Property Name="Rating" Type="int" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="CompanyName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="100" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="CompanyName" Type="varchar" MaxLength="50" />
+          <Property Name="IsClubMember" Type="bit" />
+          <Property Name="Address" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Hours" Type="int" />
+          <Property Name="Rate" Type="decimal" Precision="5" Scale="2" />
+          <Property Name="Salary" Type="decimal" Precision="7" Scale="2" />
+          <Property Name="GetsComm" Type="bit" />
+          <Property Name="Type" Type="char" Nullable="false" MaxLength="2" />
+          <Property Name="Commission" Type="int" />
+        </EntityType>
+        <EntityType Name="Locations">
+          <Key>
+            <PropertyRef Name="Locationid" />
+          </Key>
+          <Property Name="Locationid" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Address" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="City" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="State" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ManufacturerLocations">
+          <Key>
+            <PropertyRef Name="LocationId" />
+          </Key>
+          <Property Name="LocationId" Type="int" Nullable="false" />
+          <Property Name="ManufacturerId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manufacturers">
+          <Key>
+            <PropertyRef Name="ManufacturerId" />
+          </Key>
+          <Property Name="ManufacturerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Articles_Medias">
+          <End Role="Medias" Type="MediaQWModel.Store.Medias" Multiplicity="1" />
+          <End Role="Articles" Type="MediaQWModel.Store.Articles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Medias">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Articles">
+              <PropertyRef Name="ArticleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Company_Locations">
+          <End Role="Locations" Type="MediaQWModel.Store.Locations" Multiplicity="1" />
+          <End Role="Company" Type="MediaQWModel.Store.Company" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Locationid" />
+            </Principal>
+            <Dependent Role="Company">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufacturerLocations_Locations">
+          <End Role="Locations" Type="MediaQWModel.Store.Locations" Multiplicity="1" />
+          <End Role="ManufacturerLocations" Type="MediaQWModel.Store.ManufacturerLocations" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Locations">
+              <PropertyRef Name="Locationid" />
+            </Principal>
+            <Dependent Role="ManufacturerLocations">
+              <PropertyRef Name="LocationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ManufacturerLocations_Manufacturers">
+          <End Role="Manufacturers" Type="MediaQWModel.Store.Manufacturers" Multiplicity="1" />
+          <End Role="ManufacturerLocations" Type="MediaQWModel.Store.ManufacturerLocations" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manufacturers">
+              <PropertyRef Name="ManufacturerId" />
+            </Principal>
+            <Dependent Role="ManufacturerLocations">
+              <PropertyRef Name="ManufacturerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Videos_Medias">
+          <End Role="Medias" Type="MediaQWModel.Store.Medias" Multiplicity="1" />
+          <End Role="Videos" Type="MediaQWModel.Store.Videos" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Medias">
+              <PropertyRef Name="MediaId" />
+            </Principal>
+            <Dependent Role="Videos">
+              <PropertyRef Name="VideoId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MediaQWModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="MediaTPTTBH">
+          <EntitySet Name="Medias" EntityType="MediaQWModel.Media" />
+          <EntitySet Name="Employees" EntityType="MediaQWModel.Employee" />
+          <EntitySet Name="Orders" EntityType="MediaQWModel.Order" />
+          <EntitySet Name="Persons" EntityType="MediaQWModel.Person" />
+          <EntitySet Name="Locations" EntityType="MediaQWModel.Location" />
+          <EntitySet Name="Manufacturers" EntityType="MediaQWModel.Manufacturer" />
+          <AssociationSet Name="ManufacturerLocationManufacturer" Association="MediaQWModel.ManufacturerLocationManufacturer">
+            <End Role="ManufacturerLocation" EntitySet="Locations" />
+            <End Role="Manufacturer" EntitySet="Manufacturers" /></AssociationSet></EntityContainer>
+        <EntityType Name="Article" Abstract="true" BaseType="MediaQWModel.Media">
+          <Property Name="Author" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Media" Abstract="true">
+          <Key>
+            <PropertyRef Name="MediaId" />
+          </Key>
+          <Property Name="MediaId" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Video" Abstract="true" BaseType="MediaQWModel.Media">
+          <Property Name="ResourcePath" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Story" BaseType="MediaQWModel.Article" >
+          <Property Name="Plot" Type="String" Nullable="false" />
+          <Property Name="IsFictious" Type="Boolean" Nullable="true" /></EntityType>
+        <EntityType Name="BlogPosting" BaseType="MediaQWModel.Article" >
+          <Property Name="TotalComments" Type="Int32" Nullable="true" />
+          <Property Name="Post" Type="String" Nullable="false" /></EntityType>
+        <EntityType Name="EducationalVideo" BaseType="MediaQWModel.Video" >
+          <Property Name="Instructor" Type="String" Nullable="true" /></EntityType>
+        <EntityType Name="RecreationalVideo" BaseType="MediaQWModel.Video" >
+          <Property Name="Rating" Type="Int32" Nullable="true" /></EntityType>
+        <EntityType Name="Employee" Abstract="true">
+          <Key>
+            <PropertyRef Name="EmployeeId" /></Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          </EntityType>
+        <EntityType Name="HourlyEmployee" BaseType="MediaQWModel.Employee" >
+          <Property Name="Hours" Type="Int32" Nullable="true" />
+          <Property Name="Rate" Type="Decimal" Nullable="true" /></EntityType>
+        <EntityType Name="SalariedEmployee" BaseType="MediaQWModel.Employee" >
+          <Property Name="Salary" Type="Decimal" Nullable="true" /></EntityType>
+        <EntityType Name="SalComEmployee" BaseType="MediaQWModel.SalariedEmployee" >
+          <Property Name="Commission" Type="Int32" Nullable="true" />
+          </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="OrderID" /></Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" />
+          <Property Name="CustomerID" Type="String" Nullable="false" />
+          <Property Name="OrderDate" Type="DateTime" Nullable="true" />
+          </EntityType>
+        <EntityType Name="DeletedOrders" BaseType="MediaQWModel.Order" />
+        <EntityType Name="Person" Abstract="true">
+          <Key>
+            <PropertyRef Name="PersonId" /></Key>
+          <Property Name="PersonId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Customer" BaseType="MediaQWModel.Person" >
+          <Property Name="IsClubMember" Type="Boolean" Nullable="true" /></EntityType>
+        <EntityType Name="Staff" BaseType="MediaQWModel.Person" Abstract="true" />
+        <EntityType Name="Student" BaseType="MediaQWModel.Staff" >
+          <Property Name="EnrollmentDate" Type="DateTime" Nullable="true" /></EntityType>
+        <EntityType Name="Instructor" BaseType="MediaQWModel.Staff" >
+          <Property Name="HireDate" Type="DateTime" Nullable="true" /></EntityType>
+        <EntityType Name="Company" BaseType="MediaQWModel.Location">
+          <Property Name="CompanyName" Type="String" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Location">
+          <Key>
+            <PropertyRef Name="Locationid" /></Key>
+          <Property Name="Locationid" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" Nullable="false" />
+          <Property Name="City" Type="String" Nullable="false" />
+          <Property Name="State" Type="String" Nullable="false" />
+          </EntityType>
+        <EntityType Name="Manufacturer">
+          <Key>
+            <PropertyRef Name="ManufacturerId" /></Key>
+          <Property Name="ManufacturerId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" />
+          <NavigationProperty Name="ManufacturerLocations" Relationship="MediaQWModel.ManufacturerLocationManufacturer" FromRole="Manufacturer" ToRole="ManufacturerLocation" /></EntityType>
+        <EntityType Name="ManufacturerLocation" BaseType="MediaQWModel.Location" >
+          <NavigationProperty Name="Manufacturer" Relationship="MediaQWModel.ManufacturerLocationManufacturer" FromRole="ManufacturerLocation" ToRole="Manufacturer" /></EntityType>
+        <Association Name="ManufacturerLocationManufacturer">
+          <End Type="MediaQWModel.ManufacturerLocation" Role="ManufacturerLocation" Multiplicity="*" />
+          <End Type="MediaQWModel.Manufacturer" Role="Manufacturer" Multiplicity="1" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="MediaQWModelStoreContainer" CdmEntityContainer="MediaTPTTBH">
+          <EntitySetMapping Name="Medias">
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Media)">
+              <MappingFragment StoreEntitySet="Medias">
+                <ScalarProperty Name="MediaId" ColumnName="MediaId" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Article)">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="MediaId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+              </MappingFragment>
+            </EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Video)">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="MediaId" ColumnName="VideoId" />
+                <ScalarProperty Name="ResourcePath" ColumnName="ResourcePath" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.BlogPosting)">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="Post" ColumnName="ArticleContent" />
+                <ScalarProperty Name="MediaId" ColumnName="ArticleId" />
+                <ScalarProperty Name="TotalComments" ColumnName="TotalComments" />
+                <Condition ColumnName="ArticleType" Value="B" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Story)">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="MediaId" ColumnName="ArticleId" />
+                <ScalarProperty Name="Plot" ColumnName="ArticleContent" />
+                <ScalarProperty Name="IsFictious" ColumnName="IsFictious" />
+                <Condition ColumnName="ArticleType" Value="S" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.RecreationalVideo)">
+              <MappingFragment StoreEntitySet="Videos" >
+                <ScalarProperty Name="Rating" ColumnName="Rating" />
+                <ScalarProperty Name="MediaId" ColumnName="VideoId" />
+                <Condition ColumnName="VideoType" Value="R" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.EducationalVideo)">
+              <MappingFragment StoreEntitySet="Videos">
+                <ScalarProperty Name="MediaId" ColumnName="VideoId" />
+                <ScalarProperty Name="Instructor" ColumnName="Instructor" />
+                <Condition ColumnName="VideoType" Value="E" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Employee)">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.HourlyEmployee)">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <Condition ColumnName="Type" Value="H" />
+                </MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.SalComEmployee)">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                
+                <ScalarProperty Name="Commission" ColumnName="Commission" />
+                <Condition ColumnName="Type" Value="S" />
+                <Condition ColumnName="GetsComm" Value="1" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="MediaQWModel.SalariedEmployee">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <Condition ColumnName="Type" Value="S" />
+                <Condition ColumnName="GetsComm" Value="0" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.DeletedOrders)">
+              <MappingFragment StoreEntitySet="Orders" >
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <Condition ColumnName="IsDeleted" Value="1" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="MediaQWModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+                <Condition ColumnName="IsDeleted" Value="0" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Persons">
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Person)">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Customer)">
+              <MappingFragment StoreEntitySet="Persons">
+                <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="IsClubMember" ColumnName="IsClubMember" />
+                <Condition ColumnName="Type" Value="Customer" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Student)">
+              <MappingFragment StoreEntitySet="Persons">
+				  <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="EnrollmentDate" ColumnName="EnrollmentDate" />
+                <Condition ColumnName="Type" Value="Student" /></MappingFragment>
+			</EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Instructor)">
+              <MappingFragment StoreEntitySet="Persons">
+				  <ScalarProperty Name="PersonId" ColumnName="PersonId" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <Condition ColumnName="Type" Value="Instructor" /></MappingFragment>
+			</EntityTypeMapping>
+		  </EntitySetMapping>
+          <EntitySetMapping Name="Locations">
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Location)">
+              <MappingFragment StoreEntitySet="Locations">
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Locationid" ColumnName="Locationid" /></MappingFragment></EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.ManufacturerLocation)">
+              <MappingFragment StoreEntitySet="ManufacturerLocations" >
+                <ScalarProperty Name="Locationid" ColumnName="LocationId" /></MappingFragment></EntityTypeMapping><EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Company)">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="Locationid" ColumnName="LocationId" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Manufacturers">
+            <EntityTypeMapping TypeName="IsTypeOf(MediaQWModel.Manufacturer)">
+              <MappingFragment StoreEntitySet="Manufacturers">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" /></MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <AssociationSetMapping Name="ManufacturerLocationManufacturer" TypeName="MediaQWModel.ManufacturerLocationManufacturer" StoreEntitySet="ManufacturerLocations">
+            <EndProperty Name="Manufacturer">
+              <ScalarProperty Name="ManufacturerId" ColumnName="ManufacturerId" /></EndProperty>
+            <EndProperty Name="ManufacturerLocation">
+              <ScalarProperty Name="Locationid" ColumnName="LocationId" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="MediaTBHAndTBT">
+        <EntityTypeShape EntityType="MediaQWModel.Article" Width="1.5" PointX="2.875" PointY="4.125" Height="1.0992643229166665" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediaQWModel.Media" Width="1.5" PointX="1.75" PointY="2.5" Height="1.2636116536458335" IsExpanded="true" />
+        <EntityTypeShape EntityType="MediaQWModel.Video" Width="1.5" PointX="3" PointY="0.625" Height="1.099264322916667" IsExpanded="true" />
+        <InheritanceConnector EntityType="MediaQWModel.Article">
+          <ConnectorPoint PointX="3.0625" PointY="3.7636116536458335" />
+          <ConnectorPoint PointX="3.0625" PointY="4.125" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="MediaQWModel.Video">
+          <ConnectorPoint PointX="3.125" PointY="2.5" />
+          <ConnectorPoint PointX="3.125" PointY="1.724264322916667" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.Story" Width="1.5" PointX="5" PointY="5.375" Height="0.93491699218749957" />
+        <InheritanceConnector EntityType="MediaQWModel.Story">
+          <ConnectorPoint PointX="3.625" PointY="5.2242643229166665" />
+          <ConnectorPoint PointX="3.625" PointY="6.0068058268229159" />
+          <ConnectorPoint PointX="5" PointY="6.0068058268229159" /></InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.BlogPosting" Width="1.5" PointX="5" PointY="3.875" Height="0.9349169921875" />
+        <InheritanceConnector EntityType="MediaQWModel.BlogPosting">
+          <ConnectorPoint PointX="4.375" PointY="4.6318058268229159" />
+          <ConnectorPoint PointX="5" PointY="4.6318058268229159" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.EducationalVideo" Width="1.5" PointX="5" PointY="2.25" Height="0.9349169921875" />
+        <EntityTypeShape EntityType="MediaQWModel.RecreationalVideo" Width="1.5" PointX="5" PointY="0.5" Height="0.9349169921875" />
+        <InheritanceConnector EntityType="MediaQWModel.EducationalVideo">
+          <ConnectorPoint PointX="3.90625" PointY="1.724264322916667" />
+          <ConnectorPoint PointX="3.90625" PointY="2.34375" />
+          <ConnectorPoint PointX="5" PointY="2.34375" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="MediaQWModel.RecreationalVideo">
+          <ConnectorPoint PointX="4.5" PointY="1.1121321614583333" />
+          <ConnectorPoint PointX="5" PointY="1.1121321614583333" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.Employee" Width="1.5" PointX="8.25" PointY="4" Height="1.4033821614583335" />
+        <EntityTypeShape EntityType="MediaQWModel.HourlyEmployee" Width="1.5" PointX="9.875" PointY="6" Height="1.4033821614583335" />
+        <EntityTypeShape EntityType="MediaQWModel.SalariedEmployee" Width="1.5" PointX="7.5" PointY="5.875" Height="1.2110807291666657" />
+        <InheritanceConnector EntityType="MediaQWModel.HourlyEmployee" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.40625" PointY="5.4033821614583335" />
+          <ConnectorPoint PointX="9.40625" PointY="7.2759814453125" />
+          <ConnectorPoint PointX="9.875" PointY="7.2759814453125" />
+          </InheritanceConnector>
+        <InheritanceConnector EntityType="MediaQWModel.SalariedEmployee" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.625" PointY="5.4033821614583335" />
+          <ConnectorPoint PointX="8.625" PointY="5.875" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.SalComEmployee" Width="1.5" PointX="8.25" PointY="7.875" Height="1.2110807291666657" />
+        <InheritanceConnector EntityType="MediaQWModel.SalComEmployee" ManuallyRouted="false">
+          <ConnectorPoint PointX="8.625" PointY="7.0860807291666656" />
+          <ConnectorPoint PointX="8.625" PointY="7.875" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.Order" Width="1.5" PointX="9.125" PointY="0.5" Height="1.5956835937500031" />
+        <EntityTypeShape EntityType="MediaQWModel.DeletedOrders" Width="1.5" PointX="9.125" PointY="2.75" Height="1.018779296875" />
+        <InheritanceConnector EntityType="MediaQWModel.DeletedOrders" ManuallyRouted="false">
+          <ConnectorPoint PointX="9.875" PointY="2.0956835937500031" />
+          <ConnectorPoint PointX="9.875" PointY="2.75" /></InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.Person" Width="1.5" PointX="4" PointY="8.125" Height="1.4033821614583335" />
+        <EntityTypeShape EntityType="MediaQWModel.Customer" Width="1.5" PointX="2.125" PointY="10.5" Height="1.2110807291666674" />
+        <InheritanceConnector EntityType="MediaQWModel.Customer" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.34375" PointY="9.5283821614583335" />
+          <ConnectorPoint PointX="4.34375" PointY="11.521180013020834" />
+          <ConnectorPoint PointX="3.625" PointY="11.521180013020834" /></InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.Staff" Width="1.5" PointX="4.75" PointY="10.25" Height="1.018779296875" />
+        <InheritanceConnector EntityType="MediaQWModel.Staff" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.125" PointY="9.5283821614583335" />
+          <ConnectorPoint PointX="5.125" PointY="10.25" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.Student" Width="1.5" PointX="3.25" PointY="12.125" Height="1.2110807291666674" />
+        <InheritanceConnector EntityType="MediaQWModel.Student" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.1875" PointY="11.268779296875" />
+          <ConnectorPoint PointX="5.1875" PointY="12.28125" />
+          <ConnectorPoint PointX="4.75" PointY="12.28125" /></InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.Instructor" Width="1.5" PointX="5.625" PointY="12.5" Height="1.2110807291666674" />
+        <InheritanceConnector EntityType="MediaQWModel.Instructor" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.9375" PointY="11.268779296875" />
+          <ConnectorPoint PointX="5.9375" PointY="12.5" />
+          </InheritanceConnector>
+        <EntityTypeShape EntityType="MediaQWModel.Company" Width="1.5" PointX="4.375" PointY="17.875" Height="1.0992643229166674" />
+        <EntityTypeShape EntityType="MediaQWModel.Location" Width="1.5" PointX="3.375" PointY="15.75" Height="1.5923063151041674" />
+        <EntityTypeShape EntityType="MediaQWModel.Manufacturer" Width="1.5" PointX="2.125" PointY="19.625" Height="1.4279589843750031" />
+        <EntityTypeShape EntityType="MediaQWModel.ManufacturerLocation" Width="1.875" PointX="1.875" PointY="17.875" Height="1.099264322916671" />
+        <InheritanceConnector EntityType="MediaQWModel.ManufacturerLocation" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.5625" PointY="17.342306315104167" />
+          <ConnectorPoint PointX="3.5625" PointY="17.875" /></InheritanceConnector>
+        <AssociationConnector Association="MediaQWModel.ManufacturerLocationManufacturer">
+          <ConnectorPoint PointX="2.875" PointY="18.974264322916671" />
+          <ConnectorPoint PointX="2.875" PointY="19.625" />
+          </AssociationConnector>
+        <InheritanceConnector EntityType="MediaQWModel.Company" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.625" PointY="17.342306315104167" />
+          <ConnectorPoint PointX="4.625" PointY="17.875" />
+          </InheritanceConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

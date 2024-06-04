@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Schema Namespace="NWNestedComplexTypeModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+	<EntityContainer Name="NWComplexTypeEntities">
+		<EntitySet Name="Employees" EntityType="NWNestedComplexTypeModel.Employee" />
+		<EntitySet Name="Customers" EntityType="NWNestedComplexTypeModel.Customer" />
+	</EntityContainer>
+	<EntityType Name="Employee">
+		<Key>
+			<PropertyRef Name="EmployeeID" />
+		</Key>
+		<Property Name="EmployeeID" Type="Int32" Nullable="false" />
+		<Property Name="LastName" Type="String" Nullable="false" />
+		<Property Name="FirstName" Type="String" Nullable="false" />
+		<Property Name="Address"  Type="NWNestedComplexTypeModel.CommonAddress" Nullable="false" />
+	</EntityType>
+	<EntityType Name="Customer">
+		<Key>
+			<PropertyRef Name="CustomerID"/>
+		</Key>
+		<Property Name="CustomerID" Type="String" Nullable="false" />
+		<Property Name="CompanyName" Type="String" Nullable="false" />
+		<Property Name="Address" Type="NWNestedComplexTypeModel.CommonAddress" Nullable="false" />
+	</EntityType>
+	<ComplexType Name="CommonAddress">
+		<Property Name="Address" Type="String" />
+		<Property Name="Region" Type="String" />
+		<Property Name="AdditonalInfo" Nullable="false" Type="NWNestedComplexTypeModel.Geography" />
+	</ComplexType>
+	<ComplexType Name="Geography">
+		<Property Name="City" Type="String" />
+		<Property Name="PostalCode" Type="String" />
+		<Property Name="Country" Type="String" />
+	</ComplexType>
+</Schema>

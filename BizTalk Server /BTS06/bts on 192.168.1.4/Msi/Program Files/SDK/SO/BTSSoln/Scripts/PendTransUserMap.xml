@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+
+<!-- ===================================================================================== -->
+<!--                                                                                       -->
+<!-- Microsoft.Samples.BizTalk.WoodgroveBank.PendingTransactions                           -->
+<!-- End to end Service Oriented Scenatio sample for BizTalk Server.                       -->
+<!--                                                                                       -->
+<!-- This file represents  user mappings for the the PendingTransactions SSO affiliate     -->
+<!-- application.                                                                          -->   
+<!-- Use this file with the ssomanage command to create a mapping between a windows user   -->
+<!-- that is logged on using the Customer Service Application client and the corresponding -->
+<!-- user in the PendingTransactions system.                                               -->
+<!--                                                                                       -->
+<!-- Copyright (C) Microsoft Corporation. All rights reserved.                        -->
+<!-- THIS CODE AND INFORMATION ARE PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,          -->
+<!-- EITHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED WARRANTIES      -->
+<!-- OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.                           -->
+<!--                                                                                       -->
+<!-- ===================================================================================== -->
+
+<SSO>
+	<mapping>
+
+		<windowsDomain>
+			<!--
+			Specify the windows domain name of the user whose id will be mapped to the PendingTransactions Affiliate App.
+			-->
+		</windowsDomain> 
+
+		<windowsUserId>
+			<!--
+			Specify the windows user id of the user in the domain specified above.
+			This user must be a member of the group that is allowed to use the PendingTransactions Affiliate App.
+			-->
+		</windowsUserId> 
+
+		<!--  This is the name of the affiliate app. Do not change this. -->
+
+		<externalApplication>WoodgroveBank.PendingTransactions</externalApplication> 
+
+
+		<externalUserId>
+
+				<!--
+				This is the user id in the Pending Transactions System that corresponds to the windows user specified above.
+				Pending Transactions is a web service running on Windows.  Therefore map the user it to a windows 
+				user id on the IIS running this web service.  We are also using basic authentication to communicate to this
+				web service (over an SSL connection, so the channel is encrypted), so  the mapper user id in windows should
+				also have access to the file sytem where the virtual folder for the web service is located.
+				The mapped user id should also be part of the HIS runtime users group on the server that is 
+				running the web service and the Host Integration Server.
+				-->
+		</externalUserId> 
+	</mapping>
+</SSO>
+

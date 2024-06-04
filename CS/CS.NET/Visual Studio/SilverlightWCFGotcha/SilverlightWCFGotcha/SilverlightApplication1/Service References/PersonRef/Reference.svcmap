@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="1e68b4dc-0c70-4a37-9275-31bd74f2eb48" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:4192/Person.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="Person.disco" MetadataType="Disco" ID="6ccd01d7-d182-48ae-8cf0-1ee7797f9e92" SourceId="1" SourceUrl="http://localhost:4192/Person.svc?disco" />
+    <MetadataFile FileName="Person.xsd" MetadataType="Schema" ID="770efc62-cc1c-4cf7-b3d5-71b27818408a" SourceId="1" SourceUrl="http://localhost:4192/Person.svc?xsd=xsd0" />
+    <MetadataFile FileName="Person.wsdl" MetadataType="Wsdl" ID="3210c7cc-d21b-4f96-a50c-d31e6318c679" SourceId="1" SourceUrl="http://localhost:4192/Person.svc?wsdl=wsdl0" />
+    <MetadataFile FileName="Person1.wsdl" MetadataType="Wsdl" ID="16b13bea-d467-43e0-b21c-b467da7af94a" SourceId="1" SourceUrl="http://localhost:4192/Person.svc?wsdl" />
+    <MetadataFile FileName="Person1.xsd" MetadataType="Schema" ID="00a854b1-d174-4322-873e-857aca3534b6" SourceId="1" SourceUrl="http://localhost:4192/Person.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

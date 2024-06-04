@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "About Items Controls";
+    Layout = "~/Views/Shared/_LayoutServer.cshtml";
+}
+
+<h2>About Items Controls</h2>
+<div style="margin-top:70px">
+    <p>
+        All Mvc Controls Toolkit Items controls are not out-of-the box. 
+        They just iterate on user defined <a href="https://mvccontrolstoolkit.codeplex.com/wikipage?title=Use%20of%20Templates">Html templates</a> to render data structures, and ensure that all data structure are re-built properly when the form is submitted to an action method.
+        The developer has the full responsibility for the whole Html produced, and for the style being applied.
+    </p>
+    <p>
+        Out-of the box controls that are reusable on different data structures may be implemented by the developer with the help of the
+        <a href="https://mvccontrolstoolkit.codeplex.com/wikipage?title=Theming">Mvc Controls Toolkit Theming feature</a>, 
+        that relies mainly on the use of <a href="http://www.hanselman.com/blog/C4AndTheDynamicKeywordWhirlwindTourAroundNET4AndVisualStudio2010Beta1.aspx">dynamic variables</a> in partial views to produce partial views that may be used with different data structures.
+    </p>
+    <p>
+        An example of themed controls is contained in the RazorThemedGrid example in the <a href="https://mvccontrolstoolkit.codeplex.com/releases">Mvc Controls Toolkit download area</a>. 
+        However, there are no compile time checks when using dynamic variables, and one can't use extension methods with a dynamic HtmlHelper. Consequently this technique requires a big programming effort and is adequate only for very simple controls.
+    </p>
+    <p>
+        Better options are offered by the <a href="http://www.mvc-controls.com/">commercial version of the Mvc Controls Toolkit(Data Moving Plug-in)</a> 
+        that uses sophisticated template composition techniques an generics-based templates to build out-of the box controls that may be used with different data structures and configured easily with a fluent interface.
+        <a href="http://www.mvc-controls.com/controls">All controls</a> are out-of-the-box and may be <a href="http://www.mvc-controls.com/features/styling">styled easily</a>, but all their parts are made of <a href="http://www.mvc-controls.com/features/templates">nested templates</a> that  may be selected and configured with a fluent interface and substituted with custom templates.
+            Moreover whole control configurations made of fluent interface settings, and custom templates may be stored in <a href="http://www.mvc-controls.com/features/control-prototypes">prototypes</a>
+            that may be further configured and recalled on different data structures
+    </p>
+    <p>
+        <strong>
+            All available tutorials are listed <a href="https://mvccontrolstoolkit.codeplex.com/wikipage?title=Tutorials">here</a>
+        </strong>
+    </p>
+</div>

@@ -1,0 +1,45 @@
+# Git Bash # Service
+
+Aspire@Acer MINGW64 /
+$ cd "E:\Working\CS\WCF\Console\WCF-Sample"
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-Sample
+$ csc Service.cs
+Microsoft (R) Visual C# Compiler version 1.3.1.60621
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-Sample
+$ ./Service
+Service is hosted to the Server: http://localhost:8000
+Press Enter to close
+Message Received : Hello World!
+<s:Envelope xmlns:s="http://schemas.xmlsoap.org/soap/envelope/">
+  <s:Header>
+    <To s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://localhost:8000/Soap</To>
+    <Action s:mustUnderstand="1" xmlns="http://schemas.microsoft.com/ws/2005/05/addressing/none">http://tempuri.org/IWCFService/GetData</Action>
+  </s:Header>
+  <s:Body>
+    <GetData xmlns="http://tempuri.org/">
+      <data>Hello World!</data>
+    </GetData>
+  </s:Body>
+</s:Envelope>
+
+
+# Git Bash # Client
+
+Aspire@Acer MINGW64 /
+$ cd "E:\Working\CS\WCF\Console\WCF-Sample"
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-Sample
+$ csc Client.cs
+Microsoft (R) Visual C# Compiler version 1.3.1.60621
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+
+Aspire@Acer MINGW64 /e/Working/CS/WCF/Console/WCF-Sample
+$ ./Client
+Press Enter to call Server
+
+Message from Server Hello World!

@@ -1,0 +1,492 @@
+﻿<HTML>
+<HEAD>
+<TITLE ID='L_DataSrcSel_DialogTitle'>Data Source Picker</TITLE>
+<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=utf-8'>
+<LINK REL='stylesheet' TYPE='text/css' HREF='/widgets/bizdesk.css' ID='mainstylesheet'>
+
+</HEAD>
+
+<BODY onload="initDialog()" onunload="OnUnloadHandler()" STYLE="margin:0px;padding:10px">
+
+<SCRIPT LANGUAGE="VBScript">
+Option Explicit
+
+' Localizable strings
+Const L_MapProperty_Text = "No data-sources were chosen.  Do you wish to leave this property unmapped?"
+Const L_MapProperty_DialogTitle = "Map Property"
+Const L_DataSrcSel_Text = "Choose the data source for this property:"
+Const L_DataSrcLoad_Text = "Loading data sources.  Please wait..."
+
+Const L_OK_Button = "OK"
+Const L_Cancel_Button = "Cancel"
+Const L_Help_Button = "Help"
+
+Const L_DataSrc_AlternativeText = "Data Source"
+Const L_DataSrc_Text = "Data Source"
+Const L_DataSrcTbl_AlternativeText = "Data Source Table"
+Const L_DataSrcTbl_Text = "Data Source Table"
+Const L_DataSrcBusy_ToolTip = " (This is already used for a property in this profile.)"
+Const L_DataSrcInvalid_ToolTip = " (This is the wrong type for the property.)"
+Const L_NoMapping_Text = "&lt;No Data Source&gt;"
+Const L_NoMapping_ToolTip = "Choose this option to prevent data mapping"
+
+Const L_DuplicateSrc_ErrorMessage = "Only one data member is allowed per data source."
+
+' Profile-Schema XML tag-names
+Const gc_sDocument  = "Document"
+Const gc_sCatalog   = "Catalog"
+Const gc_sProfile   = "Profile"
+Const gc_sGroup     = "Group"
+Const gc_sProperty  = "Property"
+Const gc_sDataRef   = "DataRef"
+Const gc_sAttribute = "Attribute"
+Const gc_sSource    = "DataSource"
+Const gc_sObject    = "DataObject"
+Const gc_sMember    = "DataMember"
+
+Dim g_xmlProfileDoc
+Dim g_strColumnPath
+Dim g_strRetVal
+Dim g_rgstrDataSrcIDs
+Dim winHelpWindow
+Dim g_strHelpPath
+
+Sub initDialog()
+    Dim sdArgs
+    Dim strDataSrcIDs
+    Dim strPropType
+    Dim bMultiple
+    
+    Dim elSpan
+    Dim elDiv
+    Dim elText
+    Dim elButton
+    Dim elXML
+    
+    ' Init return values:
+    g_strColumnPath = Null
+    g_strRetVal = Null
+
+    ' Add HTML and XML programmatically
+        Set elXML = document.createElement("XML")
+      document.body.insertAdjacentElement "beforeEnd", elXML
+
+    Set elSpan = document.createElement("SPAN")
+      document.body.insertAdjacentElement "beforeEnd", elSpan
+      With elSpan
+        .style.paddingBottom = "10px"
+        .innerText = L_DataSrcSel_Text
+      End With
+    Set elDiv = document.createElement("DIV")
+      document.body.insertAdjacentElement "beforeEnd", elDiv
+      With elDiv
+        .id = "divDataSources" 
+        .setAttribute "XMLDataID", "xmlisProfileDoc" 
+        .setAttribute "XSLViewID", "xmlisDataSrcViewXSL"
+        .style.height = "250px"
+        .style.width = "450px"
+        .style.border = "inset 2px"
+        .style.backgroundColor = "white"
+        .style.overflow = "auto"
+        .tabIndex = 0
+      End With
+      Set elText = document.createElement("DIV")
+        elDiv.insertAdjacentElement "beforeEnd", elText
+        With elText
+          .align = "center"
+          .innerText = L_DataSrcLoad_Text
+        End With
+    Set elDiv = document.createElement("DIV")
+      document.body.insertAdjacentElement "beforeEnd", elDiv
+      With elDiv
+        .align = "right"
+        .style.paddingTop = "10px"
+      End With
+      Set elButton = elDiv.appendChild(document.createElement("BUTTON"))
+        With elButton
+          .id = "btnOK"
+          .style.width = "80px"
+          .onClick = GetRef("BtnOK_ClickHandler")
+          .innerText = L_OK_Button
+          .tabIndex = 1
+        End With
+      Set elButton = elDiv.appendChild(document.createElement("BUTTON"))
+        With elButton
+          .id = "btnCancel"
+          .style.width = "80px"
+          .onClick = GetRef("BtnCancel_ClickHandler")
+          .innerText = L_Cancel_Button
+          .tabIndex = 1
+        End With
+      Set elButton = elDiv.appendChild(document.createElement("BUTTON"))
+        With elButton
+          .id = "btnHelp"
+          .style.width = "80px"
+          .onClick = GetRef("BtnHelp_ClickHandler")
+          .innerText = L_Help_Button
+          .tabIndex = 1
+        End With
+
+    ' XML data-island containing profile XML.      
+    ' This gets populated by the dialog init code. 
+    Set elXML = document.createElement("XML")
+      document.body.insertAdjacentElement "beforeEnd", elXML
+      elXML.id = "xmlisProfileDoc"
+
+    ' XSL to transform profile XML into HTML.  Used by XMLView.htc widget. 
+    Set elXML = document.createElement("XML")
+      document.body.insertAdjacentElement "beforeEnd", elXML
+      elXML.id = "xmlisDataSrcViewXSL"
+      elXML.XMLDocument.loadXML "<?xml version='1.0'?>" &_
+        "<xsl:stylesheet xmlns:xsl=""http://www.w3.org/TR/WD-xsl"">" &_
+          "<xsl:template match=""/"">" &_
+            "<DIV ID='xvRoot'>" &_
+              "<DIV CLASS='clsXVItem'  TABINDEX='0' ID='NOMAP' TITLE='" & L_NoMapping_ToolTip & "'>" &_
+                "<NOBR>" &_
+                "<SPAN ID='xvMarker'></SPAN>" &_
+                L_NoMapping_Text &_
+                "</NOBR>" &_
+              "</DIV>" &_        
+              "<xsl:apply-templates select="".//DataSource"" />" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+          "<xsl:template match=""DataSource"">" &_
+            "<DIV CLASS='clsXVGroupNoSel' TABINDEX='0'>" &_
+              "<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+              "<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" /></xsl:attribute>" &_
+              "<NOBR>" &_
+              "<SPAN ID='xvMarker'>" &_
+                "<IMG SRC='/widgets/images/source.gif' ALT='" & L_DataSrc_AlternativeText &_
+                   "' TITLE='" & L_DataSrc_Text & "'></IMG>" &_
+              "</SPAN>" &_
+              "<xsl:value-of select=""@displayName"" />" &_
+              "</NOBR>" &_
+              "<DIV ID='xvGroup' CLASS='clsXVClosed'>" &_
+                "<xsl:apply-templates />" &_
+              "</DIV>" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+          "<xsl:template match=""DataObject"">" &_
+            "<DIV CLASS='clsXVGroupNoSel' TABINDEX='0'>" &_
+              "<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+              "<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" /></xsl:attribute>" &_
+              "<NOBR>" &_
+              "<SPAN ID='xvMarker'>" &_
+                "<IMG SRC='/widgets/images/table.gif' ALT='" & L_DataSrcTbl_AlternativeText &_
+                  "' TITLE='" & L_DataSrcTbl_Text & "'></IMG>" &_
+              "</SPAN>" &_
+              "</NOBR>" &_
+              "<xsl:value-of select=""@displayName"" />" &_
+              "<DIV ID='xvGroup' CLASS='clsXVClosed'>" &_
+                "<xsl:apply-templates />" &_
+              "</DIV>" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+          "<xsl:template match=""DataMember[not(@isMapped)  || @isMapped!='1' ||" &_
+               "not(@wrongType) || @wrongType!='1']"">" &_
+            "<DIV CLASS='clsXVItem' TABINDEX='0'>" &_
+              "<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+              "<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" /></xsl:attribute>" &_
+              "<NOBR>" &_
+              "<SPAN ID='xvMarker'></SPAN>" &_
+              "<xsl:value-of select=""@displayName"" />" &_
+              " (<xsl:value-of select=""@memberType"" />)" &_
+              "</NOBR>" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+          "<xsl:template match=""DataMember[@isMapped='1']"">" &_
+            "<DIV CLASS='clsXVItem clsXVDisabled' TABINDEX='0'>" &_
+              "<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+              "<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" />" &_
+                L_DataSrcBusy_ToolTip & "</xsl:attribute>" &_
+              "<SPAN ID='xvMarker'></SPAN>" &_
+              "<xsl:value-of select=""@displayName"" />" &_
+              " (<xsl:value-of select=""@memberType"" />)" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+          "<xsl:template match=""DataMember[@wrongType='1']"">" &_
+            "<DIV CLASS='clsXVItem clsXVDisabled' TABINDEX='0'>" &_
+              "<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+              "<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" />" &_
+                L_DataSrcInvalid_ToolTip & "</xsl:attribute>" &_
+              "<SPAN ID='xvMarker'></SPAN>" &_
+              "<xsl:value-of select=""@displayName"" />" &_
+              " (<xsl:value-of select=""@memberType"" />)" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+        "</xsl:stylesheet>"
+
+
+    ' XML data-island mapping logical property types to physical (database column) types. 
+    Set elXML = document.createElement("XML")
+      document.body.insertAdjacentElement "beforeEnd", elXML
+      elXML.id = "xiLTypesToCTypes"
+      elXML.XMLDocument.loadXML "<document>" &_
+          "<typemap ltype='STRING'			ptype='STRING'   />" &_
+		  "<typemap ltype='LONGTEXT'		ptype='STRING'   />" &_
+          "<typemap ltype='NUMBER'			ptype='NUMBER'   />" &_
+		  "<typemap ltype='FLOAT'			ptype='NUMBER'   />" &_
+          "<typemap ltype='BOOL'			ptype='BOOL'     />" &_
+          "<typemap ltype='DATETIME'		ptype='DATETIME' />" &_
+		  "<typemap ltype='TIME'			ptype='DATETIME' />" &_
+		  "<typemap ltype='DATE'			ptype='DATETIME' />" &_
+          "<typemap ltype='BINARY'			ptype='BINARY'    />" &_
+		  "<typemap ltype='IMAGE'			ptype='BINARY'    />" &_
+          "<typemap ltype='CURRENCY'		ptype='CURRENCY'   />" &_
+          "<typemap ltype='SITETERM'		ptype='STRING'   />" &_
+          "<typemap ltype='PROFILE'			ptype='STRING'   />" &_
+          "<typemap ltype='PASSWORD'		ptype='STRING'   />" &_
+        "</document>"
+
+
+    ' Retrieve and analyze the arguments for the dialog.
+    Set sdArgs = window.dialogArguments
+    
+    g_strHelpPath = sdArgs.Item("helpPath")
+    
+    If g_strHelpPath = "" Then
+        ' Hide the help button
+        btnHelp.style.display = "none"
+    Else
+        ' Complete help path
+        g_strHelpPath = g_strHelpPath & "docs/default.asp?helptopic=cs_ft_usersgrps_YPHQ.htm"
+    End If
+    
+    ' Profile-doc:
+    Set g_xmlProfileDoc = sdArgs.Item("xmlProfile")
+    xmlisProfileDoc.XMLDocument.loadXML g_xmlProfileDoc.xml
+
+    ' List of current data-sources for the property:
+    strDataSrcIDs = sdArgs.Item("strDataSrcIDs")
+
+    ' Type of property, for filtering columns:
+    strPropType = UCase(sdArgs.Item("strPropType"))
+
+    ' Whether the property can have multiple data-sources (ie. is it a join-
+    ' key or not?)
+    bMultiple = CBool(sdArgs.Item("bMultiple"))
+
+    ' List of current data-sources for the property:
+    strDataSrcIDs = sdArgs.Item("strDataSrcIDs")
+    g_rgstrDataSrcIDs = Null
+    If Not IsNull(strDataSrcIDs) Then
+        g_rgstrDataSrcIDs = Split(strDataSrcIDs, "|")
+    End If
+
+    ' Disable columns that aren't valid given the current configuration.
+    ' This function marks this dialog's internal XML document, not the
+    ' passed-in one.
+    FilterColumns strPropType, g_rgstrDataSrcIDs
+
+    ' Attach the XMLView HTC.
+    divDataSources.setAttribute "Multi", bMultiple
+    divDataSources.attachEvent "onreadystatechange", GetRef("DSView_RdyStateChg")
+    divDataSources.addBehavior "/widgets/profilebldrHTC/XMLView.htc"
+End Sub
+
+
+Sub DSView_RdyStateChg
+    Dim i, j
+
+    If divDataSources.readyState = "complete" Then
+        ' Detach the event.
+        divDataSources.detachEvent "onreadystatechange", GetRef("DSView_RdyStateChg")
+
+        'Select the <No Data Source> option
+        divDataSources.SelectItem "NOMAP", True
+
+        ' Select the passed-in properties.
+        If Not(isNull(g_rgstrDataSrcIDs)) Then
+            For i = 0 To UBound(g_rgstrDataSrcIDs)
+                ' Expand all the groups containing the item, so the user can
+                ' see the item once it's selected.
+                j = 1
+                Do
+                    j = InStr(j, g_rgstrDataSrcIDs(i), ".", 1)
+                    If j <> 0 Then
+                        divDataSources.ExpandGroupItem Left(g_rgstrDataSrcIDs(i), j - 1), True
+                        j = j + 1
+                    End If
+                Loop While j <> 0
+
+                ' Select the item.
+                divDataSources.SelectItem g_rgstrDataSrcIDs(i), True
+            Next
+        End If
+        
+        ' Hook up the onSeelctItem event
+        divDataSources.attachEvent "onSelectItem", GetRef("SelectItem")
+        Call SelectItem()
+        
+    End If
+ 
+End Sub
+
+' Fired when an item is selected in the XML View control
+' If the <No data source> option is selected, all other items
+' get deselected. And if the user selects something else,
+' make sure that the <no> option is deselected
+Sub SelectItem
+
+    Dim rgstrItems
+  
+    rgstrItems = divDataSources.GetSelectedItems()
+
+    If uBound(rgstrItems) > -1 Then
+        If rgstrItems(uBound(rgstrItems)) = "NOMAP" Then
+            'User just selected the <No Data Source> option
+            divDataSources.ClearSelections
+            divDataSources.SelectItem "NOMAP", True
+        Else
+            divDataSources.SelectItem "NOMAP", False
+        End If
+    Else
+        'There is nothing selected
+        divDataSources.SelectItem "NOMAP", True    
+    End If
+    
+
+End Sub
+
+' Marks all data-source columns that appear in current profile as used since
+' a given profile can only contain at most one property that maps to a given
+' column.
+Sub FilterColumns(strPropType, rgstrIDs)
+    Dim xlDataRefs, xmlDataRef
+    Dim xlColList, xmlColumn
+    Dim xmlMyProfDoc
+    Dim xmlDBType, strDBType
+    Dim i
+
+    Set xmlMyProfDoc = xmlisProfileDoc.XMLDocument
+
+    ' Mark mapped columns.
+    Set xlDataRefs = xmlMyProfDoc.selectNodes("//" & gc_sProperty & _
+      "[not(@isDeleted) || @isDeleted != '1']/" & gc_sDataRef)
+    For Each xmlDataRef In xlDataRefs
+        Set xmlColumn = getItemXMLFromPath(xmlDataRef.getAttribute("idref"))
+        If Not(xmlColumn Is Nothing) Then
+            xmlColumn.setAttribute "isMapped", "1"
+        End If
+    Next
+
+    ' Mark columns of improper type.
+    If Not isNull(strPropType) Then
+        ' Caller specified a type to filter according to.
+
+        ' Figure out the proper database column type from the property-type.
+        Set xmlDBType = xiLTypesToCTypes.selectSingleNode("//typemap[@ltype='" & _
+            strPropType & "']")
+        strDBType = ""
+        If Not(xmlDBType Is Nothing) Then
+            strDBType = xmlDBType.getAttribute("ptype")
+        End If
+        Set xlColList = xmlMyProfDoc.selectNodes("//" & gc_sMember & "[@memberType!='" & _
+            strDBType & "']")
+        For Each xmlColumn In xlColList
+            xmlColumn.setAttribute "wrongType", "1"
+        Next
+    End If
+
+    ' Unmark the passed-in IDs.
+    If Not(isNull(rgstrIDs)) Then
+        For i = 0 To UBound(rgstrIDs)
+            Set xmlColumn = getItemXMLFromPath(rgstrIDs(i))
+            If Not(xmlColumn Is Nothing) Then
+                xmlColumn.removeAttribute "isMapped"
+                xmlColumn.removeAttribute "wrongType"
+            End If
+        Next
+    End If
+
+End Sub
+
+
+Function getItemXMLFromPath(strItemPath)
+    Dim xmlItem
+    Dim rgstrPathParts
+    Dim i
+    Dim strXSL
+    Dim xmlMyProfDoc
+
+    Set xmlMyProfDoc = xmlisProfileDoc.XMLDocument
+
+    rgstrPathParts = Split(strItemPath, ".")
+
+    strXSL = gc_sDocument & "/" & gc_sCatalog
+    For i = 0 To UBound(rgstrPathParts)
+        strXSL = strXSL & "/*[@name $ieq$ '" & rgstrPathParts(i) & "']"
+    Next
+    Set xmlItem = xmlMyProfDoc.selectSingleNode(strXSL)
+
+    Set getItemXMLFromPath = xmlItem
+End Function
+
+
+Sub BtnCancel_ClickHandler()
+    window.close
+End Sub
+
+Sub BtnHelp_ClickHandler()
+    if typename(winHelpWindow) = "HTMLWindow2" then winHelpWindow.close
+		set winHelpWindow = window.open(g_strHelpPath, "winHelpWindow", _
+						 "height=500,width=700,status=no,toolbar=yes,menubar:no,resizable=yes")
+End Sub
+
+Sub BtnOK_ClickHandler()
+    Dim rgstrItemPaths
+    Dim i
+    Dim bClose
+    Dim sdSources
+    Dim bDuplicateSrc
+    Dim sParentPath
+    
+    bClose = True
+    bDuplicateSrc = False
+    Set sdSources = CreateObject("Scripting.Dictionary")
+    
+    ' Find out what is selected.
+    rgstrItemPaths = divDataSources.GetSelectedItems()
+    g_strColumnPath = ""
+    For i = 0 To UBound(rgstrItemPaths)
+        If Not (rgstrItemPaths(i) = "NOMAP") Then
+            If g_strColumnPath = "" Then
+                g_strColumnPath = rgstrItemPaths(i)
+            Else
+                g_strColumnPath = g_strColumnPath & "|" & rgstrItemPaths(i)
+            End If
+            'Make sure that there is only one member per data source
+            sParentPath = Left(rgstrItemPaths(i), InStrRev(rgstrItemPaths(i), ".") - 1)
+            If sdSources.Exists(sParentPath) Then
+              bDuplicateSrc = True
+            Else
+              sdSources.Add sParentPath, "True"
+            End If
+        End If
+    Next
+
+    If bDuplicateSrc Then
+      alert L_DuplicateSrc_ErrorMessage
+      bClose = False
+    End If
+
+    If g_strColumnPath = "" Then
+        If vbNo = MsgBox(L_MapProperty_Text, vbYesNo, L_MapProperty_DialogTitle) Then
+            bClose = False
+        End If
+    End If
+
+    If bClose Then
+        g_strRetVal = g_strColumnPath
+        window.close
+    End If
+End Sub
+
+Sub OnUnloadHandler()
+    window.returnValue = g_strRetVal
+End Sub
+
+</SCRIPT>
+
+</BODY>
+</HTML>

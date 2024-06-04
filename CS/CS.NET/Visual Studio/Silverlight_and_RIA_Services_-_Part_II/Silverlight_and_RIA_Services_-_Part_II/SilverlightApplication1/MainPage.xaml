@@ -1,0 +1,30 @@
+﻿<UserControl xmlns:dataFormToolkit="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data.DataForm.Toolkit"  xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"  x:Class="SilverlightApplication1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:web="clr-namespace:SilverlightApplication1.Web" 
+    xmlns:riaControls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Ria.Controls"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+    mc:Ignorable="d" d:DesignWidth="640" d:DesignHeight="480">
+    <Grid x:Name="LayoutRoot">
+        <riaControls:DomainDataSource QueryName="GetSuppliers"                                      
+                                  AutoLoad="True"
+                                  x:Name="dds">
+            <riaControls:DomainDataSource.DomainContext>
+                <web:NorthwindContext />
+            </riaControls:DomainDataSource.DomainContext>
+        </riaControls:DomainDataSource>
+
+        <StackPanel Orientation="Vertical">
+            <data:DataGrid x:Name="dgSupplier" 
+                           IsReadOnly="False"
+                           ItemsSource="{Binding Data, ElementName=dds, Mode=OneWay}" 
+                           Width="700" Height="500"
+                           KeyUp="dgSupplier_KeyUp"
+                           RowEditEnding="dgSupplier_RowEditEnding">
+            </data:DataGrid>            
+            <Button x:Name="btnUpdate" Content="Update" 
+                    IsEnabled="False" Width="100" Height="25"
+                    Click="btnUpdate_Click"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

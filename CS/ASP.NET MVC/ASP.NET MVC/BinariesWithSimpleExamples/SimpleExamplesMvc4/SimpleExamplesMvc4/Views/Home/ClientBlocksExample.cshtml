@@ -1,0 +1,102 @@
+﻿@model SimpleExamples.Models.ClientBlocksViewModel
+@using SimpleExamples.Models
+@using MVCControlsToolkit.Controls.Bindings
+@{
+    ViewBag.Title = "Client Blocks Example";
+    Layout = "~/Views/Shared/_LayoutClient.cshtml";
+}
+
+<h2>Client Blocks Example</h2>
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(false, "There are some errors")
+    <div id="ClientViewModelContainer">
+        @{
+            var clientKeywordsHelper =
+                Html.TransformedHelper(
+                m => m.ClientKeywords,
+                new ClientViewModel());
+        }
+        @clientKeywordsHelper.TemplateFor(m => m,
+            _S.H < ClientViewModel>(
+            @<text>
+                @{
+                    var bindings = item.ClientBindings();
+                    bindings
+                        .AddMethod("addNewItem",
+                        @"
+                        function () {" +
+                                bindings.VerifyFieldsValid(m => m.ItemToAdd) + @"
+                            if (this.ItemToAdd() == null || this.ItemToAdd().length == 0) return;
+                            this.Keywords.push(this.ItemToAdd());
+                            this.SelectedKeywords.push(this.ItemToAdd());
+                            this.ItemToAdd('');
+                        }
+                        ")
+                        .AddMethod("removeSelected",
+                        @"
+                        function () {
+                            this.Keywords.removeAll(this.SelectedKeywords());
+                            this.SelectedKeywords([]); // Reset selection to an empty set
+                        }
+
+                        ");
+                }
+                <div class="editor-field">
+                    @item.DropDownListFor(m => m.SelectedKeywords,
+                                    new { style = "min-width:100px" },
+                                    item.CreateChoiceList(
+                                        m => m.Keywords,
+                                        m => m,
+                                        m => m,
+                                        overridePrompt: "select keyword"))
+                </div>
+                <div class="editor-field">
+                    @item.TypedTextBoxFor(
+                                m => m.ItemToAdd,
+                                "watermark")
+                    @item.ValidationMessageFor(m => m.ItemToAdd, "*")
+                    @{
+                        var addButtonBindings = bindings
+                        .Click(m => m, "addNewItem")
+                        .Get();
+                        var removeButtonBinding = bindings
+                            .Click(m => m, "removeSelected")
+                            .Enable(m => m.SelectedKeywords, "{0}.length > 0").Get();
+                        var sumbitButtonBindings = bindings.Click(m => m, "saveAndSubmit").Get();
+                    }
+                    <input type="button" value="Add" data-bind='@addButtonBindings' />
+                    <input type="button" value="Remove Selected" data-bind='@removeButtonBinding' />
+                    <input type="button" value="Submit" data-bind='@sumbitButtonBindings' />
+                </div>
+
+            </text>
+            ),
+            null,
+            true,
+            "keywordsHandling",
+            "ClientViewModelContainer",
+            true)
+    </div>
+    <div style="margin: 10px 10px 10px 10px">
+       <input type="submit" value="Submit" />
+    </div>
+    <div style="margin-top:50px">
+        <p>
+            <strong>
+            Read more about this Client Blocks example <a href="https://mvccontrolstoolkit.codeplex.com/wikipage?title=Client%20Block%20complete%20example">here</a>
+            </strong>
+        </p>
+        <p>
+            <strong>
+            Read about Client Blocks in general <a href="https://mvccontrolstoolkit.codeplex.com/wikipage?title=Client%20Blocks">here</a>
+            </strong>
+        </p>
+        <p>
+            <strong>
+            More examples about Client Blocks and Client Templates are in the file RazorClientTemplating file in the <a href="https://mvccontrolstoolkit.codeplex.com/releases">Mvc Controls Toolkit download area</a>.
+            </strong>
+        </p>
+    </div>
+}
+

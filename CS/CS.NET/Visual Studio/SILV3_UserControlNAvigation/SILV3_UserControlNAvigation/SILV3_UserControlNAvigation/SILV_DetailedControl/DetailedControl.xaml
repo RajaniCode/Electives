@@ -1,0 +1,24 @@
+﻿<UserControl xmlns:data="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Data"  x:Class="SILV_DetailedControl.DetailedControl"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+    Width="500" Height="400">
+    <Grid x:Name="LayoutRoot" Background="White" Width="500" Height="400">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"></RowDefinition>
+            <RowDefinition Height="300"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" 
+                   Text="Information Details"
+                   FontFamily="Times New Roman"
+                    TextAlignment="Center"
+                    FontWeight="Bold"
+                    Foreground="Red"
+                    FontSize="56"></TextBlock>
+        <data:DataGrid Grid.Row="1"
+                 AlternatingRowBackground="Azure"
+                 AutoGenerateColumns="True"
+                 Background="Coral"
+                 x:Name="dgDetails">
+        </data:DataGrid>
+    </Grid>
+</UserControl>

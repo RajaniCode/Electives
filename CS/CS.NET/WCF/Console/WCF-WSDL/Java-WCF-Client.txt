@@ -1,0 +1,68 @@
+
+
+# Git Bash
+
+$ cd "E:\Working\CS\WCF\Console\WCF-WSDL"
+
+$ csc WCFService.cs
+
+$ ./WCFService
+
+
+# Git Bash
+
+$ cd $ cd "E:\Working\CS\WCF\Console\WCF-WSDL\Java-WCF-Client"
+
+$ mkdir src
+
+$ cd src
+
+$ touch WCFService.xml
+
+# src/WCFService.xml
+<bindings xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+ xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+ wsdlLocation="http://localhost:8000/WCFService.svc?wsdl"
+ xmlns="http://java.sun.com/xml/ns/jaxws">
+    <bindings node="wsdl:definitions">
+        <enableAsyncMapping>true</enableAsyncMapping>
+    </bindings>
+</bindings>
+
+$ wsimport -extension -keep -Xnocompile -b WCFService.xml http://localhost:8000/WCFService.svc?wsdl
+
+$ mkdir client
+
+$ touch client/JavaWCFClient.java
+
+# src/client/JavaWCFClient.java
+package client;
+
+import java.net.URL;
+
+import javax.xml.namespace.QName;
+import javax.xml.ws.BindingProvider;
+
+import org.tempuri.IWCFService;
+import org.tempuri.WCFService;
+
+public class JavaWCFClient {
+    public static void main(String[] strArgs) {
+	try {			
+	    WCFService srv = new WCFService(new URL("http://localhost:8000/WCFService.svc?wsdl"), 
+					new QName("http://tempuri.org/", "WCFService"));
+	    IWCFService port = srv.getBasicHttpBindingIWCFService();
+	    ((BindingProvider)port).getRequestContext().put(BindingProvider.ENDPOINT_ADDRESS_PROPERTY, "http://localhost:8000/WCFService.svc");
+	    String strOutput = port.getData("Java WCF Client");
+	    System.out.println(strOutput);
+	}
+	catch(Exception e)
+	{
+	    e.printStackTrace();
+	}	
+    }
+}
+
+$ javac "client\JavaWCFClient.java"
+
+$ java client.JavaWCFClient

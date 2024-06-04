@@ -1,0 +1,2765 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- _lcid="1033" _version="11.0.5529" _dal="1" -->
+<!-- _LocalBinding -->
+<ViewStyles>
+	<ViewStyle ID="0" DisplayName="Basic Table" Preview="_layouts/images/prvbasic.gif" Description="Shows a column for each field you choose, and a new row for each item in the list.">
+<GroupByHeader> <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML> </GroupByHeader>
+<GroupByFooter> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch> </GroupByFooter>
+<ViewHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+    <HTML><![CDATA[" width="100%" border=0 cellspacing=0 cellpadding=1 rules=rows><TR VALIGN=TOP>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH nowrap class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+            <Case Value=""><Switch><Expr><Property Select="Type"/><PresenceEnabled/></Expr>
+                            <Case Value="UserTRUE"><HTML><![CDATA[<TH nowrap class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+                            <Default><HTML><![CDATA[<TH nowrap class="ms-vh2">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+                           </Switch>
+            </Case>
+            <Default><HTML><![CDATA[<TH nowrap class="ms-vh-icon">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+</ViewHeader>
+<ViewBody>
+    <HTML><![CDATA[<TR>]]></HTML>
+    <Fields>
+        <HTML><![CDATA[<TD Class="]]></HTML>
+	<FieldSwitch> <Expr><Property Select="ClassInfo"/></Expr> <Case Value="Menu"><HTML><![CDATA[ms-vb-title" height="100%]]></HTML></Case> <Case Value="Icon">ms-vb-icon</Case> <Default> <FieldSwitch> <Expr><Property Select="Type"/><PresenceEnabled/></Expr> <Case Value="UserTRUE">ms-vb-user</Case> <Default>ms-vb2</Default> </FieldSwitch> </Default> </FieldSwitch>
+        <HTML><![CDATA[">]]></HTML>
+        <Field/>
+        <HTML><![CDATA[</TD>]]></HTML>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+</ViewBody>
+<ViewFooter>
+<HTML><![CDATA[</TABLE>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then></Then>
+        <Else>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR></TABLE>]]></HTML>
+        </Else>
+    </IfEqual>
+<HTML><![CDATA[</td></tr></table>]]></HTML>
+</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+<ViewEmpty>
+    <HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0><tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 width="100%" Summary="]]></HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML><![CDATA[" ]]></HTML>
+    <HTML><![CDATA[border=0 rules=rows><TR>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+            <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+            <Default><HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+    <HTML><![CDATA[</TABLE>]]></HTML>
+    <HTML><![CDATA[</td></tr>]]></HTML>
+    <HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ]]></HTML>
+ <HTML><![CDATA[ width=100% ]]></HTML>
+<HTML><![CDATA[ border=0 rules=rows><TR>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then>
+    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+    <HTML>There are no items to show in this view of the "</HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+    <HTML><![CDATA[</TD>]]></HTML>
+        </Then>
+        <Else>
+            <HTML><![CDATA[<TD class="ms-vb"><B>]]></HTML>
+            <HTML>No records were found matching your query.</HTML>
+            <HTML><![CDATA[</B></TD>]]></HTML>
+            <IfEqual>
+                <Expr1><GetVar Name="ErrorText"/></Expr1>
+                <Expr2>TRUE</Expr2>
+                <Then>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR><TR>]]></HTML>
+                </Then>
+                <Else>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR><TR>]]></HTML>
+                </Else>
+            </IfEqual>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+    <HTML><![CDATA[</td></tr></TABLE>]]></HTML>
+</ViewEmpty>
+<ViewBidiHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+    <HTML><![CDATA[" width="100%" border=0 cellspacing=0 cellpadding=1 rules=rows dir="]]></HTML>
+    <ListProperty Select="Direction"/>
+    <HTML><![CDATA["><TR VALIGN=TOP>]]></HTML>
+    <Switch>
+    <Expr><ListProperty Select='Direction'/></Expr>
+    <Case Value="LTR">
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-left"/>
+    </Case>
+    <Case Value="RTL">
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-right"/>
+    </Case>
+    <Default>
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh"/>
+    </Default>
+    </Switch>    
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH nowrap class="]]></HTML>
+            <GetVar Name="MsVhDirection"/>
+            <HTML><![CDATA[">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+            <Case Value=""><Switch><Expr><Property Select="Type"/><PresenceEnabled/></Expr>
+                            <Case Value="UserTRUE"><HTML><![CDATA[<TH nowrap class="]]></HTML><GetVar Name="MsVhDirection"/><HTML><![CDATA[">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+                            <Default><HTML><![CDATA[<TH nowrap class="]]></HTML><GetVar Name="MsVhDirection"/><HTML><![CDATA[">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+                           </Switch>
+            </Case>
+            <Default><HTML><![CDATA[<TH nowrap class="]]></HTML><GetVar Name="MsVhDirection"/><HTML><![CDATA[">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+</ViewBidiHeader>
+		<Script>
+			g_RequiredFields[0] = new Array;
+		</Script>
+</ViewStyle>
+<ViewStyle ID="6" DisplayName="Picture Library Details" BaseType="1" Type="109" Preview="_layouts/images/prvpicl.gif" Description="Shows each item in a row with check boxes for selection and image icons.  Each item is separated by a line.">
+                    <ViewBody>
+<HTML><![CDATA[
+<script>
+fNewItem = false;
+]]></HTML><IfNew Name="Created_x0020_Date"><HTML><![CDATA[fNewItem = true;]]></HTML></IfNew><HTML><![CDATA[
+InsertItem(
+"]]></HTML>
+<IfEqual>
+	<Expr1><LookupColumn Name="FSObjType"/></Expr1>
+	<Expr2>0</Expr2>
+	<Then><Field Name="EncodedAbsUrl"/></Then>
+	<Else><Field Name="ServerUrl"/></Else>
+</IfEqual>
+<HTML><![CDATA[",
+"]]></HTML><Column Name="ID"/><HTML><![CDATA[",
+"]]></HTML><UrlBaseName HTMLEncode="TRUE"><LookupColumn Name="FileLeafRef"/></UrlBaseName><HTML><![CDATA[",
+"]]></HTML><GetFileExtension HTMLEncode="TRUE"><LookupColumn Name="FileLeafRef"/></GetFileExtension><HTML><![CDATA[", 
+"]]></HTML><Column Name="ImageWidth"/><HTML><![CDATA[",
+"]]></HTML><Column Name="ImageHeight"/><HTML><![CDATA[",
+]]></HTML><ScriptQuote><Column Name="Title" HTMLEncode="TRUE"/></ScriptQuote><HTML><![CDATA[,
+]]></HTML><ScriptQuote><Column Name="Description" HTMLEncode="TRUE"/></ScriptQuote><HTML><![CDATA[,
+]]></HTML><LookupColumn Name="FSObjType"/><HTML><![CDATA[, 
+]]></HTML><ScriptQuote><MapToIcon><Column Name="HTML_x0020_File_x0020_Type"/><HTML>|</HTML><Column Name="File_x0020_Type"/></MapToIcon></ScriptQuote><HTML><![CDATA[,
+fNewItem);
+</script>
+<TR vAlign=top id=row]]></HTML><Column Name="ID"/><HTML><![CDATA[>]]></HTML>
+<Fields>
+        <HTML><![CDATA[<TD Class="]]></HTML>
+        <FieldSwitch> <Expr><Property Select="ClassInfo"/></Expr> <Case Value="Menu"><HTML><![CDATA[ms-vb-title" height="100%]]></HTML></Case> <Case Value="Icon">ms-vb-icon</Case> <Default> <FieldSwitch> <Expr><Property Select="Type"/><PresenceEnabled/></Expr> <Case Value="UserTRUE">ms-vb-user</Case> <Default>ms-vb2</Default> </FieldSwitch> </Default> </FieldSwitch>
+        <HTML><![CDATA[">]]></HTML>
+	<Field/>
+	<HTML><![CDATA[</TD>]]></HTML>
+</Fields>
+<HTML><![CDATA[</TR>]]></HTML>
+        </ViewBody>
+        <ViewFooter>
+<HTML><![CDATA[
+<?IMPORT namespace='stsplrc' implementation='#default#vml'?>
+<stsplrc:rect ID=webImageSyncer style="display:none;width:100;height:100"></stsplrc:rect>
+<span ID=selectionCacheMgr class=userdata style="display:none"></span>
+<span ID=DebugBox class=ms-selectedtitle style="display:none"></span>
+]]></HTML>
+<HTML><![CDATA[</TABLE></td></tr></table>]]></HTML>
+<HTML><![CDATA[
+<script>
+fImglibDefautlView = true;
+urlCmdForDisplay = ctx.displayFormUrl + "?RootFolder=]]></HTML><GetVar Name="RootFolder" URLEncode="TRUE"/><HTML><![CDATA[";
+ViewHeaderScript(]]></HTML><ScriptQuote><GetVar Name="ViewStyle" HTMLEncode="TRUE"/></ScriptQuote><HTML><![CDATA[,
+]]></HTML><ListProperty Select="WebImageWidth"/><HTML><![CDATA[,
+]]></HTML><ListProperty Select="WebImageHeight"/><HTML><![CDATA[,
+]]></HTML><ListProperty Select="ThumbnailSize"/><HTML><![CDATA[);
+currentPicture = ]]></HTML>
+<IfEqual><Expr1><GetVar Name="picID"/></Expr1><Expr2></Expr2><Then>0</Then><Else><GetVar Name="picID"/></Else></IfEqual>
+<HTML><![CDATA[;
+ViewFooterScript();
+</script>]]></HTML>
+        </ViewFooter>
+	<GroupByHeader>
+          <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML>
+<HTML><![CDATA[
+<script>
+	fIsInGroupByView = true;
+</script>]]></HTML>          
+	</GroupByHeader>
+<ViewFields>
+    <FieldRef Name="SelectedFlag"/>
+    <FieldRef Name="DocIcon"/>
+    <FieldRef Name="NameOrTitle"/>
+    <FieldRef Name="ImageSize"/>
+    <FieldRef Name="FileSizeDisplay"/>
+    <FieldRef Name="RequiredField" Explicit="TRUE"/>
+</ViewFields>
+<Script>
+    g_RequiredFields[6] = new Array;
+    g_RequiredFields[6]["RequiredField"] = true;
+</Script>
+</ViewStyle>
+<ViewStyle ID="7" DisplayName="">                
+		   <ViewFields>
+			<FieldRef Name="Title"/>
+		   </ViewFields>
+                <ViewHeader>
+                <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                <HTML><![CDATA[dopt.CalendarPeriod = "day";]]></HTML>
+                <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                </ViewHeader>
+                <ViewBidiHeader>
+                <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                <HTML><![CDATA[dopt.CalendarPeriod = "day";]]></HTML>
+                <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                </ViewBidiHeader>
+                <ViewBody> <HTML>cal.AddFullEvent(</HTML> <SetVar Name="_DateCount" Scope="Request" Value="0"/> <Fields> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="2"/> <Default> <Switch><Expr><Property Select="Name"/></Expr> <Case Value="Created_x0020_Date"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Case Value="Last_x0020_Modified"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Default> <Switch><Expr><Property Select="Type"/></Expr> <Case Value="DateTime"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Default/> </Switch> </Default> </Switch> </Default> </Switch> </Fields> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="1"> <HTML> "", </HTML> </Case> </Switch> <HTML> "", "", </HTML> <Switch><Expr><ListProperty Select='BaseType'/></Expr> <Case Value="1"> <ScriptQuote><LookupColumn Name="FileLeafRef"/></ScriptQuote> </Case> <Default> <Switch><Expr><ListProperty Select='ServerTemplate'/></Expr> <Case Value="103"> <ScriptQuote><Column Name="URL"/></ScriptQuote> </Case> <Default> <ScriptQuote><Column Name="Title"/></ScriptQuote> </Default> </Switch> </Default> </Switch> <HTML>, </HTML> <ScriptQuote><URL/></ScriptQuote> <HTML>); </HTML> </ViewBody>
+                <ViewFooter>
+                <HTML><![CDATA[cal.BuildUI();</SCRIPT>]]></HTML>
+                 <IfEqual>
+                  <Expr1><GetVar Name="SearchString"/></Expr1>
+                  <Expr2></Expr2>
+                  <Then></Then>
+                  <Else>
+                   <HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR></TABLE>]]></HTML>
+                  </Else>
+                 </IfEqual>
+                </ViewFooter>
+                <ViewEmpty>
+                 <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                 <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                 <HTML><![CDATA[dopt.CalendarPeriod = "day";]]></HTML>
+                 <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                 <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                 <HTML><![CDATA[cal.BuildUI();</SCRIPT>]]></HTML>
+                 <IfEqual>
+                  <Expr1><GetVar Name="SearchString"/></Expr1>
+                  <Expr2></Expr2>
+                  <Then>
+                  </Then>
+                  <Else>
+                   <HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0><tr>]]></HTML>
+                   <HTML><![CDATA[<td nowrap class="ms-vb"><b>]]></HTML>
+                   <HTML>No records were found matching your query.</HTML>
+                   <HTML><![CDATA[</b></td></tr>]]></HTML>
+                   <IfEqual>
+                    <Expr1><GetVar Name="ErrorText"/></Expr1>
+                    <Expr2>TRUE</Expr2>
+                    <Then>
+                     <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR>]]></HTML>
+                    </Then>
+                    <Else>
+                     <HTML><![CDATA[<TR><TD class="ms-descriptiontext">]]></HTML>
+                     <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+                     <HTML><![CDATA[</TD></TR>]]></HTML>
+                    </Else>
+                   </IfEqual>
+                   <HTML><![CDATA[</TABLE>]]></HTML>
+                  </Else>
+                 </IfEqual>
+                </ViewEmpty>
+                <Script>
+                g_RequiredFields[7] = new Array;
+                </Script>
+            </ViewStyle>
+<ViewStyle ID="8" DisplayName="">                
+		   <ViewFields>
+			<FieldRef Name="Title"/>
+		   </ViewFields>
+                <ViewHeader>
+                <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                <HTML><![CDATA[dopt.CalendarPeriod = "week";]]></HTML>
+                <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                </ViewHeader>
+                <ViewBidiHeader>
+                <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                <HTML><![CDATA[dopt.CalendarPeriod = "week";]]></HTML>
+                <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                </ViewBidiHeader>
+                <ViewBody> <HTML>cal.AddFullEvent(</HTML> <SetVar Name="_DateCount" Scope="Request" Value="0"/> <Fields> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="2"/> <Default> <Switch><Expr><Property Select="Name"/></Expr> <Case Value="Created_x0020_Date"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Case Value="Last_x0020_Modified"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Default> <Switch><Expr><Property Select="Type"/></Expr> <Case Value="DateTime"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Default/> </Switch> </Default> </Switch> </Default> </Switch> </Fields> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="1"> <HTML> "", </HTML> </Case> </Switch> <HTML> "", "", </HTML> <Switch><Expr><ListProperty Select='BaseType'/></Expr> <Case Value="1"> <ScriptQuote><LookupColumn Name="FileLeafRef"/></ScriptQuote> </Case> <Default> <Switch><Expr><ListProperty Select='ServerTemplate'/></Expr> <Case Value="103"> <ScriptQuote><Column Name="URL"/></ScriptQuote> </Case> <Default> <ScriptQuote><Column Name="Title"/></ScriptQuote> </Default> </Switch> </Default> </Switch> <HTML>, </HTML> <ScriptQuote><URL/></ScriptQuote> <HTML>); </HTML> </ViewBody>
+                <ViewFooter>
+                <HTML><![CDATA[cal.BuildUI();</SCRIPT>]]></HTML>
+                 <IfEqual>
+                  <Expr1><GetVar Name="SearchString"/></Expr1>
+                  <Expr2></Expr2>
+                  <Then></Then>
+                  <Else>
+                   <HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR></TABLE>]]></HTML>
+                  </Else>
+                 </IfEqual>
+                </ViewFooter>
+                <ViewEmpty>
+                 <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                 <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                 <HTML><![CDATA[dopt.CalendarPeriod = "week";]]></HTML>
+                 <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                 <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                 <HTML><![CDATA[cal.BuildUI();</SCRIPT>]]></HTML>
+                 <IfEqual>
+                  <Expr1><GetVar Name="SearchString"/></Expr1>
+                  <Expr2></Expr2>
+                  <Then>
+                  </Then>
+                  <Else>
+                   <HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0><tr>]]></HTML>
+                   <HTML><![CDATA[<td nowrap class="ms-vb"><b>]]></HTML>
+                   <HTML>No records were found matching your query.</HTML>
+                   <HTML><![CDATA[</b></td></tr>]]></HTML>
+                   <IfEqual>
+                    <Expr1><GetVar Name="ErrorText"/></Expr1>
+                    <Expr2>TRUE</Expr2>
+                    <Then>
+                     <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR>]]></HTML>
+                    </Then>
+                    <Else>
+                     <HTML><![CDATA[<TR><TD class="ms-descriptiontext">]]></HTML>
+                     <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+                     <HTML><![CDATA[</TD></TR>]]></HTML>
+                    </Else>
+                   </IfEqual>
+                   <HTML><![CDATA[</TABLE>]]></HTML>
+                  </Else>
+                 </IfEqual>
+                </ViewEmpty>
+                <Script>
+                g_RequiredFields[8] = new Array;
+                </Script>
+            </ViewStyle>
+<ViewStyle ID="9" DisplayName="">                
+		   <ViewFields>
+			<FieldRef Name="Title"/>
+		   </ViewFields>
+                <ViewHeader>
+                <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                </ViewHeader>
+                <ViewBidiHeader>
+                <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                </ViewBidiHeader>
+                <ViewBody> <HTML>cal.AddFullEvent(</HTML> <SetVar Name="_DateCount" Scope="Request" Value="0"/> <Fields> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="2"/> <Default> <Switch><Expr><Property Select="Name"/></Expr> <Case Value="Created_x0020_Date"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Case Value="Last_x0020_Modified"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Default> <Switch><Expr><Property Select="Type"/></Expr> <Case Value="DateTime"> <ScriptQuote> <Column Format="ISO8601Gregorian"/> </ScriptQuote> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="0"> <SetVar Name="_DateCount" Scope="Request" Value="1"/> </Case> <Case Value="1"> <SetVar Name="_DateCount" Scope="Request" Value="2"/> </Case> </Switch> <HTML>, </HTML> </Case> <Default/> </Switch> </Default> </Switch> </Default> </Switch> </Fields> <Switch><Expr><GetVar Name="_DateCount"/></Expr> <Case Value="1"> <HTML> "", </HTML> </Case> </Switch> <HTML> "", "", </HTML> <Switch><Expr><ListProperty Select='BaseType'/></Expr> <Case Value="1"> <ScriptQuote><LookupColumn Name="FileLeafRef"/></ScriptQuote> </Case> <Default> <Switch><Expr><ListProperty Select='ServerTemplate'/></Expr> <Case Value="103"> <ScriptQuote><Column Name="URL"/></ScriptQuote> </Case> <Default> <ScriptQuote><Column Name="Title"/></ScriptQuote> </Default> </Switch> </Default> </Switch> <HTML>, </HTML> <ScriptQuote><URL/></ScriptQuote> <HTML>); </HTML> </ViewBody>
+                <ViewFooter>
+                <HTML><![CDATA[cal.BuildUI();</SCRIPT>]]></HTML>
+                 <IfEqual>
+                  <Expr1><GetVar Name="SearchString"/></Expr1>
+                  <Expr2></Expr2>
+                  <Then></Then>
+                  <Else>
+                   <HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR></TABLE>]]></HTML>
+                  </Else>
+                 </IfEqual>
+                </ViewFooter>
+                <ViewEmpty>
+                 <HTML><![CDATA[<SCRIPT>var dopt = new DateOptions;]]></HTML>
+                 <HTML><![CDATA[ dopt.chDateSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="29"/></ScriptQuote><HTML><![CDATA[; dopt.chTimeSep = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="30"/></ScriptQuote><HTML><![CDATA[; dopt.SetTimeFormat(]]></HTML><ProjectProperty Select="Time24"/><HTML><![CDATA[); dopt.SetDateOrder(]]></HTML><LocaleInfo LCTYPE="33"/><HTML><![CDATA[); dopt.SetDOW(]]></HTML><LocaleInfo LCTYPE="4108"/> <HTML><![CDATA[); dopt.stAM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="40"/></ScriptQuote><HTML><![CDATA[; dopt.stPM = ]]></HTML><ScriptQuote><LocaleInfo LCTYPE="41"/></ScriptQuote><HTML><![CDATA[; dopt.TimeMarkPosn = ]]></HTML><LocaleInfo LCTYPE="4101"/><HTML><![CDATA[; dopt.webTZOffsetMin = ]]></HTML><ProjectProperty Select="TimeZoneBias"/><HTML><![CDATA[; ]]></HTML>
+                 <HTML><![CDATA[var cal = new Calendar(null, null, dopt);]]></HTML>
+                 <HTML><![CDATA[cal.stViewID=]]></HTML><ScriptQuote><GetVar Name="View"/></ScriptQuote><HTML><![CDATA[;]]></HTML>
+                 <HTML><![CDATA[cal.BuildUI();</SCRIPT>]]></HTML>
+                 <IfEqual>
+                  <Expr1><GetVar Name="SearchString"/></Expr1>
+                  <Expr2></Expr2>
+                  <Then>
+                  </Then>
+                  <Else>
+                   <HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0><tr>]]></HTML>
+                   <HTML><![CDATA[<td nowrap class="ms-vb"><b>]]></HTML>
+                   <HTML>No records were found matching your query.</HTML>
+                   <HTML><![CDATA[</b></td></tr>]]></HTML>
+                   <IfEqual>
+                    <Expr1><GetVar Name="ErrorText"/></Expr1>
+                    <Expr2>TRUE</Expr2>
+                    <Then>
+                     <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR>]]></HTML>
+                    </Then>
+                    <Else>
+                     <HTML><![CDATA[<TR><TD class="ms-descriptiontext">]]></HTML>
+                     <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+                     <HTML><![CDATA[</TD></TR>]]></HTML>
+                    </Else>
+                   </IfEqual>
+                   <HTML><![CDATA[</TABLE>]]></HTML>
+                  </Else>
+                 </IfEqual>
+                </ViewEmpty>
+                <Script>
+                g_RequiredFields[9] = new Array;
+                </Script>
+            </ViewStyle>
+<ViewStyle ID="12" DisplayName="Boxed, no labels" BaseType="0" Preview="_layouts/images/prvboxdn.gif" Description="Shows a two-column table with each list item in a cell and without a label.">
+	<GroupByHeader>
+          <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML>
+	   <SetVar Name="EvenRow" Scope="Request" Value="0"/>
+       <SetVar Name="OnlyOneItem" Scope="Request" Value="1"/>
+	</GroupByHeader>
+    <GroupByFooter>
+          <Switch>
+	        <Expr><GetVar Name="OnlyOneItem"/></Expr>
+		      <Case Value="1">
+		        <HTML><![CDATA[<td>&nbsp;</td><td width="50%">&nbsp;</td>]]></HTML>
+                <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+	          </Case>
+          </Switch>
+<Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch>
+    </GroupByFooter>
+<ViewHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" width="99%" border=0>]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+	<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewHeader>
+<ViewBidiHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" border="0" cellspacing="0" width="100%" dir="]]></HTML>
+	<ListProperty Select="Direction"/><HTML><![CDATA[">]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+       <SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewBidiHeader>
+<ViewBody ExpandXML="TRUE">											<!--Inbedded table name in sep. row -->
+	<SetVar Name="First" Scope="Request" Value="1"/>
+	<Fields>
+		<Switch>
+		<Expr><GetVar Name="First" /></Expr>		<!-- Put first field in top shaded area -->
+		<Case Value="1">
+			<HTML><![CDATA[
+				<td valign="top" width="50%" class="ms-stylebox">
+				<table border="0" width="100%">
+				<TR><TD colspan="2" class="ms-styleheader">
+				]]></HTML>
+		<Switch><Expr><Property Select="Type"/></Expr>
+              <Case Value="Computed">
+			<Field />	
+		</Case>
+		<Default>
+			<HTML><![CDATA[
+				<a href="
+				]]></HTML>
+			<URL/>
+			<HTML><![CDATA[" ONCLICK="GoToLink(this);return false;" target="_self">]]></HTML>
+			<Field />										<!-- Inbedded table start a new row -->
+			<HTML><![CDATA[
+			</a>
+			]]></HTML>
+			</Default>
+			</Switch>
+			<HTML><![CDATA[
+			</TD></TR>
+			]]></HTML>
+		<SetVar Name="First" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<Switch>
+				<Expr><Field/></Expr>
+				<Case Value=""/>
+				<Default>
+					<HTML><![CDATA[
+					<TR><TD width="20px"></TD><TD class="ms-stylebody">
+					]]></HTML>	
+					<Field/>
+					<HTML><![CDATA[
+					</TD></TR>
+					]]></HTML>
+				</Default>
+			</Switch>
+		</Default>
+		</Switch>
+	</Fields>
+	<HTML><![CDATA[
+	</TABLE></TD>
+	]]></HTML>
+	<Switch>
+		<Expr><GetVar Name="EvenRow"/></Expr>
+		<Case Value="1">
+			<HTML><![CDATA[</tr><TR style="font-size: 6px"><TD>&nbsp;</TD></TR><tr>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+            <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<HTML><![CDATA[<td width="1.5%">&nbsp;</td>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="1"/>
+		</Default>
+	</Switch>
+</ViewBody>
+<ViewFooter ExpandXML="TRUE">
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then></Then>
+        <Else>
+            <HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">]]></HTML>
+            <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+            <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+<ViewEmpty>
+    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 Summary="]]></HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML><![CDATA[" width="100%" border=0 rules=rows><TR>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+	        <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> 
+	        <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> 
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+    <HTML><![CDATA[</TABLE>]]></HTML>
+    <HTML><![CDATA[<TABLE width="100%" border=0 rules=rows><TR>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then>
+    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+    <HTML>There are no items to show in this view of the "</HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+    <HTML><![CDATA[</TD>]]></HTML>
+        </Then>
+        <Else>
+            <HTML><![CDATA[<TD class="ms-vb"><B>]]></HTML>
+            <HTML>No records were found matching your query.</HTML>
+            <HTML><![CDATA[</B></TD>]]></HTML>
+            <IfEqual>
+                <Expr1><GetVar Name="ErrorText"/></Expr1>
+                <Expr2>TRUE</Expr2>
+                <Then>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR><TR>]]></HTML>
+                </Then>
+                <Else>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR><TR>]]></HTML>
+                </Else>
+            </IfEqual>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+</ViewEmpty>
+		<Script>
+			g_RequiredFields[12] = new Array;
+		</Script>
+</ViewStyle>
+<ViewStyle ID="13" DisplayName="Boxed" BaseType="0" Preview="_layouts/images/prvboxd.gif" Description="Shows a two-column table with each list item in a labeled cell.">
+	<GroupByHeader>
+          <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML>
+	   <SetVar Name="EvenRow" Scope="Request" Value="0"/>
+       <SetVar Name="OnlyOneItem" Scope="Request" Value="1"/>
+    </GroupByHeader>
+    <GroupByFooter>
+      <Switch>
+	    <Expr><GetVar Name="OnlyOneItem"/></Expr>
+		  <Case Value="1">
+		    <HTML><![CDATA[<td>&nbsp;</td><td width="50%">&nbsp;</td>]]></HTML>
+            <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+	      </Case>
+      </Switch>
+<Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch>
+    </GroupByFooter>
+<ViewHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" width="100%" border=0>]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+	<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewHeader>
+<ViewBidiHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" border="0" cellspacing="0" width="100%" dir="]]></HTML>
+	<ListProperty Select="Direction"/><HTML><![CDATA[">]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+	<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewBidiHeader>
+<ViewBody ExpandXML="TRUE">											<!--Inbedded table name in sep. row -->
+	<SetVar Name="First" Scope="Request" Value="1"/>
+	<Fields>
+		<Switch>
+		<Expr><GetVar Name="First" /></Expr>		<!-- Put first field in top shaded area -->
+		<Case Value="1">
+			<HTML><![CDATA[
+				<td valign="top" width="50%" class="ms-stylebox">
+				<table border="0" width="100%">
+				<TR><TD colspan="2" class="ms-vb">
+				]]></HTML>
+		<Switch><Expr><Property Select="Type"/></Expr>
+              <Case Value="Computed">
+			<Field />	
+		</Case>
+		<Default>
+			<HTML><![CDATA[
+				<a href="
+				]]></HTML>
+			<URL/>
+			<HTML><![CDATA[" ONCLICK="GoToLink(this);return false;" target="_self">]]></HTML>
+			<Field />										<!-- Inbedded table start a new row -->
+			<HTML><![CDATA[
+			</a>
+			]]></HTML>
+			</Default>
+			</Switch>
+			<HTML><![CDATA[
+			</TD></TR>
+			]]></HTML>
+		<SetVar Name="First" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<HTML><![CDATA[
+			<TR><TD class="ms-stylelabel">
+			]]></HTML>												<!-- Start a new row and cell for name -->
+			<Property Select="DisplayName" />
+			<HTML><![CDATA[
+			</TD><TD class="ms-stylebody">
+			]]></HTML>	
+			<Switch>
+				<Expr><Field/></Expr>
+				<Case Value=""/>
+				<Default>
+					<Field/>
+					<HTML><![CDATA[
+					</TD></TR>
+					]]></HTML>
+				</Default>
+			</Switch>
+		</Default>
+		</Switch>
+	</Fields>
+	<HTML><![CDATA[
+	</TABLE></TD>
+	]]></HTML>
+	<Switch>
+		<Expr><GetVar Name="EvenRow"/></Expr>
+		<Case Value="1">
+			<HTML><![CDATA[</tr><tr><td><br></td></tr><tr>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+            <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<HTML><![CDATA[<td>&nbsp;</td>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="1"/>
+		</Default>
+	</Switch>
+</ViewBody>
+<ViewFooter ExpandXML="TRUE">
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then></Then>
+        <Else>
+            <HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">]]></HTML>
+            <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+            <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+<ViewEmpty>
+    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 Summary="]]></HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML><![CDATA[" width="100%" border=0 rules=rows><TR>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+	        <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> 
+	        <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+    <HTML><![CDATA[</TABLE>]]></HTML>
+    <HTML><![CDATA[<TABLE width="100%" border=0 rules=rows><TR>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then>
+    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+    <HTML>There are no items to show in this view of the "</HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+    <HTML><![CDATA[</TD>]]></HTML>
+        </Then>
+        <Else>
+            <HTML><![CDATA[<TD class="ms-vb"><B>]]></HTML>
+            <HTML>No records were found matching your query.</HTML>
+            <HTML><![CDATA[</B></TD>]]></HTML>
+            <IfEqual>
+                <Expr1><GetVar Name="ErrorText"/></Expr1>
+                <Expr2>TRUE</Expr2>
+                <Then>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR><TR>]]></HTML>
+                </Then>
+                <Else>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR><TR>]]></HTML>
+                </Else>
+            </IfEqual>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+</ViewEmpty>
+		<Script>
+			g_RequiredFields[13] = new Array;
+		</Script>
+</ViewStyle>
+<ViewStyle ID="14" DisplayName="Document Details" BaseType="1" Preview="_layouts/images/prvdocl.gif" Description="Shows a two-column table with the title and file type icon for each document library file. Other fields appear in cells on separate lines under the title. This layout is repeated for each list item.">
+	<ViewFields>
+		<FieldRef Name="DocIcon" Explicit="TRUE"/>
+		<FieldRef Name="LinkFilenameNoMenu" Explicit="TRUE"/>
+		<FieldRef Name="Edit" Explicit="TRUE"/>
+	</ViewFields>
+	<GroupByHeader>
+          <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML>
+	   <SetVar Name="EvenRow" Scope="Request" Value="0"/>
+       <SetVar Name="OnlyOneItem" Scope="Request" Value="1"/>
+	</GroupByHeader>
+    <GroupByFooter>
+      <Switch>
+	    <Expr><GetVar Name="OnlyOneItem"/></Expr>
+		  <Case Value="1">
+		    <HTML><![CDATA[<td>&nbsp;</td><td width="50%">&nbsp;</td>]]></HTML>
+            <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+	      </Case>
+      </Switch>
+<Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch>
+    </GroupByFooter>
+<ViewHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" width="100%" border=0>]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+	<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewHeader>
+<ViewBidiHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" border="0" cellspacing="0" width="100%" dir="]]></HTML>
+	<ListProperty Select="Direction"/><HTML><![CDATA[">]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+	<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewBidiHeader>
+<ViewBody ExpandXML="TRUE">
+	<HTML><![CDATA[
+		<td valign="top" width="49%" class="ms-stylebox">
+		<table border="0" width="100%" cellspacing="0"><TR class="ms-styleheader">
+		<TD> 
+	]]></HTML>
+	<Field Name="DocIcon"/>
+	<HTML><![CDATA[
+		</TD><TD colspan="2">
+	]]></HTML>
+	<Field Name="LinkFilenameNoMenu"/>	
+	<HTML><![CDATA[
+		</TD><TD align="right">
+	]]></HTML>	
+	<Field Name="Edit"/>	
+	<HTML><![CDATA[
+		</TD></TR>
+	]]></HTML>
+	<Fields>
+		<Switch>
+			<Expr><Field/></Expr>
+			<Case Value=""/>
+			<Default>
+				<Switch>
+					<Expr><Property Select="Name"/></Expr>
+					<Case Value="DocIcon"/>
+					<Case Value="LinkFilenameNoMenu"/>  
+					<Case Value="Edit"/>
+					<Default>
+						<HTML><![CDATA[
+						<TR><TD>
+						&nbsp;
+						</TD><TD>
+						<span class="ms-stylelabel"> 
+						]]></HTML>
+						<Property Select="DisplayName" HTMLEncode="True" />
+						<HTML><![CDATA[
+						</span></TD><TD class="ms-stylebody"> 
+						]]></HTML> 		
+						<Field/>
+						<HTML><![CDATA[
+						</TD></TR> 
+						]]></HTML> 		
+					</Default>
+				</Switch>
+			</Default>
+		</Switch>
+	</Fields>
+	<HTML><![CDATA[
+	</TABLE></TD>
+	]]></HTML>
+	<Switch>
+		<Expr><GetVar Name="EvenRow"/></Expr>
+		<Case Value="1">
+			<HTML><![CDATA[</tr><TR style="font-size: 6px"><TD>&nbsp;</TD></TR><tr>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+            <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<HTML><![CDATA[<td width="1.5%">&nbsp;</td>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="1"/>
+		</Default>
+	</Switch>
+</ViewBody>
+<ViewFooter ExpandXML="TRUE">
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then></Then>
+        <Else>
+            <HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">]]></HTML>
+            <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+            <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</ViewFooter>
+<ViewEmpty ExpandXML="TRUE">
+    <HTML><![CDATA[<TABLE border="0" width="100%"><TR><TD class="ms-vb">]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then>
+            <HTML>There are no items to show in this view.</HTML>
+        </Then>
+        <Else>
+            <HTML><![CDATA[<B>]]></HTML>
+            <HTML>No records were found matching your query.</HTML>
+            <HTML><![CDATA[</B>]]></HTML>
+            <IfEqual>
+                <Expr1><GetVar Name="ErrorText"/></Expr1>
+                <Expr2>TRUE</Expr2>
+                <Then>
+                    <HTML><![CDATA[</TD></TR><TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.]]></HTML>
+                </Then>
+                <Else>
+                    <HTML><![CDATA[</TD></TR><TR><TD class="ms-descriptiontext">]]></HTML>
+                    <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+                </Else>
+            </IfEqual>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</ViewEmpty>
+			<Script>
+				g_RequiredFields[14] = new Array;
+                                g_RequiredFields[14] ["DocIcon"] =  true;
+		                  g_RequiredFields[14]["LinkFilenameNoMenu"] = true;
+		                  g_RequiredFields[14]["Edit"] = true;
+			</Script>
+</ViewStyle>
+<ViewStyle ID="15" DisplayName="Newsletter" Preview="_layouts/images/prvnews.gif" Description="Displays short fields on a row above a field with multiple lines of text. This style is good for displaying items with multiple lines of text. This layout is repeated for each list item; each item is separated by a line.">
+<GroupByHeader> <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML> </GroupByHeader>
+<GroupByFooter> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch> </GroupByFooter>
+		<ViewHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+		    <HTML><![CDATA[" width="99%" border=0 cellspacing=0 cellpadding=0 rules=rows>]]></HTML>
+            <HTML><![CDATA[<TR VALIGN=TOP>]]></HTML>
+            <SetVar Name="ColsOrBody" Scope="Request" Value="Cols" /> 
+		    <SetVar Name="Columns" Scope="Request" Value="."/> <!-- we will add a dot for each column, 
+		                                                                                                 start with a dot for group indent if any-->
+		    <SetVar Name="Dot" Scope="Request" Value="."/>    <!-- can only concat var and var -->
+		    <Fields>
+		    	<Switch>
+		    		<Expr><Property Select="Type" /></Expr>
+		    		<Case Value="Note"> 
+		    		<SetVar Name="ColsOrBody" Scope="Request" Value="Body" /> 
+		    		</Case>
+		    	</Switch>
+				<Switch>
+		    		<Expr><GetVar Name="ColsOrBody" /></Expr>
+		    		<Case Value="Cols">
+		    			<SetVar Name="Columns" Scope="Request"><GetVar Name="Dot"/><GetVar Name="Columns"/></SetVar>
+                        <Switch>
+				        <Expr><Property Select="Name"/></Expr>
+				        <Case Value="Attachments">
+				            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+				            <Field/>
+				            <HTML><![CDATA[</TH>]]></HTML>
+				        </Case>
+				        <Default>
+				        <Switch>
+				            <Expr><Property Select='HeaderImage'/></Expr>
+				            <Case Value=""><HTML><![CDATA[<TH class="ms-vh2" style="padding-bottom: 6px">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+				            <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+				        </Switch>
+				        </Default>
+				        </Switch>
+					</Case>
+				</Switch>
+		    </Fields>
+		    <HTML><![CDATA[</TR>]]></HTML>
+		    <SetVar Name="NumColumns" Scope="Request"><Length><GetVar Name="Columns"/></Length></SetVar>
+		</ViewHeader>
+		<ViewBody>
+            <SetVar Name="FreeForm" Scope="Request" Value="FALSE"/>
+			<SetVar Name="ColsOrBody" Scope="Request" Value="Cols" /> 				<!-- Starts as Cols, turns to Body once
+																						First multiline field is reached -->
+		    <HTML><![CDATA[<tr>]]></HTML>
+		      <Switch>
+		    	<Expr><GetVar Name="NumColumns" /></Expr>
+		    	<Case Value="1">
+			    <HTML><![CDATA[<TD class = "ms-vb2" colspan="1">]]></HTML>
+			    </Case>
+			  </Switch>
+		    <Fields>
+		    	<Switch>
+		    		<Expr><Property Select="Type" /></Expr>
+		    		<Case Value="Note"> 
+                        <SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+		    			<SetVar Name="ColsOrBody" Scope="Request" Value="Body" /> 
+		    		</Case>
+		    	</Switch>
+		    	<Switch>
+		    		<Expr><GetVar Name="ColsOrBody" /></Expr>
+		    		<Case Value="Cols">
+				        <HTML><![CDATA[<TD class="ms-vb2"><span class="ms-announcementtitle">]]></HTML>           
+				        <Field/>
+				        <HTML><![CDATA[</span></TD>]]></HTML>
+			        </Case>
+			        <Default>	
+			        	<HTML><![CDATA[</TR>]]></HTML>								<!--Close the row-->
+				        <HTML><![CDATA[<TR>]]></HTML>
+				        <HTML><![CDATA[<TD class = "ms-vb" style="padding-top: 2px;padding-left: 4px; padding-right: 0px; padding-bottom: 4px" colspan=]]></HTML><GetVar Name="NumColumns"/>
+    					<HTML><![CDATA[>]]></HTML>
+				        <Field/>
+				        <HTML><![CDATA[</TD>]]></HTML>
+			        </Default>
+				</Switch>			        
+		    </Fields>
+			<HTML><![CDATA[</TR>]]></HTML>
+			<HTML><![CDATA[<TR>
+    			<TD colspan=]]></HTML><GetVar Name="NumColumns"/>
+    			<HTML><![CDATA[><IMG SRC="/_layouts/images/blank.gif" width="100%" height=1 alt=""></TD>
+   			</TR>
+   			]]></HTML>
+		</ViewBody>
+		<ViewFooter>
+			<HTML><![CDATA[</TABLE>]]></HTML>
+			    <IfEqual>
+			        <Expr1><GetVar Name="SearchString"/></Expr1>
+			        <Expr2></Expr2>
+			        <Then></Then>
+			        <Else>
+			<HTML><![CDATA[
+			<TABLE width="100%" border=0><TR>
+			<TD class="ms-descriptiontext">
+			
+			It may take several minutes for recent items to appear in the search results.</TD></TR>
+			</TABLE>]]></HTML>
+			        </Else>
+			    </IfEqual>
+			<HTML><![CDATA[</td></tr></table>]]></HTML>
+		</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+		<ViewEmpty>
+		    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 Summary="]]></HTML>
+		    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+		    <HTML><![CDATA[" width="100%" border=0 rules=rows><TR>]]></HTML>
+		    <Fields>
+		        <Switch><Expr><Property Select="Name"/></Expr>
+		        <Case Value="Attachments">
+		            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+		            <Field/>
+		            <HTML><![CDATA[</TH>]]></HTML>
+		        </Case>
+		        <Default>
+		        <Switch>
+		            <Expr><Property Select='HeaderImage'/></Expr>
+					<Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+					<Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+			    </Switch>
+		        </Default>
+		        </Switch>
+		    </Fields>
+		    <HTML><![CDATA[</TR>]]></HTML>
+		    <HTML><![CDATA[</TABLE>]]></HTML>
+		    <HTML><![CDATA[<TABLE width="100%" border=0 rules=rows><TR>]]></HTML>
+		    <IfEqual>
+		        <Expr1><GetVar Name="SearchString"/></Expr1>
+		        <Expr2></Expr2>
+		        <Then>
+		    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+		    <HTML>There are no items to show in this view of the "</HTML>
+		    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+		    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+		    <HTML><![CDATA[</TD>]]></HTML>
+		        </Then>
+		        <Else>
+		            <HTML><![CDATA[<TD class="ms-vb"><B>]]></HTML>
+		            <HTML>No records were found matching your query.</HTML>
+		            <HTML><![CDATA[</B></TD>]]></HTML>
+		            <IfEqual>
+		                <Expr1><GetVar Name="ErrorText"/></Expr1>
+		                <Expr2>TRUE</Expr2>
+		                <Then>
+		                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR><TR>]]></HTML>
+		                </Then>
+		                <Else>
+		                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR><TR>]]></HTML>
+		                </Else>
+		            </IfEqual>
+		        </Else>
+		    </IfEqual>
+		    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+		</ViewEmpty>
+		<ViewBidiHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+		    <HTML><![CDATA[" width="100%" border=0 rules=rows dir="]]></HTML>
+		    <ListProperty Select="Direction"/>
+		    <HTML><![CDATA["><TR VALIGN=TOP>]]></HTML>
+		    <Switch>
+		    <Expr><ListProperty Select='Direction'/></Expr>
+		    <Case Value="LTR">
+		        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-left"/>
+		    </Case>
+		    <Case Value="RTL">
+		        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-right"/>
+		    </Case>
+		    <Default>
+		        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh"/>
+		    </Default>
+		    </Switch>    
+		    <Fields>
+		        <Switch><Expr><Property Select="Name"/></Expr>
+		        <Case Value="Attachments">
+		            <HTML><![CDATA[<TH class="]]></HTML>
+		            <GetVar Name="MsVhDirection"/>
+		            <HTML><![CDATA[-icon">]]></HTML>
+		            <Field/>
+		            <HTML><![CDATA[</TH>]]></HTML>
+		        </Case>
+		        <Default>
+		        <HTML><![CDATA[<TH class="]]></HTML>
+		        <GetVar Name="MsVhDirection"/>
+		        <HTML><![CDATA[">]]></HTML>
+		        <Field/>
+		        <HTML><![CDATA[</TH>]]></HTML>
+		        </Default>
+		        </Switch>
+		    </Fields>
+		    <HTML><![CDATA[</TR>]]></HTML>
+                  <SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+		</ViewBidiHeader>
+				<Script>
+					g_RequiredFields[15] = new Array;
+				</Script>
+</ViewStyle>
+<ViewStyle ID="16" DisplayName="Newsletter, no lines" Preview="_layouts/images/prvnewsn.gif" Description="Displays short fields on a row above a field with multiple lines of text. This style is good for displaying items with multiple lines of text. This layout is repeated for each list item.">
+<GroupByHeader> <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML> </GroupByHeader>
+<GroupByFooter> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch> </GroupByFooter>
+		<ViewHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+		    <HTML><![CDATA[" width="99%" border=0 cellspacing=0 cellpadding=0 rules=rows><TR VALIGN=TOP>]]></HTML>
+		    <SetVar Name="ColsOrBody" Scope="Request" Value="Cols" /> 
+		    <SetVar Name="Columns" Scope="Request" >.</SetVar> <!-- we will add a dot for each column -->
+		    <SetVar Name="dot" Scope="Request" >.</SetVar>	 <!-- can not concatenate var and string, need var and var-->	    
+		    <Fields>
+		    	<Switch>
+		    		<Expr><Property Select="Type" /></Expr>
+		    		<Case Value="Note"> 
+		    		<SetVar Name="ColsOrBody" Scope="Request" Value="Body" /> 
+		    		</Case>
+		    	</Switch>
+				<Switch>
+		    		<Expr><GetVar Name="ColsOrBody" /></Expr>
+		    		<Case Value="Cols">
+		    			<SetVar Name="Columns" Scope="Request" ><GetVar Name="Columns"/><GetVar Name="dot"/></SetVar>
+				        <Switch>
+				        <Expr><Property Select="Name"/></Expr>
+				        <Case Value="Attachments">
+				            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+				            <Field/>
+				            <HTML><![CDATA[</TH>]]></HTML>
+				        </Case>
+				        <Default>
+				        <Switch>
+				            <Expr><Property Select='HeaderImage'/></Expr>
+    				        <Case Value=""><HTML><![CDATA[<TH class="ms-vh2" style="padding-bottom: 1px">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+				            <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+				        </Switch>
+				        </Default>
+				        </Switch>
+					</Case>
+				</Switch>
+		    </Fields>
+		    <HTML><![CDATA[</TR>]]></HTML>
+		    <SetVar Name="NumColumns" Scope="Request"><Length><GetVar Name="Columns"/></Length></SetVar>
+		</ViewHeader>
+		<ViewBody>
+            <SetVar Name="FreeForm" Scope="Request" Value="FALSE"/>
+			<SetVar Name="ColsOrBody" Scope="Request" Value="Cols" /> 				<!-- Starts as Cols, turns to Body once
+																						First multiline field is reached -->
+		    <HTML><![CDATA[
+   			<tr>
+		    ]]></HTML>
+		    <Fields>
+		    	<Switch>
+		    		<Expr><Property Select="Type" /></Expr>
+		    		<Case Value="Note"> 
+                        <SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+		    			<SetVar Name="ColsOrBody" Scope="Request" Value="Body" /> 
+		    		</Case>
+		    	</Switch>
+		    	<Switch>
+		    		<Expr><GetVar Name="ColsOrBody"/></Expr>
+		    		<Case Value="Cols">
+				        <HTML><![CDATA[<TD class="ms-vb" style="padding-top: 3px;padding-left: 4px; padding-right: 0px; padding-bottom: 1px" ><span class="ms-announcementtitle">]]></HTML>
+				        <Field/>
+				        <HTML><![CDATA[</span></TD>]]></HTML>
+			        </Case>
+			        <Default>	
+			        	<HTML><![CDATA[</TR>]]></HTML>								<!--Close the row-->
+				        <HTML><![CDATA[<TR>]]></HTML>
+				        <HTML><![CDATA[<TD class = "ms-vb" style="padding-top: 0px;padding-left: 4px; padding-right: 0px; padding-bottom: 8px" colspan=]]></HTML><GetVar Name="NumColumns"/>
+				        <HTML><![CDATA[>]]></HTML>
+				        <Field/>
+				        <HTML><![CDATA[</TD>]]></HTML>
+			        </Default>
+				</Switch>			        
+		    </Fields>
+			<HTML><![CDATA[
+			</TR>
+			<TR>
+    			<TD colspan=]]></HTML><GetVar Name="NumColumns"/>
+    			<HTML><![CDATA[><IMG SRC="/_layouts/images/blank.gif" width="100%" height=1 alt=""></TD>
+   			</TR>
+   			]]></HTML>
+		</ViewBody>
+		<ViewFooter>
+			<HTML><![CDATA[</TABLE>]]></HTML>
+			    <IfEqual>
+			        <Expr1><GetVar Name="SearchString"/></Expr1>
+			        <Expr2></Expr2>
+			        <Then></Then>
+			        <Else>
+			<HTML><![CDATA[
+			<TABLE width="100%" border=0><TR>
+			<TD class="ms-descriptiontext">
+			
+			It may take several minutes for recent items to appear in the search results.</TD></TR>
+			</TABLE>]]></HTML>
+			        </Else>
+			    </IfEqual>
+			<HTML><![CDATA[</td></tr></table>]]></HTML>
+		</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+		<ViewEmpty>
+		    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 Summary="]]></HTML>
+		    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+		    <HTML><![CDATA[" width="100%" border=0 rules=rows><TR>]]></HTML>
+		    <Fields>
+		        <Switch><Expr><Property Select="Name"/></Expr>
+		        <Case Value="Attachments">
+		            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+		            <Field/>
+		            <HTML><![CDATA[</TH>]]></HTML>
+		        </Case>
+		        <Default>
+		        <Switch>
+		            <Expr><Property Select='HeaderImage'/></Expr>
+		            <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+		            <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+		        </Switch>
+		        </Default>
+		        </Switch>
+		    </Fields>
+		    <HTML><![CDATA[</TR>]]></HTML>
+		    <HTML><![CDATA[</TABLE>]]></HTML>
+		    <HTML><![CDATA[<TABLE width="100%" border=0 rules=rows><TR>]]></HTML>
+		    <IfEqual>
+		        <Expr1><GetVar Name="SearchString"/></Expr1>
+		        <Expr2></Expr2>
+		        <Then>
+		    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+		    <HTML>There are no items to show in this view of the "</HTML>
+		    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+		    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+		    <HTML><![CDATA[</TD>]]></HTML>
+		        </Then>
+		        <Else>
+		            <HTML><![CDATA[<TD class="ms-vb"><B>]]></HTML>
+		            <HTML>No records were found matching your query.</HTML>
+		            <HTML><![CDATA[</B></TD>]]></HTML>
+		            <IfEqual>
+		                <Expr1><GetVar Name="ErrorText"/></Expr1>
+		                <Expr2>TRUE</Expr2>
+		                <Then>
+		                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR><TR>]]></HTML>
+		                </Then>
+		                <Else>
+		                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR><TR>]]></HTML>
+		                </Else>
+		            </IfEqual>
+		        </Else>
+		    </IfEqual>
+		    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+		</ViewEmpty>
+		<ViewBidiHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+		    <HTML><![CDATA[" width="100%" border=0 rules=rows dir="]]></HTML>
+		    <ListProperty Select="Direction"/>
+		    <HTML><![CDATA["><TR VALIGN=TOP>]]></HTML>
+		    <Switch>
+		    <Expr><ListProperty Select='Direction'/></Expr>
+		    <Case Value="LTR">
+		        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-left"/>
+		    </Case>
+		    <Case Value="RTL">
+		        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-right"/>
+		    </Case>
+		    <Default>
+		        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh"/>
+		    </Default>
+		    </Switch>    
+		    <Fields>
+		        <Switch><Expr><Property Select="Name"/></Expr>
+		        <Case Value="Attachments">
+		            <HTML><![CDATA[<TH class="]]></HTML>
+		            <GetVar Name="MsVhDirection"/>
+		            <HTML><![CDATA[-icon">]]></HTML>
+		            <Field/>
+		            <HTML><![CDATA[</TH>]]></HTML>
+		        </Case>
+		        <Default>
+		        <HTML><![CDATA[<TH class="]]></HTML>
+		        <GetVar Name="MsVhDirection"/>
+		        <HTML><![CDATA[">]]></HTML>
+		        <Field/>
+		        <HTML><![CDATA[</TH>]]></HTML>
+		        </Default>
+		        </Switch>
+		    </Fields>
+		    <HTML><![CDATA[</TR>]]></HTML>
+                  <SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+		</ViewBidiHeader>
+				<Script>
+					g_RequiredFields[16] = new Array;
+				</Script>
+</ViewStyle>
+<ViewStyle ID="17" DisplayName="Shaded" Preview="_layouts/images/prvshade.gif" Description="Displays items with alternating background colors.">
+<GroupByHeader> <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML> </GroupByHeader>
+<GroupByFooter> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch> </GroupByFooter>
+<ViewHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+    <HTML><![CDATA[" width="100%" border=0 cellspacing=0 cellpadding=1 rules=rows><TR VALIGN=TOP>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+	        <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+	        <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+</ViewHeader>
+<ViewBody>
+<Switch>
+ <Expr><GetVar Name="AlternateStyle"/></Expr>
+ <Case Value="1"><SetVar Scope="Request" Name="AlternateStyle">0</SetVar></Case>
+ <Default><SetVar Scope="Request" Name="AlternateStyle">1</SetVar></Default>
+</Switch>
+<HTML><![CDATA[<TR class="]]></HTML>
+<Switch>
+ <Expr><GetVar Name="AlternateStyle"/></Expr>
+ <Case Value="1">ms-alternating</Case>
+ <Default></Default>
+</Switch>
+<HTML><![CDATA[">]]></HTML><Fields><HTML><![CDATA[<TD Class="]]></HTML>
+ <FieldSwitch> <Expr><Property Select="ClassInfo"/></Expr> <Case Value="Menu"><HTML><![CDATA[ms-vb-title" height="100%]]></HTML></Case> <Case Value="Icon">ms-vb-icon</Case> <Default> <FieldSwitch> <Expr><Property Select="Type"/><PresenceEnabled/></Expr> <Case Value="UserTRUE">ms-vb-user</Case> <Default>ms-vb2</Default> </FieldSwitch> </Default> </FieldSwitch>
+<HTML><![CDATA[">]]></HTML><Field/><HTML><![CDATA[</TD>]]></HTML></Fields><HTML><![CDATA[</TR>]]></HTML>
+</ViewBody>
+<ViewFooter>
+<HTML><![CDATA[</TABLE>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then></Then>
+        <Else>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR></TABLE>]]></HTML>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</td></tr></table>]]></HTML>
+</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+<ViewEmpty>
+    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 Summary="]]></HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML><![CDATA[" width="100%" ]]></HTML>
+    <HTML><![CDATA[border=0 rules=rows><TR>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+	        <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+	        <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+    <HTML><![CDATA[</TABLE>]]></HTML>
+    <HTML><![CDATA[<TABLE ]]></HTML>
+ <HTML><![CDATA[ width=100% ]]></HTML>
+<HTML><![CDATA[ border=0 rules=rows><TR>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then>
+    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+    <HTML>There are no items to show in this view of the "</HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+    <HTML><![CDATA[</TD>]]></HTML>
+        </Then>
+        <Else>
+            <HTML><![CDATA[<TD class="ms-vb"><B>]]></HTML>
+            <HTML>No records were found matching your query.</HTML>
+            <HTML><![CDATA[</B></TD>]]></HTML>
+            <IfEqual>
+                <Expr1><GetVar Name="ErrorText"/></Expr1>
+                <Expr2>TRUE</Expr2>
+                <Then>
+                    <HTML><![CDATA[</TR><TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD>]]></HTML>
+                </Then>
+                <Else>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD>]]></HTML>
+                </Else>
+            </IfEqual>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+</ViewEmpty>
+<ViewBidiHeader>
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+    <HTML><![CDATA[" width="100%" border=0 rules=rows dir="]]></HTML>
+    <ListProperty Select="Direction"/>
+    <HTML><![CDATA["><TR VALIGN=TOP>]]></HTML>
+    <Switch>
+    <Expr><ListProperty Select='Direction'/></Expr>
+    <Case Value="LTR">
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-left"/>
+    </Case>
+    <Case Value="RTL">
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh-right"/>
+    </Case>
+    <Default>
+        <SetVar Name="MsVhDirection" Scope="Request" Value="ms-vh"/>
+    </Default>
+    </Switch>    
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="]]></HTML>
+            <GetVar Name="MsVhDirection"/>
+            <HTML><![CDATA[-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <HTML><![CDATA[<TH class="]]></HTML>
+        <GetVar Name="MsVhDirection"/>
+        <HTML><![CDATA[">]]></HTML>
+        <Field/>
+        <HTML><![CDATA[</TH>]]></HTML>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+</ViewBidiHeader>
+		<Script>
+			g_RequiredFields[17] = new Array;
+		</Script>
+</ViewStyle>
+<ViewStyle ID="18" DisplayName="Issues Boxed" BaseType="5" Preview="_layouts/images/prvboxd.gif" Description="Shows a two-column table with each list item in a labeled cell." >
+	<GroupByHeader>
+          <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML>
+	   <SetVar Name="EvenRow" Scope="Request" Value="0"/>
+       <SetVar Name="OnlyOneItem" Scope="Request" Value="1"/>
+    </GroupByHeader>
+    <GroupByFooter>
+      <Switch>
+	    <Expr><GetVar Name="OnlyOneItem"/></Expr>
+		  <Case Value="1">
+		    <HTML><![CDATA[<td>&nbsp;</td><td width="50%">&nbsp;</td>]]></HTML>
+            <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+	      </Case>
+      </Switch>
+<Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch>
+    </GroupByFooter>
+<ViewHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" width="100%" border=0>]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+	<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewHeader>
+<ViewBidiHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" border="0" cellspacing="0" width="100%" dir="]]></HTML>
+	<ListProperty Select="Direction"/><HTML><![CDATA[">]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+	<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewBidiHeader>
+<ViewBody ExpandXML="TRUE">											<!--Inbedded table name in sep. row -->
+	<SetVar Name="First" Scope="Request" Value="1"/>
+	<Fields>
+		<Switch>
+		<Expr><GetVar Name="First" /></Expr>		<!-- Put first field in top shaded area -->
+		<Case Value="1">
+			<HTML><![CDATA[
+				<td valign="top" width="50%" class="ms-stylebox">
+				<table border="0" width="100%">
+				<TR><TD colspan="2" class="ms-vb">
+				]]></HTML>
+		<Switch><Expr><Property Select="Type"/></Expr>
+              <Case Value="Computed">
+			<Field />	
+		</Case>
+		<Default>
+			<HTML><![CDATA[
+				<a href="
+				]]></HTML>
+			<URL/>
+			<HTML><![CDATA[" ONCLICK="GoToLink(this);return false;" target="_self">]]></HTML>
+			<Field />										<!-- Inbedded table start a new row -->
+			<HTML><![CDATA[
+			</a>
+			]]></HTML>
+			</Default>
+			</Switch>
+			<HTML><![CDATA[
+			</TD></TR>
+			]]></HTML>
+		<SetVar Name="First" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<HTML><![CDATA[
+			<TR><TD class="ms-stylelabel">
+			]]></HTML>												<!-- Start a new row and cell for name -->
+			<Property Select="DisplayName" />
+			<HTML><![CDATA[
+			</TD><TD class="ms-stylebody">
+			]]></HTML>	
+			<Switch>
+				<Expr><Field/></Expr>
+				<Case Value=""/>
+				<Default>
+					<Field/>
+					<HTML><![CDATA[
+					</TD></TR>
+					]]></HTML>
+				</Default>
+			</Switch>
+		</Default>
+		</Switch>
+	</Fields>
+	<HTML><![CDATA[
+	</TABLE></TD>
+	]]></HTML>
+	<Switch>
+		<Expr><GetVar Name="EvenRow"/></Expr>
+		<Case Value="1">
+			<HTML><![CDATA[</tr><tr><td><br></td></tr><tr>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+            <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<HTML><![CDATA[<td>&nbsp;</td>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="1"/>
+		</Default>
+	</Switch>
+</ViewBody>
+<ViewFooter ExpandXML="TRUE">
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then></Then>
+        <Else>
+            <HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">]]></HTML>
+            <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+            <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+<ViewEmpty>
+    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 Summary="]]></HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML><![CDATA[" width="100%" border=0 rules=rows><TR>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+	        <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+	        <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+    <HTML><![CDATA[</TABLE>]]></HTML>
+    <HTML><![CDATA[<TABLE width="100%" border=0 rules=rows><TR>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then>
+    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+    <HTML>There are no items to show in this view of the "</HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+    <HTML><![CDATA[</TD>]]></HTML>
+        </Then>
+        <Else>
+            <HTML><![CDATA[<TD class="ms-vb"><B>]]></HTML>
+            <HTML>No records were found matching your query.</HTML>
+            <HTML><![CDATA[</B></TD>]]></HTML>
+            <IfEqual>
+                <Expr1><GetVar Name="ErrorText"/></Expr1>
+                <Expr2>TRUE</Expr2>
+                <Then>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR><TR>]]></HTML>
+                </Then>
+                <Else>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR><TR>]]></HTML>
+                </Else>
+            </IfEqual>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+</ViewEmpty>
+		<Script>
+			g_RequiredFields[18] = new Array;
+		</Script>
+</ViewStyle>
+<ViewStyle ID="19" DisplayName="Issues Boxed, no labels" BaseType="5" Preview="_layouts/images/prvboxdn.gif" Description="Shows a two-column table with each list item in a cell and without a label.">
+	<GroupByHeader>
+          <HTML><![CDATA[<TBODY id="titl]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA["><TR]]></HTML> <Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[ class="ms-gb" ]]></HTML> </Case><Default> <HTML><![CDATA[ class="ms-gb2" ]]></HTML> </Default> </Switch> <HTML><![CDATA[><TD colspan="100" nowrap><img src="/_layouts/images/blank.gif" alt="" height=1 width=]]></HTML> <GetVar Name="GroupByIndent"/> <HTML><![CDATA[><a href="javascript:" onclick="javascript:ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');return false;"><img id="img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[" src="/_layouts/images/minus.gif" alt="]]></HTML> 		    <HTML>Expand/Collapse</HTML> 		    <HTML><![CDATA[" border="0"></a>&nbsp;]]></HTML> <GetVar Name="GroupByField" HTMLEncode="TRUE" /> <HTML><![CDATA[ :&nbsp;]]></HTML><GetVar Name="GroupByValue"/> <HTML><![CDATA[</TD></TR></TBODY>]]></HTML>
+	   <SetVar Name="EvenRow" Scope="Request" Value="0"/>
+       <SetVar Name="OnlyOneItem" Scope="Request" Value="1"/>
+	</GroupByHeader>
+    <GroupByFooter>
+          <Switch>
+	        <Expr><GetVar Name="OnlyOneItem"/></Expr>
+		      <Case Value="1">
+		        <HTML><![CDATA[<td>&nbsp;</td><td width="50%">&nbsp;</td>]]></HTML>
+                <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+	          </Case>
+          </Switch>
+<Switch><Expr><GetVar Name="GroupByIndent"/></Expr><Case Value="0"> <HTML><![CDATA[<TBODY id="foot]]></HTML> 		     <GetVar Name="GroupByLevelString"/> 		     <HTML><![CDATA[_"><TR><TD><BR></TD></TR></TBODY>]]></HTML> </Case><Default/> </Switch> <Switch><Expr><GetVar Name="GroupByCollapse"/></Expr><Case Value="TRUE"> <HTML><![CDATA[<SCRIPT>ExpCollGroup(']]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[','img_]]></HTML> 		    <GetVar Name="GroupByLevelString"/> 		    <HTML><![CDATA[');</SCRIPT>]]></HTML> </Case><Default/> </Switch>
+    </GroupByFooter>
+<ViewHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" width="99%" border=0>]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+	<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewHeader>
+<ViewBidiHeader ExpandXML="TRUE">
+<HTML><![CDATA[<TABLE width="100%" cellspacing=0 cellpadding=0 border=0>]]></HTML>
+<HTML><![CDATA[<SCRIPT>
+ctx = new ContextInfo();
+ctx.listBaseType = ]]></HTML><ListProperty Select="BaseType"/><HTML><![CDATA[;
+ctx.listTemplate = ]]></HTML><ListProperty Select="ServerTemplate"/><HTML><![CDATA[;
+ctx.listName = ]]></HTML><ScriptQuote><List/></ScriptQuote><HTML><![CDATA[;
+ctx.listUrlDir = ]]></HTML><ScriptQuote><ListUrlDir WebRel="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpPath = ]]></HTML><ScriptQuote><HttpPath/></ScriptQuote><HTML><![CDATA[;
+ctx.HttpRoot = ]]></HTML><ScriptQuote><HttpVDir/></ScriptQuote><HTML><![CDATA[;
+ctx.imagesPath = ]]></HTML><ScriptQuote>/_layouts/images/</ScriptQuote><HTML><![CDATA[;
+ctx.PortalUrl = ]]></HTML><ScriptQuote><ProjectProperty Select="PortalUrl"/></ScriptQuote><HTML><![CDATA[;
+if (ctx.PortalUrl == "") ctx.PortalUrl = null;
+ctx.displayFormUrl = ]]></HTML><ScriptQuote><URL Cmd="DISPLAY" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.editFormUrl = ]]></HTML><ScriptQuote><URL Cmd="EDIT" NoID="TRUE"/></ScriptQuote><HTML><![CDATA[;
+ctx.isWebEditorPreview = ]]></HTML><Switch><Expr><GetVar Name="WebEditorPreview"/></Expr><Case Value="TRUE">1</Case><Default>0</Default></Switch><HTML><![CDATA[;
+ctx.ctxId = ]]></HTML><Counter Type="View"/><HTML><![CDATA[;
+]]></HTML><Switch>
+<Expr><ListProperty Select="ModeratedList"/></Expr>
+<Case Value="0"/>
+<Default>
+ctx.isModerated = true;
+</Default>
+</Switch>
+<Switch><Expr><GetVar Name="RecursiveView"/></Expr>
+<Case Value="1">
+ctx.recursiveView = true;
+</Case>
+<Default/>
+</Switch>
+<HTML><![CDATA[ 
+ctx]]></HTML><Counter Type="View"/><HTML><![CDATA[ = ctx;
+</SCRIPT>]]></HTML>
+<HTML><![CDATA[<tr><td>]]></HTML>
+    <HTML><![CDATA[<TABLE ID="]]></HTML><WebQueryInfo/>
+	<HTML><![CDATA[" border="0" cellspacing="0" width="100%" dir="]]></HTML>
+	<ListProperty Select="Direction"/><HTML><![CDATA[">]]></HTML>
+<Switch> <Expr><GetVar Name="Filter"/></Expr> <Case Value="1"> <HTML><![CDATA[<TR><TD colspan="100"><TABLE><TR valign=TOP>]]></HTML> <Fields> <Switch> <Expr><Property Select='HeaderImage'/></Expr> <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case> <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default> </Switch> </Fields> <HTML><![CDATA[</TR></TABLE></TD></TR>]]></HTML> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Case> </Switch> <Switch> <Expr><GetVar Name="FilterField1"/></Expr> <Case Value=""/> <Default> <HTML><![CDATA[<TR><TD class="ms-vh" colspan=6>]]></HTML><HTML>Filtered by: </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField1"/></FieldProperty> <Switch> <Expr><GetVar Name="FilterField2"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField2"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField3"/></Expr> <Case Value=""/> <Default> <HTML> AND </HTML> <FieldProperty Select="DisplayName"><GetVar Name="FilterField3"/></FieldProperty> </Default> </Switch> <Switch> <Expr><GetVar Name="FilterField4" Scope="Request"/></Expr> <Case Value=""/> <Default> <HTML>... </HTML> </Default> </Switch> <HTML><![CDATA[<TR><td class="ms-sectionline" height=1 colspan=6></TR>]]></HTML> </Default> </Switch>
+       <SetVar Name="EvenRow" Scope="Request" Value="0"/>
+	<SetVar Name="FreeForm" Scope="Request" Value="TRUE"/>
+	<HTML><![CDATA[<TR>]]></HTML>
+</ViewBidiHeader>
+<ViewBody ExpandXML="TRUE">											<!--Inbedded table name in sep. row -->
+	<SetVar Name="First" Scope="Request" Value="1"/>
+	<Fields>
+		<Switch>
+		<Expr><GetVar Name="First" /></Expr>		<!-- Put first field in top shaded area -->
+		<Case Value="1">
+			<HTML><![CDATA[
+				<td valign="top" width="50%" class="ms-stylebox">
+				<table border="0" width="100%">
+				<TR><TD colspan="2" class="ms-styleheader">
+				]]></HTML>
+		<Switch><Expr><Property Select="Type"/></Expr>
+              <Case Value="Computed">
+			<Field />	
+		</Case>
+		<Default>
+			<HTML><![CDATA[
+				<a href="
+				]]></HTML>
+			<URL/>
+			<HTML><![CDATA[" ONCLICK="GoToLink(this);return false;" target="_self">]]></HTML>
+			<Field />										<!-- Inbedded table start a new row -->
+			<HTML><![CDATA[
+			</a>
+			]]></HTML>
+			</Default>
+			</Switch>
+			<HTML><![CDATA[
+			</TD></TR>
+			]]></HTML>
+		<SetVar Name="First" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<Switch>
+				<Expr><Field/></Expr>
+				<Case Value=""/>
+				<Default>
+					<HTML><![CDATA[
+					<TR><TD width="20px"></TD><TD class="ms-stylebody">
+					]]></HTML>	
+					<Field/>
+					<HTML><![CDATA[
+					</TD></TR>
+					]]></HTML>
+				</Default>
+			</Switch>
+		</Default>
+		</Switch>
+	</Fields>
+	<HTML><![CDATA[
+	</TABLE></TD>
+	]]></HTML>
+	<Switch>
+		<Expr><GetVar Name="EvenRow"/></Expr>
+		<Case Value="1">
+			<HTML><![CDATA[</tr><TR style="font-size: 6px"><TD>&nbsp;</TD></TR><tr>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="0"/>
+            <SetVar Name="OnlyOneItem" Scope="Request" Value="0"/>
+		</Case>
+		<Default>
+			<HTML><![CDATA[<td width="1.5%">&nbsp;</td>]]></HTML>
+			<SetVar Name="EvenRow" Scope="Request" Value="1"/>
+		</Default>
+	</Switch>
+</ViewBody>
+<ViewFooter ExpandXML="TRUE">
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then></Then>
+        <Else>
+            <HTML><![CDATA[<TABLE width="100%" border=0><TR><TD class="ms-descriptiontext">]]></HTML>
+            <HTML>It may take several minutes for recent items to appear in the search results.</HTML>
+            <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</ViewFooter>
+<PagedRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR>
+<TD align=right Class="ms-vb">]]></HTML><HTML>(Items</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageFirstRow" HTMLEncode="TRUE"/><HTML><![CDATA[&nbsp;]]></HTML>
+<HTML>to</HTML><HTML><![CDATA[&nbsp;]]></HTML>
+<GetVar Name="PageLastRow" HTMLEncode="TRUE"/>
+<HTML>)</HTML>
+<HTML><![CDATA[&nbsp;<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML>Next</HTML>
+<HTML><![CDATA[</A> 
+<A HREF="javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'>]]></HTML>
+<HTML><![CDATA[<img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;
+</TD></TR></TABLE>]]></HTML>
+</PagedRowset>
+<PagedRecurrenceRowset>
+<HTML><![CDATA[<TABLE width="100%" border=0><TR><TD  nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="PrevPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[&nbsp;<A id=onetidPrev HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/prev.gif" border=0 alt="]]><![CDATA[Previous]]><![CDATA["></A>
+                <A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="PrevPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                >]]></HTML>
+            <HTML>Previous</HTML>
+            <HTML><![CDATA[</A>]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD><TD align=right nowrap Class="ms-vb">]]></HTML>
+    <Switch>
+        <Expr><GetVar Name="NextPageData"/></Expr>
+        <Case Value="" />
+        <Default>
+            <HTML><![CDATA[<A HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+            >]]></HTML>
+            <HTML>Next</HTML>
+            <HTML><![CDATA[</A>
+            <A id=onetidNext HREF=
+                "javascript:" OnClick='javascript:SubmitFormPost("]]></HTML><ScriptQuote NotAddingQuote="TRUE"><PageUrl/><HTML>?</HTML><GetVar Name="NextPageData"/></ScriptQuote><HTML><![CDATA[");javascript:return false;'
+                ><img src="/_layouts/images/next.gif" border=0 alt="]]><![CDATA[Next]]><![CDATA["></A>&nbsp;]]></HTML>
+        </Default>
+    </Switch>
+<HTML><![CDATA[</TD></TR></TABLE>]]></HTML>
+</PagedRecurrenceRowset>
+<ViewEmpty>
+    <HTML><![CDATA[<TABLE ID=onetidDoclibViewTbl0 Summary="]]></HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML><![CDATA[" width="100%" border=0 rules=rows><TR>]]></HTML>
+    <Fields>
+        <Switch><Expr><Property Select="Name"/></Expr>
+        <Case Value="Attachments">
+            <HTML><![CDATA[<TH class="ms-vh-icon">]]></HTML>
+            <Field/>
+            <HTML><![CDATA[</TH>]]></HTML>
+        </Case>
+        <Default>
+        <Switch>
+            <Expr><Property Select='HeaderImage'/></Expr>
+	        <Case Value=""><HTML><![CDATA[<TH class="ms-vh">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Case>
+	        <Default><HTML><![CDATA[<TH class="ms-vhImage">]]></HTML><Field/><HTML><![CDATA[</TH>]]></HTML></Default>
+        </Switch>
+        </Default>
+        </Switch>
+    </Fields>
+    <HTML><![CDATA[</TR>]]></HTML>
+    <HTML><![CDATA[</TABLE>]]></HTML>
+    <HTML><![CDATA[<TABLE width="100%" border=0 rules=rows><TR>]]></HTML>
+    <IfEqual>
+        <Expr1><GetVar Name="SearchString"/></Expr1>
+        <Expr2></Expr2>
+        <Then>
+    <HTML><![CDATA[<TD Class="ms-vb"> ]]></HTML>
+    <HTML>There are no items to show in this view of the "</HTML>
+    <ListProperty Select="Title" HTMLEncode="TRUE"/>
+    <HTML>" list.  To create a new item, click "New item" above.</HTML>
+    <HTML><![CDATA[</TD>]]></HTML>
+        </Then>
+        <Else>
+            <HTML><![CDATA[<TD class="ms-vb"><B>]]></HTML>
+            <HTML>No records were found matching your query.</HTML>
+            <HTML><![CDATA[</B></TD>]]></HTML>
+            <IfEqual>
+                <Expr1><GetVar Name="ErrorText"/></Expr1>
+                <Expr2>TRUE</Expr2>
+                <Then>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">Please see the <A HREF="javascript:HelpWindowKey('search_tips')">Search Tips</A> page for help creating your query.</TD></TR><TR>]]></HTML>
+                </Then>
+                <Else>
+                    <HTML><![CDATA[<TR><TD class="ms-descriptiontext">It may take several minutes for recent items to appear in the search results.</TD></TR><TR>]]></HTML>
+                </Else>
+            </IfEqual>
+        </Else>
+    </IfEqual>
+    <HTML><![CDATA[</TR></TABLE>]]></HTML>
+</ViewEmpty>
+		<Script>
+			g_RequiredFields[19] = new Array;
+		</Script>
+</ViewStyle>
+</ViewStyles>

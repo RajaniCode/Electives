@@ -1,0 +1,101 @@
+<!-- Copyright (c) Microsoft Corporation.  All rights reserved. -->
+<!--  -->
+<!-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, -->
+<!-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED -->
+<!-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. -->
+<!-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE -->
+<!-- AND INFORMATION REMAINS WITH THE USER. -->
+<!--  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<title></title>
+		<META CONTENT="Microsoft Visual Studio 7.0" name="GENERATOR">
+		<META CONTENT="C#" NAME="CODE_LANGUAGE">
+		<META CONTENT="JavaScript" NAME="vs_defaultClientScript">
+		<META CONTENT="http://schemas.microsoft.com/intellisense/ie5" NAME="vs_targetSchema">
+		<LINK REL="stylesheet" TYPE="text/css" HREF="default.css" ID="brma_ss">
+		<script language="jscript">
+		window.returnValue = "";
+		document.title = window.dialogArguments.Title;
+		
+		function PageLoad()
+		{		
+			// Initialize static strings
+			var oNavCtrl = document.CollapsibleCtrl;
+			//document.title = oNavCtrl.GetWebPageResourceString("str_BRMAName");
+		
+			str_ServiceInstanceAction.innerText=oNavCtrl.GetWebPageResourceString("str_ServiceInstanceAction");
+			document.all("btn_OK").value=oNavCtrl.GetWebPageResourceString("str_btn_OK");
+			document.all("btn_Cancel").value=oNavCtrl.GetWebPageResourceString("str_btn_Cancel");
+
+			oPerm = window.dialogArguments;
+			if(oPerm.Message!="")
+			{
+				txtMsg.innerText ="\n"+ oPerm.Message + "\n ";//get the Message to show
+			}
+			else
+			{
+				FormData.innerHTML=oPerm.HtmlTable;//innerHtml
+				//thisBody.innerHTML=oPerm.HtmlTable;//innerHtml
+			}
+			
+			var height;
+			var width;
+			
+			if(oPerm.Message!="")
+			{
+				height=document.body.scrollHeight+60;
+				window.dialogHeight=height+"px";
+			}
+			else
+			{
+				height=document.body.scrollHeight+30;
+				width=document.body.scrollWidth+30;
+				window.dialogHeight=height+"px";
+				window.dialogWidth=width+"px";
+			}
+		}		
+		 
+	function btnOK_onClick()
+	{
+		window.returnValue = "OK";
+		window.close();
+	}
+	
+	function btnCancel_onClick()
+	{
+		window.close();
+	}	
+	</script>
+	</HEAD>
+	<body id="thisBody" MS_POSITIONING="GridLayout" onload="PageLoad();">
+		<FORM id="form" method="post">
+			<div id="FormData">
+				<FIELDSET STYLE="font-size:85%;width:600px;margin-left:15px;margin-top:15px;">
+				<LEGEND><a id="str_ServiceInstanceAction"></a></LEGEND>
+				<DIV STYLE="padding-left:5px;">
+					<TABLE WIDTH="100%" CELLSPACING="3" CELLPADDING="1">
+					<TR>
+						<TD WIDTH="10%" align="left" ID="txtMsg"></TD>
+					</TR>
+					</TABLE>
+				</DIV>
+				</FIELDSET>
+			</div>
+			<TABLE WIDTH="100%" CELLSPACING="5" CELLPADDING="5">
+			<TR>
+				<TD ALIGN="center">
+					<INPUT TYPE="button" id="btn_OK" VALUE="" CLASS="button" ONCLICK="btnOK_onClick()" />
+					<INPUT TYPE="button" id="btn_Cancel" VALUE="" CLASS="button" ONCLICK="btnCancel_onClick()" style="DISPLAY:none;" />
+				</TD>
+			</TR>
+			</TABLE>
+			<DIV id="HelperObjectsDiv" style="DISPLAY: none">
+				<OBJECT id="CollapsibleCtrl" CLASSID="clsid:12BBC156-5455-4a61-8DC8-82F56838CB99" VIEWASTEXT>
+				</OBJECT>		
+				<A ID="SeqNumHolder">0</A>
+			</DIV>
+		</FORM>
+	</body>
+</HTML>

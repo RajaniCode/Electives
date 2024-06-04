@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Conference.Models.Comment>
+
+@*<div id="comments">
+	<ul>
+		@foreach(var comment in Model) {
+			<li>@comment.Content</li>
+		}
+	</ul>
+	@using(Ajax.BeginForm("_Submit", "Comment", new AjaxOptions() { UpdateTargetId = "comments" })) {
+		@Html.AntiForgeryToken()
+		@Html.Action("_CommentForm", new { SessionID = ViewBag.SessionID })
+	}
+</div>*@
+
+<script>
+	$(function () {
+		var commentHub = $.connection.commentHub;
+		var sessionID = '@ViewBag.SessionID';
+
+		commentHub.client.addNewComment = function (content) {
+			$("#comments-list").append("<li>" + content + "</li>");
+		};
+
+		$.connection.hub.start().done(function () {
+			commentHub.server.register(sessionID);
+
+			$("#submit").click(function () {
+				commentHub.server.addComment(sessionID, $("#content").val());
+			});
+		});
+	});
+</script>
+
+<ul id="comments-list">
+	@foreach(var comment in Model) {
+		<li>@comment.Content</li>
+	}
+</ul>
+<div>
+	<label for="Content">Content:</label>
+	<input type="text" id="content" value="" />
+	<button	type="button" id="submit">Submit Comment</button>
+</div>

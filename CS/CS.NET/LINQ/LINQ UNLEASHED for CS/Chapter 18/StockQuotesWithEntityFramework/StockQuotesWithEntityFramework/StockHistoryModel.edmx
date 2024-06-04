@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="CopyToOutputDirectory" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <edmx:ReverseEngineer />
+    <edmx:Diagrams ><Diagram Name="StockHistoryModel"><EntityTypeShape EntityType="StockHistoryModel.Company" PointX="0.875" PointY="1.375" Width="1.5" Height="1.787985026041667" IsExpanded="true" /><EntityTypeShape EntityType="StockHistoryModel.PriceHistory" PointX="3.625" PointY="0.75" Width="1.5" Height="2.5571907552083331" IsExpanded="true" /><AssociationConnector Association="StockHistoryModel.CompanyPriceHistory"><ConnectorPoint PointX="2.375" PointY="2.172841796875" /><ConnectorPoint PointX="3.625" PointY="2.172841796875" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+  <edmx:Runtime>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StockHistoryModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="StockHistoryEntities">
+          <EntitySet Name="Company" EntityType="StockHistoryModel.Company" />
+          <EntitySet Name="PriceHistory" EntityType="StockHistoryModel.PriceHistory" />
+        <AssociationSet Name="CompanyPriceHistory" Association="StockHistoryModel.CompanyPriceHistory"><End Role="Company" EntitySet="Company" /><End Role="PriceHistory" EntitySet="PriceHistory" /></AssociationSet></EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="Int32" Nullable="false" />
+          <Property Name="CompanyName" Type="String" Nullable="false" MaxLength="30" />
+          <Property Name="CompanySymbol" Type="String" Nullable="false" MaxLength="6" />
+        <NavigationProperty Name="PriceHistory" Relationship="StockHistoryModel.CompanyPriceHistory" FromRole="Company" ToRole="PriceHistory" /></EntityType>
+        <EntityType Name="PriceHistory">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+          </Key>
+          <Property Name="QuoteID" Type="Int32" Nullable="false" />
+          <Property Name="WhenRequested" Type="DateTime" Nullable="false" />
+          <Property Name="OpeningPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LastTradePrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="LastTradeTime" Type="DateTime" PreserveSeconds="false" />
+          <Property Name="CurrentPrice" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="TodaysHigh" Type="Decimal" Precision="18" Scale="2" />
+        <NavigationProperty Name="Company" Relationship="StockHistoryModel.CompanyPriceHistory" FromRole="PriceHistory" ToRole="Company" /></EntityType>
+      <Association Name="CompanyPriceHistory"><End Type="StockHistoryModel.Company" Role="Company" Multiplicity="1" /><End Type="StockHistoryModel.PriceHistory" Role="PriceHistory" Multiplicity="*" /></Association></Schema>
+    </edmx:ConceptualModels>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StockHistoryModel.Store" Alias="Self" ProviderManifestToken="09.00.3042" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="dbo">
+          <EntitySet Name="Company" EntityType="StockHistoryModel.Store.Company" />
+          <EntitySet Name="PriceHistory" EntityType="StockHistoryModel.Store.PriceHistory" />
+        </EntityContainer>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="CompanyID" />
+          </Key>
+          <Property Name="CompanyID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyName" Type="nvarchar" Nullable="false" MaxLength="30" />
+          <Property Name="CompanySymbol" Type="nvarchar" Nullable="false" MaxLength="6" />
+        </EntityType>
+        <EntityType Name="PriceHistory">
+          <Key>
+            <PropertyRef Name="QuoteID" />
+          </Key>
+          <Property Name="QuoteID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="WhenRequested" Type="datetime" Nullable="false" />
+          <Property Name="OpeningPrice" Type="decimal" Scale="2" />
+          <Property Name="LastTradePrice" Type="decimal" Scale="2" />
+          <Property Name="LastTradeTime" Type="smalldatetime" />
+          <Property Name="CurrentPrice" Type="decimal" Scale="2" />
+          <Property Name="TodaysHigh" Type="decimal" Scale="2" />
+        </EntityType>
+        <Function Name="InsertQuote" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CompanyName" Type="nvarchar" Mode="In" />
+          <Parameter Name="CompanySymbol" Type="nvarchar" Mode="In" />
+          <Parameter Name="WhenRequested" Type="datetime" Mode="In" />
+          <Parameter Name="OpeningPrice" Type="decimal" Mode="In" />
+          <Parameter Name="LastTradePrice" Type="decimal" Mode="In" />
+          <Parameter Name="LastTradeTime" Type="smalldatetime" Mode="In" />
+          <Parameter Name="CurrentPrice" Type="decimal" Mode="In" />
+          <Parameter Name="TodaysHigh" Type="decimal" Mode="In" />
+        </Function>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="dbo" CdmEntityContainer="StockHistoryEntities">
+          <EntitySetMapping Name="Company">
+            <EntityTypeMapping TypeName="IsTypeOf(StockHistoryModel.Company)">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="CompanySymbol" ColumnName="CompanySymbol" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PriceHistory">
+            <EntityTypeMapping TypeName="IsTypeOf(StockHistoryModel.PriceHistory)">
+              <MappingFragment StoreEntitySet="PriceHistory">
+                <ScalarProperty Name="QuoteID" ColumnName="QuoteID" />
+                <ScalarProperty Name="WhenRequested" ColumnName="WhenRequested" />
+                <ScalarProperty Name="OpeningPrice" ColumnName="OpeningPrice" />
+                <ScalarProperty Name="LastTradePrice" ColumnName="LastTradePrice" />
+                <ScalarProperty Name="LastTradeTime" ColumnName="LastTradeTime" />
+                <ScalarProperty Name="CurrentPrice" ColumnName="CurrentPrice" />
+                <ScalarProperty Name="TodaysHigh" ColumnName="TodaysHigh" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        <AssociationSetMapping Name="CompanyPriceHistory" TypeName="StockHistoryModel.CompanyPriceHistory" StoreEntitySet="PriceHistory"><EndProperty Name="PriceHistory"><ScalarProperty Name="QuoteID" ColumnName="QuoteID" /></EndProperty><EndProperty Name="Company"><ScalarProperty Name="CompanyID" ColumnName="CompanyID" /></EndProperty></AssociationSetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+</edmx:Edmx>

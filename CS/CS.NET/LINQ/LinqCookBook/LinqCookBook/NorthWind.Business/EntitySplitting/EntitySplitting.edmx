@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ESModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="ESModelStoreContainer">
+          <EntitySet Name="ClubMember" EntityType="ESModel.Store.ClubMember" store:Type="Tables" Schema="tpt" />
+          <EntitySet Name="Customer" EntityType="ESModel.Store.Customer" store:Type="Tables" Schema="tpt" />
+          <EntitySet Name="CustomerAccount" EntityType="ESModel.Store.CustomerAccount" store:Type="Tables" Schema="tpt" />
+          <AssociationSet Name="FK_ClubMember_Customer" Association="ESModel.Store.FK_ClubMember_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="ClubMember" EntitySet="ClubMember" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerAccount_Customer" Association="ESModel.Store.FK_CustomerAccount_Customer">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="CustomerAccount" EntitySet="CustomerAccount" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ClubMember">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="ClubName" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="Dues" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="CustomerAccount">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="int" Nullable="false" />
+          <Property Name="AccountNo" Type="varchar" Nullable="false" MaxLength="50" />
+          <Property Name="AccountBalance" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_ClubMember_Customer">
+          <End Role="Customer" Type="ESModel.Store.Customer" Multiplicity="1" />
+          <End Role="ClubMember" Type="ESModel.Store.ClubMember" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="ClubMember">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerAccount_Customer">
+          <End Role="Customer" Type="ESModel.Store.Customer" Multiplicity="1" />
+          <End Role="CustomerAccount" Type="ESModel.Store.CustomerAccount" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="CustomerId" />
+            </Principal>
+            <Dependent Role="CustomerAccount">
+              <PropertyRef Name="CustomerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ESModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="ESEntities">
+          <EntitySet Name="Customers" EntityType="ESModel.Customer" />
+        </EntityContainer>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="CustomerId" />
+          </Key>
+          <Property Name="CustomerId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="AccountNo" Type="String" Nullable="false" />
+          <Property Name="AccountBalance" Type="Int32" Nullable="false" />
+          <Property Name="ClubName" Type="String" Nullable="false" />
+          <Property Name="Dues" Type="Int32" Nullable="false" /></EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="ESModelStoreContainer" CdmEntityContainer="ESEntities">
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="IsTypeOf(ESModel.Customer)">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+              <MappingFragment StoreEntitySet="ClubMember">
+                <ScalarProperty Name="Dues" ColumnName="Dues" />
+                <ScalarProperty Name="ClubName" ColumnName="ClubName" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+                </MappingFragment>
+              <MappingFragment StoreEntitySet="CustomerAccount">
+                <ScalarProperty Name="AccountBalance" ColumnName="AccountBalance" />
+                <ScalarProperty Name="AccountNo" ColumnName="AccountNo" />
+                <ScalarProperty Name="CustomerId" ColumnName="CustomerId" /></MappingFragment></EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="EntitySplitting">
+        <EntityTypeShape EntityType="ESModel.Customer" Width="1.5" PointX="3.375" PointY="1.125" Height="1.9210009765624996" IsExpanded="true" />
+        </Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

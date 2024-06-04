@@ -1,0 +1,263 @@
+﻿<HTML>
+<HEAD>
+<TITLE ID='L_SiteTermSel_DialogTitle'>Site Term Selection</TITLE>
+<META HTTP-EQUIV='Content-Type' CONTENT='text/html; charset=utf-8'>
+<LINK REL='stylesheet' TYPE='text/css' HREF='/widgets/bizdesk.css' ID='mainstylesheet'>
+
+<STYLE>
+TABLE
+{
+    margin:0px;padding:0px
+}
+
+TR
+{
+    margin:0px;padding:0px
+}
+
+TD
+{
+    margin:0px;padding:0px
+}
+</STYLE>
+
+<SCRIPT LANGUAGE='VBScript'>
+Option Explicit
+
+' Profile-Schema XML tag-names
+
+Const gc_sDocument  = "Document"
+Const gc_sCatalog   = "Catalog"
+Const gc_sProfile   = "Profile"
+Const gc_sGroup     = "Group"
+Const gc_sProperty  = "Property"
+Const gc_sAttribute = "Attribute"
+
+Dim g_xmlSiteTermsDoc
+Dim g_strSiteTermPath
+Dim g_strRetVal
+Dim g_strHelpPath
+Dim winHelpWindow
+
+'----------------------------------------------------------------------------
+' initDialog
+'
+' Description:
+'     Sets up the dialog with the appropriate display info given the
+'     passed-in arguments.
+'----------------------------------------------------------------------------
+Sub initDialog()
+
+    Dim elXML
+    Dim sdArgs
+    Dim btnHelp
+
+    g_strSiteTermPath = Null
+    g_strRetVal = ""
+    g_strHelpPath = ""
+
+    ' Add XML islands
+    Set elXML = document.createElement("XML")
+      document.body.insertAdjacentElement "beforeEnd", elXML
+      elXML.id = "xmlisSiteTermDoc"
+
+    Set elXML = document.createElement("XML")
+      document.body.insertAdjacentElement "beforeEnd", elXML
+      elXML.id = "xmlisSiteTermView"
+      elXML.XMLDocument.loadXML "<?xml version='1.0'?>" & _
+        "<xsl:stylesheet xmlns:xsl=""http://www.w3.org/TR/WD-xsl"">" &_
+          "<xsl:template match=""/"">" &_
+            "<xsl:apply-templates select=""//Profile"" />" &_
+          "</xsl:template>" &_
+          "<xsl:template match=""Profile"">" &_
+            "<DIV ID='xvRoot'>" &_
+              "<xsl:apply-templates />" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+          "<xsl:template match=""Group[not(@isDeleted) || @isDeleted != '1']"">" &_
+            "<DIV CLASS='clsXVGroupNoSel' TABINDEX='0'>" &_
+              "<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+              "<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" /></xsl:attribute>" &_
+              "<NOBR>" &_
+              "<SPAN ID='xvMarker'>4</SPAN>" &_
+              "<xsl:value-of select=""@displayName"" />" &_
+              "</NOBR>" &_
+              "<DIV ID='xvGroup' CLASS='clsXVClosed'>" &_
+                "<xsl:apply-templates />" &_
+              "</DIV>" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+          "<xsl:template match=""Property[not(@isDeleted) || @isDeleted != '1']"">" &_
+            "<DIV CLASS='clsXVItem' TABINDEX='0'>" &_
+              "<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+              "<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" /></xsl:attribute>" &_
+              "<NOBR>" &_
+              "<SPAN ID='xvMarker'><xsl:comment>foo</xsl:comment></SPAN>" &_
+              "<xsl:value-of select=""@displayName"" />" &_
+              "</NOBR>" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+        "</xsl:stylesheet>"
+
+    Set elXML = document.createElement("XML")
+      document.body.insertAdjacentElement "beforeEnd", elXML
+      elXML.id = "xmlisSTValueView"
+      elXML.XMLDocument.loadXML "<?xml version='1.0'?>" & _
+        "<xsl:stylesheet xmlns:xsl=""http://www.w3.org/TR/WD-xsl"">" &_
+          "<!-- PropDef elements -->" &_
+          "<xsl:template match=""Property"">" &_
+            "<xsl:apply-templates />" &_
+          "</xsl:template>" &_
+          "<!-- Attribute elements -->" &_
+          "<xsl:template match=""Attribute"">" &_
+            "<DIV>" &_
+              "<xsl:attribute name=""ID""><xsl:value-of select=""@name"" /></xsl:attribute>" &_
+              "<xsl:attribute name=""TITLE""><xsl:value-of select=""@description"" /></xsl:attribute>" &_
+              "<xsl:value-of select=""@displayName"" />" &_
+            "</DIV>" &_
+          "</xsl:template>" &_
+        "</xsl:stylesheet>"
+
+
+    ' Process the input arguments.
+    Set sdArgs = window.dialogArguments
+    g_strRetVal = ""
+    g_strHelpPath = ""
+    Set g_xmlSiteTermsDoc = sdArgs.Item("siteTermsDoc")
+    
+    g_strHelpPath = sdArgs.Item("helpPath")
+    If g_strHelpPath = "" Then
+        ' Hide the help button
+        Set btnHelp = L_Help_Button
+        btnHelp.style.display = "none"
+    Else
+        ' Complete help path
+        g_strHelpPath = g_strHelpPath & "docs/default.asp?helptopic=cs_ft_usersgrps_VMGZ.htm"
+    End If
+
+    xmlisSiteTermDoc.XMLDocument.loadXML g_xmlSiteTermsDoc.xml
+    divSiteTerms.addBehavior "/widgets/profilebldrHTC/XMLView.htc"
+
+    ' This is such a dirty trick -- resizeTo won't work, though.
+    window.dialogWidth = CStr(document.body.scrollWidth + 28) & "px"
+    window.dialogHeight = CStr(document.body.scrollHeight + 28) & "px"
+End Sub
+
+
+Sub SelectionHandler()
+    Dim rgstrItemPaths
+    Dim xmlItem
+    Dim elButton
+    
+    ' Initially disable OK button and clear the current selected item.
+    Set elButton = L_OK_Button
+    elButton.disabled = True
+    g_strSiteTermPath = Null
+    divSiteTermValues.innerHTML = ""
+
+    If divSiteTerms.GetSelectedCount() = 1 Then
+        ' Find out what is selected.
+        rgstrItemPaths = divSiteTerms.GetSelectedItems()
+        Set xmlItem = getItemXMLFromPath(rgstrItemPaths(0))
+
+        ' If the selected item is a property, we can use it.
+        If xmlItem.tagName = gc_sProperty Then
+            ' Update the current selection.
+            g_strSiteTermPath = rgstrItemPaths(0)
+
+            ' Update the value-list from the current selection.
+            divSiteTermValues.innerHTML = xmlItem.transformNode(xmlisSTValueView.XMLDocument)
+
+            ' Enable/focus OK button, since something good is selected.
+            elButton.disabled = False
+            Call elButton.focus()
+        End If
+    End If
+End Sub
+
+
+Function getItemXMLFromPath(strItemPath)
+    Dim xmlItem
+    Dim rgstrPathParts
+    Dim i
+    Dim strXSL
+
+    rgstrPathParts = Split(strItemPath, ".")
+
+    strXSL = gc_sDocument & "/" & gc_sCatalog & "/" & gc_sProfile
+    For i = 0 To UBound(rgstrPathParts)
+        strXSL = strXSL & "/*[@name='" & rgstrPathParts(i) & "']"
+    Next
+    Set xmlItem = g_xmlSiteTermsDoc.selectSingleNode(strXSL)
+
+    Set getItemXMLFromPath = xmlItem
+End Function
+
+
+' Handler for "OK" button onClick event.  Causes window to fire the
+' onUnload event.
+Sub onOKBtnClicked()
+    g_strRetVal = g_strSiteTermPath
+    window.close
+End Sub
+
+
+' Handler for "Cancel" button onClick event.  Causes window to fire the
+' onUnload event.
+Sub onCancelBtnClicked()
+    window.close
+End Sub
+
+Sub onHelpBtnClicked()
+    if typename(winHelpWindow) = "HTMLWindow2" then winHelpWindow.close
+		set winHelpWindow = window.open(g_strHelpPath, "winHelpWindow", _
+						 "height=500,width=700,status=no,toolbar=yes,menubar:no,resizable=yes")
+End Sub
+
+
+' Handler for the window's onUnload event.
+Sub closeDialog()
+    window.returnValue = g_strRetVal
+End Sub
+
+</SCRIPT>
+
+</HEAD>
+
+<BODY STYLE="PADDING-RIGHT: 16px; PADDING-LEFT: 16px; PADDING-BOTTOM: 16px; MARGIN: 0px; OVERFLOW: hidden; PADDING-TOP: 16px" onload='initDialog()' onunload='closeDialog()'>
+
+<TABLE STYLE="WIDTH: 500px; HEIGHT: 300px">
+    <TR STYLE="HEIGHT: 20px">
+        <TD ID='L_SiteTermSel_Text' STYLE="WIDTH: 200px">Select a Site Term:</TD>
+        <TD ID='L_STListHeader_Text' STYLE="WIDTH: 300px" 
+   >Values:</TD>
+    </TR>
+    <TR>
+        <TD STYLE="WIDTH: 200px">
+            <DIV ID='divSiteTerms' STYLE="BORDER-RIGHT: 2px inset; BORDER-TOP: 2px inset; OVERFLOW: auto;
+                BORDER-LEFT: 2px inset; WIDTH: 200px; BORDER-BOTTOM: 2px inset; HEIGHT: 100%; BACKGROUND-COLOR: white" 
+                TABINDEX ="0" 
+                noWrap 
+				onDeselectItem="SelectionHandler()" 
+				onSelectItem="SelectionHandler()" 
+				XSLViewID="xmlisSiteTermView" 
+				XMLDataID="xmlisSiteTermDoc">
+                <H4 ID='L_SiteTermLoad_Text' ALIGN='center'>Loading Site-Terms, please wait...</H4>
+            </DIV>
+        </TD>
+        <TD STYLE="WIDTH: 300px">
+            <DIV ID='divSiteTermValues' STYLE="BORDER-RIGHT: 2px inset; BORDER-TOP: 2px inset; OVERFLOW: auto; BORDER-LEFT: 2px inset; WIDTH: 300px; BORDER-BOTTOM: 2px inset; HEIGHT: 100%" 
+				noWrap>
+            </DIV>
+        </TD>
+    </TR>
+</TABLE>
+
+<DIV ALIGN='right' STYLE="PADDING-TOP: 16px">
+<BUTTON ID='L_OK_Button' DISABLED onclick='onOKBtnClicked()' STYLE="WIDTH: 80px" TABINDEX=1>OK</BUTTON>
+<BUTTON ID='L_Cancel_Button' onclick='onCancelBtnClicked()' STYLE="WIDTH: 80px" TABINDEX=1>Cancel</BUTTON> 
+<BUTTON id=L_Help_Button style="WIDTH: 80px" onclick=onHelpBtnClicked() tabIndex=1>Help</BUTTON>
+</DIV>
+
+</BODY>
+</HTML>

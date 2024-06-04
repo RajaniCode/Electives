@@ -1,0 +1,170 @@
+<!-- Copyright (c) Microsoft Corporation. All rights reserved. -->
+<!--  -->
+<!-- THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, -->
+<!-- WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED -->
+<!-- WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. -->
+<!-- THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE -->
+<!-- AND INFORMATION REMAINS WITH THE USER. -->
+<!--  -->
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" >
+<HTML>
+	<HEAD>
+		<link rel="Configuration" href="HATcfg.xml"/>
+		<TITLE>
+			Policy Execution Details: Rule Firings
+		</TITLE>
+		<META CONTENT="Microsoft Visual Studio 7.0" name="GENERATOR">
+		<META CONTENT="C#" NAME="CODE_LANGUAGE">
+		<META CONTENT="JavaScript" NAME="vs_defaultClientScript">
+		<META CONTENT="http://schemas.microsoft.com/intellisense/ie5" NAME="vs_targetSchema">
+		<LINK REL="stylesheet" TYPE="text/css" HREF="default.css" ID="brma_ss">
+		<script language="jscript">
+		var oRulesTrackingViewCtrl, SqlSrv, SqlDB, Group, AppType, FiredRules;
+		var ErrMsg="";
+		var ControlsInstalled = false;
+		
+		function PageLoad()
+		{
+			var oNavCtrl = document.CollapsibleCtrl;
+
+			SqlSrv 	= oNavCtrl.GetViewParameter("sqlSrv"); 
+			SqlDB 	= oNavCtrl.GetViewParameter("sqlDB"); 
+			Group 	= oNavCtrl.GetViewParameter("group");
+			AppType	= oNavCtrl.GetViewParameter("AppType");
+			FiredRules = oNavCtrl.GetViewParameter("bFiredRules");
+							
+			try
+			{
+				re_toa_PolicyExecutionDetails.innerText = oNavCtrl.GetWebPageResourceString("re_toa_PolicyExecutionDetails");
+				re_toa_ScheduleInstanceID.innerText = oNavCtrl.GetWebPageResourceString("re_toa_ScheduleInstanceID");
+				re_toa_ExecTimestamp.innerText = oNavCtrl.GetWebPageResourceString("re_toa_ExecTimestamp");
+				re_toa_PolicyID.innerText = oNavCtrl.GetWebPageResourceString("re_toa_PolicyID");
+				re_toa_RuleID.innerText = oNavCtrl.GetWebPageResourceString("re_toa_RuleID");
+				re_toa_RuleName.innerText = oNavCtrl.GetWebPageResourceString("re_toa_RuleName");
+
+				oRulesTrackingViewCtrl = document.all("Registered");
+				oRulesTrackingViewCtrl.setAllValues(oNavCtrl.EncodeForUrl(SqlSrv),oNavCtrl.EncodeForUrl(SqlDB), "","", "","", oNavCtrl.EncodeForUrl(Group),oNavCtrl.EncodeForUrl(AppType), "","");
+				re_toa_ServiceName.innerText = oNavCtrl.GetWebPageResourceString("re_toa_ServiceName");
+				m_sResServiceName.innerText = oRulesTrackingViewCtrl.GetServiceNameByInstance(oNavCtrl.GetViewParameter("inst"));
+			}
+			catch(e)
+			{
+				var sErrMsg = oNavCtrl.GetWebPageResourceString("err_GenericError") + "\n";
+				sErrMsg += e.description;
+				alert(sErrMsg);
+			}
+			
+			m_sResInstanceID.innerText = oRulesTrackingViewCtrl.DecodeForDisplay(oNavCtrl.GetViewParameter("inst"));
+			m_sExecTimestamp.innerText = oRulesTrackingViewCtrl.DecodeForDisplay(oNavCtrl.GetViewParameter("ExecTime"));
+			m_sPolicyID.innerText = oRulesTrackingViewCtrl.DecodeForDisplay(oNavCtrl.GetViewParameter("PolicyID"));
+
+			var strLink = "RulesDefnDetails.htm?SqlSrv=" + oNavCtrl.EncodeForUrl(SqlSrv) + "&SqlDB=" + oNavCtrl.EncodeForUrl(SqlDB);
+			strLink += "&Group=&AppType=&inst=" + oNavCtrl.GetViewParameter("inst");
+			strLink += "&PolicyID=" + oNavCtrl.GetViewParameter("PolicyID");
+			
+			if (FiredRules == "true")
+			{
+				m_sRuleTypeHeader.innerText = oNavCtrl.GetWebPageResourceString("re_toa_RulesThatFired");
+				oRulesTrackingViewCtrl.SetRulesFiredForPolicyEngineAssociation(oNavCtrl.GetViewParameter("AssocID"));
+				var firedRulesIDList = oRulesTrackingViewCtrl.FiredRulesIDList;
+				var firedRulesNameList = oRulesTrackingViewCtrl.FiredRulesNameList;
+				//var firedRulesStrList = oRulesTrackingViewCtrl.FiredRulesStrList;
+				var firedRulesTimeList = oRulesTrackingViewCtrl.FiredRulesTimeList;	
+				for (j=0; j<firedRulesNameList.Count; j++)
+				{
+					tBody.insertRow(tBody.childNodes.length);
+					var oRow = tBody.childNodes(tBody.childNodes.length-1);
+					
+					for(i=0;i<2;i++)
+					{
+						oRow.insertCell();
+						oRow.childNodes(i).className = "toaMsgRow";
+					}
+					oRow.childNodes(0).innerText 	= j;
+					oRow.childNodes(1).innerText 	= oRulesTrackingViewCtrl.DecodeForDisplay(firedRulesNameList(j));
+					var sLink = strLink + "&RuleID=" + firedRulesIDList(j);
+					oRow.childNodes(1).innerHTML	=  "<A HREF='" + sLink + "'>" + oRulesTrackingViewCtrl.EncodeForDisplay(firedRulesNameList(j)) + "</A>";	
+				}
+			}
+			else
+			{
+				m_sRuleTypeHeader.innerText = oNavCtrl.GetWebPageResourceString("re_toa_RulesThatDidNotFire");
+				oRulesTrackingViewCtrl.SetRulesNotFiredForPolicyEngineAssociation(oNavCtrl.GetViewParameter("AssocID"));
+				var notFiredRulesIDList = oRulesTrackingViewCtrl.NotFiredRulesIDList;
+				var notFiredRulesNameList = oRulesTrackingViewCtrl.NotFiredRulesNameList;
+				var notFiredRulesStrList = oRulesTrackingViewCtrl.NotFiredRulesStrList;
+				for (j=0; j<notFiredRulesNameList.Count; j++)
+				{
+					tBody.insertRow(tBody.childNodes.length);
+					var oRow = tBody.childNodes(tBody.childNodes.length-1);
+					
+					for(i=0;i<2;i++)
+					{
+						oRow.insertCell();
+						oRow.childNodes(i).className = "toaMsgRow";
+					}
+					oRow.childNodes(0).innerText 	= j;
+					oRow.childNodes(1).innerText 	= oRulesTrackingViewCtrl.DecodeForDisplay(notFiredRulesNameList(j));
+					var sLink = strLink + "&RuleID=" + notFiredRulesIDList(j);
+					oRow.childNodes(1).innerHTML	=  "<A HREF='" + sLink + "'>" + oRulesTrackingViewCtrl.EncodeForDisplay(notFiredRulesNameList(j)) + "</A>";	
+				}
+			}
+		}
+		
+		</script>
+	</HEAD>
+	<body MS_POSITIONING="GridLayout" bgColor="#ffffff" onload="PageLoad();">
+		<FORM ID="RulesTrackingTOA" METHOD="post" RUNAT="server">
+			<!-- buttons for communication between Hat Application and IE. -->
+			<INPUT type="button" ID="HelpBtn" style="DISPLAY:none;" onclick='ShowPageHelp();'>
+
+			<TABLE STYLE="padding-left:5;margin-top:15;width:*;" CELLSPACING="0" CELLPADDING="0">
+				<TR>
+					<TD STYLE="width:*;"><B><A id="re_toa_PolicyExecutionDetails"/></B></TD>
+				</TR>
+			</TABLE>
+			<TABLE STYLE="padding-left:5;margin-top:15;width:*;" CELLSPACING="0" CELLPADDING="0">
+				<TR>
+					<TD><A id="re_toa_ServiceName"/></TD>
+					<TD><A ID="m_sResServiceName"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A id="re_toa_ScheduleInstanceID"/></TD>
+					<TD><A ID="m_sResInstanceID"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A id="re_toa_ExecTimestamp"/></TD>
+					<TD><A ID="m_sExecTimestamp"></A>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD><A id="re_toa_PolicyID"/></TD>
+					<TD><A ID="m_sPolicyID"></A>&nbsp;</TD>
+				</TR>
+			</TABLE>
+			<TABLE STYLE="padding-left:5;margin-top:15;width:*;" CELLSPACING="0" CELLPADDING="0">
+				<TR>
+					<TD><B><A ID="m_sRuleTypeHeader"></A></B>&nbsp;</TD>
+				</TR>
+				<TR>
+					<TD>&nbsp;</TD>
+				</TR>
+			</TABLE>
+			<TABLE CLASS="toaRulesExecution" CELLSPACING="0">
+				<TBODY ID="tBody">
+					<TD CLASS="toaMsgHeader" WIDTH="30%"><A id="re_toa_RuleID"/></TD>
+					<TD CLASS="toaMsgHeader" WIDTH="70%"><A id="re_toa_RuleName"/></TD>
+				</TBODY>
+			</TABLE>	
+			<DIV id="RulesTrackingViewCtrl" style="DISPLAY:none">
+				<OBJECT ID="Registered" CLASSID="clsid:DC615974-9A2E-4efe-B032-9AA9B172E0E9" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="Help" classid="clsid:DAC40761-C9C8-4653-AB49-C4D4AE4FF042" VIEWASTEXT>
+				</OBJECT>
+				
+				<OBJECT id="CollapsibleCtrl" CLASSID="clsid:12BBC156-5455-4a61-8DC8-82F56838CB99" VIEWASTEXT>
+				</OBJECT>		
+			</DIV>
+		</FORM>
+	</body>
+</HTML>

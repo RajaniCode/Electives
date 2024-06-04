@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="QueryViewWithManyToMany.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2006/04/edm/ssdl">
+        <EntityContainer Name="QueryViewWithManyToManyStoreContainer">
+          <EntitySet Name="Actors" EntityType="QueryViewWithManyToMany.Store.Actors" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Clubs" EntityType="QueryViewWithManyToMany.Store.Clubs" store:Type="Tables" Schema="QueryView" />
+          <EntitySet Name="Members" EntityType="QueryViewWithManyToMany.Store.Members" store:Type="Tables" Schema="QueryView" />
+          <EntitySet Name="Membership" EntityType="QueryViewWithManyToMany.Store.Membership" store:Type="Tables" Schema="QueryView" />
+          <AssociationSet Name="FK_Membership_Clubs" Association="QueryViewWithManyToMany.Store.FK_Membership_Clubs">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Membership" EntitySet="Membership" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Membership_Members" Association="QueryViewWithManyToMany.Store.FK_Membership_Members">
+            <End Role="Members" EntitySet="Members" />
+            <End Role="Membership" EntitySet="Membership" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ActorId" />
+          </Key>
+          <Property Name="ActorId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Clubs">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClubName" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Members">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Membership">
+          <Key>
+            <PropertyRef Name="ClubId" />
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="ClubId" Type="int" Nullable="false" />
+          <Property Name="MemberId" Type="int" Nullable="false" />
+          <Property Name="MemberShipType" Type="char" Nullable="false" MaxLength="1" />
+        </EntityType>
+		<Function Name="InsertClub"   IsComposable="false"  Schema="dbo">
+			<CommandText>
+				insert into QueryView.Clubs(ClubName) values (@ClubName)
+				select SCOPE_IDENTITY() as ClubId
+			</CommandText>
+			<Parameter Name="ClubName" Type="varchar" Mode="In" />
+		</Function>
+		<Function Name="UpdateClub"   IsComposable="false"  Schema="dbo">
+			<CommandText>
+				update QueryView.Clubs set ClubName = @ClubName
+			</CommandText>
+			<Parameter Name="ClubName" Type="varchar" Mode="In" />
+			<Parameter Name="ClubId" Type="int" Mode="In" />
+		</Function>
+		<Function Name="DeleteClub"   IsComposable="false"  Schema="dbo">
+			<CommandText>
+				delete QueryView.Clubs where ClubId = @ClubId
+			</CommandText>
+			<Parameter Name="ClubId" Type="int" Mode="In" />
+		</Function>
+		<Function Name="InsertMember"   IsComposable="false"  Schema="dbo">
+			<CommandText>
+				insert into QueryView.Members(Name) values (@Name)
+				select SCOPE_IDENTITY() as MemberId
+			</CommandText>
+			<Parameter Name="Name" Type="varchar" Mode="In" />
+		</Function>
+		<Function Name="UpdateMember"   IsComposable="false"  Schema="dbo">
+			<CommandText>
+				update QueryView.Members set Name = @Name
+			</CommandText>
+			<Parameter Name="Name" Type="varchar" Mode="In" />
+			<Parameter Name="MemberId" Type="int" Mode="In" />
+		</Function>
+		<Function Name="DeleteMember"   IsComposable="false"  Schema="dbo">
+			<CommandText>
+				delete QueryView.Members where MemberId = @MemberId
+			</CommandText>
+			<Parameter Name="MemberId" Type="int" Mode="In" />
+		</Function>
+		<Function Name="InsertGoldMembership" IsComposable="false" Schema="dbo">
+			<CommandText>
+				insert into QueryView.Membership values (@ClubId,@MemberId,'G')
+			</CommandText>
+			<Parameter Name="ClubId" Type="int" Mode="In" />
+			<Parameter Name="MemberId" Type="int" Mode="In" />
+		</Function>
+		<Function Name="DeleteMembership" IsComposable="false" Schema="dbo">
+			<CommandText>
+				delete QueryView.Membership where ClubId = @ClubId and MemberId = @MemberId
+			</CommandText>
+			<Parameter Name="ClubId" Type="int" />
+			<Parameter Name="MemberId" Type="int" />
+		</Function>
+		<Function Name="InsertPlatiniumMembership" IsComposable="false" Schema="dbo">
+			<CommandText>
+				insert into QueryView.Membership values (@ClubId,@MemberId,'P')
+			</CommandText>
+			<Parameter Name="ClubId" Type="int" Mode="In" />
+			<Parameter Name="MemberId" Type="int" Mode="In" />
+		</Function>
+		
+        <Association Name="FK_Membership_Clubs">
+          <End Role="Clubs" Type="QueryViewWithManyToMany.Store.Clubs" Multiplicity="1" />
+          <End Role="Membership" Type="QueryViewWithManyToMany.Store.Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clubs">
+              <PropertyRef Name="ClubId" />
+            </Principal>
+            <Dependent Role="Membership">
+              <PropertyRef Name="ClubId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Membership_Members">
+          <End Role="Members" Type="QueryViewWithManyToMany.Store.Members" Multiplicity="1" />
+          <End Role="Membership" Type="QueryViewWithManyToMany.Store.Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Members">
+              <PropertyRef Name="MemberId" />
+            </Principal>
+            <Dependent Role="Membership">
+              <PropertyRef Name="MemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="QueryViewWithManyToMany" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2006/04/edm">
+        <EntityContainer Name="QueryViewMM">
+          <EntitySet Name="Clubs" EntityType="QueryViewWithManyToMany.Club" />
+          <EntitySet Name="Members" EntityType="QueryViewWithManyToMany.Member" />
+          <AssociationSet Name="Gold" Association="QueryViewWithManyToMany.Gold">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Members" EntitySet="Members" /></AssociationSet>
+          <AssociationSet Name="Platinium" Association="QueryViewWithManyToMany.Platinium">
+            <End Role="Clubs" EntitySet="Clubs" />
+            <End Role="Members" EntitySet="Members" /></AssociationSet>
+          <EntitySet Name="Actors" EntityType="QueryViewWithManyToMany.Actors" /></EntityContainer>
+        <EntityType Name="Club">
+          <Key>
+            <PropertyRef Name="ClubId" />
+          </Key>
+          <Property Name="ClubId" Type="Int32" Nullable="false" />
+          <Property Name="ClubName" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="GoldMembers" Relationship="QueryViewWithManyToMany.Gold" FromRole="Clubs" ToRole="Members" />
+          <NavigationProperty Name="PlatiniumMembers" Relationship="QueryViewWithManyToMany.Platinium" FromRole="Clubs" ToRole="Members" /></EntityType>
+        <EntityType Name="Member">
+          <Key>
+            <PropertyRef Name="MemberId" />
+          </Key>
+          <Property Name="MemberId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="GoldClubs" Relationship="QueryViewWithManyToMany.Gold" FromRole="Members" ToRole="Clubs" />
+          <NavigationProperty Name="PlatiniumClubs" Relationship="QueryViewWithManyToMany.Platinium" FromRole="Members" ToRole="Clubs" /></EntityType>
+        <Association Name="Gold">
+          <End Type="QueryViewWithManyToMany.Club" Role="Clubs" Multiplicity="*" />
+          <End Type="QueryViewWithManyToMany.Member" Role="Members" Multiplicity="*" /></Association>
+        <Association Name="Platinium">
+          <End Type="QueryViewWithManyToMany.Club" Role="Clubs" Multiplicity="*" />
+          <End Type="QueryViewWithManyToMany.Member" Role="Members" Multiplicity="*" /></Association>
+        <EntityType Name="Actors">
+          <Key>
+            <PropertyRef Name="ActorId" /></Key>
+          <Property Name="ActorId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" /></EntityType></Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="urn:schemas-microsoft-com:windows:storage:mapping:CS">
+        <EntityContainerMapping StorageEntityContainer="QueryViewWithManyToManyStoreContainer" CdmEntityContainer="QueryViewMM">
+			<EntitySetMapping Name="Clubs">
+				<QueryView>
+					select value QueryViewWithManyToMany.Club(c.ClubId,c.ClubName)
+					from QueryViewWithManyToManyStoreContainer.Clubs as c
+				</QueryView>
+				<EntityTypeMapping TypeName="QueryViewWithManyToMany.Club">
+					<ModificationFunctionMapping>
+						<InsertFunction FunctionName="QueryViewWithManyToMany.Store.InsertClub">
+							<ScalarProperty Name="ClubName" ParameterName="ClubName" />
+							<ResultBinding Name="ClubId"  ColumnName="ClubId" />
+						</InsertFunction>
+						<UpdateFunction FunctionName="QueryViewWithManyToMany.Store.UpdateClub">
+							<ScalarProperty Name="ClubName" ParameterName="ClubName" Version="Current"/>
+							<ScalarProperty Name="ClubId" ParameterName="ClubId" Version="Current"/>
+						</UpdateFunction>
+						<DeleteFunction FunctionName="QueryViewWithManyToMany.Store.DeleteClub">
+							<ScalarProperty Name="ClubId" ParameterName="ClubId" />
+						</DeleteFunction>
+					</ModificationFunctionMapping>
+				</EntityTypeMapping>
+			</EntitySetMapping>
+			<EntitySetMapping Name="Members">
+				<QueryView>
+					select value QueryViewWithManyToMany.Member(m.MemberId,m.Name)
+					from QueryViewWithManyToManyStoreContainer.Members as m
+				</QueryView>
+				<EntityTypeMapping TypeName="QueryViewWithManyToMany.Member">
+					<ModificationFunctionMapping>
+						<InsertFunction FunctionName="QueryViewWithManyToMany.Store.InsertMember">
+							<ScalarProperty Name="Name" ParameterName="Name" />
+							<ResultBinding Name="MemberId"  ColumnName="MemberId" />
+						</InsertFunction>
+						<UpdateFunction FunctionName="QueryViewWithManyToMany.Store.UpdateMember">
+							<ScalarProperty Name="Name" ParameterName="Name" Version="Current"/>
+							<ScalarProperty Name="MemberId" ParameterName="MemberId" Version="Current"/>
+						</UpdateFunction>
+						<DeleteFunction FunctionName="QueryViewWithManyToMany.Store.DeleteMember">
+							<ScalarProperty Name="MemberId" ParameterName="MemberId" />
+						</DeleteFunction>
+					</ModificationFunctionMapping>
+				</EntityTypeMapping>
+			</EntitySetMapping>
+			<AssociationSetMapping TypeName="QueryViewWithManyToMany.Gold" Name="Gold">
+				<QueryView >
+					select value QueryViewWithManyToMany.Gold(
+					createref(QueryViewMM.Clubs,row(m.ClubId)),
+					createref(QueryViewMM.Members,row(m.MemberId))
+					)
+					from QueryViewWithManyToManyStoreContainer.Membership as m
+					where m.MemberShipType = 'G'
+				</QueryView>
+				<ModificationFunctionMapping>
+					<InsertFunction FunctionName="QueryViewWithManyToMany.Store.InsertGoldMembership">
+						<EndProperty Name="Clubs">
+							<ScalarProperty Name="ClubId" ParameterName="ClubId"/>
+						</EndProperty>
+						<EndProperty Name="Members">
+							<ScalarProperty Name="MemberId" ParameterName="MemberId" />
+						</EndProperty>
+					</InsertFunction>
+					<DeleteFunction FunctionName="QueryViewWithManyToMany.Store.DeleteMembership">
+						<EndProperty Name="Clubs">
+							<ScalarProperty Name="ClubId" ParameterName="ClubId"/>
+						</EndProperty>
+						<EndProperty Name="Members">
+							<ScalarProperty Name="MemberId" ParameterName="MemberId" />
+						</EndProperty>
+					</DeleteFunction>
+				</ModificationFunctionMapping>
+			</AssociationSetMapping>
+			<AssociationSetMapping TypeName="QueryViewWithManyToMany.Platinium" Name="Platinium">
+				<QueryView>
+					select value QueryViewWithManyToMany.Platinium(
+					createref(QueryViewMM.Clubs,row(m.ClubId)),
+					createref(QueryViewMM.Members,row(m.MemberId))
+					)
+					from QueryViewWithManyToManyStoreContainer.Membership as m
+					where m.MemberShipType = 'P'
+				</QueryView>
+				<ModificationFunctionMapping>
+					<InsertFunction FunctionName="QueryViewWithManyToMany.Store.InsertPlatiniumMembership">
+						<EndProperty Name="Clubs">
+							<ScalarProperty Name="ClubId" ParameterName="ClubId"/>
+						</EndProperty>
+						<EndProperty Name="Members">
+							<ScalarProperty Name="MemberId" ParameterName="MemberId" />
+						</EndProperty>
+					</InsertFunction>
+					<DeleteFunction FunctionName="QueryViewWithManyToMany.Store.DeleteMembership">
+						<EndProperty Name="Clubs">
+							<ScalarProperty Name="ClubId" ParameterName="ClubId"/>
+						</EndProperty>
+						<EndProperty Name="Members">
+							<ScalarProperty Name="MemberId" ParameterName="MemberId" />
+						</EndProperty>
+					</DeleteFunction>
+				</ModificationFunctionMapping>
+			</AssociationSetMapping>
+          <EntitySetMapping Name="Actors">
+            <EntityTypeMapping TypeName="IsTypeOf(QueryViewWithManyToMany.Actors)">
+              <MappingFragment StoreEntitySet="Actors">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ActorId" ColumnName="ActorId" /></MappingFragment></EntityTypeMapping></EntitySetMapping></EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2007/06/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="QueryViewWithManyToMany">
+        <EntityTypeShape EntityType="QueryViewWithManyToMany.Club" Width="1.5" PointX="0.75" PointY="1.125" Height="1.5956835937500002" IsExpanded="true" />
+        <EntityTypeShape EntityType="QueryViewWithManyToMany.Member" Width="1.5" PointX="2.875" PointY="1.125" Height="1.4033821614583326" IsExpanded="true" />
+        <AssociationConnector Association="QueryViewWithManyToMany.Gold">
+          <ConnectorPoint PointX="2.25" PointY="2.0189925130208328" />
+          <ConnectorPoint PointX="2.875" PointY="2.0189925130208328" /></AssociationConnector>
+        <AssociationConnector Association="QueryViewWithManyToMany.Platinium">
+          <ConnectorPoint PointX="2.25" PointY="1.5094962565104162" />
+          <ConnectorPoint PointX="2.875" PointY="1.5094962565104162" /></AssociationConnector>
+        <EntityTypeShape EntityType="QueryViewWithManyToMany.Actors" Width="1.5" PointX="0.75" PointY="3.75" Height="1.4033821614583335" /></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

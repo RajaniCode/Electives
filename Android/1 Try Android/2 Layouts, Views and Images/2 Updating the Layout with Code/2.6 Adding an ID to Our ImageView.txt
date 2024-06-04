@@ -1,0 +1,31 @@
+2.6 Adding an ID to Our ImageView
+
+We previously created an ImageView that displays the tiny_bytes_logo image. But in order to find the ImageView in the Java code, it needs to have an ID.
+
+activity_main.xml
+0<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout 
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:orientation="vertical"
+   tools:context="com.codeschool.tinybytes.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/tiny_bytes_logo"
+        android:adjustViewBounds="true"
+        
+        />
+
+</LinearLayout>  
+
+
+Let's add an id property to the ImageView in activity_main.xml and set it to "@+id/image_view_logo".
+
+
+Answer:
+activity_main.xml

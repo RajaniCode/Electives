@@ -1,0 +1,60 @@
+2.11 Logging Data in the Recipe Activity
+
+Let's log the passed in data to make sure it's coming over correctly and we'll work on displaying it in Level 3. We already have the extra image and ingredients values passed over, now let's get the directions.
+
+RecipeActivity.java
+package com.codeschool.tinybytes;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.util.Log;
+import android.widget.TextView;
+
+public class RecipeActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipe);
+
+        Intent intent = this.getIntent();
+      
+        String recipeName = "";
+        if (intent.hasExtra("recipe_name")) {
+            recipeName = intent.getStringExtra("recipe_name");
+        }
+        TextView textView = (TextView)findViewById(R.id.text_view_name);
+        textView.setText(recipeName);
+        String recipeImage = "";
+        if (intent.hasExtra("recipe_image")) {
+            recipeImage = intent.getStringExtra("recipe_image");
+        }
+      
+        String recipeIngredients = "";
+        if (intent.hasExtra("recipe_ingredients")) {
+            recipeIngredients = intent.getStringExtra("recipe_ingredients");
+        }
+        
+        
+        
+        Log.d("RecipeActivity", "Intent data: " + recipeName + ", " + 
+              recipeImage + ", " + recipeIngredients);
+    }
+}
+
+
+1. First, create a String variable called recipeDirections set to an empty String.
+
+Answer:
+RecipeActivity.java
+
+2. Next, create an if statement to check if the intent has an extra "recipe_directions" value using the hasExtra() method. And inside that if statement, use the getStringExtra() method to get the "recipe_directions" value and set it equal to the recipeDirections variable.
+
+Answer:
+RecipeActivity.java
+
+3. Concatenate a comma and the recipeDirections String to the end of the Log statement.
+
+Answer: 
+RecipeActivity.java

@@ -1,0 +1,37 @@
+2.2 Change Layout to LinearLayout
+
+We want our app to have an ImageView with our logo image followed by a GridView of all of the recipe images below that. Since these Views will be arranged vertically, let’s update our Layout to use a LinearLayout.
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+   xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:paddingBottom="16dp"
+   android:paddingLeft="16dp"
+   android:paddingRight="16dp"
+   android:paddingTop="16dp"
+   
+   tools:context="com.codeschool.tinybytes.MainActivity">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="@string/welcome_msg"
+       android:textSize="@dimen/title_size"/>
+
+</android.support.constraint.ConstraintLayout>
+
+
+1. Edit the Layout to use a LinearLayout instead of a android.support.constraint.ConstraintLayout.
+
+Answer:
+activity_main.xml
+
+2. Make the LinearLayout vertical by adding the orientation property to the LinearLayout. Let's add this below the padding properties.
+
+Answer: 
+activity_main.xml

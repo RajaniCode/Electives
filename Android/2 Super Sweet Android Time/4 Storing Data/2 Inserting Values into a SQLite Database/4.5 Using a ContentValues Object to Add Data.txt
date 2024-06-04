@@ -1,0 +1,143 @@
+4.5 Using a ContentValues Object to Add Data
+
+We want to make a method addRecipesToDatabase where we'll write code to add an array of Recipe objects to the database. We went ahead and started creating the method, but we need to finish writing the rest of the code.
+
+
+RecipeContract.java
+package com.codeschool.tinybytes;
+
+import android.provider.BaseColumns;
+
+public class RecipeContract {
+    public static final String DB_NAME = "tinybytes.db";
+    public static final int DB_VERSION = 1;
+
+    public static final String SQL_CREATE_ENTRIES =
+            "CREATE TABLE " + RecipeEntry.TABLE_NAME + " (" +
+            RecipeEntry._ID + " INTEGER PRIMARY KEY," +
+            RecipeEntry.COLUMN_NAME_NAME + " TEXT," +
+            RecipeEntry.COLUMN_NAME_INGREDIENTS + " TEXT," +
+            RecipeEntry.COLUMN_NAME_DIRECTIONS + " TEXT," +
+            RecipeEntry.COLUMN_NAME_IMAGE + " TEXT)";
+
+    public static final String SQL_DELETE_ENTRIES =
+            "DROP TABLE IF EXISTS " + RecipeEntry.TABLE_NAME;
+
+    public static class RecipeEntry implements BaseColumns {
+        public static final String TABLE_NAME = "recipe";
+        public static final String COLUMN_NAME_NAME = "name";
+        public static final String COLUMN_NAME_IMAGE = "image";
+        public static final String COLUMN_NAME_INGREDIENTS = "ingredients";
+        public static final String COLUMN_NAME_DIRECTIONS = "directions";
+    }
+}
+
+MainActivity.java
+package com.codeschool.tinybytes;
+
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.codeschool.tinybytes.RecipeContract.RecipeEntry;
+
+import cz.msebera.android.httpclient.Header;
+
+public class MainActivity extends AppCompatActivity {
+    Recipe[] recipes;
+    ImageAdapter imageAdapter;
+    GridView gridView;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        imageAdapter = new ImageAdapter(this, recipes);
+
+        gridView = (GridView)this.findViewById(R.id.gridView);
+        gridView.setAdapter(imageAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent recipeIntent = new Intent(MainActivity.this, RecipeActivity.class);
+                recipeIntent.putExtra("recipe_name", recipes[i].name);
+                recipeIntent.putExtra("recipe_image", recipes[i].image);
+                recipeIntent.putExtra("recipe_ingredients", recipes[i].ingredients);
+                recipeIntent.putExtra("recipe_directions", recipes[i].directions);
+                startActivity(recipeIntent);
+
+            }
+        });
+
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+        asyncHttpClient.get("https://courseware.codeschool.com/super_sweet_android_time/API/TinyBytes.json",
+                new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Log.e("AsyncHttpClient", responseString);
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        Log.d("AsyncHttpClient", responseString);
+                        Gson gson = new GsonBuilder().create();
+                        recipes = gson.fromJson(responseString, Recipe[].class);
+
+                        for (Recipe recipe : recipes) {
+                            Log.d("AsyncHttpClient", recipe.name);
+                        }
+
+                        imageAdapter = new ImageAdapter(MainActivity.this, recipes);
+                        gridView.setAdapter(imageAdapter);
+                    }
+                }
+        );
+    }
+
+    private void addRecipesToDatabase() {
+        RecipeDbHelper recipeDbHelper = new RecipeDbHelper(this);
+        SQLiteDatabase db = recipeDbHelper.getWritableDatabase();
+
+        if (recipes == null) return;
+        
+        
+    }
+}
+
+
+1. Create a for loop to iterate over each Recipe object in the recipes array.
+
+Answer:
+MainActivity.java
+
+2. Inside of the for loop we will need a new ContentValues object named contentValues. Create it with the new keyword and the empty constructor ContentValues().
+
+Answer: 
+MainActivity.java
+
+3. Use the put method with the contentValues object to add an entry to the database. To add the name value, the parameters will be the column name, RecipeEntry.COLUMN_NAME_NAME, and the value, recipe.name.
+
+Answer:
+MainActivity.java
+
+4. Use the put method 3 more times to add the image, ingredients, and directions.
+
+Answer:
+MainActivity.java
+
+5. Finally, use the db's insert method to add this row of values to the database. The parameters will be the table name RecipeEntry.TABLE_NAME, null, and the contentValues object respectively.
+
+Answer:
+MainActivity.java

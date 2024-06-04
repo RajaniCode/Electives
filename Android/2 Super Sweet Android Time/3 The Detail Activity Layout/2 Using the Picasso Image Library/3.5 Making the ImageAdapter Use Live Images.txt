@@ -1,0 +1,156 @@
+3.5 Making the ImageAdapter Use Live Images
+
+We went ahead and added Picasso as a dependency in build.gradle and then changed the ImageAdapter class to use the Image URLs loaded with Picasso instead of static images. Now to create an ImageAdapter object, we need to pass in a Recipe[]. Let's update the MainActivity to use our ImageAdapter correctly.
+
+
+ImageAdapter.java
+package com.codeschool.tinybytes;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+import com.squareup.picasso.Picasso;
+
+
+public class ImageAdapter extends BaseAdapter {
+    private Context mContext;
+    private Recipe[] mRecipes;
+
+    public ImageAdapter(Context c, Recipe[] recipes) {
+        mContext = c;
+        mRecipes = recipes;
+    }
+
+    public int getCount() {
+        if (mRecipes == null)
+            return 0;
+
+        return mRecipes.length;
+    }
+
+    public Object getItem(int position) {
+        return null;
+    }
+
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    // create a new ImageView for each item referenced by the Adapter
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ImageView imageView;
+        if (convertView == null) {
+            // if it's not recycled, initialize some attributes
+            imageView = new ImageView(mContext);
+            imageView.setAdjustViewBounds(true);
+            imageView.setPadding(16, 16, 16, 16);
+        } else {
+            imageView = (ImageView) convertView;
+        }
+
+        Picasso.with(mContext).load(mRecipes[position].image).into(imageView);
+        return imageView;
+    }
+
+    public ImageAdapter(Context c, Integer[] imageList) {
+
+    }
+} 
+
+MainActivity.java
+package com.codeschool.tinybytes;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import cz.msebera.android.httpclient.Header;
+
+public class MainActivity extends AppCompatActivity {
+    Recipe[] recipes;
+    ImageAdapter imageAdapter;
+    GridView gridView;
+  
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+ 
+        final Integer[] imageList = {
+            R.drawable.bread_snack, R.drawable.caprese_skewers,
+                R.drawable.cheese_grapes, R.drawable.other_salad,
+                R.drawable.ramen, R.drawable.sandwich,
+                R.drawable.shrimp_app, R.drawable.spaghetti,
+                R.drawable.spinach_salad, R.drawable.sushi,
+                R.drawable.taco
+        };
+        
+        imageAdapter = new ImageAdapter(this, imageList);
+
+        gridView = (GridView)this.findViewById(R.id.gridView);
+        gridView.setAdapter(imageAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent recipeIntent = new Intent(MainActivity.this, RecipeActivity.class);
+                recipeIntent.putExtra("recipe_name", recipes[i].name);
+                recipeIntent.putExtra("recipe_image", recipes[i].image);
+                recipeIntent.putExtra("recipe_ingredients", recipes[i].ingredients);
+                recipeIntent.putExtra("recipe_directions", recipes[i].directions);
+                startActivity(recipeIntent);
+            }
+        });
+
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+        asyncHttpClient.get("https://courseware.codeschool.com/super_sweet_android_time/API/TinyBytes.json",
+                new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Log.e("AsyncHttpClient", responseString);
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        Log.d("AsyncHttpClient", responseString);
+                        Gson gson = new GsonBuilder().create();
+                        recipes = gson.fromJson(responseString, Recipe[].class);
+                        
+                        
+                    }
+                }
+        );
+    }
+}
+
+
+1. The ImageAdapter constructor now takes a Recipe[]. Change the line where we create our ImageAdapter to pass in recipes instead of imageList to the constructor.
+
+Answer:
+MainActivity.java
+
+2. Delete the lines of code where we created the imageList since we don't need it anymore.
+
+Answer:
+MainActivity.java
+
+3. At the bottom of the AsyncHttpClient onSuccess callback method, we want to update our ImageAdapter with the latest Recipe data. Call the ImageAdapter constructor again with the new keyword and pass MainActivity.this as the Context and recipes as the Recipe[]. Set the result equal to the imageAdapter variable.
+
+Answer:
+MainActivity.java
+
+4. To update the GridView with the latest ImageAdapter, call setAdapter() on the gridView variable and pass our new imageAdapter.
+
+Answer:
+MainActivity.java

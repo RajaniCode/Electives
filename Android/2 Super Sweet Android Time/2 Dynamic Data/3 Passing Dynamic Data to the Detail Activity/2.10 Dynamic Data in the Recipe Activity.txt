@@ -1,0 +1,103 @@
+2.10 Dynamic Data in the Recipe Activity
+
+Let's pass the Recipe data to the RecipeActivity with an Intent so it can be displayed there. Instead of sending the name of the image selected at position i, we'll send the recipe properties located at position i in the recipes array. (Note that right now we're displaying static images from imageList since we haven't learned how to display images from a URL yet. But don't worry, we'll fix this in Level 3!)
+
+MainActivity.java
+package com.codeschool.tinybytes;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+
+import cz.msebera.android.httpclient.Header;
+
+public class MainActivity extends AppCompatActivity {
+    Recipe[] recipes;
+  
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        final Integer[] imageList = {
+            R.drawable.bread_snack, R.drawable.caprese_skewers,
+                R.drawable.cheese_grapes, R.drawable.other_salad,
+                R.drawable.ramen, R.drawable.sandwich,
+                R.drawable.shrimp_app, R.drawable.spaghetti,
+                R.drawable.spinach_salad, R.drawable.sushi,
+                R.drawable.taco
+        };
+
+        ImageAdapter imageAdapter = new ImageAdapter(this, imageList);
+
+        GridView gridView = (GridView)this.findViewById(R.id.gridView);
+        gridView.setAdapter(imageAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent recipeIntent = new Intent(MainActivity.this, RecipeActivity.class);
+                String foodName = getResources().getResourceEntryName(imageList[i]);
+                recipeIntent.putExtra("food_name", foodName);
+                
+                startActivity(recipeIntent);
+            }
+        });
+
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+        asyncHttpClient.get("https://courseware.codeschool.com/super_sweet_android_time/API/TinyBytes.json",
+                new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Log.e("AsyncHttpClient", responseString);
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        Log.d("AsyncHttpClient", responseString);
+                        Gson gson = new GsonBuilder().create();
+                        recipes = gson.fromJson(responseString, Recipe[].class);
+
+                        for (Recipe recipe : recipes) {
+                            Log.d("AsyncHttpClient", recipe.name);
+                        }
+                    }
+                }
+        );
+    }
+}
+
+
+1. Start by deleting the two lines of code that (1) set the foodName variable and (2) call the putExtra method.
+
+Answer:
+MainActivity.java
+
+2. Use the recipeIntent's putExtra method to pass the name property of the Recipe object at position i in the recipes array. Use the key "recipe_name" as the first parameter to putExtra(). (Note that we went ahead and made the Array of Recipe objects, recipes, a class variable so it can be accessed throughout the MainActivity class.)
+
+Answer:
+MainActivity.java
+
+3. Let's do the same thing for the image property and use the key "recipe_image".
+
+Answer:
+MainActivity.java
+
+4. Let's do the same thing for the ingredients property and use the key "recipe_ingredients".
+
+Answer:
+MainActivity.java
+
+5. And one last time for the directions property and use the key "recipe_directions".
+
+Answer:
+MainActivity.java

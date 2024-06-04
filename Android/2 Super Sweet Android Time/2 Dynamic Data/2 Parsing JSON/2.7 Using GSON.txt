@@ -1,0 +1,12 @@
+2.7 Using GSON
+
+Fill in the blanks to use Gson to create a new Game object by passing in the JSON response String and the Game class to the fromJson method.
+
+@Override
+public void onSuccess(int status, Header[] headers, String response) {
+    Gson gson = new GsonBuilder().create();
+    Game game = gson.fromJson([ ], [ ]);
+}
+
+
+Answer:

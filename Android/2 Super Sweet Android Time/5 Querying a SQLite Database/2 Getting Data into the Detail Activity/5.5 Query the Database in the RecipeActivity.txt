@@ -1,0 +1,48 @@
+5.5 Query the Database in the RecipeActivity
+
+We went ahead and got the position value passed in with the Intent, now we need to use it to get to the correct row in the recipe table.
+
+RecipeActivity.java
+package com.codeschool.tinybytes;
+
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+public class RecipeActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipe);
+
+        Intent intent = this.getIntent();
+        if (intent.hasExtra("recipe_id")) {
+            int position = intent.getIntExtra("recipe_id", 0);
+            RecipeDbHelper recipeDbHelper = new RecipeDbHelper(this);
+            
+        }
+    }
+}
+
+
+1. First let's get a SQLiteDatabase object by using the recipeDbHelper object's getWritableDatabase() method and store it in a variable named db.
+
+Answer:
+RecipeActivity.java
+
+2. Next, get all of the recipes from our recipe table by using the db's rawQuery() method with the parameters - "SELECT * FROM recipe" and null as the second argument. This will return a Cursor so let's save it in a Cursor variable named cursor.
+
+Answer: 
+RecipeActivity.java
+
+3. Finally, let's get the cursor on the correct row by calling the cursor's moveToPosition method and passing the position as a parameter.
+
+Answer:
+RecipeActivity.java

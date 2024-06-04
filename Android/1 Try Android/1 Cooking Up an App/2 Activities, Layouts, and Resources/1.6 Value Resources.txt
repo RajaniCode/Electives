@@ -1,0 +1,46 @@
+1.6 Value Resources
+
+Let's replace the hardcoded values "Tiny Bytes" and "24sp" with resource variables.
+
+dimens.xml
+<resources>
+    <dimen name="title_size">24sp</dimen>
+</resources>
+
+strings.xml
+<resources>
+    <string name="title_text">Tiny Bytes</string>
+    <string name="welcome_msg">Welcome to Tiny Bytes!</string>
+</resources>
+
+activity_main.xml
+Y<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:paddingBottom="16dp"
+   android:paddingLeft="16dp"
+   android:paddingRight="16dp"
+   android:paddingTop="16dp"
+   tools:context="com.codeschool.tinybytes.MainActivity">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Tiny Bytes"
+       android:textSize="24sp"
+       />
+
+</android.support.constraint.ConstraintLayout> 
+
+1. We have the String "Tiny Bytes" saved to our String resources file strings.xml as title_text. Replace the hardcoded String with a reference to the title_text resource.
+
+Answer:
+activity_main.xml
+
+2. We have the value "24sp" saved to our Dimensions resources file dimens.xml as title_size. Replace the hardcoded value with a reference to the title_size resource.
+
+Answer:
+activity_main.xml

@@ -1,0 +1,33 @@
+2.7 Changing the Image in Java Code
+
+We previously created an ImageView that displays the tiny_bytes_logo image. Now we'd like to update the image the ImageView displays in our Java file MainActivity.java.
+
+MainActivity.java
+package com.codeschool.tinybytes;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    
+    
+  }
+} 
+
+
+1. First, we can find the ImageView with its id in MainActivity.java using the findViewById() method. (Remember the id is image_view_logo.) Let's also create an ImageView variable named imageView to save our result. Don't forget to cast the result from a general View using (ImageView).
+
+Answer:
+MainActivity.java
+
+2. Now we want to use the setImageResource() method to set imageView's image source to the drawable tiny_bytes_logo_new. To reference drawable resources we can use the format R.drawable.<name>.
+
+Answer:
+MainActivity.java

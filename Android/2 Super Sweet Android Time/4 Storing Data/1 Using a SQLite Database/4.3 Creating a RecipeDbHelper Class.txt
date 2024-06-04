@@ -1,0 +1,44 @@
+4.3 Creating a RecipeDbHelper Class
+
+We need a RecipeDbHelper class to manage our database. We went ahead and created the class, but we still need to fill in the onCreate and onUpgrade methods.
+
+RecipeDbHelper.java
+package com.codeschool.tinybytes;
+
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
+
+public class RecipeDbHelper extends SQLiteOpenHelper {
+    public RecipeDbHelper(Context context) {
+        super(context, RecipeContract.DB_NAME,
+              null, RecipeContract.DB_VERSION);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db){
+        
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, 
+                          int oldVersion, int newVersion){
+        
+    }
+}
+
+
+1. In the onCreate method, we want to call the execSQL method on the db database parameter that's passed in. As an argument to this call, we want to execute the SQL_CREATE_ENTRIES statement we created earlier in the RecipeContract class. That can be accessed with RecipeContract.SQL_CREATE_ENTRIES.
+
+Answer:
+RecipeDbHelper.java
+
+2. In the onUpgrade method, we want to first execute the SQL command to delete the table which is the SQL_DELETE_ENTRIES statement we created in the RecipeContract class.
+
+Answer:
+RecipeDbHelper.java
+
+3. In the onUpgrade method, after we delete the table we want to create a new one by calling the onCreate() method and passing in the database variable, db.
+
+Answer:
+RecipeDbHelper.java

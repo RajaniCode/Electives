@@ -1,0 +1,135 @@
+3.3 Attaching an ImageAdapter to the GridView
+
+Now the pièce de résistance of our app - displaying a GridView full of images. To have a GridView of images we need to create a custom ImageAdapter class - we went ahead and did this following instructions from the Android Developer Network. Then we need to create a list of our images, create an ImageAdapter with those images, find our GridView, and finally set the adapter to our GridView.
+
+ImageAdapter.java
+package com.codeschool.tinybytes;
+
+import android.content.Context;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.BaseAdapter;
+import android.widget.ImageView;
+
+/**
+ * Created by sholderness on 3/8/17.
+ */
+
+public class ImageAdapter extends BaseAdapter {
+    private Context mContext;
+    private Integer[] mImageList;
+
+    public ImageAdapter(Context c, Integer[] imageList) {
+        mContext = c;
+        mImageList = imageList;
+    }
+
+    public int getCount() {
+        return mImageList.length;
+    }
+
+    public Object getItem(int position) {
+        return null;
+    }
+
+    public long getItemId(int position) {
+        return 0;
+    }
+
+    // create a new ImageView for each item referenced by the Adapter
+    public View getView(int position, View convertView, ViewGroup parent) {
+        ImageView imageView;
+        if (convertView == null) {
+            // if it's not recycled, initialize some attributes
+            imageView = new ImageView(mContext);
+            imageView.setAdjustViewBounds(true);
+            imageView.setPadding(16, 16, 16, 16);
+        } else {
+            imageView = (ImageView) convertView;
+        }
+
+        imageView.setImageResource(mImageList[position]);
+        return imageView;
+    }
+}
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.codeschool.tinybytes.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/candy_coded_title"
+        android:id="@+id/image_view_logo"
+        android:adjustViewBounds="true" />
+
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:numColumns="2"
+        android:id="@+id/gridView"/>
+
+</LinearLayout>
+
+MainActivity.java
+package com.codeschool.tinybytes;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
+
+public class MainActivity extends AppCompatActivity {
+
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    setContentView(R.layout.activity_main);
+
+    ImageView imageView = (ImageView)this.findViewById(R.id.image_view_logo);
+    imageView.setImageResource(R.drawable.tiny_bytes_logo_new);
+
+    Integer[] imageList = {
+      R.drawable.bread_snack, 
+      R.drawable.caprese_skewers,
+      R.drawable.cheese_grapes,
+      R.drawable.other_salad,
+      R.drawable.ramen, 
+      R.drawable.sandwich,
+      R.drawable.shrimp_app, 
+      R.drawable.spaghetti,
+      R.drawable.spinach_salad, 
+      R.drawable.sushi,
+      R.drawable.taco
+    };
+
+    
+  }
+}
+
+
+1. We went ahead and created a list of our drawable recipe images, imageList. Notice that it's an array of Integers since drawable id's are Integers. Now let's create an instance of the ImageAdapter class called imageAdapter by using the new keyword and passing this (meaning this MainActivity) and imageList to the ImageAdapter() constructor.
+
+Answer:
+MainActivity.java
+
+2. Next, let's find the GridView by its id and save it to a GridView variable called gridView.
+
+Answer:
+MainActivity.java
+
+3. Finally, let's set the gridView's adapter with the setAdapter() method to the imageAdapter we just created.
+
+Answer:
+MainActivity.java

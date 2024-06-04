@@ -1,0 +1,36 @@
+1.5 Edit the TextView
+
+We want to update the default text in the TextView from "Hello World" to "Tiny Bytes" and also make it bigger.
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+   xmlns:app="http://schemas.android.com/apk/res-auto"
+   xmlns:tools="http://schemas.android.com/tools"
+   android:layout_width="match_parent"
+   android:layout_height="match_parent"
+   android:paddingBottom="16dp"
+   android:paddingLeft="16dp"
+   android:paddingRight="16dp"
+   android:paddingTop="16dp"
+   tools:context="com.codeschool.tinybytes.MainActivity">
+
+   <TextView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:text="Hello World"
+       
+       />
+
+</android.support.constraint.ConstraintLayout> 
+
+
+1. Update the TextView’s text value from "Hello World" to "Tiny Bytes".
+
+Answer:
+activity_main.xml
+
+2. Set the textSize property to "24sp".
+
+Answer: 
+activity_main.xml

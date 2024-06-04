@@ -1,0 +1,52 @@
+1.6 Passing the Image Name
+
+Our RecipeActivity layout file activity_recipe.xml has a single TextView. To practice passing data with an Intent, let’s pass the name of the food image selected to the RecipeActivity and display it in that TextView.
+
+MainActivity.java
+ package com.codeschool.tinybytes;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        final Integer[] imageList = {
+            R.drawable.bread_snack, R.drawable.caprese_skewers,
+                R.drawable.cheese_grapes, R.drawable.other_salad,
+                R.drawable.ramen, R.drawable.sandwich,
+                R.drawable.shrimp_app, R.drawable.spaghetti,
+                R.drawable.spinach_salad, R.drawable.sushi,
+                R.drawable.taco
+        };
+
+        ImageAdapter imageAdapter = new ImageAdapter(this, imageList);
+
+        GridView gridView = (GridView)this.findViewById(R.id.gridView);
+        gridView.setAdapter(imageAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent recipeIntent = new Intent(MainActivity.this, RecipeActivity.class);
+                String imageName = getResources().getResourceEntryName(imageList[i]);
+                
+                startActivity(recipeIntent);
+            }
+        });
+    }
+}
+
+
+Before we call startActivity(), we want to use the putExtra() method to pass the name of the food image selected, and the key "image_name". We already have the name of the image and saved it in the String variable imageName.
+
+Answer:
+MainActivity.java

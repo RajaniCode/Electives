@@ -1,0 +1,47 @@
+1.7 Displaying the Image Name
+
+Our RecipeActivity layout has a single TextView with ID text_view_name. Let’s set that TextViews’s text to the name of the selected image we just passed in with the Intent. We went ahead and got the Intent already and created a String variable imageName.
+
+RecipeActivity.java
+package com.codeschool.tinybytes;
+
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.TextView;
+
+public class RecipeActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_recipe);
+
+        Intent intent = this.getIntent();
+        String imageName = "";
+        
+    }
+}
+
+
+1. Get the name of the selected image with the getStringExtra() method. (remember the key we used was "image_name")
+
+Set the result equal to the String imageName we already created.
+
+Answer:
+RecipeActivity.java
+
+2. Add an if check to see if the intent actually has the "image_name" key before calling getStringExtra().
+
+Answer:
+RecipeActivity.java
+
+3. Now, let's find the TextView with id text_view_name using the findViewById() method and save it into a TextView variable named textView.
+
+Answer:
+RecipeActivity.java
+
+4. Finally, let's set the textView's text to imageName using the setText method.
+
+Answer:
+RecipeActivity.java

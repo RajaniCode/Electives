@@ -1,0 +1,54 @@
+1.3 Starting the RecipeActivity
+
+We went ahead and created a RecipeActivity Java class with a corresponding layout file named activity_recipe.xml. Now we need to start this RecipeActivity with an Intent from our MainActivity.
+
+MainActivity.java
+package com.codeschool.tinybytes;
+
+import android.content.Intent;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+
+public class MainActivity extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        final Integer[] imageList = {
+            R.drawable.bread_snack, R.drawable.caprese_skewers,
+                R.drawable.cheese_grapes, R.drawable.other_salad,
+                R.drawable.ramen, R.drawable.sandwich,
+                R.drawable.shrimp_app, R.drawable.spaghetti,
+                R.drawable.spinach_salad, R.drawable.sushi,
+                R.drawable.taco
+        };
+
+        ImageAdapter imageAdapter = new ImageAdapter(this, imageList);
+
+        GridView gridView = (GridView)this.findViewById(R.id.gridView);
+        gridView.setAdapter(imageAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                
+            }
+        });
+    }
+}
+
+
+1. We want to create an Intent object called recipeIntent inside the onItemClick() callback method. To do this use the Intent constructor with the new keyword and pass it the Context and the name of the class we want to create.
+
+Answer:
+MainActivity.java
+
+2. Then call the startActivity method and pass it the Intent object we just created.
+
+Answer: 
+MainActivity.java

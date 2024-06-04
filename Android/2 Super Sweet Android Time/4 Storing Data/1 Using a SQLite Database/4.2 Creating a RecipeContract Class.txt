@@ -1,0 +1,47 @@
+4.2 Creating a RecipeContract Class
+
+We created a Contract class for our database to define constants for our recipe table. We went ahead and created the RecipeContract and RecipeEntry classes, but we still need to define a few of the column names and SQL commands.
+
+RecipeContract.java
+package com.codeschool.tinybytes;
+
+import android.provider.BaseColumns;
+
+public class RecipeContract {
+    public static final String DB_NAME = "tinybytes.db";
+    public static final int DB_VERSION = 1;
+  
+    public static final String SQL_CREATE_ENTRIES =
+            "CREATE TABLE " + RecipeEntry.TABLE_NAME + " (" + 
+            RecipeEntry._ID + " INTEGER PRIMARY KEY," +
+            RecipeEntry.COLUMN_NAME_NAME + " TEXT," +
+            RecipeEntry.COLUMN_NAME_IMAGE + " TEXT)";
+
+    public static class RecipeEntry implements BaseColumns {
+        public static final String TABLE_NAME = "recipe";
+        public static final String COLUMN_NAME_NAME = "name";
+        public static final String COLUMN_NAME_IMAGE = "image";
+        
+    }
+} 
+
+
+1. Inside of the RecipeEntry class, add a public static final String variable named COLUMN_NAME_INGREDIENTS set to the value "ingredients". This column in our table will store the recipe ingredients.
+
+Answer:
+RecipeContract.java
+
+2. Inside of the RecipeEntry class, add a public static final String variable named COLUMN_NAME_DIRECTIONS set to the value "directions". This column in our table will store the recipe directions.
+
+Answer: 
+RecipeContract.java
+
+3. Add the ingredients and directions columns to the SQL_CREATE_ENTRIES String.
+
+Answer:
+RecipeContract.java
+
+4. Add a command to delete the Recipe table by creating a public static final String variable named SQL_DELETE_ENTRIES (after the SQL_CREATE_ENTRIES variable) and setting it equal to a String that uses the "DROP TABLE IF EXISTS" command.
+
+Answer:
+RecipeContract.java

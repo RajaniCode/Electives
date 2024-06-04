@@ -1,0 +1,41 @@
+3.2 Adding a GridView
+
+We would like to add a GridView of images to our Tiny Bytes app so that the user can scroll through a grid of delicious looking images before selecting a recipe. We went ahead and added the GridView, and now we need to add a few properties to it.
+
+activity_main.xml
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.codeschool.tinybytes.MainActivity">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/candy_coded_title"
+        android:id="@+id/image_view_logo"
+        android:adjustViewBounds="true" />
+
+    <GridView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        
+        
+        />
+
+</LinearLayout>
+
+
+1. Let's set the numColumns property equal to "2".
+
+Answer: 
+activity_main.xml
+
+2. We also need to set the id property so that we can find this GridView to set its adapter later. Let's set the id equal to "@+id/gridView".
+
+Answer:
+activity_main.xml

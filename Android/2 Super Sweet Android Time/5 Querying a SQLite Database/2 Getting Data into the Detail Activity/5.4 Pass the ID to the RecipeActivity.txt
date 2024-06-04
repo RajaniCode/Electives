@@ -1,0 +1,108 @@
+5.4 Pass the ID to the RecipeActivity
+
+Instead of passing each property individually to the RecipeActivity, we want to pass the database ID and query the database in our RecipeActivity.
+
+MainActivity.java
+package com.codeschool.tinybytes;
+
+import android.content.ContentValues;
+import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.GridView;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.TextHttpResponseHandler;
+import com.codeschool.tinybytes.RecipeContract.RecipeEntry;
+
+import cz.msebera.android.httpclient.Header;
+
+public class MainActivity extends AppCompatActivity {
+    Recipe[] recipes;
+    ImageCursorAdapter imageAdapter;
+    GridView gridView;
+    RecipeDbHelper recipeDbHelper = new RecipeDbHelper(this);
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        SQLiteDatabase db = recipeDbHelper.getWritableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM recipe", null);
+        imageAdapter = new ImageCursorAdapter(this, cursor);
+
+        gridView = (GridView)this.findViewById(R.id.gridView);
+        gridView.setAdapter(imageAdapter);
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                Intent recipeIntent = new Intent(MainActivity.this, RecipeActivity.class);
+                recipeIntent.putExtra("recipe_name", recipes[i].name);
+                recipeIntent.putExtra("recipe_image", recipes[i].image);
+                recipeIntent.putExtra("recipe_ingredients", recipes[i].ingredients);
+                recipeIntent.putExtra("recipe_directions", recipes[i].directions);
+                startActivity(recipeIntent);
+            }
+        });
+
+        AsyncHttpClient asyncHttpClient = new AsyncHttpClient();
+        asyncHttpClient.get("https://courseware.codeschool.com/super_sweet_android_time/API/TinyBytes.json",
+                new TextHttpResponseHandler() {
+                    @Override
+                    public void onFailure(int statusCode, Header[] headers, String responseString, Throwable throwable) {
+                        Log.e("AsyncHttpClient", responseString);
+                    }
+
+                    @Override
+                    public void onSuccess(int statusCode, Header[] headers, String responseString) {
+                        Gson gson = new GsonBuilder().create();
+                        recipes = gson.fromJson(responseString, Recipe[].class);
+
+                        addRecipesToDatabase();
+
+                        SQLiteDatabase db = recipeDbHelper.getWritableDatabase();
+                        Cursor cursor = db.rawQuery("SELECT * FROM recipe", null);
+                        imageAdapter.changeCursor(cursor);
+                        gridView.setAdapter(imageAdapter);
+                    }
+                }
+        );
+    }
+
+    private void addRecipesToDatabase() {
+        SQLiteDatabase db = recipeDbHelper.getWritableDatabase();
+
+        if (recipes == null) return;
+        else db.delete(RecipeEntry.TABLE_NAME, null, null);
+
+        for (Recipe recipe : recipes){
+            ContentValues contentValues = new ContentValues();
+            contentValues.put(RecipeEntry.COLUMN_NAME_NAME, recipe.name);
+            contentValues.put(RecipeEntry.COLUMN_NAME_IMAGE, recipe.image);
+            contentValues.put(RecipeEntry.COLUMN_NAME_INGREDIENTS, recipe.ingredients);
+            contentValues.put(RecipeEntry.COLUMN_NAME_DIRECTIONS, recipe.directions);
+
+            db.insert(RecipeEntry.TABLE_NAME, null, contentValues);
+        }
+    }
+} 
+
+
+1. First, delete the 4 lines of code that call the putExtra method.
+
+Answer:
+MainActivity.java
+
+2. Next, call the recipeIntent's putExtra method with the key "recipe_id" and the value i.
+
+Answer: 
+MainActivity.java

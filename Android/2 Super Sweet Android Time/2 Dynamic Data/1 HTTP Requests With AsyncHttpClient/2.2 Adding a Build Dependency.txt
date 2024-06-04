@@ -1,0 +1,40 @@
+2.2 Adding a Build Dependency
+
+Let’s add the AsyncHttpClient Library as a dependency in our build.gradle file so we can use it to do an HTTP request in a background thread. We can do this by using the compile command followed by the String 'com.loopj.android:android-async-http:1.4.9'. This declares a remote dependency on version 1.4.9 of the "android-async-http" library, inside the "com.loopj.android" namespace.
+
+build.gradle
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion '25.0.0'
+    defaultConfig {
+        applicationId "com.codeschool.tinybytes"
+        minSdkVersion 10
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.2.0'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    
+    testCompile 'junit:junit:4.12'
+}
+ 
+
+Answer:
+build.gradle

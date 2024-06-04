@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0510"
+   version = "1.7">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AB2B3CFC17EA35D70028230B"
+               BuildableName = "Level1-2-SettingUpAnApiKey.app"
+               BlueprintName = "Level1-2-SettingUpAnApiKey"
+               ReferencedContainer = "container:Level1-2-SettingUpAnApiKey.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      buildConfiguration = "Debug">
+      <PreActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "exec &gt; /tmp/coreios7-location.log 2&gt;&amp;1&#10;cd &quot;$SOURCE_ROOT/$PROJECT_NAME&quot;&#10;./codeschool-xcode-submission location&#10;../../AssignUserStates">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "AB2B3D1717EA35D70028230B"
+                     BuildableName = "Level1-2-SettingUpAnApiKeyTests.xctest"
+                     BlueprintName = "Level1-2-SettingUpAnApiKeyTests"
+                     ReferencedContainer = "container:Level1-2-SettingUpAnApiKey.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PreActions>
+      <PostActions>
+         <ExecutionAction
+            ActionType = "Xcode.IDEStandardExecutionActionsCore.ExecutionActionType.ShellScriptAction">
+            <ActionContent
+               title = "Run Script"
+               scriptText = "exec &gt; /tmp/coreios7.log 2&gt;&amp;1&#10;cd &quot;$SOURCE_ROOT/$PROJECT_NAME&quot;&#10;./codeschool-xcode-submission"
+               shellToInvoke = "/bin/sh">
+               <EnvironmentBuildable>
+                  <BuildableReference
+                     BuildableIdentifier = "primary"
+                     BlueprintIdentifier = "AB2B3D1717EA35D70028230B"
+                     BuildableName = "Level1-2-SettingUpAnApiKeyTests.xctest"
+                     BlueprintName = "Level1-2-SettingUpAnApiKeyTests"
+                     ReferencedContainer = "container:Level1-2-SettingUpAnApiKey.xcodeproj">
+                  </BuildableReference>
+               </EnvironmentBuildable>
+            </ActionContent>
+         </ExecutionAction>
+      </PostActions>
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "AB2B3D1717EA35D70028230B"
+               BuildableName = "Level1-2-SettingUpAnApiKeyTests.xctest"
+               BlueprintName = "Level1-2-SettingUpAnApiKeyTests"
+               ReferencedContainer = "container:Level1-2-SettingUpAnApiKey.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AB2B3CFC17EA35D70028230B"
+            BuildableName = "Level1-2-SettingUpAnApiKey.app"
+            BlueprintName = "Level1-2-SettingUpAnApiKey"
+            ReferencedContainer = "container:Level1-2-SettingUpAnApiKey.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </TestAction>
+   <LaunchAction
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AB2B3CFC17EA35D70028230B"
+            BuildableName = "Level1-2-SettingUpAnApiKey.app"
+            BlueprintName = "Level1-2-SettingUpAnApiKey"
+            ReferencedContainer = "container:Level1-2-SettingUpAnApiKey.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+      <AdditionalOptions>
+      </AdditionalOptions>
+      <LocationScenarioReference
+         identifier = "../Level1-2-SettingUpAnApiKey/Level1-2-SettingUpAnApiKeyTests/Orlando.gpx"
+         referenceType = "0">
+      </LocationScenarioReference>
+   </LaunchAction>
+   <ProfileAction
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Release"
+      debugDocumentVersioning = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "AB2B3CFC17EA35D70028230B"
+            BuildableName = "Level1-2-SettingUpAnApiKey.app"
+            BlueprintName = "Level1-2-SettingUpAnApiKey"
+            ReferencedContainer = "container:Level1-2-SettingUpAnApiKey.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

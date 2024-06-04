@@ -1,0 +1,63 @@
+Image Replacement
+
+
+The anchor in <h1> is now replaced with a background image, but there's no fallback text. Add the logo's text to the HTML and remove it from view.
+
+index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <section class="content home">
+      <header>
+        <h1><a class="logo" href="#"></a></h1>
+        <h2>"For the Snow-Savvy Shoe-Shopper"</h2>
+      </header>
+    </section>
+  </body>
+</html>
+
+style.css
+
+.logo {
+  background: url(logo.png);
+  display: block;
+  height: 75px;
+  width: 250px;
+}
+
+Answer:
+
+index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <section class="content home">
+      <header>
+        <h1><a class="logo" href="#">Sven's Snowshoe Emporium</a></h1>
+        <h2>"For the Snow-Savvy Shoe-Shopper"</h2>
+      </header>
+    </section>
+  </body>
+</html>
+
+style.css
+
+.logo {
+  background: url(logo.png);
+  display: block;
+  height: 75px;
+  width: 250px;
+  text-indent: -9999px;
+}

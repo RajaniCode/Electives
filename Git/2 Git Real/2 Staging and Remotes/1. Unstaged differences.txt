@@ -1,0 +1,27 @@
+1. Unstaged differences
+
+
+A new file has been added to the site. Run the command to see what all has changed since your last commit.
+
+
+$ git diff
+
+
+diff --git a/ostrich.html b/ostrich.html
+index 0519ecb..93774d2 100644
+--- a/ostrich.html
++++ b/ostrich.html
+@@ -1 +1,9 @@
+- 
+\ No newline at end of file
++[m<!DOCTYPE html>
++[m<html lang="en">
++[m  <head>
++[m    <title>A little ol ostrich</titl>
++[m  </head>
++[m  <body>
++[m    <h1>SQUAWK!</h1>
++[m  </body>
++[m</html>
+
+Success!

@@ -1,0 +1,26 @@
+[rajani@localhost Django]$ su root
+Password: 
+[root@localhost Django]# python --version
+Python 2.7.5
+[root@localhost Django]# python2.7 --version
+Python 2.7.11
+[root@localhost Django]# pip --version
+pip 8.1.1 from /usr/lib/python2.7/site-packages (python 2.7)
+[root@localhost Django]# pip install Django==1.9.6
+Collecting Django==1.9.6
+  Downloading Django-1.9.6-py2.py3-none-any.whl (6.6MB)
+    100% |████████████████████████████████| 6.6MB 60kB/s 
+Installing collected packages: Django
+Successfully installed Django-1.9.6
+[root@localhost Django]# python
+Python 2.7.5 (default, Nov 20 2015, 02:00:19) 
+[GCC 4.8.5 20150623 (Red Hat 4.8.5-4)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import django
+>>> print(django.get_version())
+1.9.6
+>>> exit
+Use exit() or Ctrl-D (i.e. EOF) to exit
+>>> exit()
+[root@localhost Django]# 
+

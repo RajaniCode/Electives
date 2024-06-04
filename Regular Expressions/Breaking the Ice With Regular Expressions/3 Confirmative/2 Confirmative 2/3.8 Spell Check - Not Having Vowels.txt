@@ -1,0 +1,16 @@
+3.8 Spell Check - Not Having Vowels
+
+Ever since Mute Morris lost his tongue, he’s been saying some weird things – and no longer pronouncing vowels. Since we know that most English words contain vowels, we can generate a pattern to search for words that do not contain vowels and consider them misspelled.
+
+Using a character set repeated 1 or more times, make a pattern to search for strings that do not contain the characters 'a', 'e', 'i', 'o', 'u', and 'y'.
+
+Next, surround our pattern with a word boundary on each side.
+
+But wait, our pattern is considering strings containing white space to be misspelled words. Add the white space to the characters we wish to not match.
+
+Subjects
+The rougher the seas, the smthr we sail.
+
+
+REGULAR EXPRESSION
+/\b[^aeiouy\s]+\b/

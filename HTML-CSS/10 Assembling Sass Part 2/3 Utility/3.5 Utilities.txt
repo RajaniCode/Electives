@@ -1,0 +1,111 @@
+3.5 Utilities
+
+
+Someone started automating button creation with the button mixin, but every button has #eee-colored text regardless of background. Replace the color value in the mixin with the contrast-color() function, passing in $color and returning #111 as the dark value and #eee as the light value with a 50% threshold.
+
+
+CSS
+
+.btn-a {
+  background-color: #9fb2b0;
+  color: #eeeeee;
+}
+
+.btn-b {
+  background-color: #e58e1a;
+  color: #eeeeee;
+}
+
+.btn-c {
+  background-color: #322e2a;
+  color: #eeeeee;
+}
+
+.SASS
+
+@import "compass"
+
+=button($color)
+  background-color: $color
+  color: #eee
+
+.btn-a
+  +button(#9fb2b0)
+.btn-b
+  +button(#e58e1a)
+.btn-c
+  +button(#322e2a)
+
+.SCSS
+
+@import "compass";
+
+@mixin button($color) {
+  background-color: $color;
+  color: #eeeeee;
+}
+
+.btn-a {
+  @include button(#9fb2b0);
+}
+
+.btn-b {
+  @include button(#e58e1a);
+}
+
+.btn-c {
+  @include button(#322e2a);
+}
+
+
+Answer:
+
+.SASS
+
+@import "compass"
+
+=button($color)
+  background-color: $color
+  color: contrast-color($color, #111, #eee, 50%)
+
+.btn-a
+  +button(#9fb2b0)
+.btn-b
+  +button(#e58e1a)
+.btn-c
+  +button(#322e2a)
+
+.SCSS
+
+@import "compass";
+
+@mixin button($color) {
+  background-color: $color;
+  color: contrast-color($color, #111111, #eeeeee, 50%);
+}
+
+.btn-a {
+  @include button(#9fb2b0);
+}
+
+.btn-b {
+  @include button(#e58e1a);
+}
+
+.btn-c {
+  @include button(#322e2a);
+}
+
+CSS
+
+.btn-a {
+  background-color: #9fb2b0;
+  color: #111111; }
+
+.btn-b {
+  background-color: #e58e1a;
+  color: #111111; }
+
+.btn-c {
+  background-color: #322e2a;
+  color: #eeeeee; }

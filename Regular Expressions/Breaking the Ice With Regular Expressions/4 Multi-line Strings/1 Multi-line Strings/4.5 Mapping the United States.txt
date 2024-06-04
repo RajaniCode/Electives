@@ -1,0 +1,25 @@
+4.5 Mapping the United States
+
+We have decided to voyage to each state within the United States of America and have a large text file containing all of the states. We will need to search through the entire text file and ensure that the names of the states follow a certain pattern.
+
+Some state names have 2 words. Create a pattern that will match the first word within a two-word state name. A two-word state name can begin with 'new', 'north', 'south', 'west', and 'rhode'. We also want to match on both upper and lower case characters.
+
+Subjects
+Alabama
+Florida
+Maine
+Maryland
+New Jersey
+North Carolina
+Ohio
+Oklahoma
+Oregon
+Pennsylvania
+Rhode Island
+South Dakota
+West Virginia
+Wyoming
+
+
+REGULAR EXPRESSION
+/^(new|north|south|west|rhode)?\s?\w+$/mig

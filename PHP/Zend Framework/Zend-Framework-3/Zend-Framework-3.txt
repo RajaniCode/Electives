@@ -1,0 +1,2398 @@
+# https://docs.zendframework.com/tutorials/
+# https://docs.zendframework.com/tutorials/getting-started/overview/
+
+
+## https://docs.zendframework.com/tutorials/getting-started/skeleton-application/
+## A skeleton application
+
+$ php --version
+PHP 7.0.9 (cli) (built: Jul 20 2016 11:08:23) ( ZTS )
+Copyright (c) 1997-2016 The PHP Group
+Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies
+
+$ composer
+   ______
+  / ____/___  ____ ___  ____  ____  ________  _____
+ / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                    /_/
+Composer version 1.2.1 2016-09-12 11:27:19
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help                     Display this help message
+  -q, --quiet                    Do not output any message
+  -V, --version                  Display this application version
+      --ansi                     Force ANSI output
+      --no-ansi                  Disable ANSI output
+  -n, --no-interaction           Do not ask any interactive question
+      --profile                  Display timing and memory usage information
+      --no-plugins               Whether to disable plugins.
+  -d, --working-dir=WORKING-DIR  If specified, use the given directory as working directory.
+  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  about           Short information about Composer
+  archive         Create an archive of this composer package
+  browse          Opens the package's repository URL or homepage in your browser.
+  clear-cache     Clears composer's internal package cache.
+  clearcache      Clears composer's internal package cache.
+  config          Set config options
+  create-project  Create new project from a package into given directory.
+  depends         Shows which packages cause the given package to be installed
+  diagnose        Diagnoses the system to identify common errors.
+  dump-autoload   Dumps the autoloader
+  dumpautoload    Dumps the autoloader
+  exec            Execute a vendored binary/script
+  global          Allows running commands in the global composer dir ($COMPOSER_HOME).
+  help            Displays help for a command
+  home            Opens the package's repository URL or homepage in your browser.
+  info            Show information about packages
+  init            Creates a basic composer.json file in current directory.
+  install         Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json.
+  licenses        Show information about licenses of dependencies
+  list            Lists commands
+  outdated        Shows a list of installed packages that have updates available, including their latest version.
+  prohibits       Shows which packages prevent the given package from being installed
+  remove          Removes a package from the require or require-dev
+  require         Adds required packages to your composer.json and installs them
+  run-script      Run the scripts defined in composer.json.
+  search          Search for packages
+  self-update     Updates composer.phar to the latest version.
+  selfupdate      Updates composer.phar to the latest version.
+  show            Show information about packages
+  status          Show a list of locally modified packages
+  suggests        Show package suggestions
+  update          Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file.
+  validate        Validates a composer.json and composer.lock
+  why             Shows which packages cause the given package to be installed
+  why-not         Shows which packages prevent the given package from being installed
+
+$ composer --version
+Composer version 1.2.1 2016-09-12 11:27:19
+
+# $ composer create-project -s dev zendframework/skeleton-application path/to/install
+# $ composer create-project -s stable zendframework/skeleton-application path/to/install
+$ cd "E:\Working\PHP\Zend-Framework\Zend-Framework-3"
+$ composer create-project -s stable zendframework/skeleton-application zf3-stable
+# The default is to provide the minimum amount of dependencies necessary to run a zend-mvc application
+# All prompts emitted by the installer provide the list of options available, and will specify the default option via a capital letter
+# Default values are used if the user presses "Enter" with no value. In the previous example, "Y" is the default.
+# Hit either "Enter", or "n" followed by "Enter"
+
+$ cd zf3-stable
+$ php -S 0.0.0.0:8080 -t public/ public/index.php
+$ composer self-update
+$ composer install #
+$ composer update
+$ composer install #
+
+[
+# Timeouts
+If case of this message:
+[RuntimeException]      
+  The process timed out.
+# Then the connection was too slow to download the entire package in time, and composer timed out
+# To avoid this, instead of running: $ composer install
+# Run instead:
+$ COMPOSER_PROCESS_TIMEOUT=5000 composer install
+]
+
+$ composer show
+
+# Using the Built-in PHP web Server
+$ php -S 0.0.0.0:8080 -t public/ public/index.php
+
+# If it is done it right, see the following
+http://localhost:8080
+Welcome to Zend Framework
+Congratulations! You have successfully installed the ZF Skeleton Application. You are currently running Zend Framework version 3.0.2dev. This skeleton can serve as a simple starting point for you to begin building your application on ZF.
+
+# To test that the routing is working, navigate to http://localhost:8080/1234, and see the following 404 page:
+http://localhost:8080/1234
+A 404 error occurred
+Page not found.
+The requested URL could not be matched by routing.
+
+No Exception available
+
+# Note # Development only # PHP's built-in web server should be used for development only
+
+# Using the Apache Web Server
+# Configuration
+# Create an Apache virtual host for the application and edit the hosts file so that http://zf3-stable.localhost will serve index.php from the zf3-stable/public/ directory
+# Setting up the virtual host is usually done within httpd.conf or extra/httpd-vhosts.conf
+# In case of httpd-vhosts.conf, ensure that this file is included by the main httpd.conf file
+[
+# Some Linux distributions (ex: Ubuntu) package Apache so that configuration files are stored in /etc/apache2 and create one file per virtual host inside folder /etc/apache2/sites-enabled
+# In this case, place the virtual host block below into the file /etc/apache2/sites-enabled/zf3-stable
+]
+
+Ensure that NameVirtualHost is defined and set to *:80 or similar, and then define a virtual host along these lines:
+
+# C:\xampp\apache\conf\extra\httpd-vhosts.conf
+<VirtualHost *:83>
+    ServerName zf3-stable.localhost
+    DocumentRoot E:/Working/PHP/Zend-Framework/Zend-Framework-3/zf3-stable/public
+    SetEnv APPLICATION_ENV "development"
+    <Directory E:/Working/PHP/Zend-Framework/Zend-Framework-3/zf3-stable/public>
+        DirectoryIndex index.php
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+[
+# Update the /etc/hosts or c:\windows\system32\drivers\etc\hosts file so that zf3-stable.localhost is mapped to 127.0.0.1
+# The website can then be accessed using http://zf3-stable.localhost
+127.0.0.1 zf3-stable.localhost localhost
+]
+
+# C:\xampp\apache\conf\httpd.conf
+# Ensure that the file "httpd-vhosts.conf" is included by the main httpd.conf file
+# Virtual hosts
+Include conf/extra/httpd-vhosts.conf
+
+http://localhost:83/
+
+# Restart Apache
+# If it is done so correctly, see the same results as covered under the PHP built-in web server
+http://localhost:83/
+Welcome to Zend Framework
+Congratulations! You have successfully installed the ZF Skeleton Application. You are currently running Zend Framework version 3.0.2dev. This skeleton can serve as a simple starting point for you to begin building your application on ZF.
+
+# To test the .htaccess file is working, navigate to http://zf3-stable.localhost/1234, and see the 404 page as noted earlier
+# If you see a standard Apache 404 error, then the .htaccess usage needs a fix before continuing
+http://localhost:83/1234
+A 404 error occurred
+Page not found.
+The requested URL could not be matched by routing.
+
+No Exception available
+
+# Error reporting when using Apache
+# [Optionally,] when using Apache, use the APPLICATION_ENV setting in the VirtualHost to let PHP output all its errors to the browser # This can be useful during the development of the application
+# Edit zf3-stable/public/index.php directory and change it to the following
+<?php
+
+use Zend\Mvc\Application;
+
+/**
+ * Display all errors when APPLICATION_ENV is development.
+ */
+if ($_SERVER['APPLICATION_ENV'] === 'development') {
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+}
+
+/**
+ * This makes our life easier when dealing with paths. Everything is relative
+ * to the application root now.
+ */
+chdir(dirname(__DIR__));
+
+// Decline static file requests back to the PHP built-in webserver
+if (php_sapi_name() === 'cli-server') {
+    $path = realpath(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    if (__FILE__ !== $path && is_file($path)) {
+        return false;
+    }
+    unset($path);
+}
+
+// Composer autoloading
+include __DIR__ . '/../vendor/autoload.php';
+
+if (! class_exists(Application::class)) {
+    throw new RuntimeException(
+        "Unable to load application.\n"
+        . "- Type `composer install` if you are developing locally.\n"
+        . "- Type `vagrant ssh -c 'composer install'` if you are using Vagrant.\n"
+        . "- Type `docker-compose run zf composer install` if you are using Docker.\n"
+    );
+}
+
+// Retrieve configuration
+$appConfig = require __DIR__ . '/../config/application.config.php';
+if (file_exists(__DIR__ . '/../config/development.config.php')) {
+    $appConfig = ArrayUtils::merge($appConfig, require __DIR__ . '/../config/development.config.php');
+}
+
+// Run the application!
+Application::init($appConfig)->run();
+
+# PHP CLI 
+http://localhost:8080/ 
+# Error: 
+Notice: Undefined index: APPLICATION_ENV in E:\Working\PHP\Zend-Framework\Zend-Framework-3\zf3-stable\public\index.php on line 8
+Fatal error: Uncaught Error: Class 'ArrayUtils' not found in E:\Working\PHP\Zend-Framework\Zend-Framework-3\zf3-stable\public\index.php:43 Stack trace: #0 {main} thrown in E:\Working\PHP\Zend-Framework\Zend-Framework-3\zf3-stable\public\index.php on line 43
+# Apache 
+http://localhost:83/
+# Error: Fatal error: Uncaught Error: Class 'ArrayUtils' not found in E:\Working\PHP\Zend-Framework\Zend-Framework-3\zf3-stable\public\index.php:43 Stack trace: #0 {main} thrown in E:\Working\PHP\Zend-Framework\Zend-Framework-3\zf3-stable\public\index.php on line 43
+# Fix
+use Zend\Stdlib\ArrayUtils;
+// PHP CLI 
+// echo getenv('APPLICATION_ENV');
+if (getenv('APPLICATION_ENV') == 'development') {
+// Apache
+// if ($_SERVER['APPLICATION_ENV'] == 'development') {
+# zf3-stable/public/index.php # use Zend\Stdlib\ArrayUtils; # if (getenv('APPLICATION_ENV') == 'development')
+<?php
+
+use Zend\Mvc\Application;
+use Zend\Stdlib\ArrayUtils;
+
+/**
+ * Display all errors when APPLICATION_ENV is development.
+ */
+// PHP CLI 
+// echo getenv('APPLICATION_ENV');
+if (getenv('APPLICATION_ENV') == 'development') {
+// Apache
+// if ($_SERVER['APPLICATION_ENV'] == 'development') {
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
+}
+
+/**
+ * This makes our life easier when dealing with paths. Everything is relative
+ * to the application root now.
+ */
+chdir(dirname(__DIR__));
+
+// Decline static file requests back to the PHP built-in webserver
+if (php_sapi_name() === 'cli-server') {
+    $path = realpath(__DIR__ . parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH));
+    if (__FILE__ !== $path && is_file($path)) {
+        return false;
+    }
+    unset($path);
+}
+
+// Composer autoloading
+include __DIR__ . '/../vendor/autoload.php';
+
+if (! class_exists(Application::class)) {
+    throw new RuntimeException(
+        "Unable to load application.\n"
+        . "- Type `composer install` if you are developing locally.\n"
+        . "- Type `vagrant ssh -c 'composer install'` if you are using Vagrant.\n"
+        . "- Type `docker-compose run zf composer install` if you are using Docker.\n"
+    );
+}
+
+// Retrieve configuration
+$appConfig = require __DIR__ . '/../config/application.config.php';
+if (file_exists(__DIR__ . '/../config/development.config.php')) {
+    $appConfig = ArrayUtils::merge($appConfig, require __DIR__ . '/../config/development.config.php');
+}
+
+// Run the application!
+Application::init($appConfig)->run();
+
+# PHP CLI
+http://localhost:8080/
+# Apache
+http://localhost:83/
+
+## https://docs.zendframework.com/tutorials/getting-started/modules/
+## Modules
+# zend-mvc uses a module system to organise the main application-specific code within each module
+# The Application module provided by the skeleton is used to provide bootstrapping, error, and routing configuration to the whole application
+# It is usually used to provide application level controllers for the home page of an application
+# However skip the default one provided, as the album list needs to be the home page, which will live in the new module
+# Put all the code into the Album module which will contain the controllers, models, forms and views, along with configuration
+# Also tweak the Application module as required
+# Start with the directories required
+# Setting up the Album module
+zf3-stable/
+    /module
+        /Album
+            /config
+            /src
+                /Controller
+                /Form
+                /Model
+            /view
+                /album
+                    /album
+# The Album module has separate directories for the different types of files
+# The PHP files that contain classes within the Album namespace live in the src/ directory
+# The view directory also has a sub-folder called album for the module's view scripts
+# In order to load and configure a module, Zend Framework provides a ModuleManager
+# This will look for a Module class in the specified module namespace (i.e., Album); in the case of the new module, that means the class Album\Module, which will be found in module/Album/src/Module.php
+# Create that file now, with the following contents:
+$ touch module/Album/src/Module.php
+
+# zf3-stable/module/Album/src/Module.php # <?php
+<?php
+
+namespace Album;
+
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+
+class Module implements ConfigProviderInterface
+{
+    public function getConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+}
+# The ModuleManager will call getConfig() automatically
+
+# Autoloading
+# While Zend Framework provides autoloading capabilities via its zend-loader component, it is recommended to use Composer's autoloading capabilities
+# As such Composer needs to be informed of the new namespace, and where its files live
+# Open composer.json in the project root, and look for the autoload section; it should look like the following by default:
+"autoload": {
+    "psr-4": {
+        "Application\\": "module/Application/src/"
+    }
+},
+
+# Add the new module to the list, so it now reads:
+# zf3-stable/composer.json
+    "autoload": {
+        "psr-4": {
+            "Application\\": "module/Application/src/",
+            "Album\\": "module/Album/src/"
+        }
+    },
+
+# Run the following to ensure Composer updates its autoloading rules:
+$ composer dump-autoload
+
+# Configuration
+# Having registered the autoloader, have a look at the getConfig() method in Album\Module [zf3-stable/module/Album/src/Module.php]
+# This method loads the config/module.config.php file under the module's root directory
+
+# Create a file called module.config.php under zf3-stable/module/Album/config/:
+$ touch "module/Album/config/module.config.php"
+# zf3-stable/module/Album/config/module.config.php # <?php
+<?php
+
+namespace Album;
+
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return [
+    'controllers' => [
+        'factories' => [
+            Controller\AlbumController::class => InvokableFactory::class,
+        ],
+    ],
+    'view_manager' => [
+        'template_path_stack' => [
+            'album' => __DIR__ . '/../view',
+        ],
+    ],
+];
+
+# The config information is passed to the relevant components by the ServiceManager
+# Two initial sections are needed: controllers and view_manager
+# The controllers section provides a list of all the controllers provided by the module
+# One controller is needed i.e., AlbumController that will be referenced by its fully qualified class name, and the zend-servicemanager InvokableFactory will be used to create instances of it
+# Within the view_manager section, add the view directory to the TemplatePathStack configuration
+# This will allow it to find the view scripts for the Album module that are stored in the view/ directory
+
+# Informing the application about the new module
+# The ModuleManager needs to be told that this new module exists
+# This is done in the application's config/modules.config.php file which is provided by the skeleton application
+# Update this file so that the array it returns contains the Album module as well, so the file now looks like this:
+(Changes required are highlighted using comments; original comments from the file are omitted for brevity.)
+
+return [
+    'Zend\Form',
+    'Zend\Db',
+    'Zend\Router',
+    'Zend\Validator',
+    'Application',
+    'Album',          // <-- Add this line
+];
+# zf3-stable/config/modules.config.php
+<?php
+/**
+ * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
+ * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
+/**
+ * List of enabled modules for this application.
+ *
+ * This should be an array of module namespaces used in the application.
+ */
+return [
+    'Zend\ServiceManager\Di',
+    'Zend\Session',
+    'Zend\Mvc\Plugin\Prg',
+    'Zend\Mvc\Plugin\Identity',
+    'Zend\Mvc\Plugin\FlashMessenger',
+    'Zend\Mvc\Plugin\FilePrg',
+    'Zend\Mvc\I18n',
+    'Zend\Mvc\Console',
+    'Zend\Log',
+    'Zend\Form',
+    'Zend\Db',
+    'Zend\Cache',
+    'ZendDeveloperTools',
+    'Zend\Router',
+    'Zend\Validator',
+    'Application',
+    'Album',
+];
+# Note that the Album module has been added into the list of modules after the Application module
+# The module has been set up for putting the custom code into it
+
+# PHP CLI
+http://localhost:8080/
+# Apache
+http://localhost:83/
+
+
+## https://docs.zendframework.com/tutorials/getting-started/routing-and-controllers/
+## Routing and controllers
+# A simple inventory system to display the album collection
+# The home page will list the collection and allow us to add, edit and delete albums
+# Hence the following pages are required:
+Page		Description
+Home		This will display the list of albums and provide links to edit and delete them. Also, a link to enable adding new albums will be provided.
+Add new album	This page will provide a form for adding a new album
+Edit album	This page will provide a form for editing an album
+Delete album	This page will confirm to delete an album and then delete it
+
+# It is important to understand how the framework expects the pages to be organised
+# Each page of the application is known as an action and actions are grouped into controllers within modules
+# Hence, you would generally group related actions into a controller; for instance, a news controller might have actions of current, archived, and view
+# As there are four pages that all apply to albums, group them in a single controller AlbumController within the Album module as four actions
+# The four actions will be:
+Page		Controller		Action
+Home		AlbumController		index
+Add new album	AlbumController		add
+Edit album	AlbumController		edit
+Delete album	AlbumController		delete
+
+# The mapping of a URL to a particular action is done using routes that are defined in the module's module.config.php file
+# Add a route for the album actions
+# This is the updated module config file with the new code highlighted using comments
+namespace Album;
+
+use Zend\Router\Http\Segment;
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return [
+    'controllers' => [
+        'factories' => [
+            Controller\AlbumController::class => InvokableFactory::class,
+        ],
+    ],
+
+    // The following section is new and should be added to your file:
+    'router' => [
+        'routes' => [
+            'album' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/album[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\AlbumController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
+    'view_manager' => [
+        'template_path_stack' => [
+            'album' => __DIR__ . '/../view',
+        ],
+    ],
+];
+# zf3-stable/module/Album/config/module.config.php  # <?php
+<?php
+
+namespace Album;
+
+use Zend\Router\Http\Segment;
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return [
+    'controllers' => [
+        'factories' => [
+            Controller\AlbumController::class => InvokableFactory::class,
+        ],
+    ],
+
+    'router' => [
+        'routes' => [
+            'album' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/album[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\AlbumController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
+    'view_manager' => [
+        'template_path_stack' => [
+            'album' => __DIR__ . '/../view',
+        ],
+    ],
+];
+
+# The name of the route is 'album' and has a type of 'segment'
+# The segment route allows to specify placeholders in the URL pattern (route) that will be mapped to named parameters in the matched route
+# In this case, the route is /album[/:action[/:id]] which will match any URL that starts with /album
+# The next segment will be an optional action name, and then finally the next segment will be mapped to an optional id
+# The square brackets indicate that a segment is optional
+# The constraints section allows to ensure that the characters within a segment are as expected, so have limited actions to starting with a letter and then subsequent characters only being alphanumeric, underscore, or hyphen
+# Also limit the id to digits
+
+# This route allows to have the following URLs:
+URL		Page				Action
+/album		Home (list of albums)		index
+/album/add	Add new album			add
+/album/edit/2	Edit album with an id of 2	edit
+/album/delete/4	Delete album with an id of 4	delete
+
+# Create the controller
+# Set up the controller
+# For zend-mvc, the controller is a class that is generally called {Controller name}Controller; note that {Controller name} must start with a capital letter
+# This class lives in a file called {Controller name}Controller.php within the Controller subdirectory for the module; in this case that is module/Album/src/Controller/
+# Each action is a public method within the controller class that is named {action name}Action, where {action name} should start with a lower case letter
+
+# Conventions not strictly enforced
+# This is by convention: 
+# zend-mvc doesn't provide many restrictions on controllers other than that they must implement the Zend\Stdlib\Dispatchable interface
+# The framework provides two abstract classes that do this: Zend\Mvc\Controller\AbstractActionController and Zend\Mvc\Controll\AbstractRestfulController # The standard AbstractActionController will be used, however if it is intended to write a RESTful web service, AbstractRestfulController may be useful
+
+# Create the controller class in the file zf3-stable/module/Album/src/Controller/AlbumController.php:
+$ touch module/Album/src/Controller/AlbumController.php
+# zf3-stable/module/Album/src/Controller/AlbumController.php # <?php
+<?php
+
+namespace Album\Controller;
+
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AlbumController extends AbstractActionController
+{
+    public function indexAction()
+    {
+        die("The 'die' language construct is equivalent to exit().");
+    }
+
+    public function addAction()
+    {
+    }
+
+    public function editAction()
+    {
+    }
+
+    public function deleteAction()
+    {
+    }
+}
+
+# die("The 'die' language construct is equivalent to exit().");
+http://localhost:8080/album
+die("The 'die' language construct is equivalent to exit().");
+http://localhost:83/album
+die("The 'die' language construct is equivalent to exit().");
+
+# A working router and the actions are set up for each page of the application
+# It's time to build the view and the model layer
+
+# Initialise the view scripts
+# To integrate the view into the application, create some view script files
+# These files will be executed by the DefaultViewStrategy and will be passed any variables or view models that are returned from the controller action method
+# These view scripts are stored in the module's views directory within a directory named after the controller
+# Create these four empty files now:
+module/Album/view/album/album/index.phtml
+module/Album/view/album/album/add.phtml
+module/Album/view/album/album/edit.phtml
+module/Album/view/album/album/delete.phtml
+$
+touch module/Album/view/album/album/index.phtml
+touch module/Album/view/album/album/add.phtml
+touch module/Album/view/album/album/edit.phtml
+touch module/Album/view/album/album/delete.phtml
+
+# Start filling everything in, starting with the database and models
+
+# PHP CLI
+http://localhost:8080/album	
+# Apache
+http://localhost:83/album
+
+
+## https://docs.zendframework.com/tutorials/getting-started/database-and-models/
+## Database and models
+
+[
+# Database
+services.msc
+Stop MySQL
+Start XAMPP Apache and MySQL
+http://localhost/phpmyadmin 
+# OR 
+http://localhost:83/phpmyadmin
+]
+
+# The database
+# Now that the Album module has been set up with controller action methods and view scripts, it is time to look at the model section of the application
+# Remember that the model is the part that deals with the application's core purpose (the so-called "business rules") and, in this case, deals with the database
+# Make use of zend-db's Zend\Db\TableGateway\TableGateway to find, insert, update, and delete rows from a database table
+
+[
+# Use Sqlite, via PHP's PDO driver
+# Create a text file data/schema.sql with the following contents:
+$ touch data/schema.sql
+# zf3-stable/data/schema.sql
+CREATE TABLE album (id INTEGER PRIMARY KEY AUTOINCREMENT, artist varchar(100) NOT NULL, title varchar(100) NOT NULL);
+INSERT INTO album (artist, title) VALUES ('The Military Wives', 'In My Dreams');
+INSERT INTO album (artist, title) VALUES ('Adele', '21');
+INSERT INTO album (artist, title) VALUES ('Bruce Springsteen', 'Wrecking Ball (Deluxe)');
+INSERT INTO album (artist, title) VALUES ('Lana Del Rey', 'Born To Die');
+INSERT INTO album (artist, title) VALUES ('Gotye', 'Making Mirrors');
+
+# Now create the database using the following: # sqlite3 # zf3-stable.sqlite3
+$ sqlite3 --version
+3.8.7.2 2014-11-18 20:57:56 2ab564bf9655b7c7b97ab85cafc8a48329b27f93
+$ sqlite3 data/zf3-stable.sqlite3 < data/schema.sql
+# Some systems, including Ubuntu, use the command sqlite3; check to see which one to use on the system
+# zf3-stable/data/zf3-stable.sqlite3
+$ winpty sqlite3 data/zf3-stable.sqlite3
+SQLite version 3.8.7.2 2014-11-18 20:57:56
+Enter ".help" for usage hints.
+sqlite> .tables
+album
+sqlite> SELECT * FROM album;
+1|The Military Wives|In My Dreams
+2|Adele|21
+3|Bruce Springsteen|Wrecking Ball (Deluxe)
+4|Lana Del Rey|Born To Die
+5|Gotye|Making Mirrors
+sqlite> .exit
+]
+
+# Using PHP to create the database
+# If Sqlite is not installed on the system, use PHP to load the database using the same SQL schema file created earlier
+# Create the file data/load_db.php with the following contents:
+$ touch data/load_db.php
+# zf3-stable/data/load_db.php # zf3-stable.db
+<?php
+
+$db = new PDO('sqlite:' . realpath(__DIR__) . '/zf3-stable.db');
+$fh = fopen(__DIR__ . '/schema.sql', 'r');
+while ($line = fread($fh, 4096)) {
+    $db->exec($line);
+}
+fclose($fh);
+
+# Execute load_db.php:
+$ php data/load_db.php
+
+# Now that there is data in the database, write a very simple model for it
+# The model files
+# Zend Framework does not provide a zend-model component because the model is "business logic", and it's up to the business to decide how it wants to work
+# There are many components that can be used for this depending on the needs
+# One approach is to have model classes represent each entity in the application and then use mapper objects that load and save entities to the database
+# Another is to use an Object-Relational Mapping (ORM) technology, such as Doctrine or Propel
+
+# In this case, create a model by creating an AlbumTable class that consumes a Zend\Db\TableGateway\TableGateway, and in which each album will be represented as an Album object (known as an entity)
+# This is an implementation of the Table Data Gateway design pattern to allow for interfacing with data in a database table
+[# Though that the Table Data Gateway pattern can become limiting in larger systems, there is also an anti-pattern to put database access code into controller action methods as these are exposed by Zend\Db\TableGateway\AbstractTableGateway]
+# Start by creating a file called Album.php under module/Album/src/Model
+$ touch module/Album/src/Model/Album.php
+# zf3-stable/module/Album/src/Model/Album.php # <?php
+<?php
+
+namespace Album\Model;
+
+class Album
+{
+    public $id;
+    public $artist;
+    public $title;
+
+    public function exchangeArray(array $data)
+    {
+        $this->id     = !empty($data['id']) ? $data['id'] : null;
+        $this->artist = !empty($data['artist']) ? $data['artist'] : null;
+        $this->title  = !empty($data['title']) ? $data['title'] : null;
+    }
+}
+
+# Album entity object is a PHP class
+# In order to work with zend-db's TableGateway class, the exchangeArray() method needs to be implemented; this method copies the data from the provided array to the entity's properties
+# Add an input filter later to ensure the values injected are valid
+# Next, create the AlbumTable.php file in module/Album/src/Model directory like this:
+$ touch module/Album/src/Model/AlbumTable.php
+# zf3-stable/module/Album/src/Model/AlbumTable.php # <?php
+<?php
+
+namespace Album\Model;
+
+use RuntimeException;
+use Zend\Db\TableGateway\TableGatewayInterface;
+
+class AlbumTable
+{
+    private $tableGateway;
+
+    public function __construct(TableGatewayInterface $tableGateway)
+    {
+        $this->tableGateway = $tableGateway;
+    }
+
+    public function fetchAll()
+    {
+        return $this->tableGateway->select();
+    }
+
+    public function getAlbum($id)
+    {
+        $id = (int) $id;
+        $rowset = $this->tableGateway->select(['id' => $id]);
+        $row = $rowset->current();
+        if (! $row) {
+            throw new RuntimeException(sprintf(
+                'Could not find row with identifier %d',
+                $id
+            ));
+        }
+
+        return $row;
+    }
+
+    public function saveAlbum(Album $album)
+    {
+        $data = [
+            'artist' => $album->artist,
+            'title'  => $album->title,
+        ];
+
+        $id = (int) $album->id;
+
+        if ($id === 0) {
+            $this->tableGateway->insert($data);
+            return;
+        }
+
+        if (! $this->getAlbum($id)) {
+            throw new RuntimeException(sprintf(
+                'Cannot update album with identifier %d; does not exist',
+                $id
+            ));
+        }
+
+        $this->tableGateway->update($data, ['id' => $id]);
+    }
+
+    public function deleteAlbum($id)
+    {
+        $this->tableGateway->delete(['id' => (int) $id]);
+    }
+}
+
+# Firstly, the protected property $tableGateway has been set to the TableGateway instance passed in the constructor, hinting against the TableGatewayInterface (which allows to provide alternate implementations easily, including mock instances during testing)
+# This will be used to perform operations on the database table for the albums
+# Then create some helper methods that the application will use to interface with the table gateway
+# fetchAll() retrieves all albums rows from the database as a ResultSet, getAlbum() retrieves a single row as an Album object, saveAlbum() either creates a new row in the database or updates a row that already exists, and deleteAlbum() removes the row completely
+# The code for each of these methods is self-explanatory
+
+# Using ServiceManager to configure the table gateway and inject into the AlbumTable
+# In order to always use the same instance of the AlbumTable, use the ServiceManager to define how to create one
+# This is most easily done in the Module class where a method called getServiceConfig() is created and is automatically called by the ModuleManager and applied to the ServiceManager
+# Then retrieve when needed
+
+# To configure the ServiceManager, supply the name of the class to be instantiated or a factory (closure, callback, or class name of a factory class) that instantiates the object when the ServiceManager needs it
+#  Start by implementing getServiceConfig() to provide a factory that creates an AlbumTable
+# Add this method to the bottom of the module/Album/src/Module.php file:
+namespace Album;
+
+// Add these import statements:
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+
+class Module implements ConfigProviderInterface
+{
+    // getConfig() method is here
+
+    // Add this method:
+    public function getServiceConfig()
+    {
+        return [
+            'factories' => [
+                Model\AlbumTable::class => function($container) {
+                    $tableGateway = $container->get(Model\AlbumTableGateway::class);
+                    return new Model\AlbumTable($tableGateway);
+                },
+                Model\AlbumTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Album());
+                    return new TableGateway('album', $dbAdapter, null, $resultSetPrototype);
+                },
+            ],
+        ];
+    }
+}
+# zf3-stable/module/Album/src/Module.php
+<?php
+
+namespace Album;
+
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+
+class Module implements ConfigProviderInterface
+{
+    public function getConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+	
+    public function getServiceConfig()
+    {
+        return [
+            'factories' => [
+                Model\AlbumTable::class => function($container) {
+                    $tableGateway = $container->get(Model\AlbumTableGateway::class);
+                    return new Model\AlbumTable($tableGateway);
+                },
+                Model\AlbumTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Album());
+                    return new TableGateway('album', $dbAdapter, null, $resultSetPrototype);
+                },
+            ],
+        ];
+    }
+}
+
+# getServiceConfig() method returns an array of factories that are all merged together by the ModuleManager before passing them to the ServiceManager
+# The factory for Album\Model\AlbumTable uses the ServiceManager to create an Album\Model\AlbumTableGateway service representing a TableGateway to pass to its constructor
+# The ServiceManager is told that the AlbumTableGateway service is created by fetching a Zend\Db\Adapter\AdapterInterface implementation (also from the ServiceManager) and using it to create a TableGateway object
+# The TableGateway is told to use an Album object whenever it creates a new result row
+# The TableGateway classes use the prototype pattern for creation of result sets and entities
+# This means that instead of instantiating when required, the system clones a previously instantiated object
+# See PHP Constructor Best Practices and the Prototype Pattern [http://ralphschindler.com/2012/03/09/php-constructor-best-practices-and-the-prototype-pattern]  for more details
+
+# Factories
+# The above demonstrates building factories as closures within the module class
+# Another option is to build the factory as a class, and then map the class in the module configuration
+# This approach has a number of benefits:
+• The code is not parsed or executed unless the factory is invoked
+• Easy to unit test the factory to ensure it does what it should
+• Extending the factory if desired
+• Re-using the factory across multiple instances that have related construction
+# Creating factories is covered in the zend-servicemanager documentation [https://zendframework.github.io/zend-servicemanager/configuring-the-service-manager/#factories]
+
+# The Zend\Db\Adapter\AdapterInterface service is registered by the zend-db component
+# Note that config/modules.config.php contains the following entries: 
+return [
+    'Zend\Form',
+    'Zend\Db',
+    'Zend\Router',
+    'Zend\Validator',
+    /* ... */
+],
+
+[
+# Zend\I18n\Translator component requires the intl PHP extension [zf3-stable/module/Application/view/layout/layout.phtml on line 0]
+# xampp/php/php.ini
+# Uncomment
+extension=php_intl.dll
+]
+
+# All Zend Framework components that provide zend-servicemanager configuration are also exposed as modules themselves; the prompts as to where to register the components during the initial installation occurred to ensure that the above entries are created
+# Having a factory for the Zend\Db\Adapter\AdapterInterface service, provide configuration so it can create an adapter
+
+# Zend Framework's ModuleManager merges all the configuration from each module's module.config.php file, and then merges in the files in config/autoload/ (first *.global.php files, and then *.local.php files). 
+# Add the database configuration information to global.php for the version control system commit
+# Use local.php (outside of the VCS) to store the credentials for the database if need be
+# Modify config/autoload/global.php (in the project root, not inside the Album module) with following code:
+# zf3-stable/config/autoload/global.php # zf3-stable.db
+return [
+    'db' => [
+        'driver' => 'Pdo',
+        'dsn'    => sprintf('sqlite:%s/data/zf3-stable.db', realpath(getcwd())),
+    ],
+];
+
+# In the instance of configuring a database that required credentials, put the general configuration in the config/autoload/global.php, and then the configuration for the current environment, including the DSN and credentials, in the config/autoload/local.php file
+# These get merged when the application runs, ensuring you have a full definition, however it allows to keep files with credentials outside of version control
+
+# Back to the controller
+# Now that there is a model, it needs to be injected into the controller so that it can be used
+# Firstly, add a constructor to the controller
+# Open the file module/Album/src/Controller/AlbumController.php and add the following property and constructor:
+namespace Album\Controller;
+
+// Add the following import:
+use Album\Model\AlbumTable;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AlbumController extends AbstractActionController
+{
+    // Add this property:
+    private $table;
+
+    // Add this constructor:
+    public function __construct(AlbumTable $table)
+    {
+        $this->table = $table;
+    }
+
+    /* ... */
+}
+
+# module/Album/src/Controller/AlbumController.php
+<?php
+
+namespace Album\Controller;
+
+use Album\Model\AlbumTable;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AlbumController extends AbstractActionController
+{
+    private $table;
+	
+    public function __construct(AlbumTable $table)
+    {
+        $this->table = $table;
+    }
+	
+    public function indexAction()
+    {
+        # die("The 'die' language construct is equivalent to exit().");
+    }
+
+    public function addAction()
+    {
+    }
+
+    public function editAction()
+    {
+    }
+
+    public function deleteAction()
+    {
+    }
+}
+
+# Controller now depends on AlbumTable, so it is needed to create a factory for the controller
+# Similar to how the factories created for the model, create it in the Module class, only this time, under a new method, Album\Module::getControllerConfig():
+namespace Album;
+
+use Zend\Db\Adapter\Adapter;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+
+class Module implements ConfigProviderInterface
+{
+    // getConfig() and getServiceConfig methods are here
+
+    // Add this method:
+    public function getControllerConfig()
+    {
+        return [
+            'factories' => [
+                Controller\AlbumController::class => function($container) {
+                    return new Controller\AlbumController(
+                        $container->get(Model\AlbumTable::class)
+                    );
+                },
+            ],
+        ];
+    }
+}
+# zf3-stable/module/Album/src/Module.php
+<?php
+
+namespace Album;
+
+use Zend\Db\Adapter\AdapterInterface;
+use Zend\Db\ResultSet\ResultSet;
+use Zend\Db\TableGateway\TableGateway;
+use Zend\ModuleManager\Feature\ConfigProviderInterface;
+
+class Module implements ConfigProviderInterface
+{
+    public function getConfig()
+    {
+        return include __DIR__ . '/../config/module.config.php';
+    }
+	
+    public function getServiceConfig()
+    {
+        return [
+            'factories' => [
+                Model\AlbumTable::class => function($container) {
+                    $tableGateway = $container->get(Model\AlbumTableGateway::class);
+                    return new Model\AlbumTable($tableGateway);
+                },
+                Model\AlbumTableGateway::class => function ($container) {
+                    $dbAdapter = $container->get(AdapterInterface::class);
+                    $resultSetPrototype = new ResultSet();
+                    $resultSetPrototype->setArrayObjectPrototype(new Model\Album());
+                    return new TableGateway('album', $dbAdapter, null, $resultSetPrototype);
+                },
+            ],
+        ];
+    }
+	
+    public function getControllerConfig()
+    {
+        return [
+            'factories' => [
+                Controller\AlbumController::class => function($container) {
+                    return new Controller\AlbumController(
+                        $container->get(Model\AlbumTable::class)
+                    );
+                },
+            ],
+        ];
+    }
+}
+
+# Because the factory is defined, modify the module.config.php to remove the definition
+# Open module/Album/config/module.config.php and remove the following lines:
+<?php
+namespace Album;
+
+// Remove this:
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return [
+    // And remove the entire "controllers" section here:
+    'controllers' => [
+        'factories' => [
+            Controller\AlbumController::class => InvokableFactory::class,
+        ],
+    ],
+
+    /* ... */
+];
+# zf3-stable/module/Album/config/module.config.php
+<?php
+
+namespace Album;
+
+use Zend\Router\Http\Segment;
+
+return [
+    'router' => [
+        'routes' => [
+            'album' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route' => '/album[/:action[/:id]]',
+                    'constraints' => [
+                        'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
+                        'id'     => '[0-9]+',
+                    ],
+                    'defaults' => [
+                        'controller' => Controller\AlbumController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+        ],
+    ],
+
+    'view_manager' => [
+        'template_path_stack' => [
+            'album' => __DIR__ . '/../view',
+        ],
+    ],
+];
+
+# Now the property $table is accessible from within the controller whenever it is need to interact with the model
+
+# Listing albums
+# In order to list the albums, retrieve them from the model and pass them to the view
+# To do this, fill in indexAction() within AlbumController
+# Update the AlbumController::indexAction() as follows:
+
+// module/Album/src/Controller/AlbumController.php:
+// ...
+    public function indexAction()
+    {
+        return new ViewModel([
+            'albums' => $this->table->fetchAll(),
+        ]);
+    }
+// ...
+
+# zf3-stable/module/Album/src/Controller/AlbumController.php
+<?php
+
+namespace Album\Controller;
+
+use Album\Model\AlbumTable;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AlbumController extends AbstractActionController
+{
+    private $table;
+	
+    public function __construct(AlbumTable $table)
+    {
+        $this->table = $table;
+    }
+	
+    public function indexAction()
+    {
+        # die("The 'die' language construct is equivalent to exit().");
+        return new ViewModel([
+            'albums' => $this->table->fetchAll(),
+        ]);
+    }
+
+    public function addAction()
+    {
+    }
+
+    public function editAction()
+    {
+    }
+
+    public function deleteAction()
+    {
+    }
+}
+
+# With Zend Framework, in order to set variables in the view, return a ViewModel instance where the first parameter of the constructor is an array containing data to represent
+# These are then automatically passed to the view script
+# The ViewModel object also allows to change the view script that is used, however the default is to use {module name}/{controller name}/{action name}
+# Fill in the index.phtml view script:
+# zf3-stable/module/Album/view/album/album/index.phtml
+<?php
+// module/Album/view/album/album/index.phtml:
+
+$title = 'My albums';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<p>
+    <a href="<?= $this->url('album', ['action' => 'add']) ?>">Add new album</a>
+</p>
+
+<table class="table">
+<tr>
+    <th>Title</th>
+    <th>Artist</th>
+    <th>&nbsp;</th>
+</tr>
+<?php foreach ($albums as $album) : ?>
+    <tr>
+        <td><?= $this->escapeHtml($album->title) ?></td>
+        <td><?= $this->escapeHtml($album->artist) ?></td>
+        <td>
+            <a href="<?= $this->url('album', ['action' => 'edit', 'id' => $album->id]) ?>">Edit</a>
+            <a href="<?= $this->url('album', ['action' => 'delete', 'id' => $album->id]) ?>">Delete</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
+
+# The first thing to do is to set the title for the page (used in the layout) and also set the title for the <head> section using the headTitle() view helper which will display in the browser's title bar, then create a link to add a new album
+
+# The url() view helper is provided by zend-mvc and zend-view, and is used to create the links needed
+# The first parameter to url() is the route name to use for construction of the URL, and the second parameter is an array of variables to substitute into route placeholders
+# In this case use the album route which is set up to accept two placeholder variables: action and id
+
+# Iterate over the $albums that were assigned from the controller action
+# zend-view automatically ensures that these variables are extracted into the scope of the view script
+# And access them using $this->{variable name} in order to differentiate between variables provided to the view script and those created inside it
+
+# Create a table to display each album's title and artist, and provide links to allow for editing and deleting the record
+# A standard foreach: loop is used to iterate over the list of albums, and use the alternate form using a colon and endforeach; as it is easier to scan than to try and match up braces
+# The url() view helper is used to create the edit and delete links
+
+# Escaping
+# Always use the escapeHtml() view helper to help protect from Cross Site Scripting (XSS) vulnerabilities [http://en.wikipedia.org/wiki/Cross-site_scripting]
+
+# See this:
+http://localhost:83/album
+http://localhost:8080/album
+My albums
+Add new album
+
+Title				Artist	 
+In My Dreams			The Military Wives	Edit Delete
+21				Adele			Edit Delete
+Wrecking Ball (Deluxe)		Bruce Springsteen	Edit Delete
+Born To Die			Lana Del Rey		Edit Delete
+Making Mirrors			Gotye			Edit Delete
+
+# PHP CLI
+http://localhost:8080/album	
+# Apache
+http://localhost:83/album
+
+
+## https://docs.zendframework.com/tutorials/getting-started/forms-and-actions/
+## Forms and actions
+# Adding new albums
+# Code the functionality to add new albums
+# There are two bits to this part:
+# Display a form for user to provide details
+# Process the form submission and store to database
+# Use zend-form to do this
+# zend-form manages the various form inputs as well as their validation, the latter of which is handled by the zend-inputfilter component
+# Start by creating a new class, Album\Form\AlbumForm, extending from Zend\Form\Form
+# Create the file module/Album/src/Form/AlbumForm.php with the following contents:
+$ touch module/Album/src/Form/AlbumForm.php
+# zf3-stable/module/Album/src/Form/AlbumForm.php #<?php
+<?php
+
+namespace Album\Form;
+
+use Zend\Form\Form;
+
+class AlbumForm extends Form
+{
+    public function __construct($name = null)
+    {
+        // Ignore the name provided to the constructor
+        parent::__construct('album');
+
+        $this->add([
+            'name' => 'id',
+            'type' => 'hidden',
+        ]);
+        $this->add([
+            'name' => 'title',
+            'type' => 'text',
+            'options' => [
+                'label' => 'Title',
+            ],
+        ]);
+        $this->add([
+            'name' => 'artist',
+            'type' => 'text',
+            'options' => [
+                'label' => 'Artist',
+            ],
+        ]);
+        $this->add([
+            'name' => 'submit',
+            'type' => 'submit',
+            'attributes' => [
+                'value' => 'Go',
+                'id'    => 'submitbutton',
+            ],
+        ]);
+    }
+}
+
+# Within the constructor of AlbumForm, set the name of the form as the parent's constructor is called
+# Create four form elements: the id, title, artist, and submit button
+# For each item, set various attributes and options, including the label to be displayed
+
+# Form method
+# HTML forms can be sent using POST and GET
+# zend-form defaults to POST; therefore there's no need to be explicit in setting this option
+# If need be change it to GET however, set the method attribute in the constructor:
+$this->setAttribute('method', 'GET');
+
+# Set up validation for this form
+# zend-inputfilter provides a general purpose mechanism for input validation
+# It also provides an interface, InputFilterAwareInterface, which zend-form will use in order to bind an input filter to a given form
+# Add this capability now to the Album class
+// module/Album/src/Model/Album.php:
+namespace Album\Model;
+
+// Add the following import statements:
+use DomainException;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Filter\ToInt;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Validator\StringLength;
+
+class Album implements InputFilterAwareInterface
+{
+    public $id;
+    public $artist;
+    public $title;
+
+    // Add this property:
+    private $inputFilter;
+
+    public function exchangeArray(array $data)
+    {
+        $this->id     = !empty($data['id']) ? $data['id'] : null;
+        $this->artist = !empty($data['artist']) ? $data['artist'] : null;
+        $this->title  = !empty($data['title']) ? $data['title'] : null;
+    }
+
+    /* Add the following methods: */
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(sprintf(
+            '%s does not allow injection of an alternate input filter',
+            __CLASS__
+        ));
+    }
+
+    public function getInputFilter()
+    {
+        if ($this->inputFilter) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = new InputFilter();
+
+        $inputFilter->add([
+            'name' => 'id',
+            'required' => true,
+            'filters' => [
+                ['name' => ToInt::class],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name' => 'artist',
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name' => 'title',
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
+    }
+}
+# zf3-stable/module/Album/src/Model/Album.php
+<?php
+
+namespace Album\Model;
+
+use DomainException;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Filter\ToInt;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Validator\StringLength;
+
+class Album implements InputFilterAwareInterface
+{
+    public $id;
+    public $artist;
+    public $title;
+
+    private $inputFilter;
+
+    public function exchangeArray(array $data)
+    {
+        $this->id     = !empty($data['id']) ? $data['id'] : null;
+        $this->artist = !empty($data['artist']) ? $data['artist'] : null;
+        $this->title  = !empty($data['title']) ? $data['title'] : null;
+    }
+
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(sprintf(
+            '%s does not allow injection of an alternate input filter',
+            __CLASS__
+        ));
+    }
+
+    public function getInputFilter()
+    {
+        if ($this->inputFilter) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = new InputFilter();
+
+        $inputFilter->add([
+            'name' => 'id',
+            'required' => true,
+            'filters' => [
+                ['name' => ToInt::class],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name' => 'artist',
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name' => 'title',
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
+    }
+}
+# The InputFilterAwareInterface defines two methods: setInputFilter() and getInputFilter()
+# There is only need to implement getInputFilter() so throw an exception from setInputFilter()
+
+# Within getInputFilter(), instantiate an InputFilter and then add the inputs that are required
+# Add one input for each property to be filtered or validated
+# For the id field, add an int filter as only integers are needed
+# For the text elements, add two filters, StripTags and StringTrim, to remove unwanted HTML and unnecessary white space
+# Also set them to be required and add a StringLength validator to ensure that the user doesn't enter more characters than that can be stored into the database
+# Get the form to display and then process it on submission
+# This is done within the AlbumController::addAction():
+// module/Album/src/Controller/AlbumController.php:
+
+// Add the following import statements at the top of the file:
+use Album\Form\AlbumForm;
+use Album\Model\Album;
+
+class AlbumController extends AbstractActionController
+{
+    /* ... */
+
+    /* Update the following method to read as follows: */
+    public function addAction()
+    {
+        $form = new AlbumForm();
+        $form->get('submit')->setValue('Add');
+
+        $request = $this->getRequest();
+
+        if (! $request->isPost()) {
+            return ['form' => $form];
+        }
+
+        $album = new Album();
+        $form->setInputFilter($album->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return ['form' => $form];
+        }
+
+        $album->exchangeArray($form->getData());
+        $this->table->saveAlbum($album);
+        return $this->redirect()->toRoute('album');
+    }
+
+    /* ... */
+}
+# zf3-stable/module/Album/src/Controller/AlbumController.php
+<?php
+
+namespace Album\Controller;
+
+use Album\Form\AlbumForm;
+use Album\Model\Album;
+use Album\Model\AlbumTable;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AlbumController extends AbstractActionController
+{
+    private $table;
+	
+    public function __construct(AlbumTable $table)
+    {
+        $this->table = $table;
+    }
+	
+    public function indexAction()
+    {
+        # die("The 'die' language construct is equivalent to exit().");
+        return new ViewModel([
+            'albums' => $this->table->fetchAll(),
+        ]);
+    }
+
+    public function addAction()
+    {
+        $form = new AlbumForm();
+        $form->get('submit')->setValue('Add');
+
+        $request = $this->getRequest();
+
+        if (! $request->isPost()) {
+            return ['form' => $form];
+        }
+
+        $album = new Album();
+        $form->setInputFilter($album->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return ['form' => $form];
+        }
+
+        $album->exchangeArray($form->getData());
+        $this->table->saveAlbum($album);
+        return $this->redirect()->toRoute('album');
+    }
+
+    public function editAction()
+    {
+    }
+
+    public function deleteAction()
+    {
+    }
+}
+# After adding the Album and AlbumForm classes to the import list, implement addAction()
+# Look at the addAction() code in a little more detail:
+$form = new AlbumForm();
+$form->get('submit')->setValue('Add');
+# Instantiate AlbumForm and set the label on the submit button to "Add"
+# This is done here so as to re-use the form when editing an album using a different label
+$request = $this->getRequest();
+
+if (! $request->isPost()) {
+    return ['form' => $form];
+}
+# If the request is not a POST request, then no form data has been submitted, and the form needs to be displayed
+# zend-mvc allows to return an array of data instead of a view model if desired; if so, the array will be used to create a view model
+$album = new Album();
+$form->setInputFilter($album->getInputFilter());
+$form->setData($request->getPost());
+# At this point, there is a form submission
+# Create an Album instance, and pass its input filter on to the form; additionally, pass the submitted data from the request instance to the form
+if (! $form->isValid()) {
+    return ['form' => $form];
+}
+# If form validation fails, the form has to be redisplayed
+# At this point, the form contains information about what fields failed validation, and why, and this information will be communicated to the view layer
+$album->exchangeArray($form->getData());
+$this->table->saveAlbum($album);
+# If the form is valid, then grab the data from the form and store to the model using saveAlbum()
+return $this->redirect()->toRoute('album');
+
+# After the new album row has been saved, redirect back to the list of albums using the Redirect controller plugin
+# Render the form in the add.phtml view script:
+# zf3-stable/module/Album/view/album/album/add.phtml
+<?php
+
+// module/Album/view/album/album/add.phtml:
+
+$title = 'Add new album';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$form->setAttribute('action', $this->url('album', ['action' => 'add']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formHidden($form->get('id'));
+echo $this->formRow($form->get('title'));
+echo $this->formRow($form->get('artist'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+
+# Display a title as before, and then render the form
+# zend-form provides several view helpers to make this a little easier
+# The form() view helper has an openTag() and closeTag() method which is used to open and close the form
+# Then for each element with a label, use formRow() to render the label, input, and any validation error messages; for the two elements that are standalone and have no validation rules, use formHidden() and formSubmit()
+# Alternatively, the process of rendering the form can be simplified by using the bundled formCollection view helper
+# For example, in the view script above replace all the form-rendering echo statements with:
+echo $this->formCollection($form);
+# This will iterate over the form structure, calling the appropriate label, element, and error view helpers for each element, however formCollection($form) has to be wrapped with the open and close form tags
+# This helps reduce the complexity of the view script in situations where the default HTML rendering of the form is acceptable
+# "Add new album" link on the home page of the application can now be used to add a new album record
+# Bootstrap, the CSS foundation used in the skeleton, has specialized markup for displaying forms
+# Form look can be addressed in the view script by:
+• Adding markup around the elements
+• Rendering labels, elements, and error messages separately
+• Adding attributes to elements
+
+# Update the add.phtml view script to read as follows:
+<?php
+$title = 'Add new album';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+// This provides a default CSS class and placeholder text for the title element:
+$album = $form->get('title');
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+// This provides a default CSS class and placeholder text for the artist element:
+$artist = $form->get('artist');
+$artist->setAttribute('class', 'form-control');
+$artist->setAttribute('placeholder', 'Artist');
+
+// This provides CSS classes for the submit button:
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('album', ['action' => 'add']));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<?php // Wrap the elements in divs marked as form groups, and render the
+      // label, element, and errors separately within ?>
+<div class="form-group">
+    <?= $this->formLabel($album) ?>
+    <?= $this->formElement($album) ?>
+    <?= $this->formElementErrors()->render($album, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($artist) ?>
+    <?= $this->formElement($artist) ?>
+    <?= $this->formElementErrors()->render($artist, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+
+# Form look has been addressed 
+http://localhost:83/album/add
+http://localhost:8080/album/add
+
+# The above is meant to demonstrate both the ease of use of the default form features, as well as some of the customizations possible when rendering forms
+# Any markup can be generated necessary for the site 
+
+# Editing an album
+# Editing an album is almost identical to adding one, so the code is very similar
+# Use editAction() in the AlbumController:
+// module/Album/src/Controller/AlbumController.php:
+// ...
+
+    public function editAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+
+        if (0 === $id) {
+            return $this->redirect()->toRoute('album', ['action' => 'add']);
+        }
+
+        // Retrieve the album with the specified id. Doing so raises
+        // an exception if the album is not found, which should result
+        // in redirecting to the landing page.
+        try {
+            $album = $this->table->getAlbum($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('album', ['action' => 'index']);
+        }
+
+        $form = new AlbumForm();
+        $form->bind($album);
+        $form->get('submit')->setAttribute('value', 'Edit');
+
+        $request = $this->getRequest();
+        $viewData = ['id' => $id, 'form' => $form];
+
+        if (! $request->isPost()) {
+            return $viewData;
+        }
+
+        $form->setInputFilter($album->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return $viewData;
+        }
+
+        $this->table->saveAlbum($album);
+
+        // Redirect to album list
+        return $this->redirect()->toRoute('album', ['action' => 'index']);
+    }
+# zf3-stable/module/Album/src/Controller/AlbumController.php
+<?php
+
+namespace Album\Controller;
+
+use Album\Form\AlbumForm;
+use Album\Model\Album;
+use Album\Model\AlbumTable;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AlbumController extends AbstractActionController
+{
+    private $table;
+	
+    public function __construct(AlbumTable $table)
+    {
+        $this->table = $table;
+    }
+	
+    public function indexAction()
+    {
+        # die("The 'die' language construct is equivalent to exit().");
+        return new ViewModel([
+            'albums' => $this->table->fetchAll(),
+        ]);
+    }
+
+    public function addAction()
+    {
+        $form = new AlbumForm();
+        $form->get('submit')->setValue('Add');
+
+        $request = $this->getRequest();
+
+        if (! $request->isPost()) {
+            return ['form' => $form];
+        }
+
+        $album = new Album();
+        $form->setInputFilter($album->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return ['form' => $form];
+        }
+
+        $album->exchangeArray($form->getData());
+        $this->table->saveAlbum($album);
+        return $this->redirect()->toRoute('album');
+    }
+
+    public function editAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+
+        if (0 === $id) {
+            return $this->redirect()->toRoute('album', ['action' => 'add']);
+        }
+
+        // Retrieve the album with the specified id. Doing so raises
+        // an exception if the album is not found, which should result
+        // in redirecting to the landing page.
+        try {
+            $album = $this->table->getAlbum($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('album', ['action' => 'index']);
+        }
+
+        $form = new AlbumForm();
+        $form->bind($album);
+        $form->get('submit')->setAttribute('value', 'Edit');
+
+        $request = $this->getRequest();
+        $viewData = ['id' => $id, 'form' => $form];
+
+        if (! $request->isPost()) {
+            return $viewData;
+        }
+
+        $form->setInputFilter($album->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return $viewData;
+        }
+
+        $this->table->saveAlbum($album);
+
+        // Redirect to album list
+        return $this->redirect()->toRoute('album', ['action' => 'index']);
+    }
+
+    public function deleteAction()
+    {
+    }
+}
+# This code should look comfortably familiar
+# Look at the differences from adding an album
+# Firstly, look for the id that is in the matched route and use it to load the album to be edited:
+$id = (int) $this->params()->fromRoute('id', 0);
+
+if (0 === $id) {
+    return $this->redirect()->toRoute('album', ['action' => 'add']);
+}
+// Retrieve the album with the specified id. Doing so raises
+// an exception if the album is not found, which should result
+// in redirecting to the landing page.
+try {
+    $album = $this->table->getAlbum($id);
+} catch (\Exception $e) {
+    return $this->redirect()->toRoute('album', ['action' => 'index']);
+}
+# params is a controller plugin that provides a convenient way to retrieve parameters from the matched route
+# Use it to retrieve the id from the route created within the Album module's module.config.php
+# If the id is zero, then redirect to the add action, otherwise, continue by getting the album entity from the database
+# Check to make sure that the album with the specified id can actually be found
+# If it cannot, then the data access method throws an exception
+# Catch that exception and re-route the user to the index page
+$form = new AlbumForm();
+$form->bind($album);
+$form->get('submit')->setAttribute('value', 'Edit');
+# The form's bind() method attaches the model to the form
+# This is used in two ways:
+• When displaying the form, the initial values for each element are extracted from the model
+• After successful validation in isValid(), the data from the form is put back into the model
+# These operations are done using a hydrator object
+# There are a number of hydrators, however the default one is Zend\Hydrator\ArraySerializable which expects to find two methods in the model: getArrayCopy() and exchangeArray()
+# Edit exchangeArray() [has already been written] in the Album entity, and add getArrayCopy():
+// module/Album/src/Model/Album.php:
+// ...
+   
+    // Edit the following method:
+    public function exchangeArray($data)
+    {
+        $this->id     = isset($data['id']) ? $data['id'] : null;
+        $this->artist = isset($data['artist']) ? $data['artist'] : null;
+        $this->title  = isset($data['title']) ? $data['title'] : null;
+    }
+
+    // Add the following method:
+    public function getArrayCopy()
+    {
+        return [
+            'id'     => $this->id,
+            'artist' => $this->artist,
+            'title'  => $this->title,
+        ];
+    }
+
+// ...
+# zf3-stable/module/Album/src/Model/Album.php
+<?php
+
+namespace Album\Model;
+
+use DomainException;
+use Zend\Filter\StringTrim;
+use Zend\Filter\StripTags;
+use Zend\Filter\ToInt;
+use Zend\InputFilter\InputFilter;
+use Zend\InputFilter\InputFilterAwareInterface;
+use Zend\InputFilter\InputFilterInterface;
+use Zend\Validator\StringLength;
+
+class Album implements InputFilterAwareInterface
+{
+    public $id;
+    public $artist;
+    public $title;
+
+    private $inputFilter;
+
+    public function exchangeArray($data)
+    {
+        $this->id     = isset($data['id']) ? $data['id'] : null;
+        $this->artist = isset($data['artist']) ? $data['artist'] : null;
+        $this->title  = isset($data['title']) ? $data['title'] : null;
+    }
+    
+    public function getArrayCopy()
+    {
+        return [
+            'id'     => $this->id,
+            'artist' => $this->artist,
+            'title'  => $this->title,
+        ];
+    }
+	
+    public function setInputFilter(InputFilterInterface $inputFilter)
+    {
+        throw new DomainException(sprintf(
+            '%s does not allow injection of an alternate input filter',
+            __CLASS__
+        ));
+    }
+
+    public function getInputFilter()
+    {
+        if ($this->inputFilter) {
+            return $this->inputFilter;
+        }
+
+        $inputFilter = new InputFilter();
+
+        $inputFilter->add([
+            'name' => 'id',
+            'required' => true,
+            'filters' => [
+                ['name' => ToInt::class],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name' => 'artist',
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $inputFilter->add([
+            'name' => 'title',
+            'required' => true,
+            'filters' => [
+                ['name' => StripTags::class],
+                ['name' => StringTrim::class],
+            ],
+            'validators' => [
+                [
+                    'name' => StringLength::class,
+                    'options' => [
+                        'encoding' => 'UTF-8',
+                        'min' => 1,
+                        'max' => 100,
+                    ],
+                ],
+            ],
+        ]);
+
+        $this->inputFilter = $inputFilter;
+        return $this->inputFilter;
+    }
+}
+# As a result of using bind() with its hydrator, there is no need to populate the form's data back into the $album as that's already been done, so call the mapper's saveAlbum() method to store the changes back to the database
+
+# The view template, edit.phtml, looks very similar to the one for adding an album:
+# zf3-stable/module/Album/view/album/album/edit.phtml
+<?php
+// module/Album/view/album/album/edit.phtml:
+
+$title = 'Edit album';
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+$album = $form->get('title');
+$album->setAttribute('class', 'form-control');
+$album->setAttribute('placeholder', 'Album title');
+
+$artist = $form->get('artist');
+$artist->setAttribute('class', 'form-control');
+$artist->setAttribute('placeholder', 'Artist');
+
+$submit = $form->get('submit');
+$submit->setAttribute('class', 'btn btn-primary');
+
+$form->setAttribute('action', $this->url('album', [
+    'action' => 'edit',
+    'id'     => $id,
+]));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+    <?= $this->formLabel($album) ?>
+    <?= $this->formElement($album) ?>
+    <?= $this->formElementErrors()->render($album, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($artist) ?>
+    <?= $this->formElement($artist) ?>
+    <?= $this->formElementErrors()->render($artist, ['class' => 'help-block']) ?>
+</div>
+
+<?php
+echo $this->formSubmit($submit);
+echo $this->formHidden($form->get('id'));
+echo $this->form()->closeTag();
+
+# The only changes are to use the 'Edit Album' title and set the form's action to the 'edit' action too, using the current album identifier
+# Albums can now be edited
+
+# Deleting an album
+# To round out the application, add deletion
+# With a "Delete" link next to each album on the list page, the naive approach would be to do a delete when it's clicked, which would be wrong
+# Remembering the HTTP spec, recall that an irreversible action shouldn't be done using GET and POST should be used instead
+# Show a confirmation form when the user clicks delete, and if they then click "yes", do the deletion
+# As the form is trivial, code it directly into the view (zend-form is, after all, optional!).
+
+# Start with the action code in AlbumController::deleteAction():
+//...
+    // Add content to the following method:
+    public function deleteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('album');
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost('id');
+                $this->table->deleteAlbum($id);
+            }
+
+            // Redirect to list of albums
+            return $this->redirect()->toRoute('album');
+        }
+
+        return [
+            'id'    => $id,
+            'album' => $this->table->getAlbum($id),
+        ];
+    }
+//...
+# zf3-stable/module/Album/src/Album/Controller/AlbumController.php
+<?php
+
+namespace Album\Controller;
+
+use Album\Form\AlbumForm;
+use Album\Model\Album;
+use Album\Model\AlbumTable;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\ViewModel;
+
+class AlbumController extends AbstractActionController
+{
+    private $table;
+	
+    public function __construct(AlbumTable $table)
+    {
+        $this->table = $table;
+    }
+	
+    public function indexAction()
+    {
+        # die("The 'die' language construct is equivalent to exit().");
+        return new ViewModel([
+            'albums' => $this->table->fetchAll(),
+        ]);
+    }
+
+    public function addAction()
+    {
+        $form = new AlbumForm();
+        $form->get('submit')->setValue('Add');
+
+        $request = $this->getRequest();
+
+        if (! $request->isPost()) {
+            return ['form' => $form];
+        }
+
+        $album = new Album();
+        $form->setInputFilter($album->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return ['form' => $form];
+        }
+
+        $album->exchangeArray($form->getData());
+        $this->table->saveAlbum($album);
+        return $this->redirect()->toRoute('album');
+    }
+
+    public function editAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+
+        if (0 === $id) {
+            return $this->redirect()->toRoute('album', ['action' => 'add']);
+        }
+
+        // Retrieve the album with the specified id. Doing so raises
+        // an exception if the album is not found, which should result
+        // in redirecting to the landing page.
+        try {
+            $album = $this->table->getAlbum($id);
+        } catch (\Exception $e) {
+            return $this->redirect()->toRoute('album', ['action' => 'index']);
+        }
+
+        $form = new AlbumForm();
+        $form->bind($album);
+        $form->get('submit')->setAttribute('value', 'Edit');
+
+        $request = $this->getRequest();
+        $viewData = ['id' => $id, 'form' => $form];
+
+        if (! $request->isPost()) {
+            return $viewData;
+        }
+
+        $form->setInputFilter($album->getInputFilter());
+        $form->setData($request->getPost());
+
+        if (! $form->isValid()) {
+            return $viewData;
+        }
+
+        $this->table->saveAlbum($album);
+
+        // Redirect to album list
+        return $this->redirect()->toRoute('album', ['action' => 'index']);
+    }
+
+    public function deleteAction()
+    {
+        $id = (int) $this->params()->fromRoute('id', 0);
+        if (!$id) {
+            return $this->redirect()->toRoute('album');
+        }
+
+        $request = $this->getRequest();
+        if ($request->isPost()) {
+            $del = $request->getPost('del', 'No');
+
+            if ($del == 'Yes') {
+                $id = (int) $request->getPost('id');
+                $this->table->deleteAlbum($id);
+            }
+
+            // Redirect to list of albums
+            return $this->redirect()->toRoute('album');
+        }
+
+        return [
+            'id'    => $id,
+            'album' => $this->table->getAlbum($id),
+        ];
+    }
+}
+
+# As before, get the id from the matched route, and check the request object's isPost() to determine whether to show the confirmation page or to delete the album
+# Use the table object to delete the row using the deleteAlbum() method and then redirect back the list of albums
+# If the request is not a POST, then retrieve the correct database record and assign to the view, along with the id
+# The view script is a simple form:
+# zf3-stable/module/Album/view/album/album/delete.phtml
+<?php
+// module/Album/view/album/album/delete.phtml:
+
+$title = 'Delete album';
+$url   = $this->url('album', ['action' => 'delete', 'id' => $id]);
+
+$this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+
+<p>
+    Are you sure that you want to delete
+    "<?= $this->escapeHtml($album->title) ?>" by
+    "<?= $this->escapeHtml($album->artist) ?>"?
+</p>
+
+<form action="<?= $url ?>" method="post">
+<div class="form-group">
+    <input type="hidden" name="id" value="<?= (int) $album->id ?>" />
+    <input type="submit" class="btn btn-danger" name="del" value="Yes" />
+    <input type="submit" class="btn btn-success" name="del" value="No" />
+</div>
+</form>
+# In this script, a confirmation message is displayed to the user and then a form with "Yes" and "No" buttons
+# In the action, the "Yes" value was checked specifically for when doing the deletion
+
+# Ensuring that the home page displays the list of albums
+# Note the home page, http://localhost:83/ doesn't display the list of albums
+# This is due to a route set up in the Application module's module.config.php
+# To change it, open module/Application/config/module.config.php and find the home route:
+'home' => [
+    'type' => \Zend\Router\Http\Literal::class, # [use Zend\Router\Http\Literal;]
+    'options' => [
+        'route'    => '/',
+        'defaults' => [
+            'controller' => Controller\IndexController::class,
+            'action'     => 'index',
+        ],
+    ],
+],
+
+# Import Album\Controller\AlbumController at the top of the file: use Album\Controller\AlbumController;
+# And change the controller from Controller\IndexController::class to AlbumController::class:
+'home' => [
+    'type' => \Zend\Router\Http\Literal::class, # [use Zend\Router\Http\Literal;]
+    'options' => [
+        'route'    => '/',
+        'defaults' => [
+            'controller' => AlbumController::class, // <-- change here
+            'action'     => 'index',
+        ],
+    ],
+],
+# zf3-stable/module/Application/config/module.config.php
+<?php
+/**
+ * @link      http://github.com/zendframework/ZendSkeletonApplication for the canonical source repository
+ * @copyright Copyright (c) 2005-2016 Zend Technologies USA Inc. (http://www.zend.com)
+ * @license   http://framework.zend.com/license/new-bsd New BSD License
+ */
+
+namespace Application;
+
+use Album\Controller\AlbumController;
+use Zend\Router\Http\Literal;
+use Zend\Router\Http\Segment;
+use Zend\ServiceManager\Factory\InvokableFactory;
+
+return [
+    'router' => [
+        'routes' => [
+            'home' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route'    => '/',
+                    'defaults' => [
+                        'controller' => AlbumController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+            'application' => [
+                'type'    => Segment::class,
+                'options' => [
+                    'route'    => '/application[/:action]',
+                    'defaults' => [
+                        'controller' => Controller\IndexController::class,
+                        'action'     => 'index',
+                    ],
+                ],
+            ],
+        ],
+    ],
+    'controllers' => [
+        'factories' => [
+            Controller\IndexController::class => InvokableFactory::class,
+        ],
+    ],
+    'view_manager' => [
+        'display_not_found_reason' => true,
+        'display_exceptions'       => true,
+        'doctype'                  => 'HTML5',
+        'not_found_template'       => 'error/404',
+        'exception_template'       => 'error/index',
+        'template_map' => [
+            'layout/layout'           => __DIR__ . '/../view/layout/layout.phtml',
+            'application/index/index' => __DIR__ . '/../view/application/index/index.phtml',
+            'error/404'               => __DIR__ . '/../view/error/404.phtml',
+            'error/index'             => __DIR__ . '/../view/error/index.phtml',
+        ],
+        'template_path_stack' => [
+            __DIR__ . '/../view',
+        ],
+    ],
+];
+
+# Note # zf3-stable/public/index.php # Comment out # echo getenv('APPLICATION_ENV');
+# That's it — now a fully working application!
+
+# PHP CLI
+http://localhost:8080/
+# Apache
+http://localhost:83/
+
+# Conclusion
+# This concludes the brief look at building a simple, however fully functional, Zend Framework zend-mvc application
+# A number of different parts of the framework were briefed
+# The most important part of applications built with zend-mvc are the modules [https://zendframework.github.io/zend-modulemanager/intro/], the building blocks of any zend-mvc application [https://zendframework.github.io/zend-mvc/quick-start/]
+# To ease the work with dependencies inside our applications, the service manager [https://zendframework.github.io/zend-servicemanager/] was used
+# To be able to map a request to controllers and their actions, routes [https://zendframework.github.io/zend-router/routing/] were used
+# Data persistence was performed using zend-db [https://zendframework.github.io/zend-db/adapter/] to communicate with a relational database
+# Input data is filtered and validated with input filters [https://zendframework.github.io/zend-inputfilter/intro/], and, together with zend-form [https://zendframework.github.io/zend-form/intro/], they provide a strong bridge between the domain model and the view layer
+# zend-view [https://zendframework.github.io/zend-view/quick-start/] is responsible for the View in the MVC stack, together with a vast amount of view helpers [https://zendframework.github.io/zend-view/helpers/intro/]

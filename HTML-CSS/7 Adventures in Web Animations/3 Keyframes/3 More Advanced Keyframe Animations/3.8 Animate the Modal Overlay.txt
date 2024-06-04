@@ -1,0 +1,240 @@
+3.8 Animate the Modal Overlay
+
+
+Our first step to animating the modal and modal overlay is to create a fadeIn keyframe. Finish the animation and assign it to the overlay.
+
+
+index.html
+<!DOCTYPE>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title>Cosplay Happenings</title>
+    <link href='level3.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <!-- Nav -->
+    <nav class='nav'>
+      <div class='cell'>
+        <a class='nav-logo' href='/'>
+          <div class='shing'>
+            <img src='logo.png' alt='Sweet Lands' />
+          </div>
+        </a>
+        <ul class='nav-menu'>
+          <li><a href='#retweets'>Retweets</a></li>
+          <li><a href='#pictures'>Pictures</a></li>
+          <li><a href='#event'>Upcoming</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class='header'>
+      <div class='cell well'>
+        <h1 class='header-title'>Cosplay Happenings</h1>
+        <p class='header-subtitle'>Welcome to our candy-coated community!</p>
+      </div>
+    </header>
+
+    <!-- Most Retweeted -->
+    <section class='retweets' id='retweets'>
+      <div class='cell well'>
+        <h2>Most Retweeted</h2>
+        <div class='retweet group'>
+          <img src='unicorn.jpg' alt='Unicorn' width='200' height='200' />
+          <p>
+            Sparkles the Unicorn saunters down the Lemony Brick Road and
+            prances past the Soda Pop River! Her majestic horn points the way
+            to the Frosting Fortress, as her glittery mane and tail sway in the
+            bubblegum breeze.
+          </p>
+        </div>
+        <div class='retweet group'>
+          <img src='fairy.jpg' alt='Fairy' width='200' height='200' />
+          <p>
+            Who’s that there in the Candy Corn Fields? Why, it’s Sarsaparilla
+            the Sherbet Sprite! He’s thoughtfully pondering which treat to
+            partake of next. The Lollipop Forest is in the distance, in case he
+            needs a place to rest his sweet head.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Purchase -->
+    <section class='pictures' id='pictures'>
+      <div class='cell well'>
+        <h2>Pictures</h2>
+        <ul class='pictures-list group'>
+          <li><img src='group-01.jpg' alt='Group' width='200' height='200' /></li>
+          <li><img src='cupcake.jpg' alt='Cupcake' width='200' height='200' /></li>
+          <li><img src='rainbow.jpg' alt='Rainbow' width='200' height='200' /></li>
+          <li><img src='donut.jpg' alt='Donut' width='200' height='200' /></li>
+          <li><img src='dog.jpg' alt='Dog' width='200' height='200' /></li>
+          <li><img src='fairy.jpg' alt='Fairy' width='200' height='200' /></li>
+          <li><img src='unicorn.jpg' alt='Unicorn' width='200' height='200' /></li>
+          <li><img src='group-02.jpg' alt='Group' width='200' height='200' /></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class='event'  id='event'>
+      <div class='cell well'>
+        <h2>Upcoming Event</h2>
+        <div class='event-content'>
+          <img src='sweetlandia.png' alt='SweetLandia' id='sweetlandia' width='200' />
+          <h3>SweetLandia</h3>
+          <p>
+            Once upon a time, there was a magical place called Sweet Lands — a
+            world we may now only travel to in our imaginations. But one
+            weekend every year, when the sugar cane stalks bend toward the east
+            and the cotton candy is at its swirliest, the Sweetlandia
+            convention brings this wondrous world within reach! So join
+            Sparkles, Pierre, and the rest of the gang for a meeting of the
+            sweet-minded in sunny Omaha, Nebraska! It’s sure to be your
+            sweetest adventure yet.
+          </p>
+          <div class='event-action'>
+            <a href='#' class='btn buy-button'>
+              <span class='top content'>Register Now!</span>
+              <span class='bottom content'>Hurry, Limited Space!</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Register Modal -->
+    <div class='modal-overlay'></div>
+    <div class='modal'>
+      <div class='modal-header'>
+        <a class='modal-close' href='#' aria-label='Close'>&times;</a>
+        <h3>Register</h3>
+      </div>
+      <div class='modal-content'>
+        <form class='form' action=''>
+          <fieldset class='form-field'>
+            <!-- <label class='form-label' for='type'>CC Type</label> -->
+            <select class='cs-select cs-skin-elastic' name='type'>
+              <option value='visa'>Visa</option>
+              <option value='mastercard'>MasterCard</option>
+              <option value='american_express'>American Express</option>
+            </select>
+          </fieldset>
+
+          <fieldset class='form-field'>
+            <input class='form-input' type='text' id='number' />
+            <label class='form-label' for='number'>CC Number</label>
+          </fieldset>
+
+          <fieldset class='form-field'>
+            <input class='form-input' type='text' id='expiration' />
+            <label class='form-label' for='expiration'>CC Expiration</label>
+          </fieldset>
+
+          <div class='form-submit'>
+            <input class='btn' type='Submit' value='Submit' />
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src='application.min.js'></script>
+  </body>
+</html>
+
+
+style.css
+@keyframes fadeIn {
+  0% {
+    
+  }
+  100% {
+
+  }
+}
+ 
+
+1. A fadeIn keyframe animation has been started. Style the element to be completely hidden in its starting state. Hide it in a way that will allow us to fade it in.
+
+Answer:
+style.css
+@keyframes fadeIn {
+  0% {
+   visibility: hidden;
+   opacity: 0;
+  }
+  100% {
+
+  }
+}
+
+2. Complete the animation by making the end state visible.
+
+Answer:
+style.css
+@keyframes fadeIn {
+  0% {
+   visibility: hidden;
+   opacity: 0;
+  }
+  100% {
+	 visibility: visible;
+   opacity: 1;
+  }
+}
+
+3. Apply the fadeIn animation to the .modal-overlay when it is .active.
+
+Answer:
+style.css
+@keyframes fadeIn {
+  0% {
+   visibility: hidden;
+   opacity: 0;
+  }
+  100% {
+	 visibility: visible;
+   opacity: 1;
+  }
+}
+.modal-overlay.active {
+  animation: fadeIn;
+}
+
+4. Give the animation a fast duration, let's say 0.25 seconds.
+
+Answer:
+style.css
+@keyframes fadeIn {
+  0% {
+   visibility: hidden;
+   opacity: 0;
+  }
+  100% {
+	 visibility: visible;
+   opacity: 1;
+  }
+}
+.modal-overlay.active {
+  animation: fadeIn 0.25s;
+}
+
+5. Finally, in order to make the overlay stay visible after it is done animating, give the animation a fill-mode of forwards.
+
+Answer:
+style.css
+@keyframes fadeIn {
+  0% {
+   visibility: hidden;
+   opacity: 0;
+  }
+  100% {
+	 visibility: visible;
+   opacity: 1;
+  }
+}
+.modal-overlay.active {
+  animation: fadeIn 0.25s forwards;
+}

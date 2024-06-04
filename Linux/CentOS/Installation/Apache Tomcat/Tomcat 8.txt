@@ -1,0 +1,1217 @@
+wget http://mirror.sdunix.com/apache/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.tar.gz
+OR
+wget http://mirror.sdunix.com/apache/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.zip
+OR
+Download from https://tomcat.apache.org/download-80.cgi
+
+Extract to /opt
+
+tar zxf apache-tomcat-8.0.33.tar.gz -C /opt
+
+OR Unzip and move to /opt
+
+unzip apache-tomcat-8.0.33.zip
+
+mv apache-tomcat-8.0.33/ /opt/apache-tomcat-8.0.33
+
+Create tomcat.sh under /etc/profile.d/ directory
+
+vi /etc/profile.d/tomcat.sh
+OR
+gedit /etc/profile.d/tomcat.sh
+
+Add the following
+
+#!/bin/bash
+CATALINA_HOME=/opt/apache-tomcat-8.0.33
+PATH=$CATALINA_HOME/bin:$PATH
+export PATH CATALINA_HOME
+export CLASSPATH=.
+
+Save tomcat.sh
+
+Verify tomcat.sh
+
+cat /etc/profile.d/tomcat.sh
+
+#!/bin/bash
+CATALINA_HOME=/opt/apache-tomcat-8.0.33
+PATH=$CATALINA_HOME/bin:$PATH
+export PATH CATALINA_HOME
+export CLASSPATH=.
+
+Make tomcat.sh executable
+
+chmod +x /etc/profile.d/tomcat.sh
+
+Set the environment variables
+
+source /etc/profile.d/tomcat.sh
+
+Before starting Tomcat Server, give executable permission to the following script files
+
+chmod +x $CATALINA_HOME/bin/startup.sh
+chmod +x $CATALINA_HOME/bin/shutdown.sh
+chmod +x $CATALINA_HOME/bin/catalina.sh
+
+Start Tomcat Server
+
+cd $CATALINA_HOME/bin
+./startup.sh
+
+Check Tomcat Server started
+
+Using CATALINA_BASE:   /opt/apache-tomcat-8.0.33
+Using CATALINA_HOME:   /opt/apache-tomcat-8.0.33
+Using CATALINA_TMPDIR: /opt/apache-tomcat-8.0.33/temp
+Using JRE_HOME:        /opt/jdk1.8.0_91/jre
+Using CLASSPATH:       /opt/apache-tomcat-8.0.33/bin/bootstrap.jar:/opt/apache-tomcat-8.0.33/bin/tomcat-juli.jar
+Tomcat started.
+
+Check Tomcat Server started in the browser URL: http://localhost:8080/
+
+Check Tomcat Server is allowed on default port 8080 through iptables
+
+On CentOS 7
+
+firewall-cmd --permanent --add-port=8080/tcp
+firewall-cmd --reload
+
+Browse URL: http://localhost:8080/ and see the Apache Tomcat/8.0.33
+
+If you're seeing this, you've successfully installed Tomcat. Congratulations!
+
+
+
+
+To stop Tomcat Server
+
+cd $CATALINA_HOME/bin
+./shutdown.sh
+
+
+
+
+Autostart Tomcat
+
+To auto-start Tomcat Server on reboot
+
+Create tomcat.sh under /etc/init.d/ directory
+
+vi /etc/init.d/tomcat.sh
+OR
+gedit /etc/init.d/tomcat.sh
+
+Add the following [Note: JAVA_HOME and Tomcat path]
+
+#!/bin/sh
+# chkconfig: 2345 80 20
+# Description: Tomcat Server Start/Shutdown script
+export JAVA_HOME=/opt/jdk1.8.0_91
+case $1 in
+start)
+cd /opt/apache-tomcat-8.0.33/bin/
+./startup.sh
+;;
+stop)
+cd /opt/apache-tomcat-8.0.33/bin/
+./shutdown.sh
+;;
+restart)
+cd /opt/apache-tomcat-8.0.33/bin/
+./shutdown.sh
+cd /opt/apache-tomcat-8.0.33/bin/
+./startup.sh
+;;
+esac
+exit 0
+
+Save tomcat.sh
+
+Verify tomcat.sh
+
+cat /etc/init.d/tomcat.sh
+
+#!/bin/sh
+# chkconfig: 2345 80 20
+# Description: Tomcat Server Start/Shutdown script
+export JAVA_HOME=/opt/jdk1.8.0_91
+case $1 in
+start)
+cd /opt/apache-tomcat-8.0.33/bin/
+./startup.sh
+;;
+stop)
+cd /opt/apache-tomcat-8.0.33/bin/
+./shutdown.sh
+;;
+restart)
+cd /opt/apache-tomcat-8.0.33/bin/
+./shutdown.sh
+cd /opt/apache-tomcat-8.0.33/bin/
+./startup.sh
+;;
+esac
+exit 0
+
+Make tomcat.sh executable
+
+chmod a+x /etc/init.d/tomcat.sh
+
+Run the following command to add the Tomcat Service
+
+chkconfig --add tomcat.sh
+
+Auto-start Tomcat Service
+
+On CentOS 7
+
+systemctl start tomcat
+chkconfig tomcat.sh on
+
+Add Tomcat Manager Role
+
+Edit tomcat-users.xml
+
+vi $CATALINA_HOME/conf/tomcat-users.xml
+OR
+gedit $CATALINA_HOME/conf/tomcat-users.xml
+
+Add the following between <tomcat-users> … </tomcat-users> directives
+
+[...]
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<role rolename="admin-gui"/>
+<role rolename="admin-script"/>
+<user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-gui,admin-script"/>
+[...]
+
+Save tomcat-users.xml
+
+Verify tomcat-users.xml
+
+cat $CATALINA_HOME/conf/tomcat-users.xml
+
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<tomcat-users xmlns="http://tomcat.apache.org/xml"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+              version="1.0">
+<!--
+  NOTE:  By default, no user is included in the "manager-gui" role required
+  to operate the "/manager/html" web application.  If you wish to use this app,
+  you must define such a user - the username and password are arbitrary. It is
+  strongly recommended that you do NOT use one of the users in the commented out
+  section below since they are intended for use with the examples web
+  application.
+-->
+<!--
+  NOTE:  The sample user and role entries below are intended for use with the
+  examples web application. They are wrapped in a comment and thus are ignored
+  when reading this file. If you wish to configure these users for use with the
+  examples web application, do not forget to remove the <!.. ..> that surrounds
+  them. You will also need to set the passwords to something appropriate.
+-->
+<!--
+  <role rolename="tomcat"/>
+  <role rolename="role1"/>
+  <user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
+  <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
+  <user username="role1" password="<must-be-changed>" roles="role1"/>
+-->
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<role rolename="admin-gui"/>
+<role rolename="admin-script"/>
+<user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-gui,admin-script"/>
+</tomcat-users>
+
+Restart Tomcat Service
+
+On CentOS 7
+
+systemctl restart tomcat
+
+Browse URL: http://localhost:8080/
+
+Click on the Manager app on the right
+
+Enter the manger role credentials as in the aforesaid tomcat-users.xml file
+
+User Name: admin
+Password: admin
+
+See the following in the browser
+
+Tomcat Web Application Manager
+Message: OK
+
+
+
+
+[rajani@localhost Core]$ su root
+Password: 
+[root@localhost Core]# unzip apache-tomcat-8.0.33.zip
+Archive:  apache-tomcat-8.0.33.zip
+   creating: apache-tomcat-8.0.33/
+   creating: apache-tomcat-8.0.33/bin/
+   creating: apache-tomcat-8.0.33/conf/
+   creating: apache-tomcat-8.0.33/lib/
+   creating: apache-tomcat-8.0.33/logs/
+   creating: apache-tomcat-8.0.33/temp/
+   creating: apache-tomcat-8.0.33/webapps/
+   creating: apache-tomcat-8.0.33/webapps/ROOT/
+   creating: apache-tomcat-8.0.33/webapps/ROOT/WEB-INF/
+   creating: apache-tomcat-8.0.33/webapps/docs/
+   creating: apache-tomcat-8.0.33/webapps/docs/WEB-INF/
+   creating: apache-tomcat-8.0.33/webapps/docs/api/
+   creating: apache-tomcat-8.0.33/webapps/docs/appdev/
+   creating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/
+   creating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/docs/
+   creating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/src/
+   creating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/src/mypackage/
+   creating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/web/
+   creating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/web/WEB-INF/
+   creating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/web/images/
+   creating: apache-tomcat-8.0.33/webapps/docs/architecture/
+   creating: apache-tomcat-8.0.33/webapps/docs/architecture/requestProcess/
+   creating: apache-tomcat-8.0.33/webapps/docs/architecture/startup/
+   creating: apache-tomcat-8.0.33/webapps/docs/config/
+   creating: apache-tomcat-8.0.33/webapps/docs/elapi/
+   creating: apache-tomcat-8.0.33/webapps/docs/funcspecs/
+   creating: apache-tomcat-8.0.33/webapps/docs/images/
+   creating: apache-tomcat-8.0.33/webapps/docs/images/fonts/
+   creating: apache-tomcat-8.0.33/webapps/docs/jspapi/
+   creating: apache-tomcat-8.0.33/webapps/docs/servletapi/
+   creating: apache-tomcat-8.0.33/webapps/docs/tribes/
+   creating: apache-tomcat-8.0.33/webapps/docs/websocketapi/
+   creating: apache-tomcat-8.0.33/webapps/examples/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/chat/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/checkbox/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/colors/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/dates/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/error/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/filters/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/el/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/listeners/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/num/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/sessions/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/util/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/validators/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/chat/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/jsp/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/jsp2/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/jsp/applet/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/lib/
+   creating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/tags/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/async/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/checkbox/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/colors/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/dates/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/error/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/forward/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/images/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/include/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/jsptoserv/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/num/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/plugin/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/plugin/applet/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/security/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/security/protected/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/sessions/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/simpletag/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/snp/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/
+   creating: apache-tomcat-8.0.33/webapps/examples/jsp/xml/
+   creating: apache-tomcat-8.0.33/webapps/examples/servlets/
+   creating: apache-tomcat-8.0.33/webapps/examples/servlets/chat/
+   creating: apache-tomcat-8.0.33/webapps/examples/servlets/images/
+   creating: apache-tomcat-8.0.33/webapps/examples/servlets/nonblocking/
+   creating: apache-tomcat-8.0.33/webapps/examples/websocket/
+   creating: apache-tomcat-8.0.33/webapps/host-manager/
+   creating: apache-tomcat-8.0.33/webapps/host-manager/META-INF/
+   creating: apache-tomcat-8.0.33/webapps/host-manager/WEB-INF/
+   creating: apache-tomcat-8.0.33/webapps/host-manager/WEB-INF/jsp/
+   creating: apache-tomcat-8.0.33/webapps/host-manager/images/
+   creating: apache-tomcat-8.0.33/webapps/manager/
+   creating: apache-tomcat-8.0.33/webapps/manager/META-INF/
+   creating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/
+   creating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/jsp/
+   creating: apache-tomcat-8.0.33/webapps/manager/images/
+   creating: apache-tomcat-8.0.33/work/
+  inflating: apache-tomcat-8.0.33/LICENSE  
+  inflating: apache-tomcat-8.0.33/NOTICE  
+  inflating: apache-tomcat-8.0.33/RELEASE-NOTES  
+  inflating: apache-tomcat-8.0.33/RUNNING.txt  
+  inflating: apache-tomcat-8.0.33/bin/bootstrap.jar  
+  inflating: apache-tomcat-8.0.33/bin/catalina-tasks.xml  
+  inflating: apache-tomcat-8.0.33/bin/catalina.bat  
+  inflating: apache-tomcat-8.0.33/bin/catalina.sh  
+  inflating: apache-tomcat-8.0.33/bin/commons-daemon-native.tar.gz  
+  inflating: apache-tomcat-8.0.33/bin/commons-daemon.jar  
+  inflating: apache-tomcat-8.0.33/bin/configtest.bat  
+  inflating: apache-tomcat-8.0.33/bin/configtest.sh  
+  inflating: apache-tomcat-8.0.33/bin/daemon.sh  
+  inflating: apache-tomcat-8.0.33/bin/digest.bat  
+  inflating: apache-tomcat-8.0.33/bin/digest.sh  
+  inflating: apache-tomcat-8.0.33/bin/setclasspath.bat  
+  inflating: apache-tomcat-8.0.33/bin/setclasspath.sh  
+  inflating: apache-tomcat-8.0.33/bin/shutdown.bat  
+  inflating: apache-tomcat-8.0.33/bin/shutdown.sh  
+  inflating: apache-tomcat-8.0.33/bin/startup.bat  
+  inflating: apache-tomcat-8.0.33/bin/startup.sh  
+  inflating: apache-tomcat-8.0.33/bin/tomcat-juli.jar  
+  inflating: apache-tomcat-8.0.33/bin/tomcat-native.tar.gz  
+  inflating: apache-tomcat-8.0.33/bin/tool-wrapper.bat  
+  inflating: apache-tomcat-8.0.33/bin/tool-wrapper.sh  
+  inflating: apache-tomcat-8.0.33/bin/version.bat  
+  inflating: apache-tomcat-8.0.33/bin/version.sh  
+  inflating: apache-tomcat-8.0.33/conf/catalina.policy  
+  inflating: apache-tomcat-8.0.33/conf/catalina.properties  
+  inflating: apache-tomcat-8.0.33/conf/context.xml  
+  inflating: apache-tomcat-8.0.33/conf/logging.properties  
+  inflating: apache-tomcat-8.0.33/conf/server.xml  
+  inflating: apache-tomcat-8.0.33/conf/tomcat-users.xml  
+  inflating: apache-tomcat-8.0.33/conf/tomcat-users.xsd  
+  inflating: apache-tomcat-8.0.33/conf/web.xml  
+  inflating: apache-tomcat-8.0.33/lib/annotations-api.jar  
+  inflating: apache-tomcat-8.0.33/lib/catalina-ant.jar  
+  inflating: apache-tomcat-8.0.33/lib/catalina-ha.jar  
+  inflating: apache-tomcat-8.0.33/lib/catalina-storeconfig.jar  
+  inflating: apache-tomcat-8.0.33/lib/catalina-tribes.jar  
+  inflating: apache-tomcat-8.0.33/lib/catalina.jar  
+  inflating: apache-tomcat-8.0.33/lib/ecj-4.5.jar  
+  inflating: apache-tomcat-8.0.33/lib/el-api.jar  
+  inflating: apache-tomcat-8.0.33/lib/jasper-el.jar  
+  inflating: apache-tomcat-8.0.33/lib/jasper.jar  
+  inflating: apache-tomcat-8.0.33/lib/jsp-api.jar  
+  inflating: apache-tomcat-8.0.33/lib/servlet-api.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-api.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-coyote.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-dbcp.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-i18n-es.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-i18n-fr.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-i18n-ja.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-jdbc.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-jni.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-util-scan.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-util.jar  
+  inflating: apache-tomcat-8.0.33/lib/tomcat-websocket.jar  
+  inflating: apache-tomcat-8.0.33/lib/websocket-api.jar  
+  inflating: apache-tomcat-8.0.33/temp/safeToDelete.tmp  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/RELEASE-NOTES.txt  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/WEB-INF/web.xml  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/asf-logo-wide.gif  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/asf-logo.png  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/bg-button.png  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/bg-middle.png  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/bg-nav-item.png  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/bg-nav.png  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/bg-upper.png  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/build.xml  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/favicon.ico  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/index.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/tomcat-power.gif  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/tomcat.css  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/tomcat.gif  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/tomcat.png  
+  inflating: apache-tomcat-8.0.33/webapps/ROOT/tomcat.svg  
+  inflating: apache-tomcat-8.0.33/webapps/docs/BUILDING.txt  
+  inflating: apache-tomcat-8.0.33/webapps/docs/RELEASE-NOTES.txt  
+  inflating: apache-tomcat-8.0.33/webapps/docs/RUNNING.txt  
+  inflating: apache-tomcat-8.0.33/webapps/docs/WEB-INF/web.xml  
+  inflating: apache-tomcat-8.0.33/webapps/docs/aio.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/api/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/build.xml.txt  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/deployment.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/installation.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/introduction.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/processes.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/build.xml  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/docs/README.txt  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/sample.war  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/src/mypackage/Hello.java  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/web/WEB-INF/web.xml  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/web/hello.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/web/images/tomcat.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/sample/web/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/source.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/appdev/web.xml.txt  
+  inflating: apache-tomcat-8.0.33/webapps/docs/apr.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/architecture/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/architecture/overview.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/architecture/requestProcess.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/architecture/requestProcess/authentication-process.png  
+  inflating: apache-tomcat-8.0.33/webapps/docs/architecture/requestProcess/request-process.png  
+  inflating: apache-tomcat-8.0.33/webapps/docs/architecture/startup.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/architecture/startup/serverStartup.pdf  
+  inflating: apache-tomcat-8.0.33/webapps/docs/architecture/startup/serverStartup.txt  
+  inflating: apache-tomcat-8.0.33/webapps/docs/balancer-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/building.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/cgi-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/changelog.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/class-loader-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/cluster-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/comments.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/ajp.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/automatic-deployment.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-channel.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-deployer.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-interceptor.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-listener.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-manager.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-membership.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-receiver.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-sender.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster-valve.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cluster.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/context.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/cookie-processor.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/credentialhandler.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/engine.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/executor.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/filter.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/globalresources.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/host.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/http.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/jar-scan-filter.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/jar-scanner.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/listeners.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/loader.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/manager.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/realm.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/resources.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/server.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/service.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/sessionidgenerator.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/systemprops.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/config/valve.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/connectors.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/default-servlet.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/deployer-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/developers.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/elapi/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/extras.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/fs-admin-apps.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/fs-admin-objects.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/fs-admin-opers.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/fs-default.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/fs-jdbc-realm.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/fs-jndi-realm.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/fs-memory-realm.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/funcspecs/mbean-names.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/html-manager-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/add.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/asf-feather.png  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/asf-logo.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/code.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/cors-flowchart.png  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/design.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/docs-stylesheet.css  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/docs.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/fix.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/fonts/OpenSans400.woff  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/fonts/OpenSans400italic.woff  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/fonts/OpenSans600.woff  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/fonts/OpenSans600italic.woff  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/fonts/OpenSans700.woff  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/fonts/OpenSans700italic.woff  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/fonts/fonts.css  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/printer.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/tomcat.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/tomcat.png  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/tomcat.svg  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/update.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/images/void.gif  
+  inflating: apache-tomcat-8.0.33/webapps/docs/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/introduction.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/jasper-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/jdbc-pool.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/jndi-datasource-examples-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/jndi-resources-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/jspapi/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/logging.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/manager-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/maven-jars.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/mbeans-descriptor-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/monitoring.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/proxy-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/realm-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/rewrite.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/security-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/security-manager-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/servletapi/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/setup.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/ssi-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/ssl-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/tribes/developers.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/tribes/faq.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/tribes/interceptors.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/tribes/introduction.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/tribes/membership.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/tribes/setup.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/tribes/status.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/tribes/transport.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/virtual-hosting-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/web-socket-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/websocketapi/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/windows-auth-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/docs/windows-service-howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/CookieExample.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/CookieExample.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/HelloWorldExample.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/HelloWorldExample.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/LocalStrings.properties  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/LocalStrings_en.properties  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/LocalStrings_es.properties  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/LocalStrings_fr.properties  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/LocalStrings_pt.properties  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/RequestHeaderExample.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/RequestHeaderExample.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/RequestInfoExample.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/RequestInfoExample.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/RequestParamExample.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/RequestParamExample.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/ServletToJsp.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/ServletToJsp.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/SessionExample.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/SessionExample.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async0$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async0.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async0.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async1$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async1.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async2$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async2.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async2.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async3.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Async3.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/AsyncStockServlet.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/AsyncStockServlet.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Stockticker$Stock.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Stockticker$TickListener.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Stockticker.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/async/Stockticker.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/Entries.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/Entries.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/Entry.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/Entry.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/JspCalendar.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/JspCalendar.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/TableBean.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/cal/TableBean.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/chat/ChatServlet$MessageSender.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/chat/ChatServlet.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/chat/ChatServlet.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/checkbox/CheckTest.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/checkbox/CheckTest.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/colors/ColorGameBean.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/colors/ColorGameBean.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/CompressionFilter.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/CompressionFilter.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/CompressionFilterTestServlet.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/CompressionFilterTestServlet.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/CompressionResponseStream.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/CompressionResponseStream.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/CompressionServletResponseWrapper.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/compressionFilters/CompressionServletResponseWrapper.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/dates/JspCalendar.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/dates/JspCalendar.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/error/Smart.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/error/Smart.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/ExampleTagBase.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/ExampleTagBase.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/FooTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/FooTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/FooTagExtraInfo.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/FooTagExtraInfo.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/LogTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/LogTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/ShowSource.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/ShowSource.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/ValuesTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/examples/ValuesTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/filters/ExampleFilter.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/filters/ExampleFilter.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/BookBean.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/BookBean.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/FooBean.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/FooBean.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/ValuesBean.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/ValuesBean.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/el/Functions.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/el/Functions.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/EchoAttributesTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/EchoAttributesTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/FindBookSimpleTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/FindBookSimpleTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/HelloWorldSimpleTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/HelloWorldSimpleTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/RepeatSimpleTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/RepeatSimpleTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/ShuffleSimpleTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/ShuffleSimpleTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/TileSimpleTag.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/jsp2/examples/simpletag/TileSimpleTag.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/listeners/ContextListener.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/listeners/ContextListener.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/listeners/SessionListener.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/listeners/SessionListener.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/ByteCounter$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/ByteCounter$CounterListener.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/ByteCounter.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/ByteCounter.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/NumberWriter$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/NumberWriter$NumberWriterListener.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/NumberWriter.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/nonblocking/NumberWriter.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/num/NumberGuessBean.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/num/NumberGuessBean.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/sessions/DummyCart.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/sessions/DummyCart.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/util/CookieFilter.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/util/CookieFilter.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/util/HTMLFilter.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/util/HTMLFilter.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/validators/DebugValidator.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/validators/DebugValidator.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/ExamplesConfig.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/ExamplesConfig.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/chat/ChatAnnotation.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/chat/ChatAnnotation.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Client$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Client.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Client.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawMessage$ParseException.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawMessage.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawMessage.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawboardContextListener.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawboardContextListener.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawboardEndpoint$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawboardEndpoint$2.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawboardEndpoint$3$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawboardEndpoint$3.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawboardEndpoint.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/DrawboardEndpoint.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Room$1$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Room$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Room$2.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Room$MessageType.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Room$Player.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Room.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/Room.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/AbstractWebsocketMessage.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/AbstractWebsocketMessage.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/BinaryWebsocketMessage.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/BinaryWebsocketMessage.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/CloseWebsocketMessage.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/CloseWebsocketMessage.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/StringWebsocketMessage.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/drawboard/wsmessages/StringWebsocketMessage.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoAnnotation.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoAnnotation.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoAsyncAnnotation$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoAsyncAnnotation$CompletedFuture.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoAsyncAnnotation.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoAsyncAnnotation.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoEndpoint$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoEndpoint$EchoMessageHandlerBinary.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoEndpoint$EchoMessageHandlerText.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoEndpoint.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoEndpoint.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoStreamAnnotation.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/EchoStreamAnnotation.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/echo/servers.json  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/Direction.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/Direction.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/Location$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/Location.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/Location.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/Snake.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/Snake.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/SnakeAnnotation.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/SnakeAnnotation.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/SnakeTimer$1.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/SnakeTimer.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/classes/websocket/snake/SnakeTimer.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/jsp2/jsp2-example-taglib.tld  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/jsp/applet/Clock2.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/jsp/debug-taglib.tld  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/jsp/example-taglib.tld  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/lib/taglibs-standard-spec-1.2.5.jar  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/tags/displayProducts.tag  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/tags/helloWorld.tag  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/tags/panel.tag  
+  inflating: apache-tomcat-8.0.33/webapps/examples/WEB-INF/web.xml  
+  inflating: apache-tomcat-8.0.33/webapps/examples/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/async/async1.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/async/async1.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/async/async3.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/async/async3.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/async/index.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/async/index.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/Entries.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/Entry.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/JspCalendar.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/TableBean.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/cal1.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/cal1.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/cal2.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/cal2.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/calendar.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/cal/login.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/checkbox/CheckTest.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/checkbox/check.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/checkbox/checkresult.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/checkbox/checkresult.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/checkbox/cresult.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/colors/ColorGameBean.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/colors/clr.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/colors/colors.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/colors/colrs.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/colors/colrs.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/dates/date.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/dates/date.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/dates/date.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/error/er.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/error/err.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/error/err.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/error/error.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/error/errorpge.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/error/errorpge.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/forward/forward.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/forward/forward.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/forward/fwd.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/forward/one.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/forward/one.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/forward/two.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/images/code.gif  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/images/execute.gif  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/images/read.gif  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/images/return.gif  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/include/foo.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/include/foo.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/include/foo.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/include/inc.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/include/include.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/include/include.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/Functions.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/ValuesBean.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/ValuesTag.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/basic-arithmetic.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/basic-arithmetic.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/basic-arithmetic.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/basic-comparisons.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/basic-comparisons.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/basic-comparisons.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/composite.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/composite.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/composite.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/functions.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/functions.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/functions.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/implicit-objects.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/implicit-objects.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/el/implicit-objects.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/FooBean.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/HelloWorldSimpleTag.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/ShuffleSimpleTag.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/TileSimpleTag.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/jspattribute.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/jspattribute.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/jspattribute.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/shuffle.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/shuffle.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspattribute/shuffle.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/basic.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/basic.jspx  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/basic.jspx.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/svgexample.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/textRotate.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/textRotate.jpg  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/textRotate.jspx  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/jspx/textRotate.jspx.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/EchoAttributesTag.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/coda.jspf  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/coda.jspf.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/config.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/config.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/config.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/dynamicattrs.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/dynamicattrs.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/dynamicattrs.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/prelude.jspf  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/misc/prelude.jspf.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/BookBean.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/FindBookSimpleTag.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/Functions.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/HelloWorldSimpleTag.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/RepeatSimpleTag.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/book.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/book.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/book.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/hello.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/hello.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/hello.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/repeat.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/repeat.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/simpletag/repeat.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/displayProducts.tag.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/hello.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/hello.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/hello.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/helloWorld.tag.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/panel.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/panel.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/panel.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/panel.tag.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/products.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/products.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsp2/tagfiles/products.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsptoserv/ServletToJsp.java.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsptoserv/hello.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsptoserv/hello.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsptoserv/jsptoservlet.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsptoserv/jsptoservlet.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/jsptoserv/jts.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/num/numguess.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/num/numguess.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/num/numguess.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/plugin/applet/Clock2.class  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/plugin/applet/Clock2.java  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/plugin/plugin.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/plugin/plugin.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/plugin/plugin.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/security/protected/error.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/security/protected/error.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/security/protected/index.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/security/protected/index.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/security/protected/login.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/security/protected/login.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/sessions/DummyCart.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/sessions/carts.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/sessions/carts.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/sessions/carts.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/sessions/crt.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/simpletag/foo.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/simpletag/foo.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/simpletag/foo.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/snp/snoop.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/snp/snoop.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/snp/snoop.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/source.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/source.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/choose.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/choose.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/choose.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/foreach.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/foreach.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/foreach.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/howto.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/if.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/if.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/if.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/tagplugin/notes.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/xml/xml.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/xml/xml.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/jsp/xml/xml.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/chat/index.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/chat/index.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/chat/login.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/chat/login.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/chat/post.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/chat/post.jsp.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/cookies.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/helloworld.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/images/code.gif  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/images/execute.gif  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/images/return.gif  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/index.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/nonblocking/bytecounter.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/reqheaders.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/reqinfo.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/reqparams.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/servlets/sessions.html  
+  inflating: apache-tomcat-8.0.33/webapps/examples/websocket/chat.xhtml  
+  inflating: apache-tomcat-8.0.33/webapps/examples/websocket/drawboard.xhtml  
+  inflating: apache-tomcat-8.0.33/webapps/examples/websocket/echo.xhtml  
+  inflating: apache-tomcat-8.0.33/webapps/examples/websocket/index.xhtml  
+  inflating: apache-tomcat-8.0.33/webapps/examples/websocket/snake.xhtml  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/META-INF/context.xml  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/WEB-INF/jsp/401.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/WEB-INF/jsp/403.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/WEB-INF/jsp/404.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/WEB-INF/web.xml  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/add.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/asf-logo.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/code.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/design.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/docs.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/fix.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/tomcat.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/update.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/images/void.gif  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/index.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/host-manager/manager.xml  
+  inflating: apache-tomcat-8.0.33/webapps/manager/META-INF/context.xml  
+  inflating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/jsp/401.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/jsp/403.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/jsp/404.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/jsp/connectorCiphers.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/jsp/sessionDetail.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/jsp/sessionsList.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/manager/WEB-INF/web.xml  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/add.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/asf-logo.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/code.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/design.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/docs.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/fix.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/tomcat.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/update.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/images/void.gif  
+  inflating: apache-tomcat-8.0.33/webapps/manager/index.jsp  
+  inflating: apache-tomcat-8.0.33/webapps/manager/status.xsd  
+  inflating: apache-tomcat-8.0.33/webapps/manager/xform.xsl  
+[root@localhost Core]# mv apache-tomcat-8.0.33/ /opt/apache-tomcat-8.0.33
+[root@localhost Core]# gedit /etc/profile.d/tomcat.sh
+
+(gedit:12090): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:12090): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+
+** (gedit:12090): WARNING **: Error when getting information for file '/etc/profile.d/tomcat.sh': No such file or directory
+
+(gedit:12090): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:12090): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:12090): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:12090): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:12090): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:12090): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+
+(gedit:12090): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+[root@localhost Core]# cat /etc/profile.d/tomcat.sh
+#!/bin/bash
+CATALINA_HOME=/opt/apache-tomcat-8.0.33
+PATH=$CATALINA_HOME/bin:$PATH
+export PATH CATALINA_HOME
+export CLASSPATH=.
+[root@localhost Core]# chmod +x /etc/profile.d/tomcat.sh
+[root@localhost Core]# source /etc/profile.d/tomcat.sh
+[root@localhost Core]# chmod +x $CATALINA_HOME/bin/startup.sh
+[root@localhost Core]# chmod +x $CATALINA_HOME/bin/shutdown.sh
+[root@localhost Core]# chmod +x $CATALINA_HOME/bin/catalina.sh
+[root@localhost Core]# cd $CATALINA_HOME/bin
+[root@localhost bin]# ./startup.sh
+Using CATALINA_BASE:   /opt/apache-tomcat-8.0.33
+Using CATALINA_HOME:   /opt/apache-tomcat-8.0.33
+Using CATALINA_TMPDIR: /opt/apache-tomcat-8.0.33/temp
+Using JRE_HOME:        /opt/jdk1.8.0_91/jre
+Using CLASSPATH:       /opt/apache-tomcat-8.0.33/bin/bootstrap.jar:/opt/apache-tomcat-8.0.33/bin/tomcat-juli.jar
+Tomcat started.
+[root@localhost bin]# firewall-cmd --permanent --add-port=8080/tcp
+success
+[root@localhost bin]# firewall-cmd --reload
+success
+[root@localhost bin]# cd $CATALINA_HOME/bin
+[root@localhost bin]# ./shutdown.sh
+Using CATALINA_BASE:   /opt/apache-tomcat-8.0.33
+Using CATALINA_HOME:   /opt/apache-tomcat-8.0.33
+Using CATALINA_TMPDIR: /opt/apache-tomcat-8.0.33/temp
+Using JRE_HOME:        /opt/jdk1.8.0_91/jre
+Using CLASSPATH:       /opt/apache-tomcat-8.0.33/bin/bootstrap.jar:/opt/apache-tomcat-8.0.33/bin/tomcat-juli.jar
+[root@localhost bin]# echo $JAVA_HOME
+/opt/jdk1.8.0_91
+[root@localhost bin]# gedit /etc/init.d/tomcat.sh
+
+(gedit:15218): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:15218): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+
+** (gedit:15218): WARNING **: Error when getting information for file '/etc/init.d/tomcat.sh': No such file or directory
+
+(gedit:15218): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:15218): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:15218): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:15218): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:15218): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+(gedit:15218): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:15218): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+[root@localhost bin]# cat /etc/init.d/tomcat.sh
+#!/bin/sh
+# chkconfig: 2345 80 20
+# Description: Tomcat Server Start/Shutdown script
+export JAVA_HOME=/opt/jdk1.8.0_91
+case $1 in
+start)
+cd /opt/apache-tomcat-8.0.33/bin/
+./startup.sh
+;;
+stop)
+cd /opt/apache-tomcat-8.0.33/bin/
+./shutdown.sh
+;;
+restart)
+cd /opt/apache-tomcat-8.0.33/bin/
+./shutdown.sh
+cd /opt/apache-tomcat-8.0.33/bin/
+./startup.sh
+;;
+esac
+exit 0
+[root@localhost bin]# chmod a+x /etc/init.d/tomcat.sh
+[root@localhost bin]# chkconfig --add tomcat.sh
+[root@localhost bin]# systemctl start tomcat
+[root@localhost bin]# chkconfig tomcat.sh on
+[root@localhost bin]# gedit $CATALINA_HOME/conf/tomcat-users.xml
+
+(gedit:16667): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:16667): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+
+(gedit:16667): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:16667): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:16667): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:16667): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:16667): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:16667): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+
+(gedit:16667): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+[root@localhost bin]# cat $CATALINA_HOME/conf/tomcat-users.xml
+<?xml version='1.0' encoding='utf-8'?>
+<!--
+  Licensed to the Apache Software Foundation (ASF) under one or more
+  contributor license agreements.  See the NOTICE file distributed with
+  this work for additional information regarding copyright ownership.
+  The ASF licenses this file to You under the Apache License, Version 2.0
+  (the "License"); you may not use this file except in compliance with
+  the License.  You may obtain a copy of the License at
+
+      http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+-->
+<tomcat-users xmlns="http://tomcat.apache.org/xml"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://tomcat.apache.org/xml tomcat-users.xsd"
+              version="1.0">
+<!--
+  NOTE:  By default, no user is included in the "manager-gui" role required
+  to operate the "/manager/html" web application.  If you wish to use this app,
+  you must define such a user - the username and password are arbitrary. It is
+  strongly recommended that you do NOT use one of the users in the commented out
+  section below since they are intended for use with the examples web
+  application.
+-->
+<!--
+  NOTE:  The sample user and role entries below are intended for use with the
+  examples web application. They are wrapped in a comment and thus are ignored
+  when reading this file. If you wish to configure these users for use with the
+  examples web application, do not forget to remove the <!.. ..> that surrounds
+  them. You will also need to set the passwords to something appropriate.
+-->
+<!--
+  <role rolename="tomcat"/>
+  <role rolename="role1"/>
+  <user username="tomcat" password="<must-be-changed>" roles="tomcat"/>
+  <user username="both" password="<must-be-changed>" roles="tomcat,role1"/>
+  <user username="role1" password="<must-be-changed>" roles="role1"/>
+-->
+<role rolename="manager-gui"/>
+<role rolename="manager-script"/>
+<role rolename="manager-jmx"/>
+<role rolename="manager-status"/>
+<role rolename="admin-gui"/>
+<role rolename="admin-script"/>
+<user username="admin" password="admin" roles="manager-gui,manager-script,manager-jmx,manager-status,admin-gui,admin-script"/>
+</tomcat-users>
+[root@localhost bin]# systemctl restart tomcat
+[root@localhost bin]# wget http://mirror.sdunix.com/apache/tomcat/tomcat-8/v8.0.33/bin/apache-tomcat-8.0.33.zip
+

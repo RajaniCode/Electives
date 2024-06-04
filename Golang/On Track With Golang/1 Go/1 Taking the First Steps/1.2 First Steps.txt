@@ -1,0 +1,40 @@
+1.2 First Steps
+
+Throughout many of the challenges in this course, we'll be building a CLI (command-line) chat application using concepts learned along the way. This chat app will allow us to talk to our gopher friends living underground. Let’s start with the basics.
+
+
+1. As the very first thing in the source code file, define the package that all runnable Go programs must have.
+
+Answer: 
+chat/main.go
+package main
+
+2. Next, import the package responsible for printing to the console.
+
+Answer: import "fmt"
+chat/main.go
+package main
+
+import "fmt"
+
+3. Define the function that is the entry point for all Go programs. Remember, it must have a specific name.
+
+Answer: 
+chat/main.go
+package main
+
+import "fmt"
+
+func main() {}
+
+4. From inside the main function, call the proper function from the fmt module to output the following text to the console: "Gopher chat".
+
+Answer:
+chat/main.go
+package main
+
+import "fmt"
+
+func main() {
+  fmt.Println("Gopher chat")
+}

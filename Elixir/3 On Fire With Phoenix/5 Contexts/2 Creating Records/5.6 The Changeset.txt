@@ -1,0 +1,43 @@
+5.6 The Changeset
+
+Time to refactor the code which creates new events. The first step is rendering the 
+
+lib/neon/calendar/event.ex
+defmodule Neon.Calendar.Event do
+  use Ecto.Schema
+
+  alias Neon.Calendar.Comment
+  
+
+
+  schema "events" do
+    field :name, :string
+    field :location, :string
+    field :start_on, :naive_datetime
+
+    has_many :comments, Comment
+
+    timestamps()
+  end
+
+  def changeset(%Event{} = event, attrs) do
+    event
+    |> cast(attrs, [  ])
+  end
+end
+
+
+1. Import the module which holds the cast() function, used by the changeset function.
+
+Answer:
+lib/neon/calendar/event.ex
+
+2. Create an alias which will allow us to refer to the Neon.Calendar.Event module from inside its changeset function as simply Event.
+
+Answer: 
+lib/neon/calendar/event.ex
+
+3. Complete the call to the cast function inside changeset, passing it the proper list of attributes.
+
+Answer:
+lib/neon/calendar/event.ex

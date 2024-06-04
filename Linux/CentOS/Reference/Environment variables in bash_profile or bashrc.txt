@@ -1,0 +1,53 @@
+﻿Environment variables in bash_profile or bashrc?
+
+http://superuser.com/questions/409186/environment-variables-in-bash-profile-or-bashrc
+
+On a modern system it is not especially common to run into the cases where it matters, but it does happen. (In particular, if you use shell operations in vim such as :r !command or the in-line !<motion>command form.)
+
+    What would you put under ~/.bashrc? only aliases?
+
+You put things in ~/.bashrc that would not be inherited by subshells automatically; this means aliases and functions, mostly, although sometimes you have variable settings that you don't want visible outside the shell (this is very rare). It could be argued that those should be exported somehow, but various experimental attempts have run into compatibility issues with trying to hide them within the environment and have mostly been abandoned.
+
+    If I want to set an environment variable and add it to the PATH (for example JAVA_HOME) where it would be the best place to put the export entry? in ~/.bash_profile or ~/.bashrc?
+
+You put environment settings in ~/.bash_profile so that they are given sane initial settings. Sometimes you will want to override these (often this is done by complex environments such as Matlab or Cadence); if you put the environment settings in ~/.bashrc then shells run from within those environments will lose the environments' customizations, and things may not work properly as a result. This also applies if you use a package like modules, virtualenv, rvm, etc. to manage multiple development environments; putting your settings in ~/.bashrc means you can't run the environment you want from within your editor, but instead will be forced into the system default.
+
+    In a non-login shell, I believe the ~/.bash_profile is not being "picked up".
+
+This is correct; you normally want the initial shell to be a login shell and any shells started under that one to not be login shells. If the initial shell is not a login shell, you won't have a default PATH or various other settings (including your JAVA_HOME example).
+
+Most desktop environments launched from display managers (which is to say, the vast majority of graphical logins) do not set up a login environment for the entire desktop, so you are forced to run the initial shell in terminals as a login shell. This causes a number of problems (notably that the PATH and such available to programs run from e.g. panels is not set up properly, because the panel is not a terminal and has not run ~/.bash_profile), but is a reasonable compromise given that it is not always possible to sanely run ~/.bash_profile in the non-interactive environment at the beginning of a session started by a display manager, depending on its contents. It is sometimes suggested to place environment settings in ~/.bashrc instead of configuring a login shell instead; as discussed above, this works as long as you do not need to override that environment, and causes odd breakages once you do need to do so.
+
+I recently helped diagnose an issue like this on OS X where a user who had placed settings in ~/.bashrc then later started using rvm and perlbrew saw odd behavior, because the environments set up by the two were "undone" by ~/.bashrc inside editors and sudo (which on OS X, unlike Linux, propagates the user's $HOME so that their ~/.bashrc was run by the root shell). Before trying to use those environments, there was no problem; on starting to use them, they were bewildered by the unexpected loss of their settings.
+
+
+
+
+Difference between .bashrc and .bash_profile
+
+http://superuser.com/questions/183870/difference-between-bashrc-and-bash-profile?answertab=active#tab-top
+
+
+
+Traditionally, when you log into a Unix system, the system would start one program for you. That program is a shell, i.e., a program designed to start other programs. It's a command line shell: you start another program by typing its name. The default shell, a Bourne shell, reads commands from ~/.profile when it is invoked as the login shell.
+
+Bash is a Bourne-like shell. It reads commands from ~/.bash_profile when it is invoked as the login shell, and if that file doesn't exist¹, it tries reading ~/.profile instead.
+
+You can invoke a shell directly at any time, for example by launching a terminal emulator inside a GUI environment. If the shell is not a login shell, it doesn't read ~/.profile. When you start bash as an interactive shell (i.e., not to run a script), it reads ~/.bashrc (except when invoked as a login shell, then it only reads ~/.bash_profile or ~/.profile.
+
+Therefore:
+
+    ~/.profile is the place to put stuff that applies to your whole session, such as programs that you want to start when you log in (but not graphical programs, they go into a different file), and environment variable definitions.
+
+    ~/.bashrc is the place to put stuff that applies only to bash itself, such as alias and function definitions, shell options, and prompt settings. (You could also put key bindings there, but for bash they normally go into ~/.inputrc.)
+
+    ~/.bash_profile can be used instead of ~/.profile, but it is read by bash only, not by any other shell. (This is mostly a concern if you want your initialization files to work on multiple machines and your login shell isn't bash on all of them.) This is a logical place to include ~/.bashrc if the shell is interactive. I recommend the following contents in ~/.bash_profile:
+
+    if [ -r ~/.profile ]; then . ~/.profile; fi
+    case "$-" in *i*) if [ -r ~/.bashrc ]; then . ~/.bashrc; fi;; esac
+
+On modern unices, there's an added complication related to ~/.profile. If you log in in a graphical environment (that is, if the program where you type your password is running in graphics mode), you don't automatically get a login shell that reads ~/.profile. Depending on the graphical login program, on the window manager or desktop environment you run afterwards, and on how your distribution configured these programs, your ~/.profile may or may not be read. If it's not, there's usually another place where you can define environment variables and programs to launch when you log in, but there is unfortunately no standard location.
+
+Note that you may see here and there recommendations to either put environment variable definitions in ~/.bashrc or always launch login shells in terminals. Both are bad ideas. The most common problem with either of these ideas is that your environment variables will only be set in programs launched via the terminal, not in programs started directly with an icon or menu or keyboard shortcut.
+
+¹ For completeness, by request: if .bash_profile doesn't exist, bash also tries .bash_login before falling back to .profile. Feel free to forget it exists.

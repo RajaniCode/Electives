@@ -1,0 +1,79 @@
+2.7 Closing Pull Requests by Merging
+
+We never did end up merging that "deadly_skills" branch did we? Follow the task below to manually merge it into master.
+
+GitHub Username: pluralschool
+
+1. Pull all the changes down from GitHub. Look at your git log and you’ll see the "new_rules" branch has been merged into master. After pulling it down, your "master" branch should be at the same state as the "master" branch on GitHub.
+
+Merge the "deadly_skills" branch into master and push the changes to GitHub. You'll need to be on the "master" branch when you run the merge command.
+
+After you push the "master" branch, you'll see that the pull request on the branch was closed.
+
+
+Answer:
+
+Welcome to Git (version 1.9.5-preview20150319)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Rajani@RAJANIDELL ~
+$ cd "E:\Working\Git\Code School Course\4 Mastering GitHub\2 Single Reposi
+tory Workflows\3 Merging Pull Requests\dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$ git fetch
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/deadly_skills
+  remotes/origin/gh-pages
+  remotes/origin/master
+  remotes/origin/new_rules
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$ git branch
+* master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$ git pull
+Already up-to-date.
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$ git merge --no-ff deadly_skills
+merge: deadly_skills - not something we can merge
+
+Did you mean this?
+        origin/deadly_skills
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$ git merge --no-ff origin/deadly_skills
+Merge made by the 'recursive' strategy.
+ introduction.md | 12 +++++++++++-
+ 1 file changed, 11 insertions(+), 1 deletion(-)
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$ git push origin master
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 6, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 317 bytes | 0 bytes/s, done.
+Total 2 (delta 1), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+   dbea16b..26ced35  master -> master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$ git commit
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+nothing to commit, working directory clean
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/3 Merging Pull Requests/dojo_rules (master)
+$

@@ -1,0 +1,59 @@
+1.4 Style the First Paragraph
+
+We need to use more inline styles so the p appears correctly.
+
+email.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+    <h1 style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 42px; margin: 0; padding-top: 20px; text-transform: uppercase;">Championship Match!</h1>
+    <p>
+      Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+    </p>
+  </body>
+</html>
+
+1. Set the color of the text to #3a383a.
+
+Answer: <p style="color: #3a383a;">
+
+2. Use the font-family Georgia, serif and a font-size of 18px for the paragraph.
+
+Answer: <p style="color: #3a383a; font-family: Georgia, serif; font-size:18px;">
+
+3. Override any default styles by applying a line-height of 27px and a margin of 0 on the p.
+
+Answer: <p style="color: #3a383a; font-family: Georgia, serif; font-size:18px; line-height: 27px; margin: 0;">
+
+4. Separate the paragraph from the heading by applying a padding-top of "5px" to the p.
+
+Answer: <p style="color: #3a383a; font-family: Georgia, serif; font-size:18px; line-height: 27px; margin: 0; padding-top: 5px;">
+
+
+Success:
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+    <h1 style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 42px; margin: 0; padding-top: 20px; text-transform: uppercase;">Championship Match!</h1>
+    <p style="color: #3a383a; font-family: Georgia, serif; font-size:18px; line-height: 27px; margin: 0; padding-top: 5px;">
+      Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+    </p>
+  </body>
+</html>
+

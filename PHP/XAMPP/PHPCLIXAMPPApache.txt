@@ -1,0 +1,22 @@
+# PHP CLI
+# $ cd "E:\Working\SQL\MySQL\PHP\mysqlapp"
+# $ php -S 0.0.0.0:8080
+# http://localhost:8080/customer.php
+# XAMPP Apache
+# http://localhost:8086/customer.php
+# C:\xampp\apache\conf\httpd.conf
+# Listen 8086
+# # Virtual hosts
+# Include conf/extra/httpd-vhosts.conf
+# C:\xampp\apache\conf\extra\httpd-vhosts.conf
+/* 
+<VirtualHost *:8086>
+    ServerName mysqlapp.localhost
+    DocumentRoot "D:/RajaniS Master Folder/PHP/PHP"
+    SetEnv APPLICATION_ENV "development"
+    <Directory "D:/RajaniS Master Folder/PHP/PHP">
+        DirectoryIndex index.php
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>

@@ -1,0 +1,25 @@
+1.17 Undo
+
+git reset did a great job of unstaging octodog.txt, but you'll notice that he's still there. He's just not staged anymore. It would be great if we could go back to how things were before octodog came around and ruined the party.
+
+Files can be changed back to how they were at the last commit by using the command: git checkout -- <target>. Go ahead and get rid of all the changes since the last commit for octocat.txt
+
+git checkout -- octocat.txt
+
+
+Press enter to submit commands
+
+
+> git checkout -- octocat.txt
+
+
+Success!
+
+
+My Octobox Repository
+
+    .git
+    octofamily
+    blue_octocat.txt
+    octocat.txt
+    red_octocat.txt

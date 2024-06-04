@@ -1,0 +1,63 @@
+3.2 Argument
+
+
+That's a good start, but we need the ability to change the background color. Alter the mixin to take an argument called $bg, which should then be set as the value of the background property. Pass #fff in for .factory and #797979 in for .highrise.
+
+CSS
+
+.factory {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.highrise {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+_ASSEMBLE.SCSS
+
+@mixin assemble {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.factory {
+  @include assemble;
+}
+.highrise {
+  @include assemble;
+}
+
+Answer:
+
+_ASSEMBLE.SCSS
+
+@mixin assemble($bg) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.factory {
+  @include assemble(#fff);
+}
+.highrise {
+  @include assemble(#797979);
+}
+
+
+CSS
+
+.factory {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px; }
+
+.highrise {
+  background: #797979;
+  border: 1px solid #ccc;
+  padding: 10px; }

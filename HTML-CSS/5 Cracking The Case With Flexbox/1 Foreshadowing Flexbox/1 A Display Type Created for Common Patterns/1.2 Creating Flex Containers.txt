@@ -1,0 +1,247 @@
+1.2 Creating Flex Containers
+
+We're going to be using flexbox to align content and distribute space in a series of components. Let's get started by making this media component a flex container.
+
+index.html
+
+<div class='media'>
+  <div class='media-img'>
+    <img class='db media-img-item' src='assets/images/placeholder.png' width='300'>
+  </div>
+  <div class='media-content'>
+    <h3 class='media-title'>Media Title</h3>
+    <p class='media-description'>
+      This is a media paragraph about a thing that exists. It exists and the thing exists, so there's existence.
+    </p>
+    <ul class='media-meta'>
+      <li class='media-meta-item'>
+        27
+        <span class='media-meta-label'>Likes</span>
+      </li>
+      <li class='media-meta-item'>
+        11
+        <span class='media-meta-label'>Comments</small>
+      </li>
+    </ul>
+  </div>
+</div>
+
+media.css
+
+.media {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  
+  max-width: 600px;
+}
+
+.media-meta {
+  
+  margin-top: 20px;
+}
+
+.media-content {
+  padding: 20px;
+}
+
+.media-img-container {
+  padding: 20px 20px 0 20px;
+}
+
+.media-img-item {
+  width: 100%;
+}
+
+.media-meta,
+.media-title,
+.media-description {
+  margin: 0;
+  padding: 0;
+}
+
+.media-description {
+  margin-top: 4px;
+}
+
+.media-meta-item {
+  list-style: none;
+  margin: 0;
+}
+
+.media-meta-item + .media-meta-item {
+  margin-left: 20px;
+}
+
+.media-meta-label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 500px) {
+
+  .media-img-container {
+    padding: 0;
+  }
+
+  .media-img-item {
+    width: 200px;
+  }
+
+}
+
+@media screen and (min-width: 600px) {
+
+  .media-img-item {
+    width: 300px;
+  }
+
+}
+
+
+1. Use the display property to make .media a flex container.
+
+Answer:
+media.css
+
+.media {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  max-width: 600px;
+}
+
+.media-meta {
+  
+  margin-top: 20px;
+}
+
+.media-content {
+  padding: 20px;
+}
+
+.media-img-container {
+  padding: 20px 20px 0 20px;
+}
+
+.media-img-item {
+  width: 100%;
+}
+
+.media-meta,
+.media-title,
+.media-description {
+  margin: 0;
+  padding: 0;
+}
+
+.media-description {
+  margin-top: 4px;
+}
+
+.media-meta-item {
+  list-style: none;
+  margin: 0;
+}
+
+.media-meta-item + .media-meta-item {
+  margin-left: 20px;
+}
+
+.media-meta-label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 500px) {
+
+  .media-img-container {
+    padding: 0;
+  }
+
+  .media-img-item {
+    width: 200px;
+  }
+
+}
+
+@media screen and (min-width: 600px) {
+
+  .media-img-item {
+    width: 300px;
+  }
+
+}
+
+2. Create a flex container that will align the two media-meta-item items.
+
+Answer:
+media.css
+
+.media {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  max-width: 600px;
+}
+
+.media-meta {
+  display: flex;
+  margin-top: 20px;
+}
+
+.media-content {
+  padding: 20px;
+}
+
+.media-img-container {
+  padding: 20px 20px 0 20px;
+}
+
+.media-img-item {
+  width: 100%;
+}
+
+.media-meta,
+.media-title,
+.media-description {
+  margin: 0;
+  padding: 0;
+}
+
+.media-description {
+  margin-top: 4px;
+}
+
+.media-meta-item {
+  list-style: none;
+  margin: 0;
+}
+
+.media-meta-item + .media-meta-item {
+  margin-left: 20px;
+}
+
+.media-meta-label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 500px) {
+
+  .media-img-container {
+    padding: 0;
+  }
+
+  .media-img-item {
+    width: 200px;
+  }
+
+}
+
+@media screen and (min-width: 600px) {
+
+  .media-img-item {
+    width: 300px;
+  }
+
+}

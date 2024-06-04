@@ -1,0 +1,49 @@
+6.2 Arithmetic II
+
+
+Your coworker has been attempting to set the font size of span elements inside .sign to half the .sign font size, without success. Knowing what you do about triggering division, utilize parentheses to fix the problem.
+
+
+CSS
+
+.sign {
+  font-size: 3.75em;
+  font-weight: bold;
+  padding: 20px 40px;
+}
+.sign span {
+  font-size: 3.75em/2;
+}
+
+APPLICATION.SCSS 
+
+.sign {
+  font-size: 3.75em;
+  font-weight: bold;
+  padding: 20px 40px;
+  span {
+    font-size: 3.75em / 2;
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.sign {
+  font-size: 3.75em;
+  font-weight: bold;
+  padding: 20px 40px;
+  span {
+    font-size: (3.75em / 2);
+  }
+}
+
+CSS
+
+.sign {
+  font-size: 3.75em;
+  font-weight: bold;
+  padding: 20px 40px; }
+  .sign span {
+    font-size: 1.875em; }

@@ -1,0 +1,76 @@
+4.4 Placeholder Selector I
+
+
+.group (commonly referred to as clearfix) is used throughout our application for clearing floats. To keep use of this relegated to our styles rather than allowing .group to be added as a class, convert .group over to a placeholder selector and update the extend inside .factory.
+
+
+CSS
+
+.group, .factory {
+  zoom: 1;
+}
+.group:before, .factory:before, .group:after, .factory:after {
+  content: '';
+  display: table;
+}
+.group:after, .factory:after {
+  clear: both;
+}
+
+.factory {
+  background: #fff;
+}
+
+APPLICATION.SCSS 
+
+.group {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.factory {
+  @extend .group;
+  background: #fff;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+
+%group {
+  zoom: 1;
+  &:before,
+  &:after {
+    content: '';
+    display: table;
+  }
+  &:after {
+    clear: both;
+  }
+}
+
+.factory {
+  @extend %group;
+  background: #fff;
+}
+
+CSS
+
+.factory {
+  zoom: 1; }
+  .factory:before, .factory:after {
+    content: '';
+    display: table; }
+  .factory:after {
+    clear: both; }
+
+.factory {
+  background: #fff; }

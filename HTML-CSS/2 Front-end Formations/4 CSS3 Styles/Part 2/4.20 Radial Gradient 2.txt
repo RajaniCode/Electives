@@ -1,0 +1,18 @@
+4.20 Radial Gradient 2
+
+http://caniuse.com/#feat=css-gradients
+
+Let’s change the shape of the radial-gradient to be a circle instead. Also, let’s make the size 400px.
+
+
+style.css
+
+.masthead {
+  background: radial-gradient(#1e3e4d, #102028);
+}
+
+Answer:
+
+.masthead {
+  background: radial-gradient(circle, 400px, #1e3e4d, #102028);
+}

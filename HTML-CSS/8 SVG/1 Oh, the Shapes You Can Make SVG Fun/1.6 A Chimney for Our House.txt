@@ -1,0 +1,57 @@
+1.6 A Chimney for Our House
+
+We used a rect element to give our house a chimney. However, something is not quite right…
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340">
+  <!-- Chimney -->
+  <rect height="21" width="14" fill="#FBF6A7" x="0" y="0"/>
+
+  <!-- Chimney Topper -->
+  <rect height="4" width="20" fill="#FBF6A7" x="95" y="123"/>
+
+  <!-- House -->
+  <rect height="84" width="162" fill="#FBF6A7" x="90" y="198"/>
+  <rect height="56" width="184" fill="#E04E27" x="80" y="148"/>
+</svg>
+
+
+1. Fix the chimney position by moving it to x coordinate 98 and y coordinate 127.
+
+Answer:
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340">
+  <!-- Chimney -->
+  <rect height="21" width="14" fill="#FBF6A7" x="98" y="127"/>
+
+  <!-- Chimney Topper -->
+  <rect height="4" width="20" fill="#FBF6A7" x="95" y="123"/>
+
+  <!-- House -->
+  <rect height="84" width="162" fill="#FBF6A7" x="90" y="198"/>
+  <rect height="56" width="184" fill="#E04E27" x="80" y="148"/>
+</svg>
+
+2. The chimney is now in the right spot! However, giving the chimney topper a different color would really make our chimney pop! Make the chimney topper rect (the second one) have a fill color of #E04E27.
+
+Answer:
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340">
+  <!-- Chimney -->
+  <rect height="21" width="14" fill="#FBF6A7" x="98" y="127"/>
+
+  <!-- Chimney Topper -->
+  <rect height="4" width="20" fill="#E04E27" x="95" y="123"/>
+
+  <!-- House -->
+  <rect height="84" width="162" fill="#FBF6A7" x="90" y="198"/>
+  <rect height="56" width="184" fill="#E04E27" x="80" y="148"/>
+</svg>

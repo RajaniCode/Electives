@@ -1,0 +1,291 @@
+3.7 Scale That Other Flower
+
+Let's now make the fourth and final flower smaller like the first flower. Yay, symmetry!
+
+style.css
+
+svg {
+  background-color: #F6F7F7;
+}
+.background-circle {
+  fill: #068C70;
+  stroke: #FFFFFF;
+  stroke-width: 15px;
+}
+.chimney {
+  fill: #FBF6A7;
+}
+.chimney-topper {
+  fill: #E04E27;
+}
+.body {
+  fill: #FBF6A7;
+}
+.roof {
+  fill: #E04E27;
+}
+.door {
+  fill: #E04E27;
+}
+.door-knob {
+  fill:#FBF6A7;
+}
+.flower line {
+  fill: #068C70;
+  stroke: #068C70;
+  stroke-width: 1px;
+}
+.flower-outer {
+  fill: #EC7E23;
+}
+.flower-inner {
+  fill: #FBCE1D;
+}
+text {
+  font-family: Filmotype Major;
+  font-size: 70px;
+  fill: #3E9FD8;
+  stroke: #FFFFFF;
+  stroke-width: 2px;
+}
+.windows rect {
+  fill: #3E9FD8;
+}
+.windows line {
+  stroke: #E04E27;
+  stroke-width: 4px;
+}
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340">
+    <!-- Bg Circle -->
+    <circle class="background-circle" cx="170" cy="170" r="162"/>
+
+    <!-- Chimney -->
+    <rect class="chimney" x="98" y="127" width="14" height="21"/>
+    <rect class="chimney-topper" x="95" y="123" width="20" height="4"/>
+
+    <!-- House -->
+    <rect class="body" x="90" y="198" width="162" height="84"/>
+    <polygon class="roof" points="256,148 262,203 80,203 87,148 327,148"></polygon>
+
+    <!-- Door -->
+    <rect class="door" x="153" y="222" width="36" height="60"/>
+  	<rect class="door" x="153" y="218" width="36" height="10" rx="5" ry="5"/>
+    <rect class="door-knob" x="183" y="252" width="2" height="8"/>
+
+    <g class="windows" transform="translate(72 110)">
+      <!-- Window R  -->
+      <rect x="36" y="113" width="14" height="14"/>
+      <rect x="52" y="113" width="14" height="14"/>
+      <rect x="36" y="129" width="14" height="14"/>
+      <rect x="52" y="129" width="14" height="14"/>
+      <line x1="34" y1="147" x2="69" y2="147"/>
+
+      <!-- Window L  -->
+      <rect x="130" y="113" width="14" height="14"/>
+      <rect x="146" y="113" width="14" height="14"/>
+      <rect x="130" y="129" width="14" height="14"/>
+      <rect x="146" y="129" width="14" height="14"/>
+      <line x1="128" y1="147" x2="162" y2="147"/>
+    </g>
+
+    <!-- Flowers -->
+    <g class="flower" transform="scale(.8) translate(60,71)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <circle class="flower-outer" cx="228" cy="267" r="6"/>
+      <circle class="flower-inner" cx="231" cy="266" r="2"/>
+    </g>
+    <g class="flower" transform="translate(-22, 0)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <g transform="rotate(195,228,267)">
+        <circle class="flower-outer" cx="228" cy="267" r="6"/>
+        <circle class="flower-inner" cx="231" cy="266" r="2"/>
+      </g>
+    </g>
+    <g class="flower" transform="translate(-93, 0)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <g transform="rotate(50,228,267)">
+        <circle class="flower-outer" cx="228" cy="267" r="6"/>
+        <circle class="flower-inner" cx="231" cy="266" r="2"/>
+      </g>
+    </g>
+    <g class="flower" transform="translate(-116, 0)         ">                      
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <circle class="flower-outer" cx="228" cy="267" r="6"/>
+      <circle class="flower-inner" cx="231" cy="266" r="2"/>
+    </g>
+
+    <!-- TEXT -->
+    <text x="85" y="97">HOME</text>
+  </svg>
+</body>
+</html>
+
+
+1. Scale the last (fourth) flower by .8.
+
+Answer:
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340">
+    <!-- Bg Circle -->
+    <circle class="background-circle" cx="170" cy="170" r="162"/>
+
+    <!-- Chimney -->
+    <rect class="chimney" x="98" y="127" width="14" height="21"/>
+    <rect class="chimney-topper" x="95" y="123" width="20" height="4"/>
+
+    <!-- House -->
+    <rect class="body" x="90" y="198" width="162" height="84"/>
+    <polygon class="roof" points="256,148 262,203 80,203 87,148 327,148"></polygon>
+
+    <!-- Door -->
+    <rect class="door" x="153" y="222" width="36" height="60"/>
+  	<rect class="door" x="153" y="218" width="36" height="10" rx="5" ry="5"/>
+    <rect class="door-knob" x="183" y="252" width="2" height="8"/>
+
+    <g class="windows" transform="translate(72 110)">
+      <!-- Window R  -->
+      <rect x="36" y="113" width="14" height="14"/>
+      <rect x="52" y="113" width="14" height="14"/>
+      <rect x="36" y="129" width="14" height="14"/>
+      <rect x="52" y="129" width="14" height="14"/>
+      <line x1="34" y1="147" x2="69" y2="147"/>
+
+      <!-- Window L  -->
+      <rect x="130" y="113" width="14" height="14"/>
+      <rect x="146" y="113" width="14" height="14"/>
+      <rect x="130" y="129" width="14" height="14"/>
+      <rect x="146" y="129" width="14" height="14"/>
+      <line x1="128" y1="147" x2="162" y2="147"/>
+    </g>
+
+    <!-- Flowers -->
+    <g class="flower" transform="scale(.8) translate(60,71)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <circle class="flower-outer" cx="228" cy="267" r="6"/>
+      <circle class="flower-inner" cx="231" cy="266" r="2"/>
+    </g>
+    <g class="flower" transform="translate(-22, 0)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <g transform="rotate(195,228,267)">
+        <circle class="flower-outer" cx="228" cy="267" r="6"/>
+        <circle class="flower-inner" cx="231" cy="266" r="2"/>
+      </g>
+    </g>
+    <g class="flower" transform="translate(-93, 0)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <g transform="rotate(50,228,267)">
+        <circle class="flower-outer" cx="228" cy="267" r="6"/>
+        <circle class="flower-inner" cx="231" cy="266" r="2"/>
+      </g>
+    </g>
+    <g class="flower" transform="translate(-116, 0) scale(.8)">                      
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <circle class="flower-outer" cx="228" cy="267" r="6"/>
+      <circle class="flower-inner" cx="231" cy="266" r="2"/>
+    </g>
+
+    <!-- TEXT -->
+    <text x="85" y="97">HOME</text>
+  </svg>
+</body>
+</html>
+
+2. After the scale(), add another translate() to move the flower back down and over into its proper position using 55 for the X value and 71 for the Y value.
+
+Answer:
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+  <link rel="stylesheet" href="stylesheets/style.css">
+</head>
+<body>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340">
+    <!-- Bg Circle -->
+    <circle class="background-circle" cx="170" cy="170" r="162"/>
+
+    <!-- Chimney -->
+    <rect class="chimney" x="98" y="127" width="14" height="21"/>
+    <rect class="chimney-topper" x="95" y="123" width="20" height="4"/>
+
+    <!-- House -->
+    <rect class="body" x="90" y="198" width="162" height="84"/>
+    <polygon class="roof" points="256,148 262,203 80,203 87,148 327,148"></polygon>
+
+    <!-- Door -->
+    <rect class="door" x="153" y="222" width="36" height="60"/>
+  	<rect class="door" x="153" y="218" width="36" height="10" rx="5" ry="5"/>
+    <rect class="door-knob" x="183" y="252" width="2" height="8"/>
+
+    <g class="windows" transform="translate(72 110)">
+      <!-- Window R  -->
+      <rect x="36" y="113" width="14" height="14"/>
+      <rect x="52" y="113" width="14" height="14"/>
+      <rect x="36" y="129" width="14" height="14"/>
+      <rect x="52" y="129" width="14" height="14"/>
+      <line x1="34" y1="147" x2="69" y2="147"/>
+
+      <!-- Window L  -->
+      <rect x="130" y="113" width="14" height="14"/>
+      <rect x="146" y="113" width="14" height="14"/>
+      <rect x="130" y="129" width="14" height="14"/>
+      <rect x="146" y="129" width="14" height="14"/>
+      <line x1="128" y1="147" x2="162" y2="147"/>
+    </g>
+
+    <!-- Flowers -->
+    <g class="flower" transform="scale(.8) translate(60,71)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <circle class="flower-outer" cx="228" cy="267" r="6"/>
+      <circle class="flower-inner" cx="231" cy="266" r="2"/>
+    </g>
+    <g class="flower" transform="translate(-22, 0)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <g transform="rotate(195,228,267)">
+        <circle class="flower-outer" cx="228" cy="267" r="6"/>
+        <circle class="flower-inner" cx="231" cy="266" r="2"/>
+      </g>
+    </g>
+    <g class="flower" transform="translate(-93, 0)">
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <g transform="rotate(50,228,267)">
+        <circle class="flower-outer" cx="228" cy="267" r="6"/>
+        <circle class="flower-inner" cx="231" cy="266" r="2"/>
+      </g>
+    </g>
+    <g class="flower" transform="translate(-116, 0) scale(.8) translate(55, 71)">                      
+      <line x1="228" y1="267" x2="228" y2="282"/>
+      <circle class="flower-outer" cx="228" cy="267" r="6"/>
+      <circle class="flower-inner" cx="231" cy="266" r="2"/>
+    </g>
+
+    <!-- TEXT -->
+    <text x="85" y="97">HOME</text>
+  </svg>
+</body>
+</html>

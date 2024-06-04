@@ -1,0 +1,115 @@
+1.3 Starting a Grid
+
+Basic grids are handled well by flexbox. Let's get one started for our design patterns by making a few flex containers with one class.
+
+grid.html
+
+<div class='demo'>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+</div>
+
+grid.css
+
+.grid {
+  
+  margin: 20px 0;
+}
+
+.demo .grid-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  text-align: center;
+}
+
+
+Use the .grid selector to make each grid class a flex container.
+
+Answer:
+grid.css
+
+.grid {
+  display: flex;
+  margin: 20px 0;
+}
+
+.demo .grid-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  text-align: center;
+}

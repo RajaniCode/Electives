@@ -1,0 +1,88 @@
+4.5 Placeholder Selector II
+
+
+Whoops - we've discovered an alteration to .blueprint later in our stylesheet, and extending .blueprint with .surveyor is creating extra selectors in .factory that aren't needed. Create a placeholder selector called container to hold the shared properties and extend it with .blueprint and .surveyor to remove the extra .factory .surveyor selector.
+
+
+CSS
+
+.blueprint, .surveyor {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.surveyor {
+  color: #fff;
+}
+
+.factory {
+  background: #fff;
+}
+.factory .blueprint, .factory .surveyor {
+  margin-bottom: 20px;
+}
+
+APPLICATION.SCSS 
+
+.blueprint {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+.surveyor {
+  @extend .blueprint;
+  color: #fff;
+}
+
+.factory {
+  background: #fff;
+  .blueprint {
+    margin-bottom: 20px;
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+%container {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.blueprint {
+ @extend %container; 
+}
+.surveyor {
+  @extend %container;
+  color: #fff;
+}
+
+.factory {
+  background: #fff;
+  @extend %container;
+  margin-bottom: 20px !important;
+}
+
+CSS
+
+.blueprint, .surveyor, .factory {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.surveyor {
+  color: #fff;
+}
+
+.factory {
+  background: #fff;
+  margin-bottom: 20px !important;
+}

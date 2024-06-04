@@ -1,0 +1,42 @@
+2.1 Editing in the Source Tab
+
+li.event
+media="screen"
+.events .event {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #f2f2f2;
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    box-shadow: 0 3px 0 #edb330;
+    color: #777777;
+    font-size: 1.6em;
+    list-style-type: none;
+    margin: 10px 0;
+    padding: 10px 15px;
+    position: relative;
+}
+
+Inspect the Run 5K event, find its .event CSS declaration, and link from there to the corresponding location in the calendar.css stylesheet. Then edit the stylesheet file, changing the border-radius from 2px to 10px.
+
+[Skip challenge due to Chrome browser changes.] Save the updated stylesheet file. Then, right-click and find our changes by selecting the Local Modifications option. Undo our changes by clicking apply original content.
+
+[Skip challenge due to Chrome browser changes.] Go back to the original version of the file by clicking revert to discard your entire revision history. Lastly, give our events a rounded look with a border-radius of 20px.
+
+media="screen"
+.events .event {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #f2f2f2;
+    border: 1px solid #dedede;
+    border-radius: 10px;
+    box-shadow: 0 3px 0 #edb330;
+    color: #777777;
+    font-size: 1.6em;
+    list-style-type: none;
+    margin: 10px 0;
+    padding: 10px 15px;
+    position: relative;
+}

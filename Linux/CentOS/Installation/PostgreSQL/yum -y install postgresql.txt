@@ -1,0 +1,92 @@
+
+
+rpm -iUvh http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
+
+yum -y install postgresql95 postgresql95-server postgresql95-contrib postgresql95-libs
+
+systemctl enable postgresql-9.5
+
+/usr/pgsql-9.5/bin/postgresql95-setup initdb
+
+systemctl enable postgresql-9.5
+
+# systemctl start postgresql-9.5
+
+[rajani@localhost PostgreSQL]$ su root
+Password: 
+[root@localhost PostgreSQL]# rpm -iUvh http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
+Retrieving http://yum.postgresql.org/9.5/redhat/rhel-7-x86_64/pgdg-centos95-9.5-2.noarch.rpm
+warning: /var/tmp/rpm-tmp.pzCL9L: Header V4 DSA/SHA1 Signature, key ID 442df0f8: NOKEY
+Preparing...                          ################################# [100%]
+Updating / installing...
+   1:pgdg-centos95-9.5-2              ################################# [100%]
+[root@localhost PostgreSQL]# yum -y install postgresql95 postgresql95-server postgresql95-contrib postgresql95-libs
+Loaded plugins: fastestmirror, langpacks
+pgdg95                                                                                                                                   | 3.6 kB  00:00:00     
+(1/2): pgdg95/7/x86_64/group_gz                                                                                                          |  333 B  00:00:02     
+(2/2): pgdg95/7/x86_64/primary_db                                                                                                        | 140 kB  00:00:11     
+Loading mirror speeds from cached hostfile
+ * base: ftp.iitm.ac.in
+ * epel: epel.mirror.net.in
+ * extras: ftp.iitm.ac.in
+ * nux-dextop: mirror.li.nux.ro
+ * rpmforge: ftp.lug.ro
+ * updates: ftp.iitm.ac.in
+Resolving Dependencies
+--> Running transaction check
+---> Package postgresql95.x86_64 0:9.5.3-2PGDG.rhel7 will be installed
+---> Package postgresql95-contrib.x86_64 0:9.5.3-2PGDG.rhel7 will be installed
+---> Package postgresql95-libs.x86_64 0:9.5.3-2PGDG.rhel7 will be installed
+---> Package postgresql95-server.x86_64 0:9.5.3-2PGDG.rhel7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                                       Arch                            Version                                    Repository                       Size
+================================================================================================================================================================
+Installing:
+ postgresql95                                  x86_64                          9.5.3-2PGDG.rhel7                          pgdg95                          1.3 M
+ postgresql95-contrib                          x86_64                          9.5.3-2PGDG.rhel7                          pgdg95                          527 k
+ postgresql95-libs                             x86_64                          9.5.3-2PGDG.rhel7                          pgdg95                          218 k
+ postgresql95-server                           x86_64                          9.5.3-2PGDG.rhel7                          pgdg95                          4.1 M
+
+Transaction Summary
+================================================================================================================================================================
+Install  4 Packages
+
+Total download size: 6.1 M
+Installed size: 26 M
+Downloading packages:
+(1/4): postgresql95-contrib-9.5.3-2PGDG.rhel7.x86_64.rpm                                                                                 | 527 kB  00:00:53     
+(2/4): postgresql95-libs-9.5.3-2PGDG.rhel7.x86_64.rpm                                                                                    | 218 kB  00:00:27     
+(3/4): postgresql95-9.5.3-2PGDG.rhel7.x86_64.rpm                                                                                         | 1.3 MB  00:01:56     
+(4/4): postgresql95-server-9.5.3-2PGDG.rhel7.x86_64.rpm                                                                                  | 4.1 MB  00:06:32     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                            13 kB/s | 6.1 MB  00:07:52     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+Warning: RPMDB altered outside of yum.
+  Installing : postgresql95-libs-9.5.3-2PGDG.rhel7.x86_64                                                                                                   1/4 
+  Installing : postgresql95-9.5.3-2PGDG.rhel7.x86_64                                                                                                        2/4 
+  Installing : postgresql95-contrib-9.5.3-2PGDG.rhel7.x86_64                                                                                                3/4 
+  Installing : postgresql95-server-9.5.3-2PGDG.rhel7.x86_64                                                                                                 4/4 
+  Verifying  : postgresql95-contrib-9.5.3-2PGDG.rhel7.x86_64                                                                                                1/4 
+  Verifying  : postgresql95-libs-9.5.3-2PGDG.rhel7.x86_64                                                                                                   2/4 
+  Verifying  : postgresql95-server-9.5.3-2PGDG.rhel7.x86_64                                                                                                 3/4 
+  Verifying  : postgresql95-9.5.3-2PGDG.rhel7.x86_64                                                                                                        4/4 
+
+Installed:
+  postgresql95.x86_64 0:9.5.3-2PGDG.rhel7              postgresql95-contrib.x86_64 0:9.5.3-2PGDG.rhel7       postgresql95-libs.x86_64 0:9.5.3-2PGDG.rhel7      
+  postgresql95-server.x86_64 0:9.5.3-2PGDG.rhel7      
+
+Complete!
+[root@localhost PostgreSQL]# systemctl enable postgresql-9.5
+Created symlink from /etc/systemd/system/multi-user.target.wants/postgresql-9.5.service to /usr/lib/systemd/system/postgresql-9.5.service.
+[root@localhost PostgreSQL]# /usr/pgsql-9.5/bin/postgresql95-setup initdb
+Initializing database ... OK
+
+[root@localhost PostgreSQL]# systemctl start postgresql-9.5
+Job for postgresql-9.5.service failed because the control process exited with error code. See "systemctl status postgresql-9.5.service" and "journalctl -xe" for details.

@@ -1,0 +1,21 @@
+1.6 Attaching a Shell to a Container
+
+Running commands is cool, but we can also attach a shell to those containers and browse them just like they were a full operating system — which they kind of are. The -i and -t flags can be passed to the exec command to keep an interactive shell open, and you can specify the shell you want to attach after the container ID. Here we'll attach a standard Bash shell.
+
+1. Type docker container ex
+
+Answer:
+
+Enter your solution below
+
+$
+
+2. We're in! From the perspective of the terminal window we're just navigating a normal Unix system, so any commands we type will run inside of that system. Try typing that same command we just ran with exec from inside the container.
+
+Type du -mh.
+
+Answer:
+
+Enter your solution below
+
+$

@@ -1,0 +1,62 @@
+6.1 Arithmetic I
+
+
+To ensure consistent spacing between columns, our stylesheet has a reusable $gutter variable. Subtract the width values in .factory and .highrise by $gutter to account for the margin.
+
+CSS
+
+.factory {
+  background: #fff;
+  margin-right: 20px;
+  width: 600px;
+}
+
+.highrise {
+  background: #797979;
+  margin-right: 20px;
+  width: 300px;
+}
+
+APPLICATION.SCSS 
+
+$gutter: 20px;
+
+.factory {
+  background: #fff;
+  margin-right: $gutter;
+  width: 600px;
+}
+.highrise {
+  background: #797979;
+  margin-right: $gutter;
+  width: 300px;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$gutter: 20px;
+
+.factory {
+  background: #fff;
+  margin-right: $gutter;
+  width: 600px - $gutter;
+}
+.highrise {
+  background: #797979;
+  margin-right: $gutter;
+  width: 300px - $gutter;
+}
+
+CSS
+
+.factory {
+  background: #fff;
+  margin-right: 20px;
+  width: 580px; }
+
+.highrise {
+  background: #797979;
+  margin-right: 20px;
+  width: 280px; }

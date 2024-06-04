@@ -1,0 +1,14 @@
+3.9 Viewport Review
+
+When setting the width and height properties on the svg selector in the CSS, are you setting those attributes on the viewport or the viewBox?
+
+[Single Answer]
+
+viewport
+viewBox
+
+
+Answer: viewport
+
+Note:
+In order to set the viewBox, you must use the viewBox attribute on the svg element inline. When setting width and height attributes on the svg element, whether in CSS or inline, you are setting the width and height of the viewport coordinate system.

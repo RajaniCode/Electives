@@ -1,0 +1,30 @@
+http://www.cloudera.com/documentation/enterprise/5-5-x/topics/install_cdh_disable_iptables.html
+
+Disabling the Firewall
+
+To disable the firewall on each host in your cluster, perform the following steps on each host.
+
+Save the existing iptables rule set.
+
+iptables-save > /root/firewall.rules
+
+Disable iptables.
+For RHEL, CentOS, Oracle, and Debian:
+
+chkconfig iptables off
+
+and
+
+/etc/init.d/iptables stop
+
+For SLES:
+
+chkconfig SuSEfirewall2_setup off
+
+and
+
+rcSuSEfirewall2 stop
+
+For Ubuntu:
+
+service ufw stop

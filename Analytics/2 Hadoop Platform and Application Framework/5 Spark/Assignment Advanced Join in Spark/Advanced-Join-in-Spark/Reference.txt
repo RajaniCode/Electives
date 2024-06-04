@@ -1,0 +1,264 @@
+#Note: %cpaste
+#sum_channels.py
+def sum_function(sorted_collection, val, kv, skv, result):
+    for i in sorted_collection:
+        val = val + int(i[1])
+        kv[i[0]] = val
+    skv = sorted(kv.items())
+    for index in range(len(skv)):
+        if index == 0:
+            result[skv[index][0]] = skv[index][1]
+            # print skv[index][0], skv[index][1]
+        elif index > 0:
+            result[skv[index][0]] = (skv[index][1] - skv[index - 1][1])
+            # print skv[index][0], (skv[index][1] - skv[index - 1][1])
+    return sorted(result.items())
+
+#Note: Ctrl+D
+
+sorted_channel_views = sorted(channel_views.collect())
+
+sum_function(sorted_channel_views, val=0, kv={}, skv={}, result={})
+
+
+In [13]: %cpaste
+Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
+:def sum_function(sorted_collection, val, kv, skv, result):
+:    for i in sorted_collection:
+:        val = val + int(i[1])
+:        kv[i[0]] = val
+:    skv = sorted(kv.items())
+:    for index in range(len(skv)):
+:        if index == 0:
+:            result[skv[index][0]] = skv[index][1]
+:            # print skv[index][0], skv[index][1]
+:        elif index > 0:
+:           result[skv[index][0]] = (skv[index][1] - skv[index - 1][1])
+:            # print skv[index][0], (skv[index][1] - skv[index - 1][1])
+:    return sorted(result.items())
+:<EOF>
+
+In [14]: sorted_channel_views = sorted(channel_views.collect())
+16/05/19 04:32:32 INFO spark.SparkContext: Starting job: collect at <ipython-input-14-e9ba75acf867>:1
+16/05/19 04:32:32 INFO spark.MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 196 bytes
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Got job 2 (collect at <ipython-input-14-e9ba75acf867>:1) with 6 output partitions
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Final stage: ResultStage 5(collect at <ipython-input-14-e9ba75acf867>:1)
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Parents of final stage: List(ShuffleMapStage 4)
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Missing parents: List()
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Submitting ResultStage 5 (PythonRDD[17] at collect at <ipython-input-14-e9ba75acf867>:1), which has no missing parents
+16/05/19 04:32:32 INFO storage.MemoryStore: ensureFreeSpace(7224) called with curMem=302832, maxMem=556038881
+16/05/19 04:32:32 INFO storage.MemoryStore: Block broadcast_6 stored as values in memory (estimated size 7.1 KB, free 530.0 MB)
+16/05/19 04:32:32 INFO storage.MemoryStore: ensureFreeSpace(4498) called with curMem=310056, maxMem=556038881
+16/05/19 04:32:32 INFO storage.MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 4.4 KB, free 530.0 MB)
+16/05/19 04:32:32 INFO storage.BlockManagerInfo: Added broadcast_6_piece0 in memory on localhost:58776 (size: 4.4 KB, free: 530.2 MB)
+16/05/19 04:32:32 INFO spark.SparkContext: Created broadcast 6 from broadcast at DAGScheduler.scala:861
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Submitting 6 missing tasks from ResultStage 5 (PythonRDD[17] at collect at <ipython-input-14-e9ba75acf867>:1)
+16/05/19 04:32:32 INFO scheduler.TaskSchedulerImpl: Adding task set 5.0 with 6 tasks
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 5.0 (TID 19, localhost, partition 0,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 5.0 (TID 20, localhost, partition 1,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 5.0 (TID 21, localhost, partition 2,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 5.0 (TID 22, localhost, partition 3,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 5.0 (TID 23, localhost, partition 4,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 5.0 (TID 24, localhost, partition 5,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO executor.Executor: Running task 0.0 in stage 5.0 (TID 19)
+16/05/19 04:32:32 INFO executor.Executor: Running task 1.0 in stage 5.0 (TID 20)
+16/05/19 04:32:32 INFO executor.Executor: Running task 2.0 in stage 5.0 (TID 21)
+16/05/19 04:32:32 INFO executor.Executor: Running task 4.0 in stage 5.0 (TID 23)
+16/05/19 04:32:32 INFO executor.Executor: Running task 3.0 in stage 5.0 (TID 22)
+16/05/19 04:32:32 INFO executor.Executor: Running task 5.0 in stage 5.0 (TID 24)
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO python.PythonRDD: Times: total = 477, boot = 25, init = 100, finish = 352
+16/05/19 04:32:32 INFO python.PythonRDD: Times: total = 482, boot = 144, init = 88, finish = 250
+16/05/19 04:32:32 INFO executor.Executor: Finished task 2.0 in stage 5.0 (TID 21). 114260 bytes result sent to driver
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 5.0 (TID 21) in 591 ms on localhost (1/6)
+16/05/19 04:32:32 INFO executor.Executor: Finished task 0.0 in stage 5.0 (TID 19). 95827 bytes result sent to driver
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 5.0 (TID 19) in 617 ms on localhost (2/6)
+16/05/19 04:32:33 INFO python.PythonRDD: Times: total = 481, boot = 167, init = 97, finish = 217
+16/05/19 04:32:33 INFO executor.Executor: Finished task 4.0 in stage 5.0 (TID 23). 123997 bytes result sent to driver
+16/05/19 04:32:33 INFO python.PythonRDD: Times: total = 465, boot = 109, init = 138, finish = 218
+16/05/19 04:32:33 INFO executor.Executor: Finished task 5.0 in stage 5.0 (TID 24). 170863 bytes result sent to driver
+16/05/19 04:32:33 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 5.0 (TID 23) in 682 ms on localhost (3/6)
+16/05/19 04:32:33 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 5.0 (TID 24) in 692 ms on localhost (4/6)
+16/05/19 04:32:33 INFO python.PythonRDD: Times: total = 671, boot = 51, init = 74, finish = 546
+16/05/19 04:32:33 INFO executor.Executor: Finished task 1.0 in stage 5.0 (TID 20). 212084 bytes result sent to driver
+16/05/19 04:32:33 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 5.0 (TID 20) in 799 ms on localhost (5/6)
+16/05/19 04:32:33 INFO python.PythonRDD: Times: total = 675, boot = 28, init = 108, finish = 539
+16/05/19 04:32:33 INFO executor.Executor: Finished task 3.0 in stage 5.0 (TID 22). 209914 bytes result sent to driver
+16/05/19 04:32:33 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 5.0 (TID 22) in 862 ms on localhost (6/6)
+16/05/19 04:32:33 INFO scheduler.DAGScheduler: ResultStage 5 (collect at <ipython-input-14-e9ba75acf867>:1) finished in 0.884 s
+16/05/19 04:32:33 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 5.0, whose tasks have all completed, from pool 
+16/05/19 04:32:33 INFO scheduler.DAGScheduler: Job 2 finished: collect at <ipython-input-14-e9ba75acf867>:1, took 0.977854 s
+
+In [15]: sum_function(sorted_channel_views, val=0, kv={}, skv={}, result={})
+Out[15]: 
+[(u'ABC', 1115974),
+ (u'BAT', 5099141),
+ (u'BOB', 2591062),
+ (u'CAB', 3940862),
+ (u'CNO', 3941177),
+ (u'DEF', 8032799),
+ (u'MAN', 6566187),
+ (u'NOX', 2583583),
+ (u'XYZ', 5208016)]
+
+In [16]: 
+
+
+
+
+Verified:
+[(u'ABC', 1115974),
+ (u'BAT', 5099141),
+ (u'BOB', 2591062),
+ (u'CAB', 3940862),
+ (u'CNO', 3941177),
+ (u'DEF', 8032799),
+ (u'MAN', 6566187),
+ (u'NOX', 2583583),
+ (u'XYZ', 5208016)]
+
+With:
+[(u'XYZ', 5208016),
+ (u'DEF', 8032799),
+ (u'CNO', 3941177),
+ (u'BAT', 5099141),
+ (u'NOX', 2583583),
+ (u'CAB', 3940862),
+ (u'BOB', 2591062),
+ (u'ABC', 1115974),
+ (u'MAN', 6566187)]
+
+
+
+
+Advanced Join With PySpark
+
+Find the total number of viewers for all shows on the BAT channel. Let's check all the six files needed in the HDFS input folder by running the following command. Your output should look similar to the list below:
+
+hdfs dfs -ls input/
+
+Out[]: 
+input/join2_genchanA.txt
+input/join2_genchanB.txt
+input/join2_genchanC.txt
+input/join2_gennumA.txt
+input/join2_gennumB.txt
+input/join2_gennumC.txt
+
+READ SHOW FILES
+
+Perfect. The next step is to read in all of our gennum files, which contain show names and viewer numbers. The easiest way to read them into Spark all at the same time is by using pattern matching with a question mark following the base part of the filename, gennum. By doing so, we'll get all gennum files regardless of whether it is the gennumA, gennumB or gennumC file. Also, do a quick check, just to make sure everything loaded in correctly.
+
+show_views_file = sc.textFile("input/join2_gennum?.txt")
+show_views_file.take(2)
+
+Out[]: 
+[u'Hourly_Sports,21', u'PostModern_Show,38']
+
+So, the output shows that each record contains the show name (e.g. Hourly Sports) as well as the number of viewers for the show (e.g. 21). 
+PARSE SHOW FILES
+
+The next step should be very familiar to you if you worked through the simple join assignment. Here we write a function will parse our output into individual elements, since they're currently contained in a single string. After we define our function, we plug it into our PySpark transformation to parse each line of the file and lastly check the results:
+
+def split_show_views(line):
+split = line.split(',')
+show, views = split[0], split[1]
+return (show, views)
+
+show_views = show_views_file.map(split_show_views)
+show_views.take(2)
+
+Out[]: 
+[(u'Hourly_Sports','21'), (u'PostModern_Show','38')]
+
+READ CHANNEL FILES
+
+Now let's do some work with our genchan files. Just as we did with the show files, we'll use pattern matching to read in all three of the genchan files and check the output.
+
+show_channel_file = sc.textFile("input/join2_genchan?.txt")
+show_channel_file.take(2)
+
+PARSE CHANNEL FILES
+
+Now let's parse out the genchan files in much the same way we did with the gennum files, apply the function to all of those files and check the output.
+
+def split_show_channel(line):
+split = line.split(',')
+show, channel = split[0], split[1]
+return (show, channel)
+
+show_channel = show_channel_file.map(split_show_channel)
+show_channel.take(2)
+
+Out[]: 
+[(u'Baked_Talking', u'MAN'), (u'Baked_Talking', u'CNO')]
+
+JOIN THE DATASETS
+
+Next we'll use a join transformation to join the two datasets, while using the show name as our key since it's the first element in both of our files, and afterwards we again take a look at our results.
+
+join_dataset = show_views.join(show_channel)
+join_dataset.take(3)
+
+Out[]: 
+(u'Baked_Talking', (u'168', u'MAN'))
+(u'Baked_Talking', (u'132', u'CNO'))
+(u'Baked_Talking', (u'132', u'DEF'))
+
+EXTRACT CHANNEL AS KEY
+
+Now that we have all of our data in a single RDD, recall that our objective is to look at total viewers by channel, so now we'll want to extract the channel and make that the key so we can later group the results by channel. The function below extracts the elements we're interested in and assigns them to channel and views. The brackets in the code below get you to the inner tuple and allow you to extract the first and second elements from that inner tuple.
+
+def extract_channel_views(line):
+channel, views = line[1][0], line [1][1]
+return (channel, views)
+
+Since we're dealing with nested tuples here, let discuss this in a little more detail.  Our joined output, as we saw above, looks like this:
+
+(u'Baked_Talking', (u'168', u'MAN'))
+
+The outer tuple contains two elements. The first element is u'Baked_Talking', and the second element is the inner tuple or (u'168', u'MAN').
+
+So to grab the channel information out of the inner tuple, we'll need to use two steps of sub-setting. The first step selects the inner tuple, while the second step gets the second element from the inner tuple. Remember that Python uses zero-based indexing, so [0] refers to the first element, and [1] refers to the second element. 
+
+And this is the line in the function that corresponds with the above actions:
+
+def extract_channel_views(line):
+channel, views = line[1][0], line [1][1]
+return (channel, views)
+
+As we've done with our past functions, lets apply it to the full dataset and check out our results.
+
+channel_views = joined_dataset.map(extract_channel_views)
+channel_views.take(5)
+
+Now you need to define a simple function that we can use to sum viewership by channel:
+
+def sum_views(a, b):
+return a + b
+
+Lastly, you reduce by key, apply your sum function to aggregate views and produce your output, where you can find the total views for the BAT channel.
+
+channel_views.reduceByKey(sum_views).collect()
+
+Out[]: 
+[(u'XYZ', 5208016),
+(u'DEF', 8032799),
+(u'CNO', 3941177),
+(u'BAT', 5099141),
+(u'NOX', 2583583),
+(u'CAB', 3940862),
+(u'BOB', 2591062),
+(u'ABC', 1115974),
+(u'MAN', 6566187)]

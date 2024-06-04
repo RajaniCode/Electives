@@ -1,0 +1,26 @@
+Working with Yelp dataset sample
+
+In the graded quiz assignment we will first run the script that was presented the video, and then we will add commands to answer a few more questions, The details for adding commands are in the quiz. Here are the comments for running the attached pig script below.
+
+Pig_script_4yelpdata.pig
+1. Check out the Yelp dataset in your cloudera VM:
+
+Try this in Unix
+
+unix > head -1 /usr/lib/hue/apps/search/examples/collections/solr_configs_yelp_demo/index_data.csv
+
+(it returns the header row)
+
+2. Copy the dataset into HDFS if you are going to run pig -x mapreduce
+
+unix> hdfs dfs -copyFromLocal /usr/lib/hue/apps/search/examples/collections/solr_configs_yelp_demo/index_data.csv /user/cloudera/input/yelp_data.csv
+
+3. At unix prompt enter:
+
+unix > pig -x local or enter pig -x mapreduce
+
+4. Note on Pig commands: after any command you could try
+
+grunt> DESCRIBE relation-name-you-use to see what the schema that Pig is using for the relation.
+
+It is very useful as you debug and develop scripts, especially to get the field referencing correct

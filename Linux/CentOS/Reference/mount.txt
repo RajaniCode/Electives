@@ -1,0 +1,200 @@
+Mount NTFS Drive:
+
+This tutorial will show you how to mount an NTFS drive ina read/write mode on CentOS and other RHEL based Linux operating systems with ntfs-3g driver. NTFS-3G is a stable Open Source NTFS driver that supports reading and writing to NTFS drives on Linux and other operating systems.
+
+The ntfs-3g driver is available in the EPEL repository. The first step is to install and activate EPEL on your Linux system.
+Enable the EPEL repository
+
+Run the following command as root user on the shell to enable the EPEL repository.
+
+yum install epel-release
+
+EPEL (Extra Packages for Enterprise Linux) is a Fedora Special Interest Group that creates, maintains, and manages a set of additional high quality packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL).
+
+Install ntfs-3g
+
+Then we have to install the ntfs-3g package
+
+yum install ntfs-3g
+
+Once installed, we create a directory where the NTFS drive shall be mounted:
+
+mkdir '/mnt/win'
+
+And mount the NTFS partition by running this command:
+
+mount -t ntfs-3g '/dev/sdb1' '/mnt/win'
+
+OR
+
+mount -t ntfs-3g '/dev/sda2' '/mnt/win'
+
+OR 
+
+mount -t ntfs-3g '/dev/sda3' '/mnt/win'
+
+Check NTFS partition device by clicking on the devices listed under "Devices"
+
+To unmount:
+
+umount '/mnt/win'
+
+To mount the NTFS partition permanently, add the following line to the /etc/fstab file.
+
+Open /etc/fstab with an editor:
+
+nano /etc/fstab
+
+And add the line:
+
+'/dev/sdb1' '/mnt/win' ntfs-3g defaults 0 0
+
+OR
+
+'/dev/sda2' '/mnt/win' ntfs-3g defaults 0 0
+
+OR
+
+'/dev/sda3' '/mnt/win' ntfs-3g defaults 0 0
+
+Linux system will mount the NTFS drive automatically at boot time
+
+
+
+
+[rajani@localhost NTFS]$ su root
+Password: 
+[root@localhost NTFS]# yum install ntfs-3g
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.vhost.vn
+ * epel: ftp.cuhk.edu.hk
+ * extras: mirrors.viethosting.vn
+ * nux-dextop: mirror.li.nux.ro
+ * rpmforge: mirror.team-cymru.org
+ * updates: mirror.nbrc.ac.in
+Resolving Dependencies
+--> Running transaction check
+---> Package ntfs-3g.x86_64 2:2016.2.22-1.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+==============================================================================================================================
+ Package                     Arch                       Version                                Repository                Size
+==============================================================================================================================
+Installing:
+ ntfs-3g                     x86_64                     2:2016.2.22-1.el7                      epel                     280 k
+
+Transaction Summary
+==============================================================================================================================
+Install  1 Package
+
+Total download size: 280 k
+Installed size: 659 k
+Is this ok [y/d/N]: y
+Downloading packages:
+ntfs-3g-2016.2.22-1.el7.x86_64.rpm                                                                     | 280 kB  00:00:03     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : 2:ntfs-3g-2016.2.22-1.el7.x86_64                                                                           1/1 
+  Verifying  : 2:ntfs-3g-2016.2.22-1.el7.x86_64                                                                           1/1 
+
+Installed:
+  ntfs-3g.x86_64 2:2016.2.22-1.el7                                                                                            
+
+Complete!
+[root@localhost NTFS]# mkdir '/mnt/win'
+[root@localhost NTFS]# mount -t ntfs-3g '/dev/sda3' '/mnt/win'
+[root@localhost NTFS]# umount '/mnt/win'
+[root@localhost NTFS]# rmdir '/mnt/win'
+[root@localhost NTFS]# yum remove ntfs-3g
+Loaded plugins: fastestmirror, langpacks
+Resolving Dependencies
+--> Running transaction check
+---> Package ntfs-3g.x86_64 2:2016.2.22-1.el7 will be erased
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+==============================================================================================================================
+ Package                     Arch                       Version                               Repository                 Size
+==============================================================================================================================
+Removing:
+ ntfs-3g                     x86_64                     2:2016.2.22-1.el7                     @epel                     659 k
+
+Transaction Summary
+==============================================================================================================================
+Remove  1 Package
+
+Installed size: 659 k
+Is this ok [y/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Erasing    : 2:ntfs-3g-2016.2.22-1.el7.x86_64                                                                           1/1 
+  Verifying  : 2:ntfs-3g-2016.2.22-1.el7.x86_64                                                                           1/1 
+
+Removed:
+  ntfs-3g.x86_64 2:2016.2.22-1.el7                                                                                            
+
+Complete!
+[root@localhost NTFS]# 
+
+
+
+
+mount for all mounted file systems:
+
+[rajani@localhost NTFS]$ su root
+Password: 
+[root@localhost NTFS]# mount
+proc on /proc type proc (rw,nosuid,nodev,noexec,relatime)
+sysfs on /sys type sysfs (rw,nosuid,nodev,noexec,relatime,seclabel)
+devtmpfs on /dev type devtmpfs (rw,nosuid,seclabel,size=3990304k,nr_inodes=997576,mode=755)
+securityfs on /sys/kernel/security type securityfs (rw,nosuid,nodev,noexec,relatime)
+tmpfs on /dev/shm type tmpfs (rw,nosuid,nodev,seclabel)
+devpts on /dev/pts type devpts (rw,nosuid,noexec,relatime,seclabel,gid=5,mode=620,ptmxmode=000)
+tmpfs on /run type tmpfs (rw,nosuid,nodev,seclabel,mode=755)
+tmpfs on /sys/fs/cgroup type tmpfs (rw,nosuid,nodev,noexec,seclabel,mode=755)
+cgroup on /sys/fs/cgroup/systemd type cgroup (rw,nosuid,nodev,noexec,relatime,xattr,release_agent=/usr/lib/systemd/systemd-cgroups-agent,name=systemd)
+pstore on /sys/fs/pstore type pstore (rw,nosuid,nodev,noexec,relatime)
+cgroup on /sys/fs/cgroup/cpuset type cgroup (rw,nosuid,nodev,noexec,relatime,cpuset)
+cgroup on /sys/fs/cgroup/cpu,cpuacct type cgroup (rw,nosuid,nodev,noexec,relatime,cpuacct,cpu)
+cgroup on /sys/fs/cgroup/memory type cgroup (rw,nosuid,nodev,noexec,relatime,memory)
+cgroup on /sys/fs/cgroup/devices type cgroup (rw,nosuid,nodev,noexec,relatime,devices)
+cgroup on /sys/fs/cgroup/freezer type cgroup (rw,nosuid,nodev,noexec,relatime,freezer)
+cgroup on /sys/fs/cgroup/net_cls type cgroup (rw,nosuid,nodev,noexec,relatime,net_cls)
+cgroup on /sys/fs/cgroup/blkio type cgroup (rw,nosuid,nodev,noexec,relatime,blkio)
+cgroup on /sys/fs/cgroup/perf_event type cgroup (rw,nosuid,nodev,noexec,relatime,perf_event)
+cgroup on /sys/fs/cgroup/hugetlb type cgroup (rw,nosuid,nodev,noexec,relatime,hugetlb)
+configfs on /sys/kernel/config type configfs (rw,relatime)
+/dev/sda6 on / type ext4 (rw,relatime,seclabel,data=ordered)
+selinuxfs on /sys/fs/selinux type selinuxfs (rw,relatime)
+systemd-1 on /proc/sys/fs/binfmt_misc type autofs (rw,relatime,fd=34,pgrp=1,timeout=300,minproto=5,maxproto=5,direct)
+mqueue on /dev/mqueue type mqueue (rw,relatime,seclabel)
+debugfs on /sys/kernel/debug type debugfs (rw,relatime)
+hugetlbfs on /dev/hugepages type hugetlbfs (rw,relatime,seclabel)
+sunrpc on /var/lib/nfs/rpc_pipefs type rpc_pipefs (rw,relatime)
+sunrpc on /proc/fs/nfsd type nfsd (rw,relatime)
+binfmt_misc on /proc/sys/fs/binfmt_misc type binfmt_misc (rw,relatime)
+gvfsd-fuse on /run/user/1000/gvfs type fuse.gvfsd-fuse (rw,nosuid,nodev,relatime,user_id=1000,group_id=1000)
+fusectl on /sys/fs/fuse/connections type fusectl (rw,relatime)
+
+
+
+
+df for file system disk space usage:
+
+[root@localhost NTFS]# df
+Filesystem     1K-blocks    Used Available Use% Mounted on
+/dev/sda6       60344196 6841992  50413820  12% /
+devtmpfs         3990304       0   3990304   0% /dev
+tmpfs            4000260     148   4000112   1% /dev/shm
+tmpfs            4000260    9196   3991064   1% /run
+tmpfs            4000260       0   4000260   0% /sys/fs/cgroup
+[root@localhost NTFS]#

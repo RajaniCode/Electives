@@ -1,0 +1,18 @@
+3.3 Superstitious Sailors
+
+As it turns out, our potential shipmates are extremely superstitious. As such, we do not want anyone to enter certain words in their comments.
+
+Let's start checking for bad words within a sentence. We can begin with 'sink' as our first bad word. We will want to make sure this word is by itself and not part of a larger word.
+
+Looking good, but there are more bad words we need to account for. Let's also check for 'wreck'.
+
+Almost finished. Our final bad word to match is 'disaster'.
+
+Subjects
+Our ship should be unsinkable. But what if it does sink on our voyage?
+If we wreck, can we turn around?
+We want to avoid every disaster while on our voyage.
+
+
+REGULAR EXPRESSION
+/\b(sink)\b|\b(wreck)\b|\b(disaster)\b/

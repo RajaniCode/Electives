@@ -1,0 +1,141 @@
+1.3 Marking Up Lists
+
+We just added the band members and song titles to the page. Decide the best tags to mark up that content, and don't forget to nest and indent tags when necessary!
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. 
+    Critics have hailed them as the greatest post-garage-rock 
+    band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a 
+    follow-up to their breakout 2011 album, Top Right Bottom Left, 
+    and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    Jack Smith - Vocals
+    Sarah Quan - Guitar
+    Laverne Butlet - Bass
+    Simon St. Hollister - Drums
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    The Last
+    Downtown
+    Yellow Carpet
+    Rocket to Mars
+    Walk, not Run
+    Design
+    Shopping Cart
+    Our Gift to You
+
+    <h4>Opacity Zero</h4>
+
+    Visible/Invisible
+    Car Trip
+    AFK
+    Up and Up
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they 
+    are recording their new album. Check back later!</p>
+  </body>
+</html>
+
+1. Mark up the list of band members using the appropriate tag(s).
+
+Answer:
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+2. Mark up the song list for the album Opacity Zero using the appropriate tag(s).
+
+Answer:
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+Success:
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. 
+    Critics have hailed them as the greatest post-garage-rock 
+    band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a 
+    follow-up to their breakout 2011 album, Top Right Bottom Left, 
+    and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    The Last
+    Downtown
+    Yellow Carpet
+    Rocket to Mars
+    Walk, not Run
+    Design
+    Shopping Cart
+    Our Gift to You
+
+    <h4>Opacity Zero</h4>
+    
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they 
+    are recording their new album. Check back later!</p>
+  </body>
+</html>

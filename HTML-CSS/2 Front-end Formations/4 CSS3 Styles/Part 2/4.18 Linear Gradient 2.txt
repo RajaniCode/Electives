@@ -1,0 +1,17 @@
+4.18 Linear Gradient 2
+
+http://caniuse.com/#feat=css-gradients
+
+Using the same linear-gradient, reverse the gradient. Use the degree value that corresponds to the to top keyword. Don’t cheat by changing the color order in the gradient!
+
+style.css
+
+.nav {
+  background: linear-gradient(#3e606f, #324d59);
+}
+
+Answer:
+
+.nav {
+  background: linear-gradient(0deg, #3e606f, #324d59);
+}

@@ -1,0 +1,91 @@
+4.11 Styling CSS Backgrounds
+
+Before we work on adding backgrounds with CSS to Open Source Records' page, let's practice with a temporary page here.
+
+playground.css
+
+body {
+  
+}
+.box {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+}
+
+playground.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="playground.css">
+  </head>
+  <body>
+    <div class="box">
+    </div>
+  </body>
+</html>
+
+1. Set the background color of the body to #d2d2d2 and the box to #badf00.
+
+Answer:
+
+playground.css
+
+body {
+  background-color: #d2d2d2;
+}
+.box {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  background-color: #badf00;
+}
+
+2. Now, modify the CSS so that the background color of the body is still being used, but instead of the background-color property, use the shorthand background version.
+
+Use bg-body.png as the image, put the image in the top right of the container, and repeat it in all directions.
+
+Answer:
+
+body {
+  background: #d2d2d2 url(bg-body.png) top right repeat;
+}
+
+3. Finally, modify the CSS rule for the box class by reworking the existing background color into a single shorthand background property that displays the image bg-box.png, put the image at the top and center of the container, and repeat it only in the y-direction.
+
+Answer: 
+
+.box {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  background: #badf00 url(bg-box.png) top center repeat-y;
+}
+
+Success:
+
+playground.css
+
+body {
+  background: #d2d2d2 url(bg-body.png) top right repeat;
+}
+.box {
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  background: #badf00 url(bg-box.png) top center repeat-y;
+}
+
+playground.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="playground.css">
+  </head>
+  <body>
+    <div class="box">
+    </div>
+  </body>
+</html>

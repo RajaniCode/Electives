@@ -1,0 +1,35 @@
+Two versions of python on linux
+
+Distro installed a standard system Python in /usr/bin, and may have scripts that depend on this being present, and selected by #! /usr/bin/env python. You can usually get away with running Python 2.6 scripts in 2.7, but do you want to risk it?
+
+On top of that, monkeying with /usr/bin can break your package manager's ability to manage packages. And changing the order of directories in your PATH will affect a lot of other things besides Python. (In fact, it's more common to have /usr/local/bin ahead of /usr/bin, and it may be what you actually want—but if you have it the other way around, presumably there's a good reason for that.)
+
+But you don't need to change your default Python to get the system to run 2.7 when you type python.
+
+First, you can set up a shell alias:
+
+alias python=/usr/local/bin/python2.7
+
+Type that at a prompt, or put it in your ~/.bashrc if you want the change to be persistent, and now when you type python it runs your chosen 2.7, but when some program on your system tries to run a script with /usr/bin/env python it runs the standard 2.6.
+
+Alternatively, just create a virtual environment [https://pypi.python.org/pypi/virtualenv] out of your 2.7 (or separate venvs for different projects), and do your work inside the venv.
+
+
+Python from command-line
+
+wget --no-check-certificate https://www.python.org/ftp/python/2.7.11/Python-2.7.11.tgz
+
+tar -xzf Python-2.7.11.tgz  
+cd Python-2.7.11
+
+Now read the README file to figure out how to install, or do the following with no guarantees from me that it will be exactly what you need.
+
+./configure  
+make  
+sudo make install  
+
+For Python 3.5 use the following download address:
+http://www.python.org/ftp/python/3.5.1/Python-3.5.1.tgz
+
+For other versions and the most up to date download links:
+http://www.python.org/getit/

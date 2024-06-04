@@ -1,0 +1,27 @@
+Proportional Image Crop
+
+
+Now our images aren't squished, but they don't use the container effectively. Set a height on the images to match the container and make sure the width scales proportionally automatically.
+
+style.css
+
+.store li {
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+}
+.store li img {
+
+}
+
+Answer:
+
+.store li {
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+}
+.store li img {
+  height: 150px;
+  width: auto;
+}

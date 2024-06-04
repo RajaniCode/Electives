@@ -1,0 +1,35 @@
+1.8 Update the ENV in a Container
+
+It’s kind of annoying to have to type /usr/games/ before the fortune command, so let’s update the PATH environment variable in the container so that we don’t have to type all of that anymore.
+
+1. Type docker container exec -it elegant_noether /bin/bash.
+
+Answer:
+
+Enter your solution below
+
+$
+
+2. Type PATH=$PATH:/usr/games/ and hit enter.
+
+Answer:
+
+Enter your solution below
+
+$
+
+3. Now type export PATH to save the updated PATH variable.
+
+Answer:
+
+Enter your solution below
+
+$
+
+4. To test if this worked, simply type fortune — if we see the random fortune message appear then we know the PATH variable is updated!
+
+Answer:
+
+Enter your solution below
+
+$

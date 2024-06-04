@@ -1,0 +1,58 @@
+7.4 Respond-to III
+
+
+We should further expand our mixin to allow for queries beyond min-width. Add $type as the first argument to respond-to, which will be used in place of min-width when passed in.
+
+
+CSS
+
+Mixin respond-to takes 1 argument but 2 were passed.
+
+APPLICATION.SCSS 
+
+@mixin respond-to($query) {
+  @media (min-width: $query) {
+    @content;
+  }
+}
+
+.factory {
+  width: 100%;
+  @include respond-to(min-width, 960px) {
+    width: percentage(600px / 960px);
+  }
+  @include respond-to(max-width, 768px) {
+    width: 50%;
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+@mixin respond-to($type, $query) {
+  @media ($type: $query) {
+    @content;
+  }
+}
+
+.factory {
+  width: 100%;
+  @include respond-to(min-width, 960px) {
+    width: percentage(600px / 960px);
+  }
+  @include respond-to(max-width, 768px) {
+    width: 50%;
+  }
+}
+
+CSS
+
+.factory {
+  width: 100%; }
+  @media (min-width: 960px) {
+    .factory {
+      width: 62.5%; } }
+  @media (max-width: 768px) {
+    .factory {
+      width: 50%; } }

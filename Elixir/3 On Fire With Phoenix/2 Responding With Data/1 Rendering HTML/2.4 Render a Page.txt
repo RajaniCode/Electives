@@ -1,0 +1,32 @@
+2.4 Render a Page
+
+Responding with text is a good first step. However, our goal is to render an HTML page. Let’s change our controller code to do just that.
+
+lib/neon_web/controllers/event_controller.ex
+defmodule NeonWeb.EventController do
+  use NeonWeb, :controller
+
+  
+  
+
+  def index(conn, _) do
+    
+    
+  end
+end
+
+
+1. First, in order to facilitate working with Repo and Event, create two aliases for these modules.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex
+
+2. Inside index, fetch all events from the database and assign them to a variable called events.
+
+Answer: 
+lib/neon_web/controllers/event_controller.ex
+
+3. Call the render() function so that it uses the "index.html" template. The template should receive a keyword list with the events variable assigned to a key with the same name.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex

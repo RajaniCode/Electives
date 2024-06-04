@@ -1,0 +1,38 @@
+[cloudera@quickstart R]$ python --version
+Python 2.6.6
+[cloudera@quickstart R]$ gedit  mapper_FileA.py
+[cloudera@quickstart R]$ cat mapper_FileA.py
+def split_fileA(line):
+    # split the input line in word and count on the comma
+    line = line.split(",")
+    word = line[0]
+    # turn the count to an integer  
+    count = int(line[1])
+    return (word, count)
+
+test_line = "able,991"
+
+print split_fileA(test_line)
+[cloudera@quickstart R]$ chmod +x mapper_FileA.py
+[cloudera@quickstart R]$ python mapper_FileA.py
+('able', 991)
+[cloudera@quickstart R]$ gedit  mapper_FileB.py
+[cloudera@quickstart R]$ cat mapper_FileB.py
+def split_fileB(line):
+    # split the input line into word, date and count_string
+    line = line.split(",")
+    date_word = line[0]
+    count_string = line[1]
+    date_word = date_word.split(" ")
+    date = date_word[0]
+    word = date_word[1]
+    return (word, date + " " + count_string)
+
+test_line = "Jan-01 able,5"
+
+print split_fileB(test_line)
+[cloudera@quickstart R]$ python mapper_FileB.py
+('able', 'Jan-01 5')
+[cloudera@quickstart R]$ 
+ 
+

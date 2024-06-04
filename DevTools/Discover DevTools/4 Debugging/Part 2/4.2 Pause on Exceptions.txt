@@ -1,0 +1,63 @@
+4.2 Pause on Exceptions
+
+We added an Add Event button to our calendar, but there seems to be a bug! Click the button and try to add an event.
+
+Now look at the error in the console and click to view the line where it's failing in the calendar_add_event_broken.js file in the Sources panel. The error happens when we try to call the Calendar.createEvent() method. Try calling that method from the console to see that we get the same exception.
+
+Let's enable the Pause on Exceptions option. Then, click the Create Event button again to pause execution where the error is thrown. It looks like there is a mistake on line 2 that is breaking the button's functionality.
+
+Fix line 2 so that it says .create instead of .createForm. Then save the changes and resume the debugger. Now add an event to verify that your changes fixed the bug!
+
+Make sure to turn off Pause on exceptions before we move on. Then, type $("#events .event") in the console to see an array with the current list of events.
+
+F12
+Console
+[Uncaught TypeError: Cannot read property 'value' of undefined
+Calendar.createEvent();
+calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3 
+Uncaught TypeError: Cannot read property 'value' of undefined
+(at Object.Calendar.createEvent (http://d1740rtcumxhiu.cloudfront.net/assets/calendar/calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3:19)
+
+at Object.obj.createEvent (eval at <anonymous> (http://d1740rtcumxhiu.cloudfront.net/assets/application-0f80b6614f16a273dd33ba5c35291b4b.js:20991:25), <anonymous>:12:29)
+    
+at <anonymous>:2:10
+   
+at Object.InjectedScript._evaluateOn (<anonymous>:875:140)
+    
+at Object.InjectedScript._evaluateAndWrap (<anonymous>:808:34)
+    
+at Object.InjectedScript.evaluate (<anonymous>:664:21))
+Calendar.createEvent @ calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3
+obj.createEvent @ VM104:12
+(anonymous function) @ VM122:2
+InjectedScript._evaluateOn @ VM121:875
+InjectedScript._evaluateAndWrap @ VM121:808
+InjectedScript.evaluate @ VM121:664]
+
+Source
+Calendar.createEvent = function() {
+  //var field = $('.createForm input[type="text"]')[0];
+  var field = $('.create input[type="text"]')[0];
+  var name = field.value;
+  if (name == "") {
+    $(field).addClass('required');
+  }
+  else {
+    Calendar.saveEvent({name: name, date: Calendar.displayedDate});
+    Calendar.displayToday();
+    $(field).removeClass('required').val('');
+  }
+}
+;
+
+Console
+[Uncaught TypeError: Cannot read property 'value' of undefined
+Calendar.createEvent	@	calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3
+obj.createEvent	@	VM123:12
+(anonymous function)	@	calendar-51a4ed8219ec88044c56258d9b083f0f.js:88
+jQuery.event.dispatch	@	jquery-fc54103127767d5a84270aa48b6357f0.js:4641
+elemData.handle	@	jquery-fc54103127767d5a84270aa48b6357f0.js:4309]
+
+$("#events .event");
+
+[<li class=?"event">?Run 5K?</li>?, <li class=?"event">?Build Robot?</li>?, <li class=?"event">?Take Over the World?</li>?, <li class=?"event">?hover?</li>?]

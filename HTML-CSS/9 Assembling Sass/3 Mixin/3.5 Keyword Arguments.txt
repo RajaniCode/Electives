@@ -1,0 +1,62 @@
+3.5 Keyword Arguments
+
+
+Given the number of people collaborating on this stylesheet, we should make the mixin call as clear as possible. Add $bg: and $pad: to the .highrise @include arguments, creating keyword arguments.
+
+CSS
+
+_ASSEMBLE.SCSS
+
+.factory {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.highrise {
+  background: #797979;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+@mixin assemble($bg: #fff, $pad: 10px) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: $pad;
+}
+
+.factory {
+  @include assemble;
+}
+.highrise {
+  @include assemble(#797979, 20px);
+}
+
+Answer:
+
+_ASSEMBLE.SCSS
+
+@mixin assemble($bg: #fff, $pad: 10px) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: $pad;
+}
+
+.factory {
+  @include assemble;
+}
+.highrise {
+   @include assemble($bg: #797979, $pad: 20px);
+}
+
+CSS
+
+.factory {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px; }
+
+.highrise {
+  background: #797979;
+  border: 1px solid #ccc;
+  padding: 20px; }

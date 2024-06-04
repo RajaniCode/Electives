@@ -1,0 +1,25 @@
+3. Staged differences
+
+
+We've added ostrich.html to the staging area, but your co-worker has stopped by and asked to see the new page first. Run a diff on the staged changes.
+
+
+$ git diff --staged
+
+diff --git a/ostrich.html b/ostrich.html
+new file mode 100644
+index 0000000..d10f631
+--- /dev/null
++++ b/ostrich.html
+@@ -0,0 +1,9 @@
++[m<!DOCTYPE html>
++[m<html lang="en">
++[m  <head>
++[m    <title>I am an ostrich</title>
++[m  </head>
++[m  <body>
++[m    <h1>SQUAWK!</h1>
++[m  </body>
++[m</html>
+
+Success!

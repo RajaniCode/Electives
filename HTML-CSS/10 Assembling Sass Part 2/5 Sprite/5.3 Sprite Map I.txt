@@ -1,0 +1,35 @@
+5.3 Sprite Map I
+
+
+Oh. They weren't logo variations after all - these images are the default, hover, and active states of a link. It'll be easier to handle this manually, so let's start by removing the automatic import and mixin. After that, set an appropriate sprite-map to a variable called $logos.
+
+CSS
+
+.SASS
+
+@import "compass"
+@import "logos/*.png"
++all-logos-sprites
+
+.SCSS
+
+@import "compass";
+@import "logos/*.png";
+
+@include all-logos-sprites;
+
+Answer:
+
+.SASS
+
+@import compass
+
+$logos: sprite-map("logos/*.png")
+
+.SCSS
+
+@import "compass";
+
+$logos: sprite-map("logos/*.png");
+
+CSS

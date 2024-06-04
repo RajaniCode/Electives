@@ -1,0 +1,13 @@
+2.3 Escape Plan
+
+We need an escape plan for when we do not want to use an operator. Let's match the subject string '$3.99'. Keep in mind that we will need to escape some of the characters for the pattern to properly match.
+
+[Single Answer]
+
+/$3.99/
+//$3/.99/
+/!$3!.99/
+/$3\.99/
+
+
+Answer: /$3\.99/

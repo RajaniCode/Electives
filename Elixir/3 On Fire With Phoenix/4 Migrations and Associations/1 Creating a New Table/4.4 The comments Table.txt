@@ -1,0 +1,47 @@
+4.4 The comments Table
+
+The following migration creates a new table "comments" which will store comments for each event. This table will have two columns of type text and one foreign key column which will associate records in the "comments" table with a parent record in the "events" table. Let’s finish coding this module.
+
+priv/repo/migrations/20171017140040_add_comments_table.exs
+defmodule Neon.Repo.Migrations.AddCommentsTable do
+  use Ecto.Migration
+
+  def change do
+    create  do
+      add 
+      add :author, :text
+      add :event_id 
+      
+
+      
+    end
+
+    
+  end
+end
+
+
+1. Complete the argument to the create function so that a new table named "comments" is created.
+
+Answer:
+priv/repo/migrations/20171017140040_add_comments_table.exs
+
+2. On the first line inside the create block, finish adding a column named body of type text. This column should NOT accept null.
+
+Answer: 
+priv/repo/migrations/20171017140040_add_comments_table.exs
+
+3. The column event_id should be a foreign key to the “events” table. Make sure to add an option that deletes all referenced records when their parent record is deleted.
+
+Answer:
+priv/repo/migrations/20171017140040_add_comments_table.exs
+
+4. After the event_id column, call the function that adds columns which help keep track of when records were first created and last updated.
+
+Answer:
+priv/repo/migrations/20171017140040_add_comments_table.exs
+
+5. Finally, create an index for the event_id column on the newly created "comments" table. Remember, the index function expects a list as its second argument.
+
+Answer:
+priv/repo/migrations/20171017140040_add_comments_table.exs

@@ -1,0 +1,33 @@
+6.1 Rendering Performance
+
+Our design intern has added some new styles to the app, but he doesn't believe us when we tell him it's going to slow down the performance too much. Let's convince him otherwise. Go to the Timeline panel and hit the record button. Then, let's trigger some animations. Click "Next" to advance the calendar to tomorrow.
+
+Now, stop the Timeline recording. Click the Frames view icon (hover your mouse over the options if you can't find it), and take a look at how slow the performance is. Pay special attention to the green color, which means time spent painting. Let's get rid of all of these fancy styles that were added to the events. Inspect an event, and hide all of the declarations defined in the new-styles.css file.
+
+Start a new Timeline recording. Click "Prev" to get back to today's date. Then, stop the recording and take a look at the improved performance of the painting!
+
+F12
+Timeline
+
+Elements
+li.event
+Styles
+media="screen"
+#events .event {
+    background: -webkit-linear-gradient(top, rgba(69,155,231,1) 0%, rgba(0,44,95,1) 100%);
+    border-radius: 6px;
+    border: 0;
+    box-shadow: 0 3px 5px #888;
+    color: #FFF;
+}
+Edit Styles (Hide)
+media="screen"
+#events .event {
+    /* background: -webkit-linear-gradient(top, rgba(69,155,231,1) 0%, rgba(0,44,95,1) 100%); */
+    /* border-radius: 6px; */
+    /* border: 0; */
+    /* box-shadow: 0 3px 5px #888; */
+    /* color: #FFF; */
+}
+
+Timeline

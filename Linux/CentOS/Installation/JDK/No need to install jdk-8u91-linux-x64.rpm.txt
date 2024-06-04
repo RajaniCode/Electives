@@ -1,0 +1,118 @@
+No need to install jdk-8u91-linux-x64.rpm
+
+
+
+
+
+
+
+
+
+
+[rajani@localhost JDK]$ su root
+Password: 
+[root@localhost JDK]# yum install jdk-8u91-linux-x64.rpm
+Loaded plugins: fastestmirror, langpacks
+Examining jdk-8u91-linux-x64.rpm: 2000:jdk1.8.0_91-1.8.0_91-fcs.x86_64
+Marking jdk-8u91-linux-x64.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package jdk1.8.0_91.x86_64 2000:1.8.0_91-fcs will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package         Arch       Version               Repository               Size
+================================================================================
+Installing:
+ jdk1.8.0_91     x86_64     2000:1.8.0_91-fcs     /jdk-8u91-linux-x64     255 M
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total size: 255 M
+Installed size: 255 M
+Is this ok [y/d/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+Warning: RPMDB altered outside of yum.
+  Installing : 2000:jdk1.8.0_91-1.8.0_91-fcs.x86_64                         1/1 
+Unpacking JAR files...
+	tools.jar...
+	plugin.jar...
+	javaws.jar...
+	deploy.jar...
+	rt.jar...
+	jsse.jar...
+	charsets.jar...
+	localedata.jar...
+	jfxrt.jar...
+  Verifying  : 2000:jdk1.8.0_91-1.8.0_91-fcs.x86_64                         1/1 
+
+Installed:
+  jdk1.8.0_91.x86_64 2000:1.8.0_91-fcs                                          
+
+Complete!
+[root@localhost JDK]#
+
+
+
+
+
+
+
+
+
+
+http://unix.stackexchange.com/questions/110512/uninstall-jdk-rpm-to-reinstall
+
+What's that packages name?
+
+When you don't know the name of a specific RPM to uninstall you can search for it like so using the command rpm.
+
+$ rpm -aq | grep -i jdk
+java-1.7.0-openjdk-devel-1.7.0.60-2.4.4.0.fc19.x86_64
+jdk-1.7.0_45-fcs.x86_64
+java-1.7.0-openjdk-1.7.0.60-2.4.4.0.fc19.x86_64
+
+Based on the above output I have 2 versions of Java installed. The official Oracler version, jdk-1.7.0_45 and the IceTea version aka. Open JDK, java-1.7.0-openjdk-1.7.0.60-2.4.4.0.
+Uninstalling
+
+To uninstall the official version of Java (JDK) you could use the following commands, yum or rpm:
+
+yum
+
+$ sudo yum remove jdk
+[sudo] password for saml: 
+Loaded plugins: auto-update-debuginfo, changelog, langpacks, refresh-packagekit
+Resolving Dependencies
+--> Running transaction check
+---> Package jdk.x86_64 2000:1.7.0_45-fcs will be erased
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+=====================================================================================================================
+ Package              Arch                    Version                               Repository                  Size
+=====================================================================================================================
+Removing:
+ jdk                  x86_64                  2000:1.7.0_45-fcs                     installed                  193 M
+
+Transaction Summary
+=====================================================================================================================
+Remove  1 Package
+
+Installed size: 193 M
+...
+
+rpm
+
+$ sudo rpm -e jdk
+
+I would recommend always trying to use yum if you can, it does dependency checks that rpm does not.
+

@@ -1,0 +1,120 @@
+2.2 Draw a Circle
+
+Let's give our house icon a green background circle.
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+  <!-- Bg Circle -->
+  
+
+  <!-- Chimney -->
+  <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+  <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+  <!-- House -->
+  <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+  <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+  <!-- Door -->
+  <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+</svg>
+
+
+1. Create a circle element.
+
+Answer:
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+  <!-- Bg Circle -->
+  <circle />
+
+  <!-- Chimney -->
+  <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+  <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+  <!-- House -->
+  <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+  <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+  <!-- Door -->
+  <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+</svg>
+
+2. Place the center of the circle at cx coordinate 170 and cy coordinate 170.
+
+Answer:
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+  <!-- Bg Circle -->
+  <circle cx="170" cy="170" />
+
+  <!-- Chimney -->
+  <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+  <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+  <!-- House -->
+  <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+  <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+  <!-- Door -->
+  <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+</svg>
+
+3. Give the circle a 162 pixel radius.
+
+Answer:
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+  <!-- Bg Circle -->
+  <circle cx="170" cy="170" r="162"/>
+
+  <!-- Chimney -->
+  <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+  <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+  <!-- House -->
+  <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+  <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+  <!-- Door -->
+  <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+</svg>
+
+4. Color the circle green by adding a fill color of #068C70.
+
+Answer:
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+  <!-- Bg Circle -->
+  <circle cx="170" cy="170" r="162" fill="#068C70"/>
+
+  <!-- Chimney -->
+  <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+  <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+  <!-- House -->
+  <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+  <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+  <!-- Door -->
+  <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+</svg>

@@ -1,0 +1,40 @@
+[rajani@localhost uGet]$ su root
+Password: 
+[root@localhost uGet]# yum install uget-2.0.4-0.fc23.x86_64.rpm
+Loaded plugins: fastestmirror, langpacks
+Examining uget-2.0.4-0.fc23.x86_64.rpm: uget-2.0.4-0.fc23.x86_64
+Marking uget-2.0.4-0.fc23.x86_64.rpm to be installed
+Resolving Dependencies
+--> Running transaction check
+---> Package uget.x86_64 0:2.0.4-0.fc23 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================
+ Package   Arch        Version             Repository                      Size
+================================================================================
+Installing:
+ uget      x86_64      2.0.4-0.fc23        /uget-2.0.4-0.fc23.x86_64      1.2 M
+
+Transaction Summary
+================================================================================
+Install  1 Package
+
+Total size: 1.2 M
+Installed size: 1.2 M
+Is this ok [y/d/N]: y
+Downloading packages:
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : uget-2.0.4-0.fc23.x86_64                                     1/1 
+  Verifying  : uget-2.0.4-0.fc23.x86_64                                     1/1 
+
+Installed:
+  uget.x86_64 0:2.0.4-0.fc23                                                    
+
+Complete!
+[root@localhost uGet]# 
+

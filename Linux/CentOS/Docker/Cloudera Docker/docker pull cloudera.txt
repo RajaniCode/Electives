@@ -1,0 +1,21 @@
+[rajani@localhost Docker]$ su root
+Password: 
+[root@localhost Docker]# docker pull cloudera/quickstart:latest
+latest: Pulling from cloudera/quickstart
+
+1d00652ce734: Downloading [=========>                                         ] 829.9 MB/4.444 GB1d00652ce734: Pull complete 
+Digest: sha256:f91bee4cdfa2c92ea3652929a22f729d4d13fc838b00f120e630f91c941acb63
+Status: Downloaded newer image for cloudera/quickstart:latest
+[root@localhost Docker]# 
+
+
+[rajani@localhost Docker]$ su root
+Password: 
+[root@localhost Docker]# docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+hello-world           latest              94df4f0ce8a4        37 hours ago        967 B
+ubuntu                latest              44776f55294a        2 days ago          120.1 MB
+cloudera/quickstart   latest              4239cd2958c6        2 weeks ago         6.336 GB
+[root@localhost Docker]# 
+
+

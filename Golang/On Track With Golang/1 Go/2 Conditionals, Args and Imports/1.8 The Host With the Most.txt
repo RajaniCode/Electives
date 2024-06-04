@@ -1,0 +1,67 @@
+1.8 The Host With the Most
+
+Once we go through the build process, our chat program will generate a single executable file used by both the chat host and the chat guest. Each will run the program differently. The host will run the program with no arguments and then print its IP address so the guest can connect. The guest, on the other hand, will run the program passing the host’s IP address as an argument to the program.
+
+chat/main.go
+package main
+
+import (
+  "fmt"
+  
+)
+
+func main() {
+  
+}
+
+
+1. First, import the "os" package from Go's standard library so we'll be able to read arguments from the command line.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "fmt"
+  "os"
+)
+
+func main() {
+  
+}
+
+2. Using the built-in len() function, add a conditional that checks whether a user-supplied argument was passed to the program from the command line. If so, print the message "I am the guest".
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "fmt"
+  "os"
+)
+
+func main() {
+  if len(os.Args) > 1 {
+    fmt.Println("I am the guest")
+  }  
+}
+
+3. If an argument was not supplied by the user, then print the message "I am the host".
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "fmt"
+  "os"
+)
+
+func main() {
+  if len(os.Args) > 1 {
+    fmt.Println("I am the guest")
+  } else {
+    fmt.Println("I am the host")
+  }
+}

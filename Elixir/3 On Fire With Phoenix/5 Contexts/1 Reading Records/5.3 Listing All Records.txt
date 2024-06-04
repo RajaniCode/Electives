@@ -1,0 +1,29 @@
+5.3 Listing All Records
+
+In order to avoid tight coupling, we’ve started a new context module called Calendar. Let’s finish coding the features for listing all events and selecting an event by its id.
+
+lib/neon/calendar/calendar.ex
+defmodule Neon.Calendar do
+
+  alias Neon.Repo
+  alias Neon.Calendar.Event
+
+  def list_events do
+    
+  end
+
+  def get_event(id) do
+    
+  end
+end
+
+
+1. In the list_events function, write the code that returns all events from the "events" database table.
+
+Answer:
+lib/neon/calendar/calendar.ex
+
+2. In get_event(), write the code that gets an event by its id. Remember, we must also preload its comments.
+
+Answer: 
+lib/neon/calendar/calendar.ex

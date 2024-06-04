@@ -1,0 +1,16 @@
+5.4 Running With Mix
+
+Now let's use mix to run our project.
+
+Using mix on a single line, run a command using the -e flag by passing a string containing the Expenses.current_balance(100, 30) function and piping the return value to the IO.puts function.
+
+
+Type help to see the help menu.
+
+Press ENTER to submit your answer.
+
+> mix run -e "Expenses.current_balance(100, 30) |> IO.puts"
+Compiling 1 file (.ex)
+Generated expenses app
+70
+Success!

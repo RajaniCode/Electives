@@ -1,0 +1,160 @@
+Install Ruby on Rails on Ubuntu / CentOS / Fedora using rbenv
+
+http://www.itzgeek.com/how-tos/linux/ubuntu-how-tos/install-ruby-on-rails-on-ubuntu-centos-fedora-using-rbenv.html
+
+
+Before installing ruby, you must install the dependent packages. As said earlier, we will be using rbenv, it  provides an easy way to install and manage the versions of Ruby, and it is simpler than RVM.
+
+### Ubuntu / LinuxMint ###
+
+$ sudo apt-get install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev
+
+### CentOS / Fedora ###
+
+# yum install git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
+
+Install rbenv:
+
+To install rbenv, you have to run these commands. Note: When you run these commands, this will install rbenv into your home directory and will set appropriate environment variables that will allow rbenv to the active version of Ruby.
+
+cd
+git clone git://github.com/sstephenson/rbenv.git .rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+exec $SHELL
+
+git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+exec $SHELL
+
+git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+
+Reload environmental variables by logging out and back in.
+Or
+Run the below command.
+
+source ~/.bashrc
+
+Install Ruby:
+
+We will install the latest version, Ruby 2.2.2. If you want to install or use the different version of ruby, just run the rbenv with a different version number.
+
+rbenv install 2.2.2
+
+Run the following command to set version 2.2.2 as default version of ruby.
+
+rbenv global 2.2.2
+
+Check the ruby version.
+
+ruby -v
+
+ruby 2.2.2p95 (2015-04-13 revision 50295) [x86_64-linux]
+
+If you do not want rubygems to install the documentation for each package locally, run the below command.
+
+echo "gem: --no-ri --no-rdoc" > ~/.gemrc
+
+gem install bundler
+
+Install Rails:
+
+We will install Rails 4.2.1 with this command, you can also install specific version of Rails by defining –v during installation.
+
+gem install rails -v 4.2.1
+
+Whenever you install a new version of Ruby or a gem, you should run the rehash sub-command. This will make rails executables known to rbenv, which will allow us to run those executables:
+
+rbenv rehash
+
+Verify the version of rails, this will confirm us the successful installation of rails.
+
+rails -v
+
+Rails 4.2.1
+
+Install Node.js:
+
+We will install Node.js to provide a functionality of Coffeescript and the Asset Pipeline in Rails, depend on a Javascript runtime.
+
+### Ubuntu / LinuxMint ###
+
+$ sudo apt-get install nodejs
+
+### CentOS / RHEL ###
+
+## Enable EPEL: http://www.itzgeek.com/?p=7125
+
+# yum install epel-release
+
+### CentOS / RHEL / Fedora ###
+
+# yum install nodejs
+
+Install MySQL Database:
+
+Rails uses sqlite3 as its default database, which is not recommended to use in production environment where you have high traffic to web applications. You’ll probably want to go with MySQL or PostgreSQL.
+
+For example, if you want to use MariaDB as your database, install it.
+
+### Ubuntu / LinuxMint ###
+
+$ sudo apt-get install mysql-server mysql-client libmysqlclient-dev
+
+### CentOS / RHEL / Fedora ###
+
+# yum install mariadb-server mariadb-devel
+
+# systemctl start  mariadb.service
+
+# mysql_secure_installation
+
+# gem install mysql2
+
+Create a Test Application:
+
+To ensure our Ruby on Rails installation went smoothly, we can create a test application to test it out.
+
+Create a new application in your home directory.
+
+cd ~
+
+rails new itzgeekapp -d mysql
+
+cd itzgeekapp
+
+If you received an error that said Access denied for user ‘root’@’localhost’ (using password: NO) then you edit your config/database.yml file to match the database username and password.
+
+# vi config/database.yml
+
+default: &default
+adapter: mysql2
+encoding: utf8
+pool: 5
+username: root
+password: pass ## replace pass with MySQL root password.
+socket: /var/run/mysqld/mysqld.sock
+
+Create the database.
+
+rake db:create
+
+Start your rails application.
+
+rails server
+
+or
+
+## Set a binding IP address.
+
+rails server --binding=IP
+
+If everything is working properly, your Rails application should be running on port 3000 of the IP address of your server. Visit your Rails application by going there in a web browser.
+
+http://192.168.12.4:3000 or  http://ip-add-ress:3000
+
+You should get the following page.
+Ruby on Rails on Ubuntu
+Ruby on Rails on Ubuntu
+
+That’s All!!!, you have successfully installed Ruby on Rails on Ubuntu / CentOS.

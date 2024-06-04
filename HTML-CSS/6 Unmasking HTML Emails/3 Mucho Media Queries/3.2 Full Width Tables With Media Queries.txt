@@ -1,0 +1,293 @@
+3.2 Full Width Tables With Media Queries
+
+When the available width is less than 600 pixels, we want our tables to be 100%. We'll need to create CSS for that and apply styles to the tables.
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+    
+  </head>
+  <body style="margin: 0; padding: 0;">
+
+    <table border="0" cellpadding="0" cellspacing="0" style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg');" width="100%">
+      <tr>
+        <td>
+          <table align="center"
+                 border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 width="600">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+          <table align="center"
+                 border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 width="600">
+            <tr>
+              <td style="padding-top: 15px;">
+
+                <table border="0" cellpadding="0" cellspacing="0" style="text-align: center; text-transform: uppercase;" width="300">
+                  <tr>
+                    <td>
+                      <img alt="La Amor Peligrosa" src="https://s3.amazonaws.com/unmasking-html-emails/la-amor-peligrosa.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #b83466; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      Contender
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="140">
+                        <tr>
+                          <td height="5" style="font-size: 5px; line-height: 5px;"></td>
+                        </tr>
+                        <tr>
+                          <td bgcolor="#902950" height="2" style="font-size: 2px; line-height: 2px;"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #902950; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      21-0-0
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+              <td style="padding-top: 15px;">
+
+                <table border="0" cellpadding="0" cellspacing="0" style="text-align: center; text-transform: uppercase;" width="300">
+                  <tr>
+                    <td>
+                      <img alt="La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/la-fuega-fatal.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #c11e29; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      Champion
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="120">
+                        <tr>
+                          <td height="5" style="font-size: 5px; line-height: 5px;"></td>
+                        </tr>
+                        <tr>
+                          <td bgcolor="#951720" height="2" style="font-size: 2px; line-height: 2px;"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #951720; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      23-0-0
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+
+1. In the head of the email, create a style tag.
+
+Answer: <style></style>
+
+2. Create a class selector named width-full with the width set to 100% and use the !important declaration.
+
+Answer: 
+
+    <style>
+      .width-full {
+        width: 100% !important;
+      }
+    </style>
+
+3. To avoid zoom on smaller widths, we need to use a max-width media query with the value of 600px.
+
+Answer:
+
+<style>
+  @media screen and (max-width: 600px) {
+    .width-full {
+      width: 100% !important;
+    }
+  }
+</style>
+
+
+4. Add the width-full class to both of our content container table tags.
+
+Answer:
+
+...
+
+<table align="center" class="width-full"
+
+...
+
+<table align="center" class="width-full"
+
+...
+
+Success:
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      @media screen and (max-width: 600px) {
+        .width-full {
+          width: 100% !important;
+        }
+      }
+    </style>
+  </head>
+  <body style="margin: 0; padding: 0;">
+
+    <table border="0" cellpadding="0" cellspacing="0" style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg');" width="100%">
+      <tr>
+        <td>
+          <table align="center" class="width-full"
+                 border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 width="600">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+          <table align="center" class="width-full"
+                 border="0"
+                 cellpadding="0"
+                 cellspacing="0"
+                 width="600">
+            <tr>
+              <td style="padding-top: 15px;">
+
+                <table border="0" cellpadding="0" cellspacing="0" style="text-align: center; text-transform: uppercase;" width="300">
+                  <tr>
+                    <td>
+                      <img alt="La Amor Peligrosa" src="https://s3.amazonaws.com/unmasking-html-emails/la-amor-peligrosa.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #b83466; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      Contender
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="140">
+                        <tr>
+                          <td height="5" style="font-size: 5px; line-height: 5px;"></td>
+                        </tr>
+                        <tr>
+                          <td bgcolor="#902950" height="2" style="font-size: 2px; line-height: 2px;"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #902950; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      21-0-0
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+              <td style="padding-top: 15px;">
+
+                <table border="0" cellpadding="0" cellspacing="0" style="text-align: center; text-transform: uppercase;" width="300">
+                  <tr>
+                    <td>
+                      <img alt="La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/la-fuega-fatal.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #c11e29; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      Champion
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+
+                      <table align="center" border="0" cellpadding="0" cellspacing="0" width="120">
+                        <tr>
+                          <td height="5" style="font-size: 5px; line-height: 5px;"></td>
+                        </tr>
+                        <tr>
+                          <td bgcolor="#951720" height="2" style="font-size: 2px; line-height: 2px;"></td>
+                        </tr>
+                      </table>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="color: #951720; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      23-0-0
+                    </td>
+                  </tr>
+                </table>
+
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

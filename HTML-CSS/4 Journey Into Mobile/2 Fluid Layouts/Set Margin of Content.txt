@@ -1,0 +1,39 @@
+Set Margin of Content
+
+
+Using percentages, set the margin-right of .content to the equivalent of 380px to 6 decimals. Determine the correct context by viewing the given HTML markup.
+
+HTML SOURCE
+
+<div class="container">
+
+  <header></header>
+  <div class="sidebar"></div>
+  <div class="content"></div>
+
+</div>
+
+CSS SOURCE
+
+.container {
+  width: 960px;
+}
+.sidebar {
+  width: 360px;
+}
+.content {
+  width: 560px;
+}
+
+STYLE.CSS
+
+.content {
+  margin-right: 380px;
+}
+
+Answer:
+
+.content {
+  margin-right: 39.583333%; /* 380 / 960 * 100 */
+}
+

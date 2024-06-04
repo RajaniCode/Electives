@@ -1,0 +1,31 @@
+3.3 Printing Numbers
+
+Complete the for loop so that it prints numbers 5 through 9. Note: We want to define the variable i within the for loop.
+
+numbers/main.go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  for   {
+    fmt.Println(i)
+  }
+} 
+
+
+Answer:
+numbers/main.go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  for i := 5; i <= 9; i++ {
+    fmt.Println(i)
+  }
+}

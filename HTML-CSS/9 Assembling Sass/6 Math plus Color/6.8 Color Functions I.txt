@@ -1,0 +1,38 @@
+6.8 Color Functions I
+
+
+Anchor elements are currently missing a hover state - add one via nesting which sets a color 15% lighter than $color-link.
+
+
+CSS
+
+a {
+  color: #3097b4;
+  text-decoration: underline;
+}
+
+APPLICATION.SCSS 
+
+$color-link: #3097b4;
+
+a {
+  color: $color-link;
+  text-decoration: underline;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$color-link: #3097b4;
+
+a:hover {
+  color: lighten($color-link, 15%);
+  text-decoration: underline;
+}
+
+CSS
+
+a:hover {
+  color: #5dbad4;
+  text-decoration: underline; }

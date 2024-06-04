@@ -1,0 +1,181 @@
+5.10 Parsing Data
+
+Inside our lib/expenses.ex file, let's make our HTTP request and parse the JSON response.
+
+expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "localhost:3000/taxes"
+    case HTTPoison.get(url) do
+      {:ok, response} -> parse(response) |> calculate(amount)
+      {:error, _} -> "Error fetching tax rates"
+    end
+  end
+
+  defp parse(%{status_code: 200, body:   }) do
+    
+  end
+
+  defp calculate({:ok, rates}, amount) do
+    tax_rate = find_tax(rates)
+    amount + (amount * tax_rate)
+  end
+
+  defp find_tax([%{  } | _ ]) do
+    rate
+  end
+
+  defp find_tax([_ | tail]) do
+    
+  end
+
+  defp find_tax([]) do
+    raise "FL rate not found"
+  end
+end
+
+
+1. Complete the parse function by adding the json_response variable to the pattern matching on the map structure in the argument.
+
+Answer:
+expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "localhost:3000/taxes"
+    case HTTPoison.get(url) do
+      {:ok, response} -> parse(response) |> calculate(amount)
+      {:error, _} -> "Error fetching tax rates"
+    end
+  end
+
+  defp parse(%{status_code: 200, body:  json_response}) do
+    
+  end
+
+  defp calculate({:ok, rates}, amount) do
+    tax_rate = find_tax(rates)
+    amount + (amount * tax_rate)
+  end
+
+  defp find_tax([%{  } | _ ]) do
+    rate
+  end
+
+  defp find_tax([_ | tail]) do
+    
+  end
+
+  defp find_tax([]) do
+    raise "FL rate not found"
+  end
+end
+
+2. Inside the parse function, invoke Poison.Parser.parse and pass it the json_response.
+
+Answer:
+expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "localhost:3000/taxes"
+    case HTTPoison.get(url) do
+      {:ok, response} -> parse(response) |> calculate(amount)
+      {:error, _} -> "Error fetching tax rates"
+    end
+  end
+
+  defp parse(%{status_code: 200, body:  json_response}) do
+    Poison.Parser.parse(json_response)
+  end
+
+  defp calculate({:ok, rates}, amount) do
+    tax_rate = find_tax(rates)
+    amount + (amount * tax_rate)
+  end
+
+  defp find_tax([%{  } | _ ]) do
+    rate
+  end
+
+  defp find_tax([_ | tail]) do
+    
+  end
+
+  defp find_tax([]) do
+    raise "FL rate not found"
+  end
+end
+
+3. On the first clause of the find_tax function, use the map in the argument to pattern match when "state" => "FL" and assign the value of the "rate" key to a variable named rate.
+
+Answer:
+expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "localhost:3000/taxes"
+    case HTTPoison.get(url) do
+      {:ok, response} -> parse(response) |> calculate(amount)
+      {:error, _} -> "Error fetching tax rates"
+    end
+  end
+
+  defp parse(%{status_code: 200, body:  json_response}) do
+    Poison.Parser.parse(json_response)
+  end
+
+  defp calculate({:ok, rates}, amount) do
+    tax_rate = find_tax(rates)
+    amount + (amount * tax_rate)
+  end
+
+  defp find_tax([%{"state" => "FL", "rate" => rate} | _ ]) do
+    rate
+  end
+
+  defp find_tax([_ | tail]) do
+    
+  end
+
+  defp find_tax([]) do
+    raise "FL rate not found"
+  end
+end
+
+4. Inside the second clause of the find_tax function, call find_tax(tail) to complete the recursive scenario.
+
+Answer:
+expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "localhost:3000/taxes"
+    case HTTPoison.get(url) do
+      {:ok, response} -> parse(response) |> calculate(amount)
+      {:error, _} -> "Error fetching tax rates"
+    end
+  end
+
+  defp parse(%{status_code: 200, body:  json_response}) do
+    Poison.Parser.parse(json_response)
+  end
+
+  defp calculate({:ok, rates}, amount) do
+    tax_rate = find_tax(rates)
+    amount + (amount * tax_rate)
+  end
+
+  defp find_tax([%{"state" => "FL", "rate" => rate} | _ ]) do
+    rate
+  end
+
+  defp find_tax([_ | tail]) do
+    find_tax(tail)
+  end
+
+  defp find_tax([]) do
+    raise "FL rate not found"
+  end
+end

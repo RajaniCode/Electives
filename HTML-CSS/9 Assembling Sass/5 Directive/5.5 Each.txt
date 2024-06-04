@@ -1,0 +1,58 @@
+5.5 Each
+
+
+Someone left us a to-do above this segment - we can clean it up for future expansion by generating the selectors and background with @each. Start by creating a list variable named $tools to store socket, wrench, and bolt.
+
+
+CSS
+
+.tool-socket {
+  background: url("socket.png") no-repeat;
+}
+
+.tool-wrench {
+  background: url("wrench.png") no-repeat;
+}
+
+.tool-bolt {
+  background: url("bolt.png") no-repeat;
+}
+
+APPLICATION.SCSS 
+
+// TODO: simplify with @each
+
+.tool-socket {
+  background: url('socket.png') no-repeat;
+}
+.tool-wrench {
+  background: url('wrench.png') no-repeat;
+}
+.tool-bolt {
+  background: url('bolt.png') no-repeat;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+// TODO: simplify with @each
+
+$tools: socket wrench bolt;
+
+@each $tool in $tools {
+  .tool-#{$tool} {
+     background: url('#{$tool}.png') no-repeat;
+   }
+}
+
+CSS
+
+.tool-socket {
+  background: url("socket.png") no-repeat; }
+
+.tool-wrench {
+  background: url("wrench.png") no-repeat; }
+
+.tool-bolt {
+  background: url("bolt.png") no-repeat; }

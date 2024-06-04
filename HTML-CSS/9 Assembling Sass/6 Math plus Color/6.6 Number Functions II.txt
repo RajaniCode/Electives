@@ -1,0 +1,55 @@
+6.6 Number Functions II
+
+
+Our .factory and .highrise declarations are lacking responsiveness: using the target / context formula, the given $context variable, and percentage(), give each declaration a fluid width. No need to refactor this into a separate function, just add your percentage() calls within .factory and .highrise.
+
+
+CSS
+
+.factory {
+  background: #fff;
+  width: 600px;
+}
+
+.highrise {
+  background: #797979;
+  width: 300px;
+}
+
+APPLICATION.SCSS 
+
+$context: 960px;
+
+.factory {
+  background: #fff;
+  width: 600px;
+}
+.highrise {
+  background: #797979;
+  width: 300px;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$context: 960px;
+
+.factory {
+  background: #fff;
+  width: percentage(600px / $context);
+}
+.highrise {
+  background: #797979;
+  width: percentage(300px / $context);
+}
+
+CSS
+
+.factory {
+  background: #fff;
+  width: 62.5%; }
+
+.highrise {
+  background: #797979;
+  width: 31.25%; }

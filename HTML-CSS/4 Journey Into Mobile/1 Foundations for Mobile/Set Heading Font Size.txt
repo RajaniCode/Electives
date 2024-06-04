@@ -1,0 +1,25 @@
+Set Heading Font Size
+
+Using ems, set the h1 to be the equivalent of 24px. Remember, the target divided by context rule, keeping in mind our context is the body font-size set in pixels.
+
+CSS SOURCE
+
+body {
+  font-size: 62.5%; /* 1em = 10px */
+}
+
+STYLE.CSS
+
+h1 {
+
+}
+
+Answer:
+
+h1 {
+  font-size: 2.4em; /* 24px / 10px */
+}
+
+Note:
+
+24 / 10 = 2.4em

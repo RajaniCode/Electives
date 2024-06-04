@@ -1,0 +1,19 @@
+4.12 Multiple Backgrounds
+
+http://caniuse.com/#feat=multibackgrounds
+
+We have two images, painting-01.jpg and painting-02.jpg. Using the separate background properties, add both images to the element. We want the first image at top left and the second image at center. Both images have no-repeat as the repeat value.
+
+style.css
+
+.element {
+
+}
+
+Answer:
+
+.element {
+  background-image: url(painting-01.png), url(painting-02.png);
+  background-position: top left, center right;
+  background-repeat: no-repeat, no-repeat;
+}

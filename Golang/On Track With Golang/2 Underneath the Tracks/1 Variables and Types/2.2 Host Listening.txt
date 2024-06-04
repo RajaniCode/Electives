@@ -1,0 +1,110 @@
+2.2 Host Listening
+
+We've received assistance from our more experienced Go developer friends who have helped us write some functionality for our chat app. The new code is under the chat/util package and that's where the RunGuest() and RunHost() functions come from. Don’t worry about the implementation of these functions just yet. For now, we’ll keep working on the main.go file.
+
+chat/util/main.go
+package util
+
+import "fmt"
+
+func RunGuest(ipPort string) {
+  fmt.Println("Running guest", ipPort)
+}
+
+func RunHost(ipPort string) {
+  fmt.Println("Running host", ipPort)
+}
+
+func GetLocalNetworkIP() string {
+  return "192.168.1.0"
+}
+
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "os"
+)
+
+func main() {
+  
+  args := os.Args
+  if len(args) > 1 {
+    
+    util.RunGuest(hostIP)
+  } else {
+    
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+
+
+1. At the top of the main() function, assign the value "8080" to a new variable called listenPort using type inference with :=.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "os"
+)
+
+func main() {
+  listenPort := "8080"
+  args := os.Args
+  if len(args) > 1 {
+    
+    util.RunGuest(hostIP)
+  } else {
+    
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+
+2. Inside the if block, use the args variable and assign the user-supplied command-line argument to a new variable called hostIP using type inference with :=. Remember, the user-supplied argument is found on index 1 in the args array.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "os"
+)
+
+func main() {
+  listenPort := "8080"
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+
+3. Lastly, on the else block, invoke the GetLocalNetworkIP() function from the util package and assign the return value to a new variable called listenIP.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "os"
+)
+
+func main() {
+  listenPort := "8080"
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}

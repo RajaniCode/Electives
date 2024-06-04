@@ -1,0 +1,93 @@
+http://windows.php.net/download/
+Extract php-7.0.12-Win32-VC14-x64.zip (VC14 x64 Thread Safe (2016-Oct-13)) to C:\PHP
+
+[
+control.exe sysdm.cpl,System,3
+;C:\PHP
+
+1. Open the PHP installation folder, for example C:\PHP.
+2. Choose either the php.ini - development or php.ini - production file, and rename it php.ini.
+3. Edit
+doc_root = "C:\Apache24\htdocs"
+4. Uncomment (Remove ;) and Edit
+extension_dir = "C:\PHP\ext"
+5. Uncomment (Remove ;)
+extension=php_mysqli.dll
+6. Uncomment (Remove ;) and Edit
+     session.save_path = "C:\Windows\Temp"
+
+
+https://httpd.apache.org/
+https://www.apachelounge.com/download/
+Extract httpd-2.4.23-win64-VC14.zip (Apache HTTP Server Project\Apache Lounge) to C:\Apache24
+
+http://localhost/
+It works!
+
+1. Open C:\Apache24\conf\httpd.conf
+2. Edit
+<IfModule dir_module>
+    DirectoryIndex index.html index.php
+</IfModule>
+3. Add
+LoadModule php7_module "C:/PHP/php7apache2_4.dll"
+AddType application/x-httpd-php .php
+PHPIniDir "C:/PHP"
+## Note: services.msc # Service name # Apache2.4 # Restart
+
+## Test by creating C:\Apache24\htdocs\test.php
+http://localhost/test.php
+<?php phpinfo() ?>
+]
+
+https://www.apachefriends.org/download.html
+xampp-win32-7.0.9-1-VC14-installer.exe
+1. XAMPP Control Panel
+2. Apache -> Config php.ini -> Check open C:\xampp\php\php.ini
+3. Check 
+doc_root=
+4. Check
+extension_dir="C:\xampp\php\ext"
+5. Check
+extension=php_mysqli.dll
+6. Check
+session.save_path="C:\xampp\tmp"
+
+1. Check open C:\xampp\apache\conf\httpd.conf
+2. Check for index.php in <IfModule dir_module>
+<IfModule dir_module>
+    DirectoryIndex index.php index.pl index.cgi index.asp index.shtml index.html index.htm \
+                   default.php default.pl default.cgi default.asp default.shtml default.html default.htm \
+                   home.php home.pl home.cgi home.asp home.shtml home.html home.htm
+</IfModule>
+
+## Note: Run as administrator XAMPP Control Panel 
+
+## XAMPP PHP Environment Variables System Variables Path
+control.exe sysdm.cpl,System,3
+Environment Variables
+System Variables
+Path:
+;C:\xampp\php
+
+## Test by creating C:\xampp\htdocs\test.php
+<?php phpinfo() ?>
+
+
+http://localhost/test.php
+<?php phpinfo() ?>
+
+## PHP comment syntax: single line comment
+"//" or "#"
+
+PHP comment syntax: multiple line comment
+Begins with " /* " and ends with " */ ".
+
+
+## Composer # services.msc # Stop MySQL before composer install
+## Composer Environment Variables System Variables Path.txt
+control.exe sysdm.cpl,System,3
+Environment Variables
+System Variables
+Path:
+;C:\ProgramData\ComposerSetup\bin

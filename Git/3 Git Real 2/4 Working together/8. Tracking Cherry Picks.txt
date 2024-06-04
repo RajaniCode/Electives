@@ -1,0 +1,12 @@
+8. Tracking Cherry Picks
+
+
+There has been a lot of cherry picking lately, so the decision has been made to keep track of where these commits are coming from. Cherry pick the "bug fix" commit with a sha of "bdf9578". Use the option which keeps a record of where the commit was cherry picked.
+
+
+$ git cherry-pick -x bdf9578
+
+[master 8c37687] Bug fix. (cherry picked from commit bdf95785e56f401642373bdce471d33cdfd52ff0)
+ 1 file changed, 4 insertions(+)
+
+Success!

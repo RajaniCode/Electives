@@ -1,0 +1,189 @@
+yum list | grep postgresql
+
+
+
+
+[rajani@localhost PostgreSQL]$ su root
+Password: 
+[root@localhost PostgreSQL]# yum list | grep postgresql
+postgresql.x86_64                        9.2.15-1.el7_2               @updates  
+postgresql-contrib.x86_64                9.2.15-1.el7_2               @updates  
+postgresql-libs.x86_64                   9.2.15-1.el7_2               @updates  
+postgresql-server.x86_64                 9.2.15-1.el7_2               @updates  
+postgresql95.x86_64                      9.5.3-2PGDG.rhel7            @pgdg95   
+postgresql95-contrib.x86_64              9.5.3-2PGDG.rhel7            @pgdg95   
+postgresql95-libs.x86_64                 9.5.3-2PGDG.rhel7            @pgdg95   
+postgresql95-server.x86_64               9.5.3-2PGDG.rhel7            @pgdg95   
+calligra-kexi-driver-postgresql.x86_64   2.9.10-1.el7                 epel      
+collectd-postgresql.x86_64               5.5.1-3.el7                  epel      
+freeradius-postgresql.x86_64             3.0.4-6.el7                  base      
+libreoffice-postgresql.x86_64            1:4.3.7.2-5.el7_2.1          updates   
+mingw32-postgresql.noarch                9.3.4-2.el7                  epel      
+mingw64-postgresql.noarch                9.3.4-2.el7                  epel      
+mono-data-postgresql.x86_64              2.10.8-9.el7                 epel      
+opendbx-postgresql.x86_64                1.4.6-6.el7                  epel      
+opensips-postgresql.x86_64               1.10.5-3.el7                 epel      
+owncloud-postgresql.noarch               8.1.6-1.el7                  epel      
+pcp-pmda-postgresql.x86_64               3.10.6-2.el7                 base      
+pdns-backend-postgresql.x86_64           3.4.8-1.el7                  epel      
+perdition-postgresql.x86_64              2.1-5.el7                    epel      
+postgresql.i686                          9.2.15-1.el7_2               updates   
+postgresql-devel.i686                    9.2.15-1.el7_2               updates   
+postgresql-devel.x86_64                  9.2.15-1.el7_2               updates   
+postgresql-docs.x86_64                   9.2.15-1.el7_2               updates   
+postgresql-jdbc.noarch                   9.4.1208-1.rhel7             pgdg95    
+postgresql-jdbc-javadoc.noarch           9.4.1208-1.rhel7             pgdg95    
+postgresql-libs.i686                     9.2.15-1.el7_2               updates   
+postgresql-odbc.x86_64                   09.03.0100-2.el7             base      
+postgresql-pgpool-II.x86_64              3.4.3-3.el7                  epel      
+postgresql-pgpool-II-devel.x86_64        3.4.3-3.el7                  epel      
+postgresql-pgpool-II-extensions.x86_64   3.4.3-3.el7                  epel      
+postgresql-plperl.x86_64                 9.2.15-1.el7_2               updates   
+postgresql-plpython.x86_64               9.2.15-1.el7_2               updates   
+postgresql-plruby.x86_64                 0.5.3-13.el7                 epel      
+postgresql-plruby-doc.x86_64             0.5.3-13.el7                 epel      
+postgresql-pltcl.x86_64                  9.2.15-1.el7_2               updates   
+postgresql-test.x86_64                   9.2.15-1.el7_2               updates   
+postgresql-upgrade.x86_64                9.2.15-1.el7_2               updates   
+postgresql94-jdbc.noarch                 9.4.1207-2.rhel7             pgdg95    
+postgresql94-jdbc-javadoc.noarch         9.4.1207-2.rhel7             pgdg95    
+postgresql95-debuginfo.x86_64            9.5.3-2PGDG.rhel7            pgdg95    
+postgresql95-devel.x86_64                9.5.3-2PGDG.rhel7            pgdg95    
+postgresql95-docs.x86_64                 9.5.3-2PGDG.rhel7            pgdg95    
+postgresql95-odbc.x86_64                 09.05.0200-1PGDG.rhel7       pgdg95    
+postgresql95-odbc-debuginfo.x86_64       09.03.0400-1PGDG.rhel7       pgdg95    
+postgresql95-plperl.x86_64               9.5.3-2PGDG.rhel7            pgdg95    
+postgresql95-plpython.x86_64             9.5.3-2PGDG.rhel7            pgdg95    
+postgresql95-pltcl.x86_64                9.5.3-2PGDG.rhel7            pgdg95    
+postgresql95-python.x86_64               4.2-1PGDG.rhel7              pgdg95    
+postgresql95-python-debuginfo.x86_64     4.2-1PGDG.rhel7              pgdg95    
+postgresql95-tcl.x86_64                  2.0.0-1.rhel7                pgdg95    
+postgresql95-tcl-debuginfo.x86_64        2.0.0-1.rhel7                pgdg95    
+postgresql95-test.x86_64                 9.5.3-2PGDG.rhel7            pgdg95    
+proftpd-postgresql.x86_64                1.3.5b-1.el7                 epel      
+python-testing.postgresql.noarch         1.1.0-2.el7                  epel      
+qt-postgresql.i686                       1:4.8.5-12.el7_2             updates   
+qt-postgresql.x86_64                     1:4.8.5-12.el7_2             updates   
+qt5-qtbase-postgresql.x86_64             5.6.0-13.el7                 epel      
+soci-postgresql.x86_64                   3.2.3-1.el7                  epel      
+soci-postgresql-devel.x86_64             3.2.3-1.el7                  epel      
+[root@localhost PostgreSQL]# 
+
+
+
+
+grep -R 'rvm.sh' /etc
+
+
+
+
+[rajani@localhost ~]$ su root
+Password: 
+[root@localhost rajani]# ps -ef | grep vdagent
+qemu      5903     1 65 13:02 ?        00:11:04 /usr/libexec/qemu-kvm -name centos6.4 -S -machine pc-i440fx-rhel7.0.0,accel=kvm,usb=off -cpu Nehalem -m 6144 -realtime mlock=off -smp 6,sockets=6,cores=1,threads=1 -uuid c8f5bab9-2cea-47cf-9e61-48c99db8b5cb -no-user-config -nodefaults -chardev socket,id=charmonitor,path=/var/lib/libvirt/qemu/domain-centos6.4/monitor.sock,server,nowait -mon chardev=charmonitor,id=monitor,mode=control -rtc base=utc,driftfix=slew -global kvm-pit.lost_tick_policy=discard -no-hpet -no-shutdown -global PIIX4_PM.disable_s3=1 -global PIIX4_PM.disable_s4=1 -boot strict=on -device ich9-usb-ehci1,id=usb,bus=pci.0,addr=0x6.0x7 -device ich9-usb-uhci1,masterbus=usb.0,firstport=0,bus=pci.0,multifunction=on,addr=0x6 -device ich9-usb-uhci2,masterbus=usb.0,firstport=2,bus=pci.0,addr=0x6.0x1 -device ich9-usb-uhci3,masterbus=usb.0,firstport=4,bus=pci.0,addr=0x6.0x2 -device virtio-serial-pci,id=virtio-serial0,bus=pci.0,addr=0x5 -drive file=/home/rajani/R/Cloudera/QuickStarts/cloudera-quickstart-vm-5.5.0-0-kvm/cloudera-quickstart-vm-5.5.0-0-kvm.qcow2,if=none,id=drive-virtio-disk0,format=qcow2 -device virtio-blk-pci,scsi=off,bus=pci.0,addr=0x7,drive=drive-virtio-disk0,id=virtio-disk0,bootindex=1 -netdev tap,fd=23,id=hostnet0,vhost=on,vhostfd=24 -device virtio-net-pci,netdev=hostnet0,id=net0,mac=52:54:00:80:12:05,bus=pci.0,addr=0x3 -chardev pty,id=charserial0 -device isa-serial,chardev=charserial0,id=serial0 -chardev socket,id=charchannel0,path=/var/lib/libvirt/qemu/channel/target/domain-centos6.4/org.qemu.guest_agent.0,server,nowait -device virtserialport,bus=virtio-serial0.0,nr=1,chardev=charchannel0,id=channel0,name=org.qemu.guest_agent.0 -chardev spicevmc,id=charchannel1,name=vdagent -device virtserialport,bus=virtio-serial0.0,nr=2,chardev=charchannel1,id=channel1,name=com.redhat.spice.0 -device usb-tablet,id=input0 -spice port=5900,addr=127.0.0.1,disable-ticketing,image-compression=off,seamless-migration=on -vga qxl -global qxl-vga.ram_size=67108864 -global qxl-vga.vram_size=67108864 -global qxl-vga.vgamem_mb=16 -device intel-hda,id=sound0,bus=pci.0,addr=0x4 -device hda-duplex,id=sound0-codec0,bus=sound0.0,cad=0 -chardev spicevmc,id=charredir0,name=usbredir -device usb-redir,chardev=charredir0,id=redir0 -chardev spicevmc,id=charredir1,name=usbredir -device usb-redir,chardev=charredir1,id=redir1 -device virtio-balloon-pci,id=balloon0,bus=pci.0,addr=0x8 -msg timestamp=on
+root      7284  7255  0 13:19 pts/2    00:00:00 grep --color=auto vdagent
+[root@localhost rajani]# 
+
+
+
+
+[rajani@localhost Note]$ su root
+Password: 
+[root@localhost Note]# lsmod|grep kvm
+kvm_intel             162153  0 
+kvm                   525409  1 kvm_intel
+[root@localhost Note]#
+
+
+
+
+[root@localhost /]# grep --help
+Usage: grep [OPTION]... PATTERN [FILE]...
+Search for PATTERN in each FILE or standard input.
+PATTERN is, by default, a basic regular expression (BRE).
+Example: grep -i 'hello world' menu.h main.c
+
+Regexp selection and interpretation:
+  -E, --extended-regexp     PATTERN is an extended regular expression (ERE)
+  -F, --fixed-strings       PATTERN is a set of newline-separated fixed strings
+  -G, --basic-regexp        PATTERN is a basic regular expression (BRE)
+  -P, --perl-regexp         PATTERN is a Perl regular expression
+  -e, --regexp=PATTERN      use PATTERN for matching
+  -f, --file=FILE           obtain PATTERN from FILE
+  -i, --ignore-case         ignore case distinctions
+  -w, --word-regexp         force PATTERN to match only whole words
+  -x, --line-regexp         force PATTERN to match only whole lines
+  -z, --null-data           a data line ends in 0 byte, not newline
+
+Miscellaneous:
+  -s, --no-messages         suppress error messages
+  -v, --invert-match        select non-matching lines
+  -V, --version             display version information and exit
+      --help                display this help text and exit
+
+Output control:
+  -m, --max-count=NUM       stop after NUM matches
+  -b, --byte-offset         print the byte offset with output lines
+  -n, --line-number         print line number with output lines
+      --line-buffered       flush output on every line
+  -H, --with-filename       print the file name for each match
+  -h, --no-filename         suppress the file name prefix on output
+      --label=LABEL         use LABEL as the standard input file name prefix
+  -o, --only-matching       show only the part of a line matching PATTERN
+  -q, --quiet, --silent     suppress all normal output
+      --binary-files=TYPE   assume that binary files are TYPE;
+                            TYPE is 'binary', 'text', or 'without-match'
+  -a, --text                equivalent to --binary-files=text
+  -I                        equivalent to --binary-files=without-match
+  -d, --directories=ACTION  how to handle directories;
+                            ACTION is 'read', 'recurse', or 'skip'
+  -D, --devices=ACTION      how to handle devices, FIFOs and sockets;
+                            ACTION is 'read' or 'skip'
+  -r, --recursive           like --directories=recurse
+  -R, --dereference-recursive
+                            likewise, but follow all symlinks
+      --include=FILE_PATTERN
+                            search only files that match FILE_PATTERN
+      --exclude=FILE_PATTERN
+                            skip files and directories matching FILE_PATTERN
+      --exclude-from=FILE   skip files matching any file pattern from FILE
+      --exclude-dir=PATTERN directories that match PATTERN will be skipped.
+  -L, --files-without-match print only names of FILEs containing no match
+  -l, --files-with-matches  print only names of FILEs containing matches
+  -c, --count               print only a count of matching lines per FILE
+  -T, --initial-tab         make tabs line up (if needed)
+  -Z, --null                print 0 byte after FILE name
+
+Context control:
+  -B, --before-context=NUM  print NUM lines of leading context
+  -A, --after-context=NUM   print NUM lines of trailing context
+  -C, --context=NUM         print NUM lines of output context
+  -NUM                      same as --context=NUM
+      --group-separator=SEP use SEP as a group separator
+      --no-group-separator  use empty string as a group separator
+      --color[=WHEN],
+      --colour[=WHEN]       use markers to highlight the matching strings;
+                            WHEN is 'always', 'never', or 'auto'
+  -U, --binary              do not strip CR characters at EOL (MSDOS/Windows)
+  -u, --unix-byte-offsets   report offsets as if CRs were not there
+                            (MSDOS/Windows)
+
+'egrep' means 'grep -E'.  'fgrep' means 'grep -F'.
+Direct invocation as either 'egrep' or 'fgrep' is deprecated.
+When FILE is -, read standard input.  With no FILE, read . if a command-line
+-r is given, - otherwise.  If fewer than two FILEs are given, assume -h.
+Exit status is 0 if any line is selected, 1 otherwise;
+if any error occurs and -q is not given, the exit status is 2.
+
+Report bugs to: bug-grep@gnu.org
+GNU Grep home page: <http://www.gnu.org/software/grep/>
+General help using GNU software: <http://www.gnu.org/gethelp/>
+
+
+Grep for words starting with 'hol' in file
+[rajani@localhost Note]$ su root
+Password: 
+[root@localhost Note]# grep -i '^hol' '/home/rajani/Untitled Folder/Unsaved Document.txt'
+Hola
+Holland
+[root@localhost Note]#

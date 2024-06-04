@@ -1,0 +1,63 @@
+3.4 Multiple Arguments
+
+
+Some elements also need a nonstandard amount of padding. Create a second argument, $pad, with a default value of 10px. .factory uses the default value, but .highrise should have 20px of padding on all sides.
+
+
+CSS
+
+.factory {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.highrise {
+  background: #797979;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+_ASSEMBLE.SCSS
+
+@mixin assemble($bg: #fff) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.factory {
+  @include assemble;
+}
+.highrise {
+  @include assemble(#797979);
+}
+
+Answer:
+
+_ASSEMBLE.SCSS
+
+@mixin assemble($bg: #fff, $pad: 10px) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: $pad;
+}
+
+.factory {
+  @include assemble;
+}
+.highrise {
+  @include assemble(#797979, 20px);
+}
+
+CSS
+
+.factory {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px; }
+
+.highrise {
+  background: #797979;
+  border: 1px solid #ccc;
+  padding: 20px; }

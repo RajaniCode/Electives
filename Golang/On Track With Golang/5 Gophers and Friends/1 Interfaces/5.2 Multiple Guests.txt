@@ -1,0 +1,129 @@
+5.2 Multiple Guests
+
+We are expecting multiple guest connections, so we’ve created a function that returns a slice of guestConnection struct pointers named getAllConnections(). We need to loop through each struct returned from this method and invoke a method named notify(). Let’s finish the code below.
+
+chat/main.go
+package main
+
+import "fmt"
+
+type guestConnection struct {
+  ip string
+  userName string
+  isAdmin bool
+}
+
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+func main() {
+  
+  for _, c := range guestConns {
+    
+  }
+}
+
+func getAllConnections()  {
+  gConn1 := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  gConn2 := &guestConnection{ip: "192.168.0.11", userName: "Obi-Wan"}
+  
+  return []*guestConnection{gConn1, gConn2}
+}
+
+
+1. Complete the function signature for getAllConnections() so that it returns a slice of pointers to guestConnection structs.
+
+Answer:
+chat/main.go
+package main
+
+import "fmt"
+
+type guestConnection struct {
+  ip string
+  userName string
+  isAdmin bool
+}
+
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+func main() {
+  
+  for _, c := range guestConns {
+    
+  }
+}
+
+func getAllConnections() []*guestConnection {
+  gConn1 := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  gConn2 := &guestConnection{ip: "192.168.0.11", userName: "Obi-Wan"}
+  
+  return []*guestConnection{gConn1, gConn2}
+}
+
+2. On the first line of the main() function, invoke the getAllConnections() function and assign the return value to a new variable called guestConns using type inference with :=.
+
+Answer:
+chat/main.go
+package main
+
+import "fmt"
+
+type guestConnection struct {
+  ip string
+  userName string
+  isAdmin bool
+}
+
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+func main() {
+  guestConns := getAllConnections()
+  for _, c := range guestConns {
+    
+  }
+}
+
+func getAllConnections() []*guestConnection {
+  gConn1 := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  gConn2 := &guestConnection{ip: "192.168.0.11", userName: "Obi-Wan"}
+  
+  return []*guestConnection{gConn1, gConn2}
+}
+
+3. From inside the for loop, invoke the notify() method on the value assigned to c.
+
+Answer:
+chat/main.go
+package main
+
+import "fmt"
+
+type guestConnection struct {
+  ip string
+  userName string
+  isAdmin bool
+}
+
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+func main() {
+  guestConns := getAllConnections()
+  for _, c := range guestConns {
+    c.notify()
+  }
+}
+
+func getAllConnections() []*guestConnection {
+  gConn1 := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  gConn2 := &guestConnection{ip: "192.168.0.11", userName: "Obi-Wan"}
+  
+  return []*guestConnection{gConn1, gConn2}
+}

@@ -1,0 +1,95 @@
+Clearfix
+
+
+Rather than using <div class="clear"></div> to clear floats, refactor this page to use the clearfix method via .group.
+
+index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+      <div class="clear"></div>
+    </nav>
+    <section class="content home">
+      <aside>
+        <p>Did you know that Sven's Snowshoe Emporium produces the highest quality snowshoes in North America? <a href="#">Find out more</a>.</p>
+      </aside>
+      <article>
+        <h3>New Fall Styles</h3>
+        <p>Be the first at your resort to sport the hot new tennis-themed snow kicks, now available in the <a href="#">store</a>.</p>
+      </article>
+      <div class="clear"></div>
+    </section>
+  </body>
+</html>
+
+style.css
+
+nav li {
+  float: left;
+}
+aside {
+  float: right;
+  width: 120px;
+}
+article {
+  float: left;
+  width: 120px;
+}
+.clear {
+  clear: both;
+}
+  
+/* clearfix */
+  
+.group:before,
+.group:after {
+  content: "";
+  display: table;
+}
+.group:after {
+  clear: both;
+}
+.group {
+  zoom: 1;
+}
+
+Answer: 
+
+index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav class="group">
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <section class="group">
+      <aside>
+        <p>Did you know that Sven's Snowshoe Emporium produces the highest quality snowshoes in North America? <a href="#">Find out more</a>.</p>
+      </aside>
+      <article>
+        <h3>New Fall Styles</h3>
+        <p>Be the first at your resort to sport the hot new tennis-themed snow kicks, now available in the <a href="#">store</a>.</p>
+      </article>
+    </section>
+  </body>
+</html>

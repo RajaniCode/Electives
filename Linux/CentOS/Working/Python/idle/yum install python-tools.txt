@@ -1,0 +1,79 @@
+[rajani@localhost Python]$ su root
+Password: 
+[root@localhost Python]# yum install python-tools
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: epel.mirror.net.in
+ * extras: mirror.nbrc.ac.in
+ * nux-dextop: li.nux.ro
+ * rpmforge: ftp.neowiz.com
+ * updates: mirror.nbrc.ac.in
+Resolving Dependencies
+--> Running transaction check
+---> Package python-tools.x86_64 0:2.7.5-34.el7 will be installed
+--> Processing Dependency: tkinter = 2.7.5-34.el7 for package: python-tools-2.7.5-34.el7.x86_64
+--> Running transaction check
+---> Package tkinter.x86_64 0:2.7.5-34.el7 will be installed
+--> Processing Dependency: libtk8.5.so()(64bit) for package: tkinter-2.7.5-34.el7.x86_64
+--> Processing Dependency: libtcl8.5.so()(64bit) for package: tkinter-2.7.5-34.el7.x86_64
+--> Processing Dependency: libTix.so()(64bit) for package: tkinter-2.7.5-34.el7.x86_64
+--> Running transaction check
+---> Package tcl.x86_64 1:8.5.13-8.el7 will be installed
+---> Package tix.x86_64 1:8.4.3-12.el7 will be installed
+---> Package tk.x86_64 1:8.5.13-6.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                                  Arch                               Version                                     Repository                        Size
+================================================================================================================================================================
+Installing:
+ python-tools                             x86_64                             2.7.5-34.el7                                base                             850 k
+Installing for dependencies:
+ tcl                                      x86_64                             1:8.5.13-8.el7                              base                             1.9 M
+ tix                                      x86_64                             1:8.4.3-12.el7                              base                             254 k
+ tk                                       x86_64                             1:8.5.13-6.el7                              base                             1.4 M
+ tkinter                                  x86_64                             2.7.5-34.el7                                base                             319 k
+
+Transaction Summary
+================================================================================================================================================================
+Install  1 Package (+4 Dependent packages)
+
+Total download size: 4.7 M
+Installed size: 13 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/5): tix-8.4.3-12.el7.x86_64.rpm                                                                                                       | 254 kB  00:00:04     
+(2/5): tkinter-2.7.5-34.el7.x86_64.rpm                                                                                                   | 319 kB  00:00:04     
+(3/5): tcl-8.5.13-8.el7.x86_64.rpm                                                                                                       | 1.9 MB  00:00:09     
+(4/5): python-tools-2.7.5-34.el7.x86_64.rpm                                                                                              | 850 kB  00:00:09     
+(5/5): tk-8.5.13-6.el7.x86_64.rpm                                                                                                        | 1.4 MB  00:00:12     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                           387 kB/s | 4.7 MB  00:00:12     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : 1:tcl-8.5.13-8.el7.x86_64                                                                                                                    1/5 
+  Installing : 1:tk-8.5.13-6.el7.x86_64                                                                                                                     2/5 
+  Installing : 1:tix-8.4.3-12.el7.x86_64                                                                                                                    3/5 
+  Installing : tkinter-2.7.5-34.el7.x86_64                                                                                                                  4/5 
+  Installing : python-tools-2.7.5-34.el7.x86_64                                                                                                             5/5 
+  Verifying  : 1:tk-8.5.13-6.el7.x86_64                                                                                                                     1/5 
+  Verifying  : 1:tcl-8.5.13-8.el7.x86_64                                                                                                                    2/5 
+  Verifying  : tkinter-2.7.5-34.el7.x86_64                                                                                                                  3/5 
+  Verifying  : 1:tix-8.4.3-12.el7.x86_64                                                                                                                    4/5 
+  Verifying  : python-tools-2.7.5-34.el7.x86_64                                                                                                             5/5 
+
+Installed:
+  python-tools.x86_64 0:2.7.5-34.el7                                                                                                                            
+
+Dependency Installed:
+  tcl.x86_64 1:8.5.13-8.el7              tix.x86_64 1:8.4.3-12.el7              tk.x86_64 1:8.5.13-6.el7              tkinter.x86_64 0:2.7.5-34.el7             
+
+Complete!
+[root@localhost Python]# idle
+[root@localhost Python]# 
+

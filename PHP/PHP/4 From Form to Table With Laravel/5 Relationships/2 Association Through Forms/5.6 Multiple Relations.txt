@@ -1,0 +1,54 @@
+5.6 Multiple Relations
+
+Sometimes we need to update multiple relations at the same time. We can do this with the sync method.
+
+app/Http/Controllers/FarmController.php
+<?php
+namespace App\Http\Controllers;
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+  /**
+   * Update the specified resource in storage.
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Farm  $farm
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, Farm $farm)
+  {
+    $farm->update($request->all());
+    return redirect('farms');
+  }
+
+}
+
+
+Using the $farm object and the markets() method, sync() the information that comes back from $request->markets.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+namespace App\Http\Controllers;
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+  /**
+   * Update the specified resource in storage.
+   * @param  \Illuminate\Http\Request  $request
+   * @param  \App\Farm  $farm
+   * @return \Illuminate\Http\Response
+   */
+  public function update(Request $request, Farm $farm)
+  {
+    $farm->update($request->all());
+    $farm->markets()->sync($request->markets);
+    return redirect('farms');
+  }
+
+}
+
+

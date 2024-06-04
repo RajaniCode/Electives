@@ -1,0 +1,168 @@
+[rajani@localhost Node.js]$ su root
+Password: 
+[root@localhost Node.js]# curl --silent --location https://rpm.nodesource.com/setup_4.x | bash -
+
+## Installing the NodeSource Node.js 4.x LTS Argon repo...
+
+
+## Inspecting system...
+
++ rpm -q --whatprovides redhat-release || rpm -q --whatprovides centos-release || rpm -q --whatprovides cloudlinux-release || rpm -q --whatprovides sl-release
++ uname -m
+
+## Confirming "el7-x86_64" is supported...
+
++ curl -sLf -o /dev/null 'https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm'
+
+## Downloading release setup RPM...
+
++ mktemp
++ curl -sL -o '/tmp/tmp.ASarcBYeLj' 'https://rpm.nodesource.com/pub_4.x/el/7/x86_64/nodesource-release-el7-1.noarch.rpm'
+
+## Installing release setup RPM...
+
++ rpm -i --nosignature --force '/tmp/tmp.ASarcBYeLj'
+
+## Cleaning up...
+
++ rm -f '/tmp/tmp.ASarcBYeLj'
+
+## Checking for existing installations...
+
++ rpm -qa 'node|npm' | grep -v nodesource
+
+## Run `yum install -y nodejs` (as root) to install Node.js 4.x LTS Argon and npm.
+## You may also need development tools to build native addons:
+##   `yum install -y gcc-c++ make`
+
+[root@localhost Node.js]# yum install -y nodejs
+Loaded plugins: fastestmirror, langpacks
+nodesource                                                                                                                               | 2.5 kB  00:00:00     
+nodesource/x86_64/primary_db                                                                                                             |  33 kB  00:00:07     
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: epel.mirror.net.in
+ * extras: mirror.nbrc.ac.in
+ * nux-dextop: li.nux.ro
+ * rpmforge: ftp.neowiz.com
+ * updates: mirror.nbrc.ac.in
+Resolving Dependencies
+--> Running transaction check
+---> Package nodejs.x86_64 0:4.4.3-1nodesource.el7.centos will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                        Arch                           Version                                                 Repository                          Size
+================================================================================================================================================================
+Installing:
+ nodejs                         x86_64                         4.4.3-1nodesource.el7.centos                            nodesource                         8.5 M
+
+Transaction Summary
+================================================================================================================================================================
+Install  1 Package
+
+Total download size: 8.5 M
+Installed size: 29 M
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/nodesource/packages/nodejs-4.4.3-1nodesource.el7.centos.x86_64.rpm: Header V3 RSA/SHA1 Signature, key ID 34fa74dd: NOKEY00 ETA 
+Public key for nodejs-4.4.3-1nodesource.el7.centos.x86_64.rpm is not installed
+nodejs-4.4.3-1nodesource.el7.centos.x86_64.rpm                                                                                           | 8.5 MB  00:01:03     
+Retrieving key from file:///etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
+Importing GPG key 0x34FA74DD:
+ Userid     : "NodeSource <gpg-rpm@nodesource.com>"
+ Fingerprint: 2e55 207a 95d9 944b 0cc9 3261 5ddb e8d4 34fa 74dd
+ Package    : nodesource-release-el7-1.noarch (installed)
+ From       : /etc/pki/rpm-gpg/NODESOURCE-GPG-SIGNING-KEY-EL
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+Warning: RPMDB altered outside of yum.
+  Installing : nodejs-4.4.3-1nodesource.el7.centos.x86_64                                                                                                   1/1 
+  Verifying  : nodejs-4.4.3-1nodesource.el7.centos.x86_64                                                                                                   1/1 
+
+Installed:
+  nodejs.x86_64 0:4.4.3-1nodesource.el7.centos                                                                                                                  
+
+Complete!
+[root@localhost Node.js]# yum install -y gcc-c++ make
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: epel.mirror.net.in
+ * extras: mirror.nbrc.ac.in
+ * nux-dextop: li.nux.ro
+ * rpmforge: ftp.neowiz.com
+ * updates: mirror.nbrc.ac.in
+Package 1:make-3.82-21.el7.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package gcc-c++.x86_64 0:4.8.5-4.el7 will be installed
+--> Processing Dependency: libstdc++-devel = 4.8.5-4.el7 for package: gcc-c++-4.8.5-4.el7.x86_64
+--> Processing Dependency: gcc = 4.8.5-4.el7 for package: gcc-c++-4.8.5-4.el7.x86_64
+--> Processing Dependency: libmpc.so.3()(64bit) for package: gcc-c++-4.8.5-4.el7.x86_64
+--> Running transaction check
+---> Package gcc.x86_64 0:4.8.5-4.el7 will be installed
+--> Processing Dependency: cpp = 4.8.5-4.el7 for package: gcc-4.8.5-4.el7.x86_64
+---> Package libmpc.x86_64 0:1.0.1-3.el7 will be installed
+---> Package libstdc++-devel.x86_64 0:4.8.5-4.el7 will be installed
+--> Running transaction check
+---> Package cpp.x86_64 0:4.8.5-4.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                                     Arch                               Version                                  Repository                        Size
+================================================================================================================================================================
+Installing:
+ gcc-c++                                     x86_64                             4.8.5-4.el7                              base                             7.2 M
+Installing for dependencies:
+ cpp                                         x86_64                             4.8.5-4.el7                              base                             5.9 M
+ gcc                                         x86_64                             4.8.5-4.el7                              base                              16 M
+ libmpc                                      x86_64                             1.0.1-3.el7                              base                              51 k
+ libstdc++-devel                             x86_64                             4.8.5-4.el7                              base                             1.5 M
+
+Transaction Summary
+================================================================================================================================================================
+Install  1 Package (+4 Dependent packages)
+
+Total download size: 31 M
+Installed size: 77 M
+Downloading packages:
+(1/5): libmpc-1.0.1-3.el7.x86_64.rpm                                                                                                     |  51 kB  00:00:05     
+(2/5): libstdc++-devel-4.8.5-4.el7.x86_64.rpm                                                                                            | 1.5 MB  00:00:21     
+(3/5): cpp-4.8.5-4.el7.x86_64.rpm                                                                                                        | 5.9 MB  00:00:28     
+(4/5): gcc-c++-4.8.5-4.el7.x86_64.rpm                                                                                                    | 7.2 MB  00:00:53     
+(5/5): gcc-4.8.5-4.el7.x86_64.rpm                                                                                                        |  16 MB  00:01:17     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                           405 kB/s |  31 MB  00:01:17     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libmpc-1.0.1-3.el7.x86_64                                                                                                                    1/5 
+  Installing : cpp-4.8.5-4.el7.x86_64                                                                                                                       2/5 
+  Installing : gcc-4.8.5-4.el7.x86_64                                                                                                                       3/5 
+  Installing : libstdc++-devel-4.8.5-4.el7.x86_64                                                                                                           4/5 
+  Installing : gcc-c++-4.8.5-4.el7.x86_64                                                                                                                   5/5 
+  Verifying  : cpp-4.8.5-4.el7.x86_64                                                                                                                       1/5 
+  Verifying  : libstdc++-devel-4.8.5-4.el7.x86_64                                                                                                           2/5 
+  Verifying  : gcc-c++-4.8.5-4.el7.x86_64                                                                                                                   3/5 
+  Verifying  : libmpc-1.0.1-3.el7.x86_64                                                                                                                    4/5 
+  Verifying  : gcc-4.8.5-4.el7.x86_64                                                                                                                       5/5 
+
+Installed:
+  gcc-c++.x86_64 0:4.8.5-4.el7                                                                                                                                  
+
+Dependency Installed:
+  cpp.x86_64 0:4.8.5-4.el7            gcc.x86_64 0:4.8.5-4.el7            libmpc.x86_64 0:1.0.1-3.el7            libstdc++-devel.x86_64 0:4.8.5-4.el7           
+
+Complete!
+[root@localhost Node.js]# node --version
+v4.4.3
+[root@localhost Node.js]# npm --version
+2.15.1
+[root@localhost Node.js]#

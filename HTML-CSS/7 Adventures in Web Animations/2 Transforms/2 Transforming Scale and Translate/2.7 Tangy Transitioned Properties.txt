@@ -1,0 +1,56 @@
+2.7 Tangy Transitioned Properties
+
+
+Sometimes you need to transition elements at different speeds. Transition the transforming properties at 2 different speeds.
+
+
+index.html
+.form-input + .form-label {
+  position: relative;
+  padding: 0 1em;
+  cursor: text;
+  color: #6A7989;
+  transform-origin: left center;
+  transition: all 0.3s;
+}
+
+.form-input:focus + .form-label {
+  color: #333333;
+  transform: translateY(-40px) scale(0.8);
+}
+
+
+style.css
+.form-input + .form-label {
+  position: relative;
+  padding: 0 1em;
+  cursor: text;
+  color: #6A7989;
+  transform-origin: left center;
+  transition: all 0.3s;
+}
+
+.form-input:focus + .form-label {
+  color: #333333;
+  transform: translateY(-40px) scale(0.8);
+}
+
+
+1. Change the transform to transition over 0.3s and the color over 0.5s.
+
+Answer:
+style.css
+.form-input + .form-label {
+  position: relative;
+  padding: 0 1em;
+  cursor: text;
+  color: #6A7989;
+  transform-origin: left center;
+  transition: transform 0.3s, color 0.5s;
+}
+
+.form-input:focus + .form-label {
+  color: #333333;
+  transform: translateY(-40px) scale(0.8);
+}
+ 

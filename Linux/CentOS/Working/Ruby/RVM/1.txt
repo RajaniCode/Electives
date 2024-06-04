@@ -1,0 +1,310 @@
+[rajani@localhost RVM]$ su root
+Password: 
+[root@localhost RVM]# git config --global user.name "pluralschool"
+[root@localhost RVM]# git config --global user.email "rajani.javascript@gmail.com"
+[root@localhost RVM]# git config --list
+user.name=pluralschool
+user.email=rajani.javascript@gmail.com
+[root@localhost RVM]# yum install gcc-c++ patch readline readline-devel zlib zlib-devel
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: epel.mirror.net.in
+ * extras: mirror.nbrc.ac.in
+ * nux-dextop: li.nux.ro
+ * rpmforge: ftp.neowiz.com
+ * updates: mirror.nbrc.ac.in
+Package gcc-c++-4.8.5-4.el7.x86_64 already installed and latest version
+Package patch-2.7.1-8.el7.x86_64 already installed and latest version
+Package readline-6.2-9.el7.x86_64 already installed and latest version
+Package zlib-1.2.7-15.el7.x86_64 already installed and latest version
+Package zlib-devel-1.2.7-15.el7.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package readline-devel.x86_64 0:6.2-9.el7 will be installed
+--> Processing Dependency: ncurses-devel for package: readline-devel-6.2-9.el7.x86_64
+--> Running transaction check
+---> Package ncurses-devel.x86_64 0:5.9-13.20130511.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                                  Arch                             Version                                         Repository                      Size
+================================================================================================================================================================
+Installing:
+ readline-devel                           x86_64                           6.2-9.el7                                       base                           138 k
+Installing for dependencies:
+ ncurses-devel                            x86_64                           5.9-13.20130511.el7                             base                           713 k
+
+Transaction Summary
+================================================================================================================================================================
+Install  1 Package (+1 Dependent package)
+
+Total download size: 851 k
+Installed size: 2.4 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/2): readline-devel-6.2-9.el7.x86_64.rpm                                                                                               | 138 kB  00:00:02     
+(2/2): ncurses-devel-5.9-13.20130511.el7.x86_64.rpm                                                                                      | 713 kB  00:00:06     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                           132 kB/s | 851 kB  00:00:06     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+Warning: RPMDB altered outside of yum.
+  Installing : ncurses-devel-5.9-13.20130511.el7.x86_64                                                                                                     1/2 
+  Installing : readline-devel-6.2-9.el7.x86_64                                                                                                              2/2 
+  Verifying  : readline-devel-6.2-9.el7.x86_64                                                                                                              1/2 
+  Verifying  : ncurses-devel-5.9-13.20130511.el7.x86_64                                                                                                     2/2 
+
+Installed:
+  readline-devel.x86_64 0:6.2-9.el7                                                                                                                             
+
+Dependency Installed:
+  ncurses-devel.x86_64 0:5.9-13.20130511.el7                                                                                                                    
+
+Complete!
+[root@localhost RVM]# yum install libyaml-devel libffi-devel openssl-devel make
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: epel.mirror.net.in
+ * extras: mirror.nbrc.ac.in
+ * nux-dextop: li.nux.ro
+ * rpmforge: ftp.neowiz.com
+ * updates: mirror.nbrc.ac.in
+Package 1:openssl-devel-1.0.1e-51.el7_2.4.x86_64 already installed and latest version
+Package 1:make-3.82-21.el7.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package libffi-devel.x86_64 0:3.0.13-16.el7 will be installed
+---> Package libyaml-devel.x86_64 0:0.1.4-11.el7_0 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                                   Arch                               Version                                    Repository                        Size
+================================================================================================================================================================
+Installing:
+ libffi-devel                              x86_64                             3.0.13-16.el7                              base                              23 k
+ libyaml-devel                             x86_64                             0.1.4-11.el7_0                             base                              82 k
+
+Transaction Summary
+================================================================================================================================================================
+Install  2 Packages
+
+Total download size: 105 k
+Installed size: 939 k
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/2): libffi-devel-3.0.13-16.el7.x86_64.rpm                                                                                             |  23 kB  00:00:01     
+(2/2): libyaml-devel-0.1.4-11.el7_0.x86_64.rpm                                                                                           |  82 kB  00:00:01     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                            55 kB/s | 105 kB  00:00:01     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : libffi-devel-3.0.13-16.el7.x86_64                                                                                                            1/2 
+  Installing : libyaml-devel-0.1.4-11.el7_0.x86_64                                                                                                          2/2 
+  Verifying  : libyaml-devel-0.1.4-11.el7_0.x86_64                                                                                                          1/2 
+  Verifying  : libffi-devel-3.0.13-16.el7.x86_64                                                                                                            2/2 
+
+Installed:
+  libffi-devel.x86_64 0:3.0.13-16.el7                                           libyaml-devel.x86_64 0:0.1.4-11.el7_0                                          
+
+Complete!
+[root@localhost RVM]# yum install bzip2 autoconf automake libtool bison iconv-devel sqlite-devel
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: epel.mirror.net.in
+ * extras: mirror.nbrc.ac.in
+ * nux-dextop: li.nux.ro
+ * rpmforge: ftp.tu-chemnitz.de
+ * updates: mirror.nbrc.ac.in
+Package bzip2-1.0.6-13.el7.x86_64 already installed and latest version
+No package iconv-devel available.
+Resolving Dependencies
+--> Running transaction check
+---> Package autoconf.noarch 0:2.69-11.el7 will be installed
+---> Package automake.noarch 0:1.13.4-3.el7 will be installed
+--> Processing Dependency: perl(Thread::Queue) for package: automake-1.13.4-3.el7.noarch
+---> Package bison.x86_64 0:2.7-4.el7 will be installed
+---> Package libtool.x86_64 0:2.4.2-21.el7_2 will be installed
+---> Package sqlite-devel.x86_64 0:3.7.17-8.el7 will be installed
+--> Running transaction check
+---> Package perl-Thread-Queue.noarch 0:3.02-2.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                                     Arch                             Version                                   Repository                         Size
+================================================================================================================================================================
+Installing:
+ autoconf                                    noarch                           2.69-11.el7                               base                              701 k
+ automake                                    noarch                           1.13.4-3.el7                              base                              679 k
+ bison                                       x86_64                           2.7-4.el7                                 base                              578 k
+ libtool                                     x86_64                           2.4.2-21.el7_2                            updates                           588 k
+ sqlite-devel                                x86_64                           3.7.17-8.el7                              base                              104 k
+Installing for dependencies:
+ perl-Thread-Queue                           noarch                           3.02-2.el7                                base                               17 k
+
+Transaction Summary
+================================================================================================================================================================
+Install  5 Packages (+1 Dependent package)
+
+Total download size: 2.6 M
+Installed size: 8.1 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/6): perl-Thread-Queue-3.02-2.el7.noarch.rpm                                                                                           |  17 kB  00:00:01     
+(2/6): automake-1.13.4-3.el7.noarch.rpm                                                                                                  | 679 kB  00:00:07     
+(3/6): sqlite-devel-3.7.17-8.el7.x86_64.rpm                                                                                              | 104 kB  00:00:06     
+bison-2.7-4.el7.x86_64.rpm     FAILED                                          ================                               ] 140 kB/s | 1.1 MB  00:00:10 ETA 
+http://mirror.digistar.vn/centos/7.2.1511/os/x86_64/Packages/bison-2.7-4.el7.x86_64.rpm: [Errno 14] curl#56 - "Recv failure: Connection reset by peer"00:10 ETA 
+Trying other mirror.
+(4/6): autoconf-2.69-11.el7.noarch.rpm                                                                                                   | 701 kB  00:00:11     
+(5/6): bison-2.7-4.el7.x86_64.rpm                                                                                                        | 578 kB  00:00:07     
+(6/6): libtool-2.4.2-21.el7_2.x86_64.rpm                                                                                                 | 588 kB  00:00:18     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                           140 kB/s | 2.6 MB  00:00:19     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : autoconf-2.69-11.el7.noarch                                                                                                                  1/6 
+  Installing : perl-Thread-Queue-3.02-2.el7.noarch                                                                                                          2/6 
+  Installing : automake-1.13.4-3.el7.noarch                                                                                                                 3/6 
+  Installing : libtool-2.4.2-21.el7_2.x86_64                                                                                                                4/6 
+  Installing : sqlite-devel-3.7.17-8.el7.x86_64                                                                                                             5/6 
+  Installing : bison-2.7-4.el7.x86_64                                                                                                                       6/6 
+  Verifying  : autoconf-2.69-11.el7.noarch                                                                                                                  1/6 
+  Verifying  : bison-2.7-4.el7.x86_64                                                                                                                       2/6 
+  Verifying  : perl-Thread-Queue-3.02-2.el7.noarch                                                                                                          3/6 
+  Verifying  : sqlite-devel-3.7.17-8.el7.x86_64                                                                                                             4/6 
+  Verifying  : libtool-2.4.2-21.el7_2.x86_64                                                                                                                5/6 
+  Verifying  : automake-1.13.4-3.el7.noarch                                                                                                                 6/6 
+
+Installed:
+  autoconf.noarch 0:2.69-11.el7  automake.noarch 0:1.13.4-3.el7  bison.x86_64 0:2.7-4.el7  libtool.x86_64 0:2.4.2-21.el7_2  sqlite-devel.x86_64 0:3.7.17-8.el7 
+
+Dependency Installed:
+  perl-Thread-Queue.noarch 0:3.02-2.el7                                                                                                                         
+
+Complete!
+[root@localhost RVM]# curl -L get.rvm.io | bash -s stable
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   184  100   184    0     0     89      0  0:00:02  0:00:02 --:--:--    89
+100 22865  100 22865    0     0   3517      0  0:00:06  0:00:06 --:--:--  7801
+Downloading https://github.com/rvm/rvm/archive/1.27.0.tar.gz
+Downloading https://github.com/rvm/rvm/releases/download/1.27.0/1.27.0.tar.gz.asc
+gpg: Signature made Tue 29 Mar 2016 07:19:47 PM IST using RSA key ID BF04FF17
+gpg: Can't check signature: No public key
+Warning, RVM 1.26.0 introduces signed releases and automated check of signatures when GPG software found.
+Assuming you trust Michal Papis import the mpapis public key (downloading the signatures).
+
+GPG signature verification failed for '/usr/local/rvm/archives/rvm-1.27.0.tgz' - 'https://github.com/rvm/rvm/releases/download/1.27.0/1.27.0.tar.gz.asc'!
+try downloading the signatures:
+
+    gpg2 --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+
+or if it fails:
+
+    command curl -sSL https://rvm.io/mpapis.asc | gpg2 --import -
+
+the key can be compared with:
+
+    https://rvm.io/mpapis.asc
+    https://keybase.io/mpapis
+
+[root@localhost RVM]# cat /etc/profile.d/rvm.sh
+cat: /etc/profile.d/rvm.sh: No such file or directory
+[root@localhost RVM]# source /etc/profile.d/rvm.sh
+bash: /etc/profile.d/rvm.sh: No such file or directory
+[root@localhost RVM]# ls /etc/profile.d
+256term.csh                   bash_completion.sh  colorls.csh  lang.csh  less.sh        qt.csh                 qt.sh      vim.sh      which2.sh
+256term.sh                    colorgrep.csh       colorls.sh   lang.sh   maven.sh       qt-graphicssystem.csh  tomcat.sh  vte.sh
+abrt-console-notification.sh  colorgrep.sh        java.sh      less.csh  PackageKit.sh  qt-graphicssystem.sh   vim.csh    which2.csh
+[root@localhost RVM]# gedit /etc/profile.d/rvm.sh
+
+(gedit:9529): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:9529): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+
+** (gedit:9529): WARNING **: Error when getting information for file '/etc/profile.d/rvm.sh': No such file or directory
+
+(gedit:9529): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:9529): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:9529): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:9529): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:9529): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:9529): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:9529): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:9529): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+
+(gedit:9529): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+
+
+*********************************************************************************************************************************************************************
+[root@localhost RVM]# cat /etc/profile.d/rvm.sh
+\curl -sSL https://get.rvm.io | bash -s -- --ignore-dotfiles
+echo "source $HOME/.rvm/scripts/rvm" >> ~/.bash_profile
+*********************************************************************************************************************************************************************
+
+
+
+[root@localhost RVM]# source /etc/profile.d/rvm.sh
+Turning on ignore dotfiles mode.
+Downloading https://github.com/rvm/rvm/archive/master.tar.gz
+Creating group 'rvm'
+
+Installing RVM to /usr/local/rvm/
+Installation of RVM in /usr/local/rvm/ is almost complete:
+
+  * First you need to add all users that will be using rvm to 'rvm' group,
+    and logout - login again, anyone using rvm will be operating with `umask u=rwx,g=rwx,o=rx`.
+
+  * To start using RVM you need to run `source /etc/profile.d/rvm.sh`
+    in all your open shell windows, in rare cases you need to reopen all shell windows.
+
+# pluralschool,
+#
+#   Thank you for using RVM!
+#   We sincerely hope that RVM helps to make your life easier and more enjoyable!!!
+#
+# ~Wayne, Michal & team.
+
+In case of problems: https://rvm.io/help and https://twitter.com/rvm_io
+[root@localhost RVM]# ls /etc/profile.d
+256term.csh                   bash_completion.sh  colorls.csh  lang.csh  less.sh        qt.csh                 qt.sh      vim.csh  which2.csh
+256term.sh                    colorgrep.csh       colorls.sh   lang.sh   maven.sh       qt-graphicssystem.csh  rvm.sh     vim.sh   which2.sh
+abrt-console-notification.sh  colorgrep.sh        java.sh      less.csh  PackageKit.sh  qt-graphicssystem.sh   tomcat.sh  vte.sh
+[root@localhost RVM]# groupadd rvm
+groupadd: group 'rvm' already exists
+[root@localhost RVM]# usermod -a -G rvm rajani
+[root@localhost RVM]# id rajani
+uid=1000(rajani) gid=1000(rajani) groups=1000(rajani),979(docker),1001(rvm)
+[root@localhost RVM]# usermod -a -G rvm rajani -l NEW_LOGIN
+usermod: user rajani is currently used by process 3498
+[root@localhost RVM]# getent group rvm
+rvm:x:1001:rajani
+[root@localhost RVM]# reboot

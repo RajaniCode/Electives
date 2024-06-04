@@ -1,0 +1,89 @@
+5.6 Sprite Position
+
+
+Almost finished. sprite-position for the default state has been added - now we just need to adjust the positioning for the other states. Create a nested :hover state that sets a background-position with the position of the hover image, and do the same for the :active state with the active image.
+
+
+CSS
+
+.logo {
+  background: url(logos-s170667cd82.png) 0 0;
+  display: block;
+  text-indent: -9999px;
+  height: 140px;
+  width: 180px;
+}
+
+.SASS
+
+@import "compass"
+$logos: sprite-map("logos/*.png")
+
+.logo
+  background: $logos sprite-position($logos, logo)
+  display: block
+  text-indent: -9999px
+  +sprite-dimensions($logos, logo)
+
+.SCSS
+
+@import "compass";
+
+$logos: sprite-map("logos/*.png");
+
+.logo {
+  background: $logos sprite-position($logos, logo);
+  display: block;
+  text-indent: -9999px;
+  @include sprite-dimensions($logos, logo);
+}
+
+Answer:
+
+.SASS
+
+@import compass
+
+$logos: sprite-map("logos/*.png")
+
+.logo
+  background: $logos sprite-position($logos, logo)
+  display: block
+  text-indent: -9999px
+  +sprite-dimensions($logos, logo)
+  &:hover
+    background-position: sprite-position($logos, hover)
+  &:active
+    background-position: sprite-position($logos, active)
+
+.SCSS
+
+@import "compass";
+
+$logos: sprite-map("logos/*.png");
+
+.logo {
+  background: $logos sprite-position($logos, logo);
+  display: block;
+  text-indent: -9999px;
+  @include sprite-dimensions($logos, logo);
+  &:hover {
+    background-position: sprite-position($logos, hover);
+  }
+  &:active {
+    background-position: sprite-position($logos, active);
+  }
+}
+
+CSS
+
+.logo {
+  background: url('/logos-s170667cd82.png') 0 0;
+  display: block;
+  text-indent: -9999px;
+  height: 140px;
+  width: 180px; }
+  .logo:hover {
+    background-position: 0 -280px; }
+  .logo:active {
+    background-position: 0 -140px; }

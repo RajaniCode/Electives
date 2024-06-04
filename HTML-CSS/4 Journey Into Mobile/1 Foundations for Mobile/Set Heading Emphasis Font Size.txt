@@ -1,0 +1,41 @@
+Set Heading Emphasis Font Size
+
+
+Using ems, set the a element inside the h1 element to be 16px. Remember, the target divided by context rule, keeping in mind our context has changed. Use the CSS Source tab below for additional help. Specify your answer to at least 6 decimals.
+
+HTML SOURCE
+
+<body>
+  <h1>
+    <a href='#'>Set Heading Emphasis Font Size</a>
+  </h1>
+</body>
+
+CSS SOURCE
+
+body {
+  font-size: 62.5%; /* 1em = 10px */
+}
+h1 {
+  font-size: 2.4em; /* 24px / 10px */
+}
+
+body {
+  font-size: 62.5%; /* 1em = 10px */
+}
+h1 {
+  font-size: 2.4em; /* 24px / 10px */
+}
+
+STYLE.CSS
+
+h1 a {
+
+}
+
+Answer:
+
+h1 a {
+  font-size: 0.666666em; /* 16px / 24px */
+}
+

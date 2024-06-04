@@ -1,0 +1,33 @@
+1.9 Read
+
+We've added some data to the Farms datastore, so now let's practice reading it back.
+
+app.php
+
+<?php
+
+use App\Farm;
+
+
+1. Using the all static method, store all of the farms in a variable called $farms.
+
+Answer
+app.php
+
+<?php
+
+use App\Farm;
+$farms = Farm::all();
+
+2. Next, using a foreach loop, cycle through each farm in the $farms collection and echo the name property each time.
+
+Answer
+app.php
+
+<?php
+
+use App\Farm;
+$farms = Farm::all(); 
+foreach ($farms as $farm) {
+ echo $farm->name;
+}

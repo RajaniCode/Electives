@@ -1,0 +1,27 @@
+2.8 EventView
+
+In our event listing page we want to display the state where each event takes place. However, the value assigned to location on each Event is a string with city and state (i.e. "Orlando, FL"). Let’s write some code in the view to extract just the state from the location property so we can display it in the template.
+
+lib/neon_web/views/event_view.ex
+defmodule NeonWeb.EventView do
+  use NeonWeb, :view
+
+end
+
+
+1. In NeonWeb.EventView, define a function called state_name which takes one argument called location.
+
+Answer:
+lib/neon_web/views/event_view.ex
+
+2. Inside this function, use String.split to split the string into two parts. Use pattern matching to assign the result to a list with two empty variables: the first one we’ll explicitly ignore with _ (underscore) and the second one we’ll name state.
+
+Find out more about String.split here.
+
+Answer:
+lib/neon_web/views/event_view.ex
+
+3. Make sure the function returns the value for state.
+
+Answer:
+lib/neon_web/views/event_view.ex

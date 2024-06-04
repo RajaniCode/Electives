@@ -1,0 +1,412 @@
+4.15 Adding Our Navigation
+
+Time to focus on navigation! For this one, we'll recreate the Navigation Component from the video. We've gone ahead and added a list of links in the header as a starting point, but it's looking a little ugly. Follow the tasks to create a functional navigation for our site.
+
+index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blasting Off With Bootstrap</title>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <link href='css/main.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Blasting Off with Bootstrap</h1>
+          <ul>
+            <li><a href='tickets.html'>Tickets</a></li>
+            <li><a href='stations.html'>Stations</a></li>
+            <li><a href='about.html'>About</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class='container'>
+      <div class='row well well-lg'>
+        <div class='col-md-6'>
+          <h2>The Fastest Way to Space</h2>
+          <p class='lead'>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
+          <button type='button' class='btn btn-lg btn-default'>Take the Tour</button>
+          <button type='button' class='btn btn-lg btn-primary'>Book Tickets Now</button>
+        </div>
+        <div class='col-md-6 visible-md visible-lg'>
+          <img src='images/img-header.jpg' alt='Blast off with Bootstrap' />
+        </div>
+      </div>
+
+      <div class='row text-center features'>
+        <div class='col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0'>
+          <i class='glyphicon glyphicon-briefcase'></i>
+          <h3>Book Today!</h3>
+          <p>Even if you're traveling tomorrow, you can still get tickets today. We have a number of conveniently located ports around the globe to service everyone.</p>
+        </div>
+
+        <div class='col-sm-4 col-xs-6'>
+          <i class='glyphicon glyphicon-random'></i>
+          <h3>Go Anywhere</h3>
+          <p>If you need to get to space today, why not try out a transporter? Despite the claims, there are have been no deaths in the last 6 weeks!</p>
+        </div>
+
+        <div class='col-sm-4 col-xs-6'>
+          <i class='glyphicon glyphicon-send'></i>
+          <h3>RocketBus&reg;</h3>
+          <p>For cheapest fares, catch the next RocketBus&reg; to the stars. Cheaper on your wallet, and easiest way to make friends.</p>
+        </div>
+      </div>
+    </div>
+    <div class='quote'>
+      <div class='container'>
+        <blockquote>
+          <p>Any sufficiently advanced technology is indistinguishable from magic.</p>
+          <footer>Arthur C. Clarke in <cite title="Source Title">Profiles of the Future</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+    <div class='container transport-systems'>
+      <div class='row'>
+        <div class='col-md-10 col-md-offset-1'>
+          <h2>Our Transport Systems</h2>
+          <p>Learn more about our transport systems to find out which one is right for you. Pick out the mode of transport that works for your budget and risk level.</p>
+        </div>
+      </div>
+
+      <div class='row text-center'>
+        <div class='transporter col-md-3 col-md-offset-1 well well-sm'>
+          <h3>Transporter</h3>
+          <ul class='list-unstyled'>
+            <li>8 second travel time</li>
+            <li>Chance of death only 1 in 7,593</li>
+            <li>Low price of only $15.99!</li>
+          </ul>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-transfer'></i> Beam Me Up!</button></p>
+        </div>
+        <div class='space-elevator col-md-3 col-md-offset-1 well well-sm'>
+          <h3>Space Elevator</h3>
+          <ul class='list-unstyled'>
+            <li>8 hour scenic ride</li>
+            <li>Only 1 horrific death per 12,456</li>
+            <li>Only $45.99 if you book today!</li>
+          </ul>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-sort'></i> Board the Elevator!</button></p>
+        </div>
+        <div class='rocketbus col-md-3 col-md-offset-1 well well-sm'>
+          <h3>RocketBus</h3>
+          <ul class='list-unstyled'>
+            <li>8 minute scenic ride</li>
+            <li>Plunging death rate of under 1/100k</li>
+            <li>$74.99 lets you blast off today!</li>
+          </ul>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-plane'></i> Blast Off!</button></p>
+        </div>
+      </div>
+    </div>
+    <div class='footer'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-3 col-sm-4 col-xs-6'>
+            <h4>Who We Are</h4>
+            <p><i>Blasting Off With Bootstrap</i> is the fastest way to space. <a href='tickets.html'>Book your ticket today</a>!</p>
+            <p><a href='about.html'>More About Us <i class='glyphicon glyphicon-arrow-right'></i></a></p>
+          </div>
+
+          <div class='col-md-offset-1 col-sm-2 col-xs-6'>
+            <h4>Links</h4>
+            <ul class='list-unstyled'>
+              <li><a href='index.html'>Home</a></li>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+            </ul>
+          </div>
+
+          <div class='clearfix visible-xs'></div>
+
+          <div class='col-sm-2 col-xs-6'>
+            <h4>Stay in Touch</h4>
+            <ul class='list-unstyled'>
+              <li><a href='about.html'>About</a></li>
+              <li><a href='contact.html'>Contact Us</a></li>
+              <li><a href='/blog'>Blog</a></li>
+              <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
+              <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
+            </ul>
+          </div>
+
+          <div class='col-md-3 col-md-offset-1 col-sm-4 col-xs-6'>
+            <h4>Contact Us</h4>
+            <ul class='list-unstyled'>
+              <li><i class='glyphicon glyphicon-globe'></i> Orlando, FL</li>
+              <li><i class='glyphicon glyphicon-phone'></i> 1-555-blast-off</li>
+              <li><i class='glyphicon glyphicon-envelope'></i> <a href='mailto:blastingoff@codeschool.com'>blastingoff@codeschool.com</a></li>
+            </ul>
+            <p>Blasting Off With Bootstrap &copy;2214.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+  </body>
+</html>
+
+index.html
+
+1. Even though our navigation is working, it's not pretty.
+
+Create a new div above our "container" div that uses Bootstrap's Navigation class. We'll use this as a starting point for our Navigation Component.
+
+Answer:
+
+    <div class='navbar'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-12'>
+            <h1>Blasting Off with Bootstrap</h1>
+            <ul>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+              <li><a href='about.html'>About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+2. Our navbar is looking a bit plain. Go ahead and add a class to it that'll turn it a default grey color.
+
+Answer: <div class='navbar navbar navbar-default'>
+
+Note:
+
+    <div class='navbar navbar navbar-default'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-12'>
+            <h1>Blasting Off with Bootstrap</h1>
+            <ul>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+              <li><a href='about.html'>About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+3. If we open our page now, we'll see that our .navbar element actually has rounded corners around it. Since it's at the top of the page, most people might not notice, but it's still an issue we should take care of.
+
+Add another class to our Navigation Component that will indicate it's positioned at the top of the screen. It should disappear as the page scrolls.
+
+Answer: <div class='navbar navbar navbar-default navbar-static-top'>
+
+    <div class='navbar navbar navbar-default navbar-static-top'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-12'>
+            <h1>Blasting Off with Bootstrap</h1>
+            <ul>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+              <li><a href='about.html'>About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+4. Time to get down to content. We want a link to our homepage rather than an h1 tag there. Change this tag to a link to our homepage (which is at index.html) and give it a Bootstrap class used for site titles and logos.
+
+Answer: <a class='navbar-brand' href='index.html'>Blasting Off with Bootstrap</a>
+
+5. Our list of links in our header is going to show up with bullets next to them – not exactly what we want. Add (3) classes that will affect it in the following ways:
+
+    Use Bootstrap's Nav Component.
+    Indicate that this Nav Component is being used within a Navbar Component.
+    Position the Nav Component all the way to the right side of the Navigation.
+
+
+Answer: <ul class='nav navbar-nav navbar-right'>
+
+6. Finally, now that our navigation is wrapped in a Navigation Component, we no longer need to use grids in our navigation. Remove all elements in our nav associated with grids.
+
+Answer:
+
+    <div class='navbar navbar navbar-default navbar-static-top'>
+      <div class='container'>
+        <div>
+          <div>
+            <a class='navbar-brand' href='index.html'>Blasting Off with Bootstrap</a>
+            <ul class='nav navbar-nav navbar-right'>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+              <li><a href='about.html'>About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+Note:
+
+Remove:
+
+<div class='row'>
+
+<div class='col-md-12'>
+
+
+index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blasting Off With Bootstrap</title>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <link href='css/main.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='navbar navbar navbar-default navbar-static-top'>
+      <div class='container'>
+        <div>
+          <div>
+            <a class='navbar-brand' href='index.html'>Blasting Off with Bootstrap</a>
+            <ul class='nav navbar-nav navbar-right'>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+              <li><a href='about.html'>About</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='container'>
+      <div class='row well well-lg'>
+        <div class='col-md-6'>
+          <h2>The Fastest Way to Space</h2>
+          <p class='lead'>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
+          <button type='button' class='btn btn-lg btn-default'>Take the Tour</button>
+          <button type='button' class='btn btn-lg btn-primary'>Book Tickets Now</button>
+        </div>
+        <div class='col-md-6 visible-md visible-lg'>
+          <img src='images/img-header.jpg' alt='Blast off with Bootstrap' />
+        </div>
+      </div>
+
+      <div class='row text-center features'>
+        <div class='col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0'>
+          <i class='glyphicon glyphicon-briefcase'></i>
+          <h3>Book Today!</h3>
+          <p>Even if you're traveling tomorrow, you can still get tickets today. We have a number of conveniently located ports around the globe to service everyone.</p>
+        </div>
+
+        <div class='col-sm-4 col-xs-6'>
+          <i class='glyphicon glyphicon-random'></i>
+          <h3>Go Anywhere</h3>
+          <p>If you need to get to space today, why not try out a transporter? Despite the claims, there are have been no deaths in the last 6 weeks!</p>
+        </div>
+
+        <div class='col-sm-4 col-xs-6'>
+          <i class='glyphicon glyphicon-send'></i>
+          <h3>RocketBus&reg;</h3>
+          <p>For cheapest fares, catch the next RocketBus&reg; to the stars. Cheaper on your wallet, and easiest way to make friends.</p>
+        </div>
+      </div>
+    </div>
+    <div class='quote'>
+      <div class='container'>
+        <blockquote>
+          <p>Any sufficiently advanced technology is indistinguishable from magic.</p>
+          <footer>Arthur C. Clarke in <cite title="Source Title">Profiles of the Future</cite></footer>
+        </blockquote>
+      </div>
+    </div>
+    <div class='container transport-systems'>
+      <div class='row'>
+        <div class='col-md-10 col-md-offset-1'>
+          <h2>Our Transport Systems</h2>
+          <p>Learn more about our transport systems to find out which one is right for you. Pick out the mode of transport that works for your budget and risk level.</p>
+        </div>
+      </div>
+
+      <div class='row text-center'>
+        <div class='transporter col-md-3 col-md-offset-1 well well-sm'>
+          <h3>Transporter</h3>
+          <ul class='list-unstyled'>
+            <li>8 second travel time</li>
+            <li>Chance of death only 1 in 7,593</li>
+            <li>Low price of only $15.99!</li>
+          </ul>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-transfer'></i> Beam Me Up!</button></p>
+        </div>
+        <div class='space-elevator col-md-3 col-md-offset-1 well well-sm'>
+          <h3>Space Elevator</h3>
+          <ul class='list-unstyled'>
+            <li>8 hour scenic ride</li>
+            <li>Only 1 horrific death per 12,456</li>
+            <li>Only $45.99 if you book today!</li>
+          </ul>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-sort'></i> Board the Elevator!</button></p>
+        </div>
+        <div class='rocketbus col-md-3 col-md-offset-1 well well-sm'>
+          <h3>RocketBus</h3>
+          <ul class='list-unstyled'>
+            <li>8 minute scenic ride</li>
+            <li>Plunging death rate of under 1/100k</li>
+            <li>$74.99 lets you blast off today!</li>
+          </ul>
+          <p><button class='btn btn-info'><i class='glyphicon glyphicon-plane'></i> Blast Off!</button></p>
+        </div>
+      </div>
+    </div>
+    <div class='footer'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-3 col-sm-4 col-xs-6'>
+            <h4>Who We Are</h4>
+            <p><i>Blasting Off With Bootstrap</i> is the fastest way to space. <a href='tickets.html'>Book your ticket today</a>!</p>
+            <p><a href='about.html'>More About Us <i class='glyphicon glyphicon-arrow-right'></i></a></p>
+          </div>
+
+          <div class='col-md-offset-1 col-sm-2 col-xs-6'>
+            <h4>Links</h4>
+            <ul class='list-unstyled'>
+              <li><a href='index.html'>Home</a></li>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+            </ul>
+          </div>
+
+          <div class='clearfix visible-xs'></div>
+
+          <div class='col-sm-2 col-xs-6'>
+            <h4>Stay in Touch</h4>
+            <ul class='list-unstyled'>
+              <li><a href='about.html'>About</a></li>
+              <li><a href='contact.html'>Contact Us</a></li>
+              <li><a href='/blog'>Blog</a></li>
+              <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
+              <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
+            </ul>
+          </div>
+
+          <div class='col-md-3 col-md-offset-1 col-sm-4 col-xs-6'>
+            <h4>Contact Us</h4>
+            <ul class='list-unstyled'>
+              <li><i class='glyphicon glyphicon-globe'></i> Orlando, FL</li>
+              <li><i class='glyphicon glyphicon-phone'></i> 1-555-blast-off</li>
+              <li><i class='glyphicon glyphicon-envelope'></i> <a href='mailto:blastingoff@codeschool.com'>blastingoff@codeschool.com</a></li>
+            </ul>
+            <p>Blasting Off With Bootstrap &copy;2214.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+  </body>
+</html>

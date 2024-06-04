@@ -1,0 +1,351 @@
+3.7 Album Styles
+
+This div-with-a-class thing is pretty useful - and it looks like there's another place we can use it too.
+
+Our designers want a dashed border around each of the albums and their track listings, so we need to group the h4 and ol tags that contain each album's song list.
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>The Prependers</h2>
+
+      <h3>Bio</h3>
+
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+      <h3>Members</h3>
+
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+
+      <h3>Albums</h3>
+
+      <h4>Top, Right, Bottom, Left</h4>
+
+      <ol>
+        <li>The Last</li>
+        <li>Downtown</li>
+        <li>Yellow Carpet</li>
+        <li>Rocket to Mars</li>
+        <li>Walk, not Run</li>
+        <li>Design</li>
+        <li>Shopping Cart</li>
+        <li>Our Gift to You</li>
+      </ol>
+
+      <h4>Opacity Zero</h4>
+
+      <ol>
+        <li>Visible/Invisible</li>
+        <li>Car Trip</li>
+        <li>AFK</li>
+        <li>Up and Up</li>
+      </ol>
+
+      <h3>Tour Dates</h3>
+
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+}
+
+1. There's information about two albums, and each album consists of an h4 tag and an ordered list.
+
+Wrap each album name and track listing in their own divisions, and give those divisions a class attribute with the value album.
+
+Answer:
+
+      <div class="album">
+        <h4>Top, Right, Bottom, Left</h4>
+
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h4>Opacity Zero</h4>
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+
+2. Now we can target tags that have a class of album in order to style them the way we want.
+
+Use a class selector to add a dashed border that's 2px wide and is the color #bbbbbb to each album. When you're writing the border property, use the single-line version.
+
+Answer:
+
+.album {
+  border: 2px dashed #bbbbbb;  
+}
+
+3. That border is a little too close to our content, so add 10px of space to the top and bottom along with 5px of space to the left and right between the content and border.
+
+Use the single-line version of the padding property to add these four values.
+
+Answer:
+
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 10px 5px 10px 5px;
+}
+
+4. That's looking better now - but the borders of each album division are touching up together, so add 5px of spacing between the two album divs.
+
+Answer: 
+
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 10px 5px 10px 5px;
+  margin-bottom: 5px;
+}
+
+prependers-band.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>The Prependers</h2>
+
+      <h3>Bio</h3>
+
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+      <h3>Members</h3>
+
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+
+      <h3>Albums</h3>
+
+      <div class="album">
+        <h4>Top, Right, Bottom, Left</h4>
+
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h4>Opacity Zero</h4>
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+      
+      <h3>Tour Dates</h3>
+
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 10px 5px 10px 5px;
+  margin-bottom: 5px;
+}

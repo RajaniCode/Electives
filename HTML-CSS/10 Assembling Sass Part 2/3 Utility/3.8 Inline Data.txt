@@ -1,0 +1,60 @@
+3.8 Inline Data
+
+
+Since arrow.png is the only background image in our stylesheet, we're probably better off saving the HTTP request and just embedding it. Swap out the image-url() function to achieve Base64 encoding.
+
+CSS
+
+.entry {
+  background: url(arrow.png) right center no-repeat;
+  line-height: 30px;
+  padding-right: 40px;
+}
+
+.SASS
+
+@import "compass"
+
+.entry
+  background: image-url('arrow.png') right center no-repeat
+  line-height: image-height('arrow.png')
+  padding-right: image-width('arrow.png') + 10px
+
+
+.SCSS
+
+@import "compass";
+
+.entry {
+  background: image-url("arrow.png") right center no-repeat;
+  line-height: image-height("arrow.png");
+  padding-right: image-width("arrow.png") + 10px;
+}
+
+Answer:
+
+.SASS
+
+@import compass
+
+.entry
+  background: inline-image("arrow.png") right center no-repeat
+  line-height: image-height("arrow.png")
+  padding-right: image-width("arrow.png") + 10px
+
+.SCSS
+
+@import "compass";
+
+.entry {
+  background: inline-image("arrow.png") right center no-repeat;
+  line-height: image-height("arrow.png");
+  padding-right: image-width("arrow.png") + 10px;
+}
+
+CSS
+
+.entry {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAAeCAYAAAA7MK6iAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAANBJREFUeNq81TsKwlAQheHr4TYuwEXYCNmOaxDcgyBYBiwEF5be2gXYOlMEgpj7nDkXpsiL7yfksRkO+3sI4SLzDsQFmZPMS0YDdkxY15YdgJ9tWgBW9rsHIHPcLQCF55kHoPJ8swA0XtcdgM471hwAo2dlGTCWBMD4LdGAc0kAnL4P2QAvOBvgDa8GxMBdGnCUmZiw/u+vMk+ZT2SD887IBj3hJOgBK3iTeaRAS7gKtICbwB64C2yBTcAa2BQsgV3AFOwK/oMp4BKmgvP6CjAAfwVKAY2uLhUAAAAASUVORK5CYII=') right center no-repeat;
+  line-height: 30px;
+  padding-right: 40px; }

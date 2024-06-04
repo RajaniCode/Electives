@@ -1,0 +1,29 @@
+5.11 Transition
+
+http://caniuse.com/#feat=css-transitions
+
+Let’s add a nice transition to all of our links when they are hovered over. Using the individual properties, add a transition to the color property over the course of 1 second, with a 0 second delay, and the timing function of ease.
+
+style.css
+
+a {
+  color: #c44743;
+}
+
+a:hover {
+  color: #d56d68;
+}
+
+Answer:
+
+a {
+  color: #c44743;
+  transition-duration: 1s;
+  transition-property: background-color;
+  transition-timing-function: ease-in-out;
+  transition-delay: 0s;
+}
+
+a:hover {
+  color: #d56d68;
+}

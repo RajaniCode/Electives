@@ -1,0 +1,161 @@
+5.9 Catching Exceptions
+
+Now let's fill in our try and catch blocks to finish with our validation.
+
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+
+  $dateValidator = Validator::notEmpty()->date();
+
+  try {
+    
+    
+  } catch (NestedValidationException $e) {
+    
+    
+  }
+
+  echo htmlspecialchars($reason);
+}
+
+
+1. The first thing we want inside the try block is our $dateValidator, using assert($date) instead of the validate($date) method that we used previously.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+
+  $dateValidator = Validator::notEmpty()->date();
+
+  try {
+    $dateValidator->assert($date);
+    
+  } catch (NestedValidationException $e) {
+    
+    
+  }
+
+  echo htmlspecialchars($reason);
+}
+
+2. Still inside the try block, use the echo keyword along with the date() function to format and print our date.
+
+For the first argument to the date() function, let's use the 'm d Y' format string. For the second argument, use strtotime($date), which converts the date to a timestamp.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+
+  $dateValidator = Validator::notEmpty()->date();
+
+  try {
+    $dateValidator->assert($date);
+    echo date('m d Y', strtotime($date));
+  } catch (NestedValidationException $e) {
+    
+    
+  }
+
+  echo htmlspecialchars($reason);
+}
+
+3. Inside our catch block, let's create a foreach loop. We'll use $e->getMessages() as $message to collect the exception messages from the $e exception object variable and assign them to the $message variable.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+
+  $dateValidator = Validator::notEmpty()->date();
+
+  try {
+    $dateValidator->assert($date);
+    echo date('m d Y', strtotime($date));
+  } catch (NestedValidationException $e) {
+    foreach($e->getMessages() as $message){
+      $message = $e;
+    }    
+  }
+
+  echo htmlspecialchars($reason);
+}
+
+4. Lastly, let's echo the $message inside the body of the foreach loop.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+
+  $dateValidator = Validator::notEmpty()->date();
+
+  try {
+    $dateValidator->assert($date);
+    echo date('m d Y', strtotime($date));
+  } catch (NestedValidationException $e) {
+    foreach($e->getMessages() as $message){
+      $message = $e;
+      echo $message;
+    }    
+  }
+
+  echo htmlspecialchars($reason);
+}

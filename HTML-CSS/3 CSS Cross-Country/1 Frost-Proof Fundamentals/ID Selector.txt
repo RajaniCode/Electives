@@ -1,0 +1,32 @@
+ID Selector
+
+
+Select the slogan only by its ID attribute, then center the text and make it italic. If you don't remember the CSS properties, refer to Mozilla's CSS Reference.
+
+style.css
+
+HTML Source
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  
+  <body>
+    <section class="content">
+      <header>
+        <h1>Sven's Snowshoe Emporium</h1>
+        <h2 id="slogan">"For the Snow-Savvy Shoe-Shopper"</h2>
+      </header>
+    </section>
+  </body>
+</html>
+
+Answer:
+
+#slogan {
+   text-align: center;
+   font-style: italic;   
+}

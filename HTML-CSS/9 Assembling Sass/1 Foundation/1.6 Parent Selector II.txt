@@ -1,0 +1,54 @@
+1.6 Parent Selector II
+
+
+Now that we have the parent selector, let's use it to add a :hover state to .notice a with a color: #313131; property. While we're at it, we should nest a inside of .notice properly.
+
+CSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+}
+
+.notice a {
+  color: #222;
+}
+
+APPLICATION.SCSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+}
+.notice a {
+  color: #222;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+  a {
+    color: #222;
+      &:hover {
+	 color: #313131;
+      }
+  }
+}
+
+CSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px; }
+  .notice a {
+    color: #222; }
+    .notice a:hover {
+      color: #313131; }

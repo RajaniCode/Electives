@@ -1,0 +1,18 @@
+1.5 Better Formatting
+
+In the middle of coding our chat program, we were sent another program by a friend who’s just starting to learn Go. Unfortunately, our friend doesn’t follow proper formatting rules and the code is a little hard to understand. Let’s use the command that ships with Go to automatically format this source code file for us. Remember to use the flag which writes the output of the command back to the original source file.
+
+main.go
+package
+main
+import"fmt"
+func     main(){
+fmt.Println("Gopher chat")}
+
+Enter the command to format main.go in the current directory.
+
+
+$ gofmt -w main.go
+
+Success!
+$ 

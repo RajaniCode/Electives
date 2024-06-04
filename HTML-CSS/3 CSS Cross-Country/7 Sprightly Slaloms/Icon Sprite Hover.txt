@@ -1,0 +1,74 @@
+Icon Sprite Hover
+
+
+Now, add the appropriate positioning shifts to the hover state of our navigation items.
+
+
+HTML SOURCE
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+ 
+  <body>
+    <nav class="sidebar">
+      <ul>
+        <li><a class="featured" href="#">Featured Items</a></li>
+        <li><a class="sales" href="#">Sale Items</a></li>
+        <li><a href="#">Men's</a></li>
+        <li><a href="#">Women's</a></li>
+        <li><a href="#">Children's</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>
+
+style.css
+
+.sidebar a {
+  display: block;
+  line-height: 40px;
+}
+.sidebar .featured,
+.sidebar .sales {
+  background: url(sidebar.png) no-repeat;
+  padding-left: 50px;
+}
+.sidebar .sales {
+  background-position: 0 -80px;
+}
+.sidebar .featured:hover,
+.sidebar .featured:focus {
+
+}
+.sidebar .sales:hover,
+.sidebar .sales:focus {
+
+}
+
+
+Answer:
+
+.sidebar a {
+  display: block;
+  line-height: 40px;
+}
+.sidebar .featured,
+.sidebar .sales {
+  background: url(sidebar.png) no-repeat;
+  padding-left: 50px;
+}
+.sidebar .sales {
+  background-position: 0 -80px;
+}
+.sidebar .featured:hover,
+.sidebar .featured:focus {
+  background-position: 0 -40px;
+}
+.sidebar .sales:hover,
+.sidebar .sales:focus {
+  background-position: 0 -120px;
+}

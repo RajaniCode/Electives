@@ -1,0 +1,31 @@
+1.1 DOM Manipulation
+
+<section id="calendar" class="calendar" style="display: block;">
+        <header>
+          <a class="prev" href="#">Yesterday</a>
+          <a class="next" href="#">Tomorrow</a>
+          <h1 id="date" class="date"><b>Wed</b> Mar 02 2016</h1>
+        </header>
+        <ul id="events" class="events"><li class="event">Dentist Appointment</li><li class="event">Run 5K</li><li class="event">Build Robot</li><li class="event">Take Over the World</li></ul>
+      </section>
+
+
+Right-click on the "Yesterday" link and select the Inspect Element option.
+
+Change "Yesterday" to "Prev" and "Tomorrow" to "Next" in the sample app.
+
+Move the Run 5K event to top of the list.
+
+Add a class attribute of "today" to the <b> element inside of the date <h1>.
+
+Remove the Dentist Appointment event from the list.
+
+
+<section id="calendar" class="calendar" style="display: block;">
+        <header>
+          <a class="prev" href="#">Prev</a>
+          <a class="next" href="#">Next</a>
+          <h1 id="date" class="date"><b class="today">Wed</b> Mar 02 2016</h1>
+        </header>
+        <ul id="events" class="events"><li class="event">Run 5K</li><li class="event">Build Robot</li><li class="event">Take Over the World</li></ul>
+      </section>

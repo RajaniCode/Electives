@@ -1,0 +1,36 @@
+5.4 Getting a Record
+
+Let’s refactor the index and show actions in EventController to use the Calendar module.
+
+lib/neon_web/controllers/event_controller.ex
+ defmodule NeonWeb.EventController do
+  use NeonWeb, :controller
+
+  
+
+  def index(conn, _) do
+    
+    render conn, "index.html", events: events
+  end
+
+  def show(conn, %{"id" => event_id }) do
+    
+    render conn, "show.html", event: event
+  end
+end
+
+
+1. First, create an alias to the Neon.Calendar module so we can refer to it simply by Calendar.
+
+Answer: 
+lib/neon_web/controllers/event_controller.ex
+
+2. In the index action, use the Calendar module to list all events and assign the result to a variable called events.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex
+
+3. In the show action, use the Calendar module to get an event with id event_id and assign the result to a variable called event.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex

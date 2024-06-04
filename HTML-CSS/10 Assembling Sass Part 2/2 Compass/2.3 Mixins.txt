@@ -1,0 +1,79 @@
+2.3 Mixins
+
+.socket partially rotates when .is-active is added, but the non-prefixed transform property is lacking support in some browsers. Use the transform mixin instead to widen coverage.
+
+
+
+CSS
+
+.socket {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+.socket.is-active {
+  transform: rotate(45deg);
+}
+
+.SASS
+
+@import "compass"
+
+.socket
+  border-radius: 50%
+  height: 200px
+  width: 200px
+  &.is-active
+    transform: rotate(45deg)
+
+.SCSS
+
+@import "compass";
+
+.socket {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  &.is-active {
+    transform: rotate(45deg);
+  }
+}
+
+Answer:
+
+.SASS
+
+@import "compass"
+
+.socket
+  border-radius: 50%
+  height: 200px
+  width: 200px
+  &.is-active
+    +transform(rotate(45deg))
+
+.SCSS
+
+@import "compass";
+
+.socket {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+  &.is-active {
+    @include transform(rotate(45deg));
+  }
+}
+
+CSS
+
+.socket {
+  border-radius: 50%;
+  height: 200px;
+  width: 200px; }
+  .socket.is-active {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg); }

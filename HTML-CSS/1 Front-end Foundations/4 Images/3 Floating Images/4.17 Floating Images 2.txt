@@ -1,0 +1,400 @@
+4.17 Floating Images 2
+
+This float thing is pretty cool, and it seems like we can use it on prependers-band.html to put each album image on the same line as the album name.
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+  background: #555555 url(images/bg-tile.png) top left repeat;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.nav a {
+  color: #ee932a;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #ffffff url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+  height: 120px;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+.recording-now {
+  width: 440px;
+  height: 200px;
+  background: #ffffff url(images/prependers-recording.jpg) center center no-repeat;
+  border: 1px solid #ee932a;
+  padding: 4px 4px 4px 4px;
+}
+.recording-now p {
+  color: #ffffff;
+  font-size: 28px;
+}
+.bands-list img {
+  float: left;
+  padding-right: 15px;
+}
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h1>The Prependers</h1>
+      
+      <h2>Bio</h2>
+      
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+      
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+      
+      <h2>Members</h2>
+      
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+      
+      <h2>Albums</h2>
+      
+      <div class="album">
+        <h3>Top, Right, Bottom, Left</h3>
+        
+        <img src="images/prependers/top-right-bottom-left.jpg" alt="Top Right Bottom Left album cover">
+
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h3>Opacity Zero</h3>
+        
+        <img src="images/prependers/opacity-zero.jpg" alt="Opacity Zero album cover">
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+      
+      <h2>Tour Dates</h2>
+      
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>
+
+1. Write a selector that targets any images in the album container, and float them so the album image appears to the right of the album name.
+
+Answer: 
+
+.album img {
+  float: right;
+}
+
+Success:
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+  background: #555555 url(images/bg-tile.png) top left repeat;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.nav a {
+  color: #ee932a;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #ffffff url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.album img {
+  float: right;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+  height: 120px;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+.recording-now {
+  width: 440px;
+  height: 200px;
+  background: #ffffff url(images/prependers-recording.jpg) center center no-repeat;
+  border: 1px solid #ee932a;
+  padding: 4px 4px 4px 4px;
+}
+.recording-now p {
+  color: #ffffff;
+  font-size: 28px;
+}
+.bands-list img {
+  float: left;
+  padding-right: 15px;
+}
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h1>The Prependers</h1>
+      
+      <h2>Bio</h2>
+      
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+      
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+      
+      <h2>Members</h2>
+      
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+      
+      <h2>Albums</h2>
+      
+      <div class="album">
+        <h3>Top, Right, Bottom, Left</h3>
+        
+        <img src="images/prependers/top-right-bottom-left.jpg" alt="Top Right Bottom Left album cover">
+
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h3>Opacity Zero</h3>
+        
+        <img src="images/prependers/opacity-zero.jpg" alt="Opacity Zero album cover">
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+      
+      <h2>Tour Dates</h2>
+      
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>

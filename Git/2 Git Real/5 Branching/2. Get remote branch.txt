@@ -1,0 +1,13 @@
+2. Get remote branch
+
+
+"git branch -r" does not query the remotes to check for new branches. In order to see a new remote branch you first have to do a fetch or a pull. So retrieve the remote "weasel" branch.
+
+
+$ git fetch
+
+From https://git@pshop.com/petshop_online/petshop.git
+   3cc5dbd..162f5d8  master     -> origin/master
+ * [new branch]      weasel     -> origin/weasel
+
+Success!

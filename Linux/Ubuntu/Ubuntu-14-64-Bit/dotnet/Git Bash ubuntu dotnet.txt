@@ -1,0 +1,422 @@
+
+Aspire@Acer MINGW64 ~
+$ vagrant --version
+Vagrant 1.9.2
+
+Aspire@Acer MINGW64 ~
+$ cd "E:\Working\Ubuntu\dotnet\Vagrantfile"
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/dotnet/Vagrantfile
+$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Box 'ubuntu/trusty64' could not be found. Attempting to find and install...
+    default: Box Provider: virtualbox
+    default: Box Version: >= 0
+==> default: Loading metadata for box 'ubuntu/trusty64'
+    default: URL: https://atlas.hashicorp.com/ubuntu/trusty64
+==> default: Adding box 'ubuntu/trusty64' (v20170504.0.0) for provider: virtualbox
+    default: Downloading: https://atlas.hashicorp.com/ubuntu/boxes/trusty64/versions/20170504.0.0/providers/virtualbox.box
+    default:
+==> default: Successfully added box 'ubuntu/trusty64' (v20170504.0.0) for 'virtualbox'!
+==> default: Importing base box 'ubuntu/trusty64'...
+==> default: Matching MAC address for NAT networking...
+==> default: Checking if box 'ubuntu/trusty64' is up to date...
+==> default: Setting the name of the VM: Vagrantfile_default_1494077244417_87582
+==> default: Clearing any previously set forwarded ports...
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 27017 (guest) => 27017 (host) (adapter 1)
+    default: 8080 (guest) => 8080 (host) (adapter 1)
+    default: 7077 (guest) => 7077 (host) (adapter 1)
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Remote connection disconnect. Retrying...
+    default:
+    default: Vagrant insecure key detected. Vagrant will automatically replace
+    default: this with a newly generated keypair for better security.
+    default:
+    default: Inserting generated public key within guest...
+    default: Removing insecure key from the guest if it's present...
+    default: Key inserted! Disconnecting and reconnecting using new SSH key...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 4.3.36
+    default: VirtualBox Version: 5.1
+==> default: Mounting shared folders...
+    default: /vagrant => E:/Working/CS/Ubuntu/Vagrantfile
+==> default: Running provisioner: shell...
+    default: Running: inline script
+==> default: I am provisioning...
+==> default: Get:1 http://security.ubuntu.com trusty-security InRelease [65.9 kB]
+==> default: Ign http://archive.ubuntu.com trusty InRelease
+==> default: Get:2 http://archive.ubuntu.com trusty-updates InRelease [65.9 kB]
+==> default: Hit http://archive.ubuntu.com trusty-backports InRelease
+==> default: Get:3 http://security.ubuntu.com trusty-security/main Sources [129 kB]
+==> default: Hit http://archive.ubuntu.com trusty Release.gpg
+==> default: Get:4 http://archive.ubuntu.com trusty-updates/main Sources [397 kB]
+==> default: Get:5 http://security.ubuntu.com trusty-security/universe Sources [52.5 kB]
+==> default: Get:6 http://security.ubuntu.com trusty-security/main amd64 Packages [610 kB]
+==> default: Get:7 http://archive.ubuntu.com trusty-updates/restricted Sources [6,327 B]
+==> default: Get:8 http://archive.ubuntu.com trusty-updates/universe Sources [178 kB]
+==> default: Get:9 http://archive.ubuntu.com trusty-updates/multiverse Sources [7,759 B]
+==> default: Get:10 http://archive.ubuntu.com trusty-updates/main amd64 Packages [977 kB]
+==> default: Get:11 http://security.ubuntu.com trusty-security/universe amd64 Packages [157 kB]
+==> default: Get:12 http://security.ubuntu.com trusty-security/main Translation-en [333 kB]
+==> default: Get:13 http://security.ubuntu.com trusty-security/universe Translation-en [91.4 kB]
+==> default: Get:14 http://archive.ubuntu.com trusty-updates/restricted amd64 Packages [17.1 kB]
+==> default: Get:15 http://archive.ubuntu.com trusty-updates/universe amd64 Packages [405 kB]
+==> default: Get:16 http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages [14.3 kB]
+==> default: Get:17 http://archive.ubuntu.com trusty-updates/main Translation-en [484 kB]
+==> default: Get:18 http://archive.ubuntu.com trusty-updates/multiverse Translation-en [7,430 B]
+==> default: Get:19 http://archive.ubuntu.com trusty-updates/restricted Translation-en [3,975 B]
+==> default: Get:20 http://archive.ubuntu.com trusty-updates/universe Translation-en [215 kB]
+==> default: Get:21 http://archive.ubuntu.com trusty-backports/main Sources [9,712 B]
+==> default: Get:22 http://archive.ubuntu.com trusty-backports/restricted Sources [28 B]
+==> default: Get:23 http://archive.ubuntu.com trusty-backports/universe Sources [35.3 kB]
+==> default: Get:24 http://archive.ubuntu.com trusty-backports/multiverse Sources [1,898 B]
+==> default: Hit http://archive.ubuntu.com trusty-backports/main amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports/restricted amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports/universe amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports/main Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-backports/multiverse Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-backports/restricted Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-backports/universe Translation-en
+==> default: Hit http://archive.ubuntu.com trusty Release
+==> default: Get:25 http://archive.ubuntu.com trusty/main Sources [1,064 kB]
+==> default: Get:26 http://archive.ubuntu.com trusty/restricted Sources [5,433 B]
+==> default: Get:27 http://archive.ubuntu.com trusty/universe Sources [6,399 kB]
+==> default: Get:28 http://archive.ubuntu.com trusty/multiverse Sources [174 kB]
+==> default: Hit http://archive.ubuntu.com trusty/main amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty/restricted amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty/universe amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty/main Translation-en
+==> default: Hit http://archive.ubuntu.com trusty/multiverse Translation-en
+==> default: Hit http://archive.ubuntu.com trusty/restricted Translation-en
+==> default: Hit http://archive.ubuntu.com trusty/universe Translation-en
+==> default: Ign http://archive.ubuntu.com trusty/main Translation-en_US
+==> default: Ign http://archive.ubuntu.com trusty/multiverse Translation-en_US
+==> default: Ign http://archive.ubuntu.com trusty/restricted Translation-en_US
+==> default: Ign http://archive.ubuntu.com trusty/universe Translation-en_US
+==> default: Fetched 11.9 MB in 51s (231 kB/s)
+==> default: Reading package lists...
+==> default: Executing: gpg --ignore-time-conflict --no-options --no-default-keyring --homedir /tmp/tmp.mZa2NwYD0r --no-auto-check-trustdb --trust-model always --keyring /etc/apt/trusted.gpg --primary-keyring /etc/apt/trusted.gpg --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+==> default: gpg:
+==> default: requesting key 417A0893 from hkp server keyserver.ubuntu.com
+==> default: gpg:
+==> default: key 417A0893: public key "MS Open Tech <interop@microsoft.com>" imported
+==> default: gpg:
+==> default: Total number processed: 1
+==> default: gpg:
+==> default:               imported: 1
+==> default:   (RSA: 1)
+==> default: Get:1 http://security.ubuntu.com trusty-security InRelease [65.9 kB]
+==> default: Ign http://archive.ubuntu.com trusty InRelease
+==> default: Get:2 http://archive.ubuntu.com trusty-updates InRelease [65.9 kB]
+==> default: Get:3 https://apt-mo.trafficmanager.net trusty InRelease
+==> default: Get:4 http://security.ubuntu.com trusty-security/main Sources [129 kB]
+==> default: Get:5 https://apt-mo.trafficmanager.net trusty/main amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports InRelease
+==> default: Get:6 https://apt-mo.trafficmanager.net trusty/main Translation-en_US
+==> default: Hit http://archive.ubuntu.com trusty Release.gpg
+==> default: Get:7 http://security.ubuntu.com trusty-security/universe Sources [52.5 kB]
+==> default: Get:8 http://archive.ubuntu.com trusty-updates/main Sources [397 kB]
+==> default: Get:9 http://security.ubuntu.com trusty-security/main amd64 Packages [610 kB]
+==> default: Ign https://apt-mo.trafficmanager.net trusty/main Translation-en_US
+==> default: Ign https://apt-mo.trafficmanager.net trusty/main Translation-en
+==> default: Get:10 http://archive.ubuntu.com trusty-updates/restricted Sources [6,327 B]
+==> default: Get:11 http://archive.ubuntu.com trusty-updates/universe Sources [178 kB]
+==> default: Get:12 http://archive.ubuntu.com trusty-updates/multiverse Sources [7,759 B]
+==> default: Get:13 http://security.ubuntu.com trusty-security/universe amd64 Packages [157 kB]
+==> default: Get:14 http://archive.ubuntu.com trusty-updates/main amd64 Packages [977 kB]
+==> default: Hit http://security.ubuntu.com trusty-security/main Translation-en
+==> default: Hit http://security.ubuntu.com trusty-security/universe Translation-en
+==> default: Get:15 http://archive.ubuntu.com trusty-updates/restricted amd64 Packages [17.1 kB]
+==> default: Get:16 http://archive.ubuntu.com trusty-updates/universe amd64 Packages [405 kB]
+==> default: Get:17 http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages [14.3 kB]
+==> default: Hit http://archive.ubuntu.com trusty-updates/main Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-updates/multiverse Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-updates/restricted Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-updates/universe Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-backports/main Sources
+==> default: Hit http://archive.ubuntu.com trusty-backports/restricted Sources
+==> default: Hit http://archive.ubuntu.com trusty-backports/universe Sources
+==> default: Hit http://archive.ubuntu.com trusty-backports/multiverse Sources
+==> default: Hit http://archive.ubuntu.com trusty-backports/main amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports/restricted amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports/universe amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty-backports/main Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-backports/multiverse Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-backports/restricted Translation-en
+==> default: Hit http://archive.ubuntu.com trusty-backports/universe Translation-en
+==> default: Hit http://archive.ubuntu.com trusty Release
+==> default: Hit http://archive.ubuntu.com trusty/main Sources
+==> default: Hit http://archive.ubuntu.com trusty/restricted Sources
+==> default: Hit http://archive.ubuntu.com trusty/universe Sources
+==> default: Hit http://archive.ubuntu.com trusty/multiverse Sources
+==> default: Hit http://archive.ubuntu.com trusty/main amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty/restricted amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty/universe amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages
+==> default: Hit http://archive.ubuntu.com trusty/main Translation-en
+==> default: Hit http://archive.ubuntu.com trusty/multiverse Translation-en
+==> default: Hit http://archive.ubuntu.com trusty/restricted Translation-en
+==> default: Hit http://archive.ubuntu.com trusty/universe Translation-en
+==> default: Ign http://archive.ubuntu.com trusty/main Translation-en_US
+==> default: Ign http://archive.ubuntu.com trusty/multiverse Translation-en_US
+==> default: Ign http://archive.ubuntu.com trusty/restricted Translation-en_US
+==> default: Ign http://archive.ubuntu.com trusty/universe Translation-en_US
+==> default: Fetched 3,092 kB in 31s (96.8 kB/s)
+==> default: Reading package lists...
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/dotnet/Vagrantfile
+$ vagrant ssh
+Welcome to Ubuntu 14.04.5 LTS (GNU/Linux 3.13.0-117-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+ System information disabled due to load higher than 1.0
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+2 packages can be updated.
+0 updates are security updates.
+
+New release '16.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+vagrant@vagrant-ubuntu-trusty-64:~$ ls
+vagrant@vagrant-ubuntu-trusty-64:~$ ls ~
+vagrant@vagrant-ubuntu-trusty-64:~$ ls /
+bin  boot  dev  etc  home  initrd.img  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  vagrant  var  vmlinuz
+vagrant@vagrant-ubuntu-trusty-64:~$ sudo apt-get update
+Hit http://security.ubuntu.com trusty-security InRelease
+Ign http://archive.ubuntu.com trusty InRelease
+Hit http://security.ubuntu.com trusty-security/main Sources
+Hit http://archive.ubuntu.com trusty-updates InRelease
+Hit http://security.ubuntu.com trusty-security/universe Sources
+Hit http://archive.ubuntu.com trusty-backports InRelease
+Hit https://apt-mo.trafficmanager.net trusty InRelease
+Hit https://apt-mo.trafficmanager.net trusty/main amd64 Packages
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages
+Hit http://archive.ubuntu.com trusty Release.gpg
+Get:1 https://apt-mo.trafficmanager.net trusty/main Translation-en_US
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/main Sources
+Hit http://security.ubuntu.com trusty-security/main Translation-en
+Hit http://archive.ubuntu.com trusty-updates/restricted Sources
+Hit http://security.ubuntu.com trusty-security/universe Translation-en
+Hit http://archive.ubuntu.com trusty-updates/universe Sources
+Hit http://archive.ubuntu.com trusty-updates/multiverse Sources
+Ign https://apt-mo.trafficmanager.net trusty/main Translation-en_US
+Ign https://apt-mo.trafficmanager.net trusty/main Translation-en
+Hit http://archive.ubuntu.com trusty-updates/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty-updates/main Translation-en
+Hit http://archive.ubuntu.com trusty-updates/multiverse Translation-en
+Hit http://archive.ubuntu.com trusty-updates/restricted Translation-en
+Hit http://archive.ubuntu.com trusty-updates/universe Translation-en
+Hit http://archive.ubuntu.com trusty-backports/main Sources
+Hit http://archive.ubuntu.com trusty-backports/restricted Sources
+Hit http://archive.ubuntu.com trusty-backports/universe Sources
+Hit http://archive.ubuntu.com trusty-backports/multiverse Sources
+Hit http://archive.ubuntu.com trusty-backports/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/main Translation-en
+Hit http://archive.ubuntu.com trusty-backports/multiverse Translation-en
+Hit http://archive.ubuntu.com trusty-backports/restricted Translation-en
+Hit http://archive.ubuntu.com trusty-backports/universe Translation-en
+Hit http://archive.ubuntu.com trusty Release
+Hit http://archive.ubuntu.com trusty/main Sources
+Hit http://archive.ubuntu.com trusty/restricted Sources
+Hit http://archive.ubuntu.com trusty/universe Sources
+Hit http://archive.ubuntu.com trusty/multiverse Sources
+Hit http://archive.ubuntu.com trusty/main amd64 Packages
+Hit http://archive.ubuntu.com trusty/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty/main Translation-en
+Hit http://archive.ubuntu.com trusty/multiverse Translation-en
+Hit http://archive.ubuntu.com trusty/restricted Translation-en
+Hit http://archive.ubuntu.com trusty/universe Translation-en
+Ign http://archive.ubuntu.com trusty/main Translation-en_US
+Ign http://archive.ubuntu.com trusty/multiverse Translation-en_US
+Ign http://archive.ubuntu.com trusty/restricted Translation-en_US
+Ign http://archive.ubuntu.com trusty/universe Translation-en_US
+Reading package lists... Done
+vagrant@vagrant-ubuntu-trusty-64:~$ sudo apt-get install dotnet-dev-1.0.3
+Reading package lists... Done
+Building dependency tree
+Reading state information... Done
+The following extra packages will be installed:
+  dotnet-host dotnet-hostfxr-1.0.1 dotnet-hostfxr-1.1.0
+  dotnet-sharedframework-microsoft.netcore.app-1.0.4
+  dotnet-sharedframework-microsoft.netcore.app-1.1.1 liblldb-3.6 libllvm3.6
+  liblttng-ust-ctl2 liblttng-ust0 libunwind8 liburcu1
+The following NEW packages will be installed:
+  dotnet-dev-1.0.3 dotnet-host dotnet-hostfxr-1.0.1 dotnet-hostfxr-1.1.0
+  dotnet-sharedframework-microsoft.netcore.app-1.0.4
+  dotnet-sharedframework-microsoft.netcore.app-1.1.1 liblldb-3.6 libllvm3.6
+  liblttng-ust-ctl2 liblttng-ust0 libunwind8 liburcu1
+0 upgraded, 12 newly installed, 0 to remove and 0 not upgraded.
+Need to get 112 MB of archives.
+After this operation, 341 MB of additional disk space will be used.
+Do you want to continue? [Y/n] Y
+Get:1 http://archive.ubuntu.com/ubuntu/ trusty-updates/main libllvm3.6 amd64 1:3.6-2ubuntu1~trusty1 [7,858 kB]
+Get:2 https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty/main dotnet-host amd64 1.1.0-preview1-001100-00-1 [34.5 kB]
+Get:3 https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty/main dotnet-hostfxr-1.0.1 amd64 1.0.1-1 [130 kB]
+Get:4 https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty/main dotnet-sharedframework-microsoft.netcore.app-1.0.4 amd64 1.0.4-1 [22.6 MB]
+Get:5 https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty/main dotnet-hostfxr-1.1.0 amd64 1.1.0-1 [131 kB]
+Get:6 https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty/main dotnet-sharedframework-microsoft.netcore.app-1.1.1 amd64 1.1.1-1 [22.9 MB]
+Get:7 https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty/main dotnet-dev-1.0.3 amd64 1.0.3-1 [51.4 MB]
+Get:8 http://archive.ubuntu.com/ubuntu/ trusty-updates/main liblldb-3.6 amd64 1:3.6-2ubuntu1~trusty1 [7,055 kB]
+Get:9 http://archive.ubuntu.com/ubuntu/ trusty/main libunwind8 amd64 1.1-2.2ubuntu3 [48.3 kB]
+Get:10 http://archive.ubuntu.com/ubuntu/ trusty/main liburcu1 amd64 0.7.12-0ubuntu2 [34.9 kB]
+Get:11 http://archive.ubuntu.com/ubuntu/ trusty/main liblttng-ust-ctl2 amd64 2.4.0-4ubuntu1 [61.7 kB]
+Get:12 http://archive.ubuntu.com/ubuntu/ trusty/main liblttng-ust0 amd64 2.4.0-4ubuntu1 [106 kB]
+Fetched 112 MB in 1min 40s (1,118 kB/s)
+Selecting previously unselected package libllvm3.6:amd64.
+(Reading database ... 63130 files and directories currently installed.)
+Preparing to unpack .../libllvm3.6_1%3a3.6-2ubuntu1~trusty1_amd64.deb ...
+Unpacking libllvm3.6:amd64 (1:3.6-2ubuntu1~trusty1) ...
+Selecting previously unselected package liblldb-3.6.
+Preparing to unpack .../liblldb-3.6_1%3a3.6-2ubuntu1~trusty1_amd64.deb ...
+Unpacking liblldb-3.6 (1:3.6-2ubuntu1~trusty1) ...
+Selecting previously unselected package libunwind8.
+Preparing to unpack .../libunwind8_1.1-2.2ubuntu3_amd64.deb ...
+Unpacking libunwind8 (1.1-2.2ubuntu3) ...
+Selecting previously unselected package liburcu1.
+Preparing to unpack .../liburcu1_0.7.12-0ubuntu2_amd64.deb ...
+Unpacking liburcu1 (0.7.12-0ubuntu2) ...
+Selecting previously unselected package liblttng-ust-ctl2:amd64.
+Preparing to unpack .../liblttng-ust-ctl2_2.4.0-4ubuntu1_amd64.deb ...
+Unpacking liblttng-ust-ctl2:amd64 (2.4.0-4ubuntu1) ...
+Selecting previously unselected package liblttng-ust0:amd64.
+Preparing to unpack .../liblttng-ust0_2.4.0-4ubuntu1_amd64.deb ...
+Unpacking liblttng-ust0:amd64 (2.4.0-4ubuntu1) ...
+Selecting previously unselected package dotnet-host.
+Preparing to unpack .../dotnet-host_1.1.0-preview1-001100-00-1_amd64.deb ...
+Unpacking dotnet-host (1.1.0-preview1-001100-00-1) ...
+Selecting previously unselected package dotnet-hostfxr-1.0.1.
+Preparing to unpack .../dotnet-hostfxr-1.0.1_1.0.1-1_amd64.deb ...
+Unpacking dotnet-hostfxr-1.0.1 (1.0.1-1) ...
+Selecting previously unselected package dotnet-sharedframework-microsoft.netcore.app-1.0.4.
+Preparing to unpack .../dotnet-sharedframework-microsoft.netcore.app-1.0.4_1.0.4-1_amd64.deb ...
+Unpacking dotnet-sharedframework-microsoft.netcore.app-1.0.4 (1.0.4-1) ...
+Selecting previously unselected package dotnet-hostfxr-1.1.0.
+Preparing to unpack .../dotnet-hostfxr-1.1.0_1.1.0-1_amd64.deb ...
+Unpacking dotnet-hostfxr-1.1.0 (1.1.0-1) ...
+Selecting previously unselected package dotnet-sharedframework-microsoft.netcore.app-1.1.1.
+Preparing to unpack .../dotnet-sharedframework-microsoft.netcore.app-1.1.1_1.1.1-1_amd64.deb ...
+Unpacking dotnet-sharedframework-microsoft.netcore.app-1.1.1 (1.1.1-1) ...
+Selecting previously unselected package dotnet-dev-1.0.3.
+Preparing to unpack .../dotnet-dev-1.0.3_1.0.3-1_amd64.deb ...
+Unpacking dotnet-dev-1.0.3 (1.0.3-1) ...
+Processing triggers for man-db (2.6.7.1-1ubuntu1) ...
+Setting up libllvm3.6:amd64 (1:3.6-2ubuntu1~trusty1) ...
+Setting up liblldb-3.6 (1:3.6-2ubuntu1~trusty1) ...
+Setting up libunwind8 (1.1-2.2ubuntu3) ...
+Setting up liburcu1 (0.7.12-0ubuntu2) ...
+Setting up liblttng-ust-ctl2:amd64 (2.4.0-4ubuntu1) ...
+Setting up liblttng-ust0:amd64 (2.4.0-4ubuntu1) ...
+Setting up dotnet-host (1.1.0-preview1-001100-00-1) ...
+Setting up dotnet-hostfxr-1.0.1 (1.0.1-1) ...
+Setting up dotnet-sharedframework-microsoft.netcore.app-1.0.4 (1.0.4-1) ...
+Setting up dotnet-hostfxr-1.1.0 (1.1.0-1) ...
+Setting up dotnet-sharedframework-microsoft.netcore.app-1.1.1 (1.1.1-1) ...
+Setting up dotnet-dev-1.0.3 (1.0.3-1) ...
+Processing triggers for libc-bin (2.19-0ubuntu6.11) ...
+vagrant@vagrant-ubuntu-trusty-64:~$ sudo apt-get update
+Ign http://archive.ubuntu.com trusty InRelease
+Get:1 http://archive.ubuntu.com trusty-updates InRelease [65.9 kB]
+Hit http://security.ubuntu.com trusty-security InRelease
+Hit https://apt-mo.trafficmanager.net trusty InRelease
+Hit http://security.ubuntu.com trusty-security/main Sources
+Hit http://archive.ubuntu.com trusty-backports InRelease
+Hit https://apt-mo.trafficmanager.net trusty/main amd64 Packages
+Get:2 https://apt-mo.trafficmanager.net trusty/main Translation-en_US
+Hit http://archive.ubuntu.com trusty Release.gpg
+Hit http://security.ubuntu.com trusty-security/universe Sources
+Get:3 http://archive.ubuntu.com trusty-updates/main Sources [397 kB]
+Hit http://security.ubuntu.com trusty-security/main amd64 Packages
+Ign https://apt-mo.trafficmanager.net trusty/main Translation-en_US
+Ign https://apt-mo.trafficmanager.net trusty/main Translation-en
+Hit http://security.ubuntu.com trusty-security/universe amd64 Packages
+Get:4 http://archive.ubuntu.com trusty-updates/restricted Sources [6,327 B]
+Hit http://security.ubuntu.com trusty-security/main Translation-en
+Get:5 http://archive.ubuntu.com trusty-updates/universe Sources [178 kB]
+Hit http://security.ubuntu.com trusty-security/universe Translation-en
+Get:6 http://archive.ubuntu.com trusty-updates/multiverse Sources [7,759 B]
+Get:7 http://archive.ubuntu.com trusty-updates/main amd64 Packages [977 kB]
+Get:8 http://archive.ubuntu.com trusty-updates/restricted amd64 Packages [17.1 kB]
+Get:9 http://archive.ubuntu.com trusty-updates/universe amd64 Packages [405 kB]
+Get:10 http://archive.ubuntu.com trusty-updates/multiverse amd64 Packages [14.3 kB]
+Hit http://archive.ubuntu.com trusty-updates/main Translation-en
+Hit http://archive.ubuntu.com trusty-updates/multiverse Translation-en
+Hit http://archive.ubuntu.com trusty-updates/restricted Translation-en
+Hit http://archive.ubuntu.com trusty-updates/universe Translation-en
+Hit http://archive.ubuntu.com trusty-backports/main Sources
+Hit http://archive.ubuntu.com trusty-backports/restricted Sources
+Hit http://archive.ubuntu.com trusty-backports/universe Sources
+Hit http://archive.ubuntu.com trusty-backports/multiverse Sources
+Hit http://archive.ubuntu.com trusty-backports/main amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty-backports/main Translation-en
+Hit http://archive.ubuntu.com trusty-backports/multiverse Translation-en
+Hit http://archive.ubuntu.com trusty-backports/restricted Translation-en
+Hit http://archive.ubuntu.com trusty-backports/universe Translation-en
+Hit http://archive.ubuntu.com trusty Release
+Hit http://archive.ubuntu.com trusty/main Sources
+Hit http://archive.ubuntu.com trusty/restricted Sources
+Hit http://archive.ubuntu.com trusty/universe Sources
+Hit http://archive.ubuntu.com trusty/multiverse Sources
+Hit http://archive.ubuntu.com trusty/main amd64 Packages
+Hit http://archive.ubuntu.com trusty/restricted amd64 Packages
+Hit http://archive.ubuntu.com trusty/universe amd64 Packages
+Hit http://archive.ubuntu.com trusty/multiverse amd64 Packages
+Hit http://archive.ubuntu.com trusty/main Translation-en
+Hit http://archive.ubuntu.com trusty/multiverse Translation-en
+Hit http://archive.ubuntu.com trusty/restricted Translation-en
+Hit http://archive.ubuntu.com trusty/universe Translation-en
+Ign http://archive.ubuntu.com trusty/main Translation-en_US
+Ign http://archive.ubuntu.com trusty/multiverse Translation-en_US
+Ign http://archive.ubuntu.com trusty/restricted Translation-en_US
+Ign http://archive.ubuntu.com trusty/universe Translation-en_US
+Fetched 2,069 kB in 16s (126 kB/s)
+Reading package lists... Done
+vagrant@vagrant-ubuntu-trusty-64:~$ ls
+vagrant@vagrant-ubuntu-trusty-64:~$ ls ~
+vagrant@vagrant-ubuntu-trusty-64:~$ ls /
+bin  boot  dev  etc  home  initrd.img  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  vagrant  var  vmlinuz
+vagrant@vagrant-ubuntu-trusty-64:~$ csc
+The program 'csc' is currently not installed. To run 'csc' please ask your administrator to install the package 'chicken-bin'
+vagrant@vagrant-ubuntu-trusty-64:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/dotnet/Vagrantfile
+$ exit

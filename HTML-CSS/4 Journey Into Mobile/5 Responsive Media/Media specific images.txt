@@ -1,0 +1,17 @@
+Media specific images
+
+
+Now, add camp-site-lrg.jpeg as the second source, with an @media qualifier for devices with a width of at least 900px.
+
+INDEX.HTML
+
+<picture alt="Our Camp Site">
+  <source src="camp-site.jpeg" />
+</picture>
+
+Answer:
+
+<picture alt="Our Camp Site">
+  <source src="camp-site.jpeg" />
+  <source src="camp-site-lrg.jpeg" media="(min-width: 900px)" />
+</picture>

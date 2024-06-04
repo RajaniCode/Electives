@@ -1,0 +1,191 @@
+4.8 Borders II
+
+
+Just before pushing the site to production, the foreman has burst into your office, breathlessly asking for the paragraph to stand out just a touch more. Add a 2px border and 1 unit of padding to each side of the p, without upsetting your grid.
+
+CSS
+
+* html {
+  font-size: 100%;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+h1 {
+  font-size: 3em;
+  line-height: 1.5em;
+  line-height: 2em;
+}
+
+.SASS
+
+@import "compass"
+
+$base-font-size: 16px
+$base-line-height: 24px
++establish-baseline
+
+h1
+  +adjust-font-size-to(48px)
+  +adjust-leading-to(4, 48px)
+
+h2
+  +adjust-font-size-to(24px)
+  +leading-border(2px, 1, 24px)
+  border-color: #C5BDAF
+
+p
+  +adjust-font-size-to(19px)
+  +trailer(1, 19px)
+  border-color: #C5BDAF
+
+ul
+  +trailer(1)
+
+li
+  +rhythm(0.5, 0.5, 0.5, 0.5)
+
+.SCSS
+
+@import "compass";
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+@include establish-baseline;
+
+h1 {
+  @include adjust-font-size-to(48px);
+  @include adjust-leading-to(4, 48px);
+}
+
+h2 {
+  @include adjust-font-size-to(24px);
+  @include leading-border(2px, 1, 24px);
+  border-color: #c5bdaf;
+}
+
+p {
+  @include adjust-font-size-to(19px);
+  @include trailer(1, 19px);
+  border-color: #c5bdaf;
+}
+
+ul {
+  @include trailer(1);
+}
+
+li {
+  @include rhythm(0.5, 0.5, 0.5, 0.5);
+}
+
+Answer:
+
+.SASS
+
+@import compass
+
+$base-font-size: 16px
+$base-line-height: 24px
+
++establish-baseline
+
+h1
+  +adjust-font-size-to(48px)
+  +adjust-leading-to(4, 48px)
+
+h2
+  +adjust-font-size-to(24px)
+  +leading-border(2px, 1, 24px)
+  border-color: #c5bdaf
+
+p
+  +adjust-font-size-to(19px)
+  +trailer(1, 19px)
+  +rhythm-borders(2px, 1, 19px)
+  border-color: #c5bdaf
+
+ul
+  +trailer(1)
+
+li
+  +rhythm(0.5, 0.5, 0.5, 0.5)
+
+
+.SCSS
+
+@import "compass";
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+@include establish-baseline;
+
+h1 {
+  @include adjust-font-size-to(48px);
+  @include adjust-leading-to(4, 48px);
+}
+
+h2 {
+  @include adjust-font-size-to(24px);
+  @include leading-border(2px, 1, 24px);
+  border-color: #c5bdaf;
+}
+
+p {
+  @include adjust-font-size-to(19px);
+  @include trailer(1, 19px);
+  @include rhythm-borders(2px, 1, 19px);
+  border-color: #c5bdaf;
+}
+
+ul {
+  @include trailer(1);
+}
+
+li {
+  @include rhythm(0.5, 0.5, 0.5, 0.5);
+}
+
+CSS
+
+* html {
+  font-size: 100%; }
+
+html {
+  font-size: 16px;
+  line-height: 1.5em; }
+
+h1 {
+  font-size: 3em;
+  line-height: 1.5em;
+  line-height: 2em; }
+
+h2 {
+  font-size: 1.5em;
+  line-height: 2em;
+  border-top-style: solid;
+  border-top-width: 0.08333em;
+  padding-top: 0.91667em;
+  border-color: #c5bdaf; }
+
+p {
+  font-size: 1.1875em;
+  line-height: 1.26316em;
+  margin-bottom: 1.26316em;
+  border-style: solid;
+  border-width: 0.10526em;
+  padding: 1.15789em;
+  border-color: #c5bdaf; }
+
+ul {
+  margin-bottom: 1.5em; }
+
+li {
+  margin-top: 0.75em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  margin-bottom: 0.75em; }

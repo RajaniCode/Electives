@@ -1,0 +1,446 @@
+4.7 Adding Content Images
+
+Let's update The Prependers page to include images for their album covers.
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>The Prependers</h2>
+      
+      <h3>Bio</h3>
+      
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+      
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+      
+      <h3>Members</h3>
+      
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+      
+      <h3>Albums</h3>
+      
+      <div class="album">
+        <h4>Top, Right, Bottom, Left</h4>
+        
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h4>Opacity Zero</h4>
+        
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+      
+      <h3>Tour Dates</h3>
+      
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>Bands</h2>
+      
+      <ul class="bands-list">
+        <li>
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+      
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h3 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+}
+
+1. Check out the site folder structure and markup a content image in between the album name and song list for the album Top, Right, Bottom, Left.
+
+Make sure the image has the descriptive text "Top, Right, Bottom, Left album cover"
+
+Answer: 
+
+prependers-band.html
+
+<img src="images/prependers/top-right-bottom-left.jpg" alt="Top, Right, Bottom, Left album cover">
+
+2. Check out the site folder structure and markup a content image in between the album name and song list for the album Opacity Zero.
+
+Make sure the image has the descriptive text "Opacity Zero album cover".
+
+Answer: 
+
+prependers-band.html
+
+<img src="images/prependers/opacity-zero.jpg" alt="Opacity Zero album cover">
+
+3. While we're adding content images, lets go ahead and add band images to the bands.html page. Insert the images before the heading tags inside of each list item for The Prependers and Regular Expressionists.
+
+Each band has their own image that is located in the images folder - and don't forget to add an alt description for each image!
+
+Answer: 
+
+bands.html
+
+<ul class="bands-list">
+  <li>
+    <img src="images/prependers-logo.jpg" alt="Prependers Logo">
+      <h3><a href="prependers-band.html">The Prependers</a></h3>
+    </li>
+    <li>
+    <img src="images/regular-logo.jpg" alt="Regular Logo">
+      <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+    </li>
+</ul>
+
+Success:
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>The Prependers</h2>
+      
+      <h3>Bio</h3>
+      
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+      
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+      
+      <h3>Members</h3>
+      
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+      
+      <h3>Albums</h3>
+      
+      <div class="album">       
+        <h4>Top, Right, Bottom, Left</h4>
+        <img src="images/prependers/top-right-bottom-left.jpg" alt="Top, Right, Bottom, Left album cover">
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h4>Opacity Zero</h4>
+        <img src="images/prependers/opacity-zero.jpg" alt="Opacity Zero album cover">
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+      
+      <h3>Tour Dates</h3>
+      
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>Bands</h2>
+      
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="Prependers Logo">
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Logo">
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+      
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h3 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+}

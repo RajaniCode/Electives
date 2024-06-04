@@ -1,0 +1,17 @@
+4.6 Box Shadow 2
+
+http://caniuse.com/#
+
+Our button would look nice with an inset shadow. Add one that is 0 to the right, 1px down, has a 0 blur-radius, and a color of #ce6a67.
+
+style.css
+
+.btn {
+
+}
+
+Answer:
+
+.btn {
+  box-shadow: inset 0px 1px 0px #ce6a67;
+}

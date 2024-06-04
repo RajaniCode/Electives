@@ -1,0 +1,21 @@
+2.3 Building an Image From a Dockerfile
+
+Great, the Dockerfile is ready to go. We can use that Dockerfile to build a new image with the docker image build command. The --tag command is a useful option to pass to docker build that lets us specify the name of our new image followed by a version number.
+
+1. Run the docker image build command with the --tag option and name the image web-server followed by a : and the number 1.0. (The number that comes after the colon sets the version number of the image.)
+
+End the command with a single . so it knows to look for the Dockerfile in the same folder that the command is run in.
+
+Answer:
+
+Enter your solution below
+
+$
+
+2. Now type docker image ls to get a list of all images on your computer. In this
+
+Answer:
+
+Enter your solution below
+
+$

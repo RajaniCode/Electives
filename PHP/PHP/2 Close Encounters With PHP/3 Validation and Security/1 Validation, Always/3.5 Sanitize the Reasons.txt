@@ -1,0 +1,33 @@
+3.5 Sanitize the Reasons
+
+Using the htmlspecialchars() function, sanitize the reason input during the echo process.
+
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+  echo $date . "<br>";
+  echo $reason;
+}
+
+
+Add an htmlspecialchars() function around the reason variable on the line where we echo that variable.
+
+Answer:
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+  echo $date . "<br>";
+  echo htmlspecialchars($reason);
+}

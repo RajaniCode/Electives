@@ -1,0 +1,9 @@
+6. Cherry Pick Squash I
+
+
+You've fixed another bug that was causing the unicorn horn to be blunt instead of nice and sharp, but you had to make an extra commit to remove some debugging code. We want to convert these two commits to a single commit on the master branch. Cherry-pick commits "b447335" and "b59d285", without committing them to the current branch.
+
+
+$ git cherry-pick --no-commit b447335 b59d285
+
+Success!

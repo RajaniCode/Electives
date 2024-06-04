@@ -1,0 +1,330 @@
+[rajani@localhost Django-app]$ python --version
+Python 2.7.5
+[rajani@localhost Django-app]$ pip --version
+pip 8.1.1 from /usr/lib/python2.7/site-packages (python 2.7)
+[rajani@localhost Django-app]$ python -c "import django; print(django.get_version())"
+1.9.6
+[rajani@localhost Django-app]$ cd mysite
+[rajani@localhost mysite]$ ls
+db.sqlite3  manage.py  mysite  polls
+[rajani@localhost mysite]$ ls mysite
+__init__.py  __init__.pyc  settings.py  settings.pyc  urls.py  urls.pyc  wsgi.py  wsgi.pyc
+[rajani@localhost mysite]$ ls polls
+admin.py  admin.pyc  apps.py  apps.pyc  __init__.py  __init__.pyc  migrations  models.py  models.pyc  tests.py  urls.py  urls.pyc  views.py  views.pyc
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+[rajani@localhost mysite]$ gedit polls/views.py
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ cat polls/urls.py
+from django.conf.urls import url
+
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+]
+[rajani@localhost mysite]$ gedit polls/urls.py
+[rajani@localhost mysite]$ cat polls/urls.py
+from django.conf.urls import url
+
+from . import views
+
+urlpatterns = [
+    # ex: /polls/
+    url(r'^$', views.index, name='index'),
+    # ex: /polls/5/
+    url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
+    # ex: /polls/5/results/
+    url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
+    # ex: /polls/5/vote/
+    url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+]
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ gedit polls/views.py
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import HttpResponse
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    output = ', '.join([q.question_text for q in latest_question_list])
+    return HttpResponse(output)
+
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ ls polls
+admin.py  admin.pyc  apps.py  apps.pyc  __init__.py  __init__.pyc  migrations  models.py  models.pyc  tests.py  urls.py  urls.pyc  views.py  views.pyc
+[rajani@localhost mysite]$ mkdir polls/templates
+[rajani@localhost mysite]$ mkdir polls/templates/polls
+[rajani@localhost mysite]$ ls polls/templates/polls
+[rajani@localhost mysite]$ gedit polls/templates/polls/index.html
+[rajani@localhost mysite]$ cat polls/templates/polls/index.html
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import HttpResponse
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    output = ', '.join([q.question_text for q in latest_question_list])
+    return HttpResponse(output)
+
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ gedit polls/views.py
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import HttpResponse
+from django.template import loader
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    template = loader.get_template('polls/index.html')
+    context = {
+        'latest_question_list': latest_question_list,
+    }
+    return HttpResponse(template.render(context, request))
+
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ gedit polls/views.py
+[rajani@localhost mysite]$ cat polls/views.py
+from django.shortcuts import render
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls/index.html', context)
+
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ gedit polls/views.py
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import Http404
+from django.shortcuts import render
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls/index.html', context)
+
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'polls/detail.html', {'question': question})
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ cat polls/templates/polls/index.html
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+[rajani@localhost mysite]$ ls polls/templates/polls/detail.html
+ls: cannot access polls/templates/polls/detail.html: No such file or directory
+[rajani@localhost mysite]$ gedit polls/templates/polls/detail.html
+
+** (gedit:8300): WARNING **: Error when getting information for file '/home/rajani/R/Working/Python/Django/Django-app/mysite/polls/templates/polls/detail.html': No such file or directory
+[rajani@localhost mysite]$ cat polls/templates/polls/detail.html
+{{ question }}
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import Http404
+from django.shortcuts import render
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls/index.html', context)
+
+def detail(request, question_id):
+    try:
+        question = Question.objects.get(pk=question_id)
+    except Question.DoesNotExist:
+        raise Http404("Question does not exist")
+    return render(request, 'polls/detail.html', {'question': question})
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ gedit polls/views.py
+[rajani@localhost mysite]$ cat polls/views.py
+from django.shortcuts import get_object_or_404, render
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls/index.html', context)
+
+def detail(request, question_id):
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/detail.html', {'question': question})
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+[rajani@localhost mysite]$ cat polls/templates/polls/detail.html
+{{ question }}
+[rajani@localhost mysite]$ gedit polls/templates/polls/detail.html
+[rajani@localhost mysite]$ cat polls/templates/polls/detail.html
+<h1>{{ question.question_text }}</h1>
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }}</li>
+{% endfor %}
+</ul>
+[rajani@localhost mysite]$ cat polls/templates/polls/index.html
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+[rajani@localhost mysite]$ gedit polls/templates/polls/index.html
+[rajani@localhost mysite]$ cat polls/urls.py
+from django.conf.urls import url
+
+from . import views
+
+urlpatterns = [
+    # ex: /polls/
+    url(r'^$', views.index, name='index'),
+    # ex: /polls/5/
+    url(r'^(?P<question_id>[0-9]+)/$', views.detail, name='detail'),
+    # ex: /polls/5/results/
+    url(r'^(?P<question_id>[0-9]+)/results/$', views.results, name='results'),
+    # ex: /polls/5/vote/
+    url(r'^(?P<question_id>[0-9]+)/vote/$', views.vote, name='vote'),
+]
+[rajani@localhost mysite]$ gedit polls/urls.py
+[rajani@localhost mysite]$ gedit polls/templates/polls/index.html
+[rajani@localhost mysite]$ cat polls/templates/polls/index.html
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+[rajani@localhost mysite]$ gedit polls/templates/polls/index.html
+[rajani@localhost mysite]$ cat polls/templates/polls/index.html
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+[rajani@localhost mysite]$ 
+

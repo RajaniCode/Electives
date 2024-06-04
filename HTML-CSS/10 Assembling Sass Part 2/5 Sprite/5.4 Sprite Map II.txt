@@ -1,0 +1,63 @@
+5.4 Sprite Map II
+
+
+With our sprite map created, use $logos to set the generated sprite image as the background of .logo.
+
+
+CSS
+
+.logo {
+  display: block;
+  text-indent: -9999px;
+}
+
+.SASS
+
+@import "compass"
+$logos: sprite-map("logos/*.png")
+
+.logo
+  display: block
+  text-indent: -9999px
+
+.SCSS
+
+@import "compass";
+
+$logos: sprite-map("logos/*.png");
+
+.logo {
+  display: block;
+  text-indent: -9999px;
+}
+
+Answer:
+
+.SASS
+
+@import "compass"
+$logos: sprite-map("logos/*.png")
+
+.logo
+  display: block
+  text-indent: -9999px
+  background: $logos
+
+.SCSS
+
+@import "compass";
+
+$logos: sprite-map("logos/*.png");
+
+.logo {
+  display: block;
+  text-indent: -9999px;
+  background: $logos;
+}
+
+CSS
+
+.logo {
+  display: block;
+  text-indent: -9999px;
+  background: url('/logos-s170667cd82.png'); }

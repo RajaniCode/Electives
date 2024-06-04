@@ -1,0 +1,153 @@
+5.6 The lib Package
+
+The main.go file we've been working on up until now is growing too long. We’ve started moving some of the code from this file into a new package under the chat/lib/main.go file. Let’s finish this refactoring.
+
+chat/main.go
+package main
+
+
+
+func main() {
+  notifiers := lib.GetAllConnections()
+  for _, c := range notifiers {
+    c.Notify()
+  }
+}
+
+
+chat/lib/main.go
+
+
+
+import (
+  "fmt"
+  "time"
+)
+
+type guestConnection struct {
+  ip       string
+  userName string
+  isAdmin  bool
+}
+
+type visitorConnection struct {
+  ip       string
+  connHour int
+}
+
+type notifier interface {
+  notify()
+}
+
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+func (v visitorConnection) notify() {
+  fmt.Println("Visitor connected at:", v.connHour)
+}
+
+func getAllConnections() []notifier {
+  gConn := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  vConn := &visitorConnection{ip: "192.168.0.11", connHour: time.Now().Hour()}
+
+  return []notifier{gConn, vConn}
+}
+
+
+1. On the chat/lib/main.go file, define the name of this package.
+
+Answer:
+chat/lib/main.go
+package lib
+
+import (
+  "fmt"
+  "time"
+)
+
+type guestConnection struct {
+  ip       string
+  userName string
+  isAdmin  bool
+}
+
+type visitorConnection struct {
+  ip       string
+  connHour int
+}
+
+type notifier interface {
+  notify()
+}
+
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+func (v visitorConnection) notify() {
+  fmt.Println("Visitor connected at:", v.connHour)
+}
+
+func getAllConnections() []notifier {
+  gConn := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  vConn := &visitorConnection{ip: "192.168.0.11", connHour: time.Now().Hour()}
+
+  return []notifier{gConn, vConn}
+}
+
+2. Now we need to make some edits in order for our functions to be invoked from outside packages. The function names that need to be updated are getAllConnections, the notify() method declaration inside the notifier interface, and both implementations of the notify methods. Go ahead and make those changes.
+
+Answer:
+chat/lib/main.go
+package lib
+
+import (
+  "fmt"
+  "time"
+)
+
+type guestConnection struct {
+  ip       string
+  userName string
+  isAdmin  bool
+}
+
+type visitorConnection struct {
+  ip       string
+  connHour int
+}
+
+type notifier interface {
+  Notify()
+}
+
+func (g guestConnection) Notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+func (v visitorConnection) Notify() {
+  fmt.Println("Visitor connected at:", v.connHour)
+}
+
+func GetAllConnections() []notifier {
+  gConn := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  vConn := &visitorConnection{ip: "192.168.0.11", connHour: time.Now().Hour()}
+
+  return []notifier{gConn, vConn}
+}
+
+3. Back to the chat/main.go file, let’s update the main() function to use our new package. Remember to use the name of the project (chat) as the path to the new package.
+
+Answer:
+chat/main.go
+package main
+
+import "chat/lib"
+
+func main() {
+  notifiers := lib.GetAllConnections()
+  for _, c := range notifiers {
+    c.Notify()
+  }
+}

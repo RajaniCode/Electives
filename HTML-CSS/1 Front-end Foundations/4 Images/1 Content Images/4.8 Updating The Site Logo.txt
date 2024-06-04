@@ -1,0 +1,300 @@
+4.8 Updating The Site Logo
+
+Our designers just sent over a great new Open Source Records logo, so instead of just writing the record label name out with simple text, let's replace that text with an image.
+
+bands.html
+    
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Bands</h2>
+
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h3 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+}
+
+1. Replace the record label name h1 tag with a content image that displays osr-logo.png. Check out the site folder structure to find the path where that image is located.
+
+Answer:
+
+bands.html
+
+<img src="images/osr-logo.png" alt="Open Source Records">
+
+2. Removing that h1 tag and replacing it with a single image is what we wanted to do, but we've created several problems that will require us to modify our HTML and CSS.
+
+First, our logo text was centered, but our logo image is not. That's because our h1 heading tag was block-level, but our img tag is inline-level.
+
+The quickest fix is to use CSS to select just our logo img and change it to block-level, so do that now.
+
+Answer:
+
+main.css
+
+.header img {
+  display: block;
+}
+
+3. Now that our image is a block-level tag, we can center it by using auto margins on the left and right sides. Do that now, and also add in 15px of bottom margin so there's some space between the logo and the site navigation.
+
+Answer:
+
+.header img {
+  display: block;
+  margin: 0 auto 15px auto;
+}
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records">
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>Bands</h2>
+
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h3 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+}
+.header img {
+    display: block;
+    margin: 0 auto 15px auto;
+}

@@ -1,0 +1,306 @@
+3.4 Styling Tour Dates
+
+Back in regular-band.html, we've gone ahead and added that nav class onto the site navigation for you. The tour dates on this page are another great spot to use classes.
+
+We don't need to add a class to the <ul> that contains the tour dates, but we do need a way to access the date/time paragraph tag and the concert location paragraph tag separately.
+
+regular-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul class="nav">
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>Regular Expressions</h2>
+
+    <h3>Bio</h3>
+    <p>Regular Expressionists are a hip-hop trio from New York City.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Rekt - Vocals</li>
+      <li>Face-like - Vocals</li>
+      <li>DJ Regex Capture - Decks</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <p>This group has no albums released, but they are recording one album right now.</p>
+
+    <h3>Tour Dates</h3>
+
+    <ul>
+      <li>
+        <p>July 16th, 2014 @ 7:00pm</p>
+        <p><a href="http://hob.com">House of Blues</a> - Orlando, FL</p>
+      </li>
+      <li>
+        <p>July 17th, 2014 @ 7:30pm</p>
+        <p>Jannus Landing - Tampa, FL</p>
+      </li>
+      <li>
+        <p>July 19th, 2014 @ 8:00pm</p>
+        <p>The Tabernacle - Atlanta, GA</p>
+      </li>
+      <li>
+        <p>July 20th, 2014 @ 7:30pm</p>
+        <p>40 Watt Club - Athens, GA</p>
+      </li>
+    </ul>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #555555;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 15px;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+
+1. Add a class of day-time to each paragraph tag that contains a date and time.
+
+Answer:
+
+    <ul>
+      <li>
+        <p class="day-time">July 16th, 2014 @ 7:00pm</p>
+        <p><a href="http://hob.com">House of Blues</a> - Orlando, FL</p>
+      </li>
+      <li>
+        <p class="day-time">July 17th, 2014 @ 7:30pm</p>
+        <p>Jannus Landing - Tampa, FL</p>
+      </li>
+      <li>
+        <p class="day-time">July 19th, 2014 @ 8:00pm</p>
+        <p>The Tabernacle - Atlanta, GA</p>
+      </li>
+      <li>
+        <p class="day-time">July 20th, 2014 @ 7:30pm</p>
+        <p>40 Watt Club - Athens, GA</p>
+      </li>
+    </ul>
+
+2. Add a class of concert-location to each paragraph tag that contains a location.
+
+Answer:
+
+    <ul>
+      <li>
+        <p class="day-time">July 16th, 2014 @ 7:00pm</p>
+        <p class="concert-location"><a href="http://hob.com">House of Blues</a> - Orlando, FL</p>
+      </li>
+      <li>
+        <p class="day-time">July 17th, 2014 @ 7:30pm</p>
+        <p class="concert-location">Jannus Landing - Tampa, FL</p>
+      </li>
+      <li>
+        <p class="day-time">July 19th, 2014 @ 8:00pm</p>
+        <p class="concert-location">The Tabernacle - Atlanta, GA</p>
+      </li>
+      <li>
+        <p class="day-time">July 20th, 2014 @ 7:30pm</p>
+        <p class="concert-location">40 Watt Club - Athens, GA</p>
+      </li>
+    </ul>
+
+3. Use class selectors to change the color to #444444 for the .day-time and change the color to #888888 for the .concert-location.
+
+Answer:
+
+.concert-location {
+  color: #888888;
+}
+
+4. We can clean up the spacing of each tour date a little better now that we've got separate classes, because it's a little hard to read right now.
+
+Add 3px of margin-bottom to .day-time, and add 15px of margin-bottom to .concert-location.
+
+Answer:
+
+.day-time {
+  color: #444444;
+  margin-bottom: 3px;
+}
+.concert-location {
+  color: #888888;
+  margin-bottom: 15px;
+}
+
+Success:
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #555555;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 15px;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin-bottom: 3px;
+}
+.concert-location {
+  color: #888888;
+  margin-bottom: 15px;
+}
+
+regular-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul class="nav">
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>Regular Expressions</h2>
+
+    <h3>Bio</h3>
+    <p>Regular Expressionists are a hip-hop trio from New York City.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Rekt - Vocals</li>
+      <li>Face-like - Vocals</li>
+      <li>DJ Regex Capture - Decks</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <p>This group has no albums released, but they are recording one album right now.</p>
+
+    <h3>Tour Dates</h3>
+
+    <ul>
+      <li>
+        <p class="day-time">July 16th, 2014 @ 7:00pm</p>
+        <p class="concert-location"><a href="http://hob.com">House of Blues</a> - Orlando, FL</p>
+      </li>
+      <li>
+        <p class="day-time">July 17th, 2014 @ 7:30pm</p>
+        <p class="concert-location">Jannus Landing - Tampa, FL</p>
+      </li>
+      <li>
+        <p class="day-time">July 19th, 2014 @ 8:00pm</p>
+        <p class="concert-location">The Tabernacle - Atlanta, GA</p>
+      </li>
+      <li>
+        <p class="day-time">July 20th, 2014 @ 7:30pm</p>
+        <p class="concert-location">40 Watt Club - Athens, GA</p>
+      </li>
+    </ul>
+  </body>
+</html>

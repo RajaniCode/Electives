@@ -1,0 +1,137 @@
+4.2 For Loops
+
+Let's print some array values using a for loop.
+
+index.php
+
+<?php
+
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen" title="no title">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+1. Create a simple array called $cities and use tokyo, dc, moscow, and london as the values.
+
+Answer:
+index.php
+
+<?php
+$cities = ['tokyo', 'dc', 'moscow', 'london'];
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen" title="no title">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+2. In the info section, create a for (not foreach) loop that cycles through each index of the array. Hint: We can use the count() function on $cities to count the number of elements.
+
+Answer:
+index.php
+
+<?php
+$cities = ['tokyo', 'dc', 'moscow', 'london'];
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen" title="no title">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <?php
+              for($i = 0; $i < count($cities); $i++) {
+                
+              }
+            ?>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+3. Inside the for loop, echo a string containing an <li> with the name of the city at the current index in the $cities array.
+
+Answer:
+index.php
+
+<?php
+$cities = ['tokyo', 'dc', 'moscow', 'london'];
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen" title="no title">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <?php
+              for($i = 0; $i < count($cities); $i++) {
+                echo "<li>$cities[$i]</li>";
+              }
+            ?>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

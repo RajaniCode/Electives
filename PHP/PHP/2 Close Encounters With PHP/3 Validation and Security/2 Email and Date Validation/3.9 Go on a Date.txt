@@ -1,0 +1,73 @@
+3.9 Go on a Date
+
+Let's validate the date and format it for consistency. First, we will convert the date to a timestamp by using strtotime(), then we will format it using the date() function, and then echo it to the screen.
+
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+  
+    echo $date;
+  
+  echo "<br>" . htmlspecialchars($reason);
+}
+
+
+1. Add a conditional statement around the echo of the $date variable. For now, we can just use if (true).
+
+Answer:
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+  if (true) {
+    echo $date;
+  }
+  echo "<br>" . htmlspecialchars($reason);
+}
+
+2. Using strtotime(), convert the $date variable to a timestamp and store it in a variable named $time. You can do all of this inside the if statement parentheses.
+
+Answer:
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+  if ($time = strtotime($date)) {    
+    echo $date;
+  }
+  echo "<br>" . htmlspecialchars($reason);
+}
+
+3. Now that we have a converted timestamp that is valid, we will convert it to a readable date. Using the date() function, format the $time variable with the format string of 'm d Y' and echo the result to the screen.
+
+Answer:
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+  if ($time = strtotime($date)) {    
+    echo date('m d Y', $time);
+  }
+  echo "<br>" . htmlspecialchars($reason);
+}

@@ -1,0 +1,19 @@
+3.4 Testing that copying in the Dockerfile works
+
+We've just run docker image build -t web-server:1.1 . so that we can start a container and verify that the file was copied in during the build.
+
+1. Write the command that starts a container with the image web-server:1.1 with port 80 on the host mapped to port 80 on the container. Let's also use the --detach flag to make the container run in the background.
+
+Answer:
+
+Enter your solution below
+
+$
+
+2. Type curl localhost:80/page.html to see the that the file is now there.
+
+Answer:
+
+Enter your solution below
+
+$

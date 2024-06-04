@@ -1,0 +1,158 @@
+Turning on ignore dotfiles mode.
+Downloading https://github.com/rvm/rvm/archive/master.tar.gz
+
+Installing RVM to /home/rajani/.rvm/
+    Can not update 'scripts/zsh/Completion/_rvm', it's a conflict between Zsh and multiuser installation, prefix the command with 'rvmsudo' to update this file.
+    Can not update 'scripts/extras/completion.zsh/_rvm', it's a conflict between Zsh and multiuser installation, prefix the command with 'rvmsudo' to update this file.
+    Fixing environment for ruby-2.3.1.
+ruby-2.3.1 - #gemset created /home/rajani/.rvm/gems/ruby-2.3.1
+ruby-2.3.1 - #importing gemsetfile /home/rajani/.rvm/gemsets/default.gems evaluated to empty gem list
+ruby-2.3.1 - #generating default wrappers..............
+Installation of RVM in /home/rajani/.rvm/ is almost complete:
+
+  * To start using RVM you need to run `source /home/rajani/.rvm/scripts/rvm`
+    in all your open shell windows, in rare cases you need to reopen all shell windows.
+
+# rajani,
+#
+#   Thank you for using RVM!
+#   We sincerely hope that RVM helps to make your life easier and more enjoyable!!!
+#
+# ~Wayne, Michal & team.
+
+In case of problems: https://rvm.io/help and https://twitter.com/rvm_io
+[rajani@localhost RVM]$ ls /etc/rvmrc
+/etc/rvmrc
+[rajani@localhost RVM]$ cd /etc
+[rajani@localhost etc]$ ls
+abrt                       cron.hourly                 gconf          jvm-commmon               NetworkManager     rc1.d              ssh
+adjtime                    cron.monthly                gcrypt         kde                       networks           rc2.d              ssl
+aliases                    crontab                     gdbinit        kdump.conf                nfsmount.conf      rc3.d              sssd
+aliases.db                 cron.weekly                 gdbinit.d      kernel                    nsswitch.conf      rc4.d              statetab
+alsa                       crypttab                    gdm            krb5.conf                 nsswitch.conf.bak  rc5.d              statetab.d
+alternatives               csh.cshrc                   geoclue        ksmtuned.conf             ntp                rc6.d              sudo.conf
+anacrontab                 csh.login                   ghostscript    ld.so.cache               ntp.conf           rc.d               sudoers
+apt                        cups                        glusterfs      ld.so.conf                numad.conf         rc.local           sudoers.d
+asound.conf                cupshelpers                 gnome-vfs-2.0  ld.so.conf.d              oddjob             rdma               sudo-ldap.conf
+at.deny                    dbus-1                      gnupg          libaudit.conf             oddjobd.conf       reader.conf.d      sysconfig
+at-spi2                    dconf                       GREP_COLORS    libibverbs.d              oddjobd.conf.d     redhat-lsb         sysctl.conf
+audisp                     default                     groff          libnl                     openldap           redhat-release     sysctl.d
+audit                      depmod.d                    group          libreport                 opt                request-key.conf   systemd
+autofs.conf                dhcp                        group-         libuser.conf              os-release         request-key.d      system-release
+autofs_ldap_auth.conf      DIR_COLORS                  grub2.cfg      libvirt                   PackageKit         resolv.conf        system-release-cpe
+auto.master                DIR_COLORS.256color         grub.d         locale.conf               pam.d              rpc                target
+auto.master.d              DIR_COLORS.lightbgcolor     gshadow        localtime                 pam_pkcs11         rpm                tcsd.conf
+auto.misc                  dleyna-server-service.conf  gshadow-       login.defs                passwd             rsyncd.conf        terminfo
+auto.net                   dnsmasq.conf                gss            logrotate.conf            passwd-            rsyslog.conf       tmpfiles.d
+auto.smb                   dnsmasq.d                   gssproxy       logrotate.d               pbm2ppa.conf       rsyslog.d          Trolltech.conf
+avahi                      docker                      gtk-2.0        lsb-release.d             pinforc            rvmrc              trusted-key.key
+bash.bashrc                dracut.conf                 hba.conf       lsm                       pkcs11             rwtab              tuned
+bash_completion.d          dracut.conf.d               highlight      lvm                       pki                rwtab.d            udev
+bashrc                     drirc                       host.conf      machine-id                plymouth           samba              udisks2
+binfmt.d                   e2fsck.conf                 hostname       magic                     pm                 sane.d             unbound
+brltty                     enscript.cfg                hosts          mailcap                   pnm2ppa.conf       sasl2              updatedb.conf
+brltty.conf                environment                 hosts.allow    mail.rc                   polkit-1           scl                UPower
+centos-release             ethertypes                  hosts.deny     makedumpfile.conf.sample  popt.d             securetty          usb_modeswitch.conf
+centos-release-upstream    exports                     hp             man_db.conf               postfix            security           usb_modeswitch.d
+certmonger                 exports.d                   idmapd.conf    maven                     ppp                selinux            vconsole.conf
+cgconfig.conf              favicon.png                 init.d         mime.types                prelink.conf.d     services           vimrc
+cgconfig.d                 fcoe                        inittab        mke2fs.conf               printcap           sestatus.conf      virc
+cgrules.conf               festival                    inputrc        modprobe.d                profile            setroubleshoot     vmware-tools
+cgsnapshot_blacklist.conf  filesystems                 ipa            modules-load.d            profile.d          setuptool.d        wgetrc
+chkconfig.d                firefox                     iproute2       mongod.conf               protocols          sgml               wpa_supplicant
+chrony.conf                firewalld                   ipsec.conf     motd                      pulse              shadow             wvdial.conf
+chrony.keys                fonts                       ipsec.d        mtab                      purple             shadow-            X11
+cifs-utils                 foomatic                    ipsec.secrets  mtools.conf               python             shells             xdg
+clamd.d                    fprintd.conf                iscsi          multipath                 qemu               skel               xinetd.d
+cloudera-scm-server        freshclam.conf              issue          my.cnf                    qemu-ga            smart              xml
+cron.d                     freshclam.conf.bak          issue.net      my.cnf.d                  qemu-kvm           smartmontools      yum
+cron.daily                 fstab                       java           nanorc                    radvd.conf         sos.conf           yum.conf
+cron.deny                  fuse.conf                   jvm            netconfig                 rc0.d              speech-dispatcher  yum.repos.d
+[rajani@localhost etc]$ rm -rf rvmrc
+rm: cannot remove ‘rvmrc’: Permission denied
+[rajani@localhost etc]$ su root
+Password: 
+Turning on ignore dotfiles mode.
+Downloading https://github.com/rvm/rvm/archive/master.tar.gz
+
+Upgrading the RVM installation in /home/rajani/.rvm/
+Upgrade of RVM in /home/rajani/.rvm/ is complete.
+
+# pluralschool,
+#
+#   Thank you for using RVM!
+#   We sincerely hope that RVM helps to make your life easier and more enjoyable!!!
+#
+# ~Wayne, Michal & team.
+
+In case of problems: https://rvm.io/help and https://twitter.com/rvm_io
+
+Upgrade Notes:
+
+
+  * Please do NOT forget to add your users to the 'rvm' group.
+    The installer no longer auto-adds root or users to the rvm group. Admins must do this.
+    Also, please note that group memberships are ONLY evaluated at login time.
+    This means that users must log out then back in before group membership takes effect!
+
+
+[root@localhost etc]# rm rvmrc
+rm: remove regular file ‘rvmrc’? y
+[root@localhost etc]# ls
+abrt                       cron.hourly                 gconf          jvm-commmon               NetworkManager     rc1.d              ssl
+adjtime                    cron.monthly                gcrypt         kde                       networks           rc2.d              sssd
+aliases                    crontab                     gdbinit        kdump.conf                nfsmount.conf      rc3.d              statetab
+aliases.db                 cron.weekly                 gdbinit.d      kernel                    nsswitch.conf      rc4.d              statetab.d
+alsa                       crypttab                    gdm            krb5.conf                 nsswitch.conf.bak  rc5.d              sudo.conf
+alternatives               csh.cshrc                   geoclue        ksmtuned.conf             ntp                rc6.d              sudoers
+anacrontab                 csh.login                   ghostscript    ld.so.cache               ntp.conf           rc.d               sudoers.d
+apt                        cups                        glusterfs      ld.so.conf                numad.conf         rc.local           sudo-ldap.conf
+asound.conf                cupshelpers                 gnome-vfs-2.0  ld.so.conf.d              oddjob             rdma               sysconfig
+at.deny                    dbus-1                      gnupg          libaudit.conf             oddjobd.conf       reader.conf.d      sysctl.conf
+at-spi2                    dconf                       GREP_COLORS    libibverbs.d              oddjobd.conf.d     redhat-lsb         sysctl.d
+audisp                     default                     groff          libnl                     openldap           redhat-release     systemd
+audit                      depmod.d                    group          libreport                 opt                request-key.conf   system-release
+autofs.conf                dhcp                        group-         libuser.conf              os-release         request-key.d      system-release-cpe
+autofs_ldap_auth.conf      DIR_COLORS                  grub2.cfg      libvirt                   PackageKit         resolv.conf        target
+auto.master                DIR_COLORS.256color         grub.d         locale.conf               pam.d              rpc                tcsd.conf
+auto.master.d              DIR_COLORS.lightbgcolor     gshadow        localtime                 pam_pkcs11         rpm                terminfo
+auto.misc                  dleyna-server-service.conf  gshadow-       login.defs                passwd             rsyncd.conf        tmpfiles.d
+auto.net                   dnsmasq.conf                gss            logrotate.conf            passwd-            rsyslog.conf       Trolltech.conf
+auto.smb                   dnsmasq.d                   gssproxy       logrotate.d               pbm2ppa.conf       rsyslog.d          trusted-key.key
+avahi                      docker                      gtk-2.0        lsb-release.d             pinforc            rwtab              tuned
+bash.bashrc                dracut.conf                 hba.conf       lsm                       pkcs11             rwtab.d            udev
+bash_completion.d          dracut.conf.d               highlight      lvm                       pki                samba              udisks2
+bashrc                     drirc                       host.conf      machine-id                plymouth           sane.d             unbound
+binfmt.d                   e2fsck.conf                 hostname       magic                     pm                 sasl2              updatedb.conf
+brltty                     enscript.cfg                hosts          mailcap                   pnm2ppa.conf       scl                UPower
+brltty.conf                environment                 hosts.allow    mail.rc                   polkit-1           securetty          usb_modeswitch.conf
+centos-release             ethertypes                  hosts.deny     makedumpfile.conf.sample  popt.d             security           usb_modeswitch.d
+centos-release-upstream    exports                     hp             man_db.conf               postfix            selinux            vconsole.conf
+certmonger                 exports.d                   idmapd.conf    maven                     ppp                services           vimrc
+cgconfig.conf              favicon.png                 init.d         mime.types                prelink.conf.d     sestatus.conf      virc
+cgconfig.d                 fcoe                        inittab        mke2fs.conf               printcap           setroubleshoot     vmware-tools
+cgrules.conf               festival                    inputrc        modprobe.d                profile            setuptool.d        wgetrc
+cgsnapshot_blacklist.conf  filesystems                 ipa            modules-load.d            profile.d          sgml               wpa_supplicant
+chkconfig.d                firefox                     iproute2       mongod.conf               protocols          shadow             wvdial.conf
+chrony.conf                firewalld                   ipsec.conf     motd                      pulse              shadow-            X11
+chrony.keys                fonts                       ipsec.d        mtab                      purple             shells             xdg
+cifs-utils                 foomatic                    ipsec.secrets  mtools.conf               python             skel               xinetd.d
+clamd.d                    fprintd.conf                iscsi          multipath                 qemu               smart              xml
+cloudera-scm-server        freshclam.conf              issue          my.cnf                    qemu-ga            smartmontools      yum
+cron.d                     freshclam.conf.bak          issue.net      my.cnf.d                  qemu-kvm           sos.conf           yum.conf
+cron.daily                 fstab                       java           nanorc                    radvd.conf         speech-dispatcher  yum.repos.d
+cron.deny                  fuse.conf                   jvm            netconfig                 rc0.d              ssh
+[root@localhost etc]# cd /
+[root@localhost /]# rpm -qa | grep rvm
+[root@localhost /]# cd etc/profile.d
+[root@localhost profile.d]# ls
+256term.csh                   bash_completion.sh  colorls.csh  lang.csh  less.sh        qt.csh                 qt.sh      vim.csh  which2.csh
+256term.sh                    colorgrep.csh       colorls.sh   lang.sh   maven.sh       qt-graphicssystem.csh  rvm.sh     vim.sh   which2.sh
+abrt-console-notification.sh  colorgrep.sh        java.sh      less.csh  PackageKit.sh  qt-graphicssystem.sh   tomcat.sh  vte.sh
+[root@localhost profile.d]# rm -rf rvm.sh
+[root@localhost profile.d]# ls
+256term.csh                   bash_completion.sh  colorls.csh  lang.csh  less.sh        qt.csh                 qt.sh      vim.sh      which2.sh
+256term.sh                    colorgrep.csh       colorls.sh   lang.sh   maven.sh       qt-graphicssystem.csh  tomcat.sh  vte.sh
+abrt-console-notification.sh  colorgrep.sh        java.sh      less.csh  PackageKit.sh  qt-graphicssystem.sh   vim.csh    which2.csh
+[root@localhost profile.d]#
+

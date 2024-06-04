@@ -1,0 +1,60 @@
+Absolute Positioning
+250
+
+Use absolute positioning to place the <figure> in the upper right corner of the footer. Set a z-index on .newsletter to keep it above <figure> after it's positioned.
+
+HTML Source
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  
+  <body>
+    <footer>
+      <p class="newsletter"><a href="#">Sign up</a> for our newsletter, it's a racket! <a class="hide" href="#">Hide</a></p>
+      <p class="copyright">Copyright &copy; Sven's Snowshoe Emporium. All Rights Reserved.</p>
+      <figure>
+        <h4>Latest Customer Image</h4>
+        <img src="customerimg.jpg" alt="Customer Image" />
+        <figcaption>"We all bought our snowshoes from Sven's - their prices are lower than permafrost!"</figcaption>
+      </figure>
+    </footer>
+  </body>
+</html>
+
+style.css
+
+footer {
+  position: relative;
+}
+.copyright {
+  width: 120px;
+}
+.newsletter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+Answer:
+
+footer {
+  position: relative;  
+}
+.copyright {
+  width: 120px;
+}
+.newsletter {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+}
+footer figure {
+ position: absolute;
+  right: 0;
+  top: 0;
+}

@@ -1,0 +1,65 @@
+3.2 Helpers II
+
+
+With Compass around, let's simplify our scale_color adjustment from Level 1 to simply use scale-lightness.
+
+
+CSS
+
+.socket {
+  background: #333333;
+}
+.socket:hover {
+  background: #242424;
+}
+
+.SASS
+
+@import "compass"
+
+.socket
+  background: #333
+  &:hover
+    background: scale_color(#333, $lightness: -30%)
+
+.SCSS
+
+@import "compass";
+
+.socket {
+  background: #333333;
+  &:hover {
+    background: scale_color(#333333, $lightness: -30%);
+  }
+}
+
+Answer:
+
+.SASS
+
+@import "compass";
+
+.socket {
+  background: #333333;
+  &:hover {
+    background: scale-lightness(#333333, -30%);
+  }
+}
+
+.SCSS
+
+@import "compass";
+
+.socket {
+  background: #333333;
+  &:hover {
+    background: scale-lightness(#333333, -30%);
+  }
+}
+
+CSS
+
+.socket {
+  background: #333333; }
+  .socket:hover {
+    background: #242424; }

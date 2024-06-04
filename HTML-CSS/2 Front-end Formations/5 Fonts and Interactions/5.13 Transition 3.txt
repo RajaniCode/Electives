@@ -1,0 +1,30 @@
+5.13 Transition 3
+
+http://caniuse.com/#feat=css-transitions
+
+Using a keyword, change the transition to transition the two properties, color and background-color.
+
+style.css
+
+.element {
+  color: #c44743;
+  transition: color 0.2s ease-in-out 0s;
+}
+
+.element:hover {
+  background-color: rgba(196, 71, 67, 0.10);
+  color: #d56d68;
+}
+
+
+Answer:
+
+.element {
+  color: #c44743;
+  transition: all 0.2s ease-in-out 0s;
+}
+
+.element:hover {
+  background-color: rgba(196, 71, 67, 0.10);
+  color: #d56d68;
+}

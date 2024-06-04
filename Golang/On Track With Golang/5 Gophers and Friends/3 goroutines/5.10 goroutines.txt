@@ -1,0 +1,159 @@
+5.10 goroutines
+
+We've changed our Notify() method so that it now connects to a remote server. Sometimes, however, the server takes a while to respond and this has been slowing our program down. Let's fix this so that multiple calls to Notify() can run concurrently. We'll start with changes to the chat/main.go file.
+
+chat/httpService/main.go
+package httpService
+
+import (
+  "fmt"
+  "time"
+)
+
+func SendNotification() {
+  time.Sleep(5 * time.Second)
+  fmt.Println("Notification sent")
+}
+
+chat/lib/main.go
+package lib
+
+import (
+  "chat/httpService"
+  "sync"
+  "time"
+)
+
+type guestConnection struct {
+  ip       string
+  userName string
+  isAdmin  bool
+}
+
+type visitorConnection struct {
+  ip       string
+  connHour int
+}
+
+type notifier interface {
+  Notify(wg *sync.WaitGroup)
+}
+
+func (g guestConnection) Notify(wg *sync.WaitGroup) {
+  httpService.SendNotification()
+  wg.Done()
+}
+
+func (v visitorConnection) Notify(wg *sync.WaitGroup) {
+  httpService.SendNotification()
+  wg.Done()
+}
+
+func GetAllConnections() []notifier {
+  gConn := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  vConn := &visitorConnection{ip: "192.168.0.11", connHour: time.Now().Hour()}
+
+  return []notifier{gConn, vConn}
+}
+
+chat/main.go
+package main
+
+import (
+  "chat/lib"
+  "sync"
+)
+
+func main() {
+  var wg sync.WaitGroup
+
+  connections := lib.GetAllConnections()
+  connectionCount := len(connections)
+  
+  
+  
+  for _, c := range connections {
+    
+  }
+  
+  
+}
+
+
+1. Using the wg variable, add the number of goroutines our program needs to wait for. (Hint: The number of goroutines is assigned to the connectionCount variable.)
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/lib"
+  "sync"
+)
+
+func main() {
+  var wg sync.WaitGroup
+
+  connections := lib.GetAllConnections()
+  connectionCount := len(connections)
+  wg.Add(connectionCount)
+  
+  
+  for _, c := range connections {
+    
+  }
+  
+  
+}
+
+2. Inside the for loop, create a new goroutine and invoke c.Notify() passing it a reference to wg.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/lib"
+  "sync"
+)
+
+func main() {
+  var wg sync.WaitGroup
+
+  connections := lib.GetAllConnections()
+  connectionCount := len(connections)
+  wg.Add(connectionCount)
+  
+  
+  for _, c := range connections {
+    go c.Notify(&wg)
+  }
+  
+  
+}
+
+3. Lastly, below the for loop invoke the function that will make our program wait until all goroutines are done.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/lib"
+  "sync"
+)
+
+func main() {
+  var wg sync.WaitGroup
+
+  connections := lib.GetAllConnections()
+  connectionCount := len(connections)
+  wg.Add(connectionCount)
+  
+  
+  for _, c := range connections {
+    go c.Notify(&wg)
+  }
+  wg.Wait()
+  
+}

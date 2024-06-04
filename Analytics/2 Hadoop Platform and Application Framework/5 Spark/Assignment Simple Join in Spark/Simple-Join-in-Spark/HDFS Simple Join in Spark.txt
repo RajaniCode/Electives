@@ -1,0 +1,488 @@
+[cloudera@quickstart R]$ hdfs dfs -ls
+Found 8 items
+drwxr-xr-x   - cloudera cloudera          0 2016-05-12 00:33 input
+drwxr-xr-x   - cloudera cloudera          0 2016-05-13 06:28 input_join1
+drwxr-xr-x   - cloudera cloudera          0 2016-05-13 06:38 input_join2
+drwxr-xr-x   - cloudera cloudera          0 2016-05-13 06:29 output_join1
+drwxr-xr-x   - cloudera cloudera          0 2016-05-13 06:40 output_join2
+drwxr-xr-x   - cloudera cloudera          0 2016-05-10 03:42 output_new
+drwxr-xr-x   - cloudera cloudera          0 2016-05-10 03:51 output_new_0
+drwxr-xr-x   - cloudera cloudera          0 2016-05-11 01:01 output_new_2
+[cloudera@quickstart R]$ hdfs dfs -ls input
+Found 2 items
+-rw-r--r--   1 cloudera cloudera         41 2016-05-10 03:37 input/testfile1
+-rw-r--r--   1 cloudera cloudera         29 2016-05-10 03:37 input/testfile2
+[cloudera@quickstart R]$ hdfs dfs -put /home/cloudera/Desktop/R/join1_File*.txt /user/cloudera/input
+[cloudera@quickstart R]$ hdfs dfs -ls input
+Found 4 items
+-rw-r--r--   1 cloudera cloudera         37 2016-05-18 02:46 input/join1_FileA.txt
+-rw-r--r--   1 cloudera cloudera        122 2016-05-18 02:46 input/join1_FileB.txt
+-rw-r--r--   1 cloudera cloudera         41 2016-05-10 03:37 input/testfile1
+-rw-r--r--   1 cloudera cloudera         29 2016-05-10 03:37 input/testfile2
+[cloudera@quickstart R]$ python --version
+Python 2.6.6
+[cloudera@quickstart R]$ PYSPARK_DRIVER_PYTHON=ipython pyspark
+Python 2.6.6 (r266:84292, Feb 22 2013, 00:00:18) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 1.2.1 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/lib/zookeeper/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/jars/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+16/05/18 02:46:53 INFO spark.SparkContext: Running Spark version 1.5.0-cdh5.5.0
+16/05/18 02:46:54 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+16/05/18 02:46:55 WARN util.Utils: Your hostname, quickstart.cloudera resolves to a loopback address: 127.0.0.1; using 192.168.122.162 instead (on interface eth1)
+16/05/18 02:46:55 WARN util.Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+16/05/18 02:46:55 INFO spark.SecurityManager: Changing view acls to: cloudera
+16/05/18 02:46:55 INFO spark.SecurityManager: Changing modify acls to: cloudera
+16/05/18 02:46:55 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(cloudera); users with modify permissions: Set(cloudera)
+16/05/18 02:46:58 INFO slf4j.Slf4jLogger: Slf4jLogger started
+16/05/18 02:46:58 INFO Remoting: Starting remoting
+16/05/18 02:46:58 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriver@192.168.122.162:35364]
+16/05/18 02:46:58 INFO Remoting: Remoting now listens on addresses: [akka.tcp://sparkDriver@192.168.122.162:35364]
+16/05/18 02:46:58 INFO util.Utils: Successfully started service 'sparkDriver' on port 35364.
+16/05/18 02:46:58 INFO spark.SparkEnv: Registering MapOutputTracker
+16/05/18 02:46:59 INFO spark.SparkEnv: Registering BlockManagerMaster
+16/05/18 02:46:59 INFO storage.DiskBlockManager: Created local directory at /tmp/blockmgr-a9526101-526d-4686-8628-50226d70eea8
+16/05/18 02:46:59 INFO storage.MemoryStore: MemoryStore started with capacity 530.3 MB
+16/05/18 02:46:59 INFO spark.HttpFileServer: HTTP File server directory is /tmp/spark-e560e62a-8b1c-4c77-bbca-9ef3f4915d0f/httpd-e228a82e-5eb1-412c-86ff-83dc782178d2
+16/05/18 02:46:59 INFO spark.HttpServer: Starting HTTP Server
+16/05/18 02:46:59 INFO server.Server: jetty-8.y.z-SNAPSHOT
+16/05/18 02:46:59 INFO server.AbstractConnector: Started SocketConnector@0.0.0.0:46292
+16/05/18 02:46:59 INFO util.Utils: Successfully started service 'HTTP file server' on port 46292.
+16/05/18 02:47:00 INFO spark.SparkEnv: Registering OutputCommitCoordinator
+16/05/18 02:47:00 INFO server.Server: jetty-8.y.z-SNAPSHOT
+16/05/18 02:47:00 WARN component.AbstractLifeCycle: FAILED SelectChannelConnector@0.0.0.0:4040: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:444)
+	at sun.nio.ch.Net.bind(Net.java:436)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.spark-project.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187)
+	at org.spark-project.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316)
+	at org.spark-project.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265)
+	at org.spark-project.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.spark-project.jetty.server.Server.doStart(Server.java:293)
+	at org.spark-project.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.apache.spark.ui.JettyUtils$.org$apache$spark$ui$JettyUtils$$connect$1(JettyUtils.scala:236)
+	at org.apache.spark.ui.JettyUtils$$anonfun$3.apply(JettyUtils.scala:246)
+	at org.apache.spark.ui.JettyUtils$$anonfun$3.apply(JettyUtils.scala:246)
+	at org.apache.spark.util.Utils$$anonfun$startServiceOnPort$1.apply$mcVI$sp(Utils.scala:1913)
+	at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:141)
+	at org.apache.spark.util.Utils$.startServiceOnPort(Utils.scala:1904)
+	at org.apache.spark.ui.JettyUtils$.startJettyServer(JettyUtils.scala:246)
+	at org.apache.spark.ui.WebUI.bind(WebUI.scala:136)
+	at org.apache.spark.SparkContext$$anonfun$13.apply(SparkContext.scala:474)
+	at org.apache.spark.SparkContext$$anonfun$13.apply(SparkContext.scala:474)
+	at scala.Option.foreach(Option.scala:236)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:474)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:61)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:234)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:379)
+	at py4j.Gateway.invoke(Gateway.java:214)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:79)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:68)
+	at py4j.GatewayConnection.run(GatewayConnection.java:207)
+	at java.lang.Thread.run(Thread.java:745)
+16/05/18 02:47:00 WARN component.AbstractLifeCycle: FAILED org.spark-project.jetty.server.Server@4eac5666: java.net.BindException: Address already in use
+java.net.BindException: Address already in use
+	at sun.nio.ch.Net.bind0(Native Method)
+	at sun.nio.ch.Net.bind(Net.java:444)
+	at sun.nio.ch.Net.bind(Net.java:436)
+	at sun.nio.ch.ServerSocketChannelImpl.bind(ServerSocketChannelImpl.java:214)
+	at sun.nio.ch.ServerSocketAdaptor.bind(ServerSocketAdaptor.java:74)
+	at org.spark-project.jetty.server.nio.SelectChannelConnector.open(SelectChannelConnector.java:187)
+	at org.spark-project.jetty.server.AbstractConnector.doStart(AbstractConnector.java:316)
+	at org.spark-project.jetty.server.nio.SelectChannelConnector.doStart(SelectChannelConnector.java:265)
+	at org.spark-project.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.spark-project.jetty.server.Server.doStart(Server.java:293)
+	at org.spark-project.jetty.util.component.AbstractLifeCycle.start(AbstractLifeCycle.java:64)
+	at org.apache.spark.ui.JettyUtils$.org$apache$spark$ui$JettyUtils$$connect$1(JettyUtils.scala:236)
+	at org.apache.spark.ui.JettyUtils$$anonfun$3.apply(JettyUtils.scala:246)
+	at org.apache.spark.ui.JettyUtils$$anonfun$3.apply(JettyUtils.scala:246)
+	at org.apache.spark.util.Utils$$anonfun$startServiceOnPort$1.apply$mcVI$sp(Utils.scala:1913)
+	at scala.collection.immutable.Range.foreach$mVc$sp(Range.scala:141)
+	at org.apache.spark.util.Utils$.startServiceOnPort(Utils.scala:1904)
+	at org.apache.spark.ui.JettyUtils$.startJettyServer(JettyUtils.scala:246)
+	at org.apache.spark.ui.WebUI.bind(WebUI.scala:136)
+	at org.apache.spark.SparkContext$$anonfun$13.apply(SparkContext.scala:474)
+	at org.apache.spark.SparkContext$$anonfun$13.apply(SparkContext.scala:474)
+	at scala.Option.foreach(Option.scala:236)
+	at org.apache.spark.SparkContext.<init>(SparkContext.scala:474)
+	at org.apache.spark.api.java.JavaSparkContext.<init>(JavaSparkContext.scala:61)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance0(Native Method)
+	at sun.reflect.NativeConstructorAccessorImpl.newInstance(NativeConstructorAccessorImpl.java:57)
+	at sun.reflect.DelegatingConstructorAccessorImpl.newInstance(DelegatingConstructorAccessorImpl.java:45)
+	at java.lang.reflect.Constructor.newInstance(Constructor.java:526)
+	at py4j.reflection.MethodInvoker.invoke(MethodInvoker.java:234)
+	at py4j.reflection.ReflectionEngine.invoke(ReflectionEngine.java:379)
+	at py4j.Gateway.invoke(Gateway.java:214)
+	at py4j.commands.ConstructorCommand.invokeConstructor(ConstructorCommand.java:79)
+	at py4j.commands.ConstructorCommand.execute(ConstructorCommand.java:68)
+	at py4j.GatewayConnection.run(GatewayConnection.java:207)
+	at java.lang.Thread.run(Thread.java:745)
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/stages/stage/kill,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/api,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/static,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/executors/threadDump/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/executors/threadDump,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/executors/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/executors,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/environment/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/environment,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/storage/rdd/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/storage/rdd,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/storage/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/storage,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/stages/pool/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/stages/pool,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/stages/stage/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/stages/stage,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/stages/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/stages,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/jobs/job/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/jobs/job,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/jobs/json,null}
+16/05/18 02:47:00 INFO handler.ContextHandler: stopped o.s.j.s.ServletContextHandler{/jobs,null}
+16/05/18 02:47:00 WARN util.Utils: Service 'SparkUI' could not bind on port 4040. Attempting port 4041.
+16/05/18 02:47:00 INFO server.Server: jetty-8.y.z-SNAPSHOT
+16/05/18 02:47:01 INFO server.AbstractConnector: Started SelectChannelConnector@0.0.0.0:4041
+16/05/18 02:47:01 INFO util.Utils: Successfully started service 'SparkUI' on port 4041.
+16/05/18 02:47:01 INFO ui.SparkUI: Started SparkUI at http://192.168.122.162:4041
+16/05/18 02:47:01 WARN metrics.MetricsSystem: Using default name DAGScheduler for source because spark.app.id is not set.
+16/05/18 02:47:01 INFO executor.Executor: Starting executor ID driver on host localhost
+16/05/18 02:47:02 INFO util.Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 33716.
+16/05/18 02:47:02 INFO netty.NettyBlockTransferService: Server created on 33716
+16/05/18 02:47:02 INFO storage.BlockManagerMaster: Trying to register BlockManager
+16/05/18 02:47:02 INFO storage.BlockManagerMasterEndpoint: Registering block manager localhost:33716 with 530.3 MB RAM, BlockManagerId(driver, localhost, 33716)
+16/05/18 02:47:02 INFO storage.BlockManagerMaster: Registered BlockManager
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 1.5.0-cdh5.5.0
+      /_/
+
+Using Python version 2.6.6 (r266:84292, Feb 22 2013 00:00:18)
+SparkContext available as sc, HiveContext available as sqlContext.
+
+In [1]: sc.version
+Out[1]: u'1.5.0-cdh5.5.0'
+
+In [2]: ls
+CurrentDirectory.txt~                       History.txt~       join2_reducer.py~   new file~           Setup PySpark on the Cloudera VM.txt
+hadoop jar commands.txt~                    join1_FileA.txt    jr.py~              Note Commands.txt~  Setup PySpark on the Cloudera VM.txt~
+hadoop jar -numReduceTasks 0.txt~           join1_FileB.txt    l2.txt~             Note.txt~           Simple-Join-in-Spark/
+hadoop jar -numReduceTasks 2.txt~           join1_mapper.py~   make_join2data.py~  n.txt~              Unsaved Document 1~
+hadoop jar.txt~                             join1_reducer.py~  mapper.py~          reducer.py~
+Hadoop-Platform-and-Application-Framework/  join2_mapper.py~   m.py~               r.py~
+
+In [3]: fileA = sc.textFile("input/join1_FileA.txt")
+16/05/18 02:48:08 INFO storage.MemoryStore: ensureFreeSpace(124088) called with curMem=0, maxMem=556038881
+16/05/18 02:48:08 INFO storage.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 121.2 KB, free 530.2 MB)
+16/05/18 02:48:08 INFO storage.MemoryStore: ensureFreeSpace(15275) called with curMem=124088, maxMem=556038881
+16/05/18 02:48:08 INFO storage.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 14.9 KB, free 530.1 MB)
+16/05/18 02:48:08 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:33716 (size: 14.9 KB, free: 530.3 MB)
+16/05/18 02:48:08 INFO spark.SparkContext: Created broadcast 0 from textFile at NativeMethodAccessorImpl.java:-2
+
+In [4]: fileA.collect()
+16/05/18 02:48:19 WARN shortcircuit.DomainSocketFactory: The short-circuit local reads feature cannot be used because libhadoop cannot be loaded.
+16/05/18 02:48:20 INFO mapred.FileInputFormat: Total input paths to process : 1
+16/05/18 02:48:20 INFO spark.SparkContext: Starting job: collect at <ipython-input-5-8f7016f682c5>:1
+16/05/18 02:48:20 INFO scheduler.DAGScheduler: Got job 0 (collect at <ipython-input-5-8f7016f682c5>:1) with 2 output partitions
+16/05/18 02:48:20 INFO scheduler.DAGScheduler: Final stage: ResultStage 0(collect at <ipython-input-5-8f7016f682c5>:1)
+16/05/18 02:48:20 INFO scheduler.DAGScheduler: Parents of final stage: List()
+16/05/18 02:48:20 INFO scheduler.DAGScheduler: Missing parents: List()
+16/05/18 02:48:20 INFO scheduler.DAGScheduler: Submitting ResultStage 0 (MapPartitionsRDD[1] at textFile at NativeMethodAccessorImpl.java:-2), which has no missing parents
+16/05/18 02:48:21 INFO storage.MemoryStore: ensureFreeSpace(3128) called with curMem=139363, maxMem=556038881
+16/05/18 02:48:21 INFO storage.MemoryStore: Block broadcast_1 stored as values in memory (estimated size 3.1 KB, free 530.1 MB)
+16/05/18 02:48:21 INFO storage.MemoryStore: ensureFreeSpace(1792) called with curMem=142491, maxMem=556038881
+16/05/18 02:48:21 INFO storage.MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 1792.0 B, free 530.1 MB)
+16/05/18 02:48:21 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on localhost:33716 (size: 1792.0 B, free: 530.3 MB)
+16/05/18 02:48:21 INFO spark.SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:861
+16/05/18 02:48:21 INFO scheduler.DAGScheduler: Submitting 2 missing tasks from ResultStage 0 (MapPartitionsRDD[1] at textFile at NativeMethodAccessorImpl.java:-2)
+16/05/18 02:48:21 INFO scheduler.TaskSchedulerImpl: Adding task set 0.0 with 2 tasks
+16/05/18 02:48:21 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, partition 0,ANY, 2176 bytes)
+16/05/18 02:48:21 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 0.0 (TID 1, localhost, partition 1,ANY, 2176 bytes)
+16/05/18 02:48:21 INFO executor.Executor: Running task 0.0 in stage 0.0 (TID 0)
+16/05/18 02:48:21 INFO executor.Executor: Running task 1.0 in stage 0.0 (TID 1)
+16/05/18 02:48:21 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileA.txt:0+18
+16/05/18 02:48:21 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileA.txt:18+19
+16/05/18 02:48:22 INFO Configuration.deprecation: mapred.tip.id is deprecated. Instead, use mapreduce.task.id
+16/05/18 02:48:22 INFO Configuration.deprecation: mapred.task.id is deprecated. Instead, use mapreduce.task.attempt.id
+16/05/18 02:48:22 INFO Configuration.deprecation: mapred.task.is.map is deprecated. Instead, use mapreduce.task.ismap
+16/05/18 02:48:22 INFO Configuration.deprecation: mapred.task.partition is deprecated. Instead, use mapreduce.task.partition
+16/05/18 02:48:22 INFO Configuration.deprecation: mapred.job.id is deprecated. Instead, use mapreduce.job.id
+16/05/18 02:48:22 INFO executor.Executor: Finished task 0.0 in stage 0.0 (TID 0). 2078 bytes result sent to driver
+16/05/18 02:48:22 INFO executor.Executor: Finished task 1.0 in stage 0.0 (TID 1). 2055 bytes result sent to driver
+16/05/18 02:48:22 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 1245 ms on localhost (1/2)
+16/05/18 02:48:22 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 0.0 (TID 1) in 969 ms on localhost (2/2)
+16/05/18 02:48:22 INFO scheduler.DAGScheduler: ResultStage 0 (collect at <ipython-input-5-8f7016f682c5>:1) finished in 1.356 s
+16/05/18 02:48:22 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+16/05/18 02:48:22 INFO scheduler.DAGScheduler: Job 0 finished: collect at <ipython-input-5-8f7016f682c5>:1, took 1.987999 s
+Out[4]: [u'able,991', u'about,11', u'burger,15', u'actor,22']
+
+In [5]: fileB = sc.textFile("input/join1_FileB.txt")
+16/05/18 02:49:46 INFO storage.MemoryStore: ensureFreeSpace(92440) called with curMem=144283, maxMem=556038881
+16/05/18 02:49:46 INFO storage.MemoryStore: Block broadcast_2 stored as values in memory (estimated size 90.3 KB, free 530.1 MB)
+16/05/18 02:49:46 INFO storage.MemoryStore: ensureFreeSpace(21233) called with curMem=236723, maxMem=556038881
+16/05/18 02:49:46 INFO storage.MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 20.7 KB, free 530.0 MB)
+16/05/18 02:49:46 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on localhost:33716 (size: 20.7 KB, free: 530.2 MB)
+16/05/18 02:49:46 INFO spark.SparkContext: Created broadcast 2 from textFile at NativeMethodAccessorImpl.java:-2
+
+In [6]: fileB.collect()
+16/05/18 02:49:57 INFO mapred.FileInputFormat: Total input paths to process : 1
+16/05/18 02:49:57 INFO spark.SparkContext: Starting job: collect at <ipython-input-7-569d065a5231>:1
+16/05/18 02:49:57 INFO scheduler.DAGScheduler: Got job 1 (collect at <ipython-input-7-569d065a5231>:1) with 2 output partitions
+16/05/18 02:49:57 INFO scheduler.DAGScheduler: Final stage: ResultStage 1(collect at <ipython-input-7-569d065a5231>:1)
+16/05/18 02:49:57 INFO scheduler.DAGScheduler: Parents of final stage: List()
+16/05/18 02:49:57 INFO scheduler.DAGScheduler: Missing parents: List()
+16/05/18 02:49:57 INFO scheduler.DAGScheduler: Submitting ResultStage 1 (MapPartitionsRDD[3] at textFile at NativeMethodAccessorImpl.java:-2), which has no missing parents
+16/05/18 02:49:57 INFO storage.MemoryStore: ensureFreeSpace(3128) called with curMem=257956, maxMem=556038881
+16/05/18 02:49:57 INFO storage.MemoryStore: Block broadcast_3 stored as values in memory (estimated size 3.1 KB, free 530.0 MB)
+16/05/18 02:49:57 INFO storage.MemoryStore: ensureFreeSpace(1790) called with curMem=261084, maxMem=556038881
+16/05/18 02:49:57 INFO storage.MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 1790.0 B, free 530.0 MB)
+16/05/18 02:49:57 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on localhost:33716 (size: 1790.0 B, free: 530.2 MB)
+16/05/18 02:49:57 INFO spark.SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:861
+16/05/18 02:49:57 INFO scheduler.DAGScheduler: Submitting 2 missing tasks from ResultStage 1 (MapPartitionsRDD[3] at textFile at NativeMethodAccessorImpl.java:-2)
+16/05/18 02:49:57 INFO scheduler.TaskSchedulerImpl: Adding task set 1.0 with 2 tasks
+16/05/18 02:49:57 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 1.0 (TID 2, localhost, partition 0,ANY, 2176 bytes)
+16/05/18 02:49:57 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 1.0 (TID 3, localhost, partition 1,ANY, 2176 bytes)
+16/05/18 02:49:57 INFO executor.Executor: Running task 0.0 in stage 1.0 (TID 2)
+16/05/18 02:49:57 INFO executor.Executor: Running task 1.0 in stage 1.0 (TID 3)
+16/05/18 02:49:57 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileB.txt:61+61
+16/05/18 02:49:57 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileB.txt:0+61
+16/05/18 02:49:57 INFO executor.Executor: Finished task 0.0 in stage 1.0 (TID 2). 2128 bytes result sent to driver
+16/05/18 02:49:57 INFO executor.Executor: Finished task 1.0 in stage 1.0 (TID 3). 2098 bytes result sent to driver
+16/05/18 02:49:57 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 1.0 (TID 2) in 113 ms on localhost (1/2)
+16/05/18 02:49:57 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 1.0 (TID 3) in 119 ms on localhost (2/2)
+16/05/18 02:49:57 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool 
+16/05/18 02:49:57 INFO scheduler.DAGScheduler: ResultStage 1 (collect at <ipython-input-7-569d065a5231>:1) finished in 0.125 s
+16/05/18 02:49:57 INFO scheduler.DAGScheduler: Job 1 finished: collect at <ipython-input-7-569d065a5231>:1, took 0.169673 s
+Out[6]: 
+[u'Jan-01 able,5',
+ u'Feb-02 about,3',
+ u'Mar-03 about,8',
+ u'Apr-04 able,13',
+ u'Feb-22 actor,3',
+ u'Feb-23 burger,5',
+ u'Mar-08 burger,2',
+ u'Dec-15 able,100']
+
+In [7]: def split_fileA(line):
+   ...:         # split the input line in word and count on the comma
+   ...:         line = line.split(",")
+   ...:         word = line[0]
+   ...:         # turn the count to an integer  
+   ...:         count = int(line[1])
+   ...:         return (word, count)
+   ...: 
+
+In [8]: test_line = "able,991"
+
+In [9]: split_fileA(test_line)
+Out[9]: ('able', 991)
+
+In [10]: fileA_data = fileA.map(split_fileA)
+
+In [11]: fileA_data.collect()
+16/05/18 03:37:53 INFO spark.SparkContext: Starting job: collect at <ipython-input-13-d2232b968841>:1
+16/05/18 03:37:53 INFO scheduler.DAGScheduler: Got job 2 (collect at <ipython-input-13-d2232b968841>:1) with 2 output partitions
+16/05/18 03:37:53 INFO scheduler.DAGScheduler: Final stage: ResultStage 2(collect at <ipython-input-13-d2232b968841>:1)
+16/05/18 03:37:53 INFO scheduler.DAGScheduler: Parents of final stage: List()
+16/05/18 03:37:53 INFO scheduler.DAGScheduler: Missing parents: List()
+16/05/18 03:37:53 INFO scheduler.DAGScheduler: Submitting ResultStage 2 (PythonRDD[4] at collect at <ipython-input-13-d2232b968841>:1), which has no missing parents
+16/05/18 03:37:54 INFO storage.MemoryStore: ensureFreeSpace(5264) called with curMem=262874, maxMem=556038881
+16/05/18 03:37:54 INFO storage.MemoryStore: Block broadcast_4 stored as values in memory (estimated size 5.1 KB, free 530.0 MB)
+16/05/18 03:37:54 INFO storage.MemoryStore: ensureFreeSpace(3154) called with curMem=268138, maxMem=556038881
+16/05/18 03:37:54 INFO storage.MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 3.1 KB, free 530.0 MB)
+16/05/18 03:37:54 INFO storage.BlockManagerInfo: Added broadcast_4_piece0 in memory on localhost:33716 (size: 3.1 KB, free: 530.2 MB)
+16/05/18 03:37:54 INFO spark.SparkContext: Created broadcast 4 from broadcast at DAGScheduler.scala:861
+16/05/18 03:37:54 INFO scheduler.DAGScheduler: Submitting 2 missing tasks from ResultStage 2 (PythonRDD[4] at collect at <ipython-input-13-d2232b968841>:1)
+16/05/18 03:37:54 INFO scheduler.TaskSchedulerImpl: Adding task set 2.0 with 2 tasks
+16/05/18 03:37:54 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 2.0 (TID 4, localhost, partition 0,ANY, 2176 bytes)
+16/05/18 03:37:54 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 2.0 (TID 5, localhost, partition 1,ANY, 2176 bytes)
+16/05/18 03:37:54 INFO executor.Executor: Running task 0.0 in stage 2.0 (TID 4)
+16/05/18 03:37:54 INFO executor.Executor: Running task 1.0 in stage 2.0 (TID 5)
+16/05/18 03:37:55 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileA.txt:0+18
+16/05/18 03:37:55 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileA.txt:18+19
+16/05/18 03:37:55 INFO python.PythonRDD: Times: total = 1269, boot = 1099, init = 169, finish = 1
+16/05/18 03:37:55 INFO python.PythonRDD: Times: total = 1279, boot = 1160, init = 119, finish = 0
+16/05/18 03:37:55 INFO executor.Executor: Finished task 1.0 in stage 2.0 (TID 5). 2137 bytes result sent to driver
+16/05/18 03:37:55 INFO executor.Executor: Finished task 0.0 in stage 2.0 (TID 4). 2186 bytes result sent to driver
+16/05/18 03:37:55 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 2.0 (TID 5) in 1391 ms on localhost (1/2)
+16/05/18 03:37:55 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 2.0 (TID 4) in 1395 ms on localhost (2/2)
+16/05/18 03:37:55 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 2.0, whose tasks have all completed, from pool 
+16/05/18 03:37:55 INFO scheduler.DAGScheduler: ResultStage 2 (collect at <ipython-input-13-d2232b968841>:1) finished in 1.398 s
+16/05/18 03:37:55 INFO scheduler.DAGScheduler: Job 2 finished: collect at <ipython-input-13-d2232b968841>:1, took 1.444824 s
+Out[11]: [(u'able', 991), (u'about', 11), (u'burger', 15), (u'actor', 22)]
+
+In [12]: def split_fileB(line):
+   ....:         # split the input line into word, date and count_string
+   ....:         line = line.split(",")
+   ....:         date_word = line[0]
+   ....:         count_string = line[1]
+   ....:         date_word = date_word.split(" ")
+   ....:         date = date_word[0]
+   ....:         word = date_word[1]
+   ....:         return (word, date + " " + count_string)
+   ....: 
+
+In [13]: fileB_data = fileB.map(split_fileB)
+
+In [14]: fileB_data.collect()
+16/05/18 03:52:22 INFO spark.SparkContext: Starting job: collect at <ipython-input-19-636e79658f3b>:1
+16/05/18 03:52:22 INFO scheduler.DAGScheduler: Got job 4 (collect at <ipython-input-19-636e79658f3b>:1) with 2 output partitions
+16/05/18 03:52:22 INFO scheduler.DAGScheduler: Final stage: ResultStage 4(collect at <ipython-input-19-636e79658f3b>:1)
+16/05/18 03:52:22 INFO scheduler.DAGScheduler: Parents of final stage: List()
+16/05/18 03:52:22 INFO scheduler.DAGScheduler: Missing parents: List()
+16/05/18 03:52:22 INFO scheduler.DAGScheduler: Submitting ResultStage 4 (PythonRDD[6] at collect at <ipython-input-19-636e79658f3b>:1), which has no missing parents
+16/05/18 03:52:22 INFO storage.MemoryStore: ensureFreeSpace(5336) called with curMem=279830, maxMem=556038881
+16/05/18 03:52:22 INFO storage.MemoryStore: Block broadcast_6 stored as values in memory (estimated size 5.2 KB, free 530.0 MB)
+16/05/18 03:52:22 INFO storage.MemoryStore: ensureFreeSpace(3204) called with curMem=285166, maxMem=556038881
+16/05/18 03:52:22 INFO storage.MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 3.1 KB, free 530.0 MB)
+16/05/18 03:52:22 INFO storage.BlockManagerInfo: Added broadcast_6_piece0 in memory on localhost:33716 (size: 3.1 KB, free: 530.2 MB)
+16/05/18 03:52:22 INFO spark.SparkContext: Created broadcast 6 from broadcast at DAGScheduler.scala:861
+16/05/18 03:52:22 INFO scheduler.DAGScheduler: Submitting 2 missing tasks from ResultStage 4 (PythonRDD[6] at collect at <ipython-input-19-636e79658f3b>:1)
+16/05/18 03:52:22 INFO scheduler.TaskSchedulerImpl: Adding task set 4.0 with 2 tasks
+16/05/18 03:52:22 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 4.0 (TID 8, localhost, partition 0,ANY, 2176 bytes)
+16/05/18 03:52:22 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 4.0 (TID 9, localhost, partition 1,ANY, 2176 bytes)
+16/05/18 03:52:22 INFO executor.Executor: Running task 0.0 in stage 4.0 (TID 8)
+16/05/18 03:52:22 INFO executor.Executor: Running task 1.0 in stage 4.0 (TID 9)
+16/05/18 03:52:22 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileB.txt:0+61
+16/05/18 03:52:22 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileB.txt:61+61
+16/05/18 03:52:22 INFO python.PythonRDD: Times: total = 116, boot = 25, init = 89, finish = 2
+16/05/18 03:52:22 INFO executor.Executor: Finished task 1.0 in stage 4.0 (TID 9). 2221 bytes result sent to driver
+16/05/18 03:52:22 INFO python.PythonRDD: Times: total = 173, boot = 8, init = 163, finish = 2
+16/05/18 03:52:22 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 4.0 (TID 9) in 200 ms on localhost (1/2)
+16/05/18 03:52:22 INFO executor.Executor: Finished task 0.0 in stage 4.0 (TID 8). 2287 bytes result sent to driver
+16/05/18 03:52:22 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 4.0 (TID 8) in 215 ms on localhost (2/2)
+16/05/18 03:52:22 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 4.0, whose tasks have all completed, from pool 
+16/05/18 03:52:22 INFO scheduler.DAGScheduler: ResultStage 4 (collect at <ipython-input-19-636e79658f3b>:1) finished in 0.227 s
+16/05/18 03:52:22 INFO scheduler.DAGScheduler: Job 4 finished: collect at <ipython-input-19-636e79658f3b>:1, took 0.263432 s
+Out[14]: 
+[(u'able', u'Jan-01 5'),
+ (u'about', u'Feb-02 3'),
+ (u'about', u'Mar-03 8'),
+ (u'able', u'Apr-04 13'),
+ (u'actor', u'Feb-22 3'),
+ (u'burger', u'Feb-23 5'),
+ (u'burger', u'Mar-08 2'),
+ (u'able', u'Dec-15 100')]
+
+In [15]: fileB_joined_fileA = fileB_data.join(fileA_data)
+
+In [16]: fileB_joined_fileA.collect()
+16/05/18 03:53:22 INFO spark.SparkContext: Starting job: collect at <ipython-input-21-20609ef53c7a>:1
+16/05/18 03:53:22 INFO scheduler.DAGScheduler: Registering RDD 11 (join at <ipython-input-20-a3327ebae0f5>:1)
+16/05/18 03:53:22 INFO scheduler.DAGScheduler: Got job 5 (collect at <ipython-input-21-20609ef53c7a>:1) with 4 output partitions
+16/05/18 03:53:22 INFO scheduler.DAGScheduler: Final stage: ResultStage 6(collect at <ipython-input-21-20609ef53c7a>:1)
+16/05/18 03:53:22 INFO scheduler.DAGScheduler: Parents of final stage: List(ShuffleMapStage 5)
+16/05/18 03:53:22 INFO scheduler.DAGScheduler: Missing parents: List(ShuffleMapStage 5)
+16/05/18 03:53:22 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 5 (PairwiseRDD[11] at join at <ipython-input-20-a3327ebae0f5>:1), which has no missing parents
+16/05/18 03:53:22 INFO storage.MemoryStore: ensureFreeSpace(11624) called with curMem=288370, maxMem=556038881
+16/05/18 03:53:22 INFO storage.MemoryStore: Block broadcast_7 stored as values in memory (estimated size 11.4 KB, free 530.0 MB)
+16/05/18 03:53:22 INFO storage.MemoryStore: ensureFreeSpace(6502) called with curMem=299994, maxMem=556038881
+16/05/18 03:53:22 INFO storage.MemoryStore: Block broadcast_7_piece0 stored as bytes in memory (estimated size 6.3 KB, free 530.0 MB)
+16/05/18 03:53:22 INFO storage.BlockManagerInfo: Added broadcast_7_piece0 in memory on localhost:33716 (size: 6.3 KB, free: 530.2 MB)
+16/05/18 03:53:22 INFO spark.SparkContext: Created broadcast 7 from broadcast at DAGScheduler.scala:861
+16/05/18 03:53:22 INFO scheduler.DAGScheduler: Submitting 4 missing tasks from ShuffleMapStage 5 (PairwiseRDD[11] at join at <ipython-input-20-a3327ebae0f5>:1)
+16/05/18 03:53:22 INFO scheduler.TaskSchedulerImpl: Adding task set 5.0 with 4 tasks
+16/05/18 03:53:22 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 5.0 (TID 10, localhost, partition 0,ANY, 2274 bytes)
+16/05/18 03:53:22 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 5.0 (TID 11, localhost, partition 1,ANY, 2274 bytes)
+16/05/18 03:53:22 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 5.0 (TID 12, localhost, partition 2,ANY, 2274 bytes)
+16/05/18 03:53:22 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 5.0 (TID 13, localhost, partition 3,ANY, 2274 bytes)
+16/05/18 03:53:22 INFO executor.Executor: Running task 0.0 in stage 5.0 (TID 10)
+16/05/18 03:53:22 INFO executor.Executor: Running task 1.0 in stage 5.0 (TID 11)
+16/05/18 03:53:22 INFO executor.Executor: Running task 2.0 in stage 5.0 (TID 12)
+16/05/18 03:53:22 INFO executor.Executor: Running task 3.0 in stage 5.0 (TID 13)
+16/05/18 03:53:22 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileB.txt:0+61
+16/05/18 03:53:22 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileA.txt:0+18
+16/05/18 03:53:22 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileB.txt:61+61
+16/05/18 03:53:22 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join1_FileA.txt:18+19
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 177, boot = 6, init = 170, finish = 1
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 221, boot = 7, init = 208, finish = 6
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 223, boot = 22, init = 182, finish = 19
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 248, boot = 5, init = 242, finish = 1
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 310, boot = 14, init = 254, finish = 42
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 318, boot = -60185, init = 60465, finish = 38
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 321, boot = -60237, init = 60510, finish = 48
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 309, boot = 11, init = 214, finish = 84
+16/05/18 03:53:23 INFO executor.Executor: Finished task 2.0 in stage 5.0 (TID 12). 2320 bytes result sent to driver
+16/05/18 03:53:23 INFO executor.Executor: Finished task 0.0 in stage 5.0 (TID 10). 2320 bytes result sent to driver
+16/05/18 03:53:23 INFO executor.Executor: Finished task 3.0 in stage 5.0 (TID 13). 2320 bytes result sent to driver
+16/05/18 03:53:23 INFO executor.Executor: Finished task 1.0 in stage 5.0 (TID 11). 2320 bytes result sent to driver
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 5.0 (TID 10) in 767 ms on localhost (1/4)
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 5.0 (TID 12) in 757 ms on localhost (2/4)
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 5.0 (TID 11) in 760 ms on localhost (3/4)
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 5.0 (TID 13) in 757 ms on localhost (4/4)
+16/05/18 03:53:23 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 5.0, whose tasks have all completed, from pool 
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: ShuffleMapStage 5 (join at <ipython-input-20-a3327ebae0f5>:1) finished in 0.774 s
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: looking for newly runnable stages
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: running: Set()
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: waiting: Set(ResultStage 6)
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: failed: Set()
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: Missing parents for ResultStage 6: List()
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: Submitting ResultStage 6 (PythonRDD[14] at collect at <ipython-input-21-20609ef53c7a>:1), which is now runnable
+16/05/18 03:53:23 INFO storage.MemoryStore: ensureFreeSpace(6856) called with curMem=306496, maxMem=556038881
+16/05/18 03:53:23 INFO storage.MemoryStore: Block broadcast_8 stored as values in memory (estimated size 6.7 KB, free 530.0 MB)
+16/05/18 03:53:23 INFO storage.MemoryStore: ensureFreeSpace(4199) called with curMem=313352, maxMem=556038881
+16/05/18 03:53:23 INFO storage.MemoryStore: Block broadcast_8_piece0 stored as bytes in memory (estimated size 4.1 KB, free 530.0 MB)
+16/05/18 03:53:23 INFO storage.BlockManagerInfo: Added broadcast_8_piece0 in memory on localhost:33716 (size: 4.1 KB, free: 530.2 MB)
+16/05/18 03:53:23 INFO spark.SparkContext: Created broadcast 8 from broadcast at DAGScheduler.scala:861
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: Submitting 4 missing tasks from ResultStage 6 (PythonRDD[14] at collect at <ipython-input-21-20609ef53c7a>:1)
+16/05/18 03:53:23 INFO scheduler.TaskSchedulerImpl: Adding task set 6.0 with 4 tasks
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 6.0 (TID 14, localhost, partition 0,PROCESS_LOCAL, 1901 bytes)
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 6.0 (TID 15, localhost, partition 1,PROCESS_LOCAL, 1901 bytes)
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 6.0 (TID 16, localhost, partition 2,PROCESS_LOCAL, 1901 bytes)
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 6.0 (TID 17, localhost, partition 3,PROCESS_LOCAL, 1901 bytes)
+16/05/18 03:53:23 INFO executor.Executor: Running task 1.0 in stage 6.0 (TID 15)
+16/05/18 03:53:23 INFO executor.Executor: Running task 2.0 in stage 6.0 (TID 16)
+16/05/18 03:53:23 INFO executor.Executor: Running task 0.0 in stage 6.0 (TID 14)
+16/05/18 03:53:23 INFO executor.Executor: Running task 3.0 in stage 6.0 (TID 17)
+16/05/18 03:53:23 INFO storage.ShuffleBlockFetcherIterator: Getting 4 non-empty blocks out of 4 blocks
+16/05/18 03:53:23 INFO storage.ShuffleBlockFetcherIterator: Getting 4 non-empty blocks out of 4 blocks
+16/05/18 03:53:23 INFO storage.ShuffleBlockFetcherIterator: Getting 4 non-empty blocks out of 4 blocks
+16/05/18 03:53:23 INFO storage.ShuffleBlockFetcherIterator: Getting 4 non-empty blocks out of 4 blocks
+16/05/18 03:53:23 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 31 ms
+16/05/18 03:53:23 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 32 ms
+16/05/18 03:53:23 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 32 ms
+16/05/18 03:53:23 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 31 ms
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 264, boot = -459, init = 714, finish = 9
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 262, boot = -477, init = 730, finish = 9
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 266, boot = -516, init = 772, finish = 10
+16/05/18 03:53:23 INFO python.PythonRDD: Times: total = 278, boot = -519, init = 784, finish = 13
+16/05/18 03:53:23 INFO executor.Executor: Finished task 2.0 in stage 6.0 (TID 16). 1364 bytes result sent to driver
+16/05/18 03:53:23 INFO executor.Executor: Finished task 0.0 in stage 6.0 (TID 14). 1358 bytes result sent to driver
+16/05/18 03:53:23 INFO executor.Executor: Finished task 3.0 in stage 6.0 (TID 17). 1213 bytes result sent to driver
+16/05/18 03:53:23 INFO executor.Executor: Finished task 1.0 in stage 6.0 (TID 15). 1326 bytes result sent to driver
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 6.0 (TID 17) in 330 ms on localhost (1/4)
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 6.0 (TID 14) in 341 ms on localhost (2/4)
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 6.0 (TID 15) in 340 ms on localhost (3/4)
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: ResultStage 6 (collect at <ipython-input-21-20609ef53c7a>:1) finished in 0.347 s
+16/05/18 03:53:23 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 6.0 (TID 16) in 339 ms on localhost (4/4)
+16/05/18 03:53:23 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 6.0, whose tasks have all completed, from pool 
+16/05/18 03:53:23 INFO scheduler.DAGScheduler: Job 5 finished: collect at <ipython-input-21-20609ef53c7a>:1, took 1.389835 s
+Out[16]: 
+[(u'able', (u'Jan-01 5', 991)),
+ (u'able', (u'Apr-04 13', 991)),
+ (u'able', (u'Dec-15 100', 991)),
+ (u'burger', (u'Feb-23 5', 15)),
+ (u'burger', (u'Mar-08 2', 15)),
+ (u'about', (u'Feb-02 3', 11)),
+ (u'about', (u'Mar-03 8', 11)),
+ (u'actor', (u'Feb-22 3', 22))]
+
+In [17]: 

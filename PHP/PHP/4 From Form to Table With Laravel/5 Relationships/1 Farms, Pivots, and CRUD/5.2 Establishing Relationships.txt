@@ -1,0 +1,80 @@
+5.2 Establishing Relationships
+
+We need to establish our relationships between each of our models. Farms will have a markets method and Markets will have a farms method to set up a many-to-many relationship.
+
+app/Farm.php
+<?php
+namespace App;​
+use Illuminate\Database\Eloquent\Model;
+​
+class Farm extends Model
+{
+  protected $fillable = ['name', 'city', 'website'];
+  
+}
+
+app/Market.php
+<?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class Market extends Model
+{
+  protected $fillable = ['name', 'city', 'website'];
+
+}
+
+
+1. In our Market.php model file, we will need to add a new public method named farms(). We can leave that method body empty for now.
+
+Answer
+app/Market.php
+<?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class Market extends Model
+{
+  protected $fillable = ['name', 'city', 'website'];
+
+  public function farms() { }
+
+}
+
+2. Inside of the method we just created, we want to return a call to $this->belongsToMany with a single argument of 'App\Farm' and then chain the method withTimestamps() using the object operator.
+
+Answer
+app/Market.php
+<?php
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class Market extends Model
+{
+  protected $fillable = ['name', 'city', 'website'];
+
+  public function farms()
+  { 
+    return $this->belongsToMany('App\Farm')-> withTimestamps();
+  }
+
+}
+
+3. Next, repeat the same process on the Farms model, naming the method markets() and using the argument 'App\Market'.
+
+Answer
+app/Farm.php
+<?php
+namespace App;​
+use Illuminate\Database\Eloquent\Model;
+​
+class Farm extends Model
+{
+  protected $fillable = ['name', 'city', 'website'];
+  
+  public function markets()
+  { 
+    return $this->belongsToMany('App\Market')-> withTimestamps();
+  }
+
+}

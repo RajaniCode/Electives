@@ -1,0 +1,73 @@
+5. History With Diff
+
+
+Well, you see the changes, but you're not sure what your co-worker was trying to accomplish. Display the diffs along with the log to determine what's going on.
+
+
+$ git log -p
+
+
+commit 81cbeb148145208ba90fd9a3d6432fa060c207ed
+Author: Gregg <gregg@example.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    Add narwhal page
+
+diff --git a/narwhal.html b/narwhal.html
+new file mode 100644
+index 0000000..272ddd4
+--- /dev/null
++++ b/narwhal.html
+@@ -0,0 +1,6 @@
++[m<!DOCTYPE html>
++[m<html lang="en">
++[m  <head>
++[m    <title>Our Narwhals</title>
++[m  </head>
++[m</html>
+
+commit f4019efb42c4084ada568354d9886cd0a668ce53
+Author: Bob <bob@example.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    Add menu
+
+diff --git a/index.html b/index.html
+index 99daa4c..983e9c3 100644
+--- a/index.html
++++ b/index.html
+@@ -4,5 +4,11 @@
+     <title>Pet Store</title>
+   </head>
+   <body>
++[m    <ul>
++[m      <li>MENU</li>
++[m      <li><a href="cat.html">Cats</a></li>
++[m      <li><a href="dog.html">Dogs</a></li>
++[m      <li><a href="pizza.html">Pizza</a></li>
++[m    </ul>
+   </body>
+ </html>
+
+commit a726c79af27357fd0900d17f28265601c65680d1
+Author: Gregg <gregg@example.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    Add main page
+
+diff --git a/index.html b/index.html
+new file mode 100644
+index 0000000..99daa4c
+--- /dev/null
++++ b/index.html
+@@ -0,0 +1,8 @@
++[m<!DOCTYPE html>
++[m<html lang="en">
++[m  <head>
++[m    <title>Pet Store</title>
++[m  </head>
++[m  <body>
++[m  </body>
++[m</html>
+
+Success!

@@ -1,0 +1,13 @@
+4.5 Pagination
+
+Which of the following lines of code will paginate our farms from the controller and display 10 per page?
+
+[Single Answer]
+
+$farms = Farm::all()->paginate(10);
+$farms = Farm::orderBy('name', 'asc')->pages(10);
+$farms = Farm::orderBy('name', 'asc')->paginate(10);
+$farms = Farm::orderBy()->pages(10);
+
+
+Answer: $farms = Farm::orderBy('name', 'asc')->paginate(10);

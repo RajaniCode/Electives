@@ -1,0 +1,14 @@
+7. Ignore Files
+
+
+Your server writes files to the logs directory. You're not going to commit them, but they keep appearing in your git status output, and you'd like them not to. Edit your .gitignore file to ignore all files in the logs/ directory whose names end in .log.
+
+
+.gitignore
+#Enter text here
+
+
+Answer:
+.gitignore
+#Enter text here
+logs/*.log

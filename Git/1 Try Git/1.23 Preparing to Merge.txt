@@ -1,0 +1,36 @@
+1.23 Preparing to Merge
+
+Alrighty, the moment has come when you have to merge your changes from the clean_up branch into the master branch. Take a deep breath, it's not that scary.
+
+We're already on the master branch, so we just need to tell Git to merge the clean_up branch into it:
+
+git merge clean_up
+
+
+Press enter to submit commands
+
+
+$ git merge clean_up
+
+
+Updating 3852b4d..ec6888b
+Fast-forward
+ blue_octocat.txt             |    1 -
+ octocat.txt                  |    1 -
+ octofamily/baby_octocat.txt  |    1 -
+ octofamily/momma_octocat.txt |    1 -
+ red_octocat.txt              |    1 -
+ 5 files changed, 5 deletions(-)
+ delete mode 100644 blue_octocat.txt
+ delete mode 100644 octocat.txt
+ delete mode 100644 octofamily/baby_octocat.txt
+ delete mode 100644 octofamily/momma_octocat.txt
+ delete mode 100644 red_octocat.txt
+
+Success!
+
+
+My Octobox Repository
+
+    .git
+    octofamily

@@ -1,0 +1,124 @@
+5.4 Date Validator
+
+Let's add validation to our project using respect/validation
+
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+
+require 'validation.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+  
+  echo validate_date($date);
+  
+  echo htmlspecialchars($reason);
+}
+
+
+1. We will do all of our validation here in app.php, so we no longer need validation.php. Let's remove this require statement.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+  
+  echo validate_date($date);
+  
+  echo htmlspecialchars($reason);
+}
+
+2. Inside the if block, create a variable named $dateValidator and set it equal to an instance of Validator with a static call to the date() method.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+  $dateValidator = Validator::date();
+  echo validate_date($date);
+  
+  echo htmlspecialchars($reason);
+}
+
+3. We also want to check if the date is present, or 'not empty'. Place the notEmpty() Validator method in front of the date() method and chain them together with the object operator.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+  $dateValidator = Validator::notEmpty()->date();
+  echo validate_date($date);
+  
+  echo htmlspecialchars($reason);
+}
+
+4. We no longer need to call the validate_date() function. Instead, let's remove this line and replace it with an if statement that will echo the $date if true.
+
+Using our custom validator, place a call to the validate() method as our if condition. Remember to pass the $date variable as the argument of the validate() method.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+  $dateValidator = Validator::notEmpty()->date();
+  if ($dateValidator->validate($date)) {
+    echo $date;
+  }  
+  echo htmlspecialchars($reason);
+}

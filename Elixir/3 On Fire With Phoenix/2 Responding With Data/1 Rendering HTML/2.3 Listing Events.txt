@@ -1,0 +1,42 @@
+2.3 Listing Events
+
+We want to start listing events on a page. The first step is to create a route that maps the root URL path to a controller and action. Then, from the action, we’ll start by responding with plain text.
+
+lib/neon_web/router.ex
+defmodule NeonWeb.Router do
+  use NeonWeb, :router
+
+  pipeline :browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    # plug :put_secure_browser_headers
+  end
+
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  scope "/", NeonWeb do
+    pipe_through :browser
+
+    
+  end
+end
+
+
+1. In router.ex, add a new GET route, mapping "/" to the EventController module and :index action.
+
+Answer:
+lib/neon_web/router.ex
+
+2. Now switch to the lib/neon_web/controllers/event_controller.ex file and define the index action. This action takes two parameters. Name the first one conn, and make sure the second argument is ignored by the Elixir compiler.
+
+Answer: 
+lib/neon_web/router.ex
+
+3. Using the text() function, return the string "Events" from the index action. Remember to use conn as the first argument to text().
+
+Answer:
+lib/neon_web/router.ex

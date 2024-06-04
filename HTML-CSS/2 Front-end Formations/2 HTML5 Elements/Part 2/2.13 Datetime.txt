@@ -1,0 +1,17 @@
+2.13 Datetime
+
+Add the appropriate attribute with the date formatted as yyyy-mm-dd so that we can still use the current content within the time element.
+
+index.html
+
+<header>
+  <h2><a href="/blog/opening-date-announced">Opening Date Announced</a></h2>
+  <p><em>Published on</em>: <time>September 16, 2013</time></p>
+</header>
+
+Answer:
+
+<header>
+  <h2><a href="/blog/opening-date-announced">Opening Date Announced</a></h2>
+  <p><em>Published on</em>: <time datetime="2013-09-16">September 16, 2013</time></p>
+</header>

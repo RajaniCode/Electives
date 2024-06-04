@@ -1,0 +1,21 @@
+Media Specific Header
+
+
+Using the media query that you just wrote, adjust the <h1> font-size, using ems, with a target font-size of 50px, with our context being 16px. Also, set the line-height to the em equivalent of 30px.
+
+STYLE.CSS
+
+@media screen and (max-width: 850px) {
+  h1 {
+
+  }
+}
+
+Answer:
+
+@media screen and (max-width: 850px) {
+  h1 {
+    font-size: 3.125em; /* target / context = 50 / 16 = ? */
+    line-height: 1.875em; /* target / context = 30 / 16 = ? */
+  }
+}

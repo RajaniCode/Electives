@@ -1,0 +1,20 @@
+3.4 Datalist
+
+http://caniuse.com/#feat=datalist
+
+Use the datalist element to create a predefined value set of categories for our blog using categories as the name. The categories are reviews, profiles, and announcements. Don’t forget about the list and id attributes!
+
+index.html
+
+<input type="text" />
+<!-- Add your datalist here -->
+
+Answer:
+
+<input type="text" list="browsers" />
+ <!-- Add your datalist here -->
+ <datalist id="categories">  
+  <option value="reviews">
+  <option value="profiles">
+  <option value="announcements">
+</datalist>

@@ -1,0 +1,41 @@
+3.2 Creating a Controller
+
+We have created our model, run our migrations, and we have even tested that we can write to the database with tinker and our application. Now, it is time for us to move our logic into a controller.
+
+The help entry for make:controller is displayed for us.
+
+Using artisan, type the command to make a controller named FarmController, and tie it to the model Farm with the correct option.
+
+Answer
+$ php artisan make:controller -m Farm FarmController
+
+
+# Note
+$ php artisan help make:controller                                              
+Usage:
+  make:controller [options] [--] <name>
+
+Arguments:
+  name                   The name of the class
+
+Options:
+  -m, --model[=MODEL]    Generate a resource controller for the given
+                         model.
+  -r, --resource         Generate a resource controller class.
+  -p, --parent[=PARENT]  Generate a nested resource controller class.
+  -h, --help             Display this help message
+  -q, --quiet            Do not output any message
+  -V, --version          Display this application version
+      --ansi             Force ANSI output
+      --no-ansi          Disable ANSI output
+  -n, --no-interaction   Do not ask any interactive question
+      --env[=ENV]        The environment the command should run under
+  -v|vv|vvv, --verbose   Increase the verbosity of messages: 1 for
+                         normal output, 2 for more verbose output and 3
+                         for debug
+
+Help:
+  Create a new controller class
+$ php artisan make:controller -m Farm FarmController
+Controller created successfully.
+$

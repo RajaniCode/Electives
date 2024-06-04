@@ -1,0 +1,14 @@
+[rajani@localhost Images]$ docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+hello-world           latest              94df4f0ce8a4        42 hours ago        967 B
+ubuntu                latest              44776f55294a        3 days ago          120.1 MB
+cloudera/quickstart   latest              4239cd2958c6        2 weeks ago         6.336 GB
+[rajani@localhost Images]$ docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[rajani@localhost Images]$ docker save -o hello-world.tar hello-world
+[rajani@localhost Images]$ docker save -o hello-world.zip hello-world
+[rajani@localhost Images]$ docker save -o ubuntu.tar ubuntu
+[rajani@localhost Images]$ docker save -o ubuntu.zip ubuntu
+[rajani@localhost Images]$ docker save -o cloudera-quickstart.tar cloudera/quickstart
+[rajani@localhost Images]$ docker save -o cloudera-quickstart.zip cloudera/quickstart
+[rajani@localhost Images]$

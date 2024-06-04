@@ -1,0 +1,29 @@
+1.6 Committing
+
+Notice how Git says changes to be committed? The files listed here are in the Staging Area, and they are not in our repository yet. We could add or remove files from the stage before we store them in the repository.
+
+To store our staged changes we run the commit command with a message describing what we've changed. Let's do that now by typing:
+
+git commit -m "Add cute octocat story"
+
+
+Press enter to submit commands
+
+
+> git commit -m "Add cute octocat story"
+
+
+[master (root-commit) 20b5ccd] Add cute octocat story
+ 1 file changed, 1 insertion(+)
+ create mode 100644 octocat.txt
+
+Success!
+
+
+My Octobox Repository
+
+    .git
+    octofamily
+    blue_octocat.txt
+    octocat.txt
+    red_octocat.txt

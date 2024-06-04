@@ -1,0 +1,10 @@
+3.8 Pattern
+
+We are thinking about adding a “Receive updates by SMS” section to the blog. Add a tel input type with the pattern [0-9]{10} to match the user’s input.
+
+
+index.html
+
+<input type="text" />
+
+Answer: <input type="tel" pattern="[0-9]{10}" />

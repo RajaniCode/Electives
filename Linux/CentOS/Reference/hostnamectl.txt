@@ -1,0 +1,26 @@
+[rajani@localhost QuickStarts]$ uname -r
+3.10.0-327.13.1.el7.x86_64
+[rajani@localhost QuickStarts]$ hostnamectl
+   Static hostname: localhost.localdomain
+         Icon name: computer-laptop
+           Chassis: laptop
+        Machine ID: e4a30c53469644a0afa10c8f62410cf1
+           Boot ID: 64c31170efe347b58ac22bfe69413c0e
+  Operating System: CentOS Linux 7 (Core)
+       CPE OS Name: cpe:/o:centos:centos:7
+            Kernel: Linux 3.10.0-327.13.1.el7.x86_64
+      Architecture: x86-64
+[rajani@localhost QuickStarts]$ hostnamectl status
+   Static hostname: localhost.localdomain
+         Icon name: computer-laptop
+           Chassis: laptop
+        Machine ID: e4a30c53469644a0afa10c8f62410cf1
+           Boot ID: 64c31170efe347b58ac22bfe69413c0e
+  Operating System: CentOS Linux 7 (Core)
+       CPE OS Name: cpe:/o:centos:centos:7
+            Kernel: Linux 3.10.0-327.13.1.el7.x86_64
+      Architecture: x86-64
+[rajani@localhost QuickStarts]$ nmcli general hostname
+localhost.localdomain
+[rajani@localhost QuickStarts]$ 
+

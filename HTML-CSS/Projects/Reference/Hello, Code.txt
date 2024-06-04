@@ -1,0 +1,256 @@
+https://www.codeschool.com/projects/hello-code-school
+
+https://www.codeschool.com/projects/hello-code-school#course-intro-video
+
+https://codeschool-project-demos.github.io/HelloCodeSchoolProject/
+
+Build a Portfolio Using Bootstrap
+
+Test your HTML knowledge, and then use CSS to style your own page and make it unique.
+
+Step 1: Authenticate with GitHub
+
+We'll need to know your GitHub username to complete this project.
+
+Step 2: Fork the Repo
+
+In a new window, head over to GitHub and Fork thecodeschool-projects/HelloCodeSchoolProject [https://github.com/codeschool-projects/HelloCodeSchoolProject] repo into your account. Once you've done that on GitHub, let us know!
+
+How do I Fork a repo on GitHub? [https://www.codeschool.com/projects/hello-code-school/build#fork-video]
+
+Step 3: Clone the Repo
+
+Clone down your fork of the repo locally. You can copy and paste either version of this line into your terminal.
+
+Use SSH
+git clone git@github.com:RajaniCode/HelloCodeSchoolProject.git
+
+[
+Use HTTPS
+git clone https://github.com/RajaniCode/HelloCodeSchoolProject.git
+]
+
+How do I Clone a repo on GitHub? [https://www.codeschool.com/projects/build-a-portfolio-using-bootstrap/build#fork-video]
+
+# Git Bash ############################################################################################################################
+
+$ cd "E:\Working\HTML-and-CSS\Code School\Projects"
+
+Aspire@Acer MINGW64 /e/Working/HTML-and-CSS/Code School/Projects
+$ git clone git@github.com:RajaniCode/HelloCodeSchoolProject.git
+Cloning into 'HelloCodeSchoolProject'...
+remote: Counting objects: 51, done.
+remote: Total 51 (delta 0), reused 0 (delta 0), pack-reused 51
+Receiving objects: 100% (51/51), 49.86 KiB | 28.00 KiB/s, done.
+Resolving deltas: 100% (21/21), done.
+
+#######################################################################################################################################
+
+Step 4: Prepare the Build
+
+We’ll work in the index.html file in the root directory of this folder. To see what you create, you can double click on this file and open it up in your preferred web browser.
+
+Optional Setup
+It’s not required for this project, but if you want to run the tests locally to verify that all tasks are correct, you’ll need Node.js [https://nodejs.org/en/] installed locally. After that, you’ll need to run the following command from the HelloCodeSchoolProject folder:
+
+npm install
+This will install all of the required dependencies needed to test your work. If you try running npm test, it'll run the tests associated with the tasks you'll be completing.
+
+Once all of the tasks are complete, all of the tests should pass and you're done!
+
+# index.html (Original)
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+  </head>
+  <body>
+
+  </body>
+</html>
+
+$ cd HelloCodeSchoolProject
+
+$ npm --version
+
+$ npm install
+
+$ npm test
+
+Step 5: Update the title
+
+In the head of the page, create a title element that contains your name.
+ 
+    <title>Rajani</title>
+
+Step 6: Add a Heading Element
+
+    <h1>Hello, Code School!</h1>  
+
+In the body of your page, create an h1 element with the text Hello, Code School!.
+
+Step 7: Create an Unordered List
+
+Create a ul element which will be a list of things you want to learn at Code School.
+
+    <ul>
+    </ul>
+
+Step 8: Add Your Skills
+
+Create at least 2 li elements inside your list with the skills you want to learn.
+ 
+    <ul>
+      <li>Big Data</li>
+      <li>Hadoop</li>
+    </ul>
+
+# index.html 
+
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <title>Rajani</title>
+  </head>
+  <body>
+    <h1>Hello, Code School!</h1>  
+    <ul>
+      <li>Big Data</li>
+      <li>Hadoop</li>      
+    </ul>
+  </body>
+</html>
+
+$ npm test
+
+# Fix for
+
+  1) Your HTML Page "before all" hook:
+     Error: timeout of 2000ms exceeded. Ensure the done() callback is being called in this test.
+      at null.<anonymous> (E:\Working\HTML-and-CSS\Code School\Projects\HelloCodeSchoolProject\node_modules\mocha\lib\runnable.js:226:19)
+
+# test/index_test.js
+var jsdom = require('jsdom'),
+    fs = require('fs'),
+    assert = require('chai').assert,
+    file = fs.readFileSync('index.html').toString(),
+	doc = jsdom.jsdom(file);
+
+describe('Your HTML Page', function() {
+  it('should have a title @title', () => {
+    //const title = doc.querySelector('title');
+    //assert.isOk(title, 'We need a `title` element.');
+	const title = doc.querySelectorAll('title');
+	assert.equal(title.length, 1, 'Make sure to create a `title` element.');
+  });
+  
+  it('should have a title that contains your name @title', () => {
+    const title = doc.querySelector('title');
+    //assert.isAtLeast(title.textContent.length, 1, 'Make sure to create a `title` element.');
+	assert.notEqual(title.textContent, '', 'Make sure to set the content of the `title` element to your Code School username.');
+  });
+  
+  it('should have a h1 element @h1', () => {
+	//const h1 = doc.querySelector('h1');
+    //assert.isOk(h1, "Make sure to create an `h1` element.");
+	const h1 = doc.querySelectorAll('h1');
+	assert.isAtLeast(h1.length, 1, "Make sure to create an `h1` element.");
+  });
+  
+  it('should have content in the h1 element @h1', () => {
+    const h1 = doc.querySelector('h1');
+    assert.equal(h1.textContent, 'Hello, Code School!', "Make sure to set the content of your `h1` element to 'Hello, Code School!'.");
+  });
+  
+  it('should have a ul @ul', () => {
+	//const ul = doc.querySelector('ul');
+    //assert.isOk(ul, "Make sure to create a `ul` element.");
+	const ul = doc.querySelectorAll('ul');
+	assert.isAtLeast(ul.length, 1, "Make sure to create a `ul` element.");
+  });
+  
+  it('should have at least 2 li elements @li', () => {
+	const li = doc.querySelectorAll('li');	
+    assert.isAtLeast(li.length, 2, "Make sure to create at least 2 `li` elements.");
+  });
+  
+  it('should have content for all `li` elements. @li', () => {
+    var message = "Make sure to include something you want to learn for each `li` element."
+	const lifirstchild = doc.querySelector('li:first-child');
+	const lilastchild = doc.querySelector('li:last-child');
+    assert.notEqual(lifirstchild.textContent, '', message);
+    assert.notEqual(lilastchild.textContent, '', message);
+  });
+  
+  /*
+  var window;
+  before(function(next) {
+    jsdom.env(
+      file,
+      ["http://code.jquery.com/jquery.js"],
+      function (err, w) {
+        if(err) { next(err); }
+        window = w;
+        next();
+      }
+    );
+  });
+
+  it('should have a title @title', function() {
+    assert.equal(window.$('title').length, 1, 'Make sure to create a `title` element.');
+  });
+
+  it('should have a title that contains your name @title', function() {
+    assert.notEqual(window.$('title').text(), '', 'Make sure to set the content of the `title` element to your Code School username.');
+  });
+
+  it('should have a h1 element @h1', function() {
+    assert.isAtLeast(window.$('h1').length, 1, "Make sure to create an `h1` element.");
+  });
+
+  it('should have content in the h1 element @h1', function() {
+    assert.equal(window.$('h1').text(), 'Hello, Code School!', "Make sure to set the content of your `h1` element to 'Hello, Code School!'.");
+  });
+
+  it('should have a ul @ul', function() {
+    assert.isAtLeast(window.$('ul').length, 1, "Make sure to create a `ul` element.");
+  });
+
+  it('should have at least 2 li elements @li', function() {
+    assert.isAtLeast(window.$('li').length, 2, "Make sure to create at least 2 `li` elements.");
+  });
+
+  it('should have content for all `li` elements. @li', function() {
+    var message = "Make sure to include something you want to learn for each `li` element."
+    assert.notEqual(window.$('li:first').text(), '', message);
+    assert.notEqual(window.$('li:last').text(), '', message);
+  });
+  */
+});
+
+$ npm test
+
+# When you're ready, commit your code and push it to GitHub. We'll checkout your repository and validate all of the build tasks are done.
+
+$ git status
+
+$ git branch
+
+$ git add .
+
+$ git status
+
+$ git branch
+
+$ git commit -a -m "HelloCodeSchoolProject Solution"
+
+$ git push origin master
+
+$ git commit
+

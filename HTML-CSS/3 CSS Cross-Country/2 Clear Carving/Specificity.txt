@@ -1,0 +1,66 @@
+Specificity
+
+Refactor the CSS declarations for .active a and .copyright so that the !important rule can be removed.
+
+HTML Source
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  
+  <body>
+    <nav class="main">
+      <ul class="group">
+        <li class="active"><a href="#">Home</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </nav>
+    <section class="content home group">
+      <aside>
+        <p>Did you know that Sven's Snowshoe Emporium produces the highest quality snowshoes in North America? <a href="#">Find out more</a>.</p>
+      </aside>
+      <article>
+        <h3>New Fall Styles</h3>
+        <p>Be the first at your resort to sport the hot new tennis-themed snow kicks, now available in the <a href="#">store</a>.</p>
+      </article>
+    </section>
+    <footer class="primary">
+      <p><a href="#">Sign up</a> for our newsletter, it's a racket!</p>
+      <p class="copyright">Copyright &copy; Sven's Snowshoe Emporium. All Rights Reserved.</p>
+    </footer>
+  </body>
+</html>
+
+style.css
+
+.main li a {
+  color: #7ab2c1;
+}
+.active a {
+  color: #826c55 !important;
+}
+.primary p {
+  font-size: 12px;
+}
+.copyright {
+  font-size: 10px !important;
+}
+
+Answer:
+
+.main li a {
+  color: #7ab2c1;
+}
+.main .active a {
+  color: #826c55;
+}
+.primary p {
+  font-size: 12px;
+}
+.primary .copyright {
+  font-size: 10px;
+}

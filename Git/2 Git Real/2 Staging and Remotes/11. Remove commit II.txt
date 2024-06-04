@@ -1,0 +1,11 @@
+11. Remove commit II
+
+
+Your co-worker is back, looking sheepish. "Never mind the badgers ad. The client's legal department said that was a liability risk." You'll need to remove the most recent commit, and all its changes.
+
+
+$ git reset --hard HEAD^
+
+HEAD is now at 3d9a9bc Add main page
+
+Success!

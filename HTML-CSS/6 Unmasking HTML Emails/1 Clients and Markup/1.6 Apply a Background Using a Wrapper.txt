@@ -1,0 +1,62 @@
+1.6 Apply a Background Using a Wrapper
+
+We want a textured background for the viewable area, so we'll use a wrapper element with a background image that falls back to a background color.
+
+email.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    
+      <div style="margin: 0 auto; max-width: 600px;">
+        <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+        <h1 style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 42px; margin: 0; padding-top: 20px; text-transform: uppercase;">Championship Match!</h1>
+        <p style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; margin: 0; padding-top: 5px;">Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?</p>
+      </div>
+
+  </body>
+</html>
+
+
+1. Create a new div tag that will contain the existing div.
+
+Answer: 
+
+    <div>
+      <div style="margin: 0 auto; max-width: 600px;">
+        <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+        <h1 style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 42px; margin: 0; padding-top: 20px; text-transform: uppercase;">Championship Match!</h1>
+        <p style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; margin: 0; padding-top: 5px;">Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?</p>
+      </div>
+    </div>
+
+2. Apply a background-color of "#e4c59a" and a background-image with the url of "https://s3.amazonaws.com/unmasking-html-emails/bg.jpg" to the new div.
+
+Answer: <div style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg');">
+
+
+Success:
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <div style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg');">
+      <div style="margin: 0 auto; max-width: 600px;">
+        <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+        <h1 style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 42px; margin: 0; padding-top: 20px; text-transform: uppercase;">Championship Match!</h1>
+        <p style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; margin: 0; padding-top: 5px;">Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?</p>
+      </div>
+    </div>                                                                                                                                  </body>
+</html>

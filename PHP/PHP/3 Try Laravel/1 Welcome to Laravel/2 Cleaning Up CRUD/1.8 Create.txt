@@ -1,0 +1,43 @@
+1.8 Create
+
+Let's write some code that will use Laravel's Eloquent ORM to create some data, and save it to the built-in database.
+
+app.php
+
+<?php
+
+use App\Farm;
+
+
+1. Using the new keyword and the class Farm, create a new farm object called $farm.
+
+Answer
+app.php
+
+<?php
+
+use App\Farm;
+$farm = new Farm();
+
+2. Assign the string 'Bubba Hydro Farm' to the name property of $farm.
+
+Answer
+app.php
+
+<?php
+
+use App\Farm;
+$farm = new Farm();
+$farm->name = 'Bubba Hydro Farm';
+
+3. Call the save method on the $farm object.
+
+Answer
+app.php
+
+<?php
+
+use App\Farm;
+$farm = new Farm();
+$farm->name = 'Bubba Hydro Farm';
+$farm->save ();

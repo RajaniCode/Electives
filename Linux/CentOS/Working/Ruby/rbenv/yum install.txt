@@ -1,0 +1,52 @@
+[rajani@localhost rbenv]$ su root
+Password: 
+[root@localhost rbenv]# yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: epel.mirror.net.in
+ * extras: mirror.nbrc.ac.in
+ * nux-dextop: li.nux.ro
+ * rpmforge: ftp.neowiz.com
+ * updates: mirror.nbrc.ac.in
+Package git-1.8.3.1-6.el7_2.1.x86_64 already installed and latest version
+Package zlib-1.2.7-15.el7.x86_64 already installed and latest version
+Package zlib-devel-1.2.7-15.el7.x86_64 already installed and latest version
+Package gcc-c++-4.8.5-4.el7.x86_64 already installed and latest version
+Package patch-2.7.1-8.el7.x86_64 already installed and latest version
+Package readline-6.2-9.el7.x86_64 already installed and latest version
+Package readline-devel-6.2-9.el7.x86_64 already installed and latest version
+Package libyaml-devel-0.1.4-11.el7_0.x86_64 already installed and latest version
+Package libffi-devel-3.0.13-16.el7.x86_64 already installed and latest version
+Package 1:openssl-devel-1.0.1e-51.el7_2.4.x86_64 already installed and latest version
+Package 1:make-3.82-21.el7.x86_64 already installed and latest version
+Package bzip2-1.0.6-13.el7.x86_64 already installed and latest version
+Package autoconf-2.69-11.el7.noarch already installed and latest version
+Package automake-1.13.4-3.el7.noarch already installed and latest version
+Package libtool-2.4.2-21.el7_2.x86_64 already installed and latest version
+Package bison-2.7-4.el7.x86_64 already installed and latest version
+Package curl-7.29.0-25.el7.centos.x86_64 already installed and latest version
+Package sqlite-devel-3.7.17-8.el7.x86_64 already installed and latest version
+Nothing to do
+[root@localhost rbenv]# git clone git://github.com/sstephenson/rbenv.git .rbenv
+Cloning into '.rbenv'...
+remote: Counting objects: 2500, done.
+remote: Total 2500 (delta 0), reused 0 (delta 0), pack-reused 2500
+Receiving objects: 100% (2500/2500), 455.97 KiB | 167.00 KiB/s, done.
+Resolving deltas: 100% (1546/1546), done.
+[root@localhost rbenv]# echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
+[root@localhost rbenv]# echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+[root@localhost rbenv]# exec $SHELL
+[root@localhost rbenv]# git clone git://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+Cloning into '/root/.rbenv/plugins/ruby-build'...
+remote: Counting objects: 6282, done.
+remote: Compressing objects: 100% (214/214), done.
+remote: Total 6282 (delta 168), reused 0 (delta 0), pack-reused 6063
+Receiving objects: 100% (6282/6282), 1.21 MiB | 125.00 KiB/s, done.
+Resolving deltas: 100% (3604/3604), done.
+[root@localhost rbenv]# echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bash_profile
+[root@localhost rbenv]# exec $SHELL
+[root@localhost rbenv]# rbenv install -v 2.3.1
+bash: rbenv: command not found...
+[root@localhost rbenv]# reboot
+

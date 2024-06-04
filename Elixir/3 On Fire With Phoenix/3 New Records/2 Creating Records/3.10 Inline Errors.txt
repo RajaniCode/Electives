@@ -1,0 +1,11 @@
+3.10 Inline Errors
+
+In order to show inline errors in forms, Phoenix offers us the error_tag function. Select the correct way to call this function for display errors related to the location property:
+
+[Single Answer]
+
+f.error_tag(:location)
+error_tag :location
+error_tag f, :location
+
+Answer:

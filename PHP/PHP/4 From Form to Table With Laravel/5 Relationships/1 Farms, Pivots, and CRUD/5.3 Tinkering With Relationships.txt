@@ -1,0 +1,71 @@
+5.3 Tinkering With Relationships
+
+Using an existing farm and market, let's associate the market to the farm.
+
+>>> Psy Shell v0.8.1 (PHP 7.1.4 — cli) by Justin Hileman
+​
+>>> $market = App\Market::first()
+=> App\Market {
+     id: 1,
+     name: "Audubon Market",
+     city: "Orlando",
+     website: "apmarket.com",
+     created_at: "2017-05-12 13:31:16",
+     updated_at: "2017-05-12 13:31:16",
+   }
+​
+>>> $farm = App\Farm::first()
+=> App\Farm {
+     id: 1,
+     name: "Ground Floor Farm",
+     city: "Stuart",
+     website: "groundfloorfarm.com",
+     created_at: "2017-05-10 13:05:22",
+     updated_at: "2017-05-10 13:05:22",
+   }
+​
+>>> 
+>>> 
+
+Using the markets method on the $farm object, associate the existing $market object by passing it to a chained save method call.
+
+Answer
+>> $farm->markets()->save($market)
+
+
+# Note
+>>> Psy Shell v0.8.1 (PHP 7.1.4 — cli) by Justin Hileman
+​
+>>> $market = App\Market::first()
+=> App\Market {
+     id: 1,
+     name: "Audubon Market",
+     city: "Orlando",
+     website: "apmarket.com",
+     created_at: "2017-05-12 13:31:16",
+     updated_at: "2017-05-12 13:31:16",
+   }
+​
+>>> $farm = App\Farm::first()
+=> App\Farm {
+     id: 1,
+     name: "Ground Floor Farm",
+     city: "Stuart",
+     website: "groundfloorfarm.com",
+     created_at: "2017-05-10 13:05:22",
+     updated_at: "2017-05-10 13:05:22",
+   }
+​
+>>> 
+>>> $farm->markets()->save($market)
+=> AppMarket {#700
+     id: "1",
+     name: "Crist-Wilderman",
+     city: "North Doyle",
+     website: "fadel.biz",
+     created_at: "2017-07-06 16:15:23",
+     updated_at: "2017-07-06 16:15:23",
+   }
+Success!
+>>>
+

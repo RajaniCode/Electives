@@ -1,0 +1,12 @@
+3.8 Filter the Var
+
+Which of the following is the correct use of filter_var to validate an email?
+
+[Single Answer]
+
+<?php filter_var($email, FILTER_VALIDATE_EMAIL); ?>
+<?php filter_var(FILTER_VALIDATE_EMAIL, $email); ?>
+<?php filter_var($email, VALIDATE_EMAIL_VAR); ?>
+
+
+Answer: <?php filter_var($email, FILTER_VALIDATE_EMAIL); ?>

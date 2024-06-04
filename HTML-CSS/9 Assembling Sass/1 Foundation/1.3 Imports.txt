@@ -1,0 +1,29 @@
+1.3 Imports
+
+
+To modularize our styles, we've separated some out to a partial called _settings.scss. Import the settings partial into application.scss, remembering that the underscore and file extension aren't necessary with Sass imports.
+
+
+CSS
+
+APPLICATION.SCSS
+
+
+h1 {
+  color: $color-base;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+@import "settings";
+
+h1 {
+  color: $color-base;
+}
+
+CSS
+
+h1 {
+  color: #333333; }

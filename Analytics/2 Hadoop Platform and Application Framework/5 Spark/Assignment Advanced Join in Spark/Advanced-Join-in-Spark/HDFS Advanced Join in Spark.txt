@@ -1,0 +1,460 @@
+[cloudera@quickstart R]$ hdfs dfs -ls input/
+Found 10 items
+-rw-r--r--   1 cloudera cloudera         37 2016-05-18 02:46 input/join1_FileA.txt
+-rw-r--r--   1 cloudera cloudera        122 2016-05-18 02:46 input/join1_FileB.txt
+-rw-r--r--   1 cloudera cloudera       1714 2016-05-18 10:05 input/join2_genchanA.txt
+-rw-r--r--   1 cloudera cloudera       3430 2016-05-18 10:05 input/join2_genchanB.txt
+-rw-r--r--   1 cloudera cloudera       5152 2016-05-18 10:05 input/join2_genchanC.txt
+-rw-r--r--   1 cloudera cloudera      17114 2016-05-18 10:05 input/join2_gennumA.txt
+-rw-r--r--   1 cloudera cloudera      34245 2016-05-18 10:05 input/join2_gennumB.txt
+-rw-r--r--   1 cloudera cloudera      51400 2016-05-18 10:05 input/join2_gennumC.txt
+-rw-r--r--   1 cloudera cloudera         41 2016-05-10 03:37 input/testfile1
+-rw-r--r--   1 cloudera cloudera         29 2016-05-10 03:37 input/testfile2
+[cloudera@quickstart R]$ python --version
+Python 2.6.6
+[cloudera@quickstart R]$ PYSPARK_DRIVER_PYTHON=ipython pyspark
+Python 2.6.6 (r266:84292, Feb 22 2013, 00:00:18) 
+Type "copyright", "credits" or "license" for more information.
+
+IPython 1.2.1 -- An enhanced Interactive Python.
+?         -> Introduction and overview of IPython's features.
+%quickref -> Quick reference.
+help      -> Python's own help system.
+object?   -> Details about 'object', use 'object??' for extra details.
+SLF4J: Class path contains multiple SLF4J bindings.
+SLF4J: Found binding in [jar:file:/usr/lib/zookeeper/lib/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: Found binding in [jar:file:/usr/jars/slf4j-log4j12-1.7.5.jar!/org/slf4j/impl/StaticLoggerBinder.class]
+SLF4J: See http://www.slf4j.org/codes.html#multiple_bindings for an explanation.
+SLF4J: Actual binding is of type [org.slf4j.impl.Log4jLoggerFactory]
+16/05/19 04:09:03 INFO spark.SparkContext: Running Spark version 1.5.0-cdh5.5.0
+16/05/19 04:09:05 WARN util.NativeCodeLoader: Unable to load native-hadoop library for your platform... using builtin-java classes where applicable
+16/05/19 04:09:06 WARN util.Utils: Your hostname, quickstart.cloudera resolves to a loopback address: 127.0.0.1; using 192.168.122.162 instead (on interface eth1)
+16/05/19 04:09:06 WARN util.Utils: Set SPARK_LOCAL_IP if you need to bind to another address
+16/05/19 04:09:06 INFO spark.SecurityManager: Changing view acls to: cloudera
+16/05/19 04:09:06 INFO spark.SecurityManager: Changing modify acls to: cloudera
+16/05/19 04:09:06 INFO spark.SecurityManager: SecurityManager: authentication disabled; ui acls disabled; users with view permissions: Set(cloudera); users with modify permissions: Set(cloudera)
+16/05/19 04:09:18 INFO slf4j.Slf4jLogger: Slf4jLogger started
+16/05/19 04:09:18 INFO Remoting: Starting remoting
+16/05/19 04:09:19 INFO Remoting: Remoting started; listening on addresses :[akka.tcp://sparkDriver@192.168.122.162:33028]
+16/05/19 04:09:19 INFO Remoting: Remoting now listens on addresses: [akka.tcp://sparkDriver@192.168.122.162:33028]
+16/05/19 04:09:19 INFO util.Utils: Successfully started service 'sparkDriver' on port 33028.
+16/05/19 04:09:19 INFO spark.SparkEnv: Registering MapOutputTracker
+16/05/19 04:09:20 INFO spark.SparkEnv: Registering BlockManagerMaster
+16/05/19 04:09:20 INFO storage.DiskBlockManager: Created local directory at /tmp/blockmgr-08e815d2-caf3-40b6-886f-2b9ded4131de
+16/05/19 04:09:20 INFO storage.MemoryStore: MemoryStore started with capacity 530.3 MB
+16/05/19 04:09:20 INFO spark.HttpFileServer: HTTP File server directory is /tmp/spark-0acb397e-6e93-4087-9aa7-ed7f0f3dcb5f/httpd-2cc844dd-da32-4cd7-b8af-dc2cfb6b395b
+16/05/19 04:09:20 INFO spark.HttpServer: Starting HTTP Server
+16/05/19 04:09:21 INFO server.Server: jetty-8.y.z-SNAPSHOT
+16/05/19 04:09:21 INFO server.AbstractConnector: Started SocketConnector@0.0.0.0:48985
+16/05/19 04:09:21 INFO util.Utils: Successfully started service 'HTTP file server' on port 48985.
+16/05/19 04:09:22 INFO spark.SparkEnv: Registering OutputCommitCoordinator
+16/05/19 04:09:23 INFO server.Server: jetty-8.y.z-SNAPSHOT
+16/05/19 04:09:23 INFO server.AbstractConnector: Started SelectChannelConnector@0.0.0.0:4040
+16/05/19 04:09:23 INFO util.Utils: Successfully started service 'SparkUI' on port 4040.
+16/05/19 04:09:23 INFO ui.SparkUI: Started SparkUI at http://192.168.122.162:4040
+16/05/19 04:09:24 WARN metrics.MetricsSystem: Using default name DAGScheduler for source because spark.app.id is not set.
+16/05/19 04:09:24 INFO executor.Executor: Starting executor ID driver on host localhost
+16/05/19 04:09:25 INFO util.Utils: Successfully started service 'org.apache.spark.network.netty.NettyBlockTransferService' on port 58776.
+16/05/19 04:09:25 INFO netty.NettyBlockTransferService: Server created on 58776
+16/05/19 04:09:25 INFO storage.BlockManagerMaster: Trying to register BlockManager
+16/05/19 04:09:25 INFO storage.BlockManagerMasterEndpoint: Registering block manager localhost:58776 with 530.3 MB RAM, BlockManagerId(driver, localhost, 58776)
+16/05/19 04:09:25 INFO storage.BlockManagerMaster: Registered BlockManager
+Welcome to
+      ____              __
+     / __/__  ___ _____/ /__
+    _\ \/ _ \/ _ `/ __/  '_/
+   /__ / .__/\_,_/_/ /_/\_\   version 1.5.0-cdh5.5.0
+      /_/
+
+Using Python version 2.6.6 (r266:84292, Feb 22 2013 00:00:18)
+SparkContext available as sc, HiveContext available as sqlContext.
+
+In [1]: show_views_file = sc.textFile("input/join2_gennum?.txt")
+16/05/19 04:09:40 INFO storage.MemoryStore: ensureFreeSpace(124088) called with curMem=0, maxMem=556038881
+16/05/19 04:09:40 INFO storage.MemoryStore: Block broadcast_0 stored as values in memory (estimated size 121.2 KB, free 530.2 MB)
+16/05/19 04:09:40 INFO storage.MemoryStore: ensureFreeSpace(15275) called with curMem=124088, maxMem=556038881
+16/05/19 04:09:40 INFO storage.MemoryStore: Block broadcast_0_piece0 stored as bytes in memory (estimated size 14.9 KB, free 530.1 MB)
+16/05/19 04:09:40 INFO storage.BlockManagerInfo: Added broadcast_0_piece0 in memory on localhost:58776 (size: 14.9 KB, free: 530.3 MB)
+16/05/19 04:09:40 INFO spark.SparkContext: Created broadcast 0 from textFile at NativeMethodAccessorImpl.java:-2
+
+In [2]: show_views_file.take(2)
+16/05/19 04:10:02 WARN shortcircuit.DomainSocketFactory: The short-circuit local reads feature cannot be used because libhadoop cannot be loaded.
+16/05/19 04:10:03 INFO mapred.FileInputFormat: Total input paths to process : 3
+16/05/19 04:10:04 INFO spark.SparkContext: Starting job: runJob at PythonRDD.scala:361
+16/05/19 04:10:04 INFO scheduler.DAGScheduler: Got job 0 (runJob at PythonRDD.scala:361) with 1 output partitions
+16/05/19 04:10:04 INFO scheduler.DAGScheduler: Final stage: ResultStage 0(runJob at PythonRDD.scala:361)
+16/05/19 04:10:04 INFO scheduler.DAGScheduler: Parents of final stage: List()
+16/05/19 04:10:04 INFO scheduler.DAGScheduler: Missing parents: List()
+16/05/19 04:10:04 INFO scheduler.DAGScheduler: Submitting ResultStage 0 (PythonRDD[2] at RDD at PythonRDD.scala:43), which has no missing parents
+16/05/19 04:10:04 INFO storage.MemoryStore: ensureFreeSpace(5112) called with curMem=139363, maxMem=556038881
+16/05/19 04:10:04 INFO storage.MemoryStore: Block broadcast_1 stored as values in memory (estimated size 5.0 KB, free 530.1 MB)
+16/05/19 04:10:05 INFO storage.MemoryStore: ensureFreeSpace(3066) called with curMem=144475, maxMem=556038881
+16/05/19 04:10:05 INFO storage.MemoryStore: Block broadcast_1_piece0 stored as bytes in memory (estimated size 3.0 KB, free 530.1 MB)
+16/05/19 04:10:05 INFO storage.BlockManagerInfo: Added broadcast_1_piece0 in memory on localhost:58776 (size: 3.0 KB, free: 530.3 MB)
+16/05/19 04:10:05 INFO spark.SparkContext: Created broadcast 1 from broadcast at DAGScheduler.scala:861
+16/05/19 04:10:05 INFO scheduler.DAGScheduler: Submitting 1 missing tasks from ResultStage 0 (PythonRDD[2] at RDD at PythonRDD.scala:43)
+16/05/19 04:10:05 INFO scheduler.TaskSchedulerImpl: Adding task set 0.0 with 1 tasks
+16/05/19 04:10:05 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 0.0 (TID 0, localhost, partition 0,ANY, 2178 bytes)
+16/05/19 04:10:05 INFO executor.Executor: Running task 0.0 in stage 0.0 (TID 0)
+16/05/19 04:10:06 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join2_gennumA.txt:0+17114
+16/05/19 04:10:06 INFO Configuration.deprecation: mapred.tip.id is deprecated. Instead, use mapreduce.task.id
+16/05/19 04:10:06 INFO Configuration.deprecation: mapred.task.id is deprecated. Instead, use mapreduce.task.attempt.id
+16/05/19 04:10:06 INFO Configuration.deprecation: mapred.task.is.map is deprecated. Instead, use mapreduce.task.ismap
+16/05/19 04:10:06 INFO Configuration.deprecation: mapred.task.partition is deprecated. Instead, use mapreduce.task.partition
+16/05/19 04:10:06 INFO Configuration.deprecation: mapred.job.id is deprecated. Instead, use mapreduce.job.id
+16/05/19 04:10:07 INFO python.PythonRDD: Times: total = 1512, boot = 802, init = 709, finish = 1
+16/05/19 04:10:07 INFO executor.Executor: Finished task 0.0 in stage 0.0 (TID 0). 2187 bytes result sent to driver
+16/05/19 04:10:07 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 0.0 (TID 0) in 1950 ms on localhost (1/1)
+16/05/19 04:10:07 INFO scheduler.DAGScheduler: ResultStage 0 (runJob at PythonRDD.scala:361) finished in 2.068 s
+16/05/19 04:10:07 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 0.0, whose tasks have all completed, from pool 
+16/05/19 04:10:07 INFO scheduler.DAGScheduler: Job 0 finished: runJob at PythonRDD.scala:361, took 3.055964 s
+Out[2]: [u'Hourly_Sports,21', u'PostModern_Show,38']
+
+In [3]: def split_show_views(line):
+   ...:         line = line.split(",")
+   ...:         show = line[0]
+   ...:         views = int(line[1])
+   ...:         return (show, views)
+   ...: 
+
+In [4]: show_views = show_views_file.map(split_show_views)
+
+In [5]: show_channel_file = sc.textFile("input/join2_genchan?.txt")
+16/05/19 04:10:47 INFO storage.MemoryStore: ensureFreeSpace(92440) called with curMem=147541, maxMem=556038881
+16/05/19 04:10:47 INFO storage.MemoryStore: Block broadcast_2 stored as values in memory (estimated size 90.3 KB, free 530.1 MB)
+16/05/19 04:10:47 INFO storage.MemoryStore: ensureFreeSpace(21233) called with curMem=239981, maxMem=556038881
+16/05/19 04:10:47 INFO storage.MemoryStore: Block broadcast_2_piece0 stored as bytes in memory (estimated size 20.7 KB, free 530.0 MB)
+16/05/19 04:10:47 INFO storage.BlockManagerInfo: Added broadcast_2_piece0 in memory on localhost:58776 (size: 20.7 KB, free: 530.2 MB)
+16/05/19 04:10:47 INFO spark.SparkContext: Created broadcast 2 from textFile at NativeMethodAccessorImpl.java:-2
+
+In [6]: def split_show_channel(line):
+   ...:         line = line.split(",")
+   ...:         show = line[0]
+   ...:         channel = line[1]
+   ...:         return (show, channel)
+   ...: 
+
+In [7]: show_channel = show_channel_file.map(split_show_channel)
+
+In [8]: joined_dataset = show_views.join(show_channel)
+16/05/19 04:14:10 INFO mapred.FileInputFormat: Total input paths to process : 3
+
+In [9]: def extract_channel_views(show_views_channel):
+   ...:         views = int(show_views_channel[1][0])
+   ...:         channel = show_views_channel[1][1]
+   ...:         return (channel, views)
+   ...: 
+
+In [10]: channel_views = joined_dataset.map(extract_channel_views)
+
+In [11]: def some_function(a, b):
+   ....:         return a + b
+   ....: 
+
+In [12]: channel_views.reduceByKey(some_function).collect()
+16/05/19 04:15:42 INFO spark.SparkContext: Starting job: collect at <ipython-input-12-b268966ca7a0>:1
+16/05/19 04:15:42 INFO scheduler.DAGScheduler: Registering RDD 9 (join at <ipython-input-8-48f0811b2d1a>:1)
+16/05/19 04:15:42 INFO scheduler.DAGScheduler: Registering RDD 13 (reduceByKey at <ipython-input-12-b268966ca7a0>:1)
+16/05/19 04:15:42 INFO scheduler.DAGScheduler: Got job 1 (collect at <ipython-input-12-b268966ca7a0>:1) with 6 output partitions
+16/05/19 04:15:42 INFO scheduler.DAGScheduler: Final stage: ResultStage 3(collect at <ipython-input-12-b268966ca7a0>:1)
+16/05/19 04:15:42 INFO scheduler.DAGScheduler: Parents of final stage: List(ShuffleMapStage 2)
+16/05/19 04:15:42 INFO scheduler.DAGScheduler: Missing parents: List(ShuffleMapStage 2)
+16/05/19 04:15:42 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 1 (PairwiseRDD[9] at join at <ipython-input-8-48f0811b2d1a>:1), which has no missing parents
+16/05/19 04:15:42 INFO storage.MemoryStore: ensureFreeSpace(11560) called with curMem=261214, maxMem=556038881
+16/05/19 04:15:42 INFO storage.MemoryStore: Block broadcast_3 stored as values in memory (estimated size 11.3 KB, free 530.0 MB)
+16/05/19 04:15:42 INFO storage.MemoryStore: ensureFreeSpace(6466) called with curMem=272774, maxMem=556038881
+16/05/19 04:15:42 INFO storage.MemoryStore: Block broadcast_3_piece0 stored as bytes in memory (estimated size 6.3 KB, free 530.0 MB)
+16/05/19 04:15:42 INFO storage.BlockManagerInfo: Added broadcast_3_piece0 in memory on localhost:58776 (size: 6.3 KB, free: 530.2 MB)
+16/05/19 04:15:42 INFO spark.SparkContext: Created broadcast 3 from broadcast at DAGScheduler.scala:861
+16/05/19 04:15:42 INFO scheduler.DAGScheduler: Submitting 6 missing tasks from ShuffleMapStage 1 (PairwiseRDD[9] at join at <ipython-input-8-48f0811b2d1a>:1)
+16/05/19 04:15:42 INFO scheduler.TaskSchedulerImpl: Adding task set 1.0 with 6 tasks
+16/05/19 04:15:43 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 1.0 (TID 1, localhost, partition 0,ANY, 2276 bytes)
+16/05/19 04:15:43 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 1.0 (TID 2, localhost, partition 1,ANY, 2276 bytes)
+16/05/19 04:15:43 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 1.0 (TID 3, localhost, partition 2,ANY, 2276 bytes)
+16/05/19 04:15:43 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 1.0 (TID 4, localhost, partition 3,ANY, 2277 bytes)
+16/05/19 04:15:43 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 1.0 (TID 5, localhost, partition 4,ANY, 2277 bytes)
+16/05/19 04:15:43 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 1.0 (TID 6, localhost, partition 5,ANY, 2277 bytes)
+16/05/19 04:15:43 INFO executor.Executor: Running task 0.0 in stage 1.0 (TID 1)
+16/05/19 04:15:43 INFO executor.Executor: Running task 1.0 in stage 1.0 (TID 2)
+16/05/19 04:15:43 INFO executor.Executor: Running task 2.0 in stage 1.0 (TID 3)
+16/05/19 04:15:43 INFO executor.Executor: Running task 3.0 in stage 1.0 (TID 4)
+16/05/19 04:15:43 INFO executor.Executor: Running task 4.0 in stage 1.0 (TID 5)
+16/05/19 04:15:43 INFO executor.Executor: Running task 5.0 in stage 1.0 (TID 6)
+16/05/19 04:15:43 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join2_gennumA.txt:0+17114
+16/05/19 04:15:43 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join2_genchanB.txt:0+3430
+16/05/19 04:15:43 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join2_gennumC.txt:0+51400
+16/05/19 04:15:43 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join2_gennumB.txt:0+34245
+16/05/19 04:15:43 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join2_genchanC.txt:0+5152
+16/05/19 04:15:43 INFO rdd.HadoopRDD: Input split: hdfs://quickstart.cloudera:8020/user/cloudera/input/join2_genchanA.txt:0+1714
+16/05/19 04:15:43 INFO python.PythonRDD: Times: total = 260, boot = 17, init = 233, finish = 10
+16/05/19 04:15:43 INFO python.PythonRDD: Times: total = 402, boot = 26, init = 308, finish = 68
+16/05/19 04:15:43 INFO python.PythonRDD: Times: total = 322, boot = 41, init = 273, finish = 8
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 443, boot = 69, init = 362, finish = 12
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 669, boot = 112, init = 534, finish = 23
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 613, boot = 120, init = 428, finish = 65
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 591, boot = 72, init = 481, finish = 38
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 537, boot = 93, init = 369, finish = 75
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 776, boot = 46, init = 660, finish = 70
+16/05/19 04:15:44 INFO executor.Executor: Finished task 5.0 in stage 1.0 (TID 6). 2322 bytes result sent to driver
+16/05/19 04:15:44 INFO executor.Executor: Finished task 0.0 in stage 1.0 (TID 1). 2322 bytes result sent to driver
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 1.0 (TID 6) in 1389 ms on localhost (1/6)
+16/05/19 04:15:44 INFO executor.Executor: Finished task 4.0 in stage 1.0 (TID 5). 2322 bytes result sent to driver
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 1072, boot = 127, init = 854, finish = 91
+16/05/19 04:15:44 INFO executor.Executor: Finished task 3.0 in stage 1.0 (TID 4). 2322 bytes result sent to driver
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 1.0 (TID 4) in 1451 ms on localhost (2/6)
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 1.0 (TID 1) in 1521 ms on localhost (3/6)
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 1.0 (TID 5) in 1461 ms on localhost (4/6)
+16/05/19 04:15:44 INFO executor.Executor: Finished task 1.0 in stage 1.0 (TID 2). 2322 bytes result sent to driver
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 1.0 (TID 2) in 1567 ms on localhost (5/6)
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 1171, boot = 58, init = 990, finish = 123
+16/05/19 04:15:44 INFO python.PythonRDD: Times: total = 1332, boot = 18, init = 1244, finish = 70
+16/05/19 04:15:44 INFO executor.Executor: Finished task 2.0 in stage 1.0 (TID 3). 2322 bytes result sent to driver
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 1.0 (TID 3) in 1729 ms on localhost (6/6)
+16/05/19 04:15:44 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 1.0, whose tasks have all completed, from pool 
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: ShuffleMapStage 1 (join at <ipython-input-8-48f0811b2d1a>:1) finished in 1.764 s
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: looking for newly runnable stages
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: running: Set()
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: waiting: Set(ShuffleMapStage 2, ResultStage 3)
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: failed: Set()
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: Missing parents for ShuffleMapStage 2: List()
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: Missing parents for ResultStage 3: List(ShuffleMapStage 2)
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: Submitting ShuffleMapStage 2 (PairwiseRDD[13] at reduceByKey at <ipython-input-12-b268966ca7a0>:1), which is now runnable
+16/05/19 04:15:44 INFO storage.MemoryStore: ensureFreeSpace(9464) called with curMem=279240, maxMem=556038881
+16/05/19 04:15:44 INFO storage.MemoryStore: Block broadcast_4 stored as values in memory (estimated size 9.2 KB, free 530.0 MB)
+16/05/19 04:15:44 INFO storage.MemoryStore: ensureFreeSpace(5991) called with curMem=288704, maxMem=556038881
+16/05/19 04:15:44 INFO storage.MemoryStore: Block broadcast_4_piece0 stored as bytes in memory (estimated size 5.9 KB, free 530.0 MB)
+16/05/19 04:15:44 INFO storage.BlockManagerInfo: Added broadcast_4_piece0 in memory on localhost:58776 (size: 5.9 KB, free: 530.2 MB)
+16/05/19 04:15:44 INFO spark.SparkContext: Created broadcast 4 from broadcast at DAGScheduler.scala:861
+16/05/19 04:15:44 INFO scheduler.DAGScheduler: Submitting 6 missing tasks from ShuffleMapStage 2 (PairwiseRDD[13] at reduceByKey at <ipython-input-12-b268966ca7a0>:1)
+16/05/19 04:15:44 INFO scheduler.TaskSchedulerImpl: Adding task set 2.0 with 6 tasks
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 2.0 (TID 7, localhost, partition 0,PROCESS_LOCAL, 1890 bytes)
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 2.0 (TID 8, localhost, partition 1,PROCESS_LOCAL, 1890 bytes)
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 2.0 (TID 9, localhost, partition 2,PROCESS_LOCAL, 1890 bytes)
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 2.0 (TID 10, localhost, partition 3,PROCESS_LOCAL, 1890 bytes)
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 2.0 (TID 11, localhost, partition 4,PROCESS_LOCAL, 1890 bytes)
+16/05/19 04:15:44 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 2.0 (TID 12, localhost, partition 5,PROCESS_LOCAL, 1890 bytes)
+16/05/19 04:15:44 INFO executor.Executor: Running task 3.0 in stage 2.0 (TID 10)
+16/05/19 04:15:44 INFO executor.Executor: Running task 2.0 in stage 2.0 (TID 9)
+16/05/19 04:15:44 INFO executor.Executor: Running task 1.0 in stage 2.0 (TID 8)
+16/05/19 04:15:44 INFO executor.Executor: Running task 4.0 in stage 2.0 (TID 11)
+16/05/19 04:15:44 INFO executor.Executor: Running task 5.0 in stage 2.0 (TID 12)
+16/05/19 04:15:44 INFO executor.Executor: Running task 0.0 in stage 2.0 (TID 7)
+16/05/19 04:15:44 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 53 ms
+16/05/19 04:15:44 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 41 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 52 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 78 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 82 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 366, boot = -1066, init = 1321, finish = 111
+16/05/19 04:15:45 INFO executor.Executor: Finished task 2.0 in stage 2.0 (TID 9). 1443 bytes result sent to driver
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 2.0 (TID 9) in 511 ms on localhost (1/6)
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 328, boot = -953, init = 1225, finish = 56
+16/05/19 04:15:45 INFO executor.Executor: Finished task 0.0 in stage 2.0 (TID 7). 1443 bytes result sent to driver
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 453, boot = -954, init = 1266, finish = 141
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 2.0 (TID 7) in 579 ms on localhost (2/6)
+16/05/19 04:15:45 INFO executor.Executor: Finished task 4.0 in stage 2.0 (TID 11). 1443 bytes result sent to driver
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 2.0 (TID 11) in 601 ms on localhost (3/6)
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 497, boot = -860, init = 1120, finish = 237
+16/05/19 04:15:45 INFO executor.Executor: Finished task 1.0 in stage 2.0 (TID 8). 1443 bytes result sent to driver
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 602, boot = -972, init = 1315, finish = 259
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 2.0 (TID 8) in 685 ms on localhost (4/6)
+16/05/19 04:15:45 INFO executor.Executor: Finished task 5.0 in stage 2.0 (TID 12). 1443 bytes result sent to driver
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 561, boot = -920, init = 1179, finish = 302
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 2.0 (TID 12) in 728 ms on localhost (5/6)
+16/05/19 04:15:45 INFO executor.Executor: Finished task 3.0 in stage 2.0 (TID 10). 1443 bytes result sent to driver
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 2.0 (TID 10) in 770 ms on localhost (6/6)
+16/05/19 04:15:45 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 2.0, whose tasks have all completed, from pool 
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: ShuffleMapStage 2 (reduceByKey at <ipython-input-12-b268966ca7a0>:1) finished in 0.786 s
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: looking for newly runnable stages
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: running: Set()
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: waiting: Set(ResultStage 3)
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: failed: Set()
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: Missing parents for ResultStage 3: List()
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: Submitting ResultStage 3 (PythonRDD[16] at collect at <ipython-input-12-b268966ca7a0>:1), which is now runnable
+16/05/19 04:15:45 INFO storage.MemoryStore: ensureFreeSpace(5080) called with curMem=294695, maxMem=556038881
+16/05/19 04:15:45 INFO storage.MemoryStore: Block broadcast_5 stored as values in memory (estimated size 5.0 KB, free 530.0 MB)
+16/05/19 04:15:45 INFO storage.MemoryStore: ensureFreeSpace(3057) called with curMem=299775, maxMem=556038881
+16/05/19 04:15:45 INFO storage.MemoryStore: Block broadcast_5_piece0 stored as bytes in memory (estimated size 3.0 KB, free 530.0 MB)
+16/05/19 04:15:45 INFO storage.BlockManagerInfo: Added broadcast_5_piece0 in memory on localhost:58776 (size: 3.0 KB, free: 530.2 MB)
+16/05/19 04:15:45 INFO spark.SparkContext: Created broadcast 5 from broadcast at DAGScheduler.scala:861
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: Submitting 6 missing tasks from ResultStage 3 (PythonRDD[16] at collect at <ipython-input-12-b268966ca7a0>:1)
+16/05/19 04:15:45 INFO scheduler.TaskSchedulerImpl: Adding task set 3.0 with 6 tasks
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 3.0 (TID 13, localhost, partition 0,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 3.0 (TID 14, localhost, partition 1,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 3.0 (TID 15, localhost, partition 2,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 3.0 (TID 16, localhost, partition 3,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 3.0 (TID 17, localhost, partition 4,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 3.0 (TID 18, localhost, partition 5,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:15:45 INFO executor.Executor: Running task 2.0 in stage 3.0 (TID 15)
+16/05/19 04:15:45 INFO executor.Executor: Running task 3.0 in stage 3.0 (TID 16)
+16/05/19 04:15:45 INFO executor.Executor: Running task 0.0 in stage 3.0 (TID 13)
+16/05/19 04:15:45 INFO executor.Executor: Running task 5.0 in stage 3.0 (TID 18)
+16/05/19 04:15:45 INFO executor.Executor: Running task 1.0 in stage 3.0 (TID 14)
+16/05/19 04:15:45 INFO executor.Executor: Running task 4.0 in stage 3.0 (TID 17)
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 2 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 6 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 0 ms
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:15:45 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 71, boot = -1822, init = 1892, finish = 1
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 46, boot = -1324, init = 1365, finish = 5
+16/05/19 04:15:45 INFO executor.Executor: Finished task 0.0 in stage 3.0 (TID 13). 1292 bytes result sent to driver
+16/05/19 04:15:45 INFO executor.Executor: Finished task 2.0 in stage 3.0 (TID 15). 1292 bytes result sent to driver
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 103, boot = -1032, init = 1135, finish = 0
+16/05/19 04:15:45 INFO executor.Executor: Finished task 1.0 in stage 3.0 (TID 14). 1259 bytes result sent to driver
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 159, boot = -1424, init = 1560, finish = 23
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 97, boot = -1766, init = 1862, finish = 1
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 3.0 (TID 15) in 250 ms on localhost (1/6)
+16/05/19 04:15:45 INFO executor.Executor: Finished task 4.0 in stage 3.0 (TID 17). 1259 bytes result sent to driver
+16/05/19 04:15:45 INFO executor.Executor: Finished task 3.0 in stage 3.0 (TID 16). 1259 bytes result sent to driver
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 3.0 (TID 17) in 251 ms on localhost (2/6)
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 3.0 (TID 13) in 275 ms on localhost (3/6)
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 3.0 (TID 14) in 273 ms on localhost (4/6)
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 3.0 (TID 16) in 263 ms on localhost (5/6)
+16/05/19 04:15:45 INFO python.PythonRDD: Times: total = 185, boot = -1120, init = 1268, finish = 37
+16/05/19 04:15:45 INFO executor.Executor: Finished task 5.0 in stage 3.0 (TID 18). 1292 bytes result sent to driver
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: ResultStage 3 (collect at <ipython-input-12-b268966ca7a0>:1) finished in 0.297 s
+16/05/19 04:15:45 INFO scheduler.DAGScheduler: Job 1 finished: collect at <ipython-input-12-b268966ca7a0>:1, took 3.224994 s
+16/05/19 04:15:45 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 3.0 (TID 18) in 267 ms on localhost (6/6)
+16/05/19 04:15:45 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 3.0, whose tasks have all completed, from pool 
+Out[12]: 
+[(u'XYZ', 5208016),
+ (u'DEF', 8032799),
+ (u'CNO', 3941177),
+ (u'BAT', 5099141),
+ (u'NOX', 2583583),
+ (u'CAB', 3940862),
+ (u'BOB', 2591062),
+ (u'ABC', 1115974),
+ (u'MAN', 6566187)]
+
+In [13]: %cpaste
+Pasting code; enter '--' alone on the line to stop or use Ctrl-D.
+:def sum_function(sorted_collection, val, kv, skv, result):
+:    for i in sorted_collection:
+:        val = val + int(i[1])
+:        kv[i[0]] = val
+:    skv = sorted(kv.items())
+:    for index in range(len(skv)):
+:        if index == 0:
+:            result[skv[index][0]] = skv[index][1]
+:            # print skv[index][0], skv[index][1]
+:        elif index > 0:
+:           result[skv[index][0]] = (skv[index][1] - skv[index - 1][1])
+:            # print skv[index][0], (skv[index][1] - skv[index - 1][1])
+:    return sorted(result.items())
+:<EOF>
+
+In [14]: sorted_channel_views = sorted(channel_views.collect())
+16/05/19 04:32:32 INFO spark.SparkContext: Starting job: collect at <ipython-input-14-e9ba75acf867>:1
+16/05/19 04:32:32 INFO spark.MapOutputTrackerMaster: Size of output statuses for shuffle 1 is 196 bytes
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Got job 2 (collect at <ipython-input-14-e9ba75acf867>:1) with 6 output partitions
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Final stage: ResultStage 5(collect at <ipython-input-14-e9ba75acf867>:1)
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Parents of final stage: List(ShuffleMapStage 4)
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Missing parents: List()
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Submitting ResultStage 5 (PythonRDD[17] at collect at <ipython-input-14-e9ba75acf867>:1), which has no missing parents
+16/05/19 04:32:32 INFO storage.MemoryStore: ensureFreeSpace(7224) called with curMem=302832, maxMem=556038881
+16/05/19 04:32:32 INFO storage.MemoryStore: Block broadcast_6 stored as values in memory (estimated size 7.1 KB, free 530.0 MB)
+16/05/19 04:32:32 INFO storage.MemoryStore: ensureFreeSpace(4498) called with curMem=310056, maxMem=556038881
+16/05/19 04:32:32 INFO storage.MemoryStore: Block broadcast_6_piece0 stored as bytes in memory (estimated size 4.4 KB, free 530.0 MB)
+16/05/19 04:32:32 INFO storage.BlockManagerInfo: Added broadcast_6_piece0 in memory on localhost:58776 (size: 4.4 KB, free: 530.2 MB)
+16/05/19 04:32:32 INFO spark.SparkContext: Created broadcast 6 from broadcast at DAGScheduler.scala:861
+16/05/19 04:32:32 INFO scheduler.DAGScheduler: Submitting 6 missing tasks from ResultStage 5 (PythonRDD[17] at collect at <ipython-input-14-e9ba75acf867>:1)
+16/05/19 04:32:32 INFO scheduler.TaskSchedulerImpl: Adding task set 5.0 with 6 tasks
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 0.0 in stage 5.0 (TID 19, localhost, partition 0,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 1.0 in stage 5.0 (TID 20, localhost, partition 1,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 2.0 in stage 5.0 (TID 21, localhost, partition 2,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 3.0 in stage 5.0 (TID 22, localhost, partition 3,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 4.0 in stage 5.0 (TID 23, localhost, partition 4,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Starting task 5.0 in stage 5.0 (TID 24, localhost, partition 5,PROCESS_LOCAL, 1901 bytes)
+16/05/19 04:32:32 INFO executor.Executor: Running task 0.0 in stage 5.0 (TID 19)
+16/05/19 04:32:32 INFO executor.Executor: Running task 1.0 in stage 5.0 (TID 20)
+16/05/19 04:32:32 INFO executor.Executor: Running task 2.0 in stage 5.0 (TID 21)
+16/05/19 04:32:32 INFO executor.Executor: Running task 4.0 in stage 5.0 (TID 23)
+16/05/19 04:32:32 INFO executor.Executor: Running task 3.0 in stage 5.0 (TID 22)
+16/05/19 04:32:32 INFO executor.Executor: Running task 5.0 in stage 5.0 (TID 24)
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Getting 6 non-empty blocks out of 6 blocks
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO storage.ShuffleBlockFetcherIterator: Started 0 remote fetches in 1 ms
+16/05/19 04:32:32 INFO python.PythonRDD: Times: total = 477, boot = 25, init = 100, finish = 352
+16/05/19 04:32:32 INFO python.PythonRDD: Times: total = 482, boot = 144, init = 88, finish = 250
+16/05/19 04:32:32 INFO executor.Executor: Finished task 2.0 in stage 5.0 (TID 21). 114260 bytes result sent to driver
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Finished task 2.0 in stage 5.0 (TID 21) in 591 ms on localhost (1/6)
+16/05/19 04:32:32 INFO executor.Executor: Finished task 0.0 in stage 5.0 (TID 19). 95827 bytes result sent to driver
+16/05/19 04:32:32 INFO scheduler.TaskSetManager: Finished task 0.0 in stage 5.0 (TID 19) in 617 ms on localhost (2/6)
+16/05/19 04:32:33 INFO python.PythonRDD: Times: total = 481, boot = 167, init = 97, finish = 217
+16/05/19 04:32:33 INFO executor.Executor: Finished task 4.0 in stage 5.0 (TID 23). 123997 bytes result sent to driver
+16/05/19 04:32:33 INFO python.PythonRDD: Times: total = 465, boot = 109, init = 138, finish = 218
+16/05/19 04:32:33 INFO executor.Executor: Finished task 5.0 in stage 5.0 (TID 24). 170863 bytes result sent to driver
+16/05/19 04:32:33 INFO scheduler.TaskSetManager: Finished task 4.0 in stage 5.0 (TID 23) in 682 ms on localhost (3/6)
+16/05/19 04:32:33 INFO scheduler.TaskSetManager: Finished task 5.0 in stage 5.0 (TID 24) in 692 ms on localhost (4/6)
+16/05/19 04:32:33 INFO python.PythonRDD: Times: total = 671, boot = 51, init = 74, finish = 546
+16/05/19 04:32:33 INFO executor.Executor: Finished task 1.0 in stage 5.0 (TID 20). 212084 bytes result sent to driver
+16/05/19 04:32:33 INFO scheduler.TaskSetManager: Finished task 1.0 in stage 5.0 (TID 20) in 799 ms on localhost (5/6)
+16/05/19 04:32:33 INFO python.PythonRDD: Times: total = 675, boot = 28, init = 108, finish = 539
+16/05/19 04:32:33 INFO executor.Executor: Finished task 3.0 in stage 5.0 (TID 22). 209914 bytes result sent to driver
+16/05/19 04:32:33 INFO scheduler.TaskSetManager: Finished task 3.0 in stage 5.0 (TID 22) in 862 ms on localhost (6/6)
+16/05/19 04:32:33 INFO scheduler.DAGScheduler: ResultStage 5 (collect at <ipython-input-14-e9ba75acf867>:1) finished in 0.884 s
+16/05/19 04:32:33 INFO scheduler.TaskSchedulerImpl: Removed TaskSet 5.0, whose tasks have all completed, from pool 
+16/05/19 04:32:33 INFO scheduler.DAGScheduler: Job 2 finished: collect at <ipython-input-14-e9ba75acf867>:1, took 0.977854 s
+
+In [15]: sum_function(sorted_channel_views, val=0, kv={}, skv={}, result={})
+Out[15]: 
+[(u'ABC', 1115974),
+ (u'BAT', 5099141),
+ (u'BOB', 2591062),
+ (u'CAB', 3940862),
+ (u'CNO', 3941177),
+ (u'DEF', 8032799),
+ (u'MAN', 6566187),
+ (u'NOX', 2583583),
+ (u'XYZ', 5208016)]
+
+In [16]: 
+
+
+
+
+Verified:
+[(u'ABC', 1115974),
+ (u'BAT', 5099141),
+ (u'BOB', 2591062),
+ (u'CAB', 3940862),
+ (u'CNO', 3941177),
+ (u'DEF', 8032799),
+ (u'MAN', 6566187),
+ (u'NOX', 2583583),
+ (u'XYZ', 5208016)]
+
+With:
+[(u'XYZ', 5208016),
+ (u'DEF', 8032799),
+ (u'CNO', 3941177),
+ (u'BAT', 5099141),
+ (u'NOX', 2583583),
+ (u'CAB', 3940862),
+ (u'BOB', 2591062),
+ (u'ABC', 1115974),
+ (u'MAN', 6566187)]

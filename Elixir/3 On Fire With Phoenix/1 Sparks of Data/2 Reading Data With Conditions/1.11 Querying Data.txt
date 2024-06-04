@@ -1,0 +1,32 @@
+1.11 Querying Data
+
+We want to be able to list all events for a given year. In order to do that we’ve started writing a new function called Event.all_within_year. This function takes one argument, the year (as an integer), and lists all events for that year. As you can see on the tab for lib/neon/event.ex, most of the code for this function has been written.
+
+We are missing one very important import statement which allows us to use Ecto’s DSL for querying data. Add the missing statement.
+
+lib/neon/event.ex
+defmodule Neon.Event do
+  use Ecto.Schema
+  
+
+  schema "events" do
+    field :name, :string
+    field :location, :string
+    field :start_on, :naive_datetime
+
+    timestamps()
+  end
+
+  def all_within_year(target_year) do
+    {:ok, start_datetime} = NaiveDateTime.new(target_year, 1,1,0,0,0)
+    {:ok, end_datetime} = NaiveDateTime.new(target_year+1, 1,1,0,0,0)
+
+    from e in __MODULE__,
+      where: e.start_on > ^start_datetime and
+        e.start_on < ^end_datetime
+  end
+end
+
+
+Answer:
+lib/neon/event.ex

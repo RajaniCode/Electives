@@ -1,0 +1,176 @@
+2.8 Nesting and Styling Content in a Column
+
+We heard you like tables. So we're going to add some tables to your tables so that your tables are inside your tables. To style the content in the first column, we need to nest a content table and add content and styles within the td tags.
+
+email.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <table border="0" cellpadding="0" cellspacing="0" style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg');" width="100%">
+      <tr>
+        <td>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td>
+
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td style="padding-top: 15px;">
+                
+                      <img alt="La Amor Peligrosa" src="https://s3.amazonaws.com/unmasking-html-emails/la-amor-peligrosa.png" style="display: block; max-width: 100%;" width="300" />
+
+              </td>
+              <td style="padding-top: 15px;">
+                <img alt="La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/la-fuega-fatal.png" style="display: block; max-width: 100%;" width="300" />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+1. In the first td, create a table to contain the img. Apply the reset attributes and add a width of 300 to the table.
+
+Answer:
+
+                <table width="300" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td>
+                      <img alt="La Amor Peligrosa" src="https://s3.amazonaws.com/unmasking-html-emails/la-amor-peligrosa.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                </table
+
+2. Add a new tr and td to the table, with the luchadora's rank of Contender.
+
+Answer:
+
+                <table width="300" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td>
+                      <img alt="La Amor Peligrosa" src="https://s3.amazonaws.com/unmasking-html-emails/la-amor-peligrosa.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                  <tr> 
+                    <td>
+                      Contender                    
+                    </td>
+                  </tr>
+                </table>
+
+3. Style the new text with this CSS color: #b83466; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;.
+
+Answer:
+
+                <table width="300" border="0" cellpadding="0" cellspacing="0">
+                  <tr> 
+                    <td>
+                      <img alt="La Amor Peligrosa" src="https://s3.amazonaws.com/unmasking-html-emails/la-amor-peligrosa.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                  <tr> 
+                    <td style="color: #b83466; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      Contender                    
+                    </td>
+                  </tr>
+                </table>
+4. Any text within this table should be centered and uppercase, so apply the styles text-align: center; text-transform: uppercase; to the table containing the img and rank.
+
+Answer:
+
+                <table width="300" border="0" cellpadding="0" cellspacing="0" style="text-align: center; text-transform: uppercase;">
+                  <tr> 
+                    <td>
+                      <img alt="La Amor Peligrosa" src="https://s3.amazonaws.com/unmasking-html-emails/la-amor-peligrosa.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                  <tr> 
+                    <td style="color: #b83466; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      Contender                    
+                    </td>
+                  </tr>
+                </table>
+
+Success:
+
+email.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <table border="0" cellpadding="0" cellspacing="0" style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg');" width="100%">
+      <tr>
+        <td>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td>
+
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td style="padding-top: 15px;">
+                <table width="300" border="0" cellpadding="0" cellspacing="0" style="text-align: center; text-transform: uppercase;">
+                  <tr> 
+                    <td>
+                      <img alt="La Amor Peligrosa" src="https://s3.amazonaws.com/unmasking-html-emails/la-amor-peligrosa.png" style="display: block; max-width: 100%;" width="300" />
+                    </td>
+                  </tr>
+                  <tr> 
+                    <td style="color: #b83466; font-family: Georgia, serif; font-size: 20px; font-weight: bold; line-height: 20px; padding-top: 5px;">
+                      Contender                    
+                    </td>
+                  </tr>
+                </table>
+              </td>
+              <td style="padding-top: 15px;">
+                <img alt="La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/la-fuega-fatal.png" style="display: block; max-width: 100%;" width="300" />
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

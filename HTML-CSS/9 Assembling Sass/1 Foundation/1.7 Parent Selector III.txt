@@ -1,0 +1,45 @@
+1.7 Parent Selector III
+
+
+We've found a change to .surveyor further on in our stylesheet - it needs a bit more padding inside .factory containers. We'd be better off nesting this change inside .surveyor.
+
+CSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.factory .surveyor {
+  padding: 30px;
+}
+
+APPLICATION.SCSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+.factory .surveyor {
+  padding: 30px;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+	.factory & {
+  	padding: 30px;
+	}
+}
+
+CSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px; }
+  .factory .surveyor {
+    padding: 30px; }

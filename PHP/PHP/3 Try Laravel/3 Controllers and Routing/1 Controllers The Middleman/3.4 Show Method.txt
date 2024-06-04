@@ -1,0 +1,76 @@
+3.4 Show Method
+
+One common method to add to a controller is show(), which will be called whenever a user requests information about a specific piece of data from the datastore (in this case, a farm).
+
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+  public function index()
+  {
+    $farms = Farm::all();
+    return view('farms.index', ['farms' => $farms]);
+  }
+
+  
+
+}
+
+
+1. On the lines below the index method, create a new method named show that has a single parameter named $farm with the class of Farm.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+  public function index()
+  {
+    $farms = Farm::all();
+    return view('farms.index', ['farms' => $farms]);
+  }
+
+  public function show(Farm $farm)
+  {
+    
+  }
+
+}
+
+2. In show(), since the injection in the argument will get our object for us, simply return a view with the template of 'farms.show' and pass along the $farm object as an array with the key of 'farm'.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+  public function index()
+  {
+    $farms = Farm::all();
+    return view('farms.index', ['farms' => $farms]);
+  }
+
+  public function show(Farm $farm)
+  {
+    return view('farms.show', ['farm' => $farm]);
+  }
+
+}

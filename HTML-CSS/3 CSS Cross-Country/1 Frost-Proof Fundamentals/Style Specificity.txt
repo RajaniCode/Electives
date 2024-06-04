@@ -1,0 +1,59 @@
+Style Specificity
+
+
+Remove the non-external styles found on the HTML page so that !important is no longer needed to set the <header> background in style.css.
+
+index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+    <style>
+      header {
+        background: #ff0000;
+      }
+    </style>
+  </head>
+  
+  <body>
+    <section class="content home">
+      <header style="background: #423e40;">
+        <h1>Sven's Snowshoe Emporium</h1>
+        <h2>"For the Snow-Savvy Shoe-Shopper"</h2>
+      </header>
+    </section>
+  </body>
+</html>
+
+style.css
+
+header {
+  background: #e0e2e6 !important;
+}
+
+Answer: 
+
+style.css
+
+header {
+  background: #e0e2e6;
+}
+
+index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title> 
+  </head>  
+  <body>
+    <section class="content home">
+      <header>
+        <h1>Sven's Snowshoe Emporium</h1>
+        <h2>"For the Snow-Savvy Shoe-Shopper"</h2>
+      </header>
+    </section>
+  </body>
+</html>

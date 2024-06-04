@@ -1,0 +1,58 @@
+7.5 Respond-to IV
+
+
+We've noticed that our most common call to respond-to passes in min-width for $type and 960px for $query: create default values out of each so that our simplified @include works correctly.
+
+
+CSS
+
+Mixin respond-to is missing argument $type.
+
+APPLICATION.SCSS 
+
+@mixin respond-to($type, $query) {
+  @media ($type: $query) {
+    @content;
+  }
+}
+
+.factory {
+  width: 100%;
+  @include respond-to {
+    width: percentage(600px / 960px);
+  }
+  @include respond-to(max-width, 768px) {
+    width: 50%;
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+@mixin respond-to($type: min-width, $query: 960px) {
+  @media ($type: $query) {
+    @content;
+  }
+}
+
+.factory {
+  width: 100%;
+  @include respond-to {
+    width: percentage(600px / 960px);
+  }
+  @include respond-to(max-width, 768px) {
+    width: 50%;
+  }
+}
+
+CSS
+
+.factory {
+  width: 100%; }
+  @media (min-width: 960px) {
+    .factory {
+      width: 62.5%; } }
+  @media (max-width: 768px) {
+    .factory {
+      width: 50%; } }

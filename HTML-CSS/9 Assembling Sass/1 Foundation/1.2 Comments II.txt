@@ -1,0 +1,84 @@
+1.2 Comments II
+
+Our document has a few remaining CSS-style comments for organization. Since these comments are only useful to us, let's alter them so they aren't output after compiling.
+
+CSS
+
+* Headers */
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+/* Lists */
+ol {
+  list-style: decimal;
+}
+
+ul {
+  list-style: disc;
+}
+
+APPLICATION.SCSS
+
+/* Headers */
+    
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+h2 {
+  font-size: 18px;
+}
+
+/* Lists */
+
+ol {
+  list-style: decimal;
+}
+ul {
+  list-style: disc;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+// Headers
+    
+h1 {
+  font-size: 24px;
+  font-weight: bold;
+}
+h2 {
+  font-size: 18px;
+}
+
+// Lists
+
+ol {
+  list-style: decimal;
+}
+ul {
+  list-style: disc;
+}
+
+
+CSS
+
+h1 {
+  font-size: 24px;
+  font-weight: bold; }
+
+h2 {
+  font-size: 18px; }
+
+ol {
+  list-style: decimal; }
+
+ul {
+  list-style: disc; }

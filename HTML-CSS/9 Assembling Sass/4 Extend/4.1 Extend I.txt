@@ -1,0 +1,60 @@
+4.1 Extend I
+
+
+It looks like .blueprint and .surveyor have a number of matching properties. Add an @extend to .surveyor to make this section more efficient.
+
+
+CSS
+
+.blueprint {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.surveyor {
+  background: blue;
+  border-radius: 5px;
+  color: #fff;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+APPLICATION.SCSS 
+
+.blueprint {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+.surveyor {
+  background: blue;
+  border-radius: 5px;
+  color: #fff;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.blueprint {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+.surveyor {
+  @extend .blueprint;
+}
+
+CSS
+
+.blueprint, .surveyor {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px; }

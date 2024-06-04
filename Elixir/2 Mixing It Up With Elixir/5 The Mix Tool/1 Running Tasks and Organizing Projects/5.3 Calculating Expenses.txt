@@ -1,0 +1,32 @@
+5.3 Calculating Expenses
+
+Inside the lib/expenses.ex file, let’s define the first function of our new project.
+
+expenses.ex
+
+defmodule Expenses do
+  
+
+end
+
+
+1. Define a new function called current_balance. This function should accept two arguments: initial and spending.
+
+Answer:
+expenses.ex
+
+defmodule Expenses do
+  def current_balance(initial, spending) do
+  end
+end
+
+2. From inside current_balance, return the subtraction of spending from initial.
+
+Answer:
+expenses.ex
+
+defmodule Expenses do
+  def current_balance(initial, spending) do
+    initial - spending
+  end
+end

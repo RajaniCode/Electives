@@ -1,0 +1,107 @@
+
+Aspire@Acer MINGW64 ~
+$ vagrant --version
+Vagrant 1.9.2
+
+Aspire@Acer MINGW64 ~
+$ cd "E:\Working\Ubuntu\Ubuntu-14-64-Bit\Vagrantfile"
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/Ubuntu-14-64-Bit/Vagrantfile
+$ vagrant up
+Bringing machine 'default' up with 'virtualbox' provider...
+==> default: Checking if box 'ubuntu/trusty64' is up to date...
+==> default: Clearing any previously set forwarded ports...
+==> default: Clearing any previously set network interfaces...
+==> default: Preparing network interfaces based on configuration...
+    default: Adapter 1: nat
+==> default: Forwarding ports...
+    default: 27017 (guest) => 27017 (host) (adapter 1)
+    default: 8080 (guest) => 8080 (host) (adapter 1)
+    default: 7077 (guest) => 7077 (host) (adapter 1)
+    default: 22 (guest) => 2222 (host) (adapter 1)
+==> default: Running 'pre-boot' VM customizations...
+==> default: Booting VM...
+==> default: Waiting for machine to boot. This may take a few minutes...
+    default: SSH address: 127.0.0.1:2222
+    default: SSH username: vagrant
+    default: SSH auth method: private key
+    default: Warning: Remote connection disconnect. Retrying...
+==> default: Machine booted and ready!
+==> default: Checking for guest additions in VM...
+    default: The guest additions on this VM do not match the installed version of
+    default: VirtualBox! In most cases this is fine, but in rare cases it can
+    default: prevent things such as shared folders from working properly. If you see
+    default: shared folder errors, please make sure the guest additions within the
+    default: virtual machine match the version of VirtualBox you have installed on
+    default: your host and reload your VM.
+    default:
+    default: Guest Additions Version: 4.3.36
+    default: VirtualBox Version: 5.1
+==> default: Mounting shared folders...
+    default: /vagrant => E:/Working/Ubuntu/Ubuntu-14-64-Bit/Vagrantfile
+==> default: Machine already provisioned. Run `vagrant provision` or use the `--provision`
+==> default: flag to force provisioning. Provisioners marked to run always will still run.
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/Ubuntu-14-64-Bit/Vagrantfile
+$ vagrant status
+Current machine states:
+
+default                   running (virtualbox)
+
+The VM is running. To stop this VM, you can run `vagrant halt` to
+shut it down forcefully, or you can run `vagrant suspend` to simply
+suspend the virtual machine. In either case, to restart it again,
+simply run `vagrant up`.
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/Ubuntu-14-64-Bit/Vagrantfile
+$ vagrant ssh
+Welcome to Ubuntu 14.04.5 LTS (GNU/Linux 3.13.0-117-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com/
+
+ System information disabled due to load higher than 1.0
+
+  Get cloud support with Ubuntu Advantage Cloud Guest:
+    http://www.ubuntu.com/business/services/cloud
+
+0 packages can be updated.
+0 updates are security updates.
+
+New release '16.04.2 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Fri May 12 11:08:16 2017 from 10.0.2.2
+vagrant@vagrant-ubuntu-trusty-64:~$ ls
+vagrant@vagrant-ubuntu-trusty-64:~$ ls ~
+vagrant@vagrant-ubuntu-trusty-64:~$ ls /
+bin  boot  dev  etc  home  initrd.img  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  srv  sys  tmp  usr  vagrant  var  vmlinuz
+vagrant@vagrant-ubuntu-trusty-64:~$ ls /etc
+acpi                    chef            environment       init.d           login.defs      opt                      rc0.d             services     updatedb.conf
+adduser.conf            cloud           fonts             initramfs-tools  logrotate.conf  os-release               rc1.d             sgml         update-manager
+adjtime                 colord.conf     fstab             inputrc          logrotate.d     overlayroot.conf         rc2.d             shadow       update-motd.d
+alternatives            console-setup   fstab.d           insserv          lsb-release     overlayroot.local.conf   rc3.d             shadow-      update-notifier
+apm                     cron.d          fuse.conf         insserv.conf     ltrace.conf     pam.conf                 rc4.d             shells       upstart-xsessions
+apparmor                cron.daily      gai.conf          insserv.conf.d   magic           pam.d                    rc5.d             skel         vagrant_provisioned_at
+apparmor.d              cron.hourly     groff             iproute2         magic.mime      passwd                   rc6.d             ssh          vim
+apport                  cron.monthly    group             issue            mailcap         passwd-                  rc.local          ssl          vmware-tools
+apt                     crontab         group-            issue.net        mailcap.order   perl                     rcS.d             subgid       vtrgb
+at.deny                 cron.weekly     grub.d            kbd              manpath.config  pm                       request-key.conf  subgid-      w3m
+at-spi2                 crypttab        gshadow           kernel           mime.types      polkit-1                 request-key.d     subuid       wgetrc
+bash.bashrc             dbus-1          gshadow-          kernel-img.conf  mke2fs.conf     pollinate                resolvconf        subuid-      X11
+bash_completion         debconf.conf    gssapi_mech.conf  landscape        modprobe.d      popularity-contest.conf  resolv.conf       sudoers      xdg
+bash_completion.d       debian_version  gtk-3.0           ldap             modules         ppp                      rmt               sudoers.d    xml
+bindresvport.blacklist  default         hdparm.conf       ld.so.cache      mtab            profile                  rpc               sysctl.conf  zsh_command_not_found
+blkid.conf              deluser.conf    host.conf         ld.so.conf       nanorc          profile.d                rsyslog.conf      sysctl.d
+blkid.tab               depmod.d        hostname          ld.so.conf.d     netconfig       protocols                rsyslog.d         systemd
+byobu                   dhcp            hosts             legal            network         puppet                   sane.d            terminfo
+ca-certificates         dkms            hosts.allow       libaudit.conf    networks        python                   screenrc          timezone
+ca-certificates.conf    dpkg            hosts.deny        locale.alias     newt            python2.7                securetty         ucf.conf
+calendar                drirc           idmapd.conf       localtime        nologin         python3                  security          udev
+chatscripts             ec2_version     init              logcheck         nsswitch.conf   python3.4                selinux           ufw
+vagrant@vagrant-ubuntu-trusty-64:~$ exit
+logout
+Connection to 127.0.0.1 closed.
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/Ubuntu-14-64-Bit/Vagrantfile
+$ exit

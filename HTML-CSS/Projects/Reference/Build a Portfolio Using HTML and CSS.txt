@@ -1,0 +1,263 @@
+https://www.codeschool.com/projects/build-a-portfolio-using-html-and-css
+
+https://www.codeschool.com/projects/build-a-portfolio-using-html-and-css#course-intro-video
+
+https://codeschool-project-demos.github.io/HTMLPortfolioProject/
+
+Build a Portfolio Using HTML and CSS
+
+Step 1: Authenticate with GitHub
+
+We'll need to know your GitHub username to complete this project.
+
+Step 2: Fork the Repo
+
+In a new window, head over to GitHub and Fork thecodeschool-projects/HTMLPortfolioProject [https://github.com/codeschool-projects/HTMLPortfolioProject] repo into your account. Once you've done that on GitHub, let us know!
+
+How do I Fork a repo on GitHub? [https://www.codeschool.com/projects/build-a-portfolio-using-html-and-css/build#fork-video]
+
+Step 3: Clone the Repo
+
+Clone down your fork of the repo locally. You can copy and paste either version of this line into your terminal.
+
+[
+Use SSH
+git clone git@github.com:RajaniCode/HTMLPortfolioProject.git
+]
+
+Use HTTPS
+git clone https://github.com/RajaniCode/HTMLPortfolioProject.git
+
+How do I Clone a repo on GitHub? [https://www.codeschool.com/projects/build-a-portfolio-using-bootstrap/build#fork-video]
+
+# Git Bash ############################################################################################################################
+
+$ cd "E:\Working\HTML-and-CSS\Code School\Projects"
+
+Aspire@Acer MINGW64 /e/Working/HTML-and-CSS/Code School/Projects
+$ git clone https://github.com/RajaniCode/HTMLPortfolioProject.git
+Cloning into 'HTMLPortfolioProject'...
+remote: Counting objects: 62, done.
+remote: Total 62 (delta 0), reused 0 (delta 0), pack-reused 62
+Unpacking objects: 100% (62/62), done.
+
+#######################################################################################################################################
+
+Step 4: Prepare the Build
+
+Once you have cloned the forked repository, go into the directory containing the project and look for the /src directory. This is the directory where you will be making changes when you start following the step-by-step instructions. You can simply open those files in a text editor and get started.
+
+You can always open the index.html file directly in your browser and work through the tasks below. You can also head over to the Node.js [https://nodejs.org/] website and follow the instructions to install Node on your machine. Once you have Node installed, open your command line and follow these instructions:
+
+cd HTMLPortfolioProject
+npm install
+npm start
+
+Running npm start should open a browser window pointing to http://localhost:3000. Now once you make changes to the files under the /src directory, your browser will refresh automatically, displaying the newest changes made to the files. This will save you the round trip of saving files and clicking refresh on your browser.
+
+# src/index.html (Original)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+  <link rel="stylesheet" href="main.css">
+  <title>HTML Portfolio</title>
+</head>
+<body>
+
+  Welcome to the HTML Portfolio Project
+
+</body>
+</html>
+
+$ npm start
+
+http://localhost:3000
+
+Step 5: Create the Page Header
+
+At the top of our page, we'll want to create an element with a class of header for us to add some information about ourselves.
+
+  <div class="header">
+  </div>
+
+Step 6: Header Text
+
+Inside of our .header element, create an h1 tag with your name in it. This is your portfolio, so it makes sense for your name to have the most prominence.
+
+  <div class="header">
+    <h1>Rajani</h1>
+  </div>
+
+Step 7: Job Title
+
+Also inside the .header element, add a h2 tag with a job title (ie. "software developer", or "web designer", or "maker of things", etc).
+
+  <div class="header">
+    <h1>Rajani</h1>
+    <h2>Techie</h2>
+  </div>
+
+Step 8: The Tagline Element
+
+Next, create a new element that has a CSS class called tagline. In this element you'll be giving a little more information about yourself.
+
+  <div class="tagline">
+    <div class="content-wrapper">
+    </div>
+  </div>
+
+Step 9: A Little About You
+
+Inside the .tagline element, create a h3 tag inviting the visitor to learn more about you (ie. "Learn More About Me", or "Here's What I Do", etc). Also add an introductory paragraph with more information about yourself, including what things you're passionate about, programming languages you enjoy writing in, etc.
+
+  <div class="tagline">
+    <div class="content-wrapper">
+      <h3>A bit more about me</h3>
+    </div>
+  </div>
+
+Step 10: The Skills Element
+
+Next, we'll create a place to list out our current skills by creating an element with a class of skills. In here we'll be listing out what we already know.
+
+  <div class="tagline">
+    <div class="content-wrapper">
+      <h3>A bit more about me</h3>
+      <p>Hey I am Rajani, I work for <a target="_blank" href="https://www.codeschool.com">Code School</a> and I love writing Code!</p>
+    </div>
+  </div>
+
+Step 11: Skills Content
+
+Inside the .skills element, create a h3 tag inviting the user to learn more about your skills (ie. "my skills"). Also add a paragraph tag describing your skills (ie. "I enjoy writing front-end code with these technologies").
+
+  <div class="skills">
+    <div class="content-wrapper">
+      <h3>my skills</h3>
+      <p>I enjoy writing front-end code with these technologies</p>
+    </div>
+  </div>
+
+Step 12: List of Skills
+
+Inside the .skills element, create a new ul which will be a list of of your skills. In here, add 3 skills you currently possess. HTML must be one of these skills.
+
+  <div class="skills">
+    <div class="content-wrapper">
+      <h3>my skills</h3>
+      <p>Here are some of the technologies. Right now I enjoy writing:</p>
+      <ul>
+        <li>HTML &amp; CSS</li>
+        <li>Node.js</li>
+        <li>React</li>
+      </ul>
+    </div>
+  </div>
+
+Step 13: The Contact Element
+
+The last section of our page will give people a way to contact us. Create a wrapper element for this area and give it a class of contact.
+
+  <div class="contact">
+    <div class="content-wrapper">
+    </div>
+  </div>
+
+Step 14: Contact Copy
+
+Inside the .contact element, create a h3 tag inviting the user to contact you (ie. "contact me", or "drop me a line"). Also add a paragraph tag describing how people can contact you.
+
+  <div class="contact">
+    <div class="content-wrapper">
+      <h3>contact me</h3>
+    </div>
+  </div>
+
+Step 15: Contact Link
+
+Lastly, we just need a way for people to get in touch with us! In the paragraph you created, add an anchor tag (an <a> element) pointing people to a place where they can get more information about you (ie. Twitter, LinkedIn, Github, etc).
+
+  <div class="contact">
+    <div class="content-wrapper">
+      <h3>contact me</h3>
+      <p>The easiest way to contact me is Code School: <a target="_blank" href="https://www.codeschool.com/users/RajaniCode">Rajani</a></p>
+    </div>
+  </div>
+
+# src/index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+  <link rel="stylesheet" href="main.css">
+  <title>HTML Portfolio</title>
+</head>
+<body>
+  
+  <div class="header">
+    <h1>Rajani</h1>
+    <h2>Techie</h2>
+  </div>
+
+  <div class="tagline">
+    <div class="content-wrapper">
+      <h3>A bit more about me</h3>
+      <p>Hey I am Rajani, I work for <a target="_blank" href="https://www.codeschool.com">Code School</a> and I love writing Code!</p>
+    </div>
+  </div>
+
+  <div class="skills">
+    <div class="content-wrapper">
+      <h3>my skills</h3>
+      <p>Here are some of the technologies. Right now I enjoy writing:</p>
+      <ul>
+        <li>HTML &amp; CSS</li>
+        <li>Node.js</li>
+        <li>React</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="content-wrapper">
+      <h3>contact me</h3>
+      <p>The easiest way to contact me is Code School: <a target="_blank" href="https://www.codeschool.com/users/RajaniCode">Rajani</a></p>
+    </div>
+  </div>
+
+</body>
+</html>
+
+$ cd HTMLPortfolioProject
+
+$ npm --version
+
+$ npm install
+
+$ npm start
+
+http://localhost:3000
+
+$ npm test
+
+# When you're ready, commit your code and push it to GitHub. We'll checkout your repository and validate all of the build tasks are done.
+
+$ git status
+
+$ git branch
+
+$ git add .
+
+$ git status
+
+$ git branch
+
+$ git commit -a -m "HTMLPortfolioProject Solution"
+
+$ git push origin master
+
+$ git commit
+

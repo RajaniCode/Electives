@@ -1,0 +1,53 @@
+Installing Hub
+
+Windows/Linux
+
+$ git clone https://github.com/github/hub.git
+
+$ cd hub
+
+$ rake install prefix=/usr/local
+
+[Requires Ruby]
+
+Mac
+
+$ brew update
+
+$ brew install hub
+
+
+
+
+
+Using Hub
+
+
+1. Use hub commands
+
+$ hub clone
+
+$ hub fork
+
+etc
+
+2. Alias hub as git
+
+$ alias git = hub
+
+$ git clone
+
+$ git fork
+
+etc
+
+
+Notes:
+
+Don't alias in msysGit (on Windows)
+
+Tab completion
+
+http://go.codeschool.com/bash_completion
+
+http://go.codeschool.com/zsh_completion

@@ -1,0 +1,81 @@
+4.2 Layouts
+
+Before we go any further, we should DRY up our code using layouts. Let's modify our index.blade.php file to use a layout named app.blade.php.
+
+resources/views/layouts/app.blade.php
+
+
+resources/views/farms/index.blade.php
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form To Table</title>
+  </head>
+  <body>
+    @foreach($farms as $farm)
+      <a href="{{ route('farms.show', $farm) }}">
+        {{ $farm->name }}
+      </a>
+    @endforeach
+  </body>
+</html>
+
+
+1. Let's remove all of the framing HTML from our index file and place it in the app file.
+
+Answer
+resources/views/farms/index.blade.php
+   @foreach($farms as $farm)
+      <a href="{{ route('farms.show', $farm) }}">
+        {{ $farm->name }}
+      </a>
+    @endforeach
+
+resources/views/layouts/app.blade.php
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form To Table</title>
+  </head>
+  <body>
+    
+  </body>
+</html>
+
+2. Inside of our app file, let's add a @yield tag with an argument of 'main'.
+
+Answer
+resources/views/layouts/app.blade.php
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form To Table</title>
+  </head>
+  <body>
+    @yield ('main')
+  </body>
+</html>
+
+3. Back at the top our index file, we will need to add an @extends tag with the argument of 'layouts.app' to specify our layouts folder and the app file.
+
+Answer
+resources/views/layouts/app.blade.php
+@extends('layouts.app')
+   @foreach($farms as $farm)
+      <a href="{{ route('farms.show', $farm) }}">
+        {{ $farm->name }}
+      </a>
+    @endforeach
+
+4. Lastly, we will need to tell our index file where to place our content in the layout. We will do this by adding a @section tag with the argument of 'main' above our @foreach, and then an @endsection tag at the end of our content.
+
+Answer
+resources/views/layouts/app.blade.php
+@extends('layouts.app')
+@section('main')
+   @foreach($farms as $farm)
+      <a href="{{ route('farms.show', $farm) }}">
+        {{ $farm->name }}
+      </a>
+    @endforeach
+@endsection

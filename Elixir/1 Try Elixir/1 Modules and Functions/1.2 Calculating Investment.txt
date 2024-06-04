@@ -1,0 +1,48 @@
+1.2 Calculating Investment
+
+Let’s write a simple function that calculates how much money we've made from our recent investment of $1,000.00 at a 0.01% rate of return.
+
+account.exs
+
+amount = Account.investment_return(1000, 0.0001)
+IO.puts "Investment return: $#{amount}"
+
+1. Define a new module named Account.
+
+Answer:
+account.exs
+
+defmodule Account do
+end
+
+amount = Account.investment_return(1000, 0.0001)
+IO.puts "Investment return: $#{amount}"
+
+
+2. Inside the new module, define a function named investment_return. This function should accept two arguments: initial and interest.
+
+Answer:
+account.exs
+
+defmodule Account do
+ def investment_return(initial, interest) do
+ end
+end
+
+amount = Account.investment_return(1000, 0.0001)
+IO.puts "Investment return: $#{amount}"
+
+
+3. Fill in the body of the function with the following operation: initial + (initial * interest)
+
+Answer:
+account.exs
+
+defmodule Account do
+ def investment_return(initial, interest) do
+  initial + (initial * interest)
+ end
+end
+
+amount = Account.investment_return(1000, 0.0001)
+IO.puts "Investment return: $#{amount}"

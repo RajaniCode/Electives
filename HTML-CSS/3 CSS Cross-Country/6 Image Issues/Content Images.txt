@@ -1,0 +1,57 @@
+Content Images
+
+
+Replace the product image incorrectly set as a background image in <figure> with an inline image. Use the same path and add an alt attribute to match the product name.
+
+index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <article>
+      <h1>The Woven Wonder</h1>
+      <figure></figure>
+      <p>The last snowshoe you'll ever own. Sporting quad-band tuning technology, The Woven Wonder&reg; lives up to its name. And then some. Really.</p>
+    </article>
+  </body>
+</html>
+
+style.css
+
+figure {
+  background: url(wovenwonder.jpg) no-repeat;
+  border: 2px solid #c5c9cf;
+  height: 150px;
+  width: 150px;
+}
+
+Answer:
+
+index.html
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <article>
+      <h1>The Woven Wonder</h1>
+      <figure><img src="wovenwonder.jpg" alt="Woven Wonder" /></figure>
+      <p>The last snowshoe you'll ever own. Sporting quad-band tuning technology, The Woven Wonder&reg; lives up to its name. And then some. Really.</p>
+    </article>
+  </body>
+</html>
+
+style.css
+
+figure {
+  border: 2px solid #c5c9cf;
+}

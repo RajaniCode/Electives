@@ -1,0 +1,28 @@
+$ export PATH=$PATH:"/C/msys64/mingw64/bin/"
+
+$ gcc --version
+gcc.exe (Rev2, Built by MSYS2 project) 8.3.0
+Copyright (C) 2018 Free Software Foundation, Inc.
+This is free software; see the source for copying conditions.  There is NO
+warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+
+
+$ export PATH=$PATH:"/C/Users/rajanis/.nuget/packages/microsoft.net.compilers.toolset/3.7.0/tasks/net472/"
+
+$ csc -version
+3.7.0-6.20375.2 (34202cc2)
+
+$ cd "D:\Rajani\CS\GCC\GCC\C"
+
+$ gcc -c msys64-mingw64.c
+
+$ gcc -shared -o msys64-mingw64.dll msys64-mingw64.o
+
+$ csc MinGW64.cs -unsafe
+Microsoft (R) Visual C# Compiler version 3.7.0-6.20375.2 (34202cc2)
+Copyright (C) Microsoft Corporation. All rights reserved.
+
+
+$ ./MinGW64
+Hello, World!
+Hello, World!

@@ -1,0 +1,482 @@
+4.12 Adding CSS Backgrounds
+
+Now we're going to really spruce up the Open Source Records site by adding backgrounds with CSS.
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>Bands</h2>
+      
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+      
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>The Prependers</h2>
+
+      <h3>Bio</h3>
+
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+      <h3>Members</h3>
+
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+
+      <h3>Albums</h3>
+
+      <div class="album">
+        <h4>Top, Right, Bottom, Left</h4>
+
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+
+      <div class="album">
+        <h4>Opacity Zero</h4>
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+
+      <h3>Tour Dates</h3>
+
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>
+
+Answer:
+
+1. When adding backgrounds, it's usually best to start with the broadest tag that will allow the background to appear underneath all of the rest of the content, and that's usually the body tag.
+
+Add a background to the body tag with the CSS shorthand background property with these settings:
+
+    color: #555555
+    image: bg-tile.png
+    position: to the top and left of the container
+    repeat: both directions
+
+body {
+ background: #555555 url(images/bg-tile.png);
+}
+
+2. Next, let's add a background to the header of the page.
+
+This background should use the image bg-header.png, but it should not be repeated, and should be centered in the top of the container.
+
+If for some reason the background image can't be loaded, the background color of the header should be #242424.
+
+Answer:
+
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+
+3. The main content section should have a different background too, so tile the background with bg-content.png, repeated in all directions and positioned at the top left of the content-section container with a fallback color of #dddddd.
+
+Answer:
+
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #dddddd url(images/bg-content.png) top left repeat;
+}
+
+4. Both the albums in prependers-band.html and list items in bands.html should use the color #ffffff as a background color instead of an image, so set that in main.css.
+
+Answer:
+
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+}
+
+5. Finally, our link text color is too hard to read now that we're using a darker background, so let's change it to an orange color to match the key color in the new logo.
+
+That color is #ee932a, so select only anchor tags that are in the site navigation and change their text color.
+
+Answer:
+
+.nav a {
+  color: #ee932a;
+}
+
+Success:
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #dddddd url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+body {
+ background: #555555 url(images/bg-tile.png);
+}
+.nav a {
+  color: #ee932a;
+}
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>Bands</h2>
+      
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+      
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>The Prependers</h2>
+
+      <h3>Bio</h3>
+
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+      <h3>Members</h3>
+
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+
+      <h3>Albums</h3>
+
+      <div class="album">
+        <h4>Top, Right, Bottom, Left</h4>
+
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+
+      <div class="album">
+        <h4>Opacity Zero</h4>
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+
+      <h3>Tour Dates</h3>
+
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>

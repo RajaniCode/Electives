@@ -1,0 +1,79 @@
+1.4 Creating Inline Flex Containers
+
+To feature items, we need a few flex containers that will adjust to the size of the content instead of displaying "block level."
+
+promo.html
+
+<div class='promo promo--start'>
+  <div class='promo-info'>
+    <h3 class='promo-title'>
+      The Scarinator 2000
+    </h3>
+    <p class='promo-description'>
+      This is a thing that does something to scare things away.
+    </p>
+    <a class='promo-link promo-link-alt' href='#'>Buy This</a>
+  </div>
+</div>
+<div class='promo promo--center'>
+  <div class='promo-info'>
+    <h3 class='promo-title'>
+      The Scarinator 2000
+    </h3>
+    <p class='promo-description'>
+      This is a thing that does something to scare things away.
+    </p>
+    <a class='promo-link' href='#'>Buy This</a>
+  </div>
+</div>
+<div class='promo promo--end'>
+  <div class='promo-info'>
+    <h3 class='promo-title'>
+      The Scarinator 2000
+    </h3>
+    <p class='promo-description'>
+      This is a thing that does something to scare things away.
+    </p>
+    <a class='promo-link' href='#'>Buy This</a>
+  </div>
+</div>
+
+promo.css
+
+.promo {
+  border: 1px solid #e5e5e5;
+  
+  max-width: 280px;
+  min-height: 350px;
+  padding: 20px;
+}
+
+.promo-title {
+  margin: 0;
+}
+
+.promo-description {
+  margin-top: 8px;
+}
+
+
+Apply the flexbox property and value to create a container that will adjust to the content size.
+
+Answer:
+promo.css
+
+.promo {
+  border: 1px solid #e5e5e5;
+  display: inline-flex;
+  max-width: 280px;
+  min-height: 350px;
+  padding: 20px;
+}
+
+.promo-title {
+  margin: 0;
+}
+
+.promo-description {
+  margin-top: 8px;
+}

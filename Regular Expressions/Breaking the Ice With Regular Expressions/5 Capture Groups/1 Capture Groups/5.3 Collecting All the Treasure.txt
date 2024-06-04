@@ -1,0 +1,12 @@
+5.3 Collecting All the Treasure
+
+We want to collect all of the gold that we find on our voyage. Since we know that we can use capture groups, let's capture all the 'gold' words within our subject.
+
+Start by writing a pattern that matches all 'gold' words.
+
+Subjects
+gold metal golden wood gold plastic metal stone rubber gold 
+
+
+REGULAR EXPRESSION
+/\b(gold)\b/g

@@ -1,0 +1,325 @@
+https://github.com/codeschool-projects/SemanticHTMLPortfolioProject
+
+https://www.codeschool.com/projects/semantic-html-portfolio-project/build
+
+https://www.codeschool.com/projects/semantic-html-portfolio-project/build#answer-video
+
+https://codeschool-project-demos.github.io/SemanticHTMLPortfolioProject/
+
+Update a Page Using Semantic HTML
+
+Convert an existing portfolio page to HTML by updating to more semantic elements, including header, footer, main, section, and nav.
+
+Step 1: Authenticate with GitHub
+
+We'll need to know your GitHub username to complete this project.
+
+Step 2: Fork the Repo
+
+In a new window, head over to GitHub and Fork thecodeschool-projects/SemanticHTMLPortfolioProject [https://github.com/codeschool-projects/SemanticHTMLPortfolioProject] repo into your account. Once you've done that on GitHub, let us know!
+
+How do I Fork a repo on GitHub? [https://www.codeschool.com/projects/semantic-html-portfolio-project/build#fork-video]
+
+Step 3: Clone the Repo
+
+[
+Use SSH
+git clone git@github.com:RajaniCode/SemanticHTMLPortfolioProject.git
+]
+
+Use HTTPS
+git clone https://github.com/RajaniCode/SemanticHTMLPortfolioProject.git
+
+How do I Clone a repo on GitHub? [https://www.codeschool.com/projects/build-a-portfolio-using-bootstrap/build#fork-video]
+
+# Git Bash ############################################################################################################################
+
+Aspire@Acer MINGW64 /
+$ cd "E:\Working\HTML-and-CSS\Code School\Projects"
+
+Aspire@Acer MINGW64 /e/Working/HTML-and-CSS/Code School/Projects
+$ git clone https://github.com/RajaniCode/SemanticHTMLPortfolioProject.git
+Cloning into 'SemanticHTMLPortfolioProject'...
+remote: Counting objects: 58, done.
+remote: Total 58 (delta 0), reused 0 (delta 0), pack-reused 58
+Unpacking objects: 100% (58/58), done.
+
+#######################################################################################################################################
+
+Step 4: Prepare the Build
+
+For this project, we’ll work in the src/index.html file. This should be the only file you need to edit, unless you’re in the mood to switch up some styles.
+
+Optional Setup
+To get set up locally, run the following commands:
+npm install
+npm start
+
+Running npm start will open up the site with live reload enabled, meaning you'll see your changes every time you save! Whenever you want to see if you’ve completed all of the tasks, you can run npm test to check locally, or push your changes to GitHub and let us test things for you.
+
+$ cd SemanticHTMLPortfolioProject
+
+$ npm --version
+
+$ npm install
+
+$ npm start
+
+http://localhost:3000
+
+# src/index.html (Original)
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+  <link rel="stylesheet" href="main.css">
+  <title>HTML Portfolio</title>
+</head>
+
+<body>
+
+  <div class="header">
+    <h1>Sergio Cruz</h1>
+    <h2>Application Developer</h2>
+
+    <ul class="nav">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </div>
+
+  <div class="tagline">
+    <div class="content-wrapper">
+      <h3>A bit more about me</h3>
+      <p>Hey I am Sergio, I work for <a target="_blank" href="https://www.codeschool.com">Code School</a> and I love writing JavaScript!</p>
+    </div>
+  </div>
+
+
+  <div class="skills">
+    <div class="content-wrapper">
+      <h3>Skills</h3>
+      <p>Here are some of the technologies I enjoy writing day-to-day:</p>
+      <ul>
+        <li>HTML &amp; CSS</li>
+        <li>Node.js</li>
+        <li>React</li>
+        <li>Angular 2</li>
+        <li>Webpack</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="contact">
+    <div class="content-wrapper">
+      <h3>How to contact me</h3>
+      <p>The easiest way to contact me is via twitter: <a target="_blank" href="https://twitter.com/hashtagserg">@hashtagserg</a></p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="content-wrapper">
+      <h3>Credits</h3>
+      <p>This portfolio was created using <a href='https://www.codeschool.com'>Code School's</a> <a href='https://github.com/codeschool/SemanticHTMLPortfolioProject'>Semantic HTML Portfolio Project</a> template.</p>
+    </div>
+  </div>
+
+</body>
+
+</html>
+
+Step 5: Convert the Header
+
+The element with a class of "header" isn't using the most semantic HTML tag it could be using. Switch it to use an element that most accurately wraps the header content for a page.
+
+  <header>
+    <h1>Sergio Cruz</h1>
+    <h2>Application Developer</h2>
+
+    <ul class="nav">
+      <li><a href="index.html" class="active">Home</a></li>
+      <li><a href="about.html">About</a></li>
+    </ul>
+  </header>
+
+Step 6: Semantic Navigation
+
+Our .nav element in the header of the page isn't using the most semantic HTML tags it could be using. ul is the correct one for this list of navigation items, but we should wrap this element with a more semantic element to indicate it is a navigation. Go ahead and add this.
+
+    <nav>
+	  <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+	  </ul>
+    </nav>
+
+Step 7: Create Sections
+
+Each of the main content areas of our portfolio could be switched from using div tags to something that more accurately describes them as sections of our page. Update the .tagline, .skills and .contact sections to use a more semantic HTML tag.
+
+  <section class="tagline">
+    <div class="content-wrapper">
+      <h3>A bit more about me</h3>
+      <p>Hey I am Sergio, I work for <a target="_blank" href="https://www.codeschool.com">Code School</a> and I love writing JavaScript!</p>
+    </div>
+  </section>
+
+
+  <section class="skills">
+    <div class="content-wrapper">
+      <h3>Skills</h3>
+      <p>Here are some of the technologies I enjoy writing day-to-day:</p>
+      <ul>
+        <li>HTML &amp; CSS</li>
+        <li>Node.js</li>
+        <li>React</li>
+        <li>Angular 2</li>
+        <li>Webpack</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="contact">
+    <div class="content-wrapper">
+      <h3>How to contact me</h3>
+      <p>The easiest way to contact me is via twitter: <a target="_blank" href="https://twitter.com/hashtagserg">@hashtagserg</a></p>
+    </div>
+  </section>
+
+
+Step 8: Main Content
+
+Our 3 main sections make up the focus of our page. Wrap these three sections (tagline, skills and contact) in an HTML element that gives it the correct focus.
+
+  <main>
+	<section class="tagline">
+      <div class="content-wrapper">
+        <h3>A bit more about me</h3>
+        <p>Hey I am Sergio, I work for <a target="_blank" href="https://www.codeschool.com">Code School</a> and I love writing JavaScript!</p>
+      </div>
+    </section>
+
+    <section class="skills">
+      <div class="content-wrapper">
+        <h3>Skills</h3>
+        <p>Here are some of the technologies I enjoy writing day-to-day:</p>
+        <ul>
+          <li>HTML &amp; CSS</li>
+          <li>Node.js</li>
+          <li>React</li>
+          <li>Angular 2</li>
+          <li>Webpack</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="contact">
+      <div class="content-wrapper">
+        <h3>How to contact me</h3>
+        <p>The easiest way to contact me is via twitter: <a target="_blank" href="https://twitter.com/hashtagserg">@hashtagserg</a></p>
+      </div>
+    </section>
+  </main>
+
+Step 9: Footer
+
+Lastly, the element with a class of footer isn't the most semantic use of that area either. Luckily HTML 5 has a much better element we can use for footers. Update this element to use the semantically correct tag.
+
+  <footer>
+    <div class="content-wrapper">
+      <h3>Credits</h3>
+      <p>This portfolio was created using <a href='https://www.codeschool.com'>Code School's</a> <a href='https://github.com/codeschool/SemanticHTMLPortfolioProject'>Semantic HTML Portfolio Project</a> template.</p>
+    </div>
+  </footer>
+
+
+# src/index.html
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+  <link rel="stylesheet" href="main.css">
+  <title>HTML Portfolio</title>
+</head>
+
+<body>
+
+  <header>
+    <h1>Sergio Cruz</h1>
+    <h2>Application Developer</h2>
+
+    <nav>
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+	<section class="tagline">
+      <div class="content-wrapper">
+        <h3>A bit more about me</h3>
+        <p>Hey I am Sergio, I work for <a target="_blank" href="https://www.codeschool.com">Code School</a> and I love writing JavaScript!</p>
+      </div>
+    </section>
+
+    <section class="skills">
+      <div class="content-wrapper">
+        <h3>Skills</h3>
+        <p>Here are some of the technologies I enjoy writing day-to-day:</p>
+        <ul>
+          <li>HTML &amp; CSS</li>
+          <li>Node.js</li>
+          <li>React</li>
+          <li>Angular 2</li>
+          <li>Webpack</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="contact">
+      <div class="content-wrapper">
+        <h3>How to contact me</h3>
+        <p>The easiest way to contact me is via twitter: <a target="_blank" href="https://twitter.com/hashtagserg">@hashtagserg</a></p>
+      </div>
+    </section>
+  </main>
+  
+  <footer>
+    <div class="content-wrapper">
+      <h3>Credits</h3>
+      <p>This portfolio was created using <a href='https://www.codeschool.com'>Code School's</a> 
+	  <a href='https://github.com/codeschool/SemanticHTMLPortfolioProject'>Semantic HTML Portfolio Project</a> template.</p>
+    </div>
+  </footer>
+  
+</body>
+
+</html>
+
+$ npm test
+
+# When you're ready, commit your code and push it to GitHub. We'll checkout your repository and validate all of the build tasks are done.
+
+$ git status
+
+$ git branch
+
+$ git add .
+
+$ git status
+
+$ git branch
+
+$ git commit -a -m "SemanticHTMLPortfolioProject Solution"
+
+$ git push origin master
+
+$ git commit

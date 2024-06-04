@@ -1,0 +1,36 @@
+1.12 Using the Pipe
+
+On the following task, use the pipe operator |> to run a query.
+
+Using the Event.all_within_year function, type the code that lists all events for 2017. If you'd like to see the results of the query in the preview at the bottom, feel free to pipe the return value of the code to IO.inspect().
+
+lib/neon/event.ex
+defmodule Neon.Event do
+  use Ecto.Schema
+  import Ecto.Query
+
+  schema "events" do
+    field :name, :string
+    field :location, :string
+    field :start_on, :naive_datetime
+
+    timestamps()
+  end
+
+  def all_within_year(target_year) do
+    {:ok, start_datetime} = NaiveDateTime.new(target_year, 1,1,0,0,0)
+    {:ok, end_datetime} = NaiveDateTime.new(target_year+1, 1,1,0,0,0)
+
+    from e in __MODULE__,
+       where: e.start_on > ^start_datetime and
+         e.start_on < ^end_datetime
+  end
+end
+
+script.exs
+alias Neon.Repo
+alias Neon.Event
+
+
+Answer:
+script.exs

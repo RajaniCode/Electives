@@ -1,0 +1,43 @@
+1.4 Generating Models
+
+In order to work with our farms, we need to create a Farm model with a migration.
+
+The help entry for make:model is displayed for us.
+
+
+1.  Using the php artisan command line utility, create a model named Farm and pass the -m flag to generate a migration.
+
+Answer
+$ php artisan make:model -m Farm
+
+
+# Note
+$ php artisan help make:model                                                   
+Usage:                                                                          
+  make:model [options] [--] <name>                                              
+                                                                                
+Arguments:                                                                      
+  name                  The name of the class                                   
+                                                                                
+Options:                                                                        
+  -m, --migration       Create a new migration file for the model.              
+  -c, --controller      Create a new controller for the model.                  
+  -r, --resource        Indicates if the generated controller should be a       
+                        resource controller                                     
+  -h, --help            Display this help message                               
+  -q, --quiet           Do not output any message                               
+  -V, --version         Display this application version                        
+      --ansi            Force ANSI output                                       
+      --no-ansi         Disable ANSI output                                     
+  -n, --no-interaction  Do not ask any interactive question                     
+      --env[=ENV]       The environment the command should run under            
+  -v|vv|vvv, --verbose  Increase the verbosity of messages: 1 for normal output,
+                        2 for more verbose output and 3 for debug               
+                                                                                
+Help:                                                                           
+  Create a new Eloquent model class                                             
+                                                                                
+$ php artisan make:model -m Farm                                                
+Model created successfully.                                                     
+Created Migration: 2017_07_05_184216_create_farms_table                         
+$          

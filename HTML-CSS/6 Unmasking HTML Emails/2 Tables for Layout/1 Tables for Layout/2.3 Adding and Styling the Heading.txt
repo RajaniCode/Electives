@@ -1,0 +1,68 @@
+2.3 Adding and Styling the Heading
+
+Continue recreating the header by adding a new row and cell to style the heading text.
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+      <tr>
+        <td>
+          <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+        </td>
+      </tr>
+      
+    </table>
+  </body>
+</html>
+
+1. Add a new tr with a td containing the text Championship Match!
+
+Answer: <tr><td>Championship Match!</td></tr>
+
+2. Set the color of the text on the td to #3a383a.
+
+Answer: <tr><td style="color: #3a383a;">Championship Match!</td></tr>
+
+3. Style the heading text using a font-family of Georgia, serif; and a font-size of 42px;.
+
+Answer: <tr><td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px;">Championship Match!</td></tr>
+
+4. Make the heading bold and transform the text to uppercase
+
+Answer: <tr><td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; text-transform: uppercase;">Championship Match!</td></tr>
+
+5. Apply spacing to the heading using a line-height of 44px and padding-top of 20px.
+
+Answer: <tr><td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; text-transform: uppercase; line-height: 44px; padding-top: 20px;">Championship Match!</td></tr>
+
+
+Success:
+
+email.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+      <tr>
+        <td>
+          <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+        </td>
+      </tr>
+      <tr><td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; text-transform: uppercase; line-height: 44px; padding-top: 20px;">Championship Match!</td></tr>
+    </table>
+  </body>
+</html>

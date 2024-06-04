@@ -1,0 +1,29 @@
+Set Width of Content
+
+
+Using percentages, set the width for the .content to the equivalent of 575px. Remember, the context is the total width of the site which is 960px. Use this Flexible Math tool to help: http://responsv.com/flexible-math/
+
+HTML SOURCE
+
+<div class='container'>
+  <div class='content'>
+  </div>
+</div>
+
+CSS SOURCE
+
+.container {
+  width: 960px;
+}
+
+STYLE.CSS
+
+.content {
+  width: 575px;
+}
+
+Answer:
+
+.content {
+  width: 59.895833% /* 575 % 960 * 100 */
+}

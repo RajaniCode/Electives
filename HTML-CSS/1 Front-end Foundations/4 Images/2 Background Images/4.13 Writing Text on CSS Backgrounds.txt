@@ -1,0 +1,311 @@
+4.13 Writing Text on CSS Backgrounds
+
+The Prependers are putting out a new album soon, and Open Source Records want to feature them on the about page. We'll do that with a container that shows a background image.
+
+about.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+        
+    <div class="content-section">
+      <h1>About</h1>
+    
+      <p>Open Source Records is a quickly growing record label that brings you the hottest up-and-coming groups.  All of our bands are actively recording and touring, and receive our full support producing, recording, mixing, touring, and promoting their work.  At Open Source Records, artists come first.</p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+  background: #555555 url(images/bg-tile.png) top left repeat;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.nav a {
+  color: #ee932a;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #ffffff url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+
+1. Add an empty container tag that we'll use to display The Prependers' recording now image, and give that tag a class of recording-now. Put that tag after the paragraph tag in the content section.
+
+Answer:
+
+<div class="recording-now"></div>
+
+2. Switch over to main.css and select the new container with a class selector. Set the dimensions of that container to 440px wide and 200px high.
+
+Answer:
+
+.recording-now {
+  width: 440px;
+  height: 200px;
+}
+
+3. Now, add a background image to that container with the prependers-recording.jpg image file, with a fallback color of #ffffff, positioned at the top left, and not repeating.
+
+Answer:
+
+.recording-now {
+  width: 440px;
+  height: 200px;
+  background: #ffffff url(images/prependers-recording.jpg) top left no-repeat;
+}
+
+4. Create a paragraph tag inside of that .recording-now container with the text "Recording Album Now!".
+
+Answer:
+
+<div class="recording-now"><p>"Recording Album Now!".</p></div>
+
+5. Finally, style the paragraph that's inside of the .recording-now div tag.
+
+We'll leave the values up to you, but you should change the paragraph's text color using a hex color, and set the font-size (in pixels).
+
+Answer:
+
+.recording-now p {
+  color: #ffffff;
+  font-size: 20px;
+}
+
+Success:
+
+about.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+        
+    <div class="content-section">
+      <h1>About</h1>
+    
+      <p>Open Source Records is a quickly growing record label that brings you the hottest up-and-coming groups.  All of our bands are actively recording and touring, and receive our full support producing, recording, mixing, touring, and promoting their work.  At Open Source Records, artists come first.</p>
+      <div class="recording-now"><p>"Recording Album Now!".</p></div>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+  background: #555555 url(images/bg-tile.png) top left repeat;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.nav a {
+  color: #ee932a;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #ffffff url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+.recording-now {
+  width: 440px;
+  height: 200px;
+  background: #ffffff url(images/prependers-recording.jpg) top left no-repeat;  
+}
+.recording-now p {
+   color: #ffffff;
+   font-size: 20px;
+}

@@ -1,0 +1,64 @@
+yum repolist
+
+ls -l /etc/yum.repos.d
+
+
+
+
+[rajani@localhost Chromium]$ su root
+Password: 
+[root@localhost yum.repos.d]# ls -l /etc/yum.repos.d
+total 60
+-rw-r--r--. 1 root root 1612 Jul  4  2014 CentOS-Base.repo
+-rw-r--r--. 1 root root  640 Jul  4  2014 CentOS-Debuginfo.repo
+-rw-r--r--. 1 root root 1331 Jul  4  2014 CentOS-Sources.repo
+-rw-r--r--. 1 root root  156 Jul  4  2014 CentOS-Vault.repo
+-rw-r--r--. 1 root root  656 Dec 21  2013 chromium-el6.repo
+-rw-r--r--. 1 root root  957 Mar 31 09:35 epel.repo
+-rw-r--r--. 1 root root 1056 Mar 31 09:35 epel-testing.repo
+-rw-r--r--. 1 root root  173 Apr 20 14:51 google-chrome.repo
+-rw-r--r--. 1 root root  739 Jun 12  2014 mirrors-rpmforge
+-rw-r--r--. 1 root root  717 Jun 12  2014 mirrors-rpmforge-extras
+-rw-r--r--. 1 root root  728 Jun 12  2014 mirrors-rpmforge-testing
+-rw-r--r--. 1 root root  477 Jul 31  2014 nux-dextop.repo
+-rw-r--r--. 1 root root  136 Apr 20 17:13 opera.repo
+-rw-r--r--. 1 root root 1128 Jun 12  2014 rpmforge.repo
+-rw-r--r--. 1 root root  176 Apr 25 21:29 scootersoftware.repo
+[root@localhost yum.repos.d]# yum repolist
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirrors.vhost.vn
+ * epel: epel.mirror.net.in
+ * extras: mirrors.viethosting.vn
+ * nux-dextop: li.nux.ro
+ * rpmforge: mirror.hmc.edu
+ * updates: mirror.nbrc.ac.in
+repo id                                                  repo name                                                                            status
+base/7/x86_64                                            CentOS-7 - Base                                                                      9,007
+chromium-el6/x86_64                                      CentOS-7 - Chromium EL6                                                                  8
+epel/x86_64                                              Extra Packages for Enterprise Linux 7 - x86_64                                       9,988
+extras/7/x86_64                                          CentOS-7 - Extras                                                                      265
+google-chrome                                            google-chrome                                                                            3
+nux-dextop/x86_64                                        Nux.Ro RPMs for general desktop use                                                  2,430
+opera                                                    Opera packages                                                                           6
+rpmforge                                                 RHEL 7 - RPMforge.net - dag                                                            245
+scootersoftware                                          Scooter Software                                                                         1
+updates/7/x86_64                                         CentOS-7 - Updates                                                                   1,375
+repolist: 23,328
+[root@localhost yum.repos.d]# cd /etc/yum.repos.d
+[root@localhost yum.repos.d]# ls
+CentOS-Base.repo       CentOS-Vault.repo  epel-testing.repo   mirrors-rpmforge-extras   opera.repo
+CentOS-Debuginfo.repo  chromium-el6.repo  google-chrome.repo  mirrors-rpmforge-testing  rpmforge.repo
+CentOS-Sources.repo    epel.repo          mirrors-rpmforge    nux-dextop.repo           scootersoftware.repo
+[root@localhost yum.repos.d]# rm  chromium-el6.repo
+rm: remove regular file ‘chromium-el6.repo’? y
+[root@localhost yum.repos.d]# ls
+CentOS-Base.repo       CentOS-Sources.repo  epel.repo          google-chrome.repo  mirrors-rpmforge-extras   nux-dextop.repo  rpmforge.repo
+CentOS-Debuginfo.repo  CentOS-Vault.repo    epel-testing.repo  mirrors-rpmforge    mirrors-rpmforge-testing  opera.repo       scootersoftware.repo
+[root@localhost yum.repos.d]# rm  google-chrome.repo
+rm: remove regular file ‘google-chrome.repo’? y
+[root@localhost yum.repos.d]# ls
+CentOS-Base.repo       CentOS-Vault.repo  mirrors-rpmforge          nux-dextop.repo  scootersoftware.repo
+CentOS-Debuginfo.repo  epel.repo          mirrors-rpmforge-extras   opera.repo
+CentOS-Sources.repo    epel-testing.repo  mirrors-rpmforge-testing  rpmforge.repo
+[root@localhost yum.repos.d]#

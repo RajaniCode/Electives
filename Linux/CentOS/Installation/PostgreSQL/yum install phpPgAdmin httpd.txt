@@ -1,0 +1,1166 @@
+[rajani@localhost PostgreSQL]$ su root
+Password: 
+[root@localhost PostgreSQL]# yum install epel-release
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: ftp.iitm.ac.in
+ * epel: epel.mirror.net.in
+ * extras: ftp.iitm.ac.in
+ * nux-dextop: mirror.li.nux.ro
+ * rpmforge: repoforge.spinellicreations.com
+ * updates: ftp.iitm.ac.in
+Package epel-release-7-6.noarch already installed and latest version
+Nothing to do
+[root@localhost PostgreSQL]# yum update
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: ftp.iitm.ac.in
+ * epel: epel.mirror.net.in
+ * extras: ftp.iitm.ac.in
+ * nux-dextop: mirror.li.nux.ro
+ * rpmforge: ftp.lug.ro
+ * updates: ftp.iitm.ac.in
+Resolving Dependencies
+--> Running transaction check
+---> Package bcompare.x86_64 0:4.1.5-21031 will be updated
+---> Package bcompare.x86_64 0:4.1.6-21095 will be an update
+---> Package chkconfig.x86_64 0:1.3.61-5.el7 will be updated
+---> Package chkconfig.x86_64 0:1.3.61-5.el7_2.1 will be an update
+---> Package crash.x86_64 0:7.1.2-3.el7_2 will be updated
+---> Package crash.x86_64 0:7.1.2-3.el7_2.1 will be an update
+---> Package device-mapper.x86_64 7:1.02.107-5.el7_2.1 will be updated
+---> Package device-mapper.x86_64 7:1.02.107-5.el7_2.2 will be an update
+---> Package device-mapper-event.x86_64 7:1.02.107-5.el7_2.1 will be updated
+---> Package device-mapper-event.x86_64 7:1.02.107-5.el7_2.2 will be an update
+---> Package device-mapper-event-libs.x86_64 7:1.02.107-5.el7_2.1 will be updated
+---> Package device-mapper-event-libs.x86_64 7:1.02.107-5.el7_2.2 will be an update
+---> Package device-mapper-libs.x86_64 7:1.02.107-5.el7_2.1 will be updated
+---> Package device-mapper-libs.x86_64 7:1.02.107-5.el7_2.2 will be an update
+---> Package device-mapper-multipath.x86_64 0:0.4.9-85.el7_2.1 will be updated
+---> Package device-mapper-multipath.x86_64 0:0.4.9-85.el7_2.4 will be an update
+---> Package device-mapper-multipath-libs.x86_64 0:0.4.9-85.el7_2.1 will be updated
+---> Package device-mapper-multipath-libs.x86_64 0:0.4.9-85.el7_2.4 will be an update
+---> Package firefox.x86_64 0:45.1.0-1.el7.centos will be updated
+---> Package firefox.x86_64 0:45.1.1-1el7.centos will be an update
+---> Package glibc.i686 0:2.17-106.el7_2.4 will be updated
+---> Package glibc.x86_64 0:2.17-106.el7_2.4 will be updated
+---> Package glibc.i686 0:2.17-106.el7_2.6 will be an update
+---> Package glibc.x86_64 0:2.17-106.el7_2.6 will be an update
+---> Package glibc-common.x86_64 0:2.17-106.el7_2.4 will be updated
+---> Package glibc-common.x86_64 0:2.17-106.el7_2.6 will be an update
+---> Package glibc-devel.x86_64 0:2.17-106.el7_2.4 will be updated
+---> Package glibc-devel.x86_64 0:2.17-106.el7_2.6 will be an update
+---> Package glibc-headers.x86_64 0:2.17-106.el7_2.4 will be updated
+---> Package glibc-headers.x86_64 0:2.17-106.el7_2.6 will be an update
+---> Package gnome-terminal.x86_64 0:3.14.3-3.el7 will be updated
+---> Package gnome-terminal.x86_64 0:3.14.3-3.el7_2.1 will be an update
+---> Package kernel.x86_64 0:3.10.0-327.18.2.el7 will be installed
+---> Package kernel-headers.x86_64 0:3.10.0-327.13.1.el7 will be updated
+---> Package kernel-headers.x86_64 0:3.10.0-327.18.2.el7 will be an update
+---> Package kernel-tools.x86_64 0:3.10.0-327.13.1.el7 will be updated
+---> Package kernel-tools.x86_64 0:3.10.0-327.18.2.el7 will be an update
+---> Package kernel-tools-libs.x86_64 0:3.10.0-327.13.1.el7 will be updated
+---> Package kernel-tools-libs.x86_64 0:3.10.0-327.18.2.el7 will be an update
+---> Package kpartx.x86_64 0:0.4.9-85.el7_2.1 will be updated
+---> Package kpartx.x86_64 0:0.4.9-85.el7_2.4 will be an update
+---> Package libcacard.x86_64 10:1.5.3-105.el7_2.3 will be updated
+---> Package libcacard.x86_64 10:1.5.3-105.el7_2.4 will be an update
+---> Package libevent.x86_64 0:2.0.21-4.el7 will be updated
+---> Package libevent.x86_64 0:2.0.22-1.rhel7 will be an update
+---> Package libgpod.x86_64 0:0.8.3-6.el7 will be updated
+---> Package libgpod.x86_64 0:0.8.3-7.el7 will be an update
+---> Package libgudev1.x86_64 0:219-19.el7_2.7 will be updated
+---> Package libgudev1.x86_64 0:219-19.el7_2.9 will be an update
+---> Package libipa_hbac.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package libipa_hbac.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package libndp.x86_64 0:1.2-4.el7 will be updated
+---> Package libndp.x86_64 0:1.2-6.el7_2 will be an update
+---> Package libsss_idmap.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package libsss_idmap.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package libsss_nss_idmap.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package libsss_nss_idmap.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package libtevent.x86_64 0:0.9.26-1.el7_2 will be updated
+---> Package libtevent.x86_64 0:0.9.26-1.el7_2.1 will be an update
+---> Package lvm2.x86_64 7:2.02.130-5.el7_2.1 will be updated
+---> Package lvm2.x86_64 7:2.02.130-5.el7_2.2 will be an update
+---> Package lvm2-libs.x86_64 7:2.02.130-5.el7_2.1 will be updated
+---> Package lvm2-libs.x86_64 7:2.02.130-5.el7_2.2 will be an update
+---> Package net-snmp-libs.x86_64 1:5.7.2-24.el7 will be updated
+---> Package net-snmp-libs.x86_64 1:5.7.2-24.el7_2.1 will be an update
+---> Package nodejs.x86_64 0:4.4.3-1nodesource.el7.centos will be updated
+---> Package nodejs.x86_64 0:4.4.4-1nodesource.el7.centos will be an update
+---> Package ntsysv.x86_64 0:1.3.61-5.el7 will be updated
+---> Package ntsysv.x86_64 0:1.3.61-5.el7_2.1 will be an update
+---> Package pcre.i686 0:8.32-15.el7 will be updated
+---> Package pcre.x86_64 0:8.32-15.el7 will be updated
+---> Package pcre.i686 0:8.32-15.el7_2.1 will be an update
+---> Package pcre.x86_64 0:8.32-15.el7_2.1 will be an update
+---> Package pcre-devel.x86_64 0:8.32-15.el7 will be updated
+---> Package pcre-devel.x86_64 0:8.32-15.el7_2.1 will be an update
+---> Package python-libipa_hbac.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package python-libipa_hbac.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package python-perf.x86_64 0:3.10.0-327.13.1.el7 will be updated
+---> Package python-perf.x86_64 0:3.10.0-327.18.2.el7 will be an update
+---> Package python-sss-murmur.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package python-sss-murmur.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package python-sssdconfig.noarch 0:1.13.0-40.el7_2.2 will be updated
+---> Package python-sssdconfig.noarch 0:1.13.0-40.el7_2.4 will be an update
+---> Package qemu-img.x86_64 10:1.5.3-105.el7_2.3 will be updated
+---> Package qemu-img.x86_64 10:1.5.3-105.el7_2.4 will be an update
+---> Package qemu-kvm.x86_64 10:1.5.3-105.el7_2.3 will be updated
+---> Package qemu-kvm.x86_64 10:1.5.3-105.el7_2.4 will be an update
+---> Package qemu-kvm-common.x86_64 10:1.5.3-105.el7_2.3 will be updated
+---> Package qemu-kvm-common.x86_64 10:1.5.3-105.el7_2.4 will be an update
+---> Package qt.x86_64 1:4.8.5-11.el7 will be updated
+---> Package qt.x86_64 1:4.8.5-12.el7_2 will be an update
+---> Package qt-x11.x86_64 1:4.8.5-11.el7 will be updated
+---> Package qt-x11.x86_64 1:4.8.5-12.el7_2 will be an update
+---> Package sssd.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-ad.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-ad.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-client.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-client.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-common.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-common.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-common-pac.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-common-pac.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-ipa.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-ipa.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-krb5.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-krb5.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-krb5-common.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-krb5-common.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-ldap.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-ldap.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package sssd-proxy.x86_64 0:1.13.0-40.el7_2.2 will be updated
+---> Package sssd-proxy.x86_64 0:1.13.0-40.el7_2.4 will be an update
+---> Package systemd.x86_64 0:219-19.el7_2.7 will be updated
+---> Package systemd.x86_64 0:219-19.el7_2.9 will be an update
+---> Package systemd-libs.i686 0:219-19.el7_2.7 will be updated
+---> Package systemd-libs.x86_64 0:219-19.el7_2.7 will be updated
+---> Package systemd-libs.i686 0:219-19.el7_2.9 will be an update
+---> Package systemd-libs.x86_64 0:219-19.el7_2.9 will be an update
+---> Package systemd-python.x86_64 0:219-19.el7_2.7 will be updated
+---> Package systemd-python.x86_64 0:219-19.el7_2.9 will be an update
+---> Package systemd-sysv.x86_64 0:219-19.el7_2.7 will be updated
+---> Package systemd-sysv.x86_64 0:219-19.el7_2.9 will be an update
+---> Package uget.x86_64 0:2.0.4-1.el7 will be updated
+---> Package uget.x86_64 0:2.1.3-1.el7 will be an update
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                                        Arch                     Version                                        Repository                         Size
+================================================================================================================================================================
+Installing:
+ kernel                                         x86_64                   3.10.0-327.18.2.el7                            updates                            33 M
+Updating:
+ bcompare                                       x86_64                   4.1.6-21095                                    scootersoftware                    13 M
+ chkconfig                                      x86_64                   1.3.61-5.el7_2.1                               updates                           173 k
+ crash                                          x86_64                   7.1.2-3.el7_2.1                                updates                           2.6 M
+ device-mapper                                  x86_64                   7:1.02.107-5.el7_2.2                           updates                           252 k
+ device-mapper-event                            x86_64                   7:1.02.107-5.el7_2.2                           updates                           167 k
+ device-mapper-event-libs                       x86_64                   7:1.02.107-5.el7_2.2                           updates                           169 k
+ device-mapper-libs                             x86_64                   7:1.02.107-5.el7_2.2                           updates                           305 k
+ device-mapper-multipath                        x86_64                   0.4.9-85.el7_2.4                               updates                           119 k
+ device-mapper-multipath-libs                   x86_64                   0.4.9-85.el7_2.4                               updates                           222 k
+ firefox                                        x86_64                   45.1.1-1el7.centos                             updates                            76 M
+ glibc                                          i686                     2.17-106.el7_2.6                               updates                           4.2 M
+ glibc                                          x86_64                   2.17-106.el7_2.6                               updates                           3.6 M
+ glibc-common                                   x86_64                   2.17-106.el7_2.6                               updates                            11 M
+ glibc-devel                                    x86_64                   2.17-106.el7_2.6                               updates                           1.0 M
+ glibc-headers                                  x86_64                   2.17-106.el7_2.6                               updates                           662 k
+ gnome-terminal                                 x86_64                   3.14.3-3.el7_2.1                               updates                           1.1 M
+ kernel-headers                                 x86_64                   3.10.0-327.18.2.el7                            updates                           3.2 M
+ kernel-tools                                   x86_64                   3.10.0-327.18.2.el7                            updates                           2.4 M
+ kernel-tools-libs                              x86_64                   3.10.0-327.18.2.el7                            updates                           2.3 M
+ kpartx                                         x86_64                   0.4.9-85.el7_2.4                               updates                            60 k
+ libcacard                                      x86_64                   10:1.5.3-105.el7_2.4                           updates                           229 k
+ libevent                                       x86_64                   2.0.22-1.rhel7                                 pgdg95                            212 k
+ libgpod                                        x86_64                   0.8.3-7.el7                                    epel                              298 k
+ libgudev1                                      x86_64                   219-19.el7_2.9                                 updates                            66 k
+ libipa_hbac                                    x86_64                   1.13.0-40.el7_2.4                              updates                            98 k
+ libndp                                         x86_64                   1.2-6.el7_2                                    updates                            31 k
+ libsss_idmap                                   x86_64                   1.13.0-40.el7_2.4                              updates                           102 k
+ libsss_nss_idmap                               x86_64                   1.13.0-40.el7_2.4                              updates                           102 k
+ libtevent                                      x86_64                   0.9.26-1.el7_2.1                               updates                            33 k
+ lvm2                                           x86_64                   7:2.02.130-5.el7_2.2                           updates                           1.0 M
+ lvm2-libs                                      x86_64                   7:2.02.130-5.el7_2.2                           updates                           872 k
+ net-snmp-libs                                  x86_64                   1:5.7.2-24.el7_2.1                             updates                           747 k
+ nodejs                                         x86_64                   4.4.4-1nodesource.el7.centos                   nodesource                        8.5 M
+ ntsysv                                         x86_64                   1.3.61-5.el7_2.1                               updates                            36 k
+ pcre                                           i686                     8.32-15.el7_2.1                                updates                           417 k
+ pcre                                           x86_64                   8.32-15.el7_2.1                                updates                           420 k
+ pcre-devel                                     x86_64                   8.32-15.el7_2.1                                updates                           479 k
+ python-libipa_hbac                             x86_64                   1.13.0-40.el7_2.4                              updates                            93 k
+ python-perf                                    x86_64                   3.10.0-327.18.2.el7                            updates                           2.4 M
+ python-sss-murmur                              x86_64                   1.13.0-40.el7_2.4                              updates                            83 k
+ python-sssdconfig                              noarch                   1.13.0-40.el7_2.4                              updates                           124 k
+ qemu-img                                       x86_64                   10:1.5.3-105.el7_2.4                           updates                           658 k
+ qemu-kvm                                       x86_64                   10:1.5.3-105.el7_2.4                           updates                           1.8 M
+ qemu-kvm-common                                x86_64                   10:1.5.3-105.el7_2.4                           updates                           391 k
+ qt                                             x86_64                   1:4.8.5-12.el7_2                               updates                           4.5 M
+ qt-x11                                         x86_64                   1:4.8.5-12.el7_2                               updates                            13 M
+ sssd                                           x86_64                   1.13.0-40.el7_2.4                              updates                            91 k
+ sssd-ad                                        x86_64                   1.13.0-40.el7_2.4                              updates                           216 k
+ sssd-client                                    x86_64                   1.13.0-40.el7_2.4                              updates                           157 k
+ sssd-common                                    x86_64                   1.13.0-40.el7_2.4                              updates                           1.1 M
+ sssd-common-pac                                x86_64                   1.13.0-40.el7_2.4                              updates                           135 k
+ sssd-ipa                                       x86_64                   1.13.0-40.el7_2.4                              updates                           254 k
+ sssd-krb5                                      x86_64                   1.13.0-40.el7_2.4                              updates                           129 k
+ sssd-krb5-common                               x86_64                   1.13.0-40.el7_2.4                              updates                           155 k
+ sssd-ldap                                      x86_64                   1.13.0-40.el7_2.4                              updates                           194 k
+ sssd-proxy                                     x86_64                   1.13.0-40.el7_2.4                              updates                           123 k
+ systemd                                        x86_64                   219-19.el7_2.9                                 updates                           5.1 M
+ systemd-libs                                   i686                     219-19.el7_2.9                                 updates                           358 k
+ systemd-libs                                   x86_64                   219-19.el7_2.9                                 updates                           358 k
+ systemd-python                                 x86_64                   219-19.el7_2.9                                 updates                            99 k
+ systemd-sysv                                   x86_64                   219-19.el7_2.9                                 updates                            53 k
+ uget                                           x86_64                   2.1.3-1.el7                                    epel                              394 k
+
+Transaction Summary
+================================================================================================================================================================
+Install   1 Package
+Upgrade  62 Packages
+
+Total download size: 201 M
+Is this ok [y/d/N]: y
+Downloading packages:
+No Presto metadata available for epel
+No Presto metadata available for nodesource
+No Presto metadata available for pgdg95
+No Presto metadata available for scootersoftware
+Delta RPMs reduced 20 M of updates to 995 k (95% saved)
+(1/63): net-snmp-libs-5.7.2-24.el7_5.7.2-24.el7_2.1.x86_64.drpm                                                                          |  64 kB  00:00:03     
+(2/63): pcre-8.32-15.el7_8.32-15.el7_2.1.x86_64.drpm                                                                                     |  62 kB  00:00:01     
+(3/63): libndp-1.2-4.el7_1.2-6.el7_2.x86_64.drpm                                                                                         |  18 kB  00:00:04     
+(4/63): pcre-devel-8.32-15.el7_8.32-15.el7_2.1.x86_64.drpm                                                                               |  39 kB  00:00:00     
+(5/63): pcre-8.32-15.el7_8.32-15.el7_2.1.i686.drpm                                                                                       |  62 kB  00:00:06     
+(6/63): chkconfig-1.3.61-5.el7_1.3.61-5.el7_2.1.x86_64.drpm                                                                              |  61 kB  00:00:06     
+(7/63): qt-4.8.5-11.el7_4.8.5-12.el7_2.x86_64.drpm                                                                                       | 109 kB  00:00:04     
+(8/63): qt-x11-4.8.5-11.el7_4.8.5-12.el7_2.x86_64.drpm                                                                                   | 360 kB  00:00:06     
+(9/63): gnome-terminal-3.14.3-3.el7_3.14.3-3.el7_2.1.x86_64.drpm                                                                         | 219 kB  00:00:12     
+(10/63): device-mapper-event-1.02.107-5.el7_2.2.x86_64.rpm                                                                               | 167 kB  00:00:03     
+(11/63): device-mapper-event-libs-1.02.107-5.el7_2.2.x86_64.rpm                                                                          | 169 kB  00:00:05     
+(12/63): device-mapper-libs-1.02.107-5.el7_2.2.x86_64.rpm                                                                                | 305 kB  00:00:05     
+(13/63): device-mapper-1.02.107-5.el7_2.2.x86_64.rpm                                                                                     | 252 kB  00:00:11     
+(14/63): device-mapper-multipath-0.4.9-85.el7_2.4.x86_64.rpm                                                                             | 119 kB  00:00:06     
+(15/63): device-mapper-multipath-libs-0.4.9-85.el7_2.4.x86_64.rpm                                                                        | 222 kB  00:00:04     
+(16/63): crash-7.1.2-3.el7_2.1.x86_64.rpm                                                                                                | 2.6 MB  00:01:06     
+(17/63): glibc-2.17-106.el7_2.6.x86_64.rpm                                                                                               | 3.6 MB  00:01:00     
+(18/63): glibc-devel-2.17-106.el7_2.6.x86_64.rpm                                                                                         | 1.0 MB  00:00:17     
+(19/63): glibc-headers-2.17-106.el7_2.6.x86_64.rpm                                                                                       | 662 kB  00:00:14     
+(20/63): glibc-2.17-106.el7_2.6.i686.rpm                                                                                                 | 4.2 MB  00:04:01     
+(21/63): glibc-common-2.17-106.el7_2.6.x86_64.rpm                                                                                        |  11 MB  00:05:23     
+(22/63): kernel-headers-3.10.0-327.18.2.el7.x86_64.rpm                                                                                   | 3.2 MB  00:02:22     
+(23/63): kernel-tools-3.10.0-327.18.2.el7.x86_64.rpm                                                                                     | 2.4 MB  00:00:54     
+(24/63): kpartx-0.4.9-85.el7_2.4.x86_64.rpm                                                                                              |  60 kB  00:00:00     
+(25/63): libcacard-1.5.3-105.el7_2.4.x86_64.rpm                                                                                          | 229 kB  00:00:03     
+(26/63): libevent-2.0.22-1.rhel7.x86_64.rpm                                                                                              | 212 kB  00:00:11     
+(27/63): libgpod-0.8.3-7.el7.x86_64.rpm                                                                                                  | 298 kB  00:00:18     
+(28/63): libgudev1-219-19.el7_2.9.x86_64.rpm                                                                                             |  66 kB  00:00:01     
+(29/63): libipa_hbac-1.13.0-40.el7_2.4.x86_64.rpm                                                                                        |  98 kB  00:00:02     
+(30/63): libsss_idmap-1.13.0-40.el7_2.4.x86_64.rpm                                                                                       | 102 kB  00:00:02     
+(31/63): libsss_nss_idmap-1.13.0-40.el7_2.4.x86_64.rpm                                                                                   | 102 kB  00:00:01     
+(32/63): libtevent-0.9.26-1.el7_2.1.x86_64.rpm                                                                                           |  33 kB  00:00:01     
+(33/63): kernel-tools-libs-3.10.0-327.18.2.el7.x86_64.rpm                                                                                | 2.3 MB  00:01:29     
+(34/63): lvm2-2.02.130-5.el7_2.2.x86_64.rpm                                                                                              | 1.0 MB  00:00:18     
+(35/63): lvm2-libs-2.02.130-5.el7_2.2.x86_64.rpm                                                                                         | 872 kB  00:00:44     
+(36/63): ntsysv-1.3.61-5.el7_2.1.x86_64.rpm                                                                                              |  36 kB  00:00:00     
+(37/63): python-libipa_hbac-1.13.0-40.el7_2.4.x86_64.rpm                                                                                 |  93 kB  00:00:01     
+(38/63): python-perf-3.10.0-327.18.2.el7.x86_64.rpm                                                                                      | 2.4 MB  00:00:26     
+(39/63): python-sss-murmur-1.13.0-40.el7_2.4.x86_64.rpm                                                                                  |  83 kB  00:00:01     
+(40/63): python-sssdconfig-1.13.0-40.el7_2.4.noarch.rpm                                                                                  | 124 kB  00:00:01     
+(41/63): qemu-img-1.5.3-105.el7_2.4.x86_64.rpm                                                                                           | 658 kB  00:00:07     
+(42/63): qemu-kvm-1.5.3-105.el7_2.4.x86_64.rpm                                                                                           | 1.8 MB  00:00:30     
+(43/63): qemu-kvm-common-1.5.3-105.el7_2.4.x86_64.rpm                                                                                    | 391 kB  00:00:04     
+(44/63): sssd-1.13.0-40.el7_2.4.x86_64.rpm                                                                                               |  91 kB  00:00:01     
+(45/63): sssd-ad-1.13.0-40.el7_2.4.x86_64.rpm                                                                                            | 216 kB  00:00:03     
+(46/63): sssd-client-1.13.0-40.el7_2.4.x86_64.rpm                                                                                        | 157 kB  00:00:01     
+(47/63): sssd-common-1.13.0-40.el7_2.4.x86_64.rpm                                                                                        | 1.1 MB  00:00:11     
+(48/63): sssd-common-pac-1.13.0-40.el7_2.4.x86_64.rpm                                                                                    | 135 kB  00:00:02     
+(49/63): sssd-ipa-1.13.0-40.el7_2.4.x86_64.rpm                                                                                           | 254 kB  00:00:03     
+(50/63): sssd-krb5-1.13.0-40.el7_2.4.x86_64.rpm                                                                                          | 129 kB  00:00:01     
+(51/63): sssd-krb5-common-1.13.0-40.el7_2.4.x86_64.rpm                                                                                   | 155 kB  00:00:01     
+(52/63): sssd-ldap-1.13.0-40.el7_2.4.x86_64.rpm                                                                                          | 194 kB  00:00:02     
+(53/63): sssd-proxy-1.13.0-40.el7_2.4.x86_64.rpm                                                                                         | 123 kB  00:00:01     
+(54/63): kernel-3.10.0-327.18.2.el7.x86_64.rpm                                                                                           |  33 MB  00:08:52     
+(55/63): systemd-libs-219-19.el7_2.9.i686.rpm                                                                                            | 358 kB  00:00:04     
+(56/63): systemd-libs-219-19.el7_2.9.x86_64.rpm                                                                                          | 358 kB  00:00:03     
+(57/63): systemd-python-219-19.el7_2.9.x86_64.rpm                                                                                        |  99 kB  00:00:00     
+(58/63): systemd-sysv-219-19.el7_2.9.x86_64.rpm                                                                                          |  53 kB  00:00:00     
+(59/63): uget-2.1.3-1.el7.x86_64.rpm                                                                                                     | 394 kB  00:00:15     
+(60/63): nodejs-4.4.4-1nodesource.el7.centos.x86_64.rpm                                                                                  | 8.5 MB  00:03:05     
+(61/63): systemd-219-19.el7_2.9.x86_64.rpm                                                                                               | 5.1 MB  00:00:58     
+(62/63): bcompare-4.1.6.21095.x86_64.rpm                                                                                                 |  13 MB  00:12:50     
+(63/63): firefox-45.1.1-1el7.centos.x86_64.rpm                                                                                           |  76 MB  00:20:16     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                           150 kB/s | 182 MB  00:20:37     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Updating   : glibc-2.17-106.el7_2.6.x86_64                                                                                                              1/125 
+  Updating   : glibc-common-2.17-106.el7_2.6.x86_64                                                                                                       2/125 
+  Updating   : systemd-libs-219-19.el7_2.9.x86_64                                                                                                         3/125 
+  Updating   : systemd-219-19.el7_2.9.x86_64                                                                                                              4/125 
+  Updating   : pcre-8.32-15.el7_2.1.x86_64                                                                                                                5/125 
+  Updating   : libtevent-0.9.26-1.el7_2.1.x86_64                                                                                                          6/125 
+  Updating   : libsss_idmap-1.13.0-40.el7_2.4.x86_64                                                                                                      7/125 
+  Updating   : chkconfig-1.3.61-5.el7_2.1.x86_64                                                                                                          8/125 
+  Updating   : 7:device-mapper-1.02.107-5.el7_2.2.x86_64                                                                                                  9/125 
+  Updating   : 7:device-mapper-libs-1.02.107-5.el7_2.2.x86_64                                                                                            10/125 
+  Updating   : 7:device-mapper-event-libs-1.02.107-5.el7_2.2.x86_64                                                                                      11/125 
+  Updating   : libipa_hbac-1.13.0-40.el7_2.4.x86_64                                                                                                      12/125 
+  Updating   : 1:qt-4.8.5-12.el7_2.x86_64                                                                                                                13/125 
+  Updating   : 1:qt-x11-4.8.5-12.el7_2.x86_64                                                                                                            14/125 
+  Updating   : 7:device-mapper-event-1.02.107-5.el7_2.2.x86_64                                                                                           15/125 
+  Updating   : 7:lvm2-libs-2.02.130-5.el7_2.2.x86_64                                                                                                     16/125 
+  Updating   : device-mapper-multipath-libs-0.4.9-85.el7_2.4.x86_64                                                                                      17/125 
+  Updating   : kpartx-0.4.9-85.el7_2.4.x86_64                                                                                                            18/125 
+  Updating   : systemd-sysv-219-19.el7_2.9.x86_64                                                                                                        19/125 
+  Updating   : 10:qemu-kvm-common-1.5.3-105.el7_2.4.x86_64                                                                                               20/125 
+  Updating   : libsss_nss_idmap-1.13.0-40.el7_2.4.x86_64                                                                                                 21/125 
+  Updating   : sssd-client-1.13.0-40.el7_2.4.x86_64                                                                                                      22/125 
+  Updating   : sssd-common-1.13.0-40.el7_2.4.x86_64                                                                                                      23/125 
+  Updating   : sssd-krb5-common-1.13.0-40.el7_2.4.x86_64                                                                                                 24/125 
+  Updating   : sssd-common-pac-1.13.0-40.el7_2.4.x86_64                                                                                                  25/125 
+  Updating   : sssd-ad-1.13.0-40.el7_2.4.x86_64                                                                                                          26/125 
+  Updating   : sssd-ipa-1.13.0-40.el7_2.4.x86_64                                                                                                         27/125 
+  Updating   : sssd-krb5-1.13.0-40.el7_2.4.x86_64                                                                                                        28/125 
+  Updating   : sssd-ldap-1.13.0-40.el7_2.4.x86_64                                                                                                        29/125 
+  Updating   : sssd-proxy-1.13.0-40.el7_2.4.x86_64                                                                                                       30/125 
+  Updating   : 10:qemu-img-1.5.3-105.el7_2.4.x86_64                                                                                                      31/125 
+  Updating   : kernel-tools-libs-3.10.0-327.18.2.el7.x86_64                                                                                              32/125 
+  Updating   : kernel-headers-3.10.0-327.18.2.el7.x86_64                                                                                                 33/125 
+  Updating   : glibc-headers-2.17-106.el7_2.6.x86_64                                                                                                     34/125 
+  Updating   : python-sssdconfig-1.13.0-40.el7_2.4.noarch                                                                                                35/125 
+  Updating   : sssd-1.13.0-40.el7_2.4.x86_64                                                                                                             36/125 
+  Updating   : glibc-devel-2.17-106.el7_2.6.x86_64                                                                                                       37/125 
+  Updating   : kernel-tools-3.10.0-327.18.2.el7.x86_64                                                                                                   38/125 
+  Updating   : 10:qemu-kvm-1.5.3-105.el7_2.4.x86_64                                                                                                      39/125 
+  Updating   : device-mapper-multipath-0.4.9-85.el7_2.4.x86_64                                                                                           40/125 
+  Updating   : 7:lvm2-2.02.130-5.el7_2.2.x86_64                                                                                                          41/125 
+  Updating   : bcompare-4.1.6-21095.x86_64                                                                                                               42/125 
+/var/tmp/rpm-tmp.X7HMMp: line 103: kde4-config: command not found
+/var/tmp/rpm-tmp.X7HMMp: line 103: kde4-config: command not found
+  Updating   : python-libipa_hbac-1.13.0-40.el7_2.4.x86_64                                                                                               43/125 
+  Updating   : ntsysv-1.3.61-5.el7_2.1.x86_64                                                                                                            44/125 
+  Updating   : pcre-devel-8.32-15.el7_2.1.x86_64                                                                                                         45/125 
+  Updating   : systemd-python-219-19.el7_2.9.x86_64                                                                                                      46/125 
+  Updating   : libgpod-0.8.3-7.el7.x86_64                                                                                                                47/125 
+  Updating   : libgudev1-219-19.el7_2.9.x86_64                                                                                                           48/125 
+Detected old npm client, removing...
+  Updating   : nodejs-4.4.4-1nodesource.el7.centos.x86_64                                                                                                49/125 
+  Updating   : firefox-45.1.1-1el7.centos.x86_64                                                                                                         50/125 
+  Updating   : 1:net-snmp-libs-5.7.2-24.el7_2.1.x86_64                                                                                                   51/125 
+  Updating   : gnome-terminal-3.14.3-3.el7_2.1.x86_64                                                                                                    52/125 
+  Updating   : 10:libcacard-1.5.3-105.el7_2.4.x86_64                                                                                                     53/125 
+  Updating   : uget-2.1.3-1.el7.x86_64                                                                                                                   54/125 
+  Updating   : crash-7.1.2-3.el7_2.1.x86_64                                                                                                              55/125 
+  Updating   : python-perf-3.10.0-327.18.2.el7.x86_64                                                                                                    56/125 
+  Updating   : python-sss-murmur-1.13.0-40.el7_2.4.x86_64                                                                                                57/125 
+  Updating   : libevent-2.0.22-1.rhel7.x86_64                                                                                                            58/125 
+  Updating   : libndp-1.2-6.el7_2.x86_64                                                                                                                 59/125 
+  Installing : kernel-3.10.0-327.18.2.el7.x86_64                                                                                                         60/125 
+  Updating   : glibc-2.17-106.el7_2.6.i686                                                                                                               61/125 
+  Updating   : systemd-libs-219-19.el7_2.9.i686                                                                                                          62/125 
+  Updating   : pcre-8.32-15.el7_2.1.i686                                                                                                                 63/125 
+  Cleanup    : device-mapper-multipath-0.4.9-85.el7_2.1.x86_64                                                                                           64/125 
+  Cleanup    : 7:lvm2-2.02.130-5.el7_2.1.x86_64                                                                                                          65/125 
+  Cleanup    : sssd-1.13.0-40.el7_2.2.x86_64                                                                                                             66/125 
+  Cleanup    : sssd-ipa-1.13.0-40.el7_2.2.x86_64                                                                                                         67/125 
+  Cleanup    : sssd-ad-1.13.0-40.el7_2.2.x86_64                                                                                                          68/125 
+  Cleanup    : sssd-ldap-1.13.0-40.el7_2.2.x86_64                                                                                                        69/125 
+  Cleanup    : sssd-common-pac-1.13.0-40.el7_2.2.x86_64                                                                                                  70/125 
+  Cleanup    : sssd-krb5-1.13.0-40.el7_2.2.x86_64                                                                                                        71/125 
+  Cleanup    : sssd-proxy-1.13.0-40.el7_2.2.x86_64                                                                                                       72/125 
+  Cleanup    : 7:lvm2-libs-2.02.130-5.el7_2.1.x86_64                                                                                                     73/125 
+  Cleanup    : 7:device-mapper-event-1.02.107-5.el7_2.1.x86_64                                                                                           74/125 
+  Cleanup    : sssd-krb5-common-1.13.0-40.el7_2.2.x86_64                                                                                                 75/125 
+  Cleanup    : sssd-common-1.13.0-40.el7_2.2.x86_64                                                                                                      76/125 
+  Cleanup    : sssd-client-1.13.0-40.el7_2.2.x86_64                                                                                                      77/125 
+  Cleanup    : device-mapper-multipath-libs-0.4.9-85.el7_2.1.x86_64                                                                                      78/125 
+  Cleanup    : libgudev1-219-19.el7_2.7.x86_64                                                                                                           79/125 
+  Cleanup    : 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64                                                                                                      80/125 
+  Cleanup    : kernel-tools-3.10.0-327.13.1.el7.x86_64                                                                                                   81/125 
+  Cleanup    : systemd-python-219-19.el7_2.7.x86_64                                                                                                      82/125 
+  Cleanup    : glibc-devel-2.17-106.el7_2.4.x86_64                                                                                                       83/125 
+  Cleanup    : glibc-headers-2.17-106.el7_2.4.x86_64                                                                                                     84/125 
+  Cleanup    : pcre-8.32-15.el7                                                                                                                          85/125 
+  Cleanup    : bcompare-4.1.5-21031.x86_64                                                                                                               86/125 
+  Cleanup    : systemd-libs-219-19.el7_2.7                                                                                                               87/125 
+  Cleanup    : glibc-2.17-106.el7_2.4                                                                                                                    88/125 
+  Cleanup    : systemd-sysv-219-19.el7_2.7.x86_64                                                                                                        89/125 
+  Cleanup    : firefox-45.1.0-1.el7.centos.x86_64                                                                                                        90/125 
+  Cleanup    : pcre-devel-8.32-15.el7.x86_64                                                                                                             91/125 
+  Cleanup    : 1:qt-x11-4.8.5-11.el7.x86_64                                                                                                              92/125 
+  Cleanup    : 10:qemu-kvm-common-1.5.3-105.el7_2.3.x86_64                                                                                               93/125 
+  Cleanup    : 7:device-mapper-event-libs-1.02.107-5.el7_2.1.x86_64                                                                                      94/125 
+  Cleanup    : kpartx-0.4.9-85.el7_2.1.x86_64                                                                                                            95/125 
+  Cleanup    : 7:device-mapper-1.02.107-5.el7_2.1.x86_64                                                                                                 96/125 
+  Cleanup    : 7:device-mapper-libs-1.02.107-5.el7_2.1.x86_64                                                                                            97/125 
+  Cleanup    : python-libipa_hbac-1.13.0-40.el7_2.2.x86_64                                                                                               98/125 
+  Cleanup    : ntsysv-1.3.61-5.el7.x86_64                                                                                                                99/125 
+  Cleanup    : libgpod-0.8.3-6.el7.x86_64                                                                                                               100/125 
+  Cleanup    : systemd-219-19.el7_2.7.x86_64                                                                                                            101/125 
+  Cleanup    : systemd-libs-219-19.el7_2.7                                                                                                              102/125 
+  Cleanup    : chkconfig-1.3.61-5.el7.x86_64                                                                                                            103/125 
+  Cleanup    : libipa_hbac-1.13.0-40.el7_2.2.x86_64                                                                                                     104/125 
+  Cleanup    : 1:qt-4.8.5-11.el7.x86_64                                                                                                                 105/125 
+  Cleanup    : pcre-8.32-15.el7                                                                                                                         106/125 
+  Cleanup    : kernel-tools-libs-3.10.0-327.13.1.el7.x86_64                                                                                             107/125 
+  Cleanup    : 10:qemu-img-1.5.3-105.el7_2.3.x86_64                                                                                                     108/125 
+  Cleanup    : libsss_idmap-1.13.0-40.el7_2.2.x86_64                                                                                                    109/125 
+  Cleanup    : libsss_nss_idmap-1.13.0-40.el7_2.2.x86_64                                                                                                110/125 
+  Cleanup    : libtevent-0.9.26-1.el7_2.x86_64                                                                                                          111/125 
+  Cleanup    : libndp-1.2-4.el7.x86_64                                                                                                                  112/125 
+  Cleanup    : libevent-2.0.21-4.el7.x86_64                                                                                                             113/125 
+  Cleanup    : python-sss-murmur-1.13.0-40.el7_2.2.x86_64                                                                                               114/125 
+  Cleanup    : python-perf-3.10.0-327.13.1.el7.x86_64                                                                                                   115/125 
+  Cleanup    : crash-7.1.2-3.el7_2.x86_64                                                                                                               116/125 
+  Cleanup    : uget-2.0.4-1.el7.x86_64                                                                                                                  117/125 
+  Cleanup    : 10:libcacard-1.5.3-105.el7_2.3.x86_64                                                                                                    118/125 
+  Cleanup    : gnome-terminal-3.14.3-3.el7.x86_64                                                                                                       119/125 
+  Cleanup    : 1:net-snmp-libs-5.7.2-24.el7.x86_64                                                                                                      120/125 
+  Cleanup    : nodejs-4.4.3-1nodesource.el7.centos.x86_64                                                                                               121/125 
+  Cleanup    : kernel-headers-3.10.0-327.13.1.el7.x86_64                                                                                                122/125 
+  Cleanup    : python-sssdconfig-1.13.0-40.el7_2.2.noarch                                                                                               123/125 
+  Cleanup    : glibc-common-2.17-106.el7_2.4.x86_64                                                                                                     124/125 
+  Cleanup    : glibc-2.17-106.el7_2.4                                                                                                                   125/125 
+  Verifying  : device-mapper-multipath-libs-0.4.9-85.el7_2.4.x86_64                                                                                       1/125 
+  Verifying  : kpartx-0.4.9-85.el7_2.4.x86_64                                                                                                             2/125 
+  Verifying  : sssd-proxy-1.13.0-40.el7_2.4.x86_64                                                                                                        3/125 
+  Verifying  : 7:device-mapper-libs-1.02.107-5.el7_2.2.x86_64                                                                                             4/125 
+  Verifying  : libsss_idmap-1.13.0-40.el7_2.4.x86_64                                                                                                      5/125 
+  Verifying  : sssd-ad-1.13.0-40.el7_2.4.x86_64                                                                                                           6/125 
+  Verifying  : systemd-python-219-19.el7_2.9.x86_64                                                                                                       7/125 
+  Verifying  : pcre-8.32-15.el7_2.1.x86_64                                                                                                                8/125 
+  Verifying  : nodejs-4.4.4-1nodesource.el7.centos.x86_64                                                                                                 9/125 
+  Verifying  : glibc-headers-2.17-106.el7_2.6.x86_64                                                                                                     10/125 
+  Verifying  : libsss_nss_idmap-1.13.0-40.el7_2.4.x86_64                                                                                                 11/125 
+  Verifying  : 7:device-mapper-event-libs-1.02.107-5.el7_2.2.x86_64                                                                                      12/125 
+  Verifying  : glibc-2.17-106.el7_2.6.i686                                                                                                               13/125 
+  Verifying  : pcre-devel-8.32-15.el7_2.1.x86_64                                                                                                         14/125 
+  Verifying  : firefox-45.1.1-1el7.centos.x86_64                                                                                                         15/125 
+  Verifying  : 1:net-snmp-libs-5.7.2-24.el7_2.1.x86_64                                                                                                   16/125 
+  Verifying  : systemd-sysv-219-19.el7_2.9.x86_64                                                                                                        17/125 
+  Verifying  : kernel-3.10.0-327.18.2.el7.x86_64                                                                                                         18/125 
+  Verifying  : gnome-terminal-3.14.3-3.el7_2.1.x86_64                                                                                                    19/125 
+  Verifying  : 10:libcacard-1.5.3-105.el7_2.4.x86_64                                                                                                     20/125 
+  Verifying  : 10:qemu-img-1.5.3-105.el7_2.4.x86_64                                                                                                      21/125 
+  Verifying  : uget-2.1.3-1.el7.x86_64                                                                                                                   22/125 
+  Verifying  : libipa_hbac-1.13.0-40.el7_2.4.x86_64                                                                                                      23/125 
+  Verifying  : crash-7.1.2-3.el7_2.1.x86_64                                                                                                              24/125 
+  Verifying  : kernel-tools-3.10.0-327.18.2.el7.x86_64                                                                                                   25/125 
+  Verifying  : systemd-219-19.el7_2.9.x86_64                                                                                                             26/125 
+  Verifying  : python-perf-3.10.0-327.18.2.el7.x86_64                                                                                                    27/125 
+  Verifying  : 7:lvm2-libs-2.02.130-5.el7_2.2.x86_64                                                                                                     28/125 
+  Verifying  : systemd-libs-219-19.el7_2.9.x86_64                                                                                                        29/125 
+  Verifying  : 7:device-mapper-event-1.02.107-5.el7_2.2.x86_64                                                                                           30/125 
+  Verifying  : glibc-devel-2.17-106.el7_2.6.x86_64                                                                                                       31/125 
+  Verifying  : glibc-common-2.17-106.el7_2.6.x86_64                                                                                                      32/125 
+  Verifying  : sssd-common-pac-1.13.0-40.el7_2.4.x86_64                                                                                                  33/125 
+  Verifying  : kernel-tools-libs-3.10.0-327.18.2.el7.x86_64                                                                                              34/125 
+  Verifying  : 1:qt-x11-4.8.5-12.el7_2.x86_64                                                                                                            35/125 
+  Verifying  : libgpod-0.8.3-7.el7.x86_64                                                                                                                36/125 
+  Verifying  : sssd-krb5-1.13.0-40.el7_2.4.x86_64                                                                                                        37/125 
+  Verifying  : chkconfig-1.3.61-5.el7_2.1.x86_64                                                                                                         38/125 
+  Verifying  : 7:lvm2-2.02.130-5.el7_2.2.x86_64                                                                                                          39/125 
+  Verifying  : python-libipa_hbac-1.13.0-40.el7_2.4.x86_64                                                                                               40/125 
+  Verifying  : 7:device-mapper-1.02.107-5.el7_2.2.x86_64                                                                                                 41/125 
+  Verifying  : python-sss-murmur-1.13.0-40.el7_2.4.x86_64                                                                                                42/125 
+  Verifying  : sssd-1.13.0-40.el7_2.4.x86_64                                                                                                             43/125 
+  Verifying  : libevent-2.0.22-1.rhel7.x86_64                                                                                                            44/125 
+  Verifying  : libtevent-0.9.26-1.el7_2.1.x86_64                                                                                                         45/125 
+  Verifying  : 10:qemu-kvm-1.5.3-105.el7_2.4.x86_64                                                                                                      46/125 
+  Verifying  : sssd-common-1.13.0-40.el7_2.4.x86_64                                                                                                      47/125 
+  Verifying  : glibc-2.17-106.el7_2.6.x86_64                                                                                                             48/125 
+  Verifying  : libgudev1-219-19.el7_2.9.x86_64                                                                                                           49/125 
+  Verifying  : ntsysv-1.3.61-5.el7_2.1.x86_64                                                                                                            50/125 
+  Verifying  : 1:qt-4.8.5-12.el7_2.x86_64                                                                                                                51/125 
+  Verifying  : python-sssdconfig-1.13.0-40.el7_2.4.noarch                                                                                                52/125 
+  Verifying  : kernel-headers-3.10.0-327.18.2.el7.x86_64                                                                                                 53/125 
+  Verifying  : sssd-krb5-common-1.13.0-40.el7_2.4.x86_64                                                                                                 54/125 
+  Verifying  : sssd-ldap-1.13.0-40.el7_2.4.x86_64                                                                                                        55/125 
+  Verifying  : systemd-libs-219-19.el7_2.9.i686                                                                                                          56/125 
+  Verifying  : libndp-1.2-6.el7_2.x86_64                                                                                                                 57/125 
+  Verifying  : device-mapper-multipath-0.4.9-85.el7_2.4.x86_64                                                                                           58/125 
+  Verifying  : sssd-client-1.13.0-40.el7_2.4.x86_64                                                                                                      59/125 
+  Verifying  : 10:qemu-kvm-common-1.5.3-105.el7_2.4.x86_64                                                                                               60/125 
+  Verifying  : bcompare-4.1.6-21095.x86_64                                                                                                               61/125 
+  Verifying  : pcre-8.32-15.el7_2.1.i686                                                                                                                 62/125 
+  Verifying  : sssd-ipa-1.13.0-40.el7_2.4.x86_64                                                                                                         63/125 
+  Verifying  : 7:device-mapper-event-libs-1.02.107-5.el7_2.1.x86_64                                                                                      64/125 
+  Verifying  : glibc-common-2.17-106.el7_2.4.x86_64                                                                                                      65/125 
+  Verifying  : firefox-45.1.0-1.el7.centos.x86_64                                                                                                        66/125 
+  Verifying  : kernel-headers-3.10.0-327.13.1.el7.x86_64                                                                                                 67/125 
+  Verifying  : systemd-libs-219-19.el7_2.7.i686                                                                                                          68/125 
+  Verifying  : 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64                                                                                                      69/125 
+  Verifying  : device-mapper-multipath-0.4.9-85.el7_2.1.x86_64                                                                                           70/125 
+  Verifying  : 7:device-mapper-1.02.107-5.el7_2.1.x86_64                                                                                                 71/125 
+  Verifying  : systemd-libs-219-19.el7_2.7.x86_64                                                                                                        72/125 
+  Verifying  : libsss_idmap-1.13.0-40.el7_2.2.x86_64                                                                                                     73/125 
+  Verifying  : 1:net-snmp-libs-5.7.2-24.el7.x86_64                                                                                                       74/125 
+  Verifying  : sssd-common-pac-1.13.0-40.el7_2.2.x86_64                                                                                                  75/125 
+  Verifying  : sssd-ipa-1.13.0-40.el7_2.2.x86_64                                                                                                         76/125 
+  Verifying  : sssd-ldap-1.13.0-40.el7_2.2.x86_64                                                                                                        77/125 
+  Verifying  : device-mapper-multipath-libs-0.4.9-85.el7_2.1.x86_64                                                                                      78/125 
+  Verifying  : libgudev1-219-19.el7_2.7.x86_64                                                                                                           79/125 
+  Verifying  : python-libipa_hbac-1.13.0-40.el7_2.2.x86_64                                                                                               80/125 
+  Verifying  : crash-7.1.2-3.el7_2.x86_64                                                                                                                81/125 
+  Verifying  : 7:device-mapper-event-1.02.107-5.el7_2.1.x86_64                                                                                           82/125 
+  Verifying  : sssd-1.13.0-40.el7_2.2.x86_64                                                                                                             83/125 
+  Verifying  : python-sss-murmur-1.13.0-40.el7_2.2.x86_64                                                                                                84/125 
+  Verifying  : kernel-tools-3.10.0-327.13.1.el7.x86_64                                                                                                   85/125 
+  Verifying  : libipa_hbac-1.13.0-40.el7_2.2.x86_64                                                                                                      86/125 
+  Verifying  : kpartx-0.4.9-85.el7_2.1.x86_64                                                                                                            87/125 
+  Verifying  : 1:qt-x11-4.8.5-11.el7.x86_64                                                                                                              88/125 
+  Verifying  : uget-2.0.4-1.el7.x86_64                                                                                                                   89/125 
+  Verifying  : 10:libcacard-1.5.3-105.el7_2.3.x86_64                                                                                                     90/125 
+  Verifying  : pcre-8.32-15.el7.i686                                                                                                                     91/125 
+  Verifying  : glibc-headers-2.17-106.el7_2.4.x86_64                                                                                                     92/125 
+  Verifying  : 10:qemu-kvm-common-1.5.3-105.el7_2.3.x86_64                                                                                               93/125 
+  Verifying  : pcre-devel-8.32-15.el7.x86_64                                                                                                             94/125 
+  Verifying  : nodejs-4.4.3-1nodesource.el7.centos.x86_64                                                                                                95/125 
+  Verifying  : sssd-krb5-1.13.0-40.el7_2.2.x86_64                                                                                                        96/125 
+  Verifying  : pcre-8.32-15.el7.x86_64                                                                                                                   97/125 
+  Verifying  : chkconfig-1.3.61-5.el7.x86_64                                                                                                             98/125 
+  Verifying  : libsss_nss_idmap-1.13.0-40.el7_2.2.x86_64                                                                                                 99/125 
+  Verifying  : libgpod-0.8.3-6.el7.x86_64                                                                                                               100/125 
+  Verifying  : libevent-2.0.21-4.el7.x86_64                                                                                                             101/125 
+  Verifying  : libtevent-0.9.26-1.el7_2.x86_64                                                                                                          102/125 
+  Verifying  : systemd-python-219-19.el7_2.7.x86_64                                                                                                     103/125 
+  Verifying  : sssd-krb5-common-1.13.0-40.el7_2.2.x86_64                                                                                                104/125 
+  Verifying  : kernel-tools-libs-3.10.0-327.13.1.el7.x86_64                                                                                             105/125 
+  Verifying  : python-perf-3.10.0-327.13.1.el7.x86_64                                                                                                   106/125 
+  Verifying  : systemd-sysv-219-19.el7_2.7.x86_64                                                                                                       107/125 
+  Verifying  : sssd-proxy-1.13.0-40.el7_2.2.x86_64                                                                                                      108/125 
+  Verifying  : ntsysv-1.3.61-5.el7.x86_64                                                                                                               109/125 
+  Verifying  : sssd-client-1.13.0-40.el7_2.2.x86_64                                                                                                     110/125 
+  Verifying  : glibc-devel-2.17-106.el7_2.4.x86_64                                                                                                      111/125 
+  Verifying  : sssd-ad-1.13.0-40.el7_2.2.x86_64                                                                                                         112/125 
+  Verifying  : gnome-terminal-3.14.3-3.el7.x86_64                                                                                                       113/125 
+  Verifying  : systemd-219-19.el7_2.7.x86_64                                                                                                            114/125 
+  Verifying  : 1:qt-4.8.5-11.el7.x86_64                                                                                                                 115/125 
+  Verifying  : 7:device-mapper-libs-1.02.107-5.el7_2.1.x86_64                                                                                           116/125 
+  Verifying  : libndp-1.2-4.el7.x86_64                                                                                                                  117/125 
+  Verifying  : glibc-2.17-106.el7_2.4.i686                                                                                                              118/125 
+  Verifying  : 10:qemu-img-1.5.3-105.el7_2.3.x86_64                                                                                                     119/125 
+  Verifying  : 7:lvm2-libs-2.02.130-5.el7_2.1.x86_64                                                                                                    120/125 
+  Verifying  : bcompare-4.1.5-21031.x86_64                                                                                                              121/125 
+  Verifying  : python-sssdconfig-1.13.0-40.el7_2.2.noarch                                                                                               122/125 
+  Verifying  : 7:lvm2-2.02.130-5.el7_2.1.x86_64                                                                                                         123/125 
+  Verifying  : sssd-common-1.13.0-40.el7_2.2.x86_64                                                                                                     124/125 
+  Verifying  : glibc-2.17-106.el7_2.4.x86_64                                                                                                            125/125 
+
+Installed:
+  kernel.x86_64 0:3.10.0-327.18.2.el7                                                                                                                           
+
+Updated:
+  bcompare.x86_64 0:4.1.6-21095                    chkconfig.x86_64 0:1.3.61-5.el7_2.1                 crash.x86_64 0:7.1.2-3.el7_2.1                          
+  device-mapper.x86_64 7:1.02.107-5.el7_2.2        device-mapper-event.x86_64 7:1.02.107-5.el7_2.2     device-mapper-event-libs.x86_64 7:1.02.107-5.el7_2.2    
+  device-mapper-libs.x86_64 7:1.02.107-5.el7_2.2   device-mapper-multipath.x86_64 0:0.4.9-85.el7_2.4   device-mapper-multipath-libs.x86_64 0:0.4.9-85.el7_2.4  
+  firefox.x86_64 0:45.1.1-1el7.centos              glibc.i686 0:2.17-106.el7_2.6                       glibc.x86_64 0:2.17-106.el7_2.6                         
+  glibc-common.x86_64 0:2.17-106.el7_2.6           glibc-devel.x86_64 0:2.17-106.el7_2.6               glibc-headers.x86_64 0:2.17-106.el7_2.6                 
+  gnome-terminal.x86_64 0:3.14.3-3.el7_2.1         kernel-headers.x86_64 0:3.10.0-327.18.2.el7         kernel-tools.x86_64 0:3.10.0-327.18.2.el7               
+  kernel-tools-libs.x86_64 0:3.10.0-327.18.2.el7   kpartx.x86_64 0:0.4.9-85.el7_2.4                    libcacard.x86_64 10:1.5.3-105.el7_2.4                   
+  libevent.x86_64 0:2.0.22-1.rhel7                 libgpod.x86_64 0:0.8.3-7.el7                        libgudev1.x86_64 0:219-19.el7_2.9                       
+  libipa_hbac.x86_64 0:1.13.0-40.el7_2.4           libndp.x86_64 0:1.2-6.el7_2                         libsss_idmap.x86_64 0:1.13.0-40.el7_2.4                 
+  libsss_nss_idmap.x86_64 0:1.13.0-40.el7_2.4      libtevent.x86_64 0:0.9.26-1.el7_2.1                 lvm2.x86_64 7:2.02.130-5.el7_2.2                        
+  lvm2-libs.x86_64 7:2.02.130-5.el7_2.2            net-snmp-libs.x86_64 1:5.7.2-24.el7_2.1             nodejs.x86_64 0:4.4.4-1nodesource.el7.centos            
+  ntsysv.x86_64 0:1.3.61-5.el7_2.1                 pcre.i686 0:8.32-15.el7_2.1                         pcre.x86_64 0:8.32-15.el7_2.1                           
+  pcre-devel.x86_64 0:8.32-15.el7_2.1              python-libipa_hbac.x86_64 0:1.13.0-40.el7_2.4       python-perf.x86_64 0:3.10.0-327.18.2.el7                
+  python-sss-murmur.x86_64 0:1.13.0-40.el7_2.4     python-sssdconfig.noarch 0:1.13.0-40.el7_2.4        qemu-img.x86_64 10:1.5.3-105.el7_2.4                    
+  qemu-kvm.x86_64 10:1.5.3-105.el7_2.4             qemu-kvm-common.x86_64 10:1.5.3-105.el7_2.4         qt.x86_64 1:4.8.5-12.el7_2                              
+  qt-x11.x86_64 1:4.8.5-12.el7_2                   sssd.x86_64 0:1.13.0-40.el7_2.4                     sssd-ad.x86_64 0:1.13.0-40.el7_2.4                      
+  sssd-client.x86_64 0:1.13.0-40.el7_2.4           sssd-common.x86_64 0:1.13.0-40.el7_2.4              sssd-common-pac.x86_64 0:1.13.0-40.el7_2.4              
+  sssd-ipa.x86_64 0:1.13.0-40.el7_2.4              sssd-krb5.x86_64 0:1.13.0-40.el7_2.4                sssd-krb5-common.x86_64 0:1.13.0-40.el7_2.4             
+  sssd-ldap.x86_64 0:1.13.0-40.el7_2.4             sssd-proxy.x86_64 0:1.13.0-40.el7_2.4               systemd.x86_64 0:219-19.el7_2.9                         
+  systemd-libs.i686 0:219-19.el7_2.9               systemd-libs.x86_64 0:219-19.el7_2.9                systemd-python.x86_64 0:219-19.el7_2.9                  
+  systemd-sysv.x86_64 0:219-19.el7_2.9             uget.x86_64 0:2.1.3-1.el7                          
+
+Complete!
+[root@localhost PostgreSQL]# yum install phpPgAdmin httpd
+Loaded plugins: fastestmirror, langpacks
+scootersoftware                                                                                                                          |  951 B  00:00:00     
+Loading mirror speeds from cached hostfile
+ * base: ftp.iitm.ac.in
+ * epel: epel.mirror.net.in
+ * extras: ftp.iitm.ac.in
+ * nux-dextop: mirror.li.nux.ro
+ * rpmforge: ftp.lug.ro
+ * updates: ftp.iitm.ac.in
+Resolving Dependencies
+--> Running transaction check
+---> Package httpd.x86_64 0:2.4.6-40.el7.centos.1 will be installed
+--> Processing Dependency: httpd-tools = 2.4.6-40.el7.centos.1 for package: httpd-2.4.6-40.el7.centos.1.x86_64
+--> Processing Dependency: libaprutil-1.so.0()(64bit) for package: httpd-2.4.6-40.el7.centos.1.x86_64
+--> Processing Dependency: libapr-1.so.0()(64bit) for package: httpd-2.4.6-40.el7.centos.1.x86_64
+---> Package phpPgAdmin.noarch 0:5.1-2.rhel7 will be installed
+--> Processing Dependency: php-pgsql >= 4.2 for package: phpPgAdmin-5.1-2.rhel7.noarch
+--> Processing Dependency: php >= 4.2 for package: phpPgAdmin-5.1-2.rhel7.noarch
+--> Running transaction check
+---> Package apr.x86_64 0:1.4.8-3.el7 will be installed
+---> Package apr-util.x86_64 0:1.5.2-6.el7 will be installed
+---> Package httpd-tools.x86_64 0:2.4.6-40.el7.centos.1 will be installed
+---> Package php.x86_64 0:5.4.16-36.1.el7_2.1 will be installed
+--> Processing Dependency: php-common(x86-64) = 5.4.16-36.1.el7_2.1 for package: php-5.4.16-36.1.el7_2.1.x86_64
+--> Processing Dependency: php-cli(x86-64) = 5.4.16-36.1.el7_2.1 for package: php-5.4.16-36.1.el7_2.1.x86_64
+---> Package php-pgsql.x86_64 0:5.4.16-36.1.el7_2.1 will be installed
+--> Processing Dependency: php-pdo(x86-64) = 5.4.16-36.1.el7_2.1 for package: php-pgsql-5.4.16-36.1.el7_2.1.x86_64
+--> Running transaction check
+---> Package php-cli.x86_64 0:5.4.16-36.1.el7_2.1 will be installed
+---> Package php-common.x86_64 0:5.4.16-36.1.el7_2.1 will be installed
+--> Processing Dependency: libzip.so.2()(64bit) for package: php-common-5.4.16-36.1.el7_2.1.x86_64
+---> Package php-pdo.x86_64 0:5.4.16-36.1.el7_2.1 will be installed
+--> Running transaction check
+---> Package libzip.x86_64 0:0.10.1-8.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                               Arch                             Version                                         Repository                         Size
+================================================================================================================================================================
+Installing:
+ httpd                                 x86_64                           2.4.6-40.el7.centos.1                           updates                           2.7 M
+ phpPgAdmin                            noarch                           5.1-2.rhel7                                     pgdg95                            658 k
+Installing for dependencies:
+ apr                                   x86_64                           1.4.8-3.el7                                     base                              103 k
+ apr-util                              x86_64                           1.5.2-6.el7                                     base                               92 k
+ httpd-tools                           x86_64                           2.4.6-40.el7.centos.1                           updates                            82 k
+ libzip                                x86_64                           0.10.1-8.el7                                    base                               48 k
+ php                                   x86_64                           5.4.16-36.1.el7_2.1                             updates                           1.4 M
+ php-cli                               x86_64                           5.4.16-36.1.el7_2.1                             updates                           2.7 M
+ php-common                            x86_64                           5.4.16-36.1.el7_2.1                             updates                           563 k
+ php-pdo                               x86_64                           5.4.16-36.1.el7_2.1                             updates                            97 k
+ php-pgsql                             x86_64                           5.4.16-36.1.el7_2.1                             updates                            84 k
+
+Transaction Summary
+================================================================================================================================================================
+Install  2 Packages (+9 Dependent packages)
+
+Total download size: 8.5 M
+Installed size: 30 M
+Is this ok [y/d/N]: y
+Downloading packages:
+(1/11): libzip-0.10.1-8.el7.x86_64.rpm                                                                                                   |  48 kB  00:00:00     
+(2/11): httpd-tools-2.4.6-40.el7.centos.1.x86_64.rpm                                                                                     |  82 kB  00:00:00     
+(3/11): apr-util-1.5.2-6.el7.x86_64.rpm                                                                                                  |  92 kB  00:00:01     
+(4/11): apr-1.4.8-3.el7.x86_64.rpm                                                                                                       | 103 kB  00:00:02     
+(5/11): php-cli-5.4.16-36.1.el7_2.1.x86_64.rpm                                                                                           | 2.7 MB  00:00:04     
+(6/11): php-pgsql-5.4.16-36.1.el7_2.1.x86_64.rpm                                                                                         |  84 kB  00:00:01     
+(7/11): php-pdo-5.4.16-36.1.el7_2.1.x86_64.rpm                                                                                           |  97 kB  00:00:05     
+(8/11): httpd-2.4.6-40.el7.centos.1.x86_64.rpm                                                                                           | 2.7 MB  00:00:10     
+(9/11): php-5.4.16-36.1.el7_2.1.x86_64.rpm                                                                                               | 1.4 MB  00:00:10     
+(10/11): php-common-5.4.16-36.1.el7_2.1.x86_64.rpm                                                                                       | 563 kB  00:00:10     
+(11/11): phpPgAdmin-5.1-2.rhel7.noarch.rpm                                                                                               | 658 kB  00:00:09     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                           514 kB/s | 8.5 MB  00:00:16     
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : apr-1.4.8-3.el7.x86_64                                                                                                                      1/11 
+  Installing : apr-util-1.5.2-6.el7.x86_64                                                                                                                 2/11 
+  Installing : httpd-tools-2.4.6-40.el7.centos.1.x86_64                                                                                                    3/11 
+  Installing : httpd-2.4.6-40.el7.centos.1.x86_64                                                                                                          4/11 
+  Installing : libzip-0.10.1-8.el7.x86_64                                                                                                                  5/11 
+  Installing : php-common-5.4.16-36.1.el7_2.1.x86_64                                                                                                       6/11 
+  Installing : php-pdo-5.4.16-36.1.el7_2.1.x86_64                                                                                                          7/11 
+  Installing : php-pgsql-5.4.16-36.1.el7_2.1.x86_64                                                                                                        8/11 
+  Installing : php-cli-5.4.16-36.1.el7_2.1.x86_64                                                                                                          9/11 
+  Installing : php-5.4.16-36.1.el7_2.1.x86_64                                                                                                             10/11 
+  Installing : phpPgAdmin-5.1-2.rhel7.noarch                                                                                                              11/11 
+Job for httpd.service invalid.
+warning: %post(phpPgAdmin-5.1-2.rhel7.noarch) scriptlet failed, exit status 1
+Non-fatal POSTIN scriptlet failure in rpm package phpPgAdmin-5.1-2.rhel7.noarch
+  Verifying  : phpPgAdmin-5.1-2.rhel7.noarch                                                                                                               1/11 
+  Verifying  : apr-1.4.8-3.el7.x86_64                                                                                                                      2/11 
+  Verifying  : httpd-2.4.6-40.el7.centos.1.x86_64                                                                                                          3/11 
+  Verifying  : apr-util-1.5.2-6.el7.x86_64                                                                                                                 4/11 
+  Verifying  : php-pdo-5.4.16-36.1.el7_2.1.x86_64                                                                                                          5/11 
+  Verifying  : httpd-tools-2.4.6-40.el7.centos.1.x86_64                                                                                                    6/11 
+  Verifying  : php-cli-5.4.16-36.1.el7_2.1.x86_64                                                                                                          7/11 
+  Verifying  : libzip-0.10.1-8.el7.x86_64                                                                                                                  8/11 
+  Verifying  : php-5.4.16-36.1.el7_2.1.x86_64                                                                                                              9/11 
+  Verifying  : php-common-5.4.16-36.1.el7_2.1.x86_64                                                                                                      10/11 
+  Verifying  : php-pgsql-5.4.16-36.1.el7_2.1.x86_64                                                                                                       11/11 
+
+Installed:
+  httpd.x86_64 0:2.4.6-40.el7.centos.1                                              phpPgAdmin.noarch 0:5.1-2.rhel7                                             
+
+Dependency Installed:
+  apr.x86_64 0:1.4.8-3.el7               apr-util.x86_64 0:1.5.2-6.el7        httpd-tools.x86_64 0:2.4.6-40.el7.centos.1 libzip.x86_64 0:0.10.1-8.el7        
+  php.x86_64 0:5.4.16-36.1.el7_2.1       php-cli.x86_64 0:5.4.16-36.1.el7_2.1 php-common.x86_64 0:5.4.16-36.1.el7_2.1    php-pdo.x86_64 0:5.4.16-36.1.el7_2.1
+  php-pgsql.x86_64 0:5.4.16-36.1.el7_2.1
+
+Complete!
+[root@localhost PostgreSQL]# cat /etc/httpd/conf.d/phpPgAdmin.conf
+#
+# This configuration file maps the phpPgAdmin directory into the URL space. 
+# By default this application is only accessible from the local host.
+#
+
+Alias /phpPgAdmin /usr/share/phpPgAdmin
+
+<Location /phpPgAdmin>
+    <IfModule mod_authz_core.c>
+        # Apache 2.4
+        Require local
+        #Require host example.com
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        # Apache 2.2
+        Order deny,allow
+        Deny from all
+        Allow from 127.0.0.1
+        Allow from ::1
+        # Allow from .example.com
+    </IfModule>
+</Location>
+
+[root@localhost PostgreSQL]# gedit /etc/httpd/conf.d/phpPgAdmin.conf
+
+(gedit:13043): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:13043): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+
+(gedit:13043): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:13043): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:13043): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13043): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+
+(gedit:13043): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+[root@localhost PostgreSQL]# cat /etc/httpd/conf.d/phpPgAdmin.conf
+#
+# This configuration file maps the phpPgAdmin directory into the URL space. 
+# By default this application is only accessible from the local host.
+#
+
+Alias /phpPgAdmin /usr/share/phpPgAdmin
+
+<Location /phpPgAdmin>
+    <IfModule mod_authz_core.c>
+        # Apache 2.4
+        # Require local
+        Require all granted
+        #Require host example.com
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        # Apache 2.2
+        Order deny,allow
+        # Deny from all
+        # Allow from 127.0.0.1
+        # Allow from ::1
+        Allow from all
+        # Allow from .example.com
+    </IfModule>
+</Location>
+
+[root@localhost PostgreSQL]# systemctl enable httpd
+Created symlink from /etc/systemd/system/multi-user.target.wants/httpd.service to /usr/lib/systemd/system/httpd.service.
+[root@localhost PostgreSQL]# systemctl start httpd
+[root@localhost PostgreSQL]# cat /etc/phpPgAdmin/config.inc.php
+<?php
+
+	/**
+	 * Central phpPgAdmin configuration.  As a user you may modify the
+	 * settings here for your particular configuration.
+	 *
+	 * $Id: config.inc.php-dist,v 1.55 2008/02/18 21:10:31 xzilla Exp $
+	 */
+
+	// An example server.  Create as many of these as you wish,
+	// indexed from zero upwards.
+
+	// Display name for the server on the login screen
+	$conf['servers'][0]['desc'] = 'PostgreSQL';
+
+	// Hostname or IP address for server.  Use '' for UNIX domain socket.
+	// use 'localhost' for TCP/IP connection on this computer
+	$conf['servers'][0]['host'] = '';
+
+	// Database port on server (5432 is the PostgreSQL default)
+	$conf['servers'][0]['port'] = 5432;
+
+	// Database SSL mode
+	// Possible options: disable, allow, prefer, require
+	// To require SSL on older servers use option: legacy
+	// To ignore the SSL mode, use option: unspecified
+	$conf['servers'][0]['sslmode'] = 'allow';
+
+	// Change the default database only if you cannot connect to template1.
+	// For a PostgreSQL 8.1+ server, you can set this to 'postgres'.
+	$conf['servers'][0]['defaultdb'] = 'template1';
+
+	// Specify the path to the database dump utilities for this server.
+	// You can set these to '' if no dumper is available.
+	$conf['servers'][0]['pg_dump_path'] = '/usr/bin/pg_dump';
+	$conf['servers'][0]['pg_dumpall_path'] = '/usr/bin/pg_dumpall';
+
+	// Example for a second server (PostgreSQL for Windows)
+	//$conf['servers'][1]['desc'] = 'Test Server';
+	//$conf['servers'][1]['host'] = '127.0.0.1';
+	//$conf['servers'][1]['port'] = 5432;
+	//$conf['servers'][1]['sslmode'] = 'allow';
+	//$conf['servers'][1]['defaultdb'] = 'template1';
+	//$conf['servers'][1]['pg_dump_path'] = 'C:\\Program Files\\PostgreSQL\\8.0\\bin\\pg_dump.exe';
+	//$conf['servers'][1]['pg_dumpall_path'] = 'C:\\Program Files\\PostgreSQL\\8.0\\bin\\pg_dumpall.exe';
+	
+	
+	/* Groups definition */
+	/* Groups allow administrators to logicaly group servers together under
+	 * group nodes in the left browser tree
+	 *
+	 * The group '0' description
+	 */
+	//$conf['srv_groups'][0]['desc'] = 'group one';
+
+	/* Add here servers indexes belonging to the group '0' seperated by comma */
+	//$conf['srv_groups'][0]['servers'] = '0,1,2'; 
+
+	/* A server can belong to multi groups. Here server 1 is referenced in both
+	 * 'group one' and 'group two'*/
+	//$conf['srv_groups'][1]['desc'] = 'group two';
+	//$conf['srv_groups'][1]['servers'] = '3,1';
+
+	/* A group can be nested in one or more existing groups using the 'parents'
+	 * parameter. Here the group 'group three' contains only one server and will
+	 * appear as a subgroup in both 'group one' and 'group two':
+	 */
+	//$conf['srv_groups'][2]['desc'] = 'group three';
+	//$conf['srv_groups'][2]['servers'] = '4';
+	//$conf['srv_groups'][2]['parents'] = '0,1';
+
+	/* Warning: Only groups with no parents appears at the root of the tree. */
+	
+
+	// Default language. E.g.: 'english', 'polish', etc.  See lang/ directory
+	// for all possibilities. If you specify 'auto' (the default) it will use 
+	// your browser preference.
+	$conf['default_lang'] = 'auto';
+
+	// AutoComplete uses AJAX interaction to list foreign key values 
+	// on insert fields. It currently only works on single column 
+	// foreign keys. You can choose one of the following values:
+	// 'default on' enables AutoComplete and turns it on by default.
+	// 'default off' enables AutoComplete but turns it off by default.
+	// 'disable' disables AutoComplete.
+	$conf['autocomplete'] = 'default on';
+	
+	// If extra login security is true, then logins via phpPgAdmin with no
+	// password or certain usernames (pgsql, postgres, root, administrator)
+	// will be denied. Only set this false once you have read the FAQ and
+	// understand how to change PostgreSQL's pg_hba.conf to enable
+	// passworded local connections.
+	$conf['extra_login_security'] = true;
+
+	// Only show owned databases?
+	// Note: This will simply hide other databases in the list - this does
+	// not in any way prevent your users from seeing other database by
+	// other means. (e.g. Run 'SELECT * FROM pg_database' in the SQL area.)
+	$conf['owned_only'] = false;
+
+	// Display comments on objects?  Comments are a good way of documenting
+	// a database, but they do take up space in the interface.
+	$conf['show_comments'] = true;
+
+	// Display "advanced" objects? Setting this to true will show 
+	// aggregates, types, operators, operator classes, conversions, 
+	// languages and casts in phpPgAdmin. These objects are rarely 
+	// administered and can clutter the interface.
+	$conf['show_advanced'] = false;
+
+	// Display "system" objects?
+	$conf['show_system'] = false;
+
+	// Minimum length users can set their password to.
+	$conf['min_password_length'] = 1;
+
+	// Width of the left frame in pixels (object browser)
+	$conf['left_width'] = 200;
+	
+	// Which look & feel theme to use
+	$conf['theme'] = 'default';
+	
+	// Show OIDs when browsing tables?
+	$conf['show_oids'] = false;
+	
+	// Max rows to show on a page when browsing record sets
+	$conf['max_rows'] = 30;
+
+	// Max chars of each field to display by default in browse mode
+	$conf['max_chars'] = 50;
+
+	// Send XHTML strict headers?
+	$conf['use_xhtml_strict'] = false;
+
+	// Base URL for PostgreSQL documentation.
+	// '%s', if present, will be replaced with the PostgreSQL version
+	// (e.g. 8.4 )
+	$conf['help_base'] = 'http://www.postgresql.org/docs/%s/interactive/';
+	
+	// Configuration for ajax scripts
+	// Time in seconds. If set to 0, refreshing data using ajax will be disabled (locks and activity pages)
+	$conf['ajax_refresh'] = 3;
+
+	/** Plugins management
+	 * Add plugin names to the following array to activate them
+	 * Example:
+	 *   $conf['plugins'] = array(
+	 *     'Example',
+	 *     'Slony'
+	 *   );
+	 */
+	$conf['plugins'] = array();
+
+	/*****************************************
+	 * Don't modify anything below this line *
+	 *****************************************/
+
+	$conf['version'] = 19;
+
+?>
+[root@localhost PostgreSQL]# gedit /etc/phpPgAdmin/config.inc.php
+
+(gedit:13541): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:13541): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+
+(gedit:13541): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:13541): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:13541): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:13541): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+
+(gedit:13541): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+[root@localhost PostgreSQL]# cat /etc/phpPgAdmin/config.inc.php
+<?php
+
+	/**
+	 * Central phpPgAdmin configuration.  As a user you may modify the
+	 * settings here for your particular configuration.
+	 *
+	 * $Id: config.inc.php-dist,v 1.55 2008/02/18 21:10:31 xzilla Exp $
+	 */
+
+	// An example server.  Create as many of these as you wish,
+	// indexed from zero upwards.
+
+	// Display name for the server on the login screen
+	$conf['servers'][0]['desc'] = 'PostgreSQL';
+
+	// Hostname or IP address for server.  Use '' for UNIX domain socket.
+	// use 'localhost' for TCP/IP connection on this computer
+	// $conf['servers'][0]['host'] = '';
+	$conf['servers'][0]['host'] = 'localhost';
+
+	// Database port on server (5432 is the PostgreSQL default)
+	$conf['servers'][0]['port'] = 5432;
+
+	// Database SSL mode
+	// Possible options: disable, allow, prefer, require
+	// To require SSL on older servers use option: legacy
+	// To ignore the SSL mode, use option: unspecified
+	$conf['servers'][0]['sslmode'] = 'allow';
+
+	// Change the default database only if you cannot connect to template1.
+	// For a PostgreSQL 8.1+ server, you can set this to 'postgres'.
+	$conf['servers'][0]['defaultdb'] = 'template1';
+
+	// Specify the path to the database dump utilities for this server.
+	// You can set these to '' if no dumper is available.
+	$conf['servers'][0]['pg_dump_path'] = '/usr/bin/pg_dump';
+	$conf['servers'][0]['pg_dumpall_path'] = '/usr/bin/pg_dumpall';
+
+	// Example for a second server (PostgreSQL for Windows)
+	//$conf['servers'][1]['desc'] = 'Test Server';
+	//$conf['servers'][1]['host'] = '127.0.0.1';
+	//$conf['servers'][1]['port'] = 5432;
+	//$conf['servers'][1]['sslmode'] = 'allow';
+	//$conf['servers'][1]['defaultdb'] = 'template1';
+	//$conf['servers'][1]['pg_dump_path'] = 'C:\\Program Files\\PostgreSQL\\8.0\\bin\\pg_dump.exe';
+	//$conf['servers'][1]['pg_dumpall_path'] = 'C:\\Program Files\\PostgreSQL\\8.0\\bin\\pg_dumpall.exe';
+	
+	
+	/* Groups definition */
+	/* Groups allow administrators to logicaly group servers together under
+	 * group nodes in the left browser tree
+	 *
+	 * The group '0' description
+	 */
+	//$conf['srv_groups'][0]['desc'] = 'group one';
+
+	/* Add here servers indexes belonging to the group '0' seperated by comma */
+	//$conf['srv_groups'][0]['servers'] = '0,1,2'; 
+
+	/* A server can belong to multi groups. Here server 1 is referenced in both
+	 * 'group one' and 'group two'*/
+	//$conf['srv_groups'][1]['desc'] = 'group two';
+	//$conf['srv_groups'][1]['servers'] = '3,1';
+
+	/* A group can be nested in one or more existing groups using the 'parents'
+	 * parameter. Here the group 'group three' contains only one server and will
+	 * appear as a subgroup in both 'group one' and 'group two':
+	 */
+	//$conf['srv_groups'][2]['desc'] = 'group three';
+	//$conf['srv_groups'][2]['servers'] = '4';
+	//$conf['srv_groups'][2]['parents'] = '0,1';
+
+	/* Warning: Only groups with no parents appears at the root of the tree. */
+	
+
+	// Default language. E.g.: 'english', 'polish', etc.  See lang/ directory
+	// for all possibilities. If you specify 'auto' (the default) it will use 
+	// your browser preference.
+	$conf['default_lang'] = 'auto';
+
+	// AutoComplete uses AJAX interaction to list foreign key values 
+	// on insert fields. It currently only works on single column 
+	// foreign keys. You can choose one of the following values:
+	// 'default on' enables AutoComplete and turns it on by default.
+	// 'default off' enables AutoComplete but turns it off by default.
+	// 'disable' disables AutoComplete.
+	$conf['autocomplete'] = 'default on';
+	
+	// If extra login security is true, then logins via phpPgAdmin with no
+	// password or certain usernames (pgsql, postgres, root, administrator)
+	// will be denied. Only set this false once you have read the FAQ and
+	// understand how to change PostgreSQL's pg_hba.conf to enable
+	// passworded local connections.
+	// $conf['extra_login_security'] = true;
+	$conf['extra_login_security'] = false;
+
+	// Only show owned databases?
+	// Note: This will simply hide other databases in the list - this does
+	// not in any way prevent your users from seeing other database by
+	// other means. (e.g. Run 'SELECT * FROM pg_database' in the SQL area.)
+	// $conf['owned_only'] = false;
+        $conf['owned_only'] = true;
+
+	// Display comments on objects?  Comments are a good way of documenting
+	// a database, but they do take up space in the interface.
+	$conf['show_comments'] = true;
+
+	// Display "advanced" objects? Setting this to true will show 
+	// aggregates, types, operators, operator classes, conversions, 
+	// languages and casts in phpPgAdmin. These objects are rarely 
+	// administered and can clutter the interface.
+	$conf['show_advanced'] = false;
+
+	// Display "system" objects?
+	$conf['show_system'] = false;
+
+	// Minimum length users can set their password to.
+	$conf['min_password_length'] = 1;
+
+	// Width of the left frame in pixels (object browser)
+	$conf['left_width'] = 200;
+	
+	// Which look & feel theme to use
+	$conf['theme'] = 'default';
+	
+	// Show OIDs when browsing tables?
+	$conf['show_oids'] = false;
+	
+	// Max rows to show on a page when browsing record sets
+	$conf['max_rows'] = 30;
+
+	// Max chars of each field to display by default in browse mode
+	$conf['max_chars'] = 50;
+
+	// Send XHTML strict headers?
+	$conf['use_xhtml_strict'] = false;
+
+	// Base URL for PostgreSQL documentation.
+	// '%s', if present, will be replaced with the PostgreSQL version
+	// (e.g. 8.4 )
+	$conf['help_base'] = 'http://www.postgresql.org/docs/%s/interactive/';
+	
+	// Configuration for ajax scripts
+	// Time in seconds. If set to 0, refreshing data using ajax will be disabled (locks and activity pages)
+	$conf['ajax_refresh'] = 3;
+
+	/** Plugins management
+	 * Add plugin names to the following array to activate them
+	 * Example:
+	 *   $conf['plugins'] = array(
+	 *     'Example',
+	 *     'Slony'
+	 *   );
+	 */
+	$conf['plugins'] = array();
+
+	/*****************************************
+	 * Don't modify anything below this line *
+	 *****************************************/
+
+	$conf['version'] = 19;
+
+?>
+[root@localhost PostgreSQL]# systemctl restart postgresql-9.4
+Failed to restart postgresql-9.4.service: Unit postgresql-9.4.service failed to load: No such file or directory.
+[root@localhost PostgreSQL]# systemctl restart postgresql-9.5
+Job for postgresql-9.5.service failed because the control process exited with error code. See "systemctl status postgresql-9.5.service" and "journalctl -xe" for details.
+[root@localhost PostgreSQL]# systemctl restart httpd
+[root@localhost PostgreSQL]# 
+

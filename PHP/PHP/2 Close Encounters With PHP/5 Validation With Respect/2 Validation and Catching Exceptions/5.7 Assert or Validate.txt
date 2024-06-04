@@ -1,0 +1,14 @@
+5.7 Assert or Validate
+
+When we want to have the Validator class throw a custom exception when the validation fails, would we use the assert method or the validate method?
+
+[Single Answer]
+
+validate
+assert
+
+
+Answer: assert
+Note:
+validate
+The validate method returns a boolean type on failure. We really want to assert.

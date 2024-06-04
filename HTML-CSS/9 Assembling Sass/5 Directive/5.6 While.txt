@@ -1,0 +1,83 @@
+5.6 While
+
+
+Technically, it works - but this @for with a nested @if is more complicated than necessary to target odd numbers from 1 to 7. Remove the @if statement and refactor the @for using @while instead to achieve the same result. Note: if you aren't familiar with the % operator, don't worry - it's covered in the next level.
+
+
+CSS
+
+.row-1 {
+  background: #ccc;
+  height: 10px;
+}
+
+.row-3 {
+  background: #ccc;
+  height: 30px;
+}
+
+.row-5 {
+  background: #ccc;
+  height: 50px;
+}
+
+.row-7 {
+  background: #ccc;
+  height: 70px;
+}
+
+APPLICATION.SCSS
+
+@for $i from 1 through 7 {
+  @if $i % 2 != 0 {
+    .row-#{$i} {
+      background: #ccc;
+      height: $i * 10px;
+    }
+  }
+}
+
+
+Answer:
+
+APPLICATION.SCSS
+
+$i: 1;
+
+@while $i <= 7 {
+  .row-#{$i} {
+    background: #ccc;
+    height: $i * 10px;
+  } 
+  $i: $i + 1;
+}
+
+CSS
+
+.row-1 {
+  background: #ccc;
+  height: 10px; }
+
+.row-2 {
+  background: #ccc;
+  height: 20px; }
+
+.row-3 {
+  background: #ccc;
+  height: 30px; }
+
+.row-4 {
+  background: #ccc;
+  height: 40px; }
+
+.row-5 {
+  background: #ccc;
+  height: 50px; }
+
+.row-6 {
+  background: #ccc;
+  height: 60px; }
+
+.row-7 {
+  background: #ccc;
+  height: 70px; }

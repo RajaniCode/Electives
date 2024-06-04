@@ -1,0 +1,339 @@
+4.16 Floating Images 1
+
+If we look back at bands.html, it's a little annoying that the band image appears above the band name. Ideally we want the band image to appear directly to the left of the band name.
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+  background: #555555 url(images/bg-tile.png) top left repeat;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.nav a {
+  color: #ee932a;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #ffffff url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+.recording-now {
+  width: 440px;
+  height: 200px;
+  background: #ffffff url(images/prependers-recording.jpg) center center no-repeat;
+  border: 1px solid #ee932a;
+  padding: 4px 4px 4px 4px;
+}
+.recording-now p {
+  color: #ffffff;
+  font-size: 28px;
+}
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>Bands</h2>
+      
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+      
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+1. Write a selector that targets the images in the bands-list and floats them so the band name appears to the right of the band image.
+
+Answer:
+
+.bands-list img {
+   float: left;
+}
+
+2. Ouch - that looks really bad. The float is working, but the display isn't what we expect it to be because the band list item height needs to be set to be at least the height of the floated image.
+
+In this case, the floated images are 120px high, so update the bands-list list items to have this fixed height.
+
+Answer:
+
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+  height: 120px;
+}
+
+3. Much better. Now all that's left to do is to put some padding between the image and the band name.
+
+Add 15px of right padding to the image (not the band name).
+
+Answer:
+
+.bands-list img {
+   float: left;
+   padding-right: 15px;
+}
+
+Success:
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+  background: #555555 url(images/bg-tile.png) top left repeat;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.nav a {
+  color: #ee932a;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #ffffff url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+  height: 120px;
+}
+.bands-list img {
+   float: left;
+   padding-right: 15px;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+.recording-now {
+  width: 440px;
+  height: 200px;
+  background: #ffffff url(images/prependers-recording.jpg) center center no-repeat;
+  border: 1px solid #ee932a;
+  padding: 4px 4px 4px 4px;
+}
+.recording-now p {
+  color: #ffffff;
+  font-size: 28px;
+}
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>Bands</h2>
+      
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+      
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,35 @@
+1.9 POST Conditional
+
+Create a POST conditional to test if the server request method is set to POST before allowing the existing code to run.
+
+index.php
+
+<?php
+
+  $name = $_POST['name'];
+  $date = $_POST['date'];
+  $reason = $_POST['reason'];
+  
+  echo $name;
+  echo $date;
+  echo $reason;
+
+?>
+
+
+Surround the existing PHP code with an if statement. Inside the conditional parentheses, use the $_SERVER superglobal with a key of 'REQUEST_METHOD', testing that its value is identical to 'POST'.
+
+Answer:
+index.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $date = $_POST['date'];
+  $reason = $_POST['reason'];
+  
+  echo $name;
+  echo $date;
+  echo $reason;
+}
+?>

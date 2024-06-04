@@ -1,0 +1,150 @@
+Maven:
+export PATH=/opt/apache-maven-3.3.9/bin:$PATH
+echo $PATH
+
+
+
+
+wget http://www-eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.zip
+OR
+wget http://www-eu.apache.org/dist/maven/maven-3/3.3.9/binaries/apache-maven-3.3.9-bin.tar.gz
+OR
+Download from https://maven.apache.org/download.cgi
+
+[
+Unzip and move to /opt
+
+unzip apache-maven-3.3.9-bin.zip
+
+mv apache-maven-3.3.9/ /opt/apache-maven-3.3.9
+]
+
+Extract to /opt
+
+tar xzvf apache-maven-3.3.9-bin.tar.gz -C /opt
+
+symlink to apache-maven-3.3.9/bin
+
+ln -s /opt/apache-maven-3.3.9/bin/mvn /usr/bin/mvn
+
+[
+Note: unlink to /usr/bin/mvn
+
+unlink /usr/bin/mvn
+]
+
+Create maven.sh under /etc/profile.d/ directory
+
+vi /etc/profile.d/maven.sh
+OR
+gedit /etc/profile.d/maven.sh
+
+Add the following
+
+#!/bin/bash
+MAVEN_HOME=/opt/apache-maven-3.3.9
+PATH=$MAVEN_HOME/bin:$PATH
+export PATH MAVEN_HOME
+export CLASSPATH=.
+
+Save maven.sh
+
+Verify maven.sh
+
+cat /etc/profile.d/maven.sh
+
+#!/bin/bash
+MAVEN_HOME=/opt/apache-maven-3.3.9
+PATH=$MAVEN_HOME/bin:$PATH
+export PATH MAVEN_HOME
+export CLASSPATH=.
+
+Make maven.sh executable
+
+chmod +x /etc/profile.d/maven.sh
+
+Set Maven environment variables
+
+source /etc/profile.d/maven.sh
+
+Reboot
+
+Check maven version
+
+mvn -version # mvn -v
+
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T22:11:47+05:30)
+Maven home: /opt/apache-maven-3.3.9
+Java version: 1.8.0_91, vendor: Oracle Corporation
+Java home: /opt/jdk1.8.0_91/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "3.10.0-327.13.1.el7.x86_64", arch: "amd64", family: "unix"
+
+Check environment variables
+
+echo $MAVEN_HOME
+/opt/apache-maven-3.3.9
+
+echo $PATH
+/opt/apache-maven-3.3.9/bin:/opt/apache-maven-3.3.9/bin:/usr/lib64/qt-3.3/bin:/opt/apache-maven-3.3.9/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/rajani/.local/bin:/home/rajani/bin
+
+
+
+
+[rajani@localhost Maven]$ su root
+Password: 
+[root@localhost Maven]# ln -s /opt/apache-maven-3.3.9/bin/mvn /usr/bin/mvn
+[root@localhost Maven]# gedit /etc/profile.d/maven.sh
+
+(gedit:7993): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:7993): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+
+(gedit:7993): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:7993): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:7993): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:7993): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:7993): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:7993): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+
+(gedit:7993): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+[rajani@localhost Maven]$ cat /etc/profile.d/maven.sh
+#!/bin/bash
+MAVEN_HOME=/opt/apache-maven-3.3.9
+PATH=$MAVEN_HOME/bin:$PATH
+export PATH MAVEN_HOME
+export CLASSPATH=.
+[root@localhost Maven]# chmod +x /etc/profile.d/maven.sh
+[root@localhost Maven]# source /etc/profile.d/maven.sh
+[root@localhost Maven]# reboot
+
+
+[rajani@localhost Maven]$ mvn -version
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T22:11:47+05:30)
+Maven home: /opt/apache-maven-3.3.9
+Java version: 1.8.0_91, vendor: Oracle Corporation
+Java home: /opt/jdk1.8.0_91/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "3.10.0-327.13.1.el7.x86_64", arch: "amd64", family: "unix"
+[rajani@localhost Maven]$ mvn -v
+Apache Maven 3.3.9 (bb52d8502b132ec0a5a3f4c09453c07478323dc5; 2015-11-10T22:11:47+05:30)
+Maven home: /opt/apache-maven-3.3.9
+Java version: 1.8.0_91, vendor: Oracle Corporation
+Java home: /opt/jdk1.8.0_91/jre
+Default locale: en_US, platform encoding: UTF-8
+OS name: "linux", version: "3.10.0-327.13.1.el7.x86_64", arch: "amd64", family: "unix"
+[rajani@localhost Maven]$ echo $MAVEN_HOME
+/opt/apache-maven-3.3.9
+[rajani@localhost Maven]$ echo $PATH
+/opt/apache-maven-3.3.9/bin:/opt/jdk1.8.0_91/jre/bin:/opt/jdk1.8.0_91/bin:/usr/lib64/qt-3.3/bin:/opt/apache-maven-3.3.9/bin:/opt/jdk1.8.0_91/jre/bin:/opt/jdk1.8.0_91/bin:/usr/local/bin:/usr/local/sbin:/usr/bin:/usr/sbin:/bin:/sbin:/home/rajani/.local/bin:/home/rajani/bin
+[rajani@localhost Maven]$

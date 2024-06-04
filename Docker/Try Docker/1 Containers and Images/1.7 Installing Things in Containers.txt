@@ -1,0 +1,27 @@
+1.7 Installing Things in Containers
+
+Another thing we can do once we’re in a container’s shell is install new programs, or packages, that aren’t part of the base image. Let’s install the fortunes package.
+
+1. Type docker container exec -it elegant_noether /bin/bash.
+
+Answer:
+
+Enter your solution below
+
+$
+
+2. Type apt-get install -y fortunes to install the fortunes package.
+ 
+Answer:
+
+Enter your solution below
+
+$
+
+3. Type /usr/games/fortune. If we see a random fortune displayed then we know the installation worked!
+
+Answer:
+
+Enter your solution below
+
+$

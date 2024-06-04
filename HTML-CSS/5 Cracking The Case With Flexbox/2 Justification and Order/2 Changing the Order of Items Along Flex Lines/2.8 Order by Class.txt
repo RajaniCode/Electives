@@ -1,0 +1,112 @@
+2.8 Order by Class
+
+Our CMS outputs items in order, but uses a class for featured items. We want featured items to display first.
+
+products.html
+
+<section class='products'>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title One</h4>      
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Two</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Three</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Four</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Five</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Six</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product product--featured'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Seven</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Eight</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Nine</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+  <article class='product'>
+    <img src='assets/images/placeholder.png' width='200' />
+    <h4 class='product-title'>Product Title Ten</h4>
+    <p class='product-price'>$99.99</p>
+  </article>
+</section>
+
+products.css
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product {
+  padding: 10px;
+}
+
+.product-title {
+  margin: 5px 0 0 0;
+}
+
+.product-price {
+  margin: 0
+}
+
+.product--featured {
+  background: purple;
+  color: #ffffff;
+  
+}
+
+
+Use a flexbox property and value to have .product--featured displayed before other items.
+
+Answer:
+products.css
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.product {
+  padding: 10px;
+}
+
+.product-title {
+  margin: 5px 0 0 0;
+}
+
+.product-price {
+  margin: 0
+}
+
+.product--featured {
+  background: purple;
+  color: #ffffff;
+  order: -1;
+}

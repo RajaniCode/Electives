@@ -1,0 +1,60 @@
+1.1 Comments I
+
+
+With the addition of Sass to our project, we know .surveyor h2 and .surveyor h2 a can be simplified with nesting, but we don't have the time to refactor it just yet. Leave a comment that won't be output to our compiled CSS reminding us to fix this later.
+
+CSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.surveyor h2 {
+  font-size: 18px;
+}
+
+.surveyor h2 a {
+  color: green;
+}
+
+APPLICATION.SCSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+.surveyor h2 {
+  font-size: 18px;
+}
+.surveyor h2 a {
+  color: green;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+// Fix this later
+ .surveyor h2 {
+  font-size: 18px;
+}
+.surveyor h2 a {
+  color: green;
+}
+
+CSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px; }
+
+.surveyor h2 {
+  font-size: 18px; }
+
+.surveyor h2 a {
+  color: green; }

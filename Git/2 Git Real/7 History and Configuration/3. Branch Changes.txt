@@ -1,0 +1,21 @@
+3. Branch Changes
+
+
+You've finished adding elephants to the catalog. You need to write up a change log for the client, and you want to ensure you don't miss anything. Compare the master branch to your elephant branch to show what's new.
+
+
+$ git diff master elephant
+
+diff --git a/index.html b/index.html
+index 99daa4c..51fe885 100644
+--- a/index.html
++++ b/index.html
+@@ -4,5 +4,6 @@
+     <title>Pet Store</title>
+   </head>
+   <body>
++[m    <h1>We now offer elephants!  Take a cuddly behemoth home today!</h1>
+   </body>
+ </html>
+
+Success!

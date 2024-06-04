@@ -1,0 +1,38 @@
+3.7 Closures With Arguments
+
+Using the first closure in web.php as an example, let's write another route that accepts an argument. This will fix our preview so that it shows the farm number we're requesting when we visit the farms/1 route.
+
+routes/web.php
+<?php
+
+Route::get('/', function() {
+  return "this is the home page";
+});
+
+
+1. Create a closure route — similar to the '/' route — for 'farms/' and pass along an ID argument named $id.
+
+Answer
+routes/web.php
+<?php
+
+Route::get('/', function() {
+  return "this is the home page";
+});
+
+Route::get('farms/{id}' , function($id) {
+});
+
+2. Now from that route, return a string that says "The id requested is $id".
+
+Answer
+routes/web.php
+<?php
+
+Route::get('/', function() {
+  return "this is the home page";
+});
+
+Route::get('farms/{id}' , function($id) {
+  return "The id requested is $id";
+});

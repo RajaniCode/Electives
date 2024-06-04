@@ -1,0 +1,65 @@
+2.1 Importing I
+
+
+We've added a slight transition to our anchor color, but we were a bit overzealous: without Compass imported, the transition mixin isn't available. Add Compass to the top of our stylesheet to rectify this situation.
+
+
+CSS
+
+Undefined mixin 'transition'.
+
+.SASS
+
+a
+  +transition(color 0.2s ease-in-out)
+  color: blue
+  &:hover,
+  &:focus
+    color: red
+
+.SCSS
+
+a {
+  @include transition(color 0.2s ease-in-out);
+  color: blue;
+  &:hover,
+  &:focus {
+    color: red;
+  }
+}
+
+Answer:
+
+.SASS
+
+@import "compass"
+a
+  +transition(color 0.2s ease-in-out)
+  color: blue
+  &:hover,
+  &:focus
+    color: red
+
+.SCSS
+
+@import "compass";
+
+a {
+  @include transition(color 0.2s ease-in-out);
+  color: blue;
+  &:hover,
+  &:focus {
+    color: red;
+  }
+}
+
+CSS
+
+a {
+  -webkit-transition: color 0.2s ease-in-out;
+  -moz-transition: color 0.2s ease-in-out;
+  -o-transition: color 0.2s ease-in-out;
+  transition: color 0.2s ease-in-out;
+  color: blue; }
+  a:hover, a:focus {
+    color: red; }

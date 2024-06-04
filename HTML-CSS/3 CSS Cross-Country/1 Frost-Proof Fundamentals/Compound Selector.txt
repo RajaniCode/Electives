@@ -1,0 +1,39 @@
+Compound Selector
+
+HTML Source
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  
+  <body>
+    <section class="content home">
+      <header>
+        <h1>Sven's Snowshoe Emporium</h1>
+        <h2>"For the Snow-Savvy Shoe-Shopper"</h2>
+      </header>
+    </section>
+  </body>
+</html>
+
+
+Add a declaration that selects the <section> via both class attributes, removing the border when both are present
+
+style.css
+
+.content {
+  border: 2px solid #ccc;
+}
+
+Answer:
+
+.content {
+  border: 2px solid #ccc;
+}
+
+.content.home {   
+  border: 0 !important;
+}

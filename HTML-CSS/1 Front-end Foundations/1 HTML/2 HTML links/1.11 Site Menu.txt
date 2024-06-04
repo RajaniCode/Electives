@@ -1,0 +1,131 @@
+1.11 Site Menu
+
+There's more than one page on this website, so let's create a small menu to link to the other pages.
+
+regular-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+    
+    <h2>Regular Expressions</h2>
+
+    <h3>Bio</h3>
+    <p>Regular Expressionists are a hip-hop trio from 
+    New York City.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Rekt - Vocals</li>
+      <li>Face-like - Vocals</li>
+      <li>DJ Regex Capture - Decks</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <p>This group has no albums released, but they are recording 
+    one album right now.</p>
+
+    <h2>Tour Dates</h2>
+
+    <ul>
+      <li>
+        <p>July 16th, 2014 @ 7:00pm</p>
+        <p><a href="http://hob.com">House of Blues</a> - Orlando, FL</p>
+      </li>
+      <li>
+        <p>July 17th, 2014 @ 7:30pm</p>
+        <p>Jannus Landing - Tampa, FL</p>
+      </li>
+      <li>
+        <p>July 19th, 2014 @ 8:00pm</p>
+        <p>The Tabernacle - Atlanta, GA</p>
+      </li>
+      <li>
+        <p>July 20th, 2014 @ 7:30pm</p>
+        <p>40 Watt Club - Athens, GA</p>
+      </li>
+    </ul>
+  </body>
+</html>
+
+1. In regular-band.html, create an unordered list with three list items: About, Bands, and Contact that is in between the main site name and the band's name.
+
+Answer:
+
+    <ul>
+      <li>About</li>
+      <li>Bands</li>
+      <li>Contact</li>
+    </ul>
+
+2. Make the text About into a link to the page about.html. If you need to, check the tab that contains a description of all of the files on the site server to decide how to create the link path.
+
+Answer: <li><a href="about.html">About</a></li>
+
+3. Make the text Bands into a link to the page bands.html. If you need to, check the tab that contains a description of all of the files on the site server to decide how to create the link path.
+
+Answer: <li><a href="bands.html">Bands</a></li>
+
+4. Make the text Contact into a link to the page contact.html. If you need to, check the tab that contains a description of all of the files on the site server to decide how to create the link path.
+
+Answer: <li><a href="contact.html">Contact</a></li>
+
+Success:
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <h2>Regular Expressions</h2>
+
+    <h3>Bio</h3>
+    <p>Regular Expressionists are a hip-hop trio from 
+    New York City.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Rekt - Vocals</li>
+      <li>Face-like - Vocals</li>
+      <li>DJ Regex Capture - Decks</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <p>This group has no albums released, but they are recording 
+    one album right now.</p>
+
+    <h2>Tour Dates</h2>
+
+    <ul>
+      <li>
+        <p>July 16th, 2014 @ 7:00pm</p>
+        <p><a href="http://hob.com">House of Blues</a> - Orlando, FL</p>
+      </li>
+      <li>
+        <p>July 17th, 2014 @ 7:30pm</p>
+        <p>Jannus Landing - Tampa, FL</p>
+      </li>
+      <li>
+        <p>July 19th, 2014 @ 8:00pm</p>
+        <p>The Tabernacle - Atlanta, GA</p>
+      </li>
+      <li>
+        <p>July 20th, 2014 @ 7:30pm</p>
+        <p>40 Watt Club - Athens, GA</p>
+      </li>
+    </ul>
+  </body>
+</html>

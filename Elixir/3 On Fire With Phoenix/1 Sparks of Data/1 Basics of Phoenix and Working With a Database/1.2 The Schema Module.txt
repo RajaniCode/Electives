@@ -1,0 +1,28 @@
+1.2 The Schema Module
+
+The Phoenix application we’ll be coding in these challenges is called Neon. This app will help us keep track of events happening all over the country. Let’s start by creating a new Schema module responsible for mapping Phoenix code to a database table called “events”
+
+lib/neon/event.ex
+defmodule  do
+  use Ecto.Schema
+
+  schema "events" do
+    
+  end
+end
+
+
+1. Define the name of the module. Remember, the name of the module starts with the name of the application
+
+Answer:
+lib/neon/event.ex
+
+2. Inside the do/end block, define fields for :name, :location, and :start_on. The first two should be of type :string and the last one should be of type :naive_datetime.
+
+Answer: 
+lib/neon/event.ex
+
+3. Still inside do/end, call the function that maps to columns that help keep track of when a record was initially inserted and when it was last updated.
+
+Answer:
+lib/neon/event.ex

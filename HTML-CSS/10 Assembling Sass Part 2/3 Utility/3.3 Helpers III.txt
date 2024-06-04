@@ -1,0 +1,91 @@
+3.3 Helpers III
+
+
+The .warning and .error states of .note currently have hardcoded background colors, but we'd prefer to have them adjust our stored variable. Set .warning to scale the lightness of $color-highlight up by 20%, and set .error to scale the saturation of $color-highlight up by 90%.
+
+
+CSS
+
+.note {
+  background: #e5e5e5;
+  padding: 10px;
+}
+.note.warning {
+  background: #cecece;
+}
+.note.error {
+  background: #fccece;
+}
+
+.SASS
+
+@import "compass"
+$color-highlight: #e5e5e5
+
+.note
+  background: $color-highlight
+  padding: 10px
+  &.warning
+    background: #cecece
+  &.error
+    background: #fccece
+
+.SCSS
+
+@import "compass";
+
+$color-highlight: #e5e5e5;
+
+.note {
+  background: $color-highlight;
+  padding: 10px;
+  &.warning {
+    background: #cecece;
+  }
+  &.error {
+    background: #fccece;
+  }
+}
+
+Answer:
+
+.SASS
+
+@import compass
+
+$color-highlight: #e5e5e5
+
+.note
+  background: $color-highlight
+  padding: 10px
+  &.warning
+    background: scale-lightness($color-highlight, 20%)
+  &.error
+    background: scale-saturation($color-highlight, 90%)
+
+.SCSS
+
+@import "compass";
+
+$color-highlight: #e5e5e5;
+
+.note {
+  background: $color-highlight;
+  padding: 10px;
+  &.warning {
+    background: scale-lightness( $color-highlight, 20%);
+  }
+  &.error {
+    background: scale-saturation($color-highlight, 90%);
+  }
+}
+
+CSS
+
+.note {
+  background: #e5e5e5;
+  padding: 10px; }
+  .note.warning {
+    background: #eaeaea; }
+  .note.error {
+    background: #fccece; }

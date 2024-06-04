@@ -1,0 +1,65 @@
+1.7 Adding Bootstrap to our Footer
+
+It's time to make our footer look a bit better as the window size changes. Turns out we can even make it stand out a bit more by completing the following tasks.
+
+index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blasting Off With Bootstrap</title>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <link href='css/main.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>The Fastest Way to Space</h1>
+      <p>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
+      <button type='button'>Take the Tour</button>
+      <button type='button'>Book Tickets Now</button>
+    </div>
+
+    <p>This is our footer</p>
+    
+  </body>
+</html>
+
+1. We don’t want our page footer to take up the entire width of the page – not when the rest of our content is well-defined.
+
+Update the footer to use the same width as the rest of the content on the page.
+
+Answer: <div class='container'><p>This is our footer</p></div>
+
+2. Our footer is positioned correctly, but it’d be nice if it stood out a bit more. Luckily, our designers added some styling for our footer!
+
+First, create a new div that surrounds our footer's container element.
+
+Answer: <div> <div class='container'><p>This is our footer</p></div></div>
+
+3. We're almost done improving the look of our footer.
+
+Now that we have a div that surrounds our footer's container element, give it a class of footer, and it should stand out.
+
+Answer: <div class='footer'><div class='container'><p>This is our footer</p></div></div>
+
+index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blasting Off With Bootstrap</title>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <link href='css/main.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>The Fastest Way to Space</h1>
+      <p>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
+      <button type='button'>Take the Tour</button>
+      <button type='button'>Book Tickets Now</button>
+    </div>
+
+   <div class='footer'><div class='container'><p>This is our footer</p></div></div>
+    
+  </body>
+</html>

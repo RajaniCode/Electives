@@ -1,0 +1,83 @@
+1.4 More Lists II
+
+
+Instead of generating classes with hyphenated names (.team-judy), we've been asked to use each crew member's index (.team-1). Use $crew and $name with index() to fulfill this request.
+
+
+CSS
+
+.team-judy {
+  background: url("../images/judy.jpg");
+}
+
+.team-phillip {
+  background: url("../images/phillip.jpg");
+}
+
+.team-william {
+  background: url("../images/william.jpg");
+}
+
+.team-emily {
+  background: url("../images/emily.jpg");
+}
+
+.SASS
+
+$surveyors: judy phillip
+$architects: william emily
+$crew: join($surveyors, $architects)
+
+@each $name in $crew
+  .team-#{$name}
+    background: url('../images/#{$name}.jpg')
+
+.SCSS
+
+$surveyors: judy phillip;
+$architects: william emily;
+$crew: join($surveyors, $architects);
+
+@each $name in $crew {
+  .team-#{$name} {
+    background: url("../images/#{$name}.jpg");
+  }
+}
+
+Answer:
+
+.SASS
+
+$surveyors: judy phillip
+$architects: william emily
+$crew: join($surveyors, $architects)
+
+@each $name in $crew
+  .team-#{index($crew, $name)}
+    background: url('../images/#{$name}.jpg')
+
+.SCSS
+
+$surveyors: judy phillip;
+$architects: william emily;
+$crew: join($surveyors, $architects);
+
+@each $name in $crew {
+  .team-#{index($crew, $name)} {
+    background: url("../images/#{$name}.jpg");
+  }
+}
+
+CSS
+
+.team-1 {
+  background: url("../images/judy.jpg"); }
+
+.team-2 {
+  background: url("../images/phillip.jpg"); }
+
+.team-3 {
+  background: url("../images/william.jpg"); }
+
+.team-4 {
+  background: url("../images/emily.jpg"); }

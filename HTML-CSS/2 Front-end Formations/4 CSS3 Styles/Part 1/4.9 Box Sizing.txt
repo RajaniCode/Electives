@@ -1,0 +1,26 @@
+4.9 Box Sizing
+
+http://caniuse.com/#
+
+We want to include the padding value in our width and height. Using the box-sizing property, adjust the value of the .box to include the padding into the width property.
+
+style.css
+
+.box {
+  border: 5px solid #000;
+  height: 200px;
+  margin: 20px;
+  padding: 15px;
+  width: 425px;
+}
+
+Answer:
+
+.box {
+  border: 5px solid #000;
+  height: 200px;
+  margin: 20px;
+  padding: 15px;
+  width: 425px;
+  box-sizing: padding-box;
+}

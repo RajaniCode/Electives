@@ -1,0 +1,73 @@
+1.3 More Lists I
+
+
+Our crew is made up of surveyors and architects, but only surveyors are represented in our @each loop at the moment. Use join() to combine the two lists into a variable called $crew. Ensure you change the @each declaration to loop over $crew after it's created. The foreman's obsession with the indented syntax has subsided, and you can now choose which syntax to use via the editor.
+
+CSS
+
+.team-judy {
+  background: url("../images/judy.jpg");
+}
+
+.team-phillip {
+  background: url("../images/phillip.jpg");
+}
+
+.SASS
+
+$surveyors: judy phillip
+$architects: william emily
+
+@each $name in $surveyors
+  .team-#{$name}
+    background: url('../images/#{$name}.jpg')
+
+.SCSS
+
+$surveyors: judy phillip;
+$architects: william emily;
+
+@each $name in $surveyors {
+  .team-#{$name} {
+    background: url("../images/#{$name}.jpg");
+  }
+}
+
+Answer:
+
+.SASS
+
+$surveyors: judy phillip
+$architects: william emily
+
+$crew: join($surveyors, $architects)
+
+@each $name in $crew
+  .team-#{$name}
+    background: url("../images/#{$name}.jpg")
+
+.SCSS
+
+$surveyors: judy phillip;
+$architects: william emily;
+$crew: join($surveyors, $architects);
+
+@each $name in $crew {
+  .team-#{$name} {
+    background: url("../images/#{$name}.jpg");
+  }
+}
+
+CSS
+
+.team-judy {
+  background: url("../images/judy.jpg"); }
+
+.team-phillip {
+  background: url("../images/phillip.jpg"); }
+
+.team-william {
+  background: url("../images/william.jpg"); }
+
+.team-emily {
+  background: url("../images/emily.jpg"); }

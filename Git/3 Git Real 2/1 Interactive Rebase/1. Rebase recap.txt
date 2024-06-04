@@ -1,0 +1,12 @@
+1. Rebase recap
+
+
+So you've been working on your feature branch for a couple days and you realize you need to bring commits back in from master. Now you could just merge in the branch but that would create an ugly merge commit. Use rebase to bring those changes into your branch without the merge commit.
+
+
+$ git rebase master
+
+First, rewinding head to replay your work on top of it...
+Applying: Add poodle page
+
+Success!

@@ -1,0 +1,69 @@
+3.4 Pinging the Server
+
+In order to check whether the chat server is up, we’ve started a simple Go program that pings the server and prints the result to the screen. Once run, the program executes a loop that will only stop once a successful ping response has been received. Let’s finish this program.
+
+pinger/util/main.go
+package util
+
+func PingChatServer() bool {
+  //... code that pings the server
+  return true
+}
+
+pinger/main.go
+package main
+
+import (
+  "fmt"
+  "pinger/util"
+)
+
+func main() {
+  isAlive := false
+  
+  
+  
+  
+  fmt.Println("Ping is done")
+}
+
+
+1. Create a for loop that runs while the isAlive variable is false. It helps to know that in order to negate a boolean variable in Go, we can prepend it with the exclamation point. For example, !true returns false and !false returns true.
+
+Answer:
+pinger/main.go
+package main
+
+import (
+  "fmt"
+  "pinger/util"
+)
+
+func main() {
+  isAlive := false
+  for !isAlive {
+    
+  }
+  fmt.Println("Ping is done")
+}
+
+2. Inside the for loop, invoke the util.PingChatServer() function to ping the chat server. This function returns a boolean and when this boolean is true, set the isAlive variable to true. This will cause the loop to break.
+
+Answer:
+pinger/main.go
+package main
+
+import (
+  "fmt"
+  "pinger/util"
+)
+
+func main() {
+  isAlive := false
+  for !isAlive {
+    if util.PingChatServer() {
+      isAlive = true
+    }
+  }
+  fmt.Println("Ping is done")
+}

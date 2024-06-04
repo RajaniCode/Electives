@@ -1,0 +1,22 @@
+[cloudera@quickstart ~]$ cd Downloads/
+[cloudera@quickstart Downloads]$ ls
+words.txt
+[cloudera@quickstart Downloads]$ hadoop fs -copyFromLocal words.txt
+[cloudera@quickstart Downloads]$ hadoop fs -ls
+Found 1 items
+-rw-r--r--   1 cloudera cloudera    5458199 2016-04-08 03:17 words.txt
+[cloudera@quickstart Downloads]$ hadoop fs -cp words.txt words2.txt
+[cloudera@quickstart Downloads]$ hadoop fs -ls
+Found 2 items
+-rw-r--r--   1 cloudera cloudera    5458199 2016-04-08 03:17 words.txt
+-rw-r--r--   1 cloudera cloudera    5458199 2016-04-08 03:18 words2.txt
+[cloudera@quickstart Downloads]$ hadoop fs -copyToLocal words2.txt
+[cloudera@quickstart Downloads]$ ls
+words2.txt  words.txt
+[cloudera@quickstart Downloads]$ hadoop fs -rm  words2.txt
+16/04/08 03:20:51 INFO fs.TrashPolicyDefault: Namenode trash configuration: Deletion interval = 0 minutes, Emptier interval = 0 minutes.
+Deleted words2.txt
+[cloudera@quickstart Downloads]$ hadoop fs -ls
+Found 1 items
+-rw-r--r--   1 cloudera cloudera    5458199 2016-04-08 03:17 words.txt
+[cloudera@quickstart Downloads]$

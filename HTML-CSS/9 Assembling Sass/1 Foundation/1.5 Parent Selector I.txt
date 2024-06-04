@@ -1,0 +1,53 @@
+1.5 Parent Selector I
+
+
+We've noticed an issue with our .notice class - we need to nest the .alert class inside in a way that will produce .notice.alert rather than .notice .alert. Refactor the class below with the parent selector.
+
+CSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+}
+
+.notice.alert {
+  background: red;
+  box-shadow: 0 0 10px red;
+}
+
+APPLICATION.SCSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+}
+.notice.alert {
+  background: red;
+  box-shadow: 0 0 10px red;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+  &.alert {
+    background: red;
+    box-shadow: 0 0 10px red;
+  }
+}
+
+CSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px; }
+  .notice.alert {
+    background: red;
+    box-shadow: 0 0 10px red; }

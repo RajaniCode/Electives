@@ -1,0 +1,18 @@
+1.10 The Time Is Now
+
+Our friend reached out to us again asking for help. She is writing another program in Go but can't figure out what is causing a build error. We quickly notice she is missing not one, but two package imports on the chat/main.go file.
+
+main.go
+package main
+
+func main() {
+  fmt.Println("The time now is", time.Now())
+}
+
+Using the console, run a command that fixes this issue for us. Remember to use the flag that writes the output of the command back to the original source file.
+
+
+$ goimports -w chat/main.go
+
+Success!
+$

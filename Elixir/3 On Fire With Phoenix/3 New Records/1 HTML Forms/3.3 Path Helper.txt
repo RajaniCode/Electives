@@ -1,0 +1,16 @@
+3.3 Path Helper
+
+With the two routes we’ve just added to the router file, Phoenix can generate path helper functions we can use. Here are our current routes for Events:
+
+get "/events/new", EventController, :new
+post "/events", EventController, :create
+Select the valid way to invoke path helper functions from templates:
+
+[Single Answer]
+
+events_path(:new) and events_path(:create)
+events(@conn, :new) and events(@conn, :create)
+events_path(@conn, :new) and events_path(@conn, :create)
+
+
+Answer:

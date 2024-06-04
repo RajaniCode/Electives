@@ -1,0 +1,28 @@
+4.4 Supplies List
+
+We asked each potential shipmate to give us a list of supplies they will need on their journey. Within the list, we require that each person lists either 'bandaids' or 'bandages'. However, it appears that some did not follow our directions. Let's construct a pattern to check if either item is listed.
+
+To begin, construct a pattern that matches the literal 'bandaids' or 'bandages'.
+
+Next, update the pattern to make sure no extra text appears before or after either 'bandaids' or 'bandages' on the same line. Take note that this is a multi-line string.
+
+Subjects
+bandaids
+
+bandages
+
+screw driver
+hammer
+bandaids
+sword
+
+axe
+bandages
+swim suit
+hook
+
+
+REGULAR EXPRESSION
+/^bandaids|bandages$/m
+
+Also: /^(bandaids|bandages)$/m

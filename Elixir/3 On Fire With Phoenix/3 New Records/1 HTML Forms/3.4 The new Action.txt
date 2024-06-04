@@ -1,0 +1,39 @@
+3.4 The new Action
+
+Let’s finish coding the :new action in EventController.
+
+lib/neon_web/controllers/event_controller.ex
+defmodule NeonWeb.EventController do
+  use NeonWeb, :controller
+
+  alias Neon.Repo
+  alias Neon.Event
+
+  import Ecto.Changeset
+
+  def index(conn, _) do
+    events = Repo.all(Event)
+    render conn, "index.html", events: events
+  end
+
+  def new(  ) do
+    
+    
+  end
+end
+
+
+1. Fill the missing two arguments on the new function. Remember, we must explicitly ignore the second argument using a special character.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex
+
+2. Using the change() function, create a changeset and assign it to a new variable changeset.
+
+Answer: 
+lib/neon_web/controllers/event_controller.ex
+
+3. Add a call to render, passing in three arguments. The template name we’ll use is "new.html". Pass in the changeset via a keyword list with a key of the same name.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex

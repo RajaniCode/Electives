@@ -1,0 +1,78 @@
+Download Ruby:
+
+ftp://ftp.ruby-lang.org/pub/ruby/2.3/
+
+wget ftp://ftp.ruby-lang.org/pub/ruby/2.3/ruby-2.3.1.tar.gz
+
+Keep in mind that you can always access the latest version of ruby from the Ruby on Rails website: http://rubyonrails.org/download
+
+Once you have downloaded ruby, download the dependancies to your virtual server. These will help later to make the installation as smooth as possible.
+
+Note: Please check whether to install the following as it needs to be verified
+# yum install -y git-core zlib zlib-devel gcc-c++ patch readline readline-devel libyaml-devel libffi-devel openssl-devel make bzip2 autoconf automake libtool bison curl sqlite-devel
+
+
+After the dependancies are installed on your VPS, unzip the ruby file:
+
+# tar xvfz ruby-2.3.1.tar.gz
+
+Once the process has completed, enter into the downloaded directory.
+
+# cd ruby-2.3.1
+
+Step Two—Install Ruby
+
+Inside the Ruby directory we have to run the three standard commands to install the software.
+
+First:
+
+# ./configure
+
+"Configure" generates the make file and also checks that the server has all of the required dependancies. After that, still in the directory, you need to run the "make" command:
+
+# make
+
+This may take a bit longer. Once it finishes, use make install:
+
+# make install
+
+Step Three—Install Gems
+
+Once you have thoroughly unpacked the ruby code, the next step is to address the ruby gems. Since you installed the ruby package from the source, the gems should already be downloaded. However, you may need to update them:
+
+# ruby --version
+
+# gem --version
+
+# gem update --system
+
+Step Four—Install Rails
+
+After the gems are all up to date, you can complete the manual installation by setting up rails:
+
+# gem install rails
+
+With that, you have Ruby on Rails installed on your server.
+
+Step Five—See Rails Online
+
+After you have installed Ruby on Rails, you will be all set to start putting your ruby apps online.
+
+To access the Ruby server, you simply need to make a new Ruby on Rails project:
+
+rails new project_name
+
+Enter into that directory:
+
+ cd project_name
+
+And then turn on the rails server:
+
+rails server
+
+Step Six—RESULTS: Access Your Ruby Server
+
+Once Ruby on Rails is installed, you can access your virtual private server by accessing your domain or IP address (ie. 12.34.56.789:3000)
+
+Welcome aboard
+You're riding Ruby on Rails!

@@ -1,0 +1,139 @@
+[rajani@localhost MongoDB]$ su root
+Password: 
+[root@localhost MongoDB]# gedit /etc/yum.repos.d/mongodb-org-3.2.repo
+
+(gedit:11165): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:11165): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+Error creating proxy: The connection is closed (g-io-error-quark, 18)
+
+** (gedit:11165): WARNING **: Error when getting information for file '/etc/yum.repos.d/mongodb-org-3.2.repo': No such file or directory
+
+(gedit:11165): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:11165): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+(gedit:11165): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+
+** (gedit:11165): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-spell-language not supported
+
+** (gedit:11165): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-encoding not supported
+
+** (gedit:11165): WARNING **: Set document metadata failed: Setting attribute metadata::gedit-position not supported
+
+(gedit:11165): dconf-WARNING **: failed to commit changes to dconf: The connection is closed
+[root@localhost MongoDB]# sudo yum install -y mongodb-org
+Loaded plugins: fastestmirror, langpacks
+mongodb-org-3.2                                                                                                                          | 2.5 kB  00:00:00     
+mongodb-org-3.2/7/primary_db                                                                                                             |  34 kB  00:00:00     
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: epel.mirror.net.in
+ * extras: mirror.nbrc.ac.in
+ * nux-dextop: li.nux.ro
+ * rpmforge: ftp.neowiz.com
+ * updates: mirror.nbrc.ac.in
+Resolving Dependencies
+--> Running transaction check
+---> Package mongodb-org.x86_64 0:3.2.6-1.el7 will be installed
+--> Processing Dependency: mongodb-org-tools = 3.2.6 for package: mongodb-org-3.2.6-1.el7.x86_64
+--> Processing Dependency: mongodb-org-shell = 3.2.6 for package: mongodb-org-3.2.6-1.el7.x86_64
+--> Processing Dependency: mongodb-org-server = 3.2.6 for package: mongodb-org-3.2.6-1.el7.x86_64
+--> Processing Dependency: mongodb-org-mongos = 3.2.6 for package: mongodb-org-3.2.6-1.el7.x86_64
+--> Running transaction check
+---> Package mongodb-org-mongos.x86_64 0:3.2.6-1.el7 will be installed
+---> Package mongodb-org-server.x86_64 0:3.2.6-1.el7 will be installed
+---> Package mongodb-org-shell.x86_64 0:3.2.6-1.el7 will be installed
+---> Package mongodb-org-tools.x86_64 0:3.2.6-1.el7 will be installed
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+================================================================================================================================================================
+ Package                                    Arch                           Version                                Repository                               Size
+================================================================================================================================================================
+Installing:
+ mongodb-org                                x86_64                         3.2.6-1.el7                            mongodb-org-3.2                         5.8 k
+Installing for dependencies:
+ mongodb-org-mongos                         x86_64                         3.2.6-1.el7                            mongodb-org-3.2                         5.6 M
+ mongodb-org-server                         x86_64                         3.2.6-1.el7                            mongodb-org-3.2                          12 M
+ mongodb-org-shell                          x86_64                         3.2.6-1.el7                            mongodb-org-3.2                         6.7 M
+ mongodb-org-tools                          x86_64                         3.2.6-1.el7                            mongodb-org-3.2                          37 M
+
+Transaction Summary
+================================================================================================================================================================
+Install  1 Package (+4 Dependent packages)
+
+Total download size: 62 M
+Installed size: 208 M
+Downloading packages:
+warning: /var/cache/yum/x86_64/7/mongodb-org-3.2/packages/mongodb-org-3.2.6-1.el7.x86_64.rpm: Header V3 RSA/SHA1 Signature, key ID ea312927: NOKEY --:--:-- ETA 
+Public key for mongodb-org-3.2.6-1.el7.x86_64.rpm is not installed
+(1/5): mongodb-org-3.2.6-1.el7.x86_64.rpm                                                                                                | 5.8 kB  00:00:00     
+(2/5): mongodb-org-mongos-3.2.6-1.el7.x86_64.rpm                                                                                         | 5.6 MB  00:00:28     
+(3/5): mongodb-org-shell-3.2.6-1.el7.x86_64.rpm                                                                                          | 6.7 MB  00:00:35     
+(4/5): mongodb-org-server-3.2.6-1.el7.x86_64.rpm                                                                                         |  12 MB  00:01:11     
+(5/5): mongodb-org-tools-3.2.6-1.el7.x86_64.rpm                                                                                          |  37 MB  00:04:49     
+----------------------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                                           179 kB/s |  62 MB  00:05:54     
+Retrieving key from https://www.mongodb.org/static/pgp/server-3.2.asc
+Importing GPG key 0xEA312927:
+ Userid     : "MongoDB 3.2 Release Signing Key <packaging@mongodb.com>"
+ Fingerprint: 42f3 e95a 2c4f 0827 9c49 60ad d68f a50f ea31 2927
+ From       : https://www.mongodb.org/static/pgp/server-3.2.asc
+Running transaction check
+Running transaction test
+Transaction test succeeded
+Running transaction
+  Installing : mongodb-org-server-3.2.6-1.el7.x86_64                                                                                                        1/5 
+  Installing : mongodb-org-tools-3.2.6-1.el7.x86_64                                                                                                         2/5 
+  Installing : mongodb-org-mongos-3.2.6-1.el7.x86_64                                                                                                        3/5 
+  Installing : mongodb-org-shell-3.2.6-1.el7.x86_64                                                                                                         4/5 
+  Installing : mongodb-org-3.2.6-1.el7.x86_64                                                                                                               5/5 
+  Verifying  : mongodb-org-shell-3.2.6-1.el7.x86_64                                                                                                         1/5 
+  Verifying  : mongodb-org-mongos-3.2.6-1.el7.x86_64                                                                                                        2/5 
+  Verifying  : mongodb-org-tools-3.2.6-1.el7.x86_64                                                                                                         3/5 
+  Verifying  : mongodb-org-server-3.2.6-1.el7.x86_64                                                                                                        4/5 
+  Verifying  : mongodb-org-3.2.6-1.el7.x86_64                                                                                                               5/5 
+
+Installed:
+  mongodb-org.x86_64 0:3.2.6-1.el7                                                                                                                              
+
+Dependency Installed:
+  mongodb-org-mongos.x86_64 0:3.2.6-1.el7 mongodb-org-server.x86_64 0:3.2.6-1.el7 mongodb-org-shell.x86_64 0:3.2.6-1.el7 mongodb-org-tools.x86_64 0:3.2.6-1.el7
+
+Complete!
+[root@localhost MongoDB]# sudo service mongod start
+Starting mongod (via systemctl):                           [  OK  ]
+[root@localhost MongoDB]# mongo
+MongoDB shell version: 3.2.6
+connecting to: test
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+	http://docs.mongodb.org/
+Questions? Try the support group
+	http://groups.google.com/group/mongodb-user
+Server has startup warnings: 
+2016-04-30T22:45:05.648+0530 I CONTROL  [initandlisten] 
+2016-04-30T22:45:05.648+0530 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/enabled is 'always'.
+2016-04-30T22:45:05.648+0530 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2016-04-30T22:45:05.649+0530 I CONTROL  [initandlisten] 
+2016-04-30T22:45:05.649+0530 I CONTROL  [initandlisten] ** WARNING: /sys/kernel/mm/transparent_hugepage/defrag is 'always'.
+2016-04-30T22:45:05.649+0530 I CONTROL  [initandlisten] **        We suggest setting it to 'never'
+2016-04-30T22:45:05.649+0530 I CONTROL  [initandlisten] 
+2016-04-30T22:45:05.649+0530 I CONTROL  [initandlisten] ** WARNING: soft rlimits too low. rlimits set to 4096 processes, 64000 files. Number of processes should be at least 32000 : 0.5 times number of files.
+2016-04-30T22:45:05.649+0530 I CONTROL  [initandlisten] 
+> use RajaniLinuxMongoDB
+switched to db RajaniLinuxMongoDB
+> db.myCollection.insert( { x: 1 } );
+WriteResult({ "nInserted" : 1 })
+> db.myCollection.find();
+{ "_id" : ObjectId("5724e89bc27e373908bb42bc"), "x" : 1 }
+> quit();
+[root@localhost MongoDB]#
+

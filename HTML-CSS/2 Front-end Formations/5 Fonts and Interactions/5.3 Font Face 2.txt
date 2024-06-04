@@ -1,0 +1,17 @@
+5.3 Font Face 2
+
+http://caniuse.com/#feat=fontface
+
+We want to use the @font-face DroidSerifRegular font on the body copy of our blog. Set the body copy to use this font. Also, let’s set Georgia, Times New Roman, and serif as fallback fonts.
+
+style.css
+
+body {
+
+}
+
+Answer:
+
+body {
+  font-family: DroidSerifRegular, Georgia, 'Times New Roman', sans-serif;
+}

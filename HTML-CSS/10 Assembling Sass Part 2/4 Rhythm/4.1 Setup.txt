@@ -1,0 +1,57 @@
+4.1 Setup
+
+
+Before getting too far into text styling, the team's decided to try out the Compass vertical rhythm module. Move the base font size and line height values out of body and into the appropriate global variables, then kick things off with establish-baseline.
+
+
+CSS
+
+body {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.SASS
+
+@import "compass"
+
+body
+  font-size: 16px
+  line-height: 24px
+
+.SCSS
+
+@import "compass";
+
+body {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+Answer:
+
+.SASS
+
+@import compass
+
+$base-font-size: 16px
+$base-line-height: 24px
++establish-baseline
+
+.SCSS
+
+@import "compass";
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+@include establish-baseline;
+
+CSS
+
+* html {
+  font-size: 100%; }
+
+html {
+  font-size: 16px;
+  line-height: 1.5em; }

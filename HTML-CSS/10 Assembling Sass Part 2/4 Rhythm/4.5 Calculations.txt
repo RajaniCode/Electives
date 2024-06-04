@@ -1,0 +1,186 @@
+4.5 Calculations
+
+
+With Challenge 4's lesson in mind, we're ready to add a 1 unit trailer to the p.
+
+CSS
+
+* html {
+  font-size: 100%;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+h1 {
+  font-size: 3em;
+  line-height: 1.5em;
+  line-height: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 2em;
+}
+
+p {
+  font-size: 1.1875em;
+  line-height: 1.26316em;
+}
+
+ul {
+  margin-bottom: 1.5em;
+}
+
+li {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.SASS
+
+@import "compass"
+
+$base-font-size: 16px
+$base-line-height: 24px
++establish-baseline
+
+h1
+  +adjust-font-size-to(48px)
+  +adjust-leading-to(4, 48px)
+
+h2
+  +adjust-font-size-to(24px)
+
+p
+  +adjust-font-size-to(19px)
+
+ul
+  +trailer(1)
+
+li
+  +leader(0.5)
+  +trailer(0.5)
+
+.SCSS
+
+@import "compass";
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+@include establish-baseline;
+
+h1 {
+  @include adjust-font-size-to(48px);
+  @include adjust-leading-to(4, 48px);
+}
+
+h2 {
+  @include adjust-font-size-to(24px);
+}
+
+p {
+  @include adjust-font-size-to(19px);
+}
+
+ul {
+  @include trailer(1);
+}
+
+li {
+  @include leader(0.5);
+  @include trailer(0.5);
+}
+
+Answer:
+
+.SASS
+
+@import "compass"
+
+$base-font-size: 16px
+$base-line-height: 24px
++establish-baseline
+
+h1
+  +adjust-font-size-to(48px)
+  +adjust-leading-to(4, 48px)
+
+h2
+  +adjust-font-size-to(24px)
+
+p
+  +adjust-font-size-to(19px)
+  +trailer(1, 19px)
+
+ul
+  +trailer(1)
+
+li
+  +leader(0.5)
+  +trailer(0.5)
+
+.SCSS
+
+@import "compass";
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+@include establish-baseline;
+
+h1 {
+  @include adjust-font-size-to(48px);
+  @include adjust-leading-to(4, 48px);
+}
+
+h2 {
+  @include adjust-font-size-to(24px);
+}
+
+p {
+  @include adjust-font-size-to(19px);
+  @include trailer(1, 19px);
+}
+
+ul {
+  @include trailer(1);
+}
+
+li {
+  @include leader(0.5);
+  @include trailer(0.5);
+}
+
+CSS
+
+* html {
+  font-size: 100%; }
+
+html {
+  font-size: 16px;
+  line-height: 1.5em; }
+
+h1 {
+  font-size: 3em;
+  line-height: 1.5em;
+  line-height: 2em; }
+
+h2 {
+  font-size: 1.5em;
+  line-height: 2em; }
+
+p {
+  font-size: 1.1875em;
+  line-height: 1.26316em;
+  margin-bottom: 1.26316em; }
+
+ul {
+  margin-bottom: 1.5em; }
+
+li {
+  margin-top: 0.75em;
+  margin-bottom: 0.75em; }

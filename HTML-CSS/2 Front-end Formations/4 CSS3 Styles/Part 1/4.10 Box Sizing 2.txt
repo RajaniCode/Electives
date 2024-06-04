@@ -1,0 +1,22 @@
+4.10 Box Sizing 2
+
+http://caniuse.com/#
+
+Now we want our inputs to have a width of 100%, but if we were to include the padding and border properties, they’d be pushed outside of that 100%. Using the box-sizing property, make the border and padding part of the width.
+
+style.css
+
+.input {
+  border: 1px solid grey;
+  padding: 7px 10px;
+  width: 100%;
+}
+
+Answer:
+
+.input {
+  border: 1px solid grey;
+  padding: 7px 10px;
+  width: 100%;
+  box-sizing: border-box;
+}

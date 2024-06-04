@@ -1,0 +1,11 @@
+What Does Verifying A Signature Mean?
+
+https://www.apache.org/dev/release-signing#verifying-signature
+
+Public key cryptography can be used to test whether a particular file is identical (in content) to an original by verifying a signature. The signature file is a digest of the original file signed by a private key which attests to the digest's authenticity.
+
+For example, when using GNU Privacy Guard you verify the signature foo-1.0.tar.gz.asc for release foo-1.0.tar.gz using the following command:
+
+$ gpg --verify foo-1.0.tar.gz.asc foo-1.0.tar.gz
+
+Trust is required in the identity of the public key that made the signature and that the signature is for the original in question (and not some other file). When verifying a release from an untrusted source (for example, over P2P file sharing or from a mirror) it is therefore important to download the signature from a trusted source. Signatures for all Apache releases are available directly from www.apache.org and should be downloaded from there.

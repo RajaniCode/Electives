@@ -1,0 +1,33 @@
+3.3 Element Selector Shortcuts
+
+Use the $() shortcut to find all DOM elements with an ID of "#calendar" in the sample app.
+
+Use the inspect() function and the $() shortcut to view the first element that has a class of ".event" in the Elements panel. Then change that event name to Run 10K.
+
+Now that we're in the Elements panel, click to select the Build Robot event. Then, back in the console, use the $0 shortcut and a DOM method to remove() it from the list.
+
+F12
+Console
+$("#calendar");
+[<section id="calendar" class="calendar" style="display: block;">
+    <header>
+        <a class="prev" href="#">Prev</a>
+	<a class="next" href="#">Next</a>
+	<h1 id="date" class="date"><b>Wed</b> Mar 02 2016</h1>
+    </header>
+    <ul id="events" class="events">
+	<li class="event">Run 5K</li>
+	<li class="event">Build Robot</li>
+	<li class="event">Take Over the World</li></ul>
+</section>]
+
+inspect($(".event"));
+[ <li class="event">Run 5K</li>, <li class=?"event">?Build Robot?</li>?, <li class=?"event">?Take Over the World?</li>?]
+
+Elements
+<li class="event">Run 10K</li>
+
+Console
+Hint: you can remove a DOM node with jQuery's 'remove()' method.
+$0.remove();
+undefined

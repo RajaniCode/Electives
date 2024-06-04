@@ -1,0 +1,46 @@
+4.8 Routing to show
+
+Let’s start routing client requests to display data for specific events.
+
+lib/neon_web/router.ex
+defmodule NeonWeb.Router do
+  use NeonWeb, :router
+
+  pipeline :browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+
+  scope "/", NeonWeb do
+    pipe_through :browser
+
+    get "/", EventController, :index
+
+    get "/events/new", EventController, :new
+    post "/events", EventController, :create
+    
+  end
+end
+
+
+1. Add a new GET route for the "/events/:id" path. This URL should be mapped to the :show action in the EventController.
+
+Answer:
+lib/neon_web/router.ex
+
+2. On the EventController tab, add the missing second argument for the show function. The argument should read the "id" key from a map and assign it to a variable called event_id.
+
+Answer: 
+lib/neon_web/router.ex
+
+3. Inside the show function, use Repo to get the event for event_id, along with its associated comments. Assign the result to the event variable.
+
+Answer:
+lib/neon_web/router.ex

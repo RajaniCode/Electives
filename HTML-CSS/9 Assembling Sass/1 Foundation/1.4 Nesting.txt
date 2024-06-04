@@ -1,0 +1,57 @@
+1.4 Nesting
+
+
+With the comments out of the way, now it's time to refactor the .surveyor class to take advantage of nesting.
+
+CSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+.surveyor h2 {
+  font-size: 18px;
+}
+
+.surveyor h2 a {
+  color: green;
+}
+
+APPLICATION.SCSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+.surveyor h2 {
+  font-size: 18px;
+}
+.surveyor h2 a {
+  color: green;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px;
+  h2 {
+    font-size: 18px;
+    a {
+      color: green;
+    }
+  }
+}
+
+CSS
+
+.surveyor {
+  border: 1px solid #ccc;
+  padding: 20px; }
+  .surveyor h2 {
+    font-size: 18px; }
+    .surveyor h2 a {
+      color: green; }

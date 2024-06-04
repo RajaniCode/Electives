@@ -1,0 +1,25 @@
+4.6 A Better Navigator
+
+We already made a pattern to validate coordinates for our voyage, specifically the latitude and longitude. Now we have a better navigator and we are better at regular expressions. Let's create a pattern that validates multiple coordinates in a large text file.
+
+Each number can be positive or negative, so add an optional dash literal followed by a number that can be between 1 and 3 characters in length. Do not use a character set to match numbers.
+
+Next, add the decimal place (dot literal) followed by a number repeated 1 or more times. Do not use a character set to match numbers.
+
+Great, now match every coordinate in the file - not just the first one found.
+
+Finally, let's ensure there is nothing before or after our coordinate on each line. Keep in mind that this is a multi-line string.
+
+Subjects
+59.175928
+-155.917969
+69.900118
+-155.214844
+78.025574
+-67.500000
+68.592487
+174.550781
+
+
+REGULAR EXPRESSION
+/^-?\d{1,3}\.\d{1,}$/mg

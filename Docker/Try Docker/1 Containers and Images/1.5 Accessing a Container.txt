@@ -1,0 +1,23 @@
+1.5 Accessing a Container
+
+Now when we try to access http://localhost:80/index.html we'll get an error, but if we try to access http://localhost:9999/index.html then we'll see the default "It works" page! This is a really useful feature of Docker — the ability to map any port on the host (your computer) to any port on the container.
+
+Accessing the default page is cool, but what about getting into a running container and looking around? The docker container exec command lets us run commands against a running container. But before we can run a command, we need to know the ID of the container.
+
+1. Type docker container ls.
+
+Answer:
+
+Enter your solution below
+
+$
+
+Each container gets a unique ID, and Docker also assigns them a random name. You can use either the container ID or the container name whenever you're running a command that needs you to specify a container. In this course, every container you create has the name elegant_noether, so try executing the command below on that container.
+
+2. Type docker container exec elegant_noether du -mh.
+
+Answer:
+
+Enter your solution below
+
+$

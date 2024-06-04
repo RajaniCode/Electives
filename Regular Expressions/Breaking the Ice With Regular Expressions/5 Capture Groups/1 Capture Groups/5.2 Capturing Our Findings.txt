@@ -1,0 +1,13 @@
+5.2 Capturing Our Findings
+
+Regex allows us to capture and use values extracted from our subject strings. Which of the following expressions would capture and return the result 'blue' from 'sailing the great blue seas'?
+
+[Single Answer]
+
+sailing the great [\w+] seas
+sailing the great <\w+> seas
+sailing the great {\w+} seas
+sailing the great (\w+) seas
+
+
+Answer: sailing the great (\w+) seas

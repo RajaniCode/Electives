@@ -1,0 +1,88 @@
+5.9 Fetching API Data
+
+Let’s finish coding the part of our application that makes a web service request to fetch sales tax rates for each state in the U.S. from an API.
+
+lib/expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "go.codeschool.com/state-taxes"
+    
+    
+  end
+
+  defp parse(_) do
+    # TODO
+  end
+
+  defp calculate(_, _) do
+    # TODO
+  end
+end
+
+
+1. Write a case statement where the test value is the return value of calling the HTTPoison.get function with the variable url as the argument.
+
+Answer:
+lib/expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "go.codeschool.com/state-taxes"
+    case HTTPoison.get(url) do
+    end    
+  end
+
+  defp parse(_) do
+    # TODO
+  end
+
+  defp calculate(_, _) do
+    # TODO
+  end
+end
+
+2. The first pattern to the case statement should be the tuple {:ok, response}. When this pattern is matched, it should invoke the function parse(response) and then pipe its return value to the function calculate(amount). We’ll define these two functions in the next challenge.
+
+Answer:
+lib/expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "go.codeschool.com/state-taxes"
+    case HTTPoison.get(url) do
+      {:ok, response} -> parse(response) |> calculate(amount)
+    end    
+  end
+
+  defp parse(_) do
+    # TODO
+  end
+
+  defp calculate(_, _) do
+    # TODO
+  end
+end
+
+3. The second pattern should be the tuple {:error, _}. When matched, it should return the string "Error fetching tax rates".
+
+Answer:
+lib/expenses.ex
+
+defmodule Expenses do
+  def total_spendings_FL(amount) do
+    url = "go.codeschool.com/state-taxes"
+    case HTTPoison.get(url) do
+      {:ok, response} -> parse(response) |> calculate(amount)
+      {:error, _} -> "Error fetching tax rates"
+    end    
+  end
+
+  defp parse(_) do
+    # TODO
+  end
+
+  defp calculate(_, _) do
+    # TODO
+  end
+end

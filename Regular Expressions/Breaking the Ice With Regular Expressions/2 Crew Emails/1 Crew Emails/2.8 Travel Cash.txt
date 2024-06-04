@@ -1,0 +1,18 @@
+2.8 Travel Cash
+
+As each potential shipmate is signing up, we want to know how much cash they will be bringing on the trip. We can use a regular expression to make sure they have entered a valid currency amount.
+
+Let's start by matching the dollars portion of our subject (the numbers before the decimal). Here we can have 1 or more numbers that range from 0 to 9. We will want to only use a character set to match the possible amount of dollars a shipmate may bring.
+
+Great. Now let's add the decimal point and some numbers to match cents. Keep in mind that we want exactly two numbers for cents.
+
+Lastly, let's add the dollar sign to the beginning of the pattern to indicate the currency.
+
+Subjects
+$100.00
+$27.60
+$6.87
+
+
+REGULAR EXPRESSION
+/[$][0-9]+\.[0-9][0-9]/

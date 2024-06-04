@@ -1,0 +1,126 @@
+1.8 Access the Data
+
+Using the $_POST superglobal, echo each of the three items in our form.
+
+index.php
+
+<?php
+$name = $_POST['name'];
+
+?>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Travel to Earth Request</title>
+  </head>
+  <body>
+    <div class="content">
+      <form class="form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date of Departure</label>
+          <input type="date" class="form-control" id="date">
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason for Visit</label>
+          <input type="text" class="form-control" id="reason">
+        </div>
+
+        <button type="submit" class="btn" disabled="disabled">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+
+1. Create two more variables named for the date and reason form fields, with the value of each field using $_POST.
+
+Answer:
+index.php
+
+<?php
+$name = $_POST['name'];
+$date = $_POST['date'];
+$reason = $_POST['reason'];
+?>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Travel to Earth Request</title>
+  </head>
+  <body>
+    <div class="content">
+      <form class="form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date of Departure</label>
+          <input type="date" class="form-control" id="date">
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason for Visit</label>
+          <input type="text" class="form-control" id="reason">
+        </div>
+
+        <button type="submit" class="btn" disabled="disabled">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+2. Use three echo statements to display the three variables on the screen.
+
+Answer:
+index.php
+
+<?php
+$name = $_POST['name'];
+$date = $_POST['date'];
+$reason = $_POST['reason'];
+echo $name;
+echo $date;
+echo $reason;
+?>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Travel to Earth Request</title>
+  </head>
+  <body>
+    <div class="content">
+      <form class="form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date of Departure</label>
+          <input type="date" class="form-control" id="date">
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason for Visit</label>
+          <input type="text" class="form-control" id="reason">
+        </div>
+
+        <button type="submit" class="btn" disabled="disabled">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>

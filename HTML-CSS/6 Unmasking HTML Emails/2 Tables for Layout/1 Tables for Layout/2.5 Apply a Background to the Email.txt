@@ -1,0 +1,160 @@
+2.5 Apply a Background to the Email
+
+Use a wrapper table to apply a background to the whole email.
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+
+  </body>
+</html>
+
+
+1. Create a new table with a single tr and td that contains the existing table.
+
+Answer:
+
+    <table>
+      <tr>
+        <td>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+    	  </td>
+      </tr>
+    </table>
+
+2. Reset the spacing and border of this new table and use an attribute to set the width to 100%. For this you'll need to add 4 new attributes to the table.
+
+Answer:
+
+
+    <table width="100%"  border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+    	  </td>
+      </tr>
+    </table>
+
+3. Style the table with a background-color of #e4c59a and a background-image with a URL of https://s3.amazonaws.com/unmasking-html-emails/bg.jpg.
+
+Answer:
+
+    <table width="100%"  border="0" cellpadding="0" cellspacing="0" style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg.')">
+      <tr>
+        <td>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+    	  </td>
+      </tr>
+    </table>
+
+
+Success:
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <table width="100%"  border="0" cellpadding="0" cellspacing="0" style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg.')">
+      <tr>
+        <td>
+          <table align="center" border="0" cellpadding="0" cellspacing="0" width="600">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+    	  </td>
+      </tr>
+    </table>
+  </body>
+</html>

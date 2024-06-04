@@ -1,0 +1,25 @@
+8. Conflict II
+
+
+Now run another rebase to move your commit after the latest fetched one.
+
+
+$ git rebase
+
+
+First, rewinding head to replay your work on top of it...
+Applying: Added kennel page
+Applying: Updated main page
+Using index info to reconstruct a base tree...
+Falling back to patching base and 3-way merge...
+Auto-merging index.html
+CONFLICT (content): Merge conflict in index.html
+Failed to merge in the changes.
+Patch failed at 0002 Updated main page
+
+When you have resolved this problem run "git rebase --continue".
+If you would prefer to skip this patch, instead run "git rebase --skip".
+To check out the original branch and stop rebasing run "git rebase --abort".
+
+
+Success! Well, sort of. There was a conflict you'll need to fix. Type `next` to go to the next challenge to fix it.

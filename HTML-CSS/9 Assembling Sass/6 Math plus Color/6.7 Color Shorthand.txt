@@ -1,0 +1,42 @@
+6.7 Color Shorthand
+
+
+We've stored a hex color value in $color-base, but the rgb equivalent (121,121,121) is being used in .modal. Use the shorthand version of rgba() to make use of the already-available $color-base value.
+
+
+CSS
+
+.modal {
+  background: rgba(121, 121, 121, 0.75);
+  border: 1px solid #797979;
+  padding: 20px;
+}
+
+APPLICATION.SCSS 
+
+$color-base: #797979;
+
+.modal {
+  background: rgba(121,121,121,0.75);
+  border: 1px solid $color-base;
+  padding: 20px;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$color-base: #797979;
+
+.modal {
+  background: rgba($color-base,0.75);
+  border: 1px solid $color-base;
+  padding: 20px;
+}
+
+CSS
+
+.modal {
+  background: rgba(121, 121, 121, 0.75);
+  border: 1px solid #797979;
+  padding: 20px; }

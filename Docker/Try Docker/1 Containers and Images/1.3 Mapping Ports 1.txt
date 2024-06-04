@@ -1,0 +1,13 @@
+1.3 Mapping Ports 1
+
+There we go, our first container!
+
+But there's a little problem: We should be able to access the default index.html page on that server by visiting http://localhost:80/index.html, but when we do that we just get an error that we can't connect to port 80. Fortunately, we can solve this by adding a -p flag with some port numbers after it to the run command.
+
+Type docker container run -p 80:80 httpd:2.4.
+
+Answer:
+
+Enter your solution below
+
+$

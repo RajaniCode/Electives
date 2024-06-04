@@ -1,0 +1,30 @@
+5.4 Serving Correctly Sized Images
+
+Open the Network panel, clear the current waterfall  and then click the map icon  for the Run 5K event in our calendar. Look in the Network panel for the map.jpg file and notice how large the file size is!
+
+Inspect the image in the Elements panel, click the link to the map.css file that's setting the image's dimensions. Whoa, that's way bigger than we need! Try changing the height property in the CSS from 151px to 100px to see if that helps.
+
+Hmm, that doesn't look like a very good solution. Instead, we made a resized version of the image named /assets/map-small.png. Edit the image's "src" attribute in the Elements panel to point to this smaller image instead.
+
+F12
+Network
+
+Elements
+Sources
+assets
+map.css
+.map-img {
+  height: 151px;
+  width: 376px;
+}
+Edit
+.map-img {
+  height: 100px;
+  width: 376px;
+}
+Save
+
+Elements
+<img src="/assets/map.jpg" alt="Map" class="map-img">
+Edit as HTML
+<img src="/assets/map-small.png" alt="Map" class="map-img">

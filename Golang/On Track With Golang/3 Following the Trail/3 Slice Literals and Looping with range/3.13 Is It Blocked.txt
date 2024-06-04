@@ -1,0 +1,100 @@
+3.13 Is It Blocked?
+
+Let’s finish implementing the isIPBlocked() function. This function takes the host IP address as its argument and loops through a slice of blocked IPs to compare the argument and determine whether the host IP should be blocked from accessing our chat app.
+
+chat/util/main.go
+package util
+
+func GetHostIP() string {
+  // returns host IP
+  return "192.168.1.1"
+}
+
+chat/main.go
+
+package main
+
+import (
+  "chat/util"
+  "fmt"
+)
+
+func main() {
+  hostIP := util.GetHostIP()
+  fmt.Println(isIPBlocked(hostIP))
+}
+
+func isIPBlocked(ip string) bool {
+  blockedIPs := getBlockedIPs()
+  for  {
+    if  {
+      return true
+    }
+  }
+  return false
+}
+
+func getBlockedIPs() []string {
+  return []string{"192.168.0.17", "192.168.0.18", "192.168.0.19", "192.168.0.20"}
+}
+
+
+1. Use range to iterate over the elements from blockedIPs and assign them to a variable called blockedIP. Remember, to read elements from a slice, we must assign to two values and one of them must be ignored using a special character.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "fmt"
+)
+
+func main() {
+  hostIP := util.GetHostIP()
+  fmt.Println(isIPBlocked(hostIP))
+}
+
+func isIPBlocked(ip string) bool {
+  blockedIPs := getBlockedIPs()
+  for _, blockedIP := range blockedIPs {
+    if  {
+      return true
+    }
+  }
+  return false
+}
+
+func getBlockedIPs() []string {
+  return []string{"192.168.0.17", "192.168.0.18", "192.168.0.19", "192.168.0.20"}
+}
+
+2. Inside the for loop, check if the current blockedIP is equal to the IP address sent as an argument to the function. If so, then return true.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "fmt"
+)
+
+func main() {
+  hostIP := util.GetHostIP()
+  fmt.Println(isIPBlocked(hostIP))
+}
+
+func isIPBlocked(ip string) bool {
+  blockedIPs := getBlockedIPs()
+  for _, blockedIP := range blockedIPs {
+    if blockedIP == ip {
+      return true
+    }
+  }
+  return false
+}
+
+func getBlockedIPs() []string {
+  return []string{"192.168.0.17", "192.168.0.18", "192.168.0.19", "192.168.0.20"}
+}

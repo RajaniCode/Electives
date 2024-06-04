@@ -1,0 +1,87 @@
+3.6 stretch
+
+
+We've added decorative overlays with the :after pseudo-element, using the absolute positioning trick to make it stick a few pixels from each edge. Clean up the styles by importing the compass/layout module and adding stretch.
+
+
+CSS
+
+.bio {
+  position: relative;
+}
+.bio:after {
+  background: rgba(0, 0, 0, 0.3);
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  bottom: 10px;
+  left: 5px;
+}
+
+.SASS
+
+.bio
+  position: relative
+  &:after
+    background: rgba(#000, 0.3)
+    content: ""
+    position: absolute
+    top: 10px
+    right: 5px
+    bottom: 10px
+    left: 5px
+
+.SCSS
+
+.bio {
+  position: relative;
+  &:after {
+    background: rgba(black, 0.3);
+    content: "";
+    position: absolute;
+    top: 10px;
+    right: 5px;
+    bottom: 10px;
+    left: 5px;
+  }
+}
+
+Answer:
+
+.SASS
+
+@import "compass/layout"
+
+.bio
+  position: relative
+  &:after
+    background: rgba(#000, 0.3)
+    content: ""
+    +stretch(10px, 5px, 10px, 5px)
+
+.SCSS
+
+@import "compass/layout";
+
+.bio {
+  position: relative;
+  &:after {
+    background: rgba(black, 0.3);
+    content: "";
+    @include stretch(10px, 5px, 10px, 5px);
+  }
+}
+
+CSS
+
+.bio {
+  position: relative; }
+  .bio:after {
+    background: rgba(0, 0, 0, 0.3);
+    content: "";
+    position: absolute;
+    top: 10px;
+    bottom: 10px;
+    left: 5px;
+    right: 5px; }

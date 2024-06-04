@@ -1,0 +1,19 @@
+5.8 Opening Dropdowns
+
+The Bootstrap Dropdown plugin will toggle a specific class on our element in order to make the dropdown visible. Will the following dropdown menu be visible when the page loads?
+
+<div class='btn-group in'>
+  <a href='book.html' data-target='#' data-toggle='dropdown' class='btn btn-default'>Boot Tickets Now <span class='caret'></span></a>
+
+  <ul class='dropdown-menu'>
+    <li><a href='book-teleporter.html'>Teleporter</a></li>
+    <li><a href='book-elevator.html'>Orbital Elevator</a></li>
+    <li><a href='book-rocketbus.html'>RocketBus</a></li>
+  </ul>
+</div>
+
+    Yes, it will be visible when the page loads.
+
+    No, it will not be visible when the page loads.
+
+Answer: No, it will not be visible when the page loads.

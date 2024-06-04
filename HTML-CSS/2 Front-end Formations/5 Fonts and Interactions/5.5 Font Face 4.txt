@@ -1,0 +1,21 @@
+5.5 Font Face 4
+
+http://caniuse.com/#feat=fontface
+
+We have our bold @font-face version of Droid Serif set up properly. Now, set the h1 to use this new font.
+
+style.css
+
+h1 {
+
+}
+
+
+Answer:
+
+h1 {
+  font-family: 'Droid Serif';
+  src: url('DroidSerifBold.eot');
+  font-style: DroidSerifBold;
+  font-weight: bold; 
+}

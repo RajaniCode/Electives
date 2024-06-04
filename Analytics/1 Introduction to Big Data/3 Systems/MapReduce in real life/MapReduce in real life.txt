@@ -1,0 +1,27 @@
+MapReduce in real life
+
+What are some examples in work or daily life where applying the map reduce algorithm can speed up the process of the situation? In particular, if it is possible to implement, state who/what would store the data in each stage and who/what would execute the mapping and reducing?
+
+
+STEP 0 - STORE TO HDFS: 
+Work (Learning, Productivity, Contributing)
+Life (Personal, Professional, Social)
+Passion (Work, Life)
+
+STEP 1 - MAP: 
+Work, Work, Work -> (Work, 1), Work -> (Work, 1), Work -> (Work, 1)
+Life, Life, Life -> (Life, 1), (Life, 1), (Life, 1)
+Passion, Passion, Passion, Passion, Passion, Passion -> (Passion, 1), (Passion, 1), (Passion, 1), (Passion, 1), (Passion, 1), (Passion, 1)
+
+STEP 2 - SHUFFLE and SORT: 
+Passion, Passion, Passion -> (Passion, 1), (Passion, 1), (Passion, 1)
+Passion, Passion, Passion -> (Passion, 1), (Passion, 1), (Passion, 1)
+
+Work, Work, Work -> (Work, 1), Work -> (Work, 1), Work -> (Work, 1)
+Life, Life, Life -> (Life, 1), (Life, 1), (Life, 1)
+
+Work and Life
+STEP 3 - Reduce: 
+(Passion, 6) 
+(Work, 3)
+(Life, 3)

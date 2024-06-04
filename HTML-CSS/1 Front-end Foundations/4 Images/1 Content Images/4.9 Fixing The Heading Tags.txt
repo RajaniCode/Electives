@@ -1,0 +1,537 @@
+4.9 Fixing The Heading Tags
+
+The next problem is a trickier one. In the last challenge, we removed the h1 tag and replaced it with an img tag. That's fine, but it also means that our highest level heading right now is an h2 tag, which isn't OK.
+
+Each page should have one h1 tag, and the rest of the content should be organized with h2 and h3 tags. That means we need to shift our existing heading tag numbers down by one, and then update our CSS selectors to reflect that shift.
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h2>Bands</h2>
+      
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h3><a href="prependers-band.html">The Prependers</a></h3>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h3><a href="regular-band.html">Regular Expressionists</a></h3>
+        </li>
+      </ul>
+      
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h2>The Prependers</h2>
+      
+      <h3>Bio</h3>
+      
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+      
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+      
+      <h3>Members</h3>
+      
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+      
+      <h3>Albums</h3>
+      
+      <div class="album">
+        <h4>Top, Right, Bottom, Left</h4>
+
+        <img src="images/prependers/top-right-bottom-left.jpg" alt="Top Right Bottom Left album cover">
+        
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h4>Opacity Zero</h4>
+        
+        <img src="images/prependers/opacity-zero.jpg" alt="Opacity Zero album cover">
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+      
+      <h3>Tour Dates</h3>
+      
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+  text-align: center;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h3 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+
+1. Start the fix off in bands.html. Change any h2 tags to h1, and any h3 tags to h2.
+
+Answer: 
+
+    <div class="content-section">
+      <h1>Bands</h1>
+
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h2><a href="prependers-band.html">The Prependers</a></h2>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h2><a href="regular-band.html">Regular Expressionists</a></h2>
+        </li>
+      </ul>
+
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+
+2. Do the same thing for the heading tags on prependers-band.html.
+
+The band's name should be marked up with the h1 tag, followed by the page sections with h2 tags, and then the album names with h3 tags.
+
+Answer: 
+
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h1>The Prependers</h1>
+      
+      <h2>Bio</h2>
+      
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+      
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+      
+      <h2>Members</h2>
+      
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+      
+      <h2>Albums</h2>
+      
+      <div class="album">
+        <h3>Top, Right, Bottom, Left</h3>
+
+        <img src="images/prependers/top-right-bottom-left.jpg" alt="Top Right Bottom Left album cover">
+        
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h3>Opacity Zero</h3>
+        
+        <img src="images/prependers/opacity-zero.jpg" alt="Opacity Zero album cover">
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+      
+      <h2>Tour Dates</h2>
+      
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+
+3. You're doing such a fantastic job that we've saved you the effort of having to fix regular-band.html, about.html and contact.html, but we'll leave it up to you to make the heading shift in your CSS. Remember, what was an h2 is now an h1, and so on.
+
+Delete the existing h1 selector and rules, and then update the CSS selectors in main.css to reflect the new heading tag organization.
+
+Answer: 
+
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+
+Success:
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    
+    <div class="content-section">
+      <h1>Bands</h1>
+
+      <ul class="bands-list">
+        <li>
+          <img src="images/prependers-logo.jpg" alt="The Prependers Logo">
+          <h2><a href="prependers-band.html">The Prependers</a></h2>
+        </li>
+        <li>
+          <img src="images/regular-logo.jpg" alt="Regular Expressionists Logo">
+          <h2><a href="regular-band.html">Regular Expressionists</a></h2>
+        </li>
+      </ul>
+
+      <p>We're always looking for new talent, so <a href="contact.html">Contact us now!</a></p>
+    </div>
+  </body>
+</html>
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+      
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h1>The Prependers</h1>
+      
+      <h2>Bio</h2>
+      
+      <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+      
+      <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+      
+      <h2>Members</h2>
+      
+      <ul>
+        <li>Jack Smith - Vocals</li>
+        <li>Sarah Quan - Guitar</li>
+        <li>Laverne Butlet - Bass</li>
+        <li>Simon St. Hollister - Drums</li>
+      </ul>
+      
+      <h2>Albums</h2>
+      
+      <div class="album">
+        <h3>Top, Right, Bottom, Left</h3>
+
+        <img src="images/prependers/top-right-bottom-left.jpg" alt="Top Right Bottom Left album cover">
+        
+        <ol>
+          <li>The Last</li>
+          <li>Downtown</li>
+          <li>Yellow Carpet</li>
+          <li>Rocket to Mars</li>
+          <li>Walk, not Run</li>
+          <li>Design</li>
+          <li>Shopping Cart</li>
+          <li>Our Gift to You</li>
+        </ol>
+      </div>
+      
+      <div class="album">
+        <h3>Opacity Zero</h3>
+        
+        <img src="images/prependers/opacity-zero.jpg" alt="Opacity Zero album cover">
+
+        <ol>
+          <li>Visible/Invisible</li>
+          <li>Car Trip</li>
+          <li>AFK</li>
+          <li>Up and Up</li>
+        </ol>
+      </div>
+      
+      <h2>Tour Dates</h2>
+      
+      <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+    </div>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+}
+.bands-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.bands-list h3 {
+  border-bottom: 0;
+  margin: 0;
+}
+.bands-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.bands-list li {
+  border: 1px solid #555555;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}

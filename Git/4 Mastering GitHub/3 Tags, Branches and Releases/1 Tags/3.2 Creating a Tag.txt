@@ -1,0 +1,44 @@
+3.2 Creating a Tag
+
+Now that we've merged the deadly_skills branch back to master, let's create the v1.2.0 tag so dojo_rules can be released to production.
+
+GitHub Username: pluralschool
+
+
+1. Find the deadly_skills merge commit, checkout it out, create the v1.2.0 tag, and push it to GitHub.
+
+Answer: 
+
+Welcome to Git (version 1.9.5-preview20150319)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Rajani@RAJANIDELL ~
+$ cd "E:\Working\Git\Code School Course\4 Mastering GitHub\3 Tags, Branche
+s and Releases\1 Tags\dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/1 Tags/dojo_rules (master)
+$ git branch
+* master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/1 Tags/dojo_rules (master)
+$ git pull
+Already up-to-date.
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/1 Tags/dojo_rules (master)
+$ git tag -a v1.2.0 -m "Release to production dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/1 Tags/dojo_rules (master)
+$ git push --tags
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 185 bytes | 0 bytes/s, done.
+Total 1 (delta 0), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+ * [new tag]         v1.2.0 -> v1.2.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/1 Tags/dojo_rules (master)
+$

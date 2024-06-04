@@ -1,0 +1,75 @@
+2.1 Variables
+
+
+The color hex value #797979 has been popping up quite a bit throughout our stylesheet. Let's store the color in a variable and replace all instances of it with that variable.
+
+
+CSS
+
+.surveyor {
+  border: 1px solid #797979;
+  padding: 20px;
+}
+
+.surveyor h2 {
+  color: #797979;
+  font-size: 18px;
+}
+
+.notice {
+  background: yellow;
+  border: 5px solid #797979;
+  padding: 10px;
+}
+
+APPLICATION.SCSS
+
+.surveyor {
+  border: 1px solid #797979;
+  padding: 20px;
+}
+.surveyor h2 {
+  color: #797979;
+  font-size: 18px;
+}
+
+.notice {
+  background: yellow;
+  border: 5px solid #797979;
+  padding: 10px;
+}
+
+
+Answer:
+
+APPLICATION.SCSS
+
+$base: #797979;
+
+.surveyor {
+  border: 1px solid $base;
+  padding: 20px;
+	h2 {
+  	color: $base;
+  	font-size: 18px;
+  }
+}
+.notice {
+  background: yellow;
+  border: 5px solid $base;
+  padding: 10px;
+}
+
+CSS
+
+.surveyor {
+  border: 1px solid #797979;
+  padding: 20px; }
+  .surveyor h2 {
+    color: #797979;
+    font-size: 18px; }
+
+.notice {
+  background: yellow;
+  border: 5px solid #797979;
+  padding: 10px; }

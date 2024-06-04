@@ -1,0 +1,40 @@
+3.8 The create Action
+
+With the form in place, let’s move on to the create action.
+
+lib/neon_web/controllers/event_controller.ex
+defmodule NeonWeb.EventController do
+  use NeonWeb, :controller
+
+  alias Neon.Repo
+  alias Neon.Event
+
+  import Ecto.Changeset
+
+  def index(conn, _) do
+    events = Repo.all(Event)
+    render conn, "index.html", events: events
+  end
+  
+  def create(conn,  ) do
+    
+    
+    redirect(conn, to: event_path(conn, :index))
+  end
+end
+
+
+1. Add the missing argument to the create function. This argument needs to pattern match the "event" key on a map and assign the value to an empty variable called event_params.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex
+
+2. Use the cast function to cast data on the event_params variable from the keys :name, :location and :start_on. Assign the result to a new variable called changeset.
+
+Answer: 
+lib/neon_web/controllers/event_controller.ex
+
+3. Now, pass our new changeset to Repo.insert() in order to save our record to the database before we redirect users.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex

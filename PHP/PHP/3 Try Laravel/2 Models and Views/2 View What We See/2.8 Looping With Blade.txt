@@ -1,0 +1,35 @@
+2.8 Looping With Blade
+
+Data is often returned from a datastore as an array of values, and there's a special syntax in the Blade templating engine for looping through data.
+ 
+resources/views/farms/index.blade.php
+<h1>Farms</h1>
+
+<ul>
+  
+</ul>
+
+
+1. Using blade syntax, create a @foreach loop that loops through all $farms and stores each one as a variable named $farm.
+
+Answer
+resources/views/farms/index.blade.php
+<h1>Farms</h1>
+<ul>
+@foreach($farms as $farm)
+
+@endforeach
+</ul>
+
+2. Inside of that @foreach, create an <li> tag that contains the name of the $farm.
+
+Answer
+resources/views/farms/index.blade.php
+<h1>Farms</h1>
+<ul>
+@foreach($farms as $farm)
+    <li>
+    {{ $farm->name }}
+    </li>
+@endforeach
+</ul>

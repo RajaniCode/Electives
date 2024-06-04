@@ -1,0 +1,203 @@
+4.7 Borders I
+
+
+Another late night has produced a second gem: the border added to h2 is playing havoc on our baseline. Replace the border-top property with the appropriate mixin, using 1 unit for the padding value and ensuring the adjusted font size is accounted for.
+
+CSS
+
+* html {
+  font-size: 100%;
+}
+
+html {
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+h1 {
+  font-size: 3em;
+  line-height: 1.5em;
+  line-height: 2em;
+}
+
+h2 {
+  font-size: 1.5em;
+  line-height: 2em;
+  border-top: 2px solid;
+  border-color: #c5bdaf;
+}
+
+p {
+  font-size: 1.1875em;
+  line-height: 1.26316em;
+  margin-bottom: 1.26316em;
+}
+
+ul {
+  margin-bottom: 1.5em;
+}
+
+li {
+  margin-top: 0.75em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  margin-bottom: 0.75em;
+}
+
+.SASS
+
+@import "compass"
+
+$base-font-size: 16px
+$base-line-height: 24px
++establish-baseline
+
+h1
+  +adjust-font-size-to(48px)
+  +adjust-leading-to(4, 48px)
+
+h2
+  +adjust-font-size-to(24px)
+  border-top: 2px solid
+  border-color: #C5BDAF
+
+p
+  +adjust-font-size-to(19px)
+  +trailer(1, 19px)
+
+ul
+  +trailer(1)
+
+li
+  +rhythm(0.5, 0.5, 0.5, 0.5)
+
+.SCSS
+
+@import "compass";
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+@include establish-baseline;
+
+h1 {
+  @include adjust-font-size-to(48px);
+  @include adjust-leading-to(4, 48px);
+}
+
+h2 {
+  @include adjust-font-size-to(24px);
+  border-top: 2px solid;
+  border-color: #c5bdaf;
+}
+
+p {
+  @include adjust-font-size-to(19px);
+  @include trailer(1, 19px);
+}
+
+ul {
+  @include trailer(1);
+}
+
+li {
+  @include rhythm(0.5, 0.5, 0.5, 0.5);
+}
+
+Answer:
+
+.SASS
+
+@import "compass"
+
+$base-font-size: 16px
+$base-line-height: 24px
++establish-baseline
+
+h1
+  +adjust-font-size-to(48px)
+  +adjust-leading-to(4, 48px)
+
+h2
+  +adjust-font-size-to(24px)
+  +leading-border(2px, 1, 24px)
+  border-color: #C5BDAF
+
+p
+  +adjust-font-size-to(19px)
+  +trailer(1, 19px)
+
+ul
+  +trailer(1)
+
+li
+  +rhythm(0.5, 0.5, 0.5, 0.5)
+
+.SCSS
+
+@import "compass";
+
+$base-font-size: 16px;
+$base-line-height: 24px;
+
+@include establish-baseline;
+
+h1 {
+  @include adjust-font-size-to(48px);
+  @include adjust-leading-to(4, 48px);
+}
+
+h2 {
+  @include adjust-font-size-to(24px);
+  @include leading-border(2px, 1, 24px);
+  border-color: #c5bdaf;
+}
+
+p {
+  @include adjust-font-size-to(19px);
+  @include trailer(1, 19px);
+}
+
+ul {
+  @include trailer(1);
+}
+
+li {
+  @include rhythm(0.5, 0.5, 0.5, 0.5);
+}
+
+CSS
+
+* html {
+  font-size: 100%; }
+
+html {
+  font-size: 16px;
+  line-height: 1.5em; }
+
+h1 {
+  font-size: 3em;
+  line-height: 1.5em;
+  line-height: 2em; }
+
+h2 {
+  font-size: 1.5em;
+  line-height: 2em;
+  border-top-style: solid;
+  border-top-width: 0.08333em;
+  padding-top: 0.91667em;
+  border-color: #c5bdaf; }
+
+p {
+  font-size: 1.1875em;
+  line-height: 1.26316em;
+  margin-bottom: 1.26316em; }
+
+ul {
+  margin-bottom: 1.5em; }
+
+li {
+  margin-top: 0.75em;
+  padding-top: 0.75em;
+  padding-bottom: 0.75em;
+  margin-bottom: 0.75em; }

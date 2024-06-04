@@ -1,0 +1,65 @@
+3.3 Trim the Edges
+
+Using the trim() function, remove the whitespace from all three of the inputs.
+
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $date = $_POST['date'];
+  $reason = $_POST['reason'];
+
+  echo $name . "<br>";
+  echo $date . "<br>";
+  echo $reason;
+}
+
+1. Remove all leading and trailing whitespace from the $name POST data before storing it to the variable.
+ 
+Answer
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = $_POST['date'];
+  $reason = $_POST['reason'];
+
+  echo $name . "<br>";
+  echo $date . "<br>";
+  echo $reason;
+}
+
+
+2. Remove all leading and trailing whitespace from the $date POST data before storing it to the variable.
+
+Answer
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = $_POST['reason'];
+
+  echo $name . "<br>";
+  echo $date . "<br>";
+  echo $reason;
+}
+
+3. Remove all leading and trailing whitespace from the $reason POST data before storing it to the variable.
+
+Answer
+app.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+  echo $date . "<br>";
+  echo $reason;
+}

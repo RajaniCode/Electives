@@ -1,0 +1,196 @@
+2.3 Associative Arrays
+
+Create and display an associative array.
+
+index.php
+
+<?php
+
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+1. Define an associative array named $cities with the following key value pairs:
+
+tokyo	13.6
+dc	0.6
+moscow	11.5
+
+Answer:
+index.php
+
+<?php
+$cities = array(
+  'tokyo' =>	13.6,
+  'dc' =>	0.6,
+  'moscow' =>	11.5
+ );
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+2. Append 'london' with a value of 8.6 to the array after its initial assignment.
+
+Answer:
+index.php
+
+<?php
+$cities = array(
+  'tokyo' =>	13.6,
+  'dc' =>	0.6,
+  'moscow' =>	11.5
+ );
+$cities['london'] = 8.6;
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+3. Create a list item for all four items in the array with the following pattern. Use PHP to echo the numbers from the $cities array.
+
+<li>Population: 13.6 million.</li>
+
+Answer:
+index.php
+
+<?php
+$cities = array(
+  'tokyo' =>	13.6,
+  'dc' =>	0.6,
+  'moscow' =>	11.5
+ );
+$cities['london'] = 8.6;
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo "Population: {$cities['tokyo']} million." ?></li>
+            <li><?php echo "Population: {$cities['dc']} million." ?></li>
+            <li><?php echo "Population: {$cities['moscow']} million." ?></li>
+            <li><?php echo "Population: {$cities['london']} million." ?></li>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+// OR
+
+index.php
+
+<?php
+$cities = array(
+  'tokyo' =>	13.6,
+  'dc' =>	0.6,
+  'moscow' =>	11.5
+ );
+$cities['london'] = 8.6;
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo "Population: " . $cities['tokyo'] . "million." ?></li>
+            <li><?php echo "Population: " . $cities['dc'] . "million." ?></li>
+            <li><?php echo "Population: " . $cities['moscow'] . "million." ?></li>
+            <li><?php echo "Population: " . $cities['london'] . "million." ?></li>            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

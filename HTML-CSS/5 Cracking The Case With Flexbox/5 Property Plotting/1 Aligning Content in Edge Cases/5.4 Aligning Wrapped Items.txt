@@ -1,0 +1,75 @@
+5.4 Aligning Wrapped Items
+
+We set up a base layout structure for the site by wrapping our header, main, and footer sections. We want the items to have space between them, but at the moment they are stretching to fill the container.
+
+layout.html
+
+<body>
+  <header>Header</header>
+  <main>Main</main>
+  <footer>Footer</footer>
+</body>
+
+layout.css
+
+body {
+  
+  background: #fcfaff;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 400px;
+}
+
+header,
+main,
+footer {
+  flex-basis: 100%;
+  padding: 10px;
+}
+
+header,
+footer {
+  background: #fff;
+}
+
+header {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+footer {
+  border-top: 1px solid #e5e5e5;
+}
+
+
+Use the flexbox property and value to align wrapped items to have space between them.
+
+Answer:
+layout.css
+
+body {
+  align-content: space-between;
+  background: #fcfaff;
+  display: flex;
+  flex-wrap: wrap;
+  min-height: 400px;
+}
+
+header,
+main,
+footer {
+  flex-basis: 100%;
+  padding: 10px;
+}
+
+header,
+footer {
+  background: #fff;
+}
+
+header {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+footer {
+  border-top: 1px solid #e5e5e5;
+}

@@ -1,0 +1,153 @@
+[rajani@localhost Django-app]$ python --version
+Python 2.7.5
+[rajani@localhost Django-app]$ pip --version
+pip 8.1.1 from /usr/lib/python2.7/site-packages (python 2.7)
+[rajani@localhost Django-app]$ python -c "import django; print(django.get_version())"
+1.9.6
+[rajani@localhost Django-app]$ cd mysite
+[rajani@localhost mysite]$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:26:37
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Not Found: /
+[14/May/2016 13:26:45] "GET / HTTP/1.1" 404 2010
+Not Found: /favicon.ico
+[14/May/2016 13:26:46] "GET /favicon.ico HTTP/1.1" 404 2043
+Not Found: /favicon.ico
+[14/May/2016 13:26:46] "GET /favicon.ico HTTP/1.1" 404 2043
+[14/May/2016 13:28:44] "GET /admin/ HTTP/1.1" 302 0
+[14/May/2016 13:28:44] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 1679
+[14/May/2016 13:28:44] "GET /static/admin/css/login.css HTTP/1.1" 200 1203
+[14/May/2016 13:28:44] "GET /static/admin/css/base.css HTTP/1.1" 200 15897
+[14/May/2016 13:28:44] "GET /static/admin/css/fonts.css HTTP/1.1" 200 423
+[14/May/2016 13:28:44] "GET /static/admin/fonts/Roboto-Regular-webfont.woff HTTP/1.1" 200 80304
+[14/May/2016 13:28:44] "GET /static/admin/fonts/Roboto-Light-webfont.woff HTTP/1.1" 200 81348
+[14/May/2016 13:29:19] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[14/May/2016 13:29:19] "GET /admin/ HTTP/1.1" 200 3756
+[14/May/2016 13:29:19] "GET /static/admin/css/dashboard.css HTTP/1.1" 200 434
+[14/May/2016 13:29:19] "GET /static/admin/img/icon-addlink.svg HTTP/1.1" 200 331
+[14/May/2016 13:29:19] "GET /static/admin/img/icon-changelink.svg HTTP/1.1" 200 380
+[14/May/2016 13:29:19] "GET /static/admin/fonts/Roboto-Bold-webfont.woff HTTP/1.1" 200 82564
+[14/May/2016 13:29:51] "GET /admin/ HTTP/1.1" 200 3756
+Not Found: /admin/polls/34/
+[14/May/2016 13:30:00] "GET /admin/polls/34/ HTTP/1.1" 404 3992
+[14/May/2016 13:30:12] "GET /polls/34/ HTTP/1.1" 200 30
+[14/May/2016 13:31:21] "GET /polls/34/ HTTP/1.1" 200 30
+[14/May/2016 13:32:20] "GET /polls/34/results/ HTTP/1.1" 200 45
+Not Found: /polls/34/results/vote/
+[14/May/2016 13:32:58] "GET /polls/34/results/vote/ HTTP/1.1" 404 2754
+[14/May/2016 13:33:12] "GET /polls/34/vote/ HTTP/1.1" 200 29
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:36:34
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:36:46
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:36:54
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:41:19
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:41:38
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[14/May/2016 13:43:57] "GET /polls/ HTTP/1.1" 200 87
+[14/May/2016 13:47:35] "GET /admin/ HTTP/1.1" 200 3756
+[14/May/2016 13:47:38] "GET /admin/logout/ HTTP/1.1" 200 1010
+[14/May/2016 13:47:40] "GET /admin/ HTTP/1.1" 302 0
+[14/May/2016 13:47:40] "GET /admin/login/?next=/admin/ HTTP/1.1" 200 1679
+[14/May/2016 13:47:45] "POST /admin/login/?next=/admin/ HTTP/1.1" 200 1840
+[14/May/2016 13:48:00] "POST /admin/login/?next=/admin/ HTTP/1.1" 302 0
+[14/May/2016 13:48:00] "GET /admin/ HTTP/1.1" 200 3756
+[14/May/2016 13:48:12] "GET /polls/ HTTP/1.1" 200 87
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:52:50
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Not Found: /
+[14/May/2016 13:54:20] "GET / HTTP/1.1" 404 2010
+[14/May/2016 13:54:26] "GET /polls/ HTTP/1.1" 200 87
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:55:02
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 13:55:31
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[14/May/2016 13:56:16] "GET /polls/ HTTP/1.1" 200 87
+[14/May/2016 13:56:19] "GET /polls/ HTTP/1.1" 200 87
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 14:00:25
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[14/May/2016 14:00:57] "GET /polls/ HTTP/1.1" 200 87
+Not Found: /polls/specifics/12/
+[14/May/2016 14:09:47] "GET /polls/specifics/12/ HTTP/1.1" 404 2745
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 14:10:56
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Not Found: /polls/specifics/12/
+[14/May/2016 14:11:39] "GET /polls/specifics/12/ HTTP/1.1" 404 1738
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 14:12:25
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Not Found: /polls/specifics/12/
+[14/May/2016 14:12:39] "GET /polls/specifics/12/ HTTP/1.1" 404 1738
+Performing system checks...
+
+System check identified no issues (0 silenced).
+May 14, 2016 - 14:15:39
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[14/May/2016 14:18:04] "GET /polls/ HTTP/1.1" 200 87
+[14/May/2016 14:18:15] "GET /polls/1/ HTTP/1.1" 200 81
+[14/May/2016 14:35:04] "GET /polls/1/ HTTP/1.1" 200 81
+
+

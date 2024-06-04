@@ -1,0 +1,60 @@
+
+$ vagrant --version
+
+Aspire@Acer MINGW64 ~
+$ cd "E:\Working\Ubuntu\dotnet\Vagrantfile"
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/dotnet/Vagrantfile
+$ vagrant up
+
+Aspire@Acer MINGW64 /e/Working/Ubuntu/dotnet/Vagrantfile
+$ vagrant ssh
+
+vagrant@vagrant-ubuntu-trusty-64:~$ ls
+
+vagrant@vagrant-ubuntu-trusty-64:~$ ls ~
+
+vagrant@vagrant-ubuntu-trusty-64:~$ ls /
+
+vagrant@vagrant-ubuntu-trusty-64:~$ sudo apt-get update
+
+[
+https://www.microsoft.com/net/core#linuxubuntu
+
+# Ubuntu 14.04 / Linux Mint 17
+sudo sh -c 'echo "deb [arch=amd64] https://apt-mo.trafficmanager.net/repos/dotnet-release/ trusty main" > /etc/apt/sources.list.d/dotnetdev.list'
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 417A0893
+sudo apt-get update
+]
+
+# Install .NET Core SDK
+vagrant@vagrant-ubuntu-trusty-64:~$ sudo apt-get install dotnet-dev-1.0.3
+vagrant@vagrant-ubuntu-trusty-64:~$ sudo apt-get update
+
+# Initialize some code
+dotnet new console -o hwapp
+cd hwapp
+
+# Run the app
+dotnet restore
+dotnet run
+
+[
+# Install Git
+ls
+sudo apt-get install -y git
+ls
+sudo apt-get update
+ls
+
+
+# Test
+git clone https://gist.github.com/d8070c34a396a022b6b1151eef6a7182.git
+ll
+mv d8070c34a396a022b6b1151eef6a7182 CS6
+ll
+cd CS6
+cat Program.cs
+csc Program.cs
+./Program.exe
+]

@@ -1,0 +1,102 @@
+1.8 More Utilities III
+
+
+Any h1s found inside classes that extend %container should have yellow text. Nest a new h1 declaration inside %container with the appropriate property to achieve this.
+
+
+CSS
+
+.blueprint, .surveyor {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.surveyor {
+  color: white;
+}
+
+.SASS
+
+%container
+  background: blue
+  border-radius: 5px
+  margin-bottom: 15px
+  padding: 10px
+
+.blueprint
+  @extend %container
+.surveyor
+  @extend %container
+  color: #fff
+
+.SCSS
+
+%container {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+}
+
+.blueprint {
+  @extend %container;
+}
+
+.surveyor {
+  @extend %container;
+  color: white;
+}
+
+Answer:
+
+.SASS
+
+%container
+  background: blue
+  border-radius: 5px
+  margin-bottom: 15px
+  padding: 10px
+  h1
+    color: yellow
+.blueprint
+  @extend %container
+.surveyor
+  @extend %container
+  color: #fff
+
+  
+.SCSS
+
+%container {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px;
+  h1 {
+    color: yellow;
+  }
+}
+
+.blueprint {
+  @extend %container;
+}
+
+.surveyor {
+  @extend %container;
+  color: white;
+}
+
+CSS
+
+.blueprint, .surveyor {
+  background: blue;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  padding: 10px; }
+  .blueprint h1, .surveyor h1 {
+    color: yellow; }
+
+.surveyor {
+  color: white; }

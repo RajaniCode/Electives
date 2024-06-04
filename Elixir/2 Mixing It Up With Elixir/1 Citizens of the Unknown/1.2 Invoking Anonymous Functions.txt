@@ -1,0 +1,16 @@
+1.2 Invoking Anonymous Functions
+
+In the following code, we define an anonymous function and assign it to a variable called print_name. Let's finish writing this code.
+
+script.exs
+
+print_name = fn(name) -> IO.puts "Hello, I am #{name}" end
+
+
+On the second line, invoke the anonymous function assigned to the variable and pass your own name as a string argument to it.
+
+Answer:
+script.exs
+
+print_name = fn(name) -> IO.puts "Hello, I am #{name}" end
+print_name.("Elixir")

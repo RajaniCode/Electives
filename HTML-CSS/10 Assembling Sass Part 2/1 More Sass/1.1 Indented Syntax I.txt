@@ -1,0 +1,43 @@
+1.1 Indented Syntax I
+
+
+The foreman has a newfound efficiency obsession, and has ordered a switch to the indented syntax. Refactor the .surveyor declaration to do away with braces and semicolons.
+
+CSS
+
+CSS after "1px solid #cccccc": expected expression (e.g. 1px, bold), was ";"
+
+.SASS
+
+.surveyor {
+  border: 1px solid #cccccc;
+  padding: 20px;
+  h2 {
+    font-size: 18px;
+    a {
+      color: green;
+    }
+  }
+}
+
+Answer:
+
+.SASS
+
+.surveyor
+  border: 1px solid #cccccc
+  padding: 20px
+  h2
+    font-size: 18px
+    a
+      color: green
+
+CSS
+
+.surveyor {
+  border: 1px solid #cccccc;
+  padding: 20px; }
+  .surveyor h2 {
+    font-size: 18px; }
+    .surveyor h2 a {
+      color: green; }

@@ -1,0 +1,36 @@
+Set Padding of Content
+
+
+Using percentages, set the padding of .content to the equivalent of 31px. Determine the correct context by viewing the given HTML markup. Give your answer to at least 7 decimals.
+
+HTML SOURCE
+
+<div class="container">
+
+  <header></header>
+  <div class="sidebar"></div>
+  <div class="content"></div>
+
+</div>
+
+CSS SOURCE
+
+.container {
+  width: 960px;
+}
+.sidebar {
+  width: 360px;
+}
+.content {
+  width: 560px;
+}
+
+STYLE.CSS
+
+Answer:
+
+.content {
+  padding: 5.5357142%; /* target size / context size = 31 / 560 * 100 */
+}
+
+Note: target size

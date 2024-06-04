@@ -1,0 +1,29 @@
+1.15 Staged Differences (cont'd)
+
+Good, now go ahead and run git diff with the --staged option to see the changes you just staged. You should see that octodog.txt was created.
+
+git diff --staged
+
+
+Press enter to submit commands
+
+$ git diff --staged
+
+diff --git a/octofamily/octodog.txt b/octofamily/octodog.txt
+new file mode 100644
+index 0000000..cfbc74a
+--- /dev/null
++++ b/octofamily/octodog.txt
+@@ -0,0 +1 @@
++[mwoof
+
+Success!
+
+
+My Octobox Repository
+
+    .git
+    octofamily
+    blue_octocat.txt
+    octocat.txt
+    red_octocat.txt

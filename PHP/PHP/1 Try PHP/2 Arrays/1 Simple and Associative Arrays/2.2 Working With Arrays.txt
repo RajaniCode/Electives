@@ -1,0 +1,170 @@
+2.2 Working With Arrays
+
+Define and display an array.
+
+index.php
+
+<?php
+
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+1. Define an array called $cities that includes 'dc', 'london', and 'moscow'.
+
+Answer:
+index.php
+
+<?php
+$cities = array('dc', 'london', 'moscow');
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+2. Below the $cities definition, use the print_r function to display the contents of the $cities array to the screen.
+
+Answer:
+index.php
+
+<?php
+$cities = array('dc', 'london', 'moscow');
+print_r($cities);
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+3. Now, create a new list item ( <li>) and echo the second city in the $cities array.
+
+Answer:
+index.php
+
+<?php
+$cities = array('dc', 'london', 'moscow');
+print_r($cities);
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo $cities[1]; ?></li>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+4. Finally, back in the opening PHP block, append 'tokyo' to the end of the $cities array.
+
+Answer:
+index.php
+
+<?php
+$cities = array('dc', 'london', 'moscow');
+$cities[3] = 'tokyo';
+print_r($cities);
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo $cities[1]; ?></li>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

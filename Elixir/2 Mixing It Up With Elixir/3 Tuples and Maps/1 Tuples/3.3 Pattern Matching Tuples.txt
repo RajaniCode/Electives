@@ -1,0 +1,19 @@
+3.3 Pattern Matching Tuples
+
+Complete the following code.
+
+script.exs
+
+  = {:functional, "Elixir"}
+IO.puts "Paradigm: #{paradigm}"
+IO.puts "Language: #{language}"
+
+
+Using pattern matching, assign the two values from the existing tuple to two new variables called paradigm and language.
+
+Answer:
+script.exs
+
+{paradigm, language} = {:functional, "Elixir"}
+IO.puts "Paradigm: #{paradigm}"
+IO.puts "Language: #{language}"

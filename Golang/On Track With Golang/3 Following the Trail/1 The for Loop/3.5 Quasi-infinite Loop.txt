@@ -1,0 +1,46 @@
+3.5 Quasi-infinite Loop
+
+There’s a way to rewrite the previous solution using a for loop with no component at all. Complete the code with the missing keyword so that the for loop stops once util.PingChatServer() returns true.
+
+pinger/util/main.go
+package util
+
+func PingChatServer() bool {
+  //... code that pings the server
+  return true
+} 
+
+pinger/main.go
+package main
+
+import (
+  "fmt"
+  "pinger/util"
+)
+
+func main() {
+  for {
+    if util.PingChatServer() {
+      
+    }
+  }
+  fmt.Println("Ping is done")
+}
+
+Answer:
+pinger/main.go
+package main
+
+import (
+  "fmt"
+  "pinger/util"
+)
+
+func main() {
+  for {
+    if util.PingChatServer() {
+       break
+    }
+  }
+  fmt.Println("Ping is done")
+}

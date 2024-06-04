@@ -1,0 +1,13 @@
+3.9 Account Map
+
+Select the option that best illustrates the representation of a bank account structure:
+
+[Single Answer]
+
+{:routing, "001002", "account", "123123"}
+{:routing, :account, "001002", "123123"}
+%{ "routing" => "001002", "account" => "123123" }
+[:routing, "001002", :account, "123123"]
+
+
+Answer: %{ "routing" => "001002", "account" => "123123" }

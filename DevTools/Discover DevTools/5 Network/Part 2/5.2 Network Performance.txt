@@ -1,0 +1,15 @@
+5.2 Network Performance
+
+Open the Network panel, clear the current waterfall  and then click the map icon  for the Run 5K event in our calendar. Take a look at the three JavaScript files that loaded (jquery.js, jquery-ui.js, map.js). Click on jquery.js and check out the Response tab to see the non-minified version of the file.
+
+Now we can minify and combine the three JavaScript files into a new file called map_min.js. Clear your Network waterfall again using  and then click the map icon  to get the new minified version. Take a look at the size of the map_min.js file and see what it looks like in the Response tab. It's barely readable now, but the file size is much smaller! Let's remove the map from the DOM before we move on. Type $("#events li:first .map").remove() in the console to continue.
+
+F12
+Network
+
+Console
+$("#events li:first .map").remove();
+
+[<div class=?"map">?
+<iframe style=?"border:? 0;? margin-top:? 10px;? position:? static;?" src=?"/?map-fixed.html">?</iframe>
+</div>?]

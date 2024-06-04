@@ -1,0 +1,53 @@
+3.9 Using case
+
+Let’s change the code in the create action to use Elixir’s case statement.
+
+lib/neon_web/controllers/event_controller.ex
+defmodule NeonWeb.EventController do
+  use NeonWeb, :controller
+
+  alias Neon.Repo
+  alias Neon.Event
+
+  import Ecto.Changeset
+
+  def index(conn, _) do
+    events = Repo.all(Event)
+    render conn, "index.html", events: events
+  end
+
+  def new(conn, _) do
+    changeset = change(%Event{})
+    render conn, "new.html", changeset: changeset
+  end
+  
+  def create(conn, %{"event" => event_params}) do
+    changeset = cast(%Event{}, event_params, [:name, :location, :start_on])
+    case Repo.insert(changeset) do
+      {  , _} ->
+        conn
+          |> put_flash(:info, "Successfully added new event")
+          
+      {  , changeset} ->
+        conn
+          |> put_flash(:error, "Error adding new event")
+          
+    end
+  end
+end
+
+
+1. Make sure the first pattern for the case statement is a tuple where the first element is the atom :ok. The second pattern for the case statement should match a tuple where the first element is the atom :error.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex
+
+2. In the body of the first clause, finish the piping chain with a redirect to the :index action in the EventController. Remember to use the event_path helper function.
+
+Answer: 
+lib/neon_web/controllers/event_controller.ex
+
+3. In the body of the second clause, finish the piping chain with a function call that renders the "new.html" template and passes it a changeset.
+
+Answer:
+lib/neon_web/controllers/event_controller.ex

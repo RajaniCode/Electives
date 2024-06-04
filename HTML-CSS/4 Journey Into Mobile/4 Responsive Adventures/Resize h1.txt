@@ -1,0 +1,21 @@
+Resize h1
+
+
+Use the media query you just wrote to make the <h1> font-size 70px, in ems, with a context of 16px. Also, set the line-height to the em equivalent of 40px.
+
+STYLE.CSS
+
+@media screen and (max-width: 720px) {
+  h1 {
+
+  }
+}
+
+Answer:
+
+@media screen and (max-width: 720px) {
+  h1 {
+    font-size: 4.375em; /* target / context = 70 / 16 */
+    line-height: 0.571428em; /* target / context = 40 / 16 */
+  }
+}

@@ -1,0 +1,15 @@
+2.2 Piping Strings
+
+In Elixir, we can pipe strings to functions like this:
+
+"Some string" |> SomeModule.some_function
+In this challenge, we'll use the string "Elixir" with the String.upcase function from Elixir's standard library, which takes a string and converts its characters to uppercase.
+
+string.exs
+IO.puts String.upcase("Elixir")
+
+Change the following code snippet to use the pipe operator |> twice.
+
+Answer:
+string.exs
+"Elixir" |> String.upcase |> IO.puts 

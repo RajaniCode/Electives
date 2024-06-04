@@ -1,0 +1,50 @@
+5.2 Automatic II
+
+
+Now that our sprite image has been generated, complete the automatic setup with the all-x-sprites mixin, remembering that x represents the folder name our sprites reside in.
+
+CSS
+
+.logos-sprite {
+  background: url(logos-s9f85bc46eb.png) no-repeat;
+}
+
+.SASS
+
+@import "compass"
+@import "logos/*.png"
+
+.SCSS
+
+@import "compass";
+@import "logos/*.png";
+
+Answer:
+
+.SASS
+
+@import "compass"
+@import "logos/*.png"
++all-logos-sprites
+
+.SCSS
+
+@import "compass";
+@import "logos/*.png";
+
+@include all-logos-sprites;
+
+
+CSS
+
+.logos-sprite, .logos-active, .logos-hover, .logos-logo {
+  background: url('/logos-s9f85bc46eb.png') no-repeat; }
+
+.logos-active {
+  background-position: 0 -140px; }
+
+.logos-hover {
+  background-position: 0 -280px; }
+
+.logos-logo {
+  background-position: 0 0; }

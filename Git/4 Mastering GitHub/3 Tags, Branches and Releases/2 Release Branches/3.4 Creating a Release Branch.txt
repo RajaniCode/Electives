@@ -1,0 +1,273 @@
+3.4 Creating a Release Branch
+
+If you look at your git repo, you’ll see there is a v1.0.0 tag for the kill_list merge commit. There’s a kill_list.md file with a list of assassins. Instead of going after dangerous assassins let's go after some bad coding practices. Since v1.0.0 is already in production, we should use a release branch to make these changes.
+
+GitHub Username: pluralschool
+
+1. Checkout the v1.0.0 tag, use it to create release branch release_branch_1.0, and push to GitHub.
+
+Answer:
+
+Welcome to Git (version 1.9.5-preview20150319)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Rajani@RAJANIDELL ~
+$ cd "E:\Working\Git\Code School Course\4 Mastering GitHub\3 Tags, Branche
+s and Releases\2 Release Branches\dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git branch
+* master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git checkout v1.0.0
+Note: checking out 'v1.0.0'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 61fef70... Merge pull request #3 from deadlyvipers/kill_list
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules ((v1.0.0))
+$ git branch
+* (detached from v1.0.0)
+  master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules ((v1.0.0))
+$ git checkout -b release_branch_1.0
+Switched to a new branch 'release_branch_1.0'
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git push origin release_branch_1.0
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+ * [new branch]      release_branch_1.0 -> release_branch_1.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git commit
+On branch release_branch_1.0
+nothing to commit, working directory clean
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$
+
+
+2. Now that you've created the release branch, replace the assassin names in kill_list.md with the following bad coding practices:
+
+Unused code
+Functions with side effects
+Unformatted code
+Repeated code blocks
+Bad variable names
+
+Answer:
+
+Welcome to Git (version 1.9.5-preview20150319)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Rajani@RAJANIDELL ~
+$ cd "E:\Working\Git\Code School Course\4 Mastering GitHub\3 Tags, Branche
+s and Releases\2 Release Branches\dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git branch
+* master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git checkout v1.0.0
+Note: checking out 'v1.0.0'.
+
+You are in 'detached HEAD' state. You can look around, make experimental
+changes and commit them, and you can discard any commits you make in this
+state without impacting any branches by performing another checkout.
+
+If you want to create a new branch to retain commits you create, you may
+do so (now or later) by using -b with the checkout command again. Example:
+
+  git checkout -b new_branch_name
+
+HEAD is now at 61fef70... Merge pull request #3 from deadlyvipers/kill_list
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules ((v1.0.0))
+$ git branch
+* (detached from v1.0.0)
+  master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules ((v1.0.0))
+$ git checkout -b release_branch_1.0
+Switched to a new branch 'release_branch_1.0'
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git push origin release_branch_1.0
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Total 0 (delta 0), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+ * [new branch]      release_branch_1.0 -> release_branch_1.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git commit
+On branch release_branch_1.0
+nothing to commit, working directory clean
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git status
+On branch release_branch_1.0
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   kill_list.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git commit -a -m "Replace the assassin names"
+[release_branch_1.0 5f935e9] Replace the assassin names
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git push origin release_branch_1.0
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 9, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 350 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+   61fef70..5f935e9  release_branch_1.0 -> release_branch_1.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git commit
+On branch release_branch_1.0
+nothing to commit, working directory clean
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$
+
+
+3. Tag the fixed commit as v1.0.1, and push the tag up to GitHub.
+
+Answer:
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git branch
+  master
+* release_branch_1.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git tag v1.0.1 -m "Fixed commit"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git push --tags
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 1, done.
+Writing objects: 100% (1/1), 170 bytes | 0 bytes/s, done.
+Total 1 (delta 0), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+ * [new tag]         v1.0.1 -> v1.0.1
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git commit
+On branch release_branch_1.0
+nothing to commit, working directory clean
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$
+
+
+4. Now that you've created the v1.0.1 tag, merge the release branch into master.
+
+Answer:
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (release_branch_1.0)
+$ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git branch
+* master
+  release_branch_1.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git merge v1.0.1 -m "Fixed commit"
+Merge made by the 'recursive' strategy.
+ kill_list.md | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+ create mode 100644 kill_list.md
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git push origin master
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 8, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 297 bytes | 0 bytes/s, done.
+Total 2 (delta 1), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+   26ced35..253b743  master -> master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$
+
+
+5. Now that you've merged release_branch_1.0 you can tidy up your repo by deleting the branch locally and pushing that change to GitHub.
+
+Answer:
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git branch -a
+* master
+  release_branch_1.0
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/deadly_skills
+  remotes/origin/gh-pages
+  remotes/origin/master
+  remotes/origin/new_rules
+  remotes/origin/release_branch_1.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git branch
+* master
+  release_branch_1.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git branch -d release_branch_1.0
+Deleted branch release_branch_1.0 (was b2d71d3).
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git push origin :release_branch_1.0
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+To https://github.com/pluralschool/dojo_rules.git
+ - [deleted]         release_branch_1.0
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/deadly_skills
+  remotes/origin/gh-pages
+  remotes/origin/master
+  remotes/origin/new_rules
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/3 Tags, Branches and Releases/2 Release Branches/dojo_rules (master)
+$

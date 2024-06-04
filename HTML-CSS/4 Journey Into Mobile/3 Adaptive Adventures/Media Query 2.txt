@@ -1,0 +1,44 @@
+Media Query 2
+
+
+Using the media query you just wrote, stack the .logo and <nav>, rather than floating them to either side. Also, set the width to inherit from the parent and center the text inside the <nav>. Use the Desktop and Mobile buttons below to resize the site.
+
+STYLE.CSS
+
+/* Logo */
+
+.logo {
+  float: left;
+  width: 36.1702128%; /* 340px/940px */
+}
+
+/* Navigation */
+
+nav {
+  float: right;
+}
+
+STYLE.CSS
+
+@media screen and (max-width: 320px) {
+  .logo {
+
+  }
+  nav {
+
+  }
+}
+
+Answer:
+
+@media screen and (max-width: 320px) {
+  .logo {
+    float: none;
+    width: inherit;
+  }
+  nav {
+    float: none;
+    width: inherit;
+    text-align: center;
+  }
+}

@@ -1,0 +1,60 @@
+6.9 Color Functions II
+
+
+Our newly-added hover state isn't bad, but we'd like to up the intensity a bit. Keeping the lighter value, increase the saturation by 20%. Note: look to the :active state to see an example of nested color functions.
+
+
+CSS
+
+a {
+  color: #3097b4;
+  text-decoration: underline;
+}
+a:hover {
+  color: #5dbad4;
+}
+a:active {
+  color: #335a65;
+}
+
+APPLICATION.SCSS 
+
+$color-link: #3097b4;
+
+a {
+  color: $color-link;
+  text-decoration: underline;
+  &:hover {
+    color: lighten($color-link, 15%);
+  }
+  &:active {
+    color: desaturate(darken($color-link, 15%), 25%);
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$color-link: #3097b4;
+
+a {
+  color: $color-link;
+  text-decoration: underline;
+  &:hover {
+    color: saturate(lighten($color-link, 15%), 20%);
+  }
+  &:active {
+    color: desaturate(darken($color-link, 15%), 25%);
+  }
+}
+
+CSS
+
+a {
+  color: #3097b4;
+  text-decoration: underline; }
+  a:hover {
+    color: #48c5e8; }
+  a:active {
+    color: #335a65; }

@@ -1,0 +1,26 @@
+5.3 Removing Unneeded Requests
+
+Open the Network panel, clear the current waterfall  and then click the map icon  for the Run 5K event in our calendar. Look in the Network panel and see the 404 error where we're trying to load a missing stylesheet. Log the name of the missing file to the console as a string.
+
+Now we've fixed the missing stylesheet problem. Clear the network waterfall again using  and reopen the map to get this change. Notice that the 404 error for the missing file no longer appears in the Network panel.
+
+We need to make one last change to our calendar app. Let's make sure we move all of the CSS above the JavaScript inside the <head> section of the HTML code. Use the Elements panel to do this.
+
+F12
+Network
+
+Console
+GET http://discover-devtools.codeschool.com/assets/location.css 
+
+console.log("location.css");
+
+location.css
+
+undefined
+
+Elements
+<script type="text/javascript" src="/assets/calendar/calendar_details_css_fixed.js"></script>
+<link href="http://d1740rtcumxhiu.cloudfront.net/assets/calendar/calendar-b6bc5ef67922a8c7f26a807341c08d8c.css" media="screen" rel="stylesheet" type="text/css">
+Edit as HTML:
+<link href="http://d1740rtcumxhiu.cloudfront.net/assets/calendar/calendar-b6bc5ef67922a8c7f26a807341c08d8c.css" media="screen" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="/assets/calendar/calendar_details_css_fixed.js"></script>

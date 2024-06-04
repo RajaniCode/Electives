@@ -1,0 +1,13 @@
+4. Cherry Picking
+
+
+You were working on a new feature for the Unicorn class, when you happened to find a fix for a bug that was causing Unicorns to stop sparkling on occasion. You really want this commit in master ASAP. Cherry-pick the commit with a sha of 3fbd473 to the master branch.
+
+
+$ git cherry-pick 3fbd473
+
+[master 10edf85] Fix bug causing glitter to not sparkle sometimes.
+ 1 file changed, 1 insertion(+)
+ create mode 100644 unicorn_fix.rb
+
+Success!

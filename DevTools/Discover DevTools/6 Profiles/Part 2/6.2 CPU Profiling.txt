@@ -1,0 +1,140 @@
+6.2 CPU Profiling
+
+It looks like something has broken the events section of our calendar! Go to the Profiles panel, select the Collect JavaScript CPU Profile option, and then click the Start button. Now, click "Next" to advance the calendar to tomorrow and give it plenty of time to render the events. See how long it takes for the code to run?
+
+Click the Stop button and check out the Profile we recorded. Near the top of the list, you should see a really slow Calendar.getEventsForDate() function. Try calling that function in the console and see how long it takes to run.
+
+Now click the link to the calendar_slow_events.js file in the Profile that we recorded to view the source code. You'll see that there is a faster implementation of Calendar.getEventsForDate() underneath the slow implementation. Delete the slow implementation, uncomment the fast one, and then save the file. Then click "Prev" to go back to today's events.
+
+Create a separate new Profile using the same steps from above, and notice how the Calendar.getEventsForDate() function isn't at the top of the list anymore!
+
+F12
+Profiles
+
+Console
+Calendar.getEventsForDate();
+
+[
+Object
+date: "2016-03-04T09:07:36.300Z"
+name: "Go to Yoga"
+__proto__: Object
+, 
+Object
+date: "2016-03-04T09:07:36.301Z"
+name: "Vet Appointment"
+__proto__: Object
+, 
+Object
+date: "2016-03-04T09:07:36.301Z"
+name: "Surfing Lessons"
+__proto__: Object
+, 
+Object
+date: "2016-03-04T09:07:36.301Z"
+name: "Call Mom"
+__proto__: Object
+]
+
+Sources
+// Slow implementation of getEventsForDate()
+Calendar.getEventsForDate = function() {
+  var events = Calendar.events();
+  var eventsForDate = [];
+
+  var start = new Date(date).setHours(0,0,0,0);
+  var end = new Date(date).setHours(23, 59, 59, 999);
+
+  for (var i = 0; i < events.length; i++) {
+    var event_date = new Date(events[i].date).setHours(0,0,0,0);
+    for (var time = start; time < end; time++){
+      if(time == event_date) {
+        eventsForDate.push(events[i]);
+      }
+    }
+  }
+  return eventsForDate;
+}
+
+// Fast implementation of getEventsForDate()
+/*
+Calendar.getEventsForDate = function() {
+  var events = Calendar.events();
+  var eventsForDate = [];
+
+  var start = new Date(date).setHours(0,0,0,0);
+
+  for (var i = 0; i < events.length; i++) {
+    var event_date = new Date(events[i].date).setHours(0,0,0,0);
+    if(start == event_date) {
+      eventsForDate.push(events[i]);
+    }
+  }
+  return eventsForDate;
+}
+*/
+;
+
+Edit
+
+// Slow implementation of getEventsForDate()
+/*
+Calendar.getEventsForDate = function() {
+  var events = Calendar.events();
+  var eventsForDate = [];
+
+  var start = new Date(date).setHours(0,0,0,0);
+  var end = new Date(date).setHours(23, 59, 59, 999);
+
+  for (var i = 0; i < events.length; i++) {
+    var event_date = new Date(events[i].date).setHours(0,0,0,0);
+    for (var time = start; time < end; time++){
+      if(time == event_date) {
+        eventsForDate.push(events[i]);
+      }
+    }
+  }
+  return eventsForDate;
+}
+*/
+
+// Fast implementation of getEventsForDate()
+Calendar.getEventsForDate = function() {
+  var events = Calendar.events();
+  var eventsForDate = [];
+
+  var start = new Date(date).setHours(0,0,0,0);
+
+  for (var i = 0; i < events.length; i++) {
+    var event_date = new Date(events[i].date).setHours(0,0,0,0);
+    if(start == event_date) {
+      eventsForDate.push(events[i]);
+    }
+  }
+  return eventsForDate;
+}
+;
+
+Console
+Calendar.getEventsForDate();
+[
+Object
+date: "2016-03-04T09:11:52.208Z"
+name: "Go to Yoga"
+__proto__: Object
+, 
+Object
+date: "2016-03-04T09:11:52.208Z"
+name: "Vet Appointment"
+__proto__: Object
+, 
+Object
+date: "2016-03-04T09:11:52.208Z"
+name: "Surfing Lessons"
+__proto__: Object
+, 
+Object
+date: "2016-03-04T09:11:52.209Z"
+name: "Call Mom"
+__proto__: Object
+]

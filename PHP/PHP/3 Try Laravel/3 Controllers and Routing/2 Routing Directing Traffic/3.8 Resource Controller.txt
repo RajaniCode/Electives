@@ -1,0 +1,37 @@
+3.8 Resource Controller
+
+Let's refactor some of our routes to use resource and controller routes.
+
+routes/web.php
+<?php
+ 
+Route::get('/', function() {
+  return "this is the home page";
+} );
+
+Route::get('farms/{id}', function($id) {
+  return "The id requested is $id";
+});
+
+
+1. First, replace the closure in the '/' route with a string that refers to the FarmController index method.
+
+Answer
+routes/web.php
+<?php
+ 
+Route::get('/', 'FarmController@index');
+
+Route::get('farms/{id}', function($id) {
+  return "The id requested is $id";
+});
+
+2. Now replace the second closure route with a resource() route for the FarmController with a base url of 'farms'.
+
+Answer
+routes/web.php
+<?php
+ 
+Route::get('/', 'FarmController@index');
+
+Route::resource('farms', 'FarmController');

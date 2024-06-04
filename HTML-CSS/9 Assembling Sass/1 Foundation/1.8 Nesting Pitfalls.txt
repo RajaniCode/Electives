@@ -1,0 +1,74 @@
+1.8 Nesting Pitfalls
+
+
+Someone was a bit overzealous in their nesting: the a styles should apply to any anchors in .notice rather than anchors in .notice.alert. Adjust the nesting below to compensate.
+
+CSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+}
+.notice.alert {
+  background: red;
+  box-shadow: 0 0 10px red;
+}
+.notice.alert a {
+  color: #222;
+}
+.notice.alert a:hover {
+  color: #313131;
+}
+
+APPLICATION.SCSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+  &.alert {
+    background: red;
+    box-shadow: 0 0 10px red;
+    a {
+      color: #222;
+      &:hover {
+        color: #313131;
+      }
+    }
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+  &.alert {
+    background: red;
+    box-shadow: 0 0 10px red;    
+  }
+	a {
+  	color: #222;
+  	&:hover {
+    	color: #313131;
+    }
+  }
+}
+
+CSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px; }
+  .notice.alert {
+    background: red;
+    box-shadow: 0 0 10px red; }
+  .notice a {
+    color: #222; }
+    .notice a:hover {
+      color: #313131; }

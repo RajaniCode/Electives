@@ -1,0 +1,12 @@
+3.3 RESTful Routing
+
+Our controller has been created and has some default CRUD methods included. What code would we use to tie routes to the FarmController with resource routing?
+
+[Single Answer]
+
+Route::get('farms', 'FarmController@index')
+Route::resource('farms', 'FarmController')
+Route::resource('markets', 'MarketController')
+Route::resource('farms/{farm}', 'FarmController@show')
+
+Answer: Route::resource('farms', 'FarmController')

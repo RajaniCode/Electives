@@ -1,0 +1,67 @@
+2.5 Interpolation
+
+
+We'd like to add a simple way to set which side borders appear on. Create a variable with the current value (left) and interpolate that value into each border property occurance.
+
+
+CSS
+
+.girder {
+  border-left: 4px solid #ccc;
+}
+.girder h2 {
+  font-size: 24px;
+}
+
+.notice {
+  border-left: 8px solid #797979;
+}
+.notice a {
+  color: #222;
+}
+
+APPLICATION.SCSS
+
+.girder {
+  border-left: 4px solid #ccc;
+  h2 {
+    font-size: 24px;
+  }
+}
+.notice {
+  border-left: 8px solid #797979;
+  a {
+    color: #222;
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$left: left;
+
+.girder {
+  border-#{$left}: 4px solid #ccc;
+  h2 {
+    font-size: 24px;
+  }
+}
+.notice {
+  border-#{$left}: 8px solid #797979;
+  a {
+    color: #222;
+  }
+}
+
+CSS
+
+.girder {
+  border-left: 4px solid #ccc; }
+  .girder h2 {
+    font-size: 24px; }
+
+.notice {
+  border-left: 8px solid #797979; }
+  .notice a {
+    color: #222; }

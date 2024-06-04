@@ -1,0 +1,38 @@
+3.7 Variable Arguments
+
+
+We're attempting to pass a comma-separated box-shadow value into our mixin as an argument, but we keep getting an error about the number of arguments. Alter $shadow to be a variable argument and accept the value below.
+
+CSS
+
+Mixin modal takes 1 argument but 2 were passed.
+
+_MODALS.SCSS
+
+@mixin modal($shadow) {
+  box-shadow: $shadow;
+  border: 1px solid #ccc;
+}
+
+.modal {
+  @include modal(inset 0 0 5px #000, 0 2px 5px #000);
+}
+
+Answer:
+
+_MODALS.SCSS
+
+@mixin modal($shadow...) {
+  box-shadow: $shadow;
+  border: 1px solid #ccc;
+}
+
+.modal {
+  @include modal(inset 0 0 5px #000, 0 2px 5px #000);
+}
+
+CSS
+
+.modal {
+  box-shadow: inset 0 0 5px black, 0 2px 5px black;
+  border: 1px solid #ccc; }

@@ -1,0 +1,71 @@
+Positioned Elements
+
+
+Absolutely position the :before image -3px from the top and left, and the :after image -3px from the bottom and right of our .store button.
+
+
+HTML SOURCE
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <article>
+        <p>Today, Sven's is operated by Sven and his 4 daughters, Sofia, Sassa, Solvig, and Svanhilda. Stop by anytime Monday thru Saturday from 9am to 6pm, and join the Sven's Snowshoe Emporium family.</p>
+        <a class="store" href="#">See the Store</a>
+      </article>
+    </section>
+  </body>
+</html>
+
+style.css
+
+.store {
+  display: block;
+  position: relative;
+}
+.store:before, .store:after {
+  display: block;
+}
+.store:before {
+  background: url(store-before.png);
+  height: 23px;
+  width: 54px;
+}
+.store:after {
+  background: url(store-after.png);
+  height: 20px;
+  width: 41px;
+}
+
+Answer:
+
+style.css
+
+.store {
+  display: block;
+  position: relative;
+}
+.store:before, .store:after {
+  display: block;
+  position: absolute;
+  content: '';
+}
+.store:before {
+  background: url(store-before.png);
+  height: 23px;
+  width: 54px;
+  top: -3px;
+  left: -3px;
+}
+.store:after {
+  background: url(store-after.png);
+  height: 20px;
+  width: 41px;
+  bottom: -3px;
+  right: -3px;
+}

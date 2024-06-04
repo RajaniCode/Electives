@@ -1,0 +1,53 @@
+5.4 Mixin' In
+
+
+This @if directive could be useful outside .switch - let's expand the scope. Move everything inside of .switch to a mixin called family that takes an argument of $size. Remove the existing $size: 18px; line, then call the mixin from within .switch, passing 18px as an argument.
+
+
+
+CSS
+
+.switch {
+  font-size: 18px;
+  font-family: Georgia, serif;
+}
+
+APPLICATION.SCSS 
+
+$size: 18px;
+
+.switch {
+  font-size: $size;
+  @if $size <= 16px {
+    font-family: Arial, sans-serif;
+  } @else if $size <= 24px {
+    font-family: Georgia, serif;
+  } @else {
+    font-family: Helvetica, sans-serif;
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+@mixin family($size) {
+  font-size: $size;
+  @if $size <= 16px {
+    font-family: Arial, sans-serif;
+  } @else if $size <= 24px {
+    font-family: Georgia, serif;
+  } @else {
+    font-family: Helvetica, sans-serif;
+  }
+}
+
+.switch {
+  @include family(18px);  
+}
+
+CSS
+
+.switch {
+  font-size: 18px;
+  font-family: Georgia, serif; }

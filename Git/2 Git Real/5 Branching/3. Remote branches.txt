@@ -1,0 +1,23 @@
+3. Remote branches
+
+
+Your co-worker said he wants you to look over a new branch on "origin", but he didn't tell you its name. Get a list of remote branches.
+
+
+$ git remote show origin
+
+* remote origin
+  Fetch URL: https://git@pshop.com/petshop_online/petshop.git
+  Push  URL: https://git@pshop.com/petshop_online/petshop.git
+  HEAD branch (remote HEAD is ambiguous, may be one of the following):
+    master
+    weasel
+  Remote branches:
+    master tracked
+    weasel tracked
+  Local branch configured for 'git pull':
+    master merges with remote master
+  Local ref configured for 'git push':
+    master pushes to master (local out of date)
+
+Success!

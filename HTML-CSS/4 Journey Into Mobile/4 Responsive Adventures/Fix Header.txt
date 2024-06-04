@@ -1,0 +1,17 @@
+Fix Header
+
+
+Now, increase the <nav> <li>'s font-size to a target of 18px, with the context being 16px, Also, our .banner is getting rather large height-wise at this lower viewport. Let's set the height of the .banner to 250px.
+
+STYLE.CSS
+
+Answer:
+
+@media screen and (max-width: 720px) {
+  nav ul li {
+    font-size: 1.125em; /* 18 / 16 */
+  }
+  .banner {
+    height: 250px;
+  }
+}

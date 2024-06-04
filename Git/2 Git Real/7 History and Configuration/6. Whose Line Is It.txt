@@ -1,0 +1,24 @@
+6. Whose Line Is It?
+
+
+Wait, what? You don't understand these lines in index.html. You'd better find out who committed them, so you can ask them what they're supposed to do.
+
+
+$ git blame index.html
+
+^ae34cb1 (Gregg 2020-10-10 08:30:00 -0500  1) <!DOCTYPE html>
+^ae34cb1 (Gregg 2020-10-10 08:30:00 -0500  2) <html lang="en">
+^ae34cb1 (Gregg 2020-10-10 08:30:00 -0500  3)   <head>
+^ae34cb1 (Gregg 2020-10-10 08:30:00 -0500  4)     <title>Pet Store</title>
+^ae34cb1 (Gregg 2020-10-10 08:30:00 -0500  5)   </head>
+^ae34cb1 (Gregg 2020-10-10 08:30:00 -0500  6)   <body>
+2d5b9f06 (Bob   2020-10-10 08:30:00 -0500  7)     <ul>
+2d5b9f06 (Bob   2020-10-10 08:30:00 -0500  8)       <li>MENU</li>
+2d5b9f06 (Bob   2020-10-10 08:30:00 -0500  9)       <li><a href="cat.html">Cats</a></li>
+2d5b9f06 (Bob   2020-10-10 08:30:00 -0500 10)       <li><a href="dog.html">Dogs</a></li>
+2d5b9f06 (Bob   2020-10-10 08:30:00 -0500 11)       <li><a href="pizza.html">Pizza</a></li>
+2d5b9f06 (Bob   2020-10-10 08:30:00 -0500 12)     </ul>
+^ae34cb1 (Gregg 2020-10-10 08:30:00 -0500 13)   </body>
+^ae34cb1 (Gregg 2020-10-10 08:30:00 -0500 14) </html>
+
+Success!

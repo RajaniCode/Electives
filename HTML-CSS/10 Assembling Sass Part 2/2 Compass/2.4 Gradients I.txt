@@ -1,0 +1,100 @@
+2.4 Gradients I
+
+
+Someone added a radial gradient and, aside from being a bit of an eyesore, it's proving difficult to maintain. Go ahead and use the background mixin to simplify the process.
+
+
+CSS
+
+.socket {
+  background: -webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #333333), color-stop(100%, #222222));
+  background: -webkit-radial-gradient(center, #333333, #222222);
+  background: -moz-radial-gradient(center, #333333, #222222);
+  background: -ms-radial-gradient(center, #333333, #222222);
+  background: -o-radial-gradient(center, #333333, #222222);
+  background: radial-gradient(center, #333333, #222222);
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+.SASS
+
+@import "compass"
+
+.socket
+  background: -webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #333), color-stop(100%, #222))
+  background: -webkit-radial-gradient(center, #333, #222)
+  background: -moz-radial-gradient(center, #333, #222)
+  background: -ms-radial-gradient(center, #333, #222)
+  background: -o-radial-gradient(center, #333, #222)
+  background: radial-gradient(center, #333, #222)
+  border-radius: 50%
+  height: 200px
+  width: 200px
+
+.SCSS
+
+@import "compass";
+
+.socket {
+  background: -webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #333333), color-stop(100%, #222222));
+  background: -webkit-radial-gradient(center, #333333, #222222);
+  background: -moz-radial-gradient(center, #333333, #222222);
+  background: -ms-radial-gradient(center, #333333, #222222);
+  background: -o-radial-gradient(center, #333333, #222222);
+  background: radial-gradient(center, #333333, #222222);
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+Answer:
+
+.SASS
+
+@import "compass"
+
+.socket
+  +background(webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #333), color-stop(100%, #222)))
+  +background(-webkit-radial-gradient(center, #333, #222))
+  +background(-moz-radial-gradient(center, #333, #222))
+  +background(-ms-radial-gradient(center, #333, #222))
+  +background(-o-radial-gradient(center, #333, #222))
+  +background(radial-gradient(center, #333, #222))
+  border-radius: 50%
+  height: 200px
+  width: 200px
+
+.SCSS
+
+@import "compass";
+
+.socket {
+  @include background(webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #333333), color-stop(100%, #222222)));
+  @include background(-webkit-radial-gradient(center, #333333, #222222));
+  @include background(-moz-radial-gradient(center, #333333, #222222));
+  @include background(-ms-radial-gradient(center, #333333, #222222));
+  @include background(-o-radial-gradient(center, #333333, #222222));
+  @include background(radial-gradient(center, #333333, #222222));
+  border-radius: 50%;
+  height: 200px;
+  width: 200px;
+}
+
+CSS
+
+.socket {
+  background: webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #333333), color-stop(100%, #222222));
+  background: -webkit-radial-gradient(center, #333333, #222222);
+  background: -moz-radial-gradient(center, #333333, #222222);
+  background: -ms-radial-gradient(center, #333333, #222222);
+  background: -o-radial-gradient(center, #333333, #222222);
+  background: -webkit-gradient(radial, 50%, 0, 50%, 100, color-stop(0%, #333333), color-stop(100%, #222222));
+  background: -webkit-radial-gradient(center, #333333, #222222);
+  background: -moz-radial-gradient(center, #333333, #222222);
+  background: -o-radial-gradient(center, #333333, #222222);
+  background: radial-gradient(center, #333333, #222222);
+  border-radius: 50%;
+  height: 200px;
+  width: 200px; }

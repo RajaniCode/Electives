@@ -1,0 +1,30 @@
+5.7 Grab Your Passports
+
+Our final task is here. We have a pattern that validates the second section of the machine-readable portion of a passport. This format can be viewed here. We need to capture the country, date of birth, and gender to store separately.
+
+First, capture the 3-character country abbreviation using a group.
+
+The 6 digits that appear directly after the country abbreviation is the person's date of birth. Capture those 6 digits using another group.
+
+To finish off identifying our shipmate, capture the 1-character gender.
+
+REGULAR EXPRESSION
+/\d{9}\d[A-Z]{3}\d{6}\d[a-z]\d{23}/
+
+Subjects
+7564538464USA7304163f17082110789508785765793
+5783426534USA8909263m17082110789508784901612
+6437264237USA5411263f17082110789508787249611
+
+Passport Reference
+Position	Characters	Length		Meaning
+1-9		9		alpha + num	Passport number
+10		1		numeric		Check digit over digits 1–9
+11-13		3		alpha		Nationality
+14-19		6		numeric		Date of birth (YYMMDD)
+20		1		numeric		Check digit over digits 14–19
+21		1		alpha		Gender
+
+
+REGULAR EXPRESSION
+/\d{9}\d([A-Z]{3})(\d{6})\d([a-z])\d{23}/

@@ -1,0 +1,211 @@
+1.7 String Concatenation
+
+Let's combine strings with variables.
+
+index.php
+
+<?php
+$city = 'Tokyo';
+$established = 1868;
+$country = 'Japan';
+
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo $city; ?></li>
+            <li>Country: <?php echo $country; ?></li>
+            <li>Established: <?php echo $established; ?></li>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p></p>
+          <p></p>
+          <p>It officially became the capital after Emperor Meiji
+            moved his seat to the city from the old capital of
+            Kyoto.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+1. In the first new paragraph tag, use string concatenation to output the sentence: 'Tokyo has a very high population' using the $city variable.
+
+Answer:
+index.php
+
+<?php
+$city = 'Tokyo';
+$established = 1868;
+$country = 'Japan';
+
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo $city; ?></li>
+            <li>Country: <?php echo $country; ?></li>
+            <li>Established: <?php echo $established; ?></li>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p><?php echo "$city has a very high population"; ?></p>
+          <p></p>
+          <p>It officially became the capital after Emperor Meiji
+            moved his seat to the city from the old capital of
+            Kyoto.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+2. In the second new paragraph tag, create the following sentence: 'Tokyo is the capital of Japan and was established in 1868.' using the variables and string evaluation.
+
+Answer:
+index.php
+
+<?php
+$city = 'Tokyo';
+$established = 1868;
+$country = 'Japan';
+
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo $city; ?></li>
+            <li>Country: <?php echo $country; ?></li>
+            <li>Established: <?php echo $established; ?></li>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p><?php echo "$city has a very high population"; ?></p>
+          <p><?php echo "$city is the capital of $country and was established in $established."; ?></p>
+          <p>It officially became the capital after Emperor Meiji
+            moved his seat to the city from the old capital of
+            Kyoto.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+3. Add two new variables:
+
+ 1. largest_population with the boolean value of true.
+ 2. population with the integer value of 13613660.
+
+Answer:
+index.php
+
+<?php
+$city = 'Tokyo';
+$established = 1868;
+$country = 'Japan';
+$largest_population = true;
+$population = 13613660;
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo $city; ?></li>
+            <li>Country: <?php echo $country; ?></li>
+            <li>Established: <?php echo $established; ?></li>
+            
+          </ul>
+        </div>
+        <div class="details">
+          <p><?php echo "$city has a very high population"; ?></p>
+          <p><?php echo "$city is the capital of $country and was established in $established."; ?></p>
+          <p>It officially became the capital after Emperor Meiji
+            moved his seat to the city from the old capital of
+            Kyoto.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+4. Using the $population variable, add a new list item with the following text: 'Population: 13613660'
+
+Answer:
+index.php
+
+<?php
+$city = 'Tokyo';
+$established = 1868;
+$country = 'Japan';
+$largest_population = true;
+$population = 13613660;
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li><?php echo $city; ?></li>
+            <li>Country: <?php echo $country; ?></li>
+            <li>Established: <?php echo $established; ?></li>
+            <li>Population: <?php echo $population; ?></li>
+          </ul>
+        </div>
+        <div class="details">
+          <p><?php echo "$city has a very high population"; ?></p>
+          <p><?php echo "$city is the capital of $country and was established in $established."; ?></p>
+          <p>It officially became the capital after Emperor Meiji
+            moved his seat to the city from the old capital of
+            Kyoto.</p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

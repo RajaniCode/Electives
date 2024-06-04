@@ -1,0 +1,22 @@
+2. Reflog
+
+
+You realize after the fact that maybe the hard reset was a bit overkill. You still wanted your code used to add rainbow jumps. It's a good thing git never really gets rid of commits. Let's look at the reflog to see if there is anything we can do.
+
+
+$ git reflog
+
+ab27026 HEAD@{0}: reset: moving to HEAD^
+8791492 HEAD@{1}: commit: Rainbow trail when jumping.
+ab27026 HEAD@{2}: commit: Implement unicorn jumping.
+54e2eee HEAD@{3}: checkout: moving from master to master
+54e2eee HEAD@{4}: commit: Add unicorn
+f2e4957 HEAD@{5}: commit: Add tests
+d245841 HEAD@{6}: commit: Implement poodles
+b8ec575 HEAD@{7}: checkout: moving from poodle_implementation to master
+a9806ee HEAD@{8}: commit: Add poodle page
+71d674e HEAD@{9}: checkout: moving from master to poodle_implementation
+b8ec575 HEAD@{10}: commit: Added a title to the homepage
+71d674e HEAD@{11}: commit (initial): initial commit
+
+Success!

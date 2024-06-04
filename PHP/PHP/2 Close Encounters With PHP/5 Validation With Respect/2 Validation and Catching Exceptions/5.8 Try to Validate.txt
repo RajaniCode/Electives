@@ -1,0 +1,84 @@
+5.8 Try to Validate
+
+Let's use a custom exception type to manage our validation. We'll set up our empty try and catch blocks in this challenge, and we'll take care of the rest in the next one.
+
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+
+  $dateValidator = Validator::notEmpty()->date();
+
+  if ($dateValidator->validate($date)) {
+    echo $date;
+  }
+
+  echo htmlspecialchars($reason);
+}
+
+
+1. Let's start by adding a second use statement just below the one for the Validator class to import our custom Respect\Validation\Exceptions\NestedValidationException class.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;
+use Respect\Validation\Exceptions\NestedValidationException;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+
+  $dateValidator = Validator::notEmpty()->date();
+
+  if ($dateValidator->validate($date)) {
+    echo $date;
+  }
+
+  echo htmlspecialchars($reason);
+}
+
+2. Now that we have the exception we want, we can add the try and catch blocks we need to make it work.
+
+Start by scrolling down and replacing the existing validation conditional with empty try and catch blocks. The catch block should have a call to catch the NestedValidationException and pass it to an object variable named $e.
+
+Answer:
+app.php
+
+<?php
+require __DIR__ . '/vendor/autoload.php';
+
+use Respect\Validation\Validator;use Respect\Validation\Exceptions\NestedValidationException;
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name;
+
+  $dateValidator = Validator::notEmpty()->date();
+try {
+  if ($dateValidator->validate($date)) {
+    echo $date;
+  }
+} catch (NestedValidationException $e) {
+}
+  echo htmlspecialchars($reason);
+}

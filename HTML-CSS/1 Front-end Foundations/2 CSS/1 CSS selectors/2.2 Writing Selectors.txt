@@ -1,0 +1,217 @@
+2.2 Writing Selectors
+
+We've done a good job structuring the content of our page with the right HTML tags, but the way those tags look is pretty boring right now. Let's start fixing that!
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      
+    </style>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+  </body>
+</html>
+
+1. Write a CSS rule that selects every a tag and removes the underline from the text using the text-decoration property.
+
+Answer:
+
+a {
+  text-decoration: none;
+}
+
+2. Write a CSS rule that selects every p tag and changes the text color to dimgray.
+
+Answer:
+
+p {    
+  color: dimgray;       
+}
+
+Note:
+
+p {
+  /*color: #696969; */        
+  color: dimgray;       
+}
+
+3. Write a CSS rule that selects only li tags that are children of an ordered list and make their font-size 20px.
+
+Answer:
+
+ol li {
+  font-size: 20px;
+}
+
+4. Write a CSS rule that selects the h2 tag and sets the font-size to 28px.
+
+Answer:
+
+h2 {
+  font-size: 28px;
+}
+
+5. Write a CSS rule that selects all of the h3 tags and sets their font-size to 26px and their color to darkblue.
+
+Answer:
+
+h3 {
+  font-size: 26px;
+  color: darkblue;
+}
+
+Success:
+
+<style type="text/css">
+  a {
+	  text-decoration: none;
+  }
+  p {      
+	  color: dimgray;       
+  }
+  ol li  {
+	  font-size: 20px;
+  }      
+  h2 {
+	  font-size: 28px;
+  }
+  h3 {
+	  font-size: 26px;
+	  color: darkblue;
+  }
+</style>
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      a {
+        text-decoration: none;
+      }
+      p {      
+        color: dimgray;       
+      }
+      ol li  {
+        font-size: 20px;
+      }      
+      h2 {
+        font-size: 28px;
+      }
+      h3 {
+        font-size: 26px;
+        color: darkblue;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+3.3 Copying Files Through Dockerfile Instructions
+
+Another way to copy a file into a container is to write a COPY instruction in a Dockerfile. The advantage of this approach over the docker container cp command is that each new container we create with the custom image will have the file in it versus having to run the command-line command each time we make a new container.
+
+Add COPY page.html /usr/local/apache2/htdocs/ after the RUN instruction in the Dockerfile.
+
+Dockerfile
+FROM httpd:2.4
+EXPOSE 80
+RUN apt-get update && apt-get install -y fortunes
+​
+LABEL maintainer="moby-dock@example.com"
+
+
+Add COPY page.html /usr/local/apache2/htdocs/ after the RUN instruction in the Dockerfile.
+
+Answer:
+Dockerfile

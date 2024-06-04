@@ -1,0 +1,12 @@
+Copy docker images from one host to another without via repository	
+
+Save the docker image as a tar file
+
+docker save -o <save image to path> <image name>
+
+Copy the image to a new system with regular file transfer tools such as cp or scp
+
+Load the image into docker
+
+docker load -i <path to image tar file>
+

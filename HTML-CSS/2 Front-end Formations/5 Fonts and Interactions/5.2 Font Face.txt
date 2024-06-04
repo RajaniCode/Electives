@@ -1,0 +1,16 @@
+5.2 Font Face
+
+http://caniuse.com/#feat=fontface
+
+We want to use an online font on our blog. Create a @font-face declaration for DroidSerifRegular, using DroidSerif.eot as the location of our local font file, and then set the font-style and font-weight to normal.
+
+style.css
+
+Answer:
+
+@font-face {
+  font-family: 'DroidSerifRegular'; 
+	src: url('DroidSerifRegular.eot');  
+  font-style: normal;
+  font-weight: normal;
+}

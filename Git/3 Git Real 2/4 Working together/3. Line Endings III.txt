@@ -1,0 +1,30 @@
+3. Line Endings III
+
+
+After helping a 3rd Windows developer set up their workstation, you've decided enough is enough. It's time to add a .gitattributes file to handle all these line ending problems. Finish adding the options to the *.bat and *.sh files. Remember, *.bat is a windows file, while *.sh is a unix file.
+
+
+Terminal
+
+*     text=auto
+*.rb text
+*.js text
+
+*.bat text eol=
+*.sh text eol=
+
+*.png binary
+
+
+Answer:
+
+Terminal
+
+*     text=auto
+*.rb text
+*.js text
+
+*.bat text eol=crlf	
+*.sh text eol=lf
+
+*.png binary

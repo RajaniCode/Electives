@@ -1,0 +1,43 @@
+3.2 Examining Exceptions
+
+We added an Add Event button to our calendar, but there seems to be a bug. Click the button and try to add an event.
+
+Now look at the error in the console and click to view the line where it's failing in the calendar_add_event_broken.js file in the Sources panel. The error happens when we try to call the Calendar.createEvent() method. Try calling that method from the console to see that we get the same exception.
+
+We'll talk about fixing exceptions later, but we've fixed the Calendar.createEvent() method for now. Call it again and watch the event successfully get added to the calendar!
+
+F12
+Console
+[calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3]
+[Uncaught TypeError: Cannot read property 'value' of undefined
+Calendar.createEvent @ calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3
+obj.createEvent @ VM98:12
+(anonymous function) @ calendar-51a4ed8219ec88044c56258d9b083f0f.js:88
+jQuery.event.dispatch @ jquery-fc54103127767d5a84270aa48b6357f0.js:4641
+elemData.handle @ jquery-fc54103127767d5a84270aa48b6357f0.js:4309]
+
+Calendar.createEvent();
+[calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3]
+[Uncaught TypeError: Cannot read property 'value' of undefined
+    
+at Object.Calendar.createEvent (http://d1740rtcumxhiu.cloudfront.net/assets/calendar/calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3:19)
+    
+at Object.obj.createEvent (eval at <anonymous> (http://d1740rtcumxhiu.cloudfront.net/assets/application-0f80b6614f16a273dd33ba5c35291b4b.js:20991:25), <anonymous>:12:29)
+    
+at <anonymous>:2:10
+    
+at Object.InjectedScript._evaluateOn (<anonymous>:875:140)
+    
+at Object.InjectedScript._evaluateAndWrap (<anonymous>:808:34)
+    
+at Object.InjectedScript.evaluate (<anonymous>:664:21)
+Calendar.createEvent	@	calendar_add_event_broken-52eb60a2df5730f5300370279a037b33.js:3
+obj.createEvent	@	VM108:12
+(anonymous function)	@	VM254:2
+InjectedScript._evaluateOn	@	VM253:875
+InjectedScript._evaluateAndWrap	@	VM253:808
+InjectedScript.evaluate	@	VM253:664]
+
+Calendar.createEvent();
+
+undefined

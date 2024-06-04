@@ -1,0 +1,64 @@
+3.12 Using Range
+
+Let's finish the following for loop.
+
+chat/main.go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  
+  for  {
+    fmt.Println(list[i])
+  }
+}
+
+func getBlockedIPs() []string {
+  return []string{"192.168.0.17", "192.168.0.18", "192.168.0.19", "192.168.0.20"}
+}
+
+
+1. From inside the main() function, invoke getBlockedIPs() and assign the return value to a variable called list using type inference with :=.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  list := getBlockedIPs()
+  for  {
+    fmt.Println(list[i])
+  }
+}
+
+func getBlockedIPs() []string {
+  return []string{"192.168.0.17", "192.168.0.18", "192.168.0.19", "192.168.0.20"}
+}
+
+2. Using the for loop with the range clause, iterate over the indices from list and assign them to a variable called i using type inference with :=.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "fmt"
+)
+
+func main() {
+  list := getBlockedIPs()
+  for i := range list{
+    fmt.Println(list[i])
+  }
+}
+
+func getBlockedIPs() []string {
+  return []string{"192.168.0.17", "192.168.0.18", "192.168.0.19", "192.168.0.20"}
+}

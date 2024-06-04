@@ -1,0 +1,47 @@
+7.1 Nested Media Queries
+
+
+Our stylesheet contains a responsive breakpoint with some alterations to .factory. Let's clean up the media query a bit by nesting it inside .factory.
+
+
+CSS
+
+.factory {
+  width: 100%;
+}
+
+@media (min-width: 960px) {
+  .factory {
+    width: 62.5%;
+  }
+}
+
+APPLICATION.SCSS 
+
+.factory {
+  width: 100%;
+}
+@media (min-width: 960px) {
+  .factory {
+    width: percentage(600px / 960px);
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.factory {
+  width: 100%;
+  @media (min-width: 960px) {
+    width: percentage(600px / 960px);
+  }
+}
+
+CSS
+
+.factory {
+  width: 100%; }
+  @media (min-width: 960px) {
+    .factory {
+      width: 62.5%; } }

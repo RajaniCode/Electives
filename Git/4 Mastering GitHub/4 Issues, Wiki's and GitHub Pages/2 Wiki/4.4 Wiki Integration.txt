@@ -1,0 +1,95 @@
+4.4 Wiki Integration
+
+As more people start collaborating in our "dojo_rules" repository, we're starting to realize it's time to start taking documentation seriously. Follow the steps below to help people get up to speed.
+
+GitHub Username: pluralschool
+
+1. Make sure the Wiki feature is enabled for your "dojo_rules" repository. It was enabled in the "deadlyvipers/dojo_rules" repository, so it should be for yours as well.
+
+Answer:
+
+https://github.com/pluralschool/dojo_rules/settings
+
+Ensure Wikis is checked
+
+
+2. Our "README.md" file on the master branch of our "dojo_rules" repository isn't very helpful. Update "README.md" to mention that "All members should read the rules".
+
+Also include a link back to the deadlyvipers organization which started it all ("https://github.com/deadlyvipers").
+
+Feel free to include any other GitHub Flavored Markdown [https://help.github.com/articles/markdown-basics/] as well.
+
+Answer:
+
+Welcome to Git (version 1.9.5-preview20150319)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Rajani@RAJANIDELL ~
+$ cd "E:\Working\Git\Code School Course\4 Mastering GitHub\4 Issues, Wiki'
+s and GitHub Pages\2 Wiki's\dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/2 Wiki's/dojo_rules (master)
+$ git branch
+* master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/2 Wiki's/dojo_rules (master)
+$ git status
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   README.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/2 Wiki's/dojo_rules (master)
+$ git commit -a -m "Update README.md"
+[master 3fd7657] Update README.md
+ 1 file changed, 6 insertions(+), 1 deletion(-)
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/2 Wiki's/dojo_rules (master)
+$ git push origin master
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 10, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 433 bytes | 0 bytes/s, done.
+Total 3 (delta 1), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+   f368258..3fd7657  master -> master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/2 Wiki's/dojo_rules (master)
+$ git commit
+On branch master
+Your branch is up-to-date with 'origin/master'.
+
+nothing to commit, working directory clean
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/2 Wiki's/dojo_rules (master)
+$
+
+
+3. Go to the wiki for your "dojo_rules" repository and create the the first page. On that page, we'll experiment with status badging by adding in a badge that shows the build status from Travis CI [https://travis-ci.org/] for the Arel project. This will show green when tests are passing for the Arel project, or red when they are not.
+
+To add this badge, update the "Home" page of the wiki to include the following:
+
+[![Build Status](https://secure.travis-ci.org/rails/arel.svg?branch=master)](http://travis-ci.org/rails/arel)
+
+Answer:
+
+https://github.com/pluralschool/dojo_rules/wiki
+
+https://github.com/pluralschool/dojo_rules/wiki/_new
+
+Title: dojo_rules
+
+Write: [![Build Status](https://secure.travis-ci.org/rails/arel.svg?branch=master)](http://travis-ci.org/rails/arel)
+
+Save Page

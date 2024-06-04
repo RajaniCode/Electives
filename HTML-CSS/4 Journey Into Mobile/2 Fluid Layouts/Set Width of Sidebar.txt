@@ -1,0 +1,29 @@
+Set Width of Sidebar
+
+
+Using percentages, set the width for the .sidebar to the equivalent of 400px to 6 decimals. Remember, the context is the total width of the site which is 960px. Use the HTML and CSS Source tabs for more information. Use this Flexible Math tool to help: http://responsv.com/flexible-math/
+
+HTML SOURCE
+
+<div class='container'>
+  <div class='sidebar'></div>
+</div>
+
+CSS SOURCE
+
+.container {
+  width: 960px;
+}
+
+STYLE.CSS
+
+.sidebar {
+  width: 400px;
+}
+
+Answer:
+
+.sidebar {
+  width: 41.666666%; /* target / contect = 400px / 960px = 0.41666666em */
+}
+

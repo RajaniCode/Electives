@@ -1,0 +1,9 @@
+1. Line Endings I
+
+
+Your company just hired a new developer who works on a Windows computer, and you notice that some files seem to be missing line separators. You realize that the Windows machine is saving files with a different line separator character than the Unix stations. Here on your Unix machine, set your 'git config' variable to convert line endings to the Unix way on commit.
+
+
+$ git config --global core.autocrlf input
+
+Success!

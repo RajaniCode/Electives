@@ -1,0 +1,157 @@
+2.4 Justifying Column Content
+
+There are three promo components that we want to modify to display the content vertically at the flex-start, center, and flex-end positions. We'll skip flex-start because it's the default.
+
+promo.html
+
+<div class='promo promo--start'>
+  <div class='promo-info'>
+    <h3 class='promo-title'>
+      The Scarinator 2000
+    </h3>
+    <p class='promo-description'>
+      This is a thing that does something to scare things away.
+    </p>
+    <a class='promo-link promo-link-alt' href='#'>Buy This</a>
+  </div>
+</div>
+<div class='promo promo--center'>
+  <div class='promo-info'>
+    <h3 class='promo-title'>
+      The Scarinator 2000
+    </h3>
+    <p class='promo-description'>
+      This is a thing that does something to scare things away.
+    </p>
+    <a class='promo-link' href='#'>Buy This</a>
+  </div>
+</div>
+<div class='promo promo--end'>
+  <div class='promo-info'>
+    <h3 class='promo-title'>
+      The Scarinator 2000
+    </h3>
+    <p class='promo-description'>
+      This is a thing that does something to scare things away.
+    </p>
+    <a class='promo-link' href='#'>Buy This</a>
+  </div>
+</div>
+
+promo.css
+
+.promo {
+  border: 1px solid #e5e5e5;
+  display: inline-flex;
+  
+  max-width: 280px;
+  min-height: 350px;
+  padding: 20px;
+}
+
+.promo--center {
+  
+}
+
+.promo--end {
+  
+}
+
+.promo-title {
+  margin: 0;
+}
+
+.promo-description {
+  margin-top: 8px;
+}
+
+1. For the .promo selector, use a property and value that will set the container to display content in a column.
+
+Answer:
+promo.css
+
+.promo {
+  border: 1px solid #e5e5e5;
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 280px;
+  min-height: 350px;
+  padding: 20px;
+}
+
+.promo--center {
+  
+}
+
+.promo--end {
+  
+}
+
+.promo-title {
+  margin: 0;
+}
+
+.promo-description {
+  margin-top: 8px;
+}
+
+2. For the .promo--center selector, use the property and value that will justify the content to the center.
+
+Answer:
+promo.css
+
+.promo {
+  border: 1px solid #e5e5e5;
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 280px;
+  min-height: 350px;
+  padding: 20px;
+}
+
+.promo--center {
+  justify-content: center;
+}
+
+.promo--end {
+  
+}
+
+.promo-title {
+  margin: 0;
+}
+
+.promo-description {
+  margin-top: 8px;
+}
+
+3. For the .promo--end selector, use the property and value that will justify the content to the flex-end.
+
+Answer:
+promo.css
+
+.promo {
+  border: 1px solid #e5e5e5;
+  display: inline-flex;
+  flex-direction: column;
+  max-width: 280px;
+  min-height: 350px;
+  padding: 20px;
+}
+
+.promo--center {
+  justify-content: center;
+}
+
+.promo--end {
+  justify-content: flex-end;
+}
+
+.promo-title {
+  margin: 0;
+}
+
+.promo-description {
+  margin-top: 8px;
+}
+

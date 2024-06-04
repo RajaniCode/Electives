@@ -1,0 +1,17 @@
+4.15 HSLA
+
+http://caniuse.com/#feat=css3-colors
+
+Let’s change our .tagline’s color to use the hsla color function instead of rgba, using the same alpha value, but with the HSL values for white (0, 0%, 100%).
+
+style.css
+
+.tagline {
+  color: rgba(255, 255, 255, 0.65);
+}
+
+Answer:
+
+.tagline {
+  color: hsla(0, 0%, 100%, 0.65);
+}

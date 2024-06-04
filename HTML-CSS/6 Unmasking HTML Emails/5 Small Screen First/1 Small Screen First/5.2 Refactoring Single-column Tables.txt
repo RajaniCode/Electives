@@ -1,0 +1,326 @@
+5.2 Refactoring Single-column Tables
+
+We need to do some refactoring to make our email work without media queries. We removed the 2-column container table to focus on getting the single-column tables to use a fluid width.
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      @media screen and (max-width: 600px) {
+        .width-full {
+          width: 100% !important;
+        }
+        .stack-cell {
+          display: block !important;
+          width: 100% !important;
+        }
+      }
+
+      @media screen and (max-width: 320px) {
+
+        .email-title {
+          font-size: 20px !important;
+          line-height: 30px !important;
+          padding-top: 15px !important; }
+
+        .email-intro {
+          font-size: 14px !important;
+          line-height: 21px !important; }
+
+      }
+
+      @media screen and (min-width: 321px) and (max-width: 375px) {
+
+        .email-title {
+          font-size: 22px !important;
+          line-height: 36px !important; }
+
+      }
+
+      .client-link a {
+        color: #3a383a !important;
+      }
+    </style>
+    <!--[if gte mso 12]>
+      <style>
+        td {
+          mso-line-height-rule: exactly; }
+      </style>
+    <![endif]-->
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <table border="0" cellpadding="0" cellspacing="0" style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg');" width="100%">
+      <tr>
+        <td style="padding: 0 10px;">
+          <table width="600"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td class="email-title" style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td class="email-intro" style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+          <table width="600"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td style="padding-top: 30px; text-align: center;">
+                <div>
+                  <!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://buttons.cm" style="height:50px;v-text-anchor:middle;width:240px;" arcsize="8%" strokecolor="#000000" fillcolor="#3a383a">
+                      <w:anchorlock/>
+                      <center style="color:#ffffff;font-family:Georgia,serif;font-size:20px;font-weight:bold;">Buy Tickets</center>
+                    </v:roundrect>
+                  <![endif]-->
+                  <a href="http://buttons.cm" style="background-color:#3a383a;border:1px solid #000000;border-radius:4px;color:#ffffff;display:inline-block;font-family:Georgia,serif;font-size:20px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:240px;mso-hide:all;">Buy Tickets</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <table width="600"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td align="center" style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; font-weight: bold; line-height: 18px; padding-top: 20px;">
+                Or, call <span class="client-link">+90 12 3456 7890</span>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="color: #545154; font-family: Georgia, serif; font-size: 12px; padding-top: 40px;">
+                No mas? <a href="http://example.org" style="color: #545154;">Unsubscribe</a>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="color: #545154; font-family: Georgia, serif; font-size: 12px; padding: 15px 0;">
+                Av. de las Street No. 123
+                <br />
+                Azcapotzalco Santa Barbara
+                <br />
+                01234 Ciudad de México
+                <br />
+                D.F. Mexico
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
+
+
+1. Adjust the container table with the title image, heading, and paragraph of text to have a width of 100% and add a max-width of 600px.
+
+Answer: <table width="100%" style="max-width: 600px;"
+
+Note:
+ 	<table width="100%" style="max-width: 600px;"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td class="email-title" style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td class="email-intro" style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+
+2. Adjust the container table with the button to have a width of 100% and add a max-width of 600px.
+
+Answer: <table width="100%" style="max-width: 600px;"
+
+Note:
+
+ 	<table width="100%" style="max-width: 600px;"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td style="padding-top: 30px; text-align: center;">
+                <div>
+                  <!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://buttons.cm" style="height:50px;v-text-anchor:middle;width:240px;" arcsize="8%" strokecolor="#000000" fillcolor="#3a383a">
+                      <w:anchorlock/>
+                      <center style="color:#ffffff;font-family:Georgia,serif;font-size:20px;font-weight:bold;">Buy Tickets</center>
+                    </v:roundrect>
+                  <![endif]-->
+                  <a href="http://buttons.cm" style="background-color:#3a383a;border:1px solid #000000;border-radius:4px;color:#ffffff;display:inline-block;font-family:Georgia,serif;font-size:20px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:240px;mso-hide:all;">Buy Tickets</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+
+3. Adjust the container table with the contact information to have a width of 100% and add a max-width of 600px.
+
+Answer: <table width="100%" style="max-width: 600px;"
+
+Note:
+
+ 	<table width="100%" style="max-width: 600px;"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td align="center" style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; font-weight: bold; line-height: 18px; padding-top: 20px;">
+                Or, call <span class="client-link">+90 12 3456 7890</span>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="color: #545154; font-family: Georgia, serif; font-size: 12px; padding-top: 40px;">
+                No mas? <a href="http://example.org" style="color: #545154;">Unsubscribe</a>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="color: #545154; font-family: Georgia, serif; font-size: 12px; padding: 15px 0;">
+                Av. de las Street No. 123
+                <br />
+                Azcapotzalco Santa Barbara
+                <br />
+                01234 Ciudad de México
+                <br />
+                D.F. Mexico
+              </td>
+            </tr>
+          </table>
+
+4. 
+
+Answer:
+
+Success:
+
+email.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+    <style>
+      @media screen and (max-width: 600px) {
+        .width-full {
+          width: 100% !important;
+        }
+        .stack-cell {
+          display: block !important;
+          width: 100% !important;
+        }
+      }
+
+      @media screen and (max-width: 320px) {
+
+        .email-title {
+          font-size: 20px !important;
+          line-height: 30px !important;
+          padding-top: 15px !important; }
+
+        .email-intro {
+          font-size: 14px !important;
+          line-height: 21px !important; }
+
+      }
+
+      @media screen and (min-width: 321px) and (max-width: 375px) {
+
+        .email-title {
+          font-size: 22px !important;
+          line-height: 36px !important; }
+
+      }
+
+      .client-link a {
+        color: #3a383a !important;
+      }
+    </style>
+    <!--[if gte mso 12]>
+      <style>
+        td {
+          mso-line-height-rule: exactly; }
+      </style>
+    <![endif]-->
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <table border="0" cellpadding="0" cellspacing="0" style="background-color: #e4c59a; background-image: url('https://s3.amazonaws.com/unmasking-html-emails/bg.jpg');" width="100%">
+      <tr>
+        <td style="padding: 0 10px;">
+          <table width="100%" style="max-width: 600px;"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td>
+                <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png" style="display: block; max-width: 100%;" width="600" />
+              </td>
+            </tr>
+            <tr>
+              <td class="email-title" style="color: #3a383a; font-family: Georgia, serif; font-size: 42px; font-weight: bold; line-height: 44px; padding-top: 20px; text-transform: uppercase;">
+                Championship Match!
+              </td>
+            </tr>
+            <tr>
+              <td class="email-intro" style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; line-height: 27px; padding-top: 5px;">
+                Reigning Champion La Fuega Fatal will defend her title against the top contender, La Amor Peligrosa. Will the contender's attacks be enough to seize the belt, or will she go down in flames?
+              </td>
+            </tr>
+          </table>
+          <table width="100%" style="max-width: 600px;"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td style="padding-top: 30px; text-align: center;">
+                <div>
+                  <!--[if mso]>
+                    <v:roundrect xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w="urn:schemas-microsoft-com:office:word" href="http://buttons.cm" style="height:50px;v-text-anchor:middle;width:240px;" arcsize="8%" strokecolor="#000000" fillcolor="#3a383a">
+                      <w:anchorlock/>
+                      <center style="color:#ffffff;font-family:Georgia,serif;font-size:20px;font-weight:bold;">Buy Tickets</center>
+                    </v:roundrect>
+                  <![endif]-->
+                  <a href="http://buttons.cm" style="background-color:#3a383a;border:1px solid #000000;border-radius:4px;color:#ffffff;display:inline-block;font-family:Georgia,serif;font-size:20px;font-weight:bold;line-height:50px;text-align:center;text-decoration:none;width:240px;mso-hide:all;">Buy Tickets</a>
+                </div>
+              </td>
+            </tr>
+          </table>
+          <table width="100%" style="max-width: 600px;"
+                 align="center" border="0" cellpadding="0" cellspacing="0" class="width-full">
+            <tr>
+              <td align="center" style="color: #3a383a; font-family: Georgia, serif; font-size: 18px; font-weight: bold; line-height: 18px; padding-top: 20px;">
+                Or, call <span class="client-link">+90 12 3456 7890</span>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="color: #545154; font-family: Georgia, serif; font-size: 12px; padding-top: 40px;">
+                No mas? <a href="http://example.org" style="color: #545154;">Unsubscribe</a>
+              </td>
+            </tr>
+            <tr>
+              <td align="center" style="color: #545154; font-family: Georgia, serif; font-size: 12px; padding: 15px 0;">
+                Av. de las Street No. 123
+                <br />
+                Azcapotzalco Santa Barbara
+                <br />
+                01234 Ciudad de México
+                <br />
+                D.F. Mexico
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

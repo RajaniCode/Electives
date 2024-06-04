@@ -1,0 +1,33 @@
+5.7 Rendering the Form
+
+Let’s update the Calendar context module and then refactor the code in EventController to properly render the form.
+
+lib/neon/calendar/calendar.ex
+defmodule Neon.Calendar do
+
+  alias Neon.Repo
+  alias Neon.Calendar.Event
+
+  def list_events do
+    Repo.all(Event)
+  end
+
+  def get_event(id) do
+    Repo.get(Event, id) |> Repo.preload(:comments)
+  end
+
+  def change_event(%Event{} = event) do
+    
+  end
+end
+
+
+1. Inside the change_event function on the Calendar module, call Event.changeset passing it the event variable as the first argument and an empty map as the second argument.
+
+Answer:
+lib/neon/calendar/calendar.ex
+
+2. Now in EventController, finish coding the new action by calling Calendar.change_event and passing it an empty Event Struct. Assign the return value to a variable called changeset.
+
+Answer:
+lib/neon/calendar/calendar.ex

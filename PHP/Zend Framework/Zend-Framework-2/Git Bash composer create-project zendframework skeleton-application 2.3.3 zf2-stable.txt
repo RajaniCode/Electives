@@ -1,0 +1,123 @@
+Initializing new SSH agent...
+succeeded
+Identity added: /c/Users/Aspire/.ssh/id_rsa (/c/Users/Aspire/.ssh/id_rsa)
+
+Aspire@Acer MINGW64 /
+$ php --version
+PHP 7.0.9 (cli) (built: Jul 20 2016 11:08:23) ( ZTS )
+Copyright (c) 1997-2016 The PHP Group
+Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies
+
+Aspire@Acer MINGW64 /
+$ composer
+   ______
+  / ____/___  ____ ___  ____  ____  ________  _____
+ / /   / __ \/ __ `__ \/ __ \/ __ \/ ___/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ (__  )  __/ /
+\____/\____/_/ /_/ /_/ .___/\____/____/\___/_/
+                    /_/
+Composer version 1.2.1 2016-09-12 11:27:19
+
+Usage:
+  command [options] [arguments]
+
+Options:
+  -h, --help                     Display this help message
+  -q, --quiet                    Do not output any message
+  -V, --version                  Display this application version
+      --ansi                     Force ANSI output
+      --no-ansi                  Disable ANSI output
+  -n, --no-interaction           Do not ask any interactive question
+      --profile                  Display timing and memory usage information
+      --no-plugins               Whether to disable plugins.
+  -d, --working-dir=WORKING-DIR  If specified, use the given directory as working directory.
+  -v|vv|vvv, --verbose           Increase the verbosity of messages: 1 for normal output, 2 for more verbose output and 3 for debug
+
+Available commands:
+  about           Short information about Composer
+  archive         Create an archive of this composer package
+  browse          Opens the package's repository URL or homepage in your browser.
+  clear-cache     Clears composer's internal package cache.
+  clearcache      Clears composer's internal package cache.
+  config          Set config options
+  create-project  Create new project from a package into given directory.
+  depends         Shows which packages cause the given package to be installed
+  diagnose        Diagnoses the system to identify common errors.
+  dump-autoload   Dumps the autoloader
+  dumpautoload    Dumps the autoloader
+  exec            Execute a vendored binary/script
+  global          Allows running commands in the global composer dir ($COMPOSER_HOME).
+  help            Displays help for a command
+  home            Opens the package's repository URL or homepage in your browser.
+  info            Show information about packages
+  init            Creates a basic composer.json file in current directory.
+  install         Installs the project dependencies from the composer.lock file if present, or falls back on the composer.json.
+  licenses        Show information about licenses of dependencies
+  list            Lists commands
+  outdated        Shows a list of installed packages that have updates available, including their latest version.
+  prohibits       Shows which packages prevent the given package from being installed
+  remove          Removes a package from the require or require-dev
+  require         Adds required packages to your composer.json and installs them
+  run-script      Run the scripts defined in composer.json.
+  search          Search for packages
+  self-update     Updates composer.phar to the latest version.
+  selfupdate      Updates composer.phar to the latest version.
+  show            Show information about packages
+  status          Show a list of locally modified packages
+  suggests        Show package suggestions
+  update          Updates your dependencies to the latest version according to composer.json, and updates the composer.lock file.
+  validate        Validates a composer.json and composer.lock
+  why             Shows which packages cause the given package to be installed
+  why-not         Shows which packages prevent the given package from being installed
+
+Aspire@Acer MINGW64 /
+$ composer --version
+Composer version 1.2.1 2016-09-12 11:27:19
+
+Aspire@Acer MINGW64 /
+$ composer create-project -s stable zendframework/skeleton-application:2.3.3 zf2-stable
+
+
+Aspire@Acer MINGW64 /
+$ cd "E:\Working\PHP\Zend-Framework\Zend-Framework-2"
+
+Aspire@Acer MINGW64 /e/Working/PHP/Zend-Framework/Zend-Framework-2
+$ composer create-project -s stable zendframework/skeleton-application:2.3.3 zf2-stable
+Installing zendframework/skeleton-application (2.3.3)
+  - Installing zendframework/skeleton-application (2.3.3)
+    Loading from cache
+
+Created project in zf2-stable
+Loading composer repositories with package information
+Updating dependencies (including require-dev)
+  - Installing zendframework/zendxml (1.0.2)
+    Loading from cache
+
+  - Installing zendframework/zendframework (2.3.3)
+    Loading from cache
+
+zendframework/zendframework suggests installing doctrine/annotations (Doctrine Annotations >=1.0 for annotation features)
+zendframework/zendframework suggests installing ircmaxell/random-lib (Fallback random byte generator for Zend\Math\Rand if OpenSSL/Mcrypt extensions are unavailable)
+zendframework/zendframework suggests installing ocramius/proxy-manager (ProxyManager 0.5.* to handle lazy initialization of services)
+zendframework/zendframework suggests installing zendframework/zendpdf (ZendPdf for creating PDF representations of barcodes)
+zendframework/zendframework suggests installing zendframework/zendservice-recaptcha (ZendService\ReCaptcha for rendering ReCaptchas in Zend\Captcha and/or Zend\Form)
+Writing lock file
+Generating autoload files
+
+Aspire@Acer MINGW64 /e/Working/PHP/Zend-Framework/Zend-Framework-2
+$ php --version
+PHP 7.0.9 (cli) (built: Jul 20 2016 11:08:23) ( ZTS )
+Copyright (c) 1997-2016 The PHP Group
+Zend Engine v3.0.0, Copyright (c) 1998-2016 Zend Technologies
+
+Aspire@Acer MINGW64 /e/Working/PHP/Zend-Framework/Zend-Framework-2
+$ composer --version
+Composer version 1.2.1 2016-09-12 11:27:19
+
+Aspire@Acer MINGW64 /e/Working/PHP/Zend-Framework/Zend-Framework-2
+$ cd zf2-stable
+
+Aspire@Acer MINGW64 /e/Working/PHP/Zend-Framework/Zend-Framework-2/zf2-stable
+$ composer show
+zendframework/zendframework 2.3.3 Zend Framework 2
+zendframework/zendxml       1.0.2 Utility library for XML usage, best practices, and security in PHP

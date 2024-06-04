@@ -1,0 +1,50 @@
+1.5 More Lists III
+
+
+Rather than store a collection of shared styles in a class or placeholder selector, our coworker is convinced they should be represented as shown in $styles - a list of lists. Inside the @each loop within .factory, utilize nth() to create working CSS properties and values from each pair in $styles.
+
+
+CSS
+
+.SASS
+
+$styles: background #333333, margin 20px, padding 10px;
+
+.factory {
+  @each $style in $styles {}
+}
+
+.SCSS
+
+$styles: background #333333, margin 20px, padding 10px;
+
+.factory {
+  @each $style in $styles {}
+}
+
+Answer:
+
+.SASS
+
+$styles: background #333, margin 20px, padding 10px
+
+.factory
+  @each $style in $styles 
+    #{nth($style, 1)}: nth($style, 2)
+
+.SCSS
+
+$styles: background #333333, margin 20px, padding 10px;
+
+.factory {
+  @each $style in $styles {
+    #{nth($style, 1)}: nth($style, 2);
+  }
+}
+
+CSS
+
+.factory {
+  background: #333333;
+  margin: 20px;
+  padding: 10px; }

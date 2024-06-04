@@ -1,0 +1,57 @@
+1.7 More Utilities II
+
+
+The text color of .worksite is dependent on the number of members in our crew. Let's update the conditional statement to use the single-line if() for brevity.
+
+
+
+CSS
+
+.worksite {
+  color: green;
+}
+
+.SASS
+
+$crew: judy phillip william emily
+
+.worksite
+  @if length($crew) < 5
+    color: green
+  @else 
+    color: red
+
+.SCSS
+
+$crew: judy phillip william emily;
+
+.worksite {
+  @if length($crew) < 5 {
+    color: green;
+  }
+  @else {
+    color: red;
+  }
+}
+
+Answer:
+
+.SASS
+
+$crew: judy phillip william emily
+
+.worksite
+  color: if(length($crew) < 5, green, red)
+
+.SCSS
+
+$crew: judy phillip william emily;
+
+.worksite {
+  color: if(length($crew) < 5, green, red);
+}
+
+CSS
+
+.worksite {
+  color: green; }

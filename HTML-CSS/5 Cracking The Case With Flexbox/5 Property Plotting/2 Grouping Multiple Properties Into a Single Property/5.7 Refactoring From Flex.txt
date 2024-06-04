@@ -1,0 +1,39 @@
+5.7 Refactoring From Flex
+
+We want to share an answer on Stack Overflow, but we know that not everyone can use shorthand. Let's refactor this to the full properties and values.
+
+stackoverflow.html
+
+<section class='list-quad'>
+  <div class='example'>Item 1</div>
+  <div class='example'>Item 2</div>
+  <div class='example'>Item 3</div>
+  <div class='example'>Item 4</div>
+</section>
+
+example.css
+
+.example {
+  flex: 1 25%;
+}
+
+.list-quad {
+  display: flex;
+}
+
+
+Refactor the example to use the full properties instead of shorthand.
+
+Answer:
+example.css
+
+.example {
+  flex-grow: 1; 
+  flex-basis: 25%;
+}
+
+.list-quad {
+  display: flex;
+}
+
+

@@ -1,0 +1,16 @@
+3. Index Filter
+
+
+This repository is so large, using --tree-filter is going to take all day. Use --index-filter to remove master_password.txt instead. Remember, --index-filter will need a command that works on the staging area, which is going to be some sort of git command.
+
+
+$ git filter-branch --index-filter "git rm --cached --ignore-unmatch master_password.txt"
+
+Rewrite 71d674e88a5491cf3c021a90248f4a8758130617 (1/5)
+Rewrite b8ec575e54db4272fbd3f7e521b0a445f610bd1e (2/5)
+Rewrite d245841e12363a108f5644f116e424c2117314b2 (3/5)
+Rewrite f2e49574effbd61a2e179592418ee1e4c861e6b8 (4/5)
+Rewrite 54e2eee6759fba989e29b27570caf7b34996b862 (5/5)
+
+Success!
+

@@ -1,0 +1,26 @@
+3.1 Working with the Console
+
+Print the string "I can't wait to run my 5K" to the console.
+
+Find the element with an ID of "events" and log it to the console.
+
+We've implemented a Calendar.countEvents() method that returns the number of events in the list. Call the method from the console to see that it works.
+
+Assert that Calendar.countEvents() returns a value of 3. We expect this assertion to be true, so it shouldn't raise an exception.
+
+Now print the warning message "Watch out!" to the console.
+
+
+F12
+Console
+console.log("I can't wait to run my 5K");
+
+console.log(document.getElementById("events"));
+
+Calendar.countEvents();
+
+console.assert(Calendar.countEvents() == 3);
+
+console.warn("Watch out!");
+
+

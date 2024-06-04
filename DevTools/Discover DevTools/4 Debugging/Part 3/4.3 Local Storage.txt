@@ -1,0 +1,20 @@
+4.3 Local Storage
+
+Find the list of events in the Local Storage section of the Resources panel. In the list of keys and values, change the "name" of the "Build Robot" event to "Build Death Ray".
+
+Now that we have updated the data in Local Storage, force the event list to refresh by calling the Calendar.displayToday() method from the console.
+
+F12
+Resources
+Local Storage
+http://http://discover-devtools.codeschool.com
+
+Key: events
+Value: [{"name":"Run 5K","date":"2016-03-02T12:52:29.126Z"},{"name":"Build Robot","date":"2016-03-02T12:52:29.126Z"},{"name":"Take Over the World","date":"2016-03-02T12:52:29.126Z"}]
+Edit "Value"
+[{"name":"Run 5K","date":"2016-03-02T12:52:29.126Z"},{"name":"Build Death Ray","date":"2016-03-02T12:52:29.126Z"},{"name":"Take Over the World","date":"2016-03-02T12:52:29.126Z"}]
+
+Console
+Calendar.displayToday();
+
+undefined

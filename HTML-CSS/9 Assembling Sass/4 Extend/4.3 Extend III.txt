@@ -1,0 +1,70 @@
+4.3 Extend III
+
+
+Some of the CSS copied over originally contains already-combined selectors. Refactor the segment below to make use of extend on .socket instead, in case we need to add elements later.
+
+
+CSS
+
+.socket,
+.wrench,
+.bolt {
+  border-radius: 50%;
+  padding: 15px;
+  width: 30px;
+}
+
+.wrench {
+  width: 100px;
+}
+
+.bolt {
+  padding: 14px;
+}
+
+APPLICATION.SCSS 
+
+.socket,
+.wrench,
+.bolt {
+  border-radius: 50%;
+  padding: 15px;
+  width: 30px;
+}
+.wrench {
+  width: 100px;
+}
+.bolt {
+  padding: 14px;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.socket {
+  border-radius: 50%;
+  padding: 15px;
+  width: 30px;
+}
+.wrench {
+	@extend .socket;
+	width: 100px !important;
+ }
+.bolt { 
+  @extend .socket;
+  padding: 14px !important;
+}
+
+CSS
+
+.socket, .wrench, .bolt {
+  border-radius: 50%;
+  padding: 15px;
+  width: 30px; }
+
+.wrench {
+  width: 100px !important; }
+
+.bolt {
+  padding: 14px !important; }

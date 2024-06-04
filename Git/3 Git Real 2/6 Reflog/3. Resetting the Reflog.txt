@@ -1,0 +1,11 @@
+3. Resetting the Reflog
+
+
+Great, we can see that there is a log of the reset! Take note of the reflog entry right before your earlier reset. Then do a "hard reset" to that commit to get your work back.
+
+
+$ git reset --hard HEAD@{1}
+
+HEAD is now at 8791492 Rainbow trail when jumping.
+
+Success!

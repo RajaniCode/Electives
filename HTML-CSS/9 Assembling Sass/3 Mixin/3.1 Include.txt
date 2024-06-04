@@ -1,0 +1,48 @@
+3.1 Include
+
+
+We've identified a set of properties that commonly appear in our stylesheet (sometimes with minor tweaks). Let's streamline the process of using these values by adding the commented lines to a mixin called assemble, then calling that mixin in .factory and .highrise.
+
+CSS
+
+_ASSEMBLE.SCSS
+
+// background: #fff;
+// border: 1px solid #ccc;
+// padding: 10px;
+
+.factory {
+
+}
+.highrise {
+
+}
+
+Answer:
+
+_ASSEMBLE.SCSS
+
+@mixin assemble {
+ background: #fff;
+ border: 1px solid #ccc;
+ padding: 10px;
+}
+
+.factory {
+	@include assemble;
+}
+.highrise {
+	@include assemble;
+}
+
+CSS
+
+.factory {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px; }
+
+.highrise {
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 10px; }

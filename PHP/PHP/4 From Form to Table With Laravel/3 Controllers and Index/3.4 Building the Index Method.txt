@@ -1,0 +1,141 @@
+3.4 Building the Index Method
+
+The last step in our application stack is to build out our index method and view.
+
+resources/views/farms/index.blade.php
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form To Table</title>
+  </head>
+  <body>
+    
+    
+    
+  </body>
+</html>
+
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    
+    
+  }
+}
+
+1. Let's begin by modifying the index method in our controller to query for all farms using the static all method. We can store these farms in a variable $farms.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $farms = Farm::all();
+  }
+}
+
+2. On the next line, return the view helper with the 'farms.index' route and an array containing a single item — a key of 'farms' and a value of $farms — as its arguments.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+  /**
+   * Display a listing of the resource.
+   *
+   * @return \Illuminate\Http\Response
+   */
+  public function index()
+  {
+    $farms = Farm::all();
+    return view('farms.index', ['farms' => $farms]);
+  }
+}
+
+3. Switching over to our index.blade.php file, add a @foreach loop using blade to loop through all $farms as $farm and close the loop with @endforeach.
+
+Answer
+resources/views/farms/index.blade.php
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form To Table</title>
+  </head>
+  <body>
+    @foreach($farms as $farm)
+      
+    @endforeach
+    
+    
+  </body>
+</html>
+
+4. Inside of our new loop, print out the name of the $farm using the blade curly brace syntax.
+
+Answer
+resources/views/farms/index.blade.php
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form To Table</title>
+  </head>
+  <body>
+    @foreach($farms as $farm)
+      {{ $farm->name }}
+    @endforeach
+    
+    
+  </body>
+</html>
+
+5. Now surround the name in an anchor tag with an href set with the route helper with two arguments. The first argument will be the route 'farms.show'. The second argument will be the $farm variable, which Laravel will use to get the farm id.
+
+Answer
+resources/views/farms/index.blade.php
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Form To Table</title>
+  </head>
+  <body>
+    @foreach($farms as $farm)
+      <a href="{{ route('farms.show', $farm) }}">
+        {{ $farm->name }}
+      </a>
+    
+  </body>
+</html>

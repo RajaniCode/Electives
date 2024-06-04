@@ -1,0 +1,12 @@
+1.10 get vs. get!
+
+The get and get! functions behave differently when no record is found in the database. Their respective return values are:
+
+[Single Answer]
+
+0 and ""
+"" and 0
+An error is raised and ""
+nil and an error is raised
+
+Answer:

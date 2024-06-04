@@ -1,0 +1,18 @@
+Relative Positioning
+
+
+Anchors with a .button class are floated to the right of our <h3>, but we'd like them to be centered vertically. Use relative positioning to move the button down 3px.
+
+style.css
+
+.button {
+  float: right;
+}
+
+Answer:
+
+.button {
+  float: right;
+  position: relative;
+  top: 3px;
+}

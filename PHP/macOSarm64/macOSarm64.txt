@@ -1,0 +1,38 @@
+###########################################################################################################################
+
+# PHP
+
+###########################################################################################################################
+
+[
+# You must `brew unpin ruby` as installing php requires the latest version of pinned dependencies
+% brew unpin ruby
+]
+
+% brew install php
+% php --version
+% where php    
+% which php  
+% type php
+% man php
+
+% brew services start php
+% brew services restart php
+% brew services stop php
+
+# REPL
+% php -a
+> print phpversion();
+> exit
+
+# Server
+% php -S 127.0.0.1:8000
+
+# composer
+% brew install composer
+% composer --version
+% where composer    
+% which composer  
+% type composer
+
+###########################################################################################################################

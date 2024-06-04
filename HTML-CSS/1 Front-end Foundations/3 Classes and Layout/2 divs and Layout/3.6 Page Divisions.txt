@@ -1,0 +1,362 @@
+3.6 Page Divisions
+
+It would be great to style the page header differently from the rest of the content, so let's add some divisions and classes to help us do that.
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul class="nav">
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 15px;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+
+1. Wrap the Open Source Records h1 and site navigation inside of a division tag, and give that tag a class of header.
+
+Answer:
+
+    <div class="header">
+      <h1>Open Source Records</h1>
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+2. Perfect! Now wrap all of remaining content in the page body inside another division, and give that tag a class of content-section.
+
+Answer:
+
+    <div class="content-section">
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+   </div>
+
+3. Now that we've got the divisions in place, let's modify their CSS rules. Before we had separate divisions we added some padding to the entire body.
+
+Now, we want our divisions to have control over the page padding, so set the body padding back to 0.
+
+Answer:
+
+body {
+  padding: 0;
+}
+
+4. Now we can add 15px of padding back to all sides, but this time add it to the header and content-section divisions.
+
+Answer:
+
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+}
+
+5. For this site, our designers have asked us to make sure the content area of the content-section doesn't get bigger than 450px, so use that number to set the content section's width.
+
+Answer:
+
+.content-section {
+  padding: 15px;
+  width: 450px;
+}
+
+Success:
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 0;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+}
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <h1>Open Source Records</h1>
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div class="content-section">
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+   </div>
+  </body>
+</html>

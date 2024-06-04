@@ -1,0 +1,45 @@
+2.2 Your First Dockerfile
+
+In the previous level we created containers from pre-built base images. If we want to customize a base image before creating a container, we should use a Dockerfile.
+
+The filename is important — it's always Dockerfile with a capital D.
+
+We've created an empty Dockerfile that we can fill in.
+
+Dockerfile
+
+
+1. The first line of a Dockerfile is usually the FROM keyword followed a base image name. Every other instruction in the Dockerfile following the FROM instruction will create a new image that blends together everything in the base plus the modifications we're making in the rest of the Dockerfile.
+
+Type FROM httpd:2.4 as the first line of the Dockerfile. This will base our custom image off of version 2.4 of the httpd image.
+
+Answer:
+Dockerfile
+
+2. Next, we can use the Dockerfile to expose a port inside of its associated container. Note that we'll still need to map ports between the host and container when we run docker container run, but this line will let the image know which ports inside of the container should become available.
+
+Type EXPOSE 80 on line 2.
+
+Answer:
+Dockerfile
+
+3. Remember how in the last level we had to docker container exec to install fortunes? Well, with a Dockerfile we can run any commands as the image is being built with the RUN command.
+
+Type RUN apt-get update on line 3 and RUN apt-get install -y fortunes on line 4.
+
+Answer:
+Dockerfile
+
+4. We can even combine multiple run statements on a single line, which is sometimes preferred to separate lines.
+
+Remove the code on lines 3 and 4 and replace them with RUN apt-get update && apt-get install -y fortunes.
+
+Answer:
+Dockerfile
+
+5. Since we can distribute Dockerfiles to other developers, it's a good idea to put our contact information in them with the LABEL instruction. LABEL accepts key-value pairs in the form of key="value". Let's label the maintainer of this image.
+
+Type LABEL maintainer="moby-dock@example.com". (Did you know Moby Dock is the name of the Docker whale?)
+
+Answer:
+Dockerfile

@@ -1,0 +1,11 @@
+1. The Mistake
+
+
+You decided that unicorns should leave a rainbow trail when they jump. You made the upgrade, and committed the changes. There is a problem, though: this change caused a bug which prevents the unicorns from jumping at all. You panic! Hurry, do a "hard reset" back to the commit before the rainbow jumping was added: "ab27026".
+
+
+$ git reset --hard ab27026
+
+HEAD is now at ab27026 Implement unicorn jumping.
+
+Success!

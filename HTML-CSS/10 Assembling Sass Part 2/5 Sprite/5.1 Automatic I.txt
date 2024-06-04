@@ -1,0 +1,32 @@
+5.1 Automatic I
+
+
+Three variations of the company logo show up in our design, so we've saved each to the logos folder in the images directory. To make usage easy, let's use Compass automatic spriting: start by importing all .png files in the logos folder.
+
+
+CSS
+
+.SASS
+
+@import "compass"
+
+.SCSS
+
+@import "compass";
+
+Answer:
+
+.SASS
+
+@import "compass"
+@import "logos/*.png"
+
+.SCSS
+
+@import "compass";
+@import "logos/*.png";
+
+CSS
+
+.logos-sprite {
+  background: url('/logos-s9f85bc46eb.png') no-repeat; }

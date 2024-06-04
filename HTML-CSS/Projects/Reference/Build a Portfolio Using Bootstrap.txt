@@ -1,0 +1,380 @@
+https://www:codeschool:com/projects/build-a-portfolio-using-bootstrap
+
+https://www.codeschool.com/projects/build-a-portfolio-using-bootstrap#course-intro-video
+
+https://www.codeschool.com/projects/build-a-portfolio-using-bootstrap/build#answer-video
+
+https://codeschool-project-demos.github.io/BootstrapPortfolioProject/
+
+Build a Portfolio Using Bootstrap
+
+Test your HTML knowledge, and then use CSS to style your own page and make it unique.
+
+Step 1: Authenticate with GitHub
+
+We'll need to know your GitHub username to complete this project.
+
+Step 2: Fork the Repo
+
+In a new window, head over to GitHub and Fork thecodeschool-projects/BootstrapPortfolioProject [https://github.com/codeschool-projects/BootstrapPortfolioProject] repo into your account. Once you've done that on GitHub, let us know!
+
+How do I Fork a repo on GitHub? [https://www.codeschool.com/projects/build-a-portfolio-using-bootstrap/build#fork-video]
+
+Step 3: Clone the Repo
+
+Clone down your fork of the repo locally. You can copy and paste either version of this line into your terminal.
+
+[
+Use SSH
+git clone git@github.com:RajaniCode/BootstrapPortfolioProject.git
+]
+
+Use HTTPS
+git clone https://github.com/RajaniCode/BootstrapPortfolioProject.git
+
+How do I Clone a repo on GitHub? [https://www.codeschool.com/projects/build-a-portfolio-using-bootstrap/build#fork-video]
+
+# Git Bash ############################################################################################################################
+
+$ cd "E:\Working\HTML-and-CSS\Code School\Projects"
+
+Aspire@Acer MINGW64 /e/Working/HTML-and-CSS/Code School/Projects
+$ git clone https://github.com/RajaniCode/BootstrapPortfolioProject.git
+Cloning into 'BootstrapPortfolioProject'...
+remote: Counting objects: 122, done.
+remote: Total 122 (delta 0), reused 0 (delta 0), pack-reused 121
+Receiving objects: 100% (122/122), 398.94 KiB | 55.00 KiB/s, done.
+Resolving deltas: 100% (39/39), done.
+
+#######################################################################################################################################
+
+Step 4: Prepare the Build
+
+Open this project’s directory in a text editor to complete this project. A text editor like Atom or Sublime Text will do the job. You will make changes to the src/index.html file to satisfy the requirements.
+
+# src/index.html (Original)
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0;">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+  <title>HTML Portfolio</title>
+</head>
+<body>
+
+  <!--
+    Previous project placeholder begins
+  -->
+  <div class="header">
+    <h1>Morgan McCircuit</h1>
+    <h2>I write code</h2>
+  </div>
+
+  <div class="tagline">
+    <h3>Who I am</h3>
+    <p>Hi, my name is Morgan and I love to write code that is efficient.</p>
+  </div>
+
+
+  <div class="skills">
+    <h3>What I do</h3>
+    <p>Here are some of the languages I use on a day-to-day.</p>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+  </div>
+
+  <div class="contact">
+    <h3>Get in touch</h3>
+    <p>I live in the cloud and can't be seen. Send messages to the good people at <a target="_blank" href="https://twitter.com/codeschool">Code School</a> and they'll notify me.</p>
+  </div>
+  <!--
+    Previous project placeholder ends
+    (unused pieces will be deleted at the last task)
+  -->
+
+
+  <script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+</body>
+</html>
+
+
+Step 5: Create the Navigation Bar
+
+At the top of our page, we'll want to create a navbar. Here is a sample navbar [https://github.com/codeschool/BootstrapPortfolioProject/wiki/Sample-Navigation-Bar] to help you get set up. Also feel free to check out Twitter Bootstrap's documentation on navbars [http://getbootstrap.com/components/#navbar].
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#portfolio-collapse-menu">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Brand</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="portfolio-collapse-menu">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+ 
+Step 6: Name in Navbar
+
+Change the contents of the <a> tag that has the navbar-brand CSS class to include your name instead of "Brand".
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#portfolio-collapse-menu">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Rajani</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="portfolio-collapse-menu">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Link</a></li>
+          <li><a href="#">Link</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav> 
+
+Step 7: Menu in Navbar
+
+Change the contents of the <a> tags that are within the <li> menu elements. One tag should read "Home", and the other "About".
+
+  <nav class="navbar navbar-default">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#portfolio-collapse-menu">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="#">Rajani</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="portfolio-collapse-menu">
+        <ul class="nav navbar-nav">
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+  </nav>
+
+Step 8: Create the Carousel
+
+   <div id="portfolio-carousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#portfolio-carousel" data-slide-to="0" class="active"></li>
+      <li data-target="#portfolio-carousel" data-slide-to="1"></li>
+      <li data-target="#portfolio-carousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Example headline</h1>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Example headline</h1>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Example headline</h1>
+            <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="left carousel-control" href="#portfolio-carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#portfolio-carousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+Let's place a Bootstrap Carousel under our navbar. Here is a sample carousel [https://github.com/codeschool/BootstrapPortfolioProject/wiki/Sample-Carousel] to help you get set up. You can always learn more about Bootstrap's Carousel in their official documentation [http://getbootstrap.com/javascript/#carousel].
+
+Step 9: Carousel Items
+
+Change the three <h1> and <p> tags that are found under each .item element within our carousel to include three tag-lines. You can either use similar content that was already available in the page (under "Who I am", "What I do", etc) or come up with original content for yourself.
+
+   <div id="portfolio-carousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#portfolio-carousel" data-slide-to="0" class="active"></li>
+      <li data-target="#portfolio-carousel" data-slide-to="1"></li>
+      <li data-target="#portfolio-carousel" data-slide-to="2"></li>
+    </ol>
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Who I am</h1>
+            <p>Hi, my name is Rajani and I love to write code that is efficient.</p> 
+          </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>What I do</h1>
+            <p>Here are some of the languages I use on a day-to-day.</p> 
+		  </div>
+        </div>
+      </div>
+      <div class="item">
+        <div class="container">
+          <div class="carousel-caption">
+            <h1>Get in touch</h1>
+            <p>I live in the cloud and can't be seen. Send messages to the good people at <a target="_blank" href="https://twitter.com/codeschool">Code School</a> and they'll notify me.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <a class="left carousel-control" href="#portfolio-carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#portfolio-carousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+Step 10: Using Bootstrap's Grid System
+
+Let's display some elements side-by-side using the Grid System. To do so, under our carousel, let's create three nested <div> tags. One should have the marketing CSS class, the next should have the container CSS class, and the third should have the row CSS class.
+
+   <div class="marketing">
+     <div class="container">
+       <div class="row">         
+       </div>
+     </div>
+   </div>
+
+Step 11: Creating the Marketing Columns
+
+Inside of .row, add three div elements with the col-md-4 CSS class. Each of these elements should have a: - span tag with the glyphicon class, plus another class indicating which icon you'd like to use [http://getbootstrap.com/components/#glyphicons-glyphs] (ie. "glyphicon-music", or "glyphicon-camera", etc). - h2 tag with a skill in it (ie. "HTML & CSS", or "JavaScript", or "Design", etc). - p tag describing why you enjoy using each skill (ie. "I enjoy making the web come to life with Angular", etc).
+
+   <div class="marketing">
+     <div class="container">
+       <div class="row">
+         <div class="col-md-4">
+           <span class="glyphicon glyphicon-eye-open"></span>
+           <h2>HTML &amp; CSS</h2>
+           <p>I slice designs in my dreams. I love turning work-of-arts into working apps.</p>
+         </div>
+         <div class="col-md-4">
+           <span class="glyphicon glyphicon-flash"></span>
+           <h2>JavaScript</h2>
+           <p>Making the web come to life with Angular or React is my jam!</p>
+         </div>
+         <div class="col-md-4">
+           <span class="glyphicon glyphicon-hdd"></span>
+           <h2>RESTful APIs</h2>
+           <p>The tried-and-true way of writing back-end services for my client-side apps.</p>
+         </div>
+       </div>
+     </div>
+   </div>
+
+Step 12: Create the Footer
+
+Under .marketing, let's create a footer element. Our footer needs to have a div inside it with the container CSS class. You'll see the footer stick to the bottom of the page, which happens because of some styling code we made available.
+
+ <footer class="footer">
+   <div class="container">
+   </div>
+ </footer>
+
+Step 13: The Elements Inside our Footer
+
+Inside our footer container, let's create two elements: an h3 tag with a title inviting your visitors to get in touch with you, and a p tag describing how your visitors can get in touch.
+
+ <footer class="footer">
+   <div class="container">
+     <h3>Get in touch</h3>
+     <p>I live in the cloud and can't be seen. Send messages to the good people at <a target="_blank" href="https://twitter.com/codeschool">Code School</a> and they'll notify me.</p>
+   </div>
+ </footer>
+
+Step 14: Cleaning Things Up
+
+Let's remove the .header, .tagline, .skills and .contact elements as the same information should all be part of the carousel, marketing and footer elements now.
+
+$ cd BootstrapPortfolioProject
+
+$ npm --version
+
+$ npm install
+
+$ npm start
+
+http://localhost:3000
+
+$ npm test
+
+# When you're ready, commit your code and push it to GitHub. We'll checkout your repository and validate all of the build tasks are done.
+
+$ git status
+
+$ git branch
+
+$ git add .
+
+$ git status
+
+$ git branch
+
+$ git commit -a -m "BootstrapPortfolioProject Solution"
+
+$ git push origin master
+
+$ git commit
+

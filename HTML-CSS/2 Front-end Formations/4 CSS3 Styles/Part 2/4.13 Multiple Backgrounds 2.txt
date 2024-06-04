@@ -1,0 +1,19 @@
+4.13 Multiple Backgrounds 2
+
+http://caniuse.com/#feat=multibackgrounds
+
+With those same images, write the multiple backgrounds on one line using the background property.
+
+style.css
+
+.element {
+  background-image: url(painting-01.jpg), url(painting-02.jpg);
+  background-position: top left, center;
+  background-repeat: no-repeat, no-repeat;
+}
+
+Answer:
+
+.element {
+  background: url(painting-01.jpg) top left center no-repeat, url(painting-02.jpg) top left no-repeat;
+}

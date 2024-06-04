@@ -1,0 +1,143 @@
+4.2 Growing a Grid
+
+Let's finish off our grid! All it takes is making each .grid-item fill as much space as possible. Instead of adjusting to the size of the content, we want each one to grow.
+
+grid.html
+
+<div class='demo'>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid grid-wrap'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid grid-wrap'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid grid-wrap'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+</div>
+
+grid.css
+
+.grid {
+  display: flex;
+  margin: 20px 0;
+}
+
+.grid-wrap {
+  flex-wrap: wrap;
+}
+
+.grid-item {
+  
+}
+
+@media screen and (min-width: 500px) {
+  .grid-wrap {
+    flex-wrap: nowrap;
+  }
+}
+
+.demo .grid-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  text-align: center;
+}
+
+
+Use the flexbox property and value to have all of the grid items grow.
+
+Answer:
+grid.css
+
+.grid {
+  display: flex;
+  margin: 20px 0;
+}
+
+.grid-wrap {
+  flex-wrap: wrap;
+}
+
+.grid-item {
+  flex-grow: 1;
+}
+
+@media screen and (min-width: 500px) {
+  .grid-wrap {
+    flex-wrap: nowrap;
+  }
+}
+
+.demo .grid-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  text-align: center;
+}

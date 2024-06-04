@@ -1,0 +1,51 @@
+1.2 Adding and Styling the First Image
+
+The first bit of content to add is an image at the top of the email. It needs a combination of HTML attributes and inline styles to appear correctly.
+
+email.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    
+  </body>
+</html>
+
+1. Begin by adding an img tag with a source of https://s3.amazonaws.com/unmasking-html-emails/info.png.
+
+Answer: <img src="https://s3.amazonaws.com/unmasking-html-emails/info.png">
+
+2. Set the alt text for the image to La Amor Peligrosa vs. La Fuega Fatal.
+
+Answer: <img src="https://s3.amazonaws.com/unmasking-html-emails/info.png" alt="La Amor Peligrosa vs. La Fuega Fatal">
+
+3. Add inline styles to the image to set its display property to "block" and max-width property to "100%".
+
+Answer: <img src="https://s3.amazonaws.com/unmasking-html-emails/info.png" alt="La Amor Peligrosa vs. La Fuega Fatal" style="display: block; max-width: 100%">
+
+4. Use the width attribute to set the width of the image to 600 pixels, keeping in mind that the width attribute defaults to pixels.
+
+Answer: <img src="https://s3.amazonaws.com/unmasking-html-emails/info.png" alt="La Amor Peligrosa vs. La Fuega Fatal" style="display: block; max-width: 100%;" width="600">
+
+
+Success:
+
+email.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <img src="https://s3.amazonaws.com/unmasking-html-emails/info.png" alt="La Amor Peligrosa vs. La Fuega Fatal" style="display: block; max-width: 100%;" width="600">
+  </body>
+</html>
+

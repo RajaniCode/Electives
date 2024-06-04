@@ -1,0 +1,41 @@
+hdfs dfs -ls input/
+
+python --version
+
+PYSPARK_DRIVER_PYTHON=ipython pyspark
+
+show_views_file = sc.textFile("input/join2_gennum?.txt")
+
+show_views_file.take(2)
+
+def split_show_views(line):
+    line = line.split(",")
+    show = line[0]
+    views = int(line[1])
+    return (show, views)
+
+show_views = show_views_file.map(split_show_views)
+
+show_channel_file = sc.textFile("input/join2_genchan?.txt")
+
+def split_show_channel(line):
+    line = line.split(",")
+    show = line[0]
+    channel = line[1]
+    return (show, channel)
+
+show_channel = show_channel_file.map(split_show_channel)
+
+joined_dataset = show_views.join(show_channel)
+
+def extract_channel_views(show_views_channel):
+    views = int(show_views_channel[1][0])
+    channel = show_views_channel[1][1]
+    return (channel, views)
+
+channel_views = joined_dataset.map(extract_channel_views)
+
+def some_function(a, b):
+    return a + b
+
+channel_views.reduceByKey(some_function).collect()

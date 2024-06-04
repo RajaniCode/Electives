@@ -1,0 +1,15 @@
+9. On Demand Push
+
+
+We need to push submodule changes again. But this time, instead of going into the submodule to push it, just use the on-demand option for the --recurse-submodules option. This way submodules that need it will be pushed automatically.
+
+
+$ git push --recurse-submodule=on-demand
+
+Counting objects: 3, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 308 bytes, done.
+Total 2 (delta 0), reused 0 (delta 0)
+
+Success!

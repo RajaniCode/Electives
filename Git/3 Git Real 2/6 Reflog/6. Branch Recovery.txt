@@ -1,0 +1,9 @@
+6. Branch Recovery
+
+
+Now that you know what the last commit was on the deleted branch, you can create a new branch and attach the commit to it. Create a new branch named fluffy_poodle using the most recent commit from the deleted branch.
+
+
+$ git branch fluffy_poodle HEAD@{1}
+
+Success!

@@ -1,0 +1,65 @@
+5. Walking Reflogs
+
+
+Then you realize that you needed the styles menu from that fluffy_poodle branch you just deleted. Good thing git never really gets rid of anything. List all commits in the reflog by using the --walk-reflogs option of git log.
+
+
+$ git log --walk-reflog
+
+commit b8ec575e54db4272fbd3f7e521b0a445f610bd1e
+Reflog: HEAD@{0} (Flynn <flynn@petstore.com>)
+Reflog message: checkout: moving from fluffy_poodle to master
+Author: Flynn <flynn@petstore.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    Added a title to the homepage
+
+commit aaafb5e3e33a174a5cb5f45c543d3dd927dfdf32
+Reflog: HEAD@{1} (Flynn <flynn@petstore.com>)
+Reflog message: commit: Fluff poodle.
+Author: Flynn <flynn@petstore.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    Fluff poodle.
+
+commit a9806eea6928e4b150220e81227779496ba54026
+Reflog: HEAD@{2} (Flynn <flynn@petstore.com>)
+Reflog message: checkout: moving from poodle_implementation to fluffy_poodle
+Author: Flynn <flynn@petstore.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    Add poodle page
+
+commit a9806eea6928e4b150220e81227779496ba54026
+Reflog: HEAD@{3} (Flynn <flynn@petstore.com>)
+Reflog message: commit: Add poodle page
+Author: Flynn <flynn@petstore.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    Add poodle page
+
+commit 71d674e88a5491cf3c021a90248f4a8758130617
+Reflog: HEAD@{4} (Flynn <flynn@petstore.com>)
+Reflog message: checkout: moving from master to poodle_implementation
+Author: Flynn <flynn@petstore.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    initial commit
+
+commit b8ec575e54db4272fbd3f7e521b0a445f610bd1e
+Reflog: HEAD@{5} (Flynn <flynn@petstore.com>)
+Reflog message: commit: Added a title to the homepage
+Author: Flynn <flynn@petstore.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    Added a title to the homepage
+
+commit 71d674e88a5491cf3c021a90248f4a8758130617
+Reflog: HEAD@{6} (Flynn <flynn@petstore.com>)
+Reflog message: commit (initial): initial commit
+Author: Flynn <flynn@petstore.com>
+Date:   Sat Oct 10 08:30:00 2020 -0500
+
+    initial commit
+
+Success!

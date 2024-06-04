@@ -1,0 +1,244 @@
+4.6 Basis Split
+
+We're going to refactor our media component to use flex-basis for the widths. We started by removing the CSS widths for the image. When the screen size is at least 500px, we want the image to be 40% and the content to be 60%.
+
+media.html
+
+<div class='media'>
+  <div class='media-img'>
+    <img class='db media-img-item' src='assets/images/placeholder.png' width='300'>
+  </div>
+  <div class='media-content'>
+    <h3 class='media-title'>Media Title</h3>
+    <p class='media-description'>
+      This is a media paragraph that would contain details about whatever this item is about.
+    </p>
+    <ul class='media-meta'>
+      <li class='media-meta-item'>
+        27
+        <span class='media-meta-label'>Likes</span>
+      </li>
+      <li class='media-meta-item'>
+        11
+        <span class='media-meta-label'>Comments</small>
+      </li>
+    </ul>
+  </div>
+</div>
+
+media.css
+
+.media {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.media-content {
+  padding: 20px;
+}
+
+.media-img-container {
+  padding: 20px 20px 0 20px;
+}
+
+.media-img-item {
+  width: 100%;
+}
+
+.media-meta,
+.media-title,
+.media-description {
+  margin: 0;
+  padding: 0;
+}
+
+.media-description {
+  margin-top: 4px;
+}
+
+.media-meta {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.media-meta-item {
+  list-style: none;
+  margin: 0;
+}
+
+.media-meta-item + .media-meta-item {
+  margin-left: 20px;
+}
+
+.media-meta-label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 500px) {
+
+  .media {
+    flex-wrap: nowrap;
+  }
+
+  .media-img {
+	  
+  }
+
+  .media-content {
+    
+  }
+
+}
+
+
+1. Use the flexbox property and value to set .media-img to 40%.
+
+Answer:
+media.css
+
+.media {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.media-content {
+  padding: 20px;
+}
+
+.media-img-container {
+  padding: 20px 20px 0 20px;
+}
+
+.media-img-item {
+  width: 100%;
+}
+
+.media-meta,
+.media-title,
+.media-description {
+  margin: 0;
+  padding: 0;
+}
+
+.media-description {
+  margin-top: 4px;
+}
+
+.media-meta {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.media-meta-item {
+  list-style: none;
+  margin: 0;
+}
+
+.media-meta-item + .media-meta-item {
+  margin-left: 20px;
+}
+
+.media-meta-label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 500px) {
+
+  .media {
+    flex-wrap: nowrap;
+  }
+
+  .media-img {
+	  flex-basis: 40%;
+  }
+
+  .media-content {
+    
+  }
+
+}
+
+2. Use the flexbox property and value to set .media-content to 60%.
+
+Answer:
+media.css
+
+.media {
+  align-items: center;
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 600px;
+}
+
+.media-content {
+  padding: 20px;
+}
+
+.media-img-container {
+  padding: 20px 20px 0 20px;
+}
+
+.media-img-item {
+  width: 100%;
+}
+
+.media-meta,
+.media-title,
+.media-description {
+  margin: 0;
+  padding: 0;
+}
+
+.media-description {
+  margin-top: 4px;
+}
+
+.media-meta {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.media-meta-item {
+  list-style: none;
+  margin: 0;
+}
+
+.media-meta-item + .media-meta-item {
+  margin-left: 20px;
+}
+
+.media-meta-label {
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+@media screen and (min-width: 500px) {
+
+  .media {
+    flex-wrap: nowrap;
+  }
+
+  .media-img {
+	  flex-basis: 40%;
+  }
+
+  .media-content {
+    flex-basis: 60%;
+  }
+
+}

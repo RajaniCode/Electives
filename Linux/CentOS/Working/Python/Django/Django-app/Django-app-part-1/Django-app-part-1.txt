@@ -1,0 +1,87 @@
+[rajani@localhost Django-app]$ python --version
+Python 2.7.5
+[rajani@localhost Django-app]$ pip --version
+pip 8.1.1 from /usr/lib/python2.7/site-packages (python 2.7)
+[rajani@localhost Django-app]$ python -c "import django; print(django.get_version())"
+1.9.6
+[rajani@localhost Django-app]$ cd mysite
+[rajani@localhost mysite]$ python manage.py startapp polls
+[rajani@localhost mysite]$ ls
+db.sqlite3  manage.py  mysite  polls
+[rajani@localhost mysite]$ ls polls
+admin.py  apps.py  __init__.py  migrations  models.py  tests.py  views.py
+[rajani@localhost mysite]$ ls polls/migrations
+__init__.py
+[rajani@localhost mysite]$ cat polls/views.py
+from django.shortcuts import render
+
+# Create your views here.
+[rajani@localhost mysite]$ gedit polls/views.py
+[rajani@localhost mysite]$ cat polls/views.py
+from django.http import HttpResponse
+
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+[rajani@localhost mysite]$ ls polls/urls.py
+ls: cannot access polls/urls.py: No such file or directory
+[rajani@localhost mysite]$ gedit polls/urls.py
+
+** (gedit:10460): WARNING **: Error when getting information for file '/home/rajani/R/Working/Python/Django/Django-app/mysite/polls/urls.py': No such file or directory
+[rajani@localhost mysite]$ cat polls/urls.py
+from django.conf.urls import url
+
+from . import views
+
+urlpatterns = [
+    url(r'^$', views.index, name='index'),
+]
+[rajani@localhost mysite]$ cat mysite/urls.py
+"""mysite URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.9/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.conf.urls import url, include
+    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+"""
+from django.conf.urls import url
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^admin/', admin.site.urls),
+]
+[rajani@localhost mysite]$ gedit mysite/urls.py
+[rajani@localhost mysite]$ cat mysite/urls.py
+"""mysite URL Configuration
+
+The `urlpatterns` list routes URLs to views. For more information please see:
+    https://docs.djangoproject.com/en/1.9/topics/http/urls/
+Examples:
+Function views
+    1. Add an import:  from my_app import views
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+Class-based views
+    1. Add an import:  from other_app.views import Home
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+Including another URLconf
+    1. Import the include() function: from django.conf.urls import url, include
+    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+"""
+from django.conf.urls import include, url
+from django.contrib import admin
+
+urlpatterns = [
+    url(r'^polls/', include('polls.urls')),
+    url(r'^admin/', admin.site.urls),
+]
+
+[rajani@localhost mysite]$ 
+

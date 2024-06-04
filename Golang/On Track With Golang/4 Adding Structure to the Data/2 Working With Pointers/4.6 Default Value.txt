@@ -1,0 +1,19 @@
+4.6 Default Value
+
+We’ve added a new property isAdmin to our guestConnection struct. Given that it is of type bool, what is the default value for the isAdmin property ?
+
+type guestConnection struct {
+  ip string
+  userName string
+  isAdmin bool
+}
+
+[Single Answer]
+
+The default value is 0.
+The default value is false.
+The default value is nil.
+The default value is the empty string "".
+
+
+Answer: The default value is false.

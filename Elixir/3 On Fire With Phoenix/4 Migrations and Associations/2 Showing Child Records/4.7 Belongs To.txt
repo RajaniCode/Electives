@@ -1,0 +1,53 @@
+4.7 Belongs To
+
+We have database tables in place for events and comments, along with the proper foreign key and indices. Now, it’s time we associate comments and events at the Schema level.
+
+lib/neon/event.ex
+defmodule Neon.Event do
+  use Ecto.Schema
+  import Ecto.Query
+
+  schema "events" do
+    field :name, :string
+    field :location, :string
+    field :start_on, :naive_datetime
+
+    
+
+    timestamps()
+  end
+
+  def all_within_year(target_year) do
+    {:ok, start_datetime} = NaiveDateTime.new(target_year, 1,1,0,0,0)
+    {:ok, end_datetime} = NaiveDateTime.new(target_year+1, 1,1,0,0,0)
+
+    from e in __MODULE__,
+        where: e.start_on > ^start_datetime and
+        e.start_on < ^end_datetime
+  end
+end
+
+lib/neon/comment.ex
+defmodule Neon.Comment do
+  use Ecto.Schema
+
+  schema "comments" do
+    field :body, :string
+    field :author, :string
+
+    
+
+    timestamps()
+  end
+end
+
+
+1. Inside the schema block in the Comment module, call the function that creates a belongs to association between Comment and Event.
+
+Answer: 
+lib/neon/comment.ex
+
+2. Inside the schema block in the Comment module, call the function that creates a belongs to association between Comment and Event.
+
+Answer:
+lib/neon/comment.ex

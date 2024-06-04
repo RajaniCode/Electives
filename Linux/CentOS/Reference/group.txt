@@ -1,0 +1,84 @@
+http://stackoverflow.com/questions/14059916/is-there-a-command-to-list-all-unix-group-names
+
+for group:
+# groups
+
+for entire group list use
+# cut -d: -f1 /etc/group
+
+http://www.udel.edu/it/help/unix/unixgroups.html
+
+https://www.centos.org/docs/5/html/Deployment_Guide-en-US/s1-users-tools.html
+
+[rajani@localhost ~]$ su root
+Password: 
+[root@localhost rajani]# sudo groupadd ntfs
+[root@localhost rajani]# sudo usermod -a -G ntfs rajani
+[root@localhost rajani]# sudo groupdel ntfs
+[root@localhost rajani]# groups
+root
+[root@localhost rajani]# cut -d: -f1 /etc/group
+root
+bin
+daemon
+sys
+adm
+tty
+disk
+lp
+mem
+kmem
+wheel
+cdrom
+mail
+man
+dialout
+floppy
+games
+tape
+video
+ftp
+lock
+audio
+nobody
+users
+utmp
+utempter
+ssh_keys
+systemd-journal
+dbus
+polkitd
+abrt
+cgred
+usbmuxd
+unbound
+colord
+ntp
+dip
+avahi
+avahi-autoipd
+saslauth
+kvm
+qemu
+libstoragemgmt
+rpc
+rpcuser
+nfsnobody
+rtkit
+radvd
+chrony
+pulse-access
+pulse
+gdm
+gnome-initial-setup
+stapusr
+stapsys
+stapdev
+slocate
+postdrop
+postfix
+sshd
+tcpdump
+rajani
+[root@localhost rajani]# 
+

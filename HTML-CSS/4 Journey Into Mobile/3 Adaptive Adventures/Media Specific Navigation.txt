@@ -1,0 +1,22 @@
+Media Specific Navigation
+
+
+Target the <nav> <ul> <li>'s, giving them a margin-right of 5%, set the text to uppercase, and set the font-size, in ems, to a target of 13px, with the context being 16px.
+
+STYLE.CSS
+
+@media screen and (max-width: 320px) {
+  nav ul li {
+
+  }
+}
+
+Answer:
+
+@media screen and (max-width: 320px) {
+  nav ul li {
+    margin-right: 5%;
+    text-transform: uppercase;  
+    font-size: 0.8125em; /* 13px / 16px */
+  }
+}

@@ -1,0 +1,18 @@
+Media query 2
+
+
+Assuming we have a 75px by 75px logo.png image and a high-resolution logo@2x.png image, include the high-resolution image within the media query you just wrote as a background-image on the .logo. Don't forget to set the background-size as well.
+
+STYLE.CSS
+
+Answer:
+
+@media
+only screen and (-webkit-min-device-pixel-ratio: 1.5),
+only screen and (min-device-pixel-ratio: 1.5) {
+  .logo {
+    background-image: url(logo@2x.png);
+    -webkit-background-size: 75px 75px;
+    background-size: 75px 75px;
+  }
+}

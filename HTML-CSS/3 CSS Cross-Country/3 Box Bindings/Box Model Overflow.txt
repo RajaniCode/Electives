@@ -1,0 +1,24 @@
+Box Model Overflow
+
+
+Add an appropriate content height to give the <figure> a height of 120px, hide any overflow on the x-axis, and add a scroll bar on the y-axis if necessary. Hint: Use overflow-x and overflow-y to target the different axes.
+
+style.css
+
+footer figure {
+  background: #e0e2e6;
+  border: 1px solid #c5c9cf;
+  padding: 15px;
+  width: 88px;
+}
+
+Answer:
+
+footer figure {
+  background: #e0e2e6;
+  border: 1px solid #c5c9cf;
+  padding: 15px;
+  width: 88px;
+  height: 88px;
+  overflow-x: hidden;
+}

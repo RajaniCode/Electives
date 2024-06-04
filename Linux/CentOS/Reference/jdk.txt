@@ -1,0 +1,107 @@
+Setup
+
+wget --no-cookies --no-check-certificate --header "Cookie: gpw_e24=http%3A%2F%2Fwww.oracle.com%2F; oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u91-b14/jdk-8u91-linux-x64.tar.gz"
+
+Or 
+
+Download jdk-8u91-linux-x64.tar.gz 
+
+http://download.oracle.com/otn-pub/java/jdk/8u91-b14/jdk-8u91-linux-x64.tar.gz?AuthParam=1461171384_a394dbfee0999360845710215936f044
+
+
+Unzip to /opt
+
+tar zxf jdk-8u91-linux-x64.tar.gz -C /opt
+
+
+Install Java with Alternatives
+
+After extracting archive file use alternatives command to install it. alternatives command is available in chkconfig package.
+
+# cd /opt/jdk1.8.0_91/
+# alternatives --install /usr/bin/java java /opt/jdk1.8.0_91/bin/java 2
+# alternatives --config java
+
+There are 3 programs which provide 'java'.
+
+  Selection    Command
+-----------------------------------------------
+*+ 1           /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.51-2.4.5.5.el7.x86_64/jre/bin/java
+   2           /usr/java/jdk1.8.0_91/jre/bin/java
+   3           /opt/jdk1.8.0_91/bin/java
+
+Enter to keep the current selection[+], or type selection number: 3
+
+
+At this point JAVA 8 has been successfully installed on your system. We also recommend to setup javac and jar commands path using alternatives
+
+# alternatives --install /usr/bin/jar jar /opt/jdk1.8.0_91/bin/jar 2
+# alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_91/bin/javac 2
+# alternatives --set jar /opt/jdk1.8.0_91/bin/jar
+# alternatives --set javac /opt/jdk1.8.0_91/bin/javac
+
+Check Installed Java Version
+
+Check the installed Java version on your system using following command.
+
+[root@localhost jdk1.8.0_91]# java -version
+java version "1.8.0_91"
+Java(TM) SE Runtime Environment (build 1.8.0_91-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.91-b14, mixed mode)
+
+
+Configuring Environment Variables
+
+Most of Java based application’s uses environment variables to work. Set the Java environment variables using following commands
+
+Setup JAVA_HOME Variable
+# export JAVA_HOME=/opt/jdk1.8.0_91
+
+Setup JRE_HOME Variable
+# export JRE_HOME=/opt/jdk1.8.0_91/jre
+
+Setup PATH Variable
+# export PATH=$PATH:/opt/jdk1.8.0_91/bin:/opt/jdk1.8.0_91/jre/bin
+
+Also put all above environment variables in /etc/environment file for auto loading on system boot
+Check:
+http://centoshowtos.org/environment-variables/
+
+
+
+
+gnome-terminal
+
+[rajani@localhost JDK]$ su root
+Password: 
+[root@localhost JDK]# tar zxf jdk-8u91-linux-x64.tar.gz -C /opt
+[root@localhost JDK]# cd /opt
+[root@localhost opt]# dir
+jdk1.8.0_91  rh
+[root@localhost opt]# cd jdk1.8.0_91
+[root@localhost jdk1.8.0_91]# alternatives --install /usr/bin/java java /opt/jdk1.8.0_91/bin/java 2
+[root@localhost jdk1.8.0_91]# alternatives --config java
+
+There are 3 programs which provide 'java'.
+
+  Selection    Command
+-----------------------------------------------
+*+ 1           /usr/lib/jvm/java-1.7.0-openjdk-1.7.0.51-2.4.5.5.el7.x86_64/jre/bin/java
+   2           /usr/java/jdk1.8.0_91/jre/bin/java
+   3           /opt/jdk1.8.0_91/bin/java
+
+Enter to keep the current selection[+], or type selection number: 3
+[root@localhost jdk1.8.0_91]# alternatives --install /usr/bin/jar jar /opt/jdk1.8.0_91/bin/jar 2
+[root@localhost jdk1.8.0_91]# alternatives --install /usr/bin/javac javac /opt/jdk1.8.0_91/bin/javac 2
+[root@localhost jdk1.8.0_91]# alternatives --set jar /opt/jdk1.8.0_91/bin/jar
+[root@localhost jdk1.8.0_91]# alternatives --set javac /opt/jdk1.8.0_91/bin/javac
+[root@localhost jdk1.8.0_91]# java -version
+java version "1.8.0_91"
+Java(TM) SE Runtime Environment (build 1.8.0_91-b14)
+Java HotSpot(TM) 64-Bit Server VM (build 25.91-b14, mixed mode)
+[root@localhost jdk1.8.0_91]# export JAVA_HOME=/opt/jdk1.8.0_91
+[root@localhost jdk1.8.0_91]# export JRE_HOME=/opt/jdk1.8.0_91/jre
+[root@localhost jdk1.8.0_91]# export PATH=$PATH:/opt/jdk1.8.0_91/bin:/opt/jdk1.8.0_91/jre/bin
+[root@localhost jdk1.8.0_91]# 
+
+

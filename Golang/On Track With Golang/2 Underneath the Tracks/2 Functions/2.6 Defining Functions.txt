@@ -1,0 +1,156 @@
+2.6 Defining Functions
+
+The network port our application listens to will change depending on the time of the day the program is run. We'll use a new function called getListenPort() to detect the proper value for the listening port.
+
+chat/util/main.go
+
+package util
+
+import "fmt"
+
+func RunGuest(ipPort string) {
+  fmt.Println("Running guest", ipPort)
+}
+
+func RunHost(ipPort string) {
+  fmt.Println("Running host", ipPort)
+}
+
+func GetLocalNetworkIP() string {
+  return "192.168.1.0"
+}
+
+chat/main.go
+
+package main
+
+import (
+  "chat/util"
+  "os"
+  
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+
+
+
+1. Define a new function getListenPort. This function takes no argument and returns a string data type.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "os"
+  
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+func getListenPort() string {}
+
+2. We'll need to access the current time of day. To do this, we first need to import the "time" package.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "os"
+  "time"
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+func getListenPort() string {}
+
+3. From inside the new function, call time.Now().Hour() and, using type inference, assign the result to a new variable called hourOfDay.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "os"
+  "time"
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+func getListenPort() string {
+  hourOfDay := time.Now().Hour()
+}
+
+4. Finally, let’s add some conditionals. First, if hourOfDay is less than 12, then we’ll return the string "8080"; if it's not less than 12 but it is less than 20, return "8081"; otherwise return "8082".
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "os"
+  "time"
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+func getListenPort() string {
+  hourOfDay := time.Now().Hour()
+  if hourOfDay < 12 {
+    return "8080"
+  }else if hourOfDay < 20{
+    return "8081"
+  } else {
+    return "8082"
+  }
+}

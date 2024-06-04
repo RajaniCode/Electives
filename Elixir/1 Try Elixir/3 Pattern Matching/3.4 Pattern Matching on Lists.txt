@@ -1,0 +1,26 @@
+3.4 Pattern Matching on Lists
+
+Let's use pattern matching to read individual elements from a list.
+
+withdrawals.exs
+
+withdrawals = [50.0, 60.75, 12.0]
+
+            = withdrawals
+
+IO.puts "Gym: $#{gym}, Cell Phone: $#{cell_phone}, Netflix: $#{netflix}"
+
+
+Use pattern matching to read the individual elements from the withdrawals list so the code runs properly and prints the following text to the console:
+
+Gym: $50.0, Cell Phone: $60.75, Netflix: $12.0
+
+
+Answer:
+withdrawals.exs
+
+withdrawals = [50.0, 60.75, 12.0]
+
+[gym, cell_phone, netflix] = withdrawals
+
+IO.puts "Gym: $#{gym}, Cell Phone: $#{cell_phone}, Netflix: $#{netflix}"

@@ -1,0 +1,49 @@
+Pseudo Classes III
+
+
+Instead of odd items, let's instead target every 4th list item, starting with the first.
+
+HTML SOURCE
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section>
+      <article>
+        <h1>Seasonal Hours</h1>
+        <ul class="hours">
+          <li>January - 9am - 6pm</li>
+          <li>February - 9am - 6pm</li>
+          <li>March - 9am - 6pm</li>
+          <li>April - 9am - 6pm</li>
+          <li>May - 10am - 4pm</li>
+          <li>June - 10am - 4pm</li>
+          <li>July - 11am - 3pm</li>
+          <li>August - 11am - 3pm</li>
+          <li>September - 10am - 4pm</li>
+          <li>October - 10am - 4pm</li>
+          <li>November - 9am - 6pm</li>
+          <li>December - 9am - 6pm</li>
+        </ul>
+      </article>
+    </section>
+  </body>
+</html>
+
+style.css
+
+.hours li:nth-child(odd) {
+  background: #c5c9cf;
+}
+
+Answer:
+
+style.css
+
+.hours li:nth-child(4n+1) {
+  background: #c5c9cf;
+}

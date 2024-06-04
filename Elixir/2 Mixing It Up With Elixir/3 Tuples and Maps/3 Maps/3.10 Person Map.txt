@@ -1,0 +1,17 @@
+3.10 Person Map
+
+The following Elixir map represents a person structure with named fields:
+
+person = %{ "name" => "Sam", "age" => 31 }
+
+Select the option that shows the results of calling Map.fetch(person, "age") and Map.fetch!(person, "id") respectively.
+
+[Single Answer]
+
+{:ok, 31} and :error
+{:ok, 31} and KeyError
+31 and KeyError
+"31" and 0
+
+
+Answer: {:ok, 31} and KeyError

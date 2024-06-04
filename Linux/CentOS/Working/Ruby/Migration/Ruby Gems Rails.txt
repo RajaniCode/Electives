@@ -1,0 +1,402 @@
+1. RubyInstaller
+http://rubyinstaller.org/downloads/
+#As on date: Ruby 2.2.3 (x64): rubyinstaller-2.2.3-x64.exe
+
+MINGW64 ~
+$ ruby --version
+ruby 2.2.3p173 (2015-08-18 revision 51636) [x64-mingw32]
+
+Note:
+Environment Variables
+System Variables
+Path:
+C:\Ruby22-x64\bin;
+
+##########################################################################################################################################################
+
+2. RubyGems
+https://rubygems.org/
+https://rubygems.org/pages/download
+
+RubyGems is a package management framework for Ruby. Download the latest version here:
+
+TGZ
+ZIP
+GEM
+GIT
+
+If you don't have any RubyGems installed, there is still the pre-gem approach to getting software, doing it manually:
+
+1. Download from above
+2. Unpack into a directory and cd there (Extract viz. rubygems-2.6.3.zip to C:\rubygems-2.6.3)
+3. Install with: ruby setup.rb (you may need admin/root privilege) (Viz. cd "C:\rubygems-2.6.3")
+
+For more details and other options, see:
+ruby setup.rb --help
+
+GitBash
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+MINGW64 /
+$ cd "C:\rubygems-2.6.3"
+
+MINGW64 /c/rubygems-2.6.3
+$ ruby --version
+ruby 2.2.3p173 (2015-08-18 revision 51636) [x64-mingw32]
+
+MINGW64 /c/rubygems-2.6.3
+$ ruby setup.rb
+RubyGems 2.6.3 installed
+Parsing documentation for rubygems-2.6.3
+Installing ri documentation for rubygems-2.6.3
+
+=== 2.6.3 / 2016-04-05
+
+Minor enhancements:
+
+* Lazily calculate Gem::LoadError exception messages. Pull request #1550
+  by Aaron Patterson.
+* New fastly cert. Pull request #1548 by David Radcliffe.
+* Organize and cleanup SSL certs. Pull request #1555 by James Wen.
+* [RubyGems] Make deprecation message for paths= more helpful. Pull
+  request #1562 by Samuel Giddins.
+* Show default gems when using "gem list". Pull request #1570 by Luis
+  Sagastume.
+
+Bug fixes:
+
+* Stub ordering should be consistent regardless of how cache is populated.
+  Pull request #1552 by Aaron Patterson.
+* Handle cases when the @@stubs variable contains non-stubs. Pull request
+  #1558 by Per Lundberg.
+* Fix test on Windows for inconsistent temp path. Pull request #1554 by
+  Hiroshi Shirosaki.
+* Fix `Gem.find_spec_for_exe` picks oldest gem. Pull request #1566 by
+  Shinichi Maeshima.
+* [Owner] Fallback to email and userid when owner email is missing. Pull
+  request #1569 by Samuel Giddins.
+* [Installer] Handle nil existing executable. Pull request #1561 by Samuel
+  Giddins.
+* Allow two digit version numbers in the tests. Pull request #1575 by unak.
+
+=== 2.6.2 / 2016-03-12
+
+Bug fixes:
+
+* Fix wrong version of gem activation for bin stub. Pull request #1527 by
+  Aaron Patterson.
+* Speed up gem activation failures. Pull request #1539 by Aaron Patterson.
+* Fix platform sorting in the resolver. Pull request #1542 by Samuel E.
+  Giddins.
+* Ensure we unlock the monitor even if try_activate throws. Pull request
+  #1538 by Charles Oliver Nutter.
+
+
+=== 2.6.1 / 2016-02-28
+
+Bug fixes:
+
+* Ensure `default_path` and `home` are set for paths. Pull request #1513
+  by Aaron Patterson.
+* Restore but deprecate support for Array values on `Gem.paths=`. Pull
+  request #1514 by Aaron Patterson.
+* Fix invalid gem file preventing gem install from working. Pull request
+  #1499 by Luis Sagastume.
+
+=== 2.6.0 / 2016-02-26
+
+Minor enhancements:
+
+* RubyGems now defaults the `gem push` to the gem's "allowed_push_host"
+  metadata setting.  Pull request #1486 by Josh Lane.
+* Update bundled Molinillo to 0.4.3. Pull request #1493 by Samuel E. Giddins.
+* Add version option to gem open command. Pull request #1483 by Hrvoje
+  Šimic.
+* Feature/add silent flag. Pull request #1455 by Luis Sagastume.
+* Allow specifying gem requirements via env variables. Pull request #1472
+  by Samuel E. Giddins.
+
+Bug fixes:
+
+* RubyGems now stores `gem push` credentials under the host you signed-in for.
+  Pull request #1485 by Josh Lane.
+* Move `coding` location to first line. Pull request #1471 by SHIBATA
+  Hiroshi.
+* [PathSupport] Handle a regexp path separator. Pull request #1469 by
+  Samuel E. Giddins.
+* Clean up the PathSupport object. Pull request #1094 by Aaron Patterson.
+* Join with File::PATH_SEPARATOR in Gem.use_paths. Pull request #1476 by
+  Samuel E. Giddins.
+* Handle when the gem home and gem path arent set in the config file. Pull
+  request #1478 by Samuel E. Giddins.
+* Terminate TimeoutHandler. Pull request #1479 by Nobuyoshi Nakada.
+* Remove redundant cache. Pull request #1482 by Eileen M. Uchitelle.
+* Freeze `Gem::Version@segments` instance variable. Pull request #1487 by
+  Ben Dean.
+* Gem cleanup is trying to uninstall gems outside GEM_HOME and reporting
+  an error after it tries. Pull request #1353 by Luis Sagastume.
+* Avoid duplicated sources. Pull request #1489 by Luis Sagastume.
+* Better description for quiet flag. Pull request #1491 by Luis Sagastume.
+* Raise error if find_by_name returns with nil. Pull request #1494 by
+  Zoltán Hegedüs.
+* Find_files only from loaded_gems when using gemdeps. Pull request #1277
+  by Michal Papis.
+
+
+------------------------------------------------------------------------------
+
+RubyGems installed the following executables:
+        C:/Ruby22-x64/bin/gem
+
+Ruby Interactive (ri) documentation was installed. ri is kind of like man
+pages for ruby libraries. You may access it like this:
+  ri Classname
+  ri Classname.class_method
+  ri Classname#instance_method
+If you do not wish to install this documentation in the future, use the
+--no-document flag, or set it as the default in your ~/.gemrc file. See
+'gem help env' for details.
+
+
+MINGW64 /c/rubygems-2.6.3
+$ ruby --version
+ruby 2.2.3p173 (2015-08-18 revision 51636) [x64-mingw32]
+
+MINGW64 /c/rubygems-2.6.3
+$ gem --version
+2.6.3
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+##########################################################################################################################################################
+
+3. Rails
+http://rubyonrails.org/download/
+With Ruby installed, you can install all of Rails and its dependencies through RubyGems on the command line: 
+gem install rails
+
+GitBash
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+MINGW64 ~
+$ gem install rails
+Successfully installed rails-4.2.4
+Parsing documentation for rails-4.2.4
+Installing ri documentation for rails-4.2.4
+Done installing documentation for rails after 464 seconds
+1 gem installed
+
+MINGW64 ~
+$ rails --version
+Rails 4.2.4
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+##########################################################################################################################################################
+
+4. Ruby Development Kit Installation
+
+Download the DevKit archive that corresponds to the Ruby installation and system architecture. It is a self-extracting archive. 
+When you execute the file, it’ll ask you for a destination for the files. Enter a path that has no spaces in it. 
+It is recommended something simple, like C:\RubyDevKit\. Click Extract and wait until the process is finished.
+
+ruby dk.rb init
+
+GitBash
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+MINGW64 /
+$ ruby --version
+ruby 2.2.3p173 (2015-08-18 revision 51636) [x64-mingw32]
+
+MINGW64 /
+$ gem --version
+2.6.3
+
+MINGW64 /
+$ cd "C:\RubyDevKit"
+
+MINGW64 /c/RubyDevKit
+$ ruby dk.rb init
+
+Initialization complete! Please review and modify the auto-generated
+'config.yml' file to ensure it contains the root directories to all
+of the installed Rubies you want enhanced by the DevKit.
+
+***************************************************************************************************************
+
+Edit
+
+C:\RubyDevKit\config.yml
+
+---
+- C:/Ruby22-x64
+---
+
+***************************************************************************************************************
+
+MINGW64 /c/RubyDevKit
+$ gem --version
+2.6.3
+
+MINGW64 /c/RubyDevKit
+$ ruby dk.rb install
+[INFO] Installing 'C:/Ruby22-x64/lib/ruby/site_ruby/2.2.0/rubygems/defaults/operating_system.rb'
+[INFO] Installing 'C:/Ruby22-x64/lib/ruby/site_ruby/devkit.rb'
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+Note:
+Environment Variables
+System Variables
+Path:
+C:\Ruby22-x64\bin;
+C:\RailsInstaller\Git\cmd;
+C:\RailsInstaller\Ruby2.2.0\bin;
+
+##########################################################################################################################################################
+
+5. Bundler
+
+Bundler provides a consistent environment for Ruby projects by tracking and installing the exact gems and versions that are needed. 
+$ gem install bundler
+
+GitBash
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+MINGW64 /
+$ ruby --version
+ruby 2.2.4p230 (2015-12-16 revision 53155) [i386-mingw32]
+
+MINGW64 /
+$ gem --version
+2.4.5.1
+
+MINGW64 /
+$ rails --version
+Rails 4.2.5.1
+
+MINGW64 /
+$ gem install bundler
+Successfully installed bundler-1.11.2
+Parsing documentation for bundler-1.11.2
+Installing ri documentation for bundler-1.11.2
+Done installing documentation for bundler after 15 seconds
+1 gem installed
+
+MINGW64 /
+$ bundler --version
+Bundler version 1.11.2
+
+MINGW64 /
+$ ruby --version
+ruby 2.2.4p230 (2015-12-16 revision 53155) [i386-mingw32]
+
+MINGW64 /
+$ gem --version
+2.4.5.1
+
+MINGW64 /
+$ rails --version
+Rails 4.2.5.1
+
+MINGW64 /
+$ bundler --version
+Bundler version 1.11.2
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+##########################################################################################################################################################
+
+Heroku
+Signup
+https://signup.heroku.com/dc
+Login
+https://id.heroku.com/login
+
+https://devcenter.heroku.com/articles/getting-started-with-jruby#introduction
+Getting Started with Ruby on Heroku (Microsoft Windows)
+Introduction
+This tutorial will show you how to develop a Ruby app in a local Microsoft Windows development environment and then deploy it to 
+Heroku. 
+It uses JRuby, which provides a slightly more Windows-friendly environment.
+If you’re not on Windows, we recommend the traditional Getting Started with Ruby on Heroku guide.
+The first step is to sign up for a free Heroku account.
+Next, install the prerequisites:
+1.Download and install JDK 8 to get a Java virtual machine (JVM).
+2.Download and install JRuby 9.0.0.0. Select the JRuby .exe installer for your version of Windows. 
+After installing, start a new command prompt as your PATHs will have changed.
+3.Install Bundler. To do this, open a command prompt and type: jruby -S gem install bundler.
+If you receive an error such as 'jruby' is not recognized as an internal or external command, operable program or batch file., 
+close your terminal session and open a new terminal to ensure that the %PATH% environment variable is set correctly.
+
+GitBash
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+MINGW64 ~
+$ jruby --version
+jruby 9.0.0.0 (2.2.2) 2015-07-21 e10ec96 Java HotSpot(TM) 64-Bit Server 
+VM 25.51-b03 on 1.8.0_51-b16 +jit [Windows 7-amd64]
+
+MINGW64 ~
+$ jruby -S gem install bundler
+Successfully installed bundler-1.10.6
+1 gem installed
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+
+Set up
+In this step you will install the Heroku Toolbelt. 
+This provides you access to git, as well as the Heroku Command Line Interface (CLI), 
+which can be used for managing and scaling your applications and add-ons.
+A key part of the toolbelt is the heroku local command, 
+which can help in running your applications locally.
+Download Heroku Toolbelt for Windows
+Heroku CLI - Deploying To Heroku [http://docs.railsbridge.org/intro-to-rails/deploying_to_heroku]
+https://devcenter.heroku.com/articles/heroku-command#installing-the-heroku-cli
+The heroku command-line tool is an interface to the Heroku Platform API and includes support for things like creating/renaming 
+apps, running one-off dynos, taking backups, and configuring add-ons. 
+Most app management activities require the Heroku CLI to be installed and configured alongside your local working environment.
+https://toolbelt.heroku.com/
+#As on date: Heroku Toolbelt for Windows: heroku-toolbelt.exe
+Once you have installed the Heroku Toolbelt, you can use the heroku command from your command shell.
+Log in using the email address and password you used when creating your Heroku account:
+> heroku login
+Enter your Heroku credentials.
+Email: ruby@example.com
+Password:
+Authentication successful.
+
+
+Logging in is required to allow both the heroku and git commands to operate.
+
+##########################################################################################################################################################
+
+Rake-compiler
+https://github.com/rake-compiler/rake-compiler
+rake-compiler is first and foremost a productivity tool for Ruby developers. 
+Its goal is to make the busy developer's life easier by simplifying the building and packaging of Ruby extensions by simplifying code 
+and reducing duplication.
+It follows *convention over configuration* by advocating a standardized build and package structure for both C and Java based 
+RubyGems.
+rake-compiler is the result of many hard-won experiences dealing with several diverse RubyGems that provided native extensions for 
+different platforms and different user configurations in different ways.
+Details such as differences in code portability, differences in code clarity, and differences in project directory structure often made it 
+very difficult for newcomers to those RubyGems.
+From these challenges, rake-compiler was born with the single-minded goal of making the busy RubyGem developer's life much less 
+difficult.
+
+Feature Overview
+Some of the benefits rake-compiler provides include:
+
+• No custom rake tasks required. Less code duplication and errors.
+• Painlessly build extensions on different platforms (Linux, OSX and Windows).
+• Painlessly build extensions for different Ruby implementations (JRuby, Rubinius and MRI).
+• Allow multiple extensions to be compiled inside the same gem.
+• Painlessly build “fat” native gems for Windows users (from Linux or OSX).
+• Mimics RubyGems standard installation process, helping as a test environment.
+• Simplifies cross platform extension compilation (targeting Windows from Linux).
+
+Installation:
+$ gem install rake-compiler
+
+##########################################################################################################################################################
+
+Ruby Version Manager (RVM) 
+https://rvm.io/
+RVM is a command-line tool which allows you to easily install, manage, and work with multiple ruby environments from interpreters to 
+sets of gems. 
+
+##########################################################################################################################################################

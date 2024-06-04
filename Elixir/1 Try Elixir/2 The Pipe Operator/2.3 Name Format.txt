@@ -1,0 +1,39 @@
+2.3 Name Format
+
+The Person.format_name function takes a full name as a single argument and returns a version of the name formatted for a specific report. The formatted version includes the last name capitalized, followed by a comma, followed by the first name. For example, it takes the string "José Valim" and returns the string "VALIM, José".
+
+person.exs
+
+defmodule Person do
+  def format_name(full_name) do
+    format(String.split(full_name))
+  end
+
+  def format(parts) do
+    first = Enum.at(parts, 0)
+    last = Enum.at(parts, 1)
+    "#{String.upcase(last)}, #{first}"
+  end
+end 
+
+IO.puts Person.format_name("José Valim")
+
+
+Answer:
+person.exs
+
+defmodule Person do
+  def format_name(full_name) do
+    full_name |> String.split |> format
+  end
+
+  def format(parts) do
+    first = Enum.at(parts, 0)
+    last = Enum.at(parts, 1)
+    "#{String.upcase(last)}, #{first}"
+  end
+end 
+
+IO.puts Person.format_name("José Valim")
+
+

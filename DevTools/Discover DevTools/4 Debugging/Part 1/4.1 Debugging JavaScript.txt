@@ -1,0 +1,33 @@
+4.1 Debugging JavaScript
+
+We added a Calendar.clearEvents() method to our calendar, but there seems to be a bug. Look at the error in the console and click to view the line where it's failing in the calendar_error.js file in the Sources panel. Then, back in the console, type Calendar.countEvents() to see how many events we need to clear.
+
+It looks we are calling the wrong method on our events. We want the .remove() method instead of .destroy(). Fix it in the Sources panel and save your changes. Then call Calendar.clearEvents() from the console to verify that your update fixed the error!
+
+F12
+Console
+calendar_error-ad8436c99718ea5d05434acbc2bfc65d.js:4 Uncaught TypeError: event.destroy is not a function
+
+Calendar.countEvents();
+
+3
+
+
+Source
+window.Calendar.clearEvents = function(){
+    events = $(".events .event");
+    $.each(events, function(index, event){
+      //event.destroy();
+      event.remove();
+    });
+  }
+
+$(window).load(function() {
+  Calendar.clearEvents();
+});
+
+
+Console
+Calendar.clearEvents();
+
+undefined

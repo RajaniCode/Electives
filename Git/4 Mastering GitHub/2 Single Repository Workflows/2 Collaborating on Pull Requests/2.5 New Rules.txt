@@ -1,0 +1,103 @@
+2.5 New Rules
+
+
+There's only so much of git you can learn when you're the only one working in the repository. Why don't we come to your repo and make some commits?
+
+
+GitHub Username: pluralschool
+
+
+1. The Dojo needs some new rules and we're going to go ahead and start the process. Click "Submit Answer" for us to create a "new_rules" branch on your "dojo_rules" repository and a create new pull request from "new_rules" back to "master". If you already have a "new_rules" branch, we'll go ahead and delete it and recreate it.
+
+Answer: Click "Submit Answer"
+
+2. OK, our files are all committed and pushed up to your "dojo_rules" repo on the "new_rules" branch. Switch back to the master branch and pull down the latest changes and switch over to the "new_rules" branch.
+
+If you take a look at the "dojo_rules.md" file, you'll notice we were a bit careless in our new rule – misspelling "coffee" and capitalizing "dojo" when it should be lowercase. Go ahead and fix both of these errors on the branch and push your changes up to GitHub also on the "new_rules" branch.
+
+Your new commit should also now show up in the pull request we created. Once you've verified all of this, let us know by clicking "Submit Answer".
+
+Answer:
+
+Welcome to Git (version 1.9.5-preview20150319)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Rajani@RAJANIDELL ~
+$ cd "E:\Working\Git\Code School Course\4 Mastering GitHub\2 Single Reposi
+tory Workflows\2 Collaborating on Pull Requests\dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (master)
+$ git branch
+* master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (master)
+$ git pull
+Already up-to-date.
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (master)
+$ git checkout new_rules
+Branch new_rules set up to track remote branch new_rules from origin.
+Switched to a new branch 'new_rules'
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (new_rules)
+$ git branch
+  master
+* new_rules
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (new_rules)
+$ git status
+On branch new_rules
+Your branch is up-to-date with 'origin/new_rules'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   dojo_rules.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (new_rules)
+$ git commit -a -m "Fix misspelling 'coffee' and capitalizing 'dojo'"
+[new_rules dedf727] Fix misspelling 'coffee' and capitalizing 'dojo'
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (new_rules)
+$ git push origin new_rules
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 10, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 347 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+   0769dee..dedf727  new_rules -> new_rules
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (new_rules)
+$ git commit
+On branch new_rules
+Your branch is up-to-date with 'origin/new_rules'.
+
+nothing to commit, working directory clean
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (new_rules)
+$ git status
+On branch new_rules
+Your branch is up-to-date with 'origin/new_rules'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+        modified:   dojo_rules.md
+
+no changes added to commit (use "git add" and/or "git commit -a")
+
+
+3. You're all set! Go ahead and merge the "Too many people are spilling coffee" pull request we created back into master. Try doing this from the GitHub Pull Request page. Try clicking on the "Merge pull request" button on the pull request. Don't delete the branch for this one.
+
+Answer: Merge pull request on GitHub

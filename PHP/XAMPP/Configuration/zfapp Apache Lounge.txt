@@ -1,0 +1,49 @@
+http://localhost:82/zfapp/public/
+
+# Apache Lounge
+Create/Copy php.ini to C:\PHP
+
+# Apache Lounge
+Apache24\conf\httpd.conf
+ServerName localhost:82
+Listen 82
+
+<IfModule dir_module>
+    DirectoryIndex index.php index.pl index.cgi index.asp index.shtml index.html index.htm \
+                   default.php default.pl default.cgi default.asp default.shtml default.html default.htm \
+                   home.php home.pl home.cgi home.asp home.shtml home.html home.htm
+</IfModule>
+
+LoadModule php7_module "C:PHP/php7apache2_4.dll"
+AddType application/x-httpd-php .php
+PHPIniDir "C:/PHP"
+
+# Apache Lounge
+# Apache24\conf\extra\httpd-vhosts.conf
+
+<VirtualHost *:82>
+    ServerName zfapp.localhost
+    DocumentRoot C:/Users/Aspire/Downloads/PHP/Apache HTTP Server Project/Apache Lounge/Apache24/htdocs/zfapp/public
+    SetEnv APPLICATION_ENV "development"
+    <Directory C:/Users/Aspire/Downloads/PHP/Apache HTTP Server Project/Apache Lounge/Apache24/htdocs/zfapp/public>
+        DirectoryIndex index.php
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+
+# Apache Lounge # Run httpd # DO NOT Install as a service:
+Apache24\bin>httpd 
+
+## Test by creating C:\xampp\htdocs\test.php
+<?php phpinfo() ?>
+
+http://localhost:82/test.php
+
+http://localhost:82/app.php
+
+http://localhost:82/index.php
+
+http://localhost:82/index.html
+
+http://localhost:82/zfapp/public/

@@ -1,0 +1,21 @@
+5. Branch status
+
+
+Wait, did you already pull that branch locally? Check for stale branches that are tracking "origin".
+
+
+$ git remote show origin
+
+
+* remote origin
+  Fetch URL: https://git@pshop.com/petshop_online/petshop.git
+  Push  URL: https://git@pshop.com/petshop_online/petshop.git
+  HEAD branch: master
+  Remote branch:
+    master tracked
+  Local branch configured for 'git pull':
+    weasel merges with remote weasel
+  Local ref configured for 'git push':
+    master pushes to master (local out of date)
+
+Success!

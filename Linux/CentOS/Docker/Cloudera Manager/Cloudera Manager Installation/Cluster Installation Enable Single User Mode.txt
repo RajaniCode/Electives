@@ -1,0 +1,14 @@
+Cluster Installation
+
+Enable Single User Mode
+
+Only supported for CDH 5.2 and above.
+
+By default, service processes run as distinct users on the system. For example, HDFS DataNodes run as user "hdfs" and HBase RegionServers run as user "hbase." Enabling "single user mode" configures Cloudera Manager to run service processes as a single user, by default "cloudera-scm", thereby prioritizing isolation between managed services and the rest of the system over isolation between the managed services.
+
+The major benefit of this option is that the Agent does not run as root. However, this mode complicates installation, which is described fully in the documentation [http://www.cloudera.com/documentation/enterprise/latest/topics/install_singleuser_reqts.html]. Most notably, directories which in the regular mode are created automatically by the Agent, must be created manually on every host with appropriate permissions, and sudo (or equivalent) access must be set up for the configured user.
+
+Switching back and forth between single user mode and regular mode is not supported.
+
+Single User Mode -NO
+[Configure all clusters to run in single user mode where the Cloudera Manager agent and all service processes run as the same system user. Only supported for CDH 5.2 and higher.]

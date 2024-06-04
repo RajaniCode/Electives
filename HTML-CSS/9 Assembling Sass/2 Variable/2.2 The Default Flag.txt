@@ -1,0 +1,78 @@
+2.2 The Default Flag
+
+
+A coworker has been asking to see our modals partial for another project. Before we hand it over, let's clean up the repeated padding declarations to use a variable. To keep it modular, that variable definition should ensure it doesn't override a variable of the same name set elsewhere.
+
+CSS
+
+.modal {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+.modal-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  padding: 10px;
+}
+
+.modal-action {
+  background: purple;
+  display: block;
+  padding: 10px;
+}
+
+APPLICATION.SCSS
+
+.modal {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: 10px;
+}
+.modal-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  padding: 10px;
+}
+.modal-action {
+  background: purple;
+  display: block;
+  padding: 10px;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$base: 10px !default;
+
+.modal {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: $base;
+}
+.modal-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  padding: $base;
+}
+.modal-action {
+  background: purple;
+  display: block;
+  padding: $base;
+}
+
+CSS
+
+.modal {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+.modal-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  padding: 10px;
+}

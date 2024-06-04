@@ -1,0 +1,18 @@
+2.5 The Template
+
+There’s one step left before we can see the list of events rendered on a web page: coding the "index.html" template.
+
+Complete the code for the list comprehension so that it properly creates a list of <li> tags with event.name.
+
+lib/neon_web/templates/event/index.html.eex
+<h2>All Events</h2>
+
+<ul>
+  <%= for  do %>
+    <li><%= event.name %></li>
+  <% end %>
+</ul>
+
+
+Answer:
+lib/neon_web/templates/event/index.html.eex

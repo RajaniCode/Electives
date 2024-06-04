@@ -1,0 +1,79 @@
+2.3 Lists
+
+
+A last-minute change from the designer just came through: the padding value for the various modal components should be 20px 10px 15px instead of 10px. Knowing we can have lists stored in variables, alter $modal-padding to reflect this revision.
+
+
+CSS
+
+.modal {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 10px;
+}
+
+.modal-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  padding: 10px;
+}
+
+APPLICATION.SCSS
+
+$modal-padding: 10px !default;
+
+.modal {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: $modal-padding;
+}
+.modal-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  padding: $modal-padding;
+}
+.modal-action {
+  background: purple;
+  display: block;
+  padding: $modal-padding;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$modal-padding: 20px 10px 15px !default;
+
+.modal {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  padding: $modal-padding;
+}
+.modal-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  padding: $modal-padding;
+}
+.modal-action {
+  background: purple;
+  display: block;
+  padding: $modal-padding;
+}
+
+
+CSS
+
+.modal {
+  background: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  padding: 20px 10px 15px; }
+
+.modal-title {
+  border-bottom: 1px solid #ccc;
+  font-size: 24px;
+  padding: 20px 10px 15px; }
+
+.modal-action {
+  background: purple;
+  display: block;
+  padding: 20px 10px 15px; }

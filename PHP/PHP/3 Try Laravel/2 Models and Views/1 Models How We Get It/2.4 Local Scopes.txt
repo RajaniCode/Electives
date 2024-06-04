@@ -1,0 +1,49 @@
+2.4 Local Scopes
+
+Scopes are a smarter way to write queries in a model that might need to be run multiple times.
+
+app/Farm.php
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Farm extends Model
+{
+  
+}
+
+
+1. Start by creating a local scope called scopeFarmington that takes a parameter $query.
+ 
+Answer
+app/Farm.php
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Farm extends Model
+{
+    public function scopeFarmington($query) { }
+}
+
+2. Next, using a where method, return a $query where the farm's city is equal to 'Farmington'.
+
+Answer
+app/Farm.php
+<?php
+
+namespace App;
+
+use Illuminate\Database\Eloquent\Model;
+
+class Farm extends Model
+{
+    public function scopeFarmington($query)
+    {
+        return $query->where('city', 'Farmington');
+    }
+}

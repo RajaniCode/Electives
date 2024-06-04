@@ -1,0 +1,46 @@
+VirtualBox COM Server 5.1.14 r112924 win.amd64 (Jan 16 2017 16:36:58) release log
+00:00:00.008006 main     Log opened 2017-05-12T10:53:14.837835300Z
+00:00:00.008006 main     Build Type: release
+00:00:00.008006 main     OS Product: Windows 8.1
+00:00:00.008006 main     OS Release: 6.3.9600
+00:00:00.008006 main     OS Service Pack: 
+00:00:00.117079 main     DMI Product Name: Aspire V5-471P
+00:00:00.131084 main     DMI Product Version: V2.13
+00:00:00.131084 main     Host RAM: 3889MB (3.7GB) total, 2108MB (2.0GB) available
+00:00:00.131084 main     Executable: C:\Program Files\Oracle\VirtualBox\VBoxSVC.exe
+00:00:00.131084 main     Process ID: 4724
+00:00:00.131084 main     Package type: WINDOWS_64BITS_GENERIC
+00:00:00.134086          VirtualBox: object creation starts
+00:00:00.135087          Home directory: 'C:\Users\Aspire\.VirtualBox'
+00:00:00.135087          Installed Drivers:
+00:00:00.139093            C:\WINDOWS\system32\DRIVERS\VBoxNetAdp6.sys (Version: 5.1.14.12924)
+00:00:00.140094            C:\WINDOWS\system32\DRIVERS\VBoxNetLwf.sys (Version: 5.1.14.12924)
+00:00:00.141095            C:\WINDOWS\system32\DRIVERS\VBoxUSBMon.sys (Version: 5.1.14.12924)
+00:00:00.142094            C:\WINDOWS\system32\DRIVERS\VBoxDrv.sys (Version: 5.1.14.12924)
+00:00:00.145094          Loading settings file "C:\Users\Aspire\.VirtualBox\VirtualBox.xml" with version "1.12-windows"
+00:00:00.353856          Getting USB descriptor failed with error 31
+00:00:00.358859          USB: Unknown USB device detected (idVendor: 0x0489, idProduct: 0xe04e). Please, report the idVendor and idProduct to virtualbox.org.
+00:00:00.358859          USB: Unknown USB device detected (idVendor: 0x1bcf, idProduct: 0x2c17). Please, report the idVendor and idProduct to virtualbox.org.
+00:00:00.410893          HostDnsMonitor: old information
+00:00:00.410893            no server entries
+00:00:00.410893            no domain set
+00:00:00.410893            no search string entries
+00:00:00.410893          HostDnsMonitor: new information
+00:00:00.410893            server 1: 192.168.0.1
+00:00:00.410893            no domain set
+00:00:00.410893            no search string entries
+00:00:00.410893          HostDnsMonitorProxy::notify
+00:00:00.522967          VD: VDInit finished
+00:00:00.524971          VirtualBox: object created
+00:00:00.960601          Import settings with version "1.12-linux"
+00:00:01.105949          ERROR [COM]: aRC=VBOX_E_OBJECT_NOT_FOUND (0x80bb0001) aIID={0169423f-46b4-cde9-91af-1e9d5b6cd945} aComponent={VirtualBoxWrap} aText={Could not find a registered machine named 'ubuntu-cloudimg-trusty-vagrant-amd64'}, preserve=false aResultDetail=0
+00:00:01.456068          ERROR [COM]: aRC=VBOX_E_FILE_ERROR (0x80bb0004) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Could not find file for the medium 'C:\Users\Aspire\VirtualBox VMs\ubuntu-cloudimg-trusty-vagrant-amd64\box-disk1.vmdk' (VERR_PATH_NOT_FOUND)}, preserve=false aResultDetail=0
+00:00:01.660175          Import settings with version "1.12-linux"
+00:00:01.660175          ERROR [COM]: aRC=VBOX_E_OBJECT_NOT_FOUND (0x80bb0001) aIID={0169423f-46b4-cde9-91af-1e9d5b6cd945} aComponent={VirtualBoxWrap} aText={Could not find a registered machine named 'ubuntu-cloudimg-trusty-vagrant-amd64'}, preserve=false aResultDetail=0
+00:00:01.661172          ERROR [COM]: aRC=VBOX_E_FILE_ERROR (0x80bb0004) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Could not find file for the medium 'C:\Users\Aspire\VirtualBox VMs\ubuntu-cloudimg-trusty-vagrant-amd64\box-disk1.vmdk' (VERR_PATH_NOT_FOUND)}, preserve=false aResultDetail=0
+00:00:30.184995          ERROR [COM]: aRC=E_FAIL (0x80004005) aIID={b2547866-a0a1-4391-8b86-6952d82efaa0} aComponent={SessionMachine} aText={This machine does not have any snapshots}, preserve=false aResultDetail=0
+00:00:30.308076          ERROR [COM]: aRC=E_FAIL (0x80004005) aIID={b2547866-a0a1-4391-8b86-6952d82efaa0} aComponent={SessionMachine} aText={This machine does not have any snapshots}, preserve=false aResultDetail=0
+00:00:35.643122 main     VirtualBox: object deletion starts
+00:00:35.643122 main     ERROR [COM]: aRC=VBOX_E_OBJECT_IN_USE (0x80bb000c) aIID={4afe423b-43e0-e9d0-82e8-ceb307940dda} aComponent={MediumWrap} aText={Medium 'C:\Users\Aspire\VirtualBox VMs\ubuntu-cloudimg-trusty-vagrant-amd64_1494586396388_2114\box-disk1.vmdk' cannot be closed because it is still attached to 1 virtual machines}, preserve=false aResultDetail=0
+00:00:35.650129 Watcher  ERROR [COM]: aRC=E_ACCESSDENIED (0x80070005) aIID={0169423f-46b4-cde9-91af-1e9d5b6cd945} aComponent={VirtualBoxWrap} aText={The object is not ready}, preserve=false aResultDetail=0
+00:00:35.650129 main     VirtualBox: object deleted

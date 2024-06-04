@@ -1,0 +1,45 @@
+6.4 Concatenation
+
+
+Our @if directive performs a bit of string concatenation, but we'd prefer if the output value had quotes around it. Tweak the directive to ensure this is the case.
+
+
+CSS
+
+.sign {
+  font-family: sans-serif;
+}
+
+APPLICATION.SCSS 
+
+$theme: modern;
+$font: 'serif';
+
+@if $theme == modern {
+  $font: sans- + $font;
+}
+
+.sign {
+  font-family: $font;
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$theme: modern;
+$font: 'serif';
+$sans-: 'sans-';
+
+@if $theme == modern {
+  $font: $sans- + $font;
+}
+
+.sign {
+  font-family: $font;
+}
+
+CSS
+
+.sign {
+  font-family: "sans-serif"; }

@@ -1,0 +1,51 @@
+[rajani@localhost Django-app]$ python --version
+Python 2.7.5
+[rajani@localhost Django-app]$ pip --version
+pip 8.1.1 from /usr/lib/python2.7/site-packages (python 2.7)
+[rajani@localhost Django-app]$ python -c "import django; print(django.get_version())"
+1.9.6
+[rajani@localhost Django-app]$ django-admin startproject mysite
+[rajani@localhost Django-app]$ ls mysite
+manage.py  mysite
+[rajani@localhost Django-app]$ ls mysite/mysite
+__init__.py  settings.py  urls.py  wsgi.py
+[rajani@localhost Django-app]$ cd mysite
+[rajani@localhost mysite]$ python manage.py runserver
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have unapplied migrations; your app may not work properly until they are applied.
+Run 'python manage.py migrate' to apply them.
+
+May 06, 2016 - 14:12:55
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Not Found: /
+[06/May/2016 14:13:51] "GET / HTTP/1.1" 200 1767
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have unapplied migrations; your app may not work properly until they are applied.
+Run 'python manage.py migrate' to apply them.
+
+May 06, 2016 - 14:18:57
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have unapplied migrations; your app may not work properly until they are applied.
+Run 'python manage.py migrate' to apply them.
+
+May 06, 2016 - 14:19:07
+Django version 1.9.6, using settings 'mysite.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CONTROL-C.
+[06/May/2016 14:19:23] "GET /polls/ HTTP/1.1" 200 40
+
+

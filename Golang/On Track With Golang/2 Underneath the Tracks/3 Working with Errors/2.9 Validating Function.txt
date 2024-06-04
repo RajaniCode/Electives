@@ -1,0 +1,201 @@
+2.9 Validating Function
+
+Let's finish writing the new readArgs() function. This function reads arguments supplied to our program and runs a simple validation for the IP address. If the user-supplied IP address includes more than 15 characters, then it's an invalid IP address and the function should return an error.
+
+chat/util/main.go
+
+package util
+
+import "fmt"
+
+func RunGuest(ipPort string) {
+  fmt.Println("Running guest", ipPort)
+}
+
+func RunHost(ipPort string) {
+  fmt.Println("Running host", ipPort)
+}
+
+func GetLocalNetworkIP() string {
+  return "192.168.1.0"
+}
+
+chat/main.go
+
+package main
+
+import (
+  "chat/util"
+  "errors"
+  "os"
+  "time"
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+
+func readArgs() (  ) {
+  args := os.Args
+  if len(args) > 1 && len(args[1]) > 15 {
+    err := errors.New("Too many arguments")
+    
+  }
+  
+}
+
+func getListenPort() string {
+  hourOfDay := time.Now().Hour()
+  if hourOfDay < 12 {
+    return "8080"
+  } else if hourOfDay < 20 {
+    return "8081"
+  } else {
+    return "8082"
+  }
+}
+
+
+1. Complete the function signature for readArgs() indicating the return value includes two data types: an array of strings and an error.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "errors"
+  "os"
+  "time"
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+
+func readArgs() ([]string, error) {
+  args := os.Args
+  if len(args) > 1 && len(args[1]) > 15 {
+    err := errors.New("Too many arguments")
+    
+  }
+  
+}
+
+func getListenPort() string {
+  hourOfDay := time.Now().Hour()
+  if hourOfDay < 12 {
+    return "8080"
+  } else if hourOfDay < 20 {
+    return "8081"
+  } else {
+    return "8082"
+  }
+}
+
+2. Inside the if block, return both the args and the err variables using a single return statement.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "errors"
+  "os"
+  "time"
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+
+func readArgs() ([]string, error) {
+  args := os.Args
+  if len(args) > 1 && len(args[1]) > 15 {
+    err := errors.New("Too many arguments")
+    return args, err
+  }
+  
+}
+
+func getListenPort() string {
+  hourOfDay := time.Now().Hour()
+  if hourOfDay < 12 {
+    return "8080"
+  } else if hourOfDay < 20 {
+    return "8081"
+  } else {
+    return "8082"
+  }
+}
+
+3. Lastly, if no user argument is supplied to the program, then at the bottom of the function body return the args variable and an explicit nil value for the error using a single return statement.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+  "errors"
+  "os"
+  "time"
+)
+
+func main() {
+  listenPort := getListenPort()
+  args := os.Args
+  if len(args) > 1 {
+    hostIP := args[1]
+    util.RunGuest(hostIP)
+  } else {
+    listenIP := util.GetLocalNetworkIP()
+    util.RunHost(listenIP + ":" + listenPort)
+  }
+}
+
+func readArgs() ([]string, error) {
+  args := os.Args
+  if len(args) > 1 && len(args[1]) > 15 {
+    err := errors.New("Too many arguments")
+    return args, err
+  }
+  return args, nil
+}
+
+func getListenPort() string {
+  hourOfDay := time.Now().Hour()
+  if hourOfDay < 12 {
+    return "8080"
+  } else if hourOfDay < 20 {
+    return "8081"
+  } else {
+    return "8082"
+  }
+}
+

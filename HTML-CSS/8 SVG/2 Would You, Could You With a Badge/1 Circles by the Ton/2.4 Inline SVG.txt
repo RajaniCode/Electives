@@ -1,0 +1,74 @@
+2.4 Inline SVG
+
+Let's try moving our code inline from an SVG file into an HTML file.
+
+home.svg
+
+svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+  <!-- Bg Circle -->
+  <circle cx="170" cy="170" r="162" fill="#068C70" stroke="#FFFFFF" stroke-width="15" />
+
+  <!-- Chimney -->
+  <rect x="98" y="127" fill="#FBF6A7" width="14" height="21" />
+  <rect x="95" y="123" fill="#E04E27" width="20" height="4" />
+
+  <!-- House -->
+  <rect x="90" y="198" fill="#FBF6A7" width="162" height="84" />
+  <rect x="80" y="148" fill="#E04E27" width="184" height="56" />
+
+  <!-- Door -->
+  <rect x="153" y="222" fill="#E04E27" width="36" height="60" />
+  <rect x="183" y="252" fill="#FBF6A7" width="2" height="8" />
+</svg>
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+</head>
+<body>
+  <img src="home.svg"/>
+  
+</body>
+</html>
+
+
+1. Give the background circle an outer stroke color of #FFFFFF and stroke-width of 15.
+
+Answer:
+
+home.svg
+
+<?xml version="1.0" encoding="utf-8"?>
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+</head>
+<body>
+  <?xml version="1.0" encoding="utf-8"?>
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+      <!-- Bg Circle -->
+      <circle cx="170" cy="170" r="162" fill="#068C70" stroke="#FFFFFF" stroke-width="15" />
+
+      <!-- Chimney -->
+      <rect x="98" y="127" fill="#FBF6A7" width="14" height="21" />
+      <rect x="95" y="123" fill="#E04E27" width="20" height="4" />
+
+      <!-- House -->
+      <rect x="90" y="198" fill="#FBF6A7" width="162" height="84" />
+      <rect x="80" y="148" fill="#E04E27" width="184" height="56" />
+
+      <!-- Door -->
+      <rect x="153" y="222" fill="#E04E27" width="36" height="60" />
+      <rect x="183" y="252" fill="#FBF6A7" width="2" height="8" />
+    </svg>  
+</body>
+</html>

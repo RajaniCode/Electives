@@ -1,0 +1,413 @@
+5.12 Attribute Selectors
+
+Now our form is looking good, but there are a few small details that need to be fixed.
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font: inherit;
+  font-size: 100%;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+  font-family: Verdana, sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+  font-family: Verdana, sans-serif;
+  font-size: 18px;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+  line-height: 24px;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+  line-height: 22px;
+}
+body {
+  padding: 0;
+  background: #555555 url(images/bg-tile.png) top left repeat;
+  font-family: Garamond, serif;
+  font-size: 16px;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.nav a {
+  color: #ee932a;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #ffffff url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.band-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.band-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.band-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.band-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+  height: 120px;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+.recording-now {
+  width: 440px;
+  height: 200px;
+  background: #ffffff url(images/prependers-recording.jpg) center center no-repeat;
+  border: 1px solid #ee932a;
+  padding: 4px 4px 4px 4px;
+}
+.recording-now p {
+  color: #ffffff;
+  font-size: 28px;
+}
+.band-list img {
+  float: left;
+  padding-right: 15px;
+}
+.album img {
+  float: right;
+}
+textarea {
+  display: block;
+  margin-bottom: 15px;
+  width: 445px;
+  font-size: 20px;
+}
+label {
+  display: block;
+  font-weight: bold;
+}
+input {
+  display: block;
+  margin-bottom: 15px;
+  width: 445px;
+  font-size: 20px;
+}
+
+contact.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h1>Contact</h1>
+
+      <form>
+        <label for="band-name">Band Name</label>
+        <input type="text" id="band-name">
+        <label for="your-story">Your Story</label>
+        <textarea id="your-story"></textarea>
+        <label for="on-tour">On Tour</label>
+        <input type="checkbox" id="on-tour">
+        <input type="submit" value="Tell us about your band">
+      </form>
+    </div>
+  </body>
+</html>
+
+1. Select only the submit input with an attribute selector, and adjust the width to 165px.
+
+Answer:
+
+input[type="submit"] {
+  width: 165px;
+}
+
+2. We'd really like the checkbox to appear on the same line as the checkbox's label. Write some attribute selectors that make that happen.
+
+Answer:
+
+input[type="checkbox"], label[for="on-tour"] {
+  display: inline;
+}
+
+3. Hmmm, the checkbox input and label aren't displaying side-by-side even though they've been set to display: inline;. In this case, that's because we've already got a rule that sets all inputs to be 445px wide, and since there's no more space for the checkbox on the right, it moves onto the next line.
+
+Remove the width: 445px; rule from the existing input selector, and move it to a new attribute selector that only changes the width of inputs with type=text.
+
+Answer:
+
+input {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+
+input[type="text"] {
+  width: 445px;
+}
+
+Success:
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font: inherit;
+  font-size: 100%;
+}
+h1 {
+  color: #000000;
+  margin: 15px 0 15px;
+  text-align: center;
+  font-family: Verdana, sans-serif;
+  font-size: 32px;
+  font-weight: bold;
+}
+h2 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+  font-family: Verdana, sans-serif;
+  font-size: 26px;
+  font-weight: bold;
+}
+h3 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+  font-family: Verdana, sans-serif;
+  font-size: 18px;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+  line-height: 24px;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+  line-height: 22px;
+}
+body {
+  padding: 0;
+  background: #555555 url(images/bg-tile.png) top left repeat;
+  font-family: Garamond, serif;
+  font-size: 16px;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+  padding: 0;
+  text-align: center;
+}
+.nav li {
+  display: inline;
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}
+.nav a {
+  color: #ee932a;
+}
+.day-time {
+  color: #444444;
+  margin: 0 0 3px 0;
+}
+.concert-location {
+  color: #888888;
+  margin: 0 0 15px 0;
+}
+.header {
+  padding: 15px;
+  background: #242424 url(images/bg-header.png) top center no-repeat;
+}
+.content-section {
+  padding: 15px;
+  width: 450px;
+  margin: 0 auto;
+  background: #ffffff url(images/bg-content.png) top left repeat;
+}
+.album {
+  border: 2px dashed #bbbbbb;
+  padding: 5px 10px 5px 10px;
+  margin-bottom: 5px;
+  background-color: #ffffff;
+}
+.band-list {
+  list-style-type: none;
+  padding-left: 0;
+}
+.band-list h2 {
+  border-bottom: 0;
+  margin: 0;
+}
+.band-list a {
+  text-decoration: none;
+  color: #ff2244;
+}
+.band-list li {
+  border: 1px solid #555555;
+  background-color: #ffffff;
+  height: 120px;
+}
+.header img {
+  margin: 0 auto 15px auto;
+  display: block;
+}
+.recording-now {
+  width: 440px;
+  height: 200px;
+  background: #ffffff url(images/prependers-recording.jpg) center center no-repeat;
+  border: 1px solid #ee932a;
+  padding: 4px 4px 4px 4px;
+}
+.recording-now p {
+  color: #ffffff;
+  font-size: 28px;
+}
+.band-list img {
+  float: left;
+  padding-right: 15px;
+}
+.album img {
+  float: right;
+}
+textarea {
+  display: block;
+  margin-bottom: 15px;
+  width: 445px;
+  font-size: 20px;
+}
+label {
+  display: block;
+  font-weight: bold;
+}
+input {
+  display: block;
+  margin-bottom: 15px;
+  font-size: 20px;
+}
+input[type="submit"] {
+  width: 165px;
+}
+input[type="checkbox"], label[for="on-tour"] {
+  display: inline;
+}
+input[type="text"] {
+  width: 445px;
+}
+
+contact.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <div class="header">
+      <img src="images/osr-logo.png" alt="Open Source Records logo">
+
+      <ul class="nav">
+        <li><a href="about.html">About</a></li>
+        <li><a href="bands.html">Bands</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="content-section">
+      <h1>Contact</h1>
+
+      <form>
+        <label for="band-name">Band Name</label>
+        <input type="text" id="band-name">
+        <label for="your-story">Your Story</label>
+        <textarea id="your-story"></textarea>
+        <label for="on-tour">On Tour</label>
+        <input type="checkbox" id="on-tour">
+        <input type="submit" value="Tell us about your band">
+      </form>
+    </div>
+  </body>
+</html>

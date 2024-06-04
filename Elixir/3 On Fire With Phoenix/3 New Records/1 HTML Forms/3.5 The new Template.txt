@@ -1,0 +1,34 @@
+3.5 The new Template
+
+Time to code the "new.html" template.
+
+lib/neon_web/templates/event/new.html.eex
+<h2>New Event</h2>
+
+<%= form_for  , event_path(@conn, :new), fn f -> %>
+  <p>Name:  </p>
+  <p>Location:  </p>
+  <p>Date:  </p>
+  
+<% end %>
+
+
+1. Complete the form_for function call with the missing first argument.
+
+Answer:
+lib/neon_web/templates/event/new.html.eex
+
+2. Use the text_input function to create text inputs for the name and location properties.
+
+Answer: 
+lib/neon_web/templates/event/new.html.eex
+
+3. Use the datetime_select function to create a date and time select input for the start_on property. (We haven’t seen this function before, but it takes the exact same type of arguments as the text_input function: the form handler and the name of the property.)
+
+Answer:
+lib/neon_web/templates/event/new.html.eex
+
+4. Finally, use the submit function to add a button named "Add" which submits the form.
+
+Answer:
+lib/neon_web/templates/event/new.html.eex

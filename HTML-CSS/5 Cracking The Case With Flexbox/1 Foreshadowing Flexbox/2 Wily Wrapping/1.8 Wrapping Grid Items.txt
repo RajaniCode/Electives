@@ -1,0 +1,239 @@
+1.8 Wrapping Grid Items
+
+We can use a class to have grid items wrap when there's not enough space. Let's have grid containers with at least four items wrap at 500px.
+
+grid.html
+
+<div class='demo'>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+</div>
+
+grid.css
+
+.grid {
+  display: flex;
+  margin: 20px 0;
+}
+
+
+
+@media screen and (min-width: 500px) {
+  
+}
+
+.demo .grid-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  text-align: center;
+}
+
+
+1. Add a .grid-wrap selector that will have flex items wrap by default.
+
+Answer:
+grid.css
+
+.grid {
+  display: flex;
+  margin: 20px 0;
+}
+
+.grid-wrap {
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 500px) {
+  
+}
+
+.demo .grid-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  text-align: center;
+}
+
+2. When screen sizes are at least 500px, counter the wrapping by adding the .grid-wrap selector within a media query. Use the flexbox property and selector to have them not wrap.
+
+Answer:
+grid.css
+
+.grid {
+  display: flex;
+  margin: 20px 0;
+}
+
+.grid-wrap {
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 500px) {
+  .grid-wrap {
+      flex-wrap: nowrap;
+   }
+}
+
+.demo .grid-item {
+  background: #ffffff;
+  border: 1px solid #e5e5e5;
+  padding: 10px;
+  text-align: center;
+}
+
+3. Add the .grid-wrap class to grid flex containers with at least four items.
+
+Answer:
+grid.html
+
+<div class='demo'>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid-wrap'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid-wrap'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+  <div class='grid-wrap'>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+    <div class='grid-item'>
+      .grid-item
+    </div>
+  </div>
+</div>

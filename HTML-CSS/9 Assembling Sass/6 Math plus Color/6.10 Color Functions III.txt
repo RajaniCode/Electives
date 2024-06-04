@@ -1,0 +1,60 @@
+6.10 Color Functions III
+
+
+Unfortunately, our hover state just isn't obvious enough. Remove the saturate() and lighten() additions, and use a color function to invert the value.
+
+
+CSS
+
+a {
+  color: #3097b4;
+  text-decoration: underline;
+}
+a:hover {
+  color: #48c5e8;
+}
+a:active {
+  color: #335a65;
+}
+
+APPLICATION.SCSS 
+
+$color-link: #3097b4;
+
+a {
+  color: $color-link;
+  text-decoration: underline;
+  &:hover {
+    color: saturate(lighten($color-link, 15%), 20%);
+  }
+  &:active {
+    color: desaturate(darken($color-link, 15%), 25%);
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$color-link: #3097b4;
+
+a {
+  color: $color-link;
+  text-decoration: underline;
+  &:hover {
+    color: invert($color-link);
+  }
+  &:active {
+    color: complement($color-link);
+  }
+}
+
+CSS
+
+a {
+  color: #3097b4;
+  text-decoration: underline; }
+  a:hover {
+    color: #cf684b; }
+  a:active {
+    color: #b44d30; }

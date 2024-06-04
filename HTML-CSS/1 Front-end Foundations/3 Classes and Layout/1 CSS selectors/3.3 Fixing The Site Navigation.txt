@@ -1,0 +1,270 @@
+3.3 Fixing The Site Navigation
+
+We can use class attributes applied to HTML tags so they can be specifically targeted in CSS.
+
+Let's organize our HTML and CSS styles with some classes.
+
+prependers-band.html
+    
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 15px;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+
+1. The site navigation is a perfect candidate for adding a class. nav is a good name for it too, so start by adding that class to the unordered list that contains the site menu.
+
+Answer: <ul class="nav">
+
+2. Make the site navigation unordered list items display horizontally instead of their default block-level appearance.
+
+Answer:
+
+.nav li {
+  display: inline;
+}
+
+3. Remove the padding that's appearing before the site navigation unordered list.
+
+Answer:
+
+.nav {
+   padding: 0;
+}
+
+4. The navigation list items are appearing a little too close together. Add 20px of space to the right of each list item so they have some room to breathe.
+
+Answer:
+
+.nav li {
+  display: inline; 
+  padding-right: 20px;
+}
+
+5. That right padding is being applied to every navigation list item - even the last one on the right, which unlike the other items doesn't need any padding.
+
+Use a pseudo-selector to remove that padding-right from just the last navigation list item.
+
+Answer: 
+
+.nav li:last-child {
+  padding-right: 0;
+}
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="main.css">
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul class="nav">
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+  </body>
+</html>
+
+main.css
+
+html, body, h1, h2, h3, h4, ul, ol, li, p, a {
+  padding: 0;
+  border: 0;
+  margin: 0;
+}
+h1 {
+  color: #000000;
+  margin: 0 0 15px 0;
+}
+h2 {
+  color: #000000;
+  margin: 15px 0 15px;
+}
+h3 {
+  color: #333333;
+  margin: 20px 0 5px 0;
+  border-bottom: 1px solid #aaaaaa;
+  padding: 2px;
+}
+h4 {
+  color: #666666;
+  margin: 10px 0 10px 0;
+}
+p {
+  color: #444444;
+  margin: 0 0 10px 0;
+}
+a {
+  color: #440000;
+}
+ul {
+  padding: 0 0 0 30px;
+}
+li {
+  margin-bottom: 5px;
+}
+body {
+  padding: 15px;
+}
+ol {
+  padding: 0 0 0 20px;
+}
+.nav {
+   padding: 0;   
+}
+.nav li {
+  display: inline; 
+  padding-right: 20px;
+}
+.nav li:last-child {
+  padding-right: 0;
+}

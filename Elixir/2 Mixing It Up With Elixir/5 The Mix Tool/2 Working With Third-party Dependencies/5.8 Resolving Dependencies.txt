@@ -1,0 +1,48 @@
+5.8 Resolving Dependencies
+
+Now that our third-party dependencies are declared in the mix.exs file, all we need to do is install them.
+
+Use the mix tool to install the dependencies from a remote repository.
+
+
+Type help to see the help menu.
+
+Press ENTER to submit your answer.
+
+
+> mix deps.get
+Running dependency resolution...
+Dependency resolution completed:
+certifi 0.7.0
+hackney 1.6.5
+httpoison 0.10.0
+idna 1.2.0
+metrics 1.0.1
+mimerl 1.0.2
+poison 3.1.0
+ssl_verify_fun 1.1.1
+* Getting httpoison (Hex package)
+Checking package (https://repo.hex.pm/tarballs/httpoison-0.10.0.tar)
+Fetched package
+ * Getting poison (Hex package)
+Checking package (https://repo.hex.pm/tarballs/poison-3.1.0.tar)
+Fetched package
+* Getting hackney (Hex package)
+Checking package (https://repo.hex.pm/tarballs/hackney-1.6.5.tar)
+Fetched package
+* Getting certifi (Hex package)
+Checking package (https://repo.hex.pm/tarballs/certifi-0.7.0.tar)
+Fetched package
+* Getting idna (Hex package)
+Checking package (https://repo.hex.pm/tarballs/idna-1.2.0.tar)
+Fetched package
+* Getting metrics (Hex package)
+Checking package (https://repo.hex.pm/tarballs/metrics-1.0.1.tar)
+Fetched package
+* Getting mimerl (Hex package)
+Checking package (https://repo.hex.pm/tarballs/mimerl-1.0.2.tar)
+Fetched package
+* Getting ssl_verify_fun (Hex package)
+Checking package (https://repo.hex.pm/tarballs/ssl_verify_fun-1.1.1.tar)
+Fetched package
+Success!

@@ -1,0 +1,37 @@
+13. Stash Branching
+
+
+Now that you've deployed the main part of your feature, you need to finish up what is left. Create a new branch named 'poodle' and apply your most current stash all in one command.
+
+
+$ git stash branch "poodle" stash@{0}
+
+# On branch poodle
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   poodles.rb
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped stash@{0} (0c514e3c37449df05c264f58a4043321b9a85ee1)
+
+Success!
+
+
+#Note:
+
+
+$ git stash branch "poodle"
+
+# On branch poodle
+# Changes not staged for commit:
+#   (use "git add <file>..." to update what will be committed)
+#   (use "git checkout -- <file>..." to discard changes in working directory)
+#
+#	modified:   poodles.rb
+#
+no changes added to commit (use "git add" and/or "git commit -a")
+Dropped refs/stash@{0} (aacd065e3b1ff7c672b0f9425c52391f0c2d870e)
+
+Success!

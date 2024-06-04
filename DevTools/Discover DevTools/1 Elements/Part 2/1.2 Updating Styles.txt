@@ -1,0 +1,96 @@
+1.2 Updating Styles
+
+section#calendar.calendar
+media="screen"
+.calendar {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: none;
+    background: white;
+    border: 1px solid #dedede;
+    font-family: "OpenSansRegular", Helvetica, Arial, sans-serif;
+    margin: 20px 40px 10px;
+    padding: 15px 15px 35px 15px;
+    position: static;
+    z-index: 1;
+}
+
+li.event
+media="screen"
+.events .event {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #f2f2f2;
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    box-shadow: 0 3px 0 #edb330;
+    color: #777777;
+    font-size: 1.6em;
+    list-style-type: none;
+    margin: 10px 0;
+    padding: 10px 15px;
+    position: relative;
+}
+
+li.event
+element.style {
+}
+
+
+Remove the font-family: OpenSansRegular declaration from all elements inside of the calendar events.
+
+Change the margin on all events from 10px 0 to 20px 0.
+
+Change the box-shadow color to green for all events.
+
+Add a CSS declaration to our Run 5K event that sets beige as the background-color. Make sure you update the element.style declaration and not the declaration for all events.
+
+Add a CSS declaration of text-decoration: underline for the :hover state of all events, then force the :hover state on our Run 5K event to see the new CSS declaration take effect.
+
+
+section#calendar.calendar
+media="screen"
+.calendar {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    display: none;
+    background: white;
+    border: 1px solid #dedede;
+    font-family: Helvetica, Arial, sans-serif;
+    margin: 20px 40px 10px;
+    padding: 15px 15px 35px 15px;
+    position: static;
+    z-index: 1;
+}
+
+li.event
+media="screen"
+.events .event {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #f2f2f2;
+    border: 1px solid #dedede;
+    border-radius: 2px;
+    box-shadow: 0 3px 0 green;
+    color: #777777;
+    font-size: 1.6em;
+    list-style-type: none;
+    margin: 20px 0;
+    padding: 10px 15px;
+    position: relative;
+}
+
+li.event
+element.style {
+    background-color: beige;
+}
+
+li.event
+New Style Rule
+li:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,60 @@
+Portait Image Crop
+
+
+The new store images are portrait rather than landscape orientation. Swap the <img> width and height to better handle this type of proportion.
+
+HTML Source
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  
+  <body>
+    <section class="content about">
+      <h1>Our Store</h1>
+      <ul class="store">
+        <li>
+          <img src="store1.jpg" alt="Our Store" />
+        </li>
+        <li>
+          <img src="store2.jpg" alt="Our Store" />
+        </li>
+        <li>
+          <img src="store3.jpg" alt="Our Store" />
+        </li>
+        <li>
+          <img src="store4.jpg" alt="Our Store" />
+        </li>
+      </ul>
+    </section>
+  </body>
+</html>
+
+style.css
+
+.store li {
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+}
+.store li img {
+  height: 150px;
+  width: auto;
+}
+
+Answer:
+
+style.css
+
+.store li {
+  height: 150px;
+  width: 150px;
+  overflow: hidden;
+}
+.store li img {
+  height: auto;
+  width: 150px;
+}

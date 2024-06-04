@@ -1,0 +1,25 @@
+[rajani@localhost Cloudera Manager]$ su root
+Password: 
+[root@localhost Cloudera Manager]# docker images
+REPOSITORY            TAG                 IMAGE ID            CREATED             SIZE
+hello-world           latest              94df4f0ce8a4        2 days ago          967 B
+ubuntu                latest              44776f55294a        3 days ago          120.1 MB
+cloudera/quickstart   latest              4239cd2958c6        3 weeks ago         6.336 GB
+[root@localhost Cloudera Manager]# docker ps
+CONTAINER ID        IMAGE               COMMAND             CREATED             STATUS              PORTS               NAMES
+[root@localhost Cloudera Manager]# wget http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin
+--2016-04-29 15:09:43--  http://archive.cloudera.com/cm5/installer/latest/cloudera-manager-installer.bin
+Resolving archive.cloudera.com (archive.cloudera.com)... 43.249.75.167
+Connecting to archive.cloudera.com (archive.cloudera.com)|43.249.75.167|:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 517878 (506K) [application/octet-stream]
+Saving to: ‘cloudera-manager-installer.bin’
+
+100%[======================================================================================================================>] 517,878      181KB/s   in 2.8s   
+
+2016-04-29 15:09:47 (181 KB/s) - ‘cloudera-manager-installer.bin’ saved [517878/517878]
+
+[root@localhost Cloudera Manager]# chmod u+x cloudera-manager-installer.bin
+[root@localhost Cloudera Manager]# sudo ./cloudera-manager-installer.bin
+[root@localhost Cloudera Manager]# 
+

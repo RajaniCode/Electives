@@ -1,0 +1,20 @@
+3.10 Measuring a Shipmate's Excitement
+
+We've asked potential shipmates to tell us about what they are looking forward to during our voyage. We can gauge how excited they are by checking the number of exclamation marks used at the end of their sentence.
+
+Start by matching any exclamation mark that appears directly after a word.
+
+Now let's make sure that our shipmates are excited enough. Update the pattern to make sure there are a minimum of 3 exclamation marks.
+
+We want to make sure our shipmates are not too excited. Update the pattern to ensure there are no more than 10 exclamation marks.
+
+Finally, we know that the exclamation marks we're checking must be at the end of their sentence. Use an anchor to ensure there is nothing after the exclamation marks.
+
+Subjects
+Code School is awesome!!!
+Pluralsight is really cool!!!!!!
+We love regular expressions!!!!
+
+
+REGULAR EXPRESSION
+/\w\!{3,10}$/

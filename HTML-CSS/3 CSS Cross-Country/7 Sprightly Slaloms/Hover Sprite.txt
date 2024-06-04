@@ -1,0 +1,51 @@
+Hover Sprite
+
+
+Add the appropriate background-position shift to the hover state to make use of the new logo2.png sprite (see the images tab).
+
+HTML SOURCE
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+ 
+  <body>
+    <section class="content home">
+      <header>
+        <h1><a class="logo" href="#">Sven's Snowshoe Emporium</a></h1>
+        <h2>"For the Snow-Savvy Shoe-Shopper"</h2>
+      </header>
+    </section>
+  </body>
+</html>
+
+style.css
+
+.logo {
+  background: url(logo2.png);
+  display: block;
+  height: 75px;
+  text-indent: -9999px;
+  width: 250px;
+}
+.logo:hover, .logo:focus {
+  
+}
+
+Answer:
+
+style.css
+
+.logo {
+  background: url(logo2.png);
+  display: block;
+  height: 75px;
+  text-indent: -9999px;
+  width: 250px;
+}
+.logo:hover, .logo:focus {
+  background-position: 0 -75px;
+}

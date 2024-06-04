@@ -1,0 +1,33 @@
+CentOS Version
+
+[rajani@localhost yum.repos.d]$ cat /etc/centos-release
+CentOS Linux release 7.0.1406 (Core) 
+[rajani@localhost yum.repos.d]$ 
+
+
+Kernel Versions
+
+[rajani@localhost yum.repos.d]$ uname -a
+Linux localhost.localdomain 3.10.0-123.el7.x86_64 #1 SMP Mon Jun 30 12:09:22 UTC 2014 x86_64 x86_64 x86_64 GNU/Linux
+[rajani@localhost yum.repos.d]$
+
+su command to become root
+
+[rajani@localhost yum.repos.d]$ su root
+Password: 
+[root@localhost yum.repos.d]# 
+
+
+To verify if a system is 32 bit versus 64 bit you can use the uname command. Below are examples of using the uname command from the CLI on a 32 bit system followed by using the uname command on a 64 bit system.
+
+32 Bit CentOS Linux Server
+
+[root@server ~]# uname -a
+Linux server1.example.com 2.6.18-92.1.13.el5 #1 SMP Wed Sep 24 19:33:52 EDT 2008 i686 i686 i386 GNU/Linux
+
+64 Bit CentOS Linux Server
+
+[root@server ~]# uname -a
+Linux server.example.com 2.6.18-53.1.21.el5 #1 SMP Tue May 20 09:35:07 EDT 2008 x86_64 x86_64 x86_64 GNU/Linux
+
+As you can see above the 64 bit server will show x86_64 numerous times after the install date and time. The 32 bit system will show i686 and i386 after the install date and time. So it is very easy to verify if a system is 32 bit versus 64 bit using the uname -a command from a shell.

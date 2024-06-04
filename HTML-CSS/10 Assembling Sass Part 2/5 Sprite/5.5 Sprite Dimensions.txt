@@ -1,0 +1,70 @@
+5.5 Sprite Dimensions
+
+
+We're starting to make headway, but .logo isn't sized to show the full image. Use the sprite-dimensions mixin with $logos and the default state's image name (logo) to generate the dimensions for us.
+
+
+CSS
+
+.logo {
+  background: url(logos-s170667cd82.png);
+  display: block;
+  text-indent: -9999px;
+}
+
+.SASS
+
+@import "compass"
+$logos: sprite-map("logos/*.png")
+
+.logo
+  background: $logos
+  display: block
+  text-indent: -9999px
+
+.SCSS
+
+@import "compass";
+
+$logos: sprite-map("logos/*.png");
+
+.logo {
+  background: $logos;
+  display: block;
+  text-indent: -9999px;
+}
+
+Answer:
+
+.SASS
+
+@import "compass"
+$logos: sprite-map("logos/*.png")
+
+.logo
+  background: $logos
+  display: block
+  text-indent: -9999px
+  +sprite-dimensions($logos, logo)
+
+.SCSS
+
+@import "compass";
+
+$logos: sprite-map("logos/*.png");
+
+.logo {
+  background: $logos;
+  display: block;
+  text-indent: -9999px;
+  @include sprite-dimensions($logos, logo);
+}
+
+CSS
+
+.logo {
+  background: url('/logos-s170667cd82.png');
+  display: block;
+  text-indent: -9999px;
+  height: 140px;
+  width: 180px; }

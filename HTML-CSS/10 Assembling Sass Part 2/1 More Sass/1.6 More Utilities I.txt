@@ -1,0 +1,55 @@
+1.6 More Utilities I
+
+
+Adding a subtle change to .socket on :hover isn't going well: darken() causes the background to become black at low percentages. Instead, use scale_color to relatively darken the color by 30%. Hint: you'll need to use a negative value on the $lightness keyword argument.
+
+
+CSS
+
+.socket {
+  background: #333333;
+}
+.socket:hover {
+  background: black;
+}
+
+.SASS
+
+.socket
+  background: #333
+  &:hover
+    background: darken(#333, 30%)
+
+.SCSS
+
+.socket {
+  background: #333333;
+  &:hover {
+    background: darken(#333333, 30%);
+  }
+}
+
+Answer:
+
+.SASS
+
+.socket
+  background: #333
+  &:hover
+    background: scale_color(#333, $lightness: -30%)
+
+.SCSS
+
+.socket {
+  background: #333333;
+  &:hover {
+    background: scale_color(#333333, $lightness: -30%);
+  }
+}
+
+CSS
+
+.socket {
+  background: #333333; }
+  .socket:hover {
+    background: #242424; }

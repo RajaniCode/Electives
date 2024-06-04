@@ -1,0 +1,19 @@
+5.5 The Punch Card
+
+We're paying our crew in treasure, and we are asking them to enter the date and time that they start and end their shift. The required format is 'mm/dd/yyyy hh:mm'. We'll need to store the entire date and time along with just the time separately.
+
+Start by capturing the entire pattern using a group.
+
+Next, capture just the hour and minute portion of the subject using another group.
+
+The group used to evaluate either '2015' or '2016' is being returned to us - but that's not what we want. Modify this group so that it does not capture the year.
+
+REGULAR EXPRESSION
+/^\d{2}\/\d{2}\/(2015|2016) \d{2}:\d{2}$/
+
+Subjects
+12/06/2016 05:52
+
+
+REGULAR EXPRESSION
+/(^\d{2}\/\d{2}\/(?:2015|2016) (\d{2}:\d{2})$)/

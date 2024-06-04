@@ -1,0 +1,145 @@
+1.5 Building Migrations
+
+Now that we have a model named Farm, we need to build out the migration. Let's add the fields for name, city, and website to our new migration.
+
+database/migrations/2017_02_23_170216_create_farms_table.php
+\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFarmsTable extends Migration
+{
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('farms', function (Blueprint $table) {
+      $table->increments('id');
+      
+      
+      
+      $table->timestamps();
+    });
+  }
+
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('farms');
+  }
+}
+
+
+1. Inside of the up() method, add a string column to the table named 'name', and make it unique across the table.
+
+Answer
+database/migrations/2017_02_23_170216_create_farms_table.php
+\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFarmsTable extends Migration
+{
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('farms', function (Blueprint $table) {
+      $table->increments('id');
+      $table->string('name')->unique();
+      
+      
+      $table->timestamps();
+    });
+  }
+
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('farms');
+  }
+}
+
+2. Next, add a string column to the table named 'city', but it doesn't need to be unique.
+
+Answer
+database/migrations/2017_02_23_170216_create_farms_table.php
+\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFarmsTable extends Migration
+{
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('farms', function (Blueprint $table) {
+      $table->increments('id');
+      $table->string('name')->unique();
+      $table->string('city');
+      
+      $table->timestamps();
+    });
+  }
+
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('farms');
+  }
+}
+
+3. Finally, add a string column to the table named 'website', and make it unique across the table.
+
+Answer
+database/migrations/2017_02_23_170216_create_farms_table.php
+\Database\Schema\Blueprint;
+use Illuminate\Database\Migrations\Migration;
+
+class CreateFarmsTable extends Migration
+{
+  /**
+   * Run the migrations.
+   *
+   * @return void
+   */
+  public function up()
+  {
+    Schema::create('farms', function (Blueprint $table) {
+      $table->increments('id');
+      $table->string('name')->unique();
+      $table->string('city');
+      $table->string('website')->unique(); 
+      $table->timestamps();
+    });
+  }
+
+  /**
+   * Reverse the migrations.
+   *
+   * @return void
+   */
+  public function down()
+  {
+    Schema::dropIfExists('farms');
+  }
+}

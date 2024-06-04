@@ -1,0 +1,69 @@
+1.2 Adding Bootstrap to our Webpage
+
+It's time to add the Bootstrap framework to our existing web site. Follow the tasks to add it and utilize some of its features.
+
+    root folder
+        css/bootstrap.min.css
+        js/bootstrap.min.js
+
+index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blasting Off With Bootstrap</title>
+    <link href='css/main.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>The Fastest Way to Space</h1>
+      <p>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
+      <button type='button'>Take the Tour</button>
+      <button type='button'>Book Tickets Now</button>
+    </div>
+
+    <p>This is our footer</p>
+    
+  </body>
+</html>
+
+1. To start using Bootstrap, we'll need to get it added to our site. Import the Bootstrap CSS in "index.html".
+
+Answer: <link href='css/bootstrap.min.css' rel='stylesheet'>
+
+2. Since Bootstrap uses jQuery, we'll need to import it on our page. Add it now to the "index.html" file before the </body> tag.
+
+The URL for the jQuery library is:
+
+'//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'
+
+Answer: <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+
+
+3. Additionally, let's give our site the ability to use Bootstrap's pre-built JavaScript functionality. Import the Bootstrap JS library in the file.
+
+Answer: <script src='js/bootstrap.min.js'></script>
+
+index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blasting Off With Bootstrap</title>
+    <link href='css/main.css' rel='stylesheet'>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='container'>
+      <h1>The Fastest Way to Space</h1>
+      <p>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
+      <button type='button'>Take the Tour</button>
+      <button type='button'>Book Tickets Now</button>
+    </div>
+
+    <p>This is our footer</p>
+    <script src='//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+  </body>
+</html>
+

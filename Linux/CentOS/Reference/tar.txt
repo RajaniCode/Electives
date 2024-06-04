@@ -1,0 +1,54 @@
+-xf: .tar.bz2
+Extract to Current Directory
+tar -xf archive.tar.bz2
+Extract to Existing Folder 'Test' in Current Directory
+tar -xf archive.tar.bz2 -C Test
+tar -xf archive.tar.bz2 -C 'Test'
+
+
+-xvzf: tar.gz, .tar.gx, .tgz
+zxf: tar.gz
+xzvf: tar.gz
+Extract to Current Directory
+tar -xvzf archive.tar.gz
+tar -xzvf archive.tar.gz
+tar xzvf archive.tar.gz
+tar xvfz archive.tar.gz
+tar -xvzf archive.tgz
+Extract to Existing Folder 'Test' in Current Directory
+tar -xvzf archive.tar.gx -C Test
+
+
+Please note, order does not matter:
+x for extract
+v for verbose
+z for gnuzip
+f for file, should come at last just before file name
+
+
+.zip
+unzip archive.zip
+
+
+tar zxf jdk-8u91-linux-x64.tar.gz -C /opt
+
+tar xzvf apache-maven-3.3.9-bin.tar.gz -C /opt
+
+tar zxf apache-tomcat-8.0.33.tar.gz -C /opt
+
+tar xvfz ruby-2.3.1.tar.gz
+
+tar -xvzf Python-2.7.11.tgz
+
+unzip cloudera-quickstart-vm-5.5.0-0-kvm.zip
+
+tar -xzvf postgresql-9.5.3.tar.gz -C /opt
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,67 @@
+3.6 Helpers IV
+
+
+Our site design calls for containers that have the same border styles on opposite sides. We've started the borders mixin that sets $style on the correct $side - let's finish up by setting the same $style on the opposite border via opposite-position().
+
+
+CSS
+
+.complex {
+  border-left: 10px solid #cccccc;
+}
+
+.SASS
+
+@import "compass"
+
+=borders($side, $style)
+  border-#{$side}: $style
+
+.complex
+  +borders(left, 10px solid #ccc)
+
+.SCSS
+
+@import "compass";
+
+@mixin borders($side, $style) {
+  border-#{$side}: $style;
+}
+
+.complex {
+  @include borders(left, 10px solid #cccccc);
+}
+
+Answer:
+
+.SASS
+
+@import "compass"
+
+=borders($side, $style)
+  $opposite: opposite-position($side)
+  border-#{$side}: $style
+  border-#{$opposite}: $style
+
+.complex
+  +borders(left, 10px solid #ccc)
+
+.SCSS
+
+@import "compass";
+
+@mixin borders($side, $style) {
+  $opposite: opposite-position($side);
+  border-#{$side}: $style;
+  border-#{$opposite}: $style;
+}
+
+.complex {
+  @include borders(left, 10px solid #cccccc);
+}
+
+CSS
+
+.complex {
+  border-left: 10px solid #cccccc;
+  border-right: 10px solid #cccccc; }

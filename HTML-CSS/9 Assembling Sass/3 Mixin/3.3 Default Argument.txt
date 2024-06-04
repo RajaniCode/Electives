@@ -1,0 +1,64 @@
+3.3 Default Argument
+
+
+The background color for declarations using assemble will most often be #fff. Add a default value to the $bg argument to reflect this discovery. Note: once the default value is set, remember to update your .factory @include.
+
+
+CSS
+
+.factory {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.highrise {
+  background: #797979;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+_ASSEMBLE.SCSS
+
+@mixin assemble($bg) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.factory {
+  @include assemble(#fff);
+}
+.highrise {
+  @include assemble(#797979);
+}
+
+Answer:
+
+_ASSEMBLE.SCSS
+
+@mixin assemble($bg: #fff) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.factory {
+  @include assemble;
+}
+.highrise {
+  @include assemble(#797979);
+}
+
+
+CSS
+
+.factory {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px; }
+
+.highrise {
+  background: #797979;
+  border: 1px solid #ccc;
+  padding: 10px; }

@@ -1,0 +1,18 @@
+3.4 Escaping to the Coordinates
+
+We just received a list of coordinates consisting of the latitude and longitude of our potential destinations. We will need to validate that each coordinate follows a known pattern.
+
+To begin, we know that the coordinate can be a positive or negative number. Add a - character that is matched 0 to 1 time, followed by a single digit 1 or more times.
+
+Since latitudes and longitudes are decimals, we will add the ., or dot literal, to account for the decimal place.
+
+Lastly, add the final portion of the pattern to match any amount of numbers after the decimal point.
+
+Subjects
+65.836527
+-151.875000
+76.810143
+
+
+REGULAR EXPRESSION
+/(-?)\d+\.\d+/

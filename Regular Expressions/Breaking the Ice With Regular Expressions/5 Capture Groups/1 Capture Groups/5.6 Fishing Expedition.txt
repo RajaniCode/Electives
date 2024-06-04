@@ -1,0 +1,22 @@
+5.6 Fishing Expedition
+
+It's time to go fishing. We will want to construct a pattern to search through a large text file and capture all of the fish. The fish we want to capture will be 'swordfish', 'flatfish' and 'blowfish'.
+
+To begin, let's match every fish we encounter by including a modifier.
+
+REGULAR EXPRESSION
+/(sword|flat|blow)fish/
+
+Subjects
+cod
+salmon
+swordfish
+shark
+flatfish
+tuna
+blowfish
+bass
+
+
+REGULAR EXPRESSION
+/((?:sword|flat|blow)fish)/g

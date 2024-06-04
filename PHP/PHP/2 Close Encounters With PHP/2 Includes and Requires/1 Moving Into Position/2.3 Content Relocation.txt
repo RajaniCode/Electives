@@ -1,0 +1,206 @@
+2.3 Content Relocation
+
+Let's relocate the contents of our content <div> to a new file, then use a PHP include statement to programmatically add it back to the index.php file.
+
+content.php
+
+index.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $date = $_POST['date'];
+  $reason = $_POST['reason'];
+
+  echo $name;
+  echo $date;
+  echo $reason;
+}
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Travel to Earth Request</title>
+  </head>
+  <body>
+    <div class="content">
+      <form class="form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date of Departure</label>
+          <input type="date" class="form-control" id="date">
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason for Visit</label>
+          <input type="text" class="form-control" id="reason">
+        </div>
+
+        <button type="submit" class="btn" disabled="disabled">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+
+1. First, copy all the <form> code from inside the content <div> to the new content.php file.
+
+Answer:
+content.php
+
+<form class="form">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name">
+  </div>
+
+  <div class="form-group">
+    <label for="date">Date of Departure</label>
+    <input type="date" class="form-control" id="date">
+  </div>
+
+  <div class="form-group">
+    <label for="reason">Reason for Visit</label>
+    <input type="text" class="form-control" id="reason">
+  </div>
+
+  <button type="submit" class="btn" disabled="disabled">Submit</button>
+</form>
+
+index.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $date = $_POST['date'];
+  $reason = $_POST['reason'];
+
+  echo $name;
+  echo $date;
+  echo $reason;
+}
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Travel to Earth Request</title>
+  </head>
+  <body>
+    <div class="content">
+      <form class="form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" class="form-control" id="name">
+        </div>
+
+        <div class="form-group">
+          <label for="date">Date of Departure</label>
+          <input type="date" class="form-control" id="date">
+        </div>
+
+        <div class="form-group">
+          <label for="reason">Reason for Visit</label>
+          <input type="text" class="form-control" id="reason">
+        </div>
+
+        <button type="submit" class="btn" disabled="disabled">Submit</button>
+      </form>
+    </div>
+  </body>
+</html>
+
+2. Now, let's remove all the <form> code from the index.php file.
+
+Answer:
+content.php
+
+<form class="form">
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input type="text" class="form-control" id="name">
+  </div>
+
+  <div class="form-group">
+    <label for="date">Date of Departure</label>
+    <input type="date" class="form-control" id="date">
+  </div>
+
+  <div class="form-group">
+    <label for="reason">Reason for Visit</label>
+    <input type="text" class="form-control" id="reason">
+  </div>
+
+  <button type="submit" class="btn" disabled="disabled">Submit</button>
+</form>
+
+index.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $date = $_POST['date'];
+  $reason = $_POST['reason'];
+
+  echo $name;
+  echo $date;
+  echo $reason;
+}
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Travel to Earth Request</title>
+  </head>
+  <body>
+    <div class="content">
+
+    </div>
+  </body>
+</html>
+
+3. Using a PHP include statement, add the content.php file to the index.php file in place of the code you just removed.
+
+Answer:
+
+index.php
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = $_POST['name'];
+  $date = $_POST['date'];
+  $reason = $_POST['reason'];
+
+  echo $name;
+  echo $date;
+  echo $reason;
+}
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Travel to Earth Request</title>
+  </head>
+  <body>
+    <div class="content">
+      <?php 
+      include("content.php");
+      ?>
+    </div>
+  </body>
+</html>

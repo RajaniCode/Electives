@@ -1,0 +1,26 @@
+Reposition Nav
+
+
+It looks like the <nav> is pushed a little far down, so let's reduce the margin-top to 20px. We should also reduce the font-size on the <nav> <li>'s, in ems, to the equivalent of 14px with our context being 16px.
+
+STYLE.CSS
+
+@media screen and (max-width: 850px) {
+  nav {
+
+  }
+  nav ul li {
+    
+  }
+}
+
+Answer:
+
+@media screen and (max-width: 850px) {
+  nav {
+    margin-top: 20px;
+  }
+  nav ul li {
+    font-size: 0.875em; /* target / context = 14 / 16 */
+  }
+}

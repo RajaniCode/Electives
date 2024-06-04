@@ -1,0 +1,61 @@
+3.7 Image Dimensions
+
+
+.entry has arrow.png as a background image, set off to the right. We need a line height equal to arrow.png's height (30px) and right padding equal to arrow.png's width (30px), plus 10px. Use image-height() and image-width() to automate the values currently being set manually.
+
+
+CSS
+
+.entry {
+  background: url(arrow.png) right center no-repeat;
+  line-height: 30px;
+  padding-right: 40px;
+}
+
+.SASS
+
+@import "compass"
+
+.entry
+  background: image-url('arrow.png') right center no-repeat
+  line-height: 30px
+  padding-right: 30px + 10px
+
+.SCSS
+
+@import "compass";
+
+.entry {
+  background: image-url("arrow.png") right center no-repeat;
+  line-height: 30px;
+  padding-right: 30px + 10px;
+}
+
+
+Answer:
+
+.SASS
+
+@import "compass"
+
+.entry
+  background: image-url('arrow.png') right center no-repeat
+  line-height: image-height('arrow.png')
+  padding-right: image-width('arrow.png') + 10px
+
+.SCSS
+
+@import "compass";
+
+.entry {
+  background: image-url("arrow.png") right center no-repeat;
+  line-height: image-height("arrow.png");
+  padding-right: image-width("arrow.png") + 10px;
+}
+
+CSS
+
+.entry {
+  background: url('/arrow.png') right center no-repeat;
+  line-height: 30px;
+  padding-right: 40px; }

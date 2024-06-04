@@ -1,0 +1,22 @@
+5.1 0 The Network Tab
+
+Let's take a look at the network activity on our page. Open the Network panel, clear the current waterfall  and then click the map icon  for the Run 5K event in our calendar.
+
+Let's find out which one of the resources being loaded on the page is the largest. Sort the resources in the Network panel by Size in descending order. Then log the name of the largest file to the console as a string to move on.
+
+Click on the largest asset and then click the Preview tab. Below the image is some information about it. Find the MIME type and then log that as a string to the console.
+
+F12
+Network
+
+Console
+console.log("map.jpg");
+map.jpg
+
+undefined
+
+console.log("image/jpeg");
+
+image/jpeg
+
+undefined

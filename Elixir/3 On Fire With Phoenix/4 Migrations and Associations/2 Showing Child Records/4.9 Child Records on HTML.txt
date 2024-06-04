@@ -1,0 +1,26 @@
+4.9 Child Records on HTML
+
+We’ve added code to EventController so it’s successfully setting up data for the "show.html" template. Now, from this template, let’s add the section which lists comments for the event.
+
+lib/neon_web/templates/event/show.html.eex
+<h2><%= @event.name %></h2>
+
+<p>Location: <%= @event.location %></p>
+<p>Date: <%= format_date(@event.start_on) %></p>
+
+<ul>
+  <%= for  do %>
+  	
+  <% end %>
+</ul>
+
+
+1. Complete the list comprehension so that comments are read from @event and assigned to the comment variable.
+
+Answer:
+lib/neon_web/templates/event/show.html.eex
+
+2. Inside the list comprehension do/end block, add an <li> tag with the contents from comment.body.
+
+Answer: 
+lib/neon_web/templates/event/show.html.eex

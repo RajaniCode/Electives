@@ -1,0 +1,16 @@
+2.6 Off to the New
+
+We only wish to visit destinations that begin with the word 'new'. All older places will be left off of our voyage. For example, New England, New Zealand, etc…
+
+Using an anchor and a lowercase literal 'new', construct a pattern that matches 'new' only if there is not any text before the 'new' portion in our destinations. Also add the modifier that will make the pattern 'case insensitive'.
+
+Finish off the pattern by matching the remaining destination name using a character set - this character set should be repeated 1 or more times and use a range from a-z and a whitespace character.
+
+Subjects
+New Zealand
+New Guinea
+Newfoundland
+
+
+REGULAR EXPRESSION
+/^new\s?[a-z]+/i

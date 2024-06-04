@@ -1,0 +1,33 @@
+1.13 Differences
+
+Uh oh, looks like there have been some additions and changes to the octocat family. Let's take a look at what is different from our last commit by using the git diff command.
+
+In this case we want the diff of our most recent commit, which we can refer to using the HEAD pointer.
+
+git diff HEAD
+
+
+Press enter to submit commands
+
+
+$ git diff HEAD
+
+
+diff --git a/octocat.txt b/octocat.txt
+index 7d8d808..e725ef6 100644
+--- a/octocat.txt
++++ b/octocat.txt
+@@ -1 +1 @@
+-A Tale of Two Octocats
++[mA Tale of Two Octocats and an Octodog
+
+Success!
+
+
+My Octobox Repository
+
+    .git
+    octofamily
+    blue_octocat.txt
+    octocat.txt
+    red_octocat.txt

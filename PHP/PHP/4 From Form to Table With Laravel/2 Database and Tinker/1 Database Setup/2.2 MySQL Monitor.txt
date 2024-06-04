@@ -1,0 +1,36 @@
+2.2 MySQL Monitor
+
+In order for us to run our migrations, we will need to first create a new database. We'll do this using the MySQL monitor command line interface.
+
+
+1. To get started, enter the monitor using the command mysql followed by a -u and the user root. Also, add the -p flag so that MySQL will prompt us for a password (we'll fill it in automatically for you).
+
+Answer
+$ mysql -u root -p
+
+2. Now that we are in the monitor, let's run the SQL statement to create a new database named market.
+
+Answer
+mysql> create database market;
+
+
+# Note
+$ mysql -u root -p
+Enter password: [codeschool]
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 4
+Server version: 5.7.18
+
+Copyright (c) 2000, 2017, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> create database market;
+Query OK, 1 row affected (0.01 sec)
+
+mysql>
+

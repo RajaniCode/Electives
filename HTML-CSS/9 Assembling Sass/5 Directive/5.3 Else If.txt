@@ -1,0 +1,48 @@
+5.3 Else If
+
+
+On the same conditional, use @else if to add a condition between the existing @if and @else: if $size is less than or equal to 24px, font-family: Georgia, serif; is output.
+
+
+CSS
+
+.switch {
+  font-size: 18px;
+  font-family: Helvetica, sans-serif;
+}
+
+APPLICATION.SCSS
+
+$size: 18px;
+
+.switch {
+  font-size: $size;
+  @if $size <= 16px {
+    font-family: Arial, sans-serif;
+  } @else {
+    font-family: Helvetica, sans-serif;
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+$size: 18px;
+
+.switch {
+  font-size: $size;
+  @if $size <= 16px {
+    font-family: Arial, sans-serif;
+  } @else if $size <= 24px {
+  	font-family: Georgia, serif;
+  }@else {
+    font-family: Helvetica, sans-serif;
+  } 
+}
+
+CSS
+
+.switch {
+  font-size: 18px;
+  font-family: Georgia, serif; }

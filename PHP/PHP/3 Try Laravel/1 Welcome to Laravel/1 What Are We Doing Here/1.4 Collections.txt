@@ -1,0 +1,37 @@
+1.4 Collections
+
+Let's practice creating and accessing elements in a collection.
+
+app.php
+<?php
+
+// Create A Collection
+
+
+1. Create a collection named $c using the collect helper with any three string values. ex: 'a', 'b', 'c'.
+
+Answer:
+app.php
+<?php
+
+// Create A Collection
+$c = collect(['a', 'b', 'c']);
+
+2. Use echo and the first method to print the first item in the $c collection.
+
+app.php
+<?php
+
+// Create A Collection
+$c = collect(['a', 'b', 'c']);
+echo $c-first();
+
+3. Next, use echo and the last method to print the last item in the $c collection.
+
+app.php
+<?php
+
+// Create A Collection
+$c = collect(['a', 'b', 'c']);
+echo $c-first();
+echo $c-last();

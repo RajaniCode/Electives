@@ -1,0 +1,230 @@
+2.6 Changing to Hex Colors
+
+Now that we know how to create hex colors we can convert the colors on our page to hex.
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      h1 {
+        color: black;
+      }
+      h2 {
+        color: black;
+      }
+      h3 {
+        color: black;
+      }
+      h4 {
+        color: black;
+      }
+      p {
+        color: dimgray;
+      }
+      a {
+        color: darkred;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+  </body>
+</html>
+
+
+1. Set the color of the h1 and h2 text to the hexadecimal version of black.
+
+Answer:
+
+h1 {
+  color: #000000;
+}
+h2 {
+  color: #000000;
+}
+
+2. Set the h3 tags to a slightly lighter version of black, and the h4 tags to an even lighter version than that.
+
+Answer:
+
+h3 {
+  color: #111111;
+}
+h4 {
+  color: #222222;
+}
+
+3. Of the hex colors #112E10, #11EE00, #444444, and #FF0000, set the color for all paragraph text to the one closest to a darkish gray color.
+
+Answer:
+
+p {
+  color: #444444;
+}
+
+4. Set the color for all anchor tag text on the page to a dark red hexadecimal color.
+
+Answer:
+
+a {
+  color: #8B0000;
+}
+
+Success:
+
+<style type="text/css">
+    h1 {
+      color: #000000;
+    }
+    h2 {
+      color: #000000;
+    }
+    h3 {
+      color: #111111;
+    }
+    h4 {
+      color: #222222;
+    }
+    p {
+      color: #444444;
+    }
+    a {
+      color: #8B0000;
+    }
+</style>
+
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <style type="text/css">
+      h1 {
+        color: #000000;
+      }
+      h2 {
+        color: #000000;
+      }
+      h3 {
+        color: #111111;
+      }
+      h4 {
+        color: #222222;
+      }
+      p {
+        color: #444444;
+      }
+      a {
+        color: #8B0000;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. Critics have hailed them as the greatest post-garage-rock band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a follow-up to their breakout 2011 album, Top Right Bottom Left, and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they are recording their new album. Check back later!</p>
+  </body>
+</html>

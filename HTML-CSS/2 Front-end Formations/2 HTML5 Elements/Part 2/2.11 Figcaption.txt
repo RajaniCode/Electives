@@ -1,0 +1,19 @@
+2.11 Figcaption
+
+We’ve added a caption to the image in our blog post. Mark it up using the appropriate HTML5 element.
+
+
+index.html
+
+<figure>
+  <img src="armando-blontio.jpg" alt="A Famous Armando Blontio Painting" width="640" height="470" />
+  <p class="caption">"Crème de la Crème," a famous Armando Blontio painting.</p>
+</figure>
+
+
+Answer:
+
+<figure>
+  <img src="armando-blontio.jpg" alt="A Famous Armando Blontio Painting" width="640" height="470" />
+  <figcaption>"Crème de la Crème," a famous Armando Blontio painting.</figcaption>
+</figure>

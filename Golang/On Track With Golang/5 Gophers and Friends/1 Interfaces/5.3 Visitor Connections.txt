@@ -1,0 +1,206 @@
+5.3 Visitor Connections
+
+We will now start tracking visitor connections from guests who choose not to have a user name. For those types of connections, we’ll track their IP address and the hour of the day they’ve connected to our app by using the struct below:
+
+type visitorConnection struct {
+    ip       string
+    connHour int
+}
+
+The visitorConnection struct also responds to the notify() method. However, its implementation is slightly different. Let’s update our program to use an interface in order to accommodate both connection types.
+
+chat/main.go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+type guestConnection struct {
+  ip       string
+  userName string
+  isAdmin  bool
+}
+
+type visitorConnection struct {
+  ip       string
+  connHour int
+}
+
+
+
+// one implementation for guestConnection
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+// and a different implementation for visitorConnection
+func (  ) notify() {
+  fmt.Println("Visitor connected at:", v.connHour)
+}
+
+func main() {
+  notifiers := getAllConnections()
+  for _, c := range notifiers {
+    c.notify()
+  }
+
+}
+
+func getAllConnections()  {
+  gConn := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  vConn := &visitorConnection{ip: "192.168.0.11", connHour: time.Now().Hour()}
+
+  return []notifier{gConn, vConn}
+}
+
+
+1. Create a new interface called notifier. This interface should have a single method named notify() that does not return anything.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+type guestConnection struct {
+  ip       string
+  userName string
+  isAdmin  bool
+}
+
+type visitorConnection struct {
+  ip       string
+  connHour int
+}
+type notifier interface {
+  notify()
+}
+// one implementation for guestConnection
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+// and a different implementation for visitorConnection
+func (  ) notify() {
+  fmt.Println("Visitor connected at:", v.connHour)
+}
+
+func main() {
+  notifiers := getAllConnections()
+  for _, c := range notifiers {
+    c.notify()
+  }
+
+}
+
+func getAllConnections()  {
+  gConn := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  vConn := &visitorConnection{ip: "192.168.0.11", connHour: time.Now().Hour()}
+
+  return []notifier{gConn, vConn}
+}
+
+2. Next, indicate the explicit receiver for the second version of the notify() method so that it has access to properties from a visitorConnection struct. Note: It should define the variable v.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+type guestConnection struct {
+  ip       string
+  userName string
+  isAdmin  bool
+}
+
+type visitorConnection struct {
+  ip       string
+  connHour int
+}
+type notifier interface {
+  notify()
+}
+
+// one implementation for guestConnection
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+// and a different implementation for visitorConnection
+func (v visitorConnection) notify() {
+  fmt.Println("Visitor connected at:", v.connHour)
+}
+
+func main() {
+  notifiers := getAllConnections()
+  for _, c := range notifiers {
+    c.notify()
+  }
+
+}
+
+func getAllConnections()  {
+  gConn := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  vConn := &visitorConnection{ip: "192.168.0.11", connHour: time.Now().Hour()}
+
+  return []notifier{gConn, vConn}
+}
+
+3. Lastly, complete the signature for the getAllConnections() function so that it returns a slice of notifier types. Remember, the star symbol (*) is not necessary when working with interfaces.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "fmt"
+  "time"
+)
+
+type guestConnection struct {
+  ip       string
+  userName string
+  isAdmin  bool
+}
+
+type visitorConnection struct {
+  ip       string
+  connHour int
+}
+type notifier interface {
+  notify()
+}
+
+// one implementation for guestConnection
+func (g guestConnection) notify() {
+  fmt.Println("Guest connection from user name:", g.userName)
+}
+
+// and a different implementation for visitorConnection
+func (v visitorConnection) notify() {
+  fmt.Println("Visitor connected at:", v.connHour)
+}
+
+func main() {
+  notifiers := getAllConnections()
+  for _, c := range notifiers {
+    c.notify()
+  }
+
+}
+
+func getAllConnections() []notifier {
+  gConn := &guestConnection{ip: "192.168.0.10", userName: "Darth Vader"}
+  vConn := &visitorConnection{ip: "192.168.0.11", connHour: time.Now().Hour()}
+
+  return []notifier{gConn, vConn}
+}

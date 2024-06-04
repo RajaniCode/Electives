@@ -1,0 +1,17 @@
+5. Pruning
+
+
+Great! Now we're getting somewhere. There is one more problem though, you realize that some of the commits don't contain anything anymore, since you removed the password file that they referenced. You should probably use the --prune-empty option do something to clean these out.
+
+
+$ git filter-branch -f --prune-empty --all
+
+Usage: git filter-branch [--env-filter <command>] [--tree-filter <command>]
+	[--index-filter <command>] [--parent-filter <command>]
+	[--msg-filter <command>] [--commit-filter <command>]
+	[--tag-name-filter <command>] [--subdirectory-filter <directory>]
+	[--original <namespace>] [-d <directory>] [-f | --force]
+	[<rev-list options>...]
+
+Success!
+

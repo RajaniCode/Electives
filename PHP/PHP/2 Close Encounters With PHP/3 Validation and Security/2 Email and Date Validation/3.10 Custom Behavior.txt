@@ -1,0 +1,89 @@
+3.10 Custom Behavior
+
+We need to create a custom function to manage the date validation in a single line.
+
+app.php
+
+<?php
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+
+  if ($time = strtotime($date)) {
+    echo date('m d y', $time);
+  }
+
+  echo "<br>" . htmlspecialchars($reason);
+}
+
+
+1. Just under the opening of the PHP code block, add a custom function named validate_date() that will have a single parameter named $date_raw.
+
+Answer:
+app.php
+
+<?php
+function validate_date($date_raw) {}  
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+
+  if ($time = strtotime($date)) {
+    echo date('m d y', $time);
+  }
+
+  echo "<br>" . htmlspecialchars($reason);
+}
+
+2. Move the conditional and all contained code that references the date inside our new function. You will need to also replace the $date variable with our new argument of $date_raw and then return the result instead of echoing it.
+
+Answer:
+app.php
+
+<?php
+function validate_date($date_raw) {
+    if ($time = strtotime($date_raw)) {
+    return date('m d y', $time);
+  }
+}  
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+
+
+
+  echo "<br>" . htmlspecialchars($reason);
+}
+
+3. In place of the code that was below our $name variable, echo a new call to our custom function, passing the $date variable through as our argument.
+
+Answer:
+app.php
+
+<?php
+function validate_date($date_raw) {
+    if ($time = strtotime($date_raw)) {
+    return date('m d y', $time);
+  }
+}  
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  $name = trim($_POST['name']);
+  $date = trim($_POST['date']);
+  $reason = trim($_POST['reason']);
+
+  echo $name . "<br>";
+
+  echo validate_date($date);
+
+  echo "<br>" . htmlspecialchars($reason);
+}

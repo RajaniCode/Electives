@@ -1,0 +1,303 @@
+1.12 Site Wide Links
+
+Our site navigation works great on the Regular Expressionists' page, but we should copy it to every page in our site. Use the tabs at the top of the editor to switch between the HTML files and enter your code.
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+about.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <h2>About</h2>
+
+    <p>Open Source Records is a quickly growing record label that 
+    brings you the hottest up-and-coming groups.  All of our bands 
+    are actively recording and touring, and receive our full support 
+    producing, recording, mixing, touring, and promoting their work.  
+    At Open Source Records, artists come first.</p>
+  </body>
+</html>
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <h2>Bands</h2>
+
+    <ul>
+      <li><a href="prependers-band.html">The Prependers</a></li>
+      <li><a href="regular-band.html">Regular Expressionists</a></li>
+    </ul>
+
+    <p>We're always looking for new talent, so 
+    <a href="contact.html">Contact us now!</a></p>
+  </body>
+</html>
+
+contact.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <h2>Contact</h2>
+  </body>
+</html>
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. 
+    Critics have hailed them as the greatest post-garage-rock 
+    band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a 
+    follow-up to their breakout 2011 album, Top Right Bottom Left, 
+    and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they 
+    are recording their new album. Check back later!</p>
+  </body>
+</html>
+
+1. Copy the site navigation block of HTML into about.html below the Open Source Records label name.
+
+Answer:
+
+about.html
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+2. Copy the site navigation block of HTML into bands.html below the Open Source Records label nam
+
+Answer:
+
+bands.html
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+3. Copy the site navigation block of HTML into contact.html below the Open Source Records label name.
+
+Answer:
+
+contact.html
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+4. Copy the site navigation block of HTML into prependers-band.html below the Open Source Records label name.
+
+Answer:
+
+prependers-band.html
+
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+
+Success:
+
+about.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <h2>About</h2>
+
+    <p>Open Source Records is a quickly growing record label that 
+    brings you the hottest up-and-coming groups.  All of our bands 
+    are actively recording and touring, and receive our full support 
+    producing, recording, mixing, touring, and promoting their work.  
+    At Open Source Records, artists come first.</p>
+  </body>
+</html>
+
+bands.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <h2>Bands</h2>
+
+    <ul>
+      <li><a href="prependers-band.html">The Prependers</a></li>
+      <li><a href="regular-band.html">Regular Expressionists</a></li>
+    </ul>
+
+    <p>We're always looking for new talent, so 
+    <a href="contact.html">Contact us now!</a></p>
+  </body>
+</html>
+
+contact.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <h2>Contact</h2>
+  </body>
+</html>
+
+prependers-band.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Open Source Records</h1>
+    <ul>
+      <li><a href="about.html">About</a></li>
+      <li><a href="bands.html">Bands</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <h2>The Prependers</h2>
+
+    <h3>Bio</h3>
+
+    <p>The Prependers are a quirky four-piece from Orlando, FL. 
+    Critics have hailed them as the greatest post-garage-rock 
+    band of the last decade.</p>
+
+    <p>They are currently writing a full length album that's a 
+    follow-up to their breakout 2011 album, Top Right Bottom Left, 
+    and their critically acclaimed EP, Opacity Zero.</p>
+
+    <h3>Members</h3>
+
+    <ul>
+      <li>Jack Smith - Vocals</li>
+      <li>Sarah Quan - Guitar</li>
+      <li>Laverne Butlet - Bass</li>
+      <li>Simon St. Hollister - Drums</li>
+    </ul>
+
+    <h3>Albums</h3>
+
+    <h4>Top, Right, Bottom, Left</h4>
+
+    <ol>
+      <li>The Last</li>
+      <li>Downtown</li>
+      <li>Yellow Carpet</li>
+      <li>Rocket to Mars</li>
+      <li>Walk, not Run</li>
+      <li>Design</li>
+      <li>Shopping Cart</li>
+      <li>Our Gift to You</li>
+    </ol>
+
+    <h4>Opacity Zero</h4>
+
+    <ol>
+      <li>Visible/Invisible</li>
+      <li>Car Trip</li>
+      <li>AFK</li>
+      <li>Up and Up</li>
+    </ol>
+
+    <h3>Tour Dates</h3>
+
+    <p>The Prependers are not currently on tour because they 
+    are recording their new album. Check back later!</p>
+  </body>
+</html>

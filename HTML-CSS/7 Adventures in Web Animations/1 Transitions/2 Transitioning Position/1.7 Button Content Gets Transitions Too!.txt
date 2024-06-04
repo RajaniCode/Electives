@@ -1,0 +1,288 @@
+1.7 Button Content Gets Transitions Too!
+
+
+Provide Sweet Lands users with extra information about the next cosplay event. Position and transition 2 content spans inside the "Register Now" button.
+
+
+index.html
+<!DOCTYPE>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <title>Cosplay Happenings</title>
+    <link href='level1.css' rel='stylesheet' type='text/css'>
+  </head>
+  <body>
+    <!-- Nav -->
+    <nav class='nav'>
+      <div class='cell'>
+        <a class='nav-logo' href='/'>
+          <div class='shing'>
+            <img src='logo.png' alt='Sweet Lands' />
+          </div>
+        </a>
+        <ul class='nav-menu'>
+          <li><a href='#retweets'>Retweets</a></li>
+          <li><a href='#pictures'>Pictures</a></li>
+          <li><a href='#event'>Upcoming</a></li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Header -->
+    <header class='header'>
+      <div class='cell well'>
+        <h1 class='header-title'>Cosplay Happenings</h1>
+        <p class='header-subtitle'>Welcome to our candy-coated community!</p>
+      </div>
+    </header>
+
+    <!-- Most Retweeted -->
+    <section class='retweets' id='retweets'>
+      <div class='cell well'>
+        <h2>Most Retweeted</h2>
+        <div class='retweet group'>
+          <img src='unicorn.jpg' alt='Unicorn' width='200' height='200' />
+          <p>
+            Sparkles the Unicorn saunters down the Lemony Brick Road and
+            prances past the Soda Pop River! Her majestic horn points the way
+            to the Frosting Fortress, as her glittery mane and tail sway in the
+            bubblegum breeze.
+          </p>
+        </div>
+        <div class='retweet group'>
+          <img src='fairy.jpg' alt='Fairy' width='200' height='200' />
+          <p>
+            Who’s that there in the Candy Corn Fields? Why, it’s Sarsaparilla
+            the Sherbet Sprite! He’s thoughtfully pondering which treat to
+            partake of next. The Lollipop Forest is in the distance, in case he
+            needs a place to rest his sweet head.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Purchase -->
+    <section class='pictures' id='pictures'>
+      <div class='cell well'>
+        <h2>Pictures</h2>
+        <ul class='pictures-list group'>
+          <li><img src='group-01.jpg' alt='Group' width='200' height='200' /></li>
+          <li><img src='cupcake.jpg' alt='Cupcake' width='200' height='200' /></li>
+          <li><img src='rainbow.jpg' alt='Rainbow' width='200' height='200' /></li>
+          <li><img src='donut.jpg' alt='Donut' width='200' height='200' /></li>
+          <li><img src='dog.jpg' alt='Dog' width='200' height='200' /></li>
+          <li><img src='fairy.jpg' alt='Fairy' width='200' height='200' /></li>
+          <li><img src='unicorn.jpg' alt='Unicorn' width='200' height='200' /></li>
+          <li><img src='group-02.jpg' alt='Group' width='200' height='200' /></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class='event'  id='event'>
+      <div class='cell well'>
+        <h2>Upcoming Event</h2>
+        <div class='event-content'>
+          <img src='sweetlandia.png' alt='SweetLandia' width='200' />
+          <h3>SweetLandia</h3>
+          <p>
+            Once upon a time, there was a magical place called Sweet Lands — a
+            world we may now only travel to in our imaginations. But one
+            weekend every year, when the sugar cane stalks bend toward the east
+            and the cotton candy is at its swirliest, the Sweetlandia
+            convention brings this wondrous world within reach! So join
+            Sparkles, Pierre, and the rest of the gang for a meeting of the
+            sweet-minded in sunny Omaha, Nebraska! It’s sure to be your
+            sweetest adventure yet.
+          </p>
+          <div class='event-action'>
+            <a href='#' class='btn buy-button'>
+              <span class='top content'>Register Now!</span>
+              <span class='bottom content'>Hurry, Limited Space!</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Register Modal -->
+    <div class='modal-overlay'></div>
+    <div class='modal'>
+      <div class='modal-header'>
+        <a class='modal-close' href='#' aria-label='Close'>&times;</a>
+        <h3>Register</h3>
+      </div>
+      <div class='modal-content'>
+        <form class='form' action=''>
+          <fieldset class='form-field'>
+            <!-- <label class='form-label' for='type'>CC Type</label> -->
+            <select class='cs-select cs-skin-elastic' name='type'>
+              <option value='visa'>Visa</option>
+              <option value='mastercard'>MasterCard</option>
+              <option value='american_express'>American Express</option>
+            </select>
+          </fieldset>
+          <fieldset class='form-field'>
+            <label class='form-label' for='number'>CC Number</label>
+            <input class='form-input' type='text' id='number' />
+          </fieldset>
+          <fieldset class='form-field'>
+            <label class='form-label' for='expiration'>CC Expiration</label>
+            <input class='form-input' type='text' id='expiration' />
+          </fieldset>
+          <div class='form-submit'>
+            <input class='btn' type='Submit' value='Submit' />
+          </div>
+        </form>
+      </div>
+    </div>
+    <script src='application.min.js'></script>
+  </body>
+</html>
+
+
+style.css
+.btn {
+  transition: all 0.4s;
+}
+
+.top.content {
+
+}
+.bottom.content {
+
+}
+.btn:hover .top {
+
+}
+.btn:hover .bottom {
+
+}
+.btn .content {
+
+}
+
+
+1. In style.css, use the .top.content selector to set the initial state of the "Register Now!" span so that it will show up at the very top of the button.
+
+Answer:
+style.css
+.btn {
+  transition: all 0.4s;
+}
+
+.top.content {
+	top: 0;
+}
+.bottom.content {
+
+}
+.btn:hover .top {
+
+}
+.btn:hover .bottom {
+
+}
+.btn .content {
+
+}
+
+2. When the .btn is hovered over, move the .top span to 50px higher than the initial state. This will cause it to not be shown. To do this, you can use the .btn:hover .top selector.
+
+Answer:
+style.css
+.btn {
+  transition: all 0.4s;
+}
+
+.top.content {
+ top: 0;
+}
+.bottom.content {
+
+}
+.btn:hover .top {
+	top: -50px;
+}
+.btn:hover .bottom {
+
+}
+.btn .content {
+
+}
+
+
+3. Position the initial state of the "Hurry" span, so that it will not be visible using the .bottom.content selector. Do this by making it show up beneath the "Register Now!" span which is 50px high. That way when we do our transition later it will appear to be moving up.
+
+Answer:
+style.css
+.btn {
+  transition: all 0.4s;
+}
+
+.top.content {
+ top: 0;
+}
+.bottom.content {
+ top: -50px;
+}
+.btn:hover .top {
+	top: -50px;
+}
+.btn:hover .bottom {
+	
+}
+.btn .content {
+ 
+}
+
+
+4. When the button is hovered over, move the .bottom span to be at the top of the button using the .btn:hover .bottom selector. This will cause it to show up where "Register Now!" is initially.
+
+Answer:
+style.css
+.btn {
+  transition: all 0.4s;
+}
+
+.top.content {
+ top: 0;
+}
+.bottom.content {
+ top: -50px;
+}
+.btn:hover .top {
+	top: -50px;
+}
+.btn:hover .bottom {
+	top: 0;
+}
+.btn .content {
+ 
+}
+
+
+5. Lastly, find the .btn .content selector which will target all content elements within a button. Make these transition their top property over whatever duration you want.
+
+Answer:
+style.css
+.btn {
+  transition: all 0.4s;
+}
+
+.top.content {
+ top: 0;
+}
+.bottom.content {
+ top: -50px;
+}
+.btn:hover .top {
+	top: -50px;
+}
+.btn:hover .bottom {
+	top: 0;
+}
+.btn .content {
+	transition: top 2s;
+}

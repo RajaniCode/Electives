@@ -1,0 +1,103 @@
+2.9 Layouts
+
+Breaking apart layouts into separate files can help keep our template code organized and reusable.
+
+resources/views/layouts/app.blade.php
+
+
+resources/views/farms/index.blade.php
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Farm To Table</title>
+  </head>
+  <body>
+    <main classf="container">
+      <ul>
+        @foreach ($farms as $farm)
+          <li>{{ $farm->name }}</li>
+        @endforeach
+      </ul>
+    </main>
+  </body>
+</html>
+
+
+1. Look in index.blade.php and move everything except the contents of the tag with a class of container into the app.blade.php file. Then, inside of the main tag (which is now in app.php), create a @yield tag and use 'content' as the parameter.
+
+Answer
+resources/views/farms/index.blade.php
+
+    <ul>
+      @foreach ($farms as $farm)
+        <li>{{ $farm->name }}</li>
+      @endforeach
+    </ul>
+
+resources/views/layouts/app.blade.php
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Farm To Table</title>
+  </head>
+  <body>
+    <main class="container">
+       @yield('content')
+    </main>
+  </body>
+</html>
+
+2. Now back in the index file, add the @extends tag for 'layouts.app'.
+
+Answer
+resources/views/farms/index.blade.php
+
+@extends('layouts.app')
+    <ul>
+      @foreach ($farms as $farm)
+        <li>{{ $farm->name }}</li>
+      @endforeach
+    </ul>
+
+resources/views/layouts/app.blade.php
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Farm To Table</title>
+  </head>
+  <body>
+    <main class="container">
+       @yield('content')
+    </main>
+  </body>
+</html>
+
+3. Now wrap the content, including the ul, with a @section tag with the name of the section: 'content'.
+
+Answer
+resources/views/farms/index.blade.php
+
+@extends('layouts.app')
+@section('content') 
+    <ul>
+      @foreach ($farms as $farm)
+        <li>{{ $farm->name }}</li>
+      @endforeach
+    </ul>
+@endsection
+
+resources/views/layouts/app.blade.php
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Farm To Table</title>
+  </head>
+  <body>
+    <main class="container">
+       @yield('content')
+    </main>
+  </body>
+</html>

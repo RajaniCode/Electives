@@ -1,0 +1,60 @@
+Icon Sprite
+
+
+The featured and sale navigation items should have special icons. To start, add the background image to both and adjust the position for the sales icon (see the diagram on the images tab for sidebar.png).
+
+
+HTML Source
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+ 
+  <body>
+    <nav class="sidebar">
+      <ul>
+        <li><a class="featured" href="#">Featured Items</a></li>
+        <li><a class="sales" href="#">Sale Items</a></li>
+        <li><a href="#">Men's</a></li>
+        <li><a href="#">Women's</a></li>
+        <li><a href="#">Children's</a></li>
+      </ul>
+    </nav>
+  </body>
+</html>
+
+style.css
+
+.sidebar a {
+  display: block;
+  line-height: 40px;
+}
+.sidebar .featured,
+.sidebar .sales {
+  background: url() no-repeat;
+  padding-left: 50px;
+}
+.sidebar .sales {
+
+}
+
+Answer:
+
+style.css
+
+.sidebar a {
+  display: block;
+  line-height: 40px;
+}
+.sidebar .featured,
+.sidebar .sales {
+  background: url(sidebar.png) no-repeat;
+  padding-left: 50px;
+}
+.sidebar .sales {
+  background: url(sidebar.png) no-repeat;
+  background-position: 0 -80px;
+}

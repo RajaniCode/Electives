@@ -1,0 +1,28 @@
+1.5 Farm Class
+
+We've created a model class, so you can practice finding and outputting data.
+
+app.php
+<?php
+​
+use App\Farm;
+
+
+1. Use the Farm class with the static method find to retrieve the farm with an ID of 2. Store this in a variable named $farm.
+
+Answer
+app.php
+<?php
+​
+use App\Farm;
+$farm = Farm::find(2);
+
+2. Now, with the farm stored in $farm, access the name property using the object operator and echo the name to the screen.
+
+Answer
+app.php
+<?php
+​
+use App\Farm;
+$farm = Farm::find(2);
+echo $farm->name;

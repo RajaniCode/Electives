@@ -1,0 +1,15 @@
+8. Push Check
+
+
+After finishing up a bunch of changes, you want to push them up to the remote so you can share it with your other co-workers that are working on the project. Since you're using submodules, you should make sure to use the option which checks whether you have un-pushed submodules.
+
+
+$ git push --recurse-submodule=check
+
+Counting objects: 3, done.
+Delta compression using up to 2 threads.
+Compressing objects: 100% (2/2), done.
+Writing objects: 100% (2/2), 308 bytes, done.
+Total 2 (delta 0), reused 0 (delta 0)
+
+Success!

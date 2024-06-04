@@ -1,0 +1,363 @@
+2.13 Making Our Footer Responsive
+
+Our footer looks good on laptops and other medium-sized devices, but on smaller devices, each footer section is on its own line. Follow the tasks to make more use of horizontal space in the footer.
+
+index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blasting Off With Bootstrap</title>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <link href='css/main.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Blasting Off With Bootstrap</h1>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-md-6'>
+          <h2>The Fastest Way to Space</h2>
+          <p>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
+          <button type='button'>Take the Tour</button>
+          <button type='button'>Book Tickets Now</button>
+        </div>
+        <div class='col-md-6 visible-md visible-lg'>
+          <img src='images/img-header.jpg' alt='Blast off with Bootstrap' />
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0'>
+          <h3>Book Today!</h3>
+          <p>Even if you're traveling tomorrow, you can still get tickets today. We have a number of conveniently located ports around the globe to service everyone.</p>
+        </div>
+
+        <div class='col-sm-4 col-xs-6'>
+          <h3>Go Anywhere</h3>
+          <p>If you need to get to space today, why not try out a transporter? Despite the claims, there are have been no deaths in the last 6 weeks!</p>
+        </div>
+
+        <div class='col-sm-4 col-xs-6'>
+          <h3>RocketBus&reg;</h3>
+          <p>For cheapest fares, catch the next RocketBus&reg; to the stars. Cheaper on your wallet, and easiest way to make friends.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class='footer'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-md-3'>
+            <h4>Who We Are</h4>
+            <p><i>Blasting Off With Bootstrap</i> is the fastest way to space. <a href='tickets.html'>Book your ticket today</a>!</p>
+            <p><a href='about.html'>More About Us</a></p>
+          </div>
+
+          <div class='col-md-2 col-md-offset-1'>
+            <h4>Links</h4>
+            <ul>
+              <li><a href='/'>Home</a></li>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+            </ul>
+          </div>
+
+          <div class='col-md-2'>
+            <h4>Stay in Touch</h4>
+            <ul>
+              <li><a href='about.html'>About</a></li>
+              <li><a href='contact.html'>Contact Us</a></li>
+              <li><a href='/blog'>Blog</a></li>
+              <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
+              <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
+            </ul>
+          </div>
+
+          <div class='col-md-3 col-md-offset-1'>
+            <h4>Contact Us</h4>
+            <ul>
+              <li>Orlando, FL</li>
+              <li>1-555-blast-off</li>
+              <li><a href='mailto:blastingoff@codeschool.com'>blastingoff@codeschool.com</a></li>
+            </ul>
+            <p>Blasting Off With Bootstrap &copy;2214.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+  </body>
+</html>
+
+
+1. In small mode, we should be able to get away with still showing all 4 footer items as columns, since we'll no longer have the empty columns.
+
+Update the "Who We Are" and "Contact Us" sections to use 4 columns each in small mode.
+
+Answer:
+
+...
+
+<div class='col-sm-4'>
+
+...
+
+<div class='col-sm-4 col-sm-offset-1'>
+
+...
+
+Note:
+
+          <div class='col-sm-4'>
+            <h4>Who We Are</h4>
+            <p><i>Blasting Off With Bootstrap</i> is the fastest way to space. <a href='tickets.html'>Book your ticket today</a>!</p>
+            <p><a href='about.html'>More About Us</a></p>
+          </div>
+
+          <div class='col-md-2 col-md-offset-1'>
+            <h4>Links</h4>
+            <ul>
+              <li><a href='/'>Home</a></li>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+            </ul>
+          </div>
+
+          <div class='col-md-2'>
+            <h4>Stay in Touch</h4>
+            <ul>
+              <li><a href='about.html'>About</a></li>
+              <li><a href='contact.html'>Contact Us</a></li>
+              <li><a href='/blog'>Blog</a></li>
+              <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
+              <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
+            </ul>
+          </div>
+
+          <div class='col-sm-4 col-sm-offset-1'>
+            <h4>Contact Us</h4>
+            <ul>
+              <li>Orlando, FL</li>
+              <li>1-555-blast-off</li>
+              <li><a href='mailto:blastingoff@codeschool.com'>blastingoff@codeschool.com</a></li>
+            </ul>
+            <p>Blasting Off With Bootstrap &copy;2214.</p>
+          </div>
+
+2. Update the "Links" and "Stay in Touch" sections so they use 2 columns in small mode. Remove any unneeded classes.
+
+Answer:
+
+...
+
+
+<div class='col-sm-2 col-md-offset-1'>
+
+...
+
+
+<div class='col-sm-2'>
+
+...
+
+
+Note:
+
+          <div class='col-sm-2 col-md-offset-1'>
+            <h4>Links</h4>
+            <ul>
+              <li><a href='/'>Home</a></li>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+            </ul>
+          </div>
+
+          <div class='col-sm-2'>
+            <h4>Stay in Touch</h4>
+            <ul>
+              <li><a href='about.html'>About</a></li>
+              <li><a href='contact.html'>Contact Us</a></li>
+              <li><a href='/blog'>Blog</a></li>
+              <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
+              <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
+            </ul>
+          </div>
+
+3. Our footer looks good on small devices, but we have some work to do for the extra small ones.
+
+Update all sections of the footer to be half of the page on extra small devices. This should put the first two on one row and the next two on another row.
+
+Answer:
+
+...
+
+<div class='col-sm-4 col-xs-6'>
+
+...
+
+<div class='col-sm-2 col-md-offset-1 col-xs-6'>
+
+...
+
+<<div class='col-sm-2 col-xs-6'>
+
+...
+
+<div class='col-sm-4 col-sm-offset-1 col-xs-6'>
+
+...
+
+Note:
+
+          <div class='col-sm-4 col-xs-6'>
+            <h4>Who We Are</h4>
+            <p><i>Blasting Off With Bootstrap</i> is the fastest way to space. <a href='tickets.html'>Book your ticket today</a>!</p>
+            <p><a href='about.html'>More About Us</a></p>
+          </div>
+
+         <div class='col-sm-2 col-md-offset-1 col-xs-6'>
+            <h4>Links</h4>
+            <ul>
+              <li><a href='/'>Home</a></li>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+            </ul>
+          </div>
+
+          <div class='col-sm-2 col-xs-6'>
+            <h4>Stay in Touch</h4>
+            <ul>
+              <li><a href='about.html'>About</a></li>
+              <li><a href='contact.html'>Contact Us</a></li>
+              <li><a href='/blog'>Blog</a></li>
+              <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
+              <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
+            </ul>
+          </div>
+
+          <div class='col-sm-4 col-sm-offset-1 col-xs-6'>
+            <h4>Contact Us</h4>
+            <ul>
+              <li>Orlando, FL</li>
+              <li>1-555-blast-off</li>
+              <li><a href='mailto:blastingoff@codeschool.com'>blastingoff@codeschool.com</a></li>
+            </ul>
+            <p>Blasting Off With Bootstrap &copy;2214.</p>
+          </div>
+
+4. Below is an example of our footer viewed on an extra small device. Due to the way elements are floated in Bootstrap's grid system, our footer is looking pretty messed up. There is something we can do though.
+
+Create a new div between the "Links" section and the "Stay in Touch" section that only shows up on extra small devices and allows the "Stay in Touch" section to sit below the "Who We Are" section. 
+
+Answer: <div class='visible-xs'></div>
+
+5. If we were going to fix this with CSS, we'd want to use something like clear:left on the "Stay in Touch" section to have it moved down below the "Who We Are" section. The only problem is that would apply the style for all device sizes.
+
+Since we only want to adjust our layout in extra small mode, add the clearfix class to the div we added in the previous objective.
+
+Answer: <div class='visible-xs clearfix'></div>
+
+
+index.html
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Blasting Off With Bootstrap</title>
+    <link href='css/bootstrap.min.css' rel='stylesheet'>
+    <link href='css/main.css' rel='stylesheet'>
+  </head>
+  <body>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-12'>
+          <h1>Blasting Off With Bootstrap</h1>
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-md-6'>
+          <h2>The Fastest Way to Space</h2>
+          <p>Make your way to space in the comfort of your own rocket, elevator or transporter.</p>
+          <button type='button'>Take the Tour</button>
+          <button type='button'>Book Tickets Now</button>
+        </div>
+        <div class='col-md-6 visible-md visible-lg'>
+          <img src='images/img-header.jpg' alt='Blast off with Bootstrap' />
+        </div>
+      </div>
+
+      <div class='row'>
+        <div class='col-sm-4 col-xs-10 col-xs-offset-1 col-sm-offset-0'>
+          <h3>Book Today!</h3>
+          <p>Even if you're traveling tomorrow, you can still get tickets today. We have a number of conveniently located ports around the globe to service everyone.</p>
+        </div>
+
+        <div class='col-sm-4 col-xs-6'>
+          <h3>Go Anywhere</h3>
+          <p>If you need to get to space today, why not try out a transporter? Despite the claims, there are have been no deaths in the last 6 weeks!</p>
+        </div>
+
+        <div class='col-sm-4 col-xs-6'>
+          <h3>RocketBus&reg;</h3>
+          <p>For cheapest fares, catch the next RocketBus&reg; to the stars. Cheaper on your wallet, and easiest way to make friends.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class='footer'>
+      <div class='container'>
+        <div class='row'>
+          <div class='col-sm-4 col-xs-6'>
+            <h4>Who We Are</h4>
+            <p><i>Blasting Off With Bootstrap</i> is the fastest way to space. <a href='tickets.html'>Book your ticket today</a>!</p>
+            <p><a href='about.html'>More About Us</a></p>
+          </div>
+					
+     
+         <div class='col-sm-2 col-md-offset-1 col-xs-6'>
+            <h4>Links</h4>
+            <ul>
+              <li><a href='/'>Home</a></li>
+              <li><a href='tickets.html'>Tickets</a></li>
+              <li><a href='stations.html'>Stations</a></li>
+            </ul>
+          </div>
+          
+					<div class='visible-xs clearfix'></div>
+          
+          <div class='col-sm-2 col-xs-6'>
+            <h4>Stay in Touch</h4>
+            <ul>
+              <li><a href='about.html'>About</a></li>
+              <li><a href='contact.html'>Contact Us</a></li>
+              <li><a href='/blog'>Blog</a></li>
+              <li><a href='http://twitter.com/codeschool'>Twitter</a></li>
+              <li><a href='http://facebook.com/codeschool'>Facebook</a></li>
+            </ul>
+          </div>
+					
+          <div class='col-sm-4 col-sm-offset-1 col-xs-6'>
+            <h4>Contact Us</h4>
+            <ul>
+              <li>Orlando, FL</li>
+              <li>1-555-blast-off</li>
+              <li><a href='mailto:blastingoff@codeschool.com'>blastingoff@codeschool.com</a></li>
+            </ul>
+            <p>Blasting Off With Bootstrap &copy;2214.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'></script>
+    <script src='js/bootstrap.min.js'></script>
+  </body>
+</html>

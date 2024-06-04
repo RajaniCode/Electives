@@ -1,0 +1,69 @@
+3.6 Interpolating Arguments
+
+
+A change request just came in: the border should only apply to one side of these elements. Add a required argument $side to the mixin and interpolate that value to the border property (passing left as $side should create border-left: 1px solid #ccc, for instance). .factory borders should be on the left side, .highrise borders on the right. As a reminder, arguments without default values need to come before arguments with default values.
+
+CSS
+
+.factory {
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.highrise {
+  background: #797979;
+  border: 1px solid #ccc;
+  padding: 20px;
+}
+
+_ASSEMBLE.SCSS
+
+@mixin assemble($bg: #fff, $pad: 10px) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: $pad;
+}
+
+.factory {
+  @include assemble;
+}
+.highrise {
+  @include assemble($bg: #797979, $pad: 20px);
+}
+
+Answer:
+
+_ASSEMBLE.SCSS
+
+// Note:  Required argument $side must come before any optional arguments. 
+
+@mixin assemble($side, $bg: #fff, $pad: 10px) {
+  background: $bg;
+  border: 1px solid #ccc;
+  padding: $pad;
+  border-#{$side}: 1px solid #ccc;
+}
+
+.factory {
+  @include assemble($side: left);
+}
+.highrise {
+  @include assemble($side: left, $bg: #797979, $pad: 20px);
+}
+
+
+CSS
+
+@mixin assemble($side, $bg: #fff, $pad: 10px) {
+  background: $bg;
+  border-#{$side}: 1px solid #ccc;
+  padding: $pad;
+}
+
+.factory {
+  @include assemble;
+}
+.highrise {
+  @include assemble($bg: #797979, $pad: 20px);
+}

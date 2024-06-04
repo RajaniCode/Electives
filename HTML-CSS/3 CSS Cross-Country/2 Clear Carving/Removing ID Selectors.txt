@@ -1,0 +1,49 @@
+Removing ID Selectors
+
+
+Refactor #home scoped anchor tags to be scoped to the .home class instead, so that the .button declaration no longer needs reference to the home class or ID.
+
+HTML Source
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Sven's Snowshoe Emporium</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+ 
+  <body>
+    <section id="home" class="content home group">
+      <aside>
+        <p>Did you know that Sven's Snowshoe Emporium produces the highest quality snowshoes in North America? <a href="#">Find out more</a>.</p>
+      </aside>
+      <article>
+        <h3>New Fall Styles</h3>
+        <p>Be the first at your resort to sport the hot new tennis-themed snow kicks, now available in the <a href="#">store</a>.</p>
+        <a class="button" href="#">See all products</a>
+      </article>
+    </section>
+  </body>
+</html>
+
+
+style.css
+
+.home a {
+  color: #c09e79;
+}
+article .button {
+  color: #fff;
+}
+
+
+#home a {
+  color: #c09e79;
+}
+#home article .button {
+  color: #fff;
+}
+
+
+Answer:
+

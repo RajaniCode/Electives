@@ -1,0 +1,13 @@
+1.4 Mapping Ports 2
+
+Let's look at that flag and the numbers after it a bit more. The -p means "publish ports". The first number is the port on the host we want to open up, and the second number is the port in the container we want to map it to.
+
+Port 80 is a standard port for handling web requests, but we could map any port on the host to the container. Let's try mapping 9999 on the host to 80 on the container.
+
+Type docker container run -p 9999:80 httpd:2.4.
+
+Answer:
+
+Enter your solution below
+
+$

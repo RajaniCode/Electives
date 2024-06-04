@@ -1,0 +1,89 @@
+4.3 Creation Forms
+
+It is time to create a new farm using a form.
+
+resources/views/farms/create.blade.php
+@extends('layouts.app')
+@section('main')​
+  <h1>Create a Farm</h1>
+  <form class="card" action="#" >
+
+
+    <label for="name">Farm Name</label>
+    <input type="text" name="name" placeholder="Your Farm's Name">​
+    <label for="city">Farm City</label>
+    <input type="text" name="city" placeholder="Farm Location City">
+    <label for="website">Farm Website</label>
+    <input type="text" name="website" placeholder="Farm Website">
+    <button type="submit">
+      Create
+    </button>
+  </form>​
+@endsection
+
+1. Inside the form tag, add a method attribute and set it equal to "post".
+
+Answer
+resources/views/farms/create.blade.php
+@extends('layouts.app')
+@section('main')​
+  <h1>Create a Farm</h1>
+  <form class="card" action="#" method="post">
+
+
+    <label for="name">Farm Name</label>
+    <input type="text" name="name" placeholder="Your Farm's Name">​
+    <label for="city">Farm City</label>
+    <input type="text" name="city" placeholder="Farm Location City">
+    <label for="website">Farm Website</label>
+    <input type="text" name="website" placeholder="Farm Website">
+    <button type="submit">
+      Create
+    </button>
+  </form>​
+@endsection
+
+2. Use the route helper to submit this url to the farms.store route with no other arguments. We can do this in the action attribute.
+
+Answer
+resources/views/farms/create.blade.php
+@extends('layouts.app')
+@section('main')​
+  <h1>Create a Farm</h1>
+  <form class="card" action="{{ route('farms.store') }}" method="post">
+
+
+    <label for="name">Farm Name</label>
+    <input type="text" name="name" placeholder="Your Farm's Name">​
+    <label for="city">Farm City</label>
+    <input type="text" name="city" placeholder="Farm Location City">
+    <label for="website">Farm Website</label>
+    <input type="text" name="website" placeholder="Farm Website">
+    <button type="submit">
+      Create
+    </button>
+  </form>​
+@endsection
+
+3. Then, to secure this form against cross site request forgery (CSRF), we should add a call to csrf_field() using blade on the first line after the form tag.
+
+Answer
+resources/views/farms/create.blade.php
+@extends('layouts.app')
+@section('main')​
+  <h1>Create a Farm</h1>
+  <form class="card" action="{{ route('farms.store') }}" method="post">
+  {{ csrf_field() }}
+
+
+    <label for="name">Farm Name</label>
+    <input type="text" name="name" placeholder="Your Farm's Name">​
+    <label for="city">Farm City</label>
+    <input type="text" name="city" placeholder="Farm Location City">
+    <label for="website">Farm Website</label>
+    <input type="text" name="website" placeholder="Farm Website">
+    <button type="submit">
+      Create
+    </button>
+  </form>​
+@endsection

@@ -1,0 +1,94 @@
+3.7 Protecting Against Attacks
+
+Some machines from our internal network have been reported to be the origin of DDoS attacks to our chat server. We can’t let that happen!
+
+chat/util/main.go
+package util
+
+func SaveBlockedIPs(ips [4]string){
+  //... saves IPs
+}
+
+chat/main.go
+package main
+
+import (
+  "chat/util"
+)
+
+func main() {
+  
+  
+  addToBlockedList(blockedIPs)
+}
+
+func addToBlockedList(  ){
+  util.SaveBlockedIPs(ips)
+}
+
+
+1. Inside the main() function, declare a new array of type []string named blockedIPs and set the max number of elements to 4.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+)
+
+func main() {
+  var blockedIPs [4]string
+  
+  addToBlockedList(blockedIPs)
+}
+
+func addToBlockedList(  ){
+  util.SaveBlockedIPs(ips)
+}
+
+2. Now add the following IP addresses to the array: "192.168.0.16", "192.168.0.17", "192.168.0.18", and "192.168.0.19".
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+)
+
+func main() {
+  var blockedIPs [4]string
+  blockedIPs[0] = "192.168.0.16"
+  blockedIPs[1] = "192.168.0.17"
+  blockedIPs[2] = "192.168.0.18"
+  blockedIPs[3] = "192.168.0.19"
+  addToBlockedList(blockedIPs)
+}
+
+func addToBlockedList(  ){
+  util.SaveBlockedIPs(ips)
+}
+
+3. Finish declaring the addToBlockedList() function by writing the data type it expects as argument. Note: It should define the variable ips.
+
+Answer:
+chat/main.go
+package main
+
+import (
+  "chat/util"
+)
+
+func main() {
+  var blockedIPs [4]string
+  blockedIPs[0] = "192.168.0.16"
+  blockedIPs[1] = "192.168.0.17"
+  blockedIPs[2] = "192.168.0.18"
+  blockedIPs[3] = "192.168.0.19"
+  addToBlockedList(blockedIPs)
+}
+
+func addToBlockedList(ips [4]string){
+  util.SaveBlockedIPs(ips)
+}

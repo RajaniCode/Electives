@@ -1,0 +1,13 @@
+3.11 Just the Same
+
+Many operators within regex can be represented with interval expressions. What is the interval expression equivalent to \w*?
+
+[Single Answer]
+
+\w[0,]
+\w{1,}
+\w{0,}
+\w*
+
+
+Answer: \w{0,}

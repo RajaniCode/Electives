@@ -1,0 +1,105 @@
+4.2 Working on Issues
+
+Now that you have a handle on how issues work, it's time to try using some in your repository. We're going to start by creating one for you.
+
+
+GitHub Username: pluralschool
+
+
+1. You'll notice that in your fork of "dojo_rules", GitHub issues are not enabled, even though they are enabled on "deadlyvipers/dojo_rules". This is common to prevent issues from drifting away from the original source.
+
+In our case though, we want to enable them for your fork. Go ahead and enable issues for your fork of "dojo_rules" by going to settings and checking the "Issues" checkbox. When finished, click "Submit Answer" and we'll create an issue for you.
+
+Answer:
+
+https://github.com/pluralschool/dojo_rules/settings
+
+Check "Issues" checkbox
+
+
+2. Go to your "dojo_rules" repository and you'll notice that we've created an issue for you. Create a local feature branch named "kill_list".
+
+Make the fix to our issue on this branch and be sure to include "fixes #" in your commit message, using the issue number from GitHub.
+
+Push it up to GitHub on a branch of the same name.
+
+Answer:
+
+Welcome to Git (version 1.9.5-preview20150319)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Rajani@RAJANIDELL ~
+$ cd "E:\Working\Git\Code School Course\4 Mastering GitHub\4 Issues, Wiki'
+s and GitHub Pages\1 Issues\dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/1 Issues/dojo_rules (master)
+$ git branch
+* master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/1 Issues/dojo_rules (master)
+$ git branch -a
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/deadly_skills
+  remotes/origin/gh-pages
+  remotes/origin/master
+  remotes/origin/new_rules
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/1 Issues/dojo_rules (master)
+$ git checkout -b kill_list
+Switched to a new branch 'kill_list'
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/1 Issues/dojo_rules (kill_list)
+$ git branch -a
+* kill_list
+  master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/deadly_skills
+  remotes/origin/gh-pages
+  remotes/origin/master
+  remotes/origin/new_rules
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/1 Issues/dojo_rules (kill_list)
+$ git commit -am "Add repos readmes. fixes #1"
+[kill_list a6c82ea] Add repos readmes. fixes #1
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/1 Issues/dojo_rules (kill_list)
+$ git push origin kill_list
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 9, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 331 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+ * [new branch]      kill_list -> kill_list
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/4 Issues, Wiki's and GitHub Pages/1 Issues/dojo_rules (kill_list)
+$
+
+
+3. Create a pull request from your new "kill_list" branch back to "master".
+
+
+Answer:
+
+Enable issues in your repository and click "Submit Answer". After we create the issue for you, complete the following:
+
+git checkout -b kill_list
+
+Add another line to the kill_list.md file.
+
+git commit -am "Added repos without readmes. fixes #1"
+git push origin kill_list
+
+Head over to your "dojo_rules" repository and click on "Pull Requests". From there, create a new pull request, specifying from as "kill_list" and to as "master". Click "Submit Answer".
+
+
+4. We left a comment on your pull request giving you the A-OK. Go ahead and merge it back into master. You can use the Pull Request page on GitHub to make this easy. This will close the issue as well when your commit is added to master due to your commit message.
+
+Answer: Head over to the pull request you created and click "Merge".

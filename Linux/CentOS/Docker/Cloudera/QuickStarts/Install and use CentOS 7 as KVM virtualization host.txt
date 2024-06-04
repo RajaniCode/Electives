@@ -1,0 +1,95 @@
+Install and use CentOS 7 or RHEL 7 as KVM virtualization host
+
+Note: br0 is virbr0 in the original blog
+
+When thinking about virtualization, everybody immediately thinks about VMWare. And it must be said, the product they offer is very decent but also comes with a “decent” price. As an alternative, it’s worth looking into KVM for your virtualization. As with the VMWare product range, KVM offers full virtualization and it can compete with VMWare regarding stability and performance.
+
+Virtualization-terminology
+
+To prevent things getting confused I would first like to clear out some terminology used for virtualization. For somebody working on a daily basis in virtual environments, these might be clear but can be rather confusing for others.
+
+Host: the machine that hosts other system, KVM will be installed on this machine
+Guest: the system running on the host, also referred to as VM, Virtual Machine or domain.
+Hypervisor: the piece of software that enables virtualization on the host. For example: KVM, ESXi, Xen, …
+Part1: KVM installation and preparation
+KVM hypervisor and VM-extensions
+
+As mentioned earlier, KVM offers, as VMWare, full virtualization. This means that a full system, which looks like a real physical system to the guest-OS, will be offered. Besides full virtualization, there is also such a thing as paravirtualization, as Xen can offer. Paravirtualization gives you higher performance but needs a modified guest-OS and is basically limited to *nix-systems. Full virtualization enables you to run unmodified guest-systems and thus also most proprietary systems as Windows . In order to be able to use full virtualization, you either need some virtualization-extensions on your CPU or use emulation.
+
+First thing to do is to check if the host-machine supports VM-extensions. On the x86 platofrom, those are either AMD-V or Intel’s VT-X. In order to check if the installed CPU’s support those extensions, we need to check if the vmx (for VT-X) or svm (for AMD-V) flag exists in the cpuinfo-output:
+[jensd@kvmhost ~]$ egrep -c '(vmx|svm)' /proc/cpuinfo
+2
+
+When the output is 0, meaning that neither vmx or svm is found in the flags, it probably means that your CPU doesn’t support those extensions and there is little you can do. When the extensions are listed, be sure to check if they are enabled in the systems BIOS since that would cause problems later on. In case your CPU doesn’t support VM-extensions, you are limited to QEMU-emulation in combination with KVM, which delivers a much worse performance in comparison. For this tutorial, I’ll assume that the VM-extensions are supported and enabled in the BIOS of the host-system.
+KVM installation
+
+The first step in the KVM installation is installing the necessary packages. Package virt-manager, xauth and dejavu-lgc-sans-fonts are also needed if you want to manage KVM with the graphical interface in combination with X11 forwarding. (for more information, check this previous post about X11 forwarding)
+
+To install the required packages
+[jensd@kvmhost ~]$ sudo yum install kvm virt-manager libvirt virt-install qemu-kvm xauth dejavu-lgc-sans-fonts
+...
+Complete!
+
+Networking
+
+For the networking part, our KVM-host will act as a router for its guests and we will need to create a bridge interface to allow the guest to communicate out of the host. Guests will use NAT on the host to connect to the real network. To allow such type of setup it’s needed to allow ip forwarding in the kernel parameters.
+[jensd@kvmhost ~]$ echo "net.ipv4.ip_forward = 1"|sudo tee /etc/sysctl.d/99-ipforward.conf
+net.ipv4.ip_forward = 1
+[jensd@kvmhost ~]$ sudo sysctl -p /etc/sysctl.d/99-ipforward.conf
+net.ipv4.ip_forward = 1
+
+After allowing the host to do ip forwarding, we need to change the network configuration. Basically we will keep our original physical interface as it is but will assign its IP-address to the brige. In the example host-machine there is one real interface called eno16777736 and the script in /etc/sysconfig/network-scripts/ifcfg-eno16777736 looks like this:
+DEVICE="eno16777736"
+ONBOOT=yes
+IPADDR="192.168.202.111"
+NETMASK="255.255.255.0"
+GATEWAY="192.168.202.2"
+HWADDR="00:0c:29:32:d0:4c"
+DNS1="192.168.202.2"
+
+The first thing to change here, is to comment out everything that is IP-related and tell the interface which interface will be the bridge. Resulting in /etc/sysconfig/network-scripts/ifcfg-eno16777736 to look like this:
+DEVICE="eno16777736"
+ONBOOT=yes
+#IPADDR="192.168.202.111"
+#NETMASK="255.255.255.0"
+#GATEWAY="192.168.202.2"
+HWADDR="00:0c:29:32:d0:4c"
+#DNS1="192.168.202.2"
+BRIDGE=br0
+
+Next, we can create the config-script for the bridge interface br0 in /etc/sysconfig/network-scripts/ifcfg-br0. Most details can be copied from the original script for eno16777736:
+DEVICE="br0"
+TYPE=BRIDGE
+ONBOOT=yes
+BOOTPROTO=static
+IPADDR="192.168.202.111"
+NETMASK="255.255.255.0"
+GATEWAY="192.168.202.2"
+DNS1="192.168.202.2"
+
+Finish and check the KVM installation
+
+Basically all components are now ok but before KVM can be used it’s a good idea to perform a reboot in order to load the kvm-modules and to relaod the new network settings.
+
+After the reboot, we should check if the necessary kernel modules are loaded, which means that KVM successfully can handle the VM-extensions of our CPU:
+
+[jensd@kvmhost ~]$ lsmod|grep kvm
+kvm_intel 138567 0
+kvm 441119 1 kvm_intel
+
+
+Check if the bridge is installed and in an up-state:
+[jensd@kvmhost ~]$ ip a show br0
+3: br0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP
+ link/ether 00:0c:29:32:d0:4c brd ff:ff:ff:ff:ff:ff
+ inet 192.168.202.111/24 brd 192.168.202.255 scope global br0
+ valid_lft forever preferred_lft forever
+ inet6 fe80::20c:29ff:fe32:d04c/64 scope link
+ valid_lft forever preferred_lft forever
+
+Last thing to check is if we can connect to KVM by asking for a simple list of systems:
+[jensd@kvmhost ~]$ sudo virsh -c qemu:///system list
+ Id Name State
+----------------------------------------------------
+
+If it returns something else, then you should go trough the earlier steps to check where something went wrong.

@@ -1,0 +1,89 @@
+2.2 Beginning the Header
+
+Use a table to contain and align the first image for the header.
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    
+    <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+
+  </body>
+</html>
+
+1. Add a simple table with a single td to contain the <img>.
+
+Answer:
+
+    <table>
+      <tr>
+        <td>
+          <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+        </td>
+      </tr>
+    </table>
+
+2. Reset the spacing for the table to 0 using the border, cellpadding, and cellspacing attributes.
+
+Answer:
+
+    <table border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td>
+          <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+        </td>
+      </tr>
+    </table>
+
+3. Fix the width of the table to 600.
+
+Answer:
+
+    <table border="0" cellpadding="0" cellspacing="0" width="600">
+      <tr>
+        <td>
+          <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+        </td>
+      </tr>
+    </table>
+
+4. Center the table using the align attribute.
+
+Answer:
+
+    <table border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+      <tr>
+        <td>
+          <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+        </td>
+      </tr>
+    </table>
+
+Success:
+
+email.html 
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Championship Match!</title>
+    <meta name="viewport" content="width=device-width" />
+  </head>
+  <body style="margin: 0; padding: 0;">
+    <table border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+      <tr>
+        <td>
+          <img alt="La Amor Peligrosa vs. La Fuega Fatal" src="https://s3.amazonaws.com/unmasking-html-emails/info.png " style="display: block; max-width: 100%;" width="600" />
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

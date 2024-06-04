@@ -1,0 +1,21 @@
+2.3 Creating a Model
+
+We practiced working with farm data in the previous level, but now we're going to create the Farm model file.
+
+app/Farm.php
+<?php
+
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+
+1. Create a class Farm that extends the Eloquent Model class.
+
+Answer
+app/Farm.php
+<?php
+
+namespace App;
+use Illuminate\Database\Eloquent\Model;
+
+class Farm extends Model { }

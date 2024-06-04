@@ -1,0 +1,25 @@
+2.4 Social Shipmates
+
+We've noticed that the majority of potential shipmates use Twitter. We want to allow shipmates to post about their experiences on the voyage. Let's construct a pattern to validate that each potential shipmate has entered a valid Twitter URL.
+
+To begin, let's match 'http' followed by a colon ':'.
+
+Continue by adding two forward slash literals '//' after the colon. Don't forget that forward slashes are a special character that needs to be escaped!
+
+Next add the 'www' portion of our URL and include a dot literal '.' after the 'www' pattern.
+
+Next add the literal 'twitter'.
+
+Now add the '.com' portion of our pattern.
+
+Finally, add a slash literal '/' and the username portion of the twitter URL. This can be any name consisting of one or more word characters.
+
+Subjects
+
+http://www.twitter.com/codeschool
+
+http://www.twitter.com/pluralsight
+
+
+REGULAR EXPRESSION
+/\http\:\/\/\www\.twitter\.com\/\w+/

@@ -1,0 +1,294 @@
+[rajani@localhost KVM]$ su root
+Password: 
+[root@localhost KVM]# yum -y install qemu-kvm libvirt virt-install bridge-utils
+Loaded plugins: fastestmirror, langpacks
+Loading mirror speeds from cached hostfile
+ * base: mirror.nbrc.ac.in
+ * epel: ftp.cuhk.edu.hk
+ * extras: mirrors.vonline.vn
+ * nux-dextop: li.nux.ro
+ * rpmforge: mirror.smartmedia.net.id
+ * updates: mirrors.vhost.vn
+Package bridge-utils-1.5-9.el7.x86_64 already installed and latest version
+Resolving Dependencies
+--> Running transaction check
+---> Package libvirt.x86_64 0:1.2.17-13.el7_2.4 will be installed
+--> Processing Dependency: libvirt-daemon-driver-storage = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-driver-secret = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-driver-qemu = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-driver-nwfilter = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-driver-nodedev = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-driver-network = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-driver-lxc = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-driver-interface = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-config-nwfilter = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon-config-network = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-daemon = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libvirt-client = 1.2.17-13.el7_2.4 for package: libvirt-1.2.17-13.el7_2.4.x86_64
+---> Package qemu-kvm.x86_64 10:1.5.3-60.el7 will be updated
+---> Package qemu-kvm.x86_64 10:1.5.3-105.el7_2.3 will be an update
+--> Processing Dependency: qemu-kvm-common = 10:1.5.3-105.el7_2.3 for package: 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64
+--> Processing Dependency: qemu-img = 10:1.5.3-105.el7_2.3 for package: 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64
+--> Processing Dependency: glusterfs-api >= 3.6.0 for package: 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64
+--> Processing Dependency: libgfapi.so.0(GFAPI_3.5.0)(64bit) for package: 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64
+--> Processing Dependency: libgfapi.so.0(GFAPI_3.4.0)(64bit) for package: 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64
+--> Processing Dependency: libtcmalloc.so.4()(64bit) for package: 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64
+--> Processing Dependency: librbd.so.1()(64bit) for package: 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64
+--> Processing Dependency: librados.so.2()(64bit) for package: 10:qemu-kvm-1.5.3-105.el7_2.3.x86_64
+---> Package virt-install.noarch 0:1.2.1-8.el7 will be installed
+--> Processing Dependency: virt-manager-common = 1.2.1-8.el7 for package: virt-install-1.2.1-8.el7.noarch
+--> Running transaction check
+---> Package glusterfs-api.x86_64 0:3.4.0.59rhs-1.el7.centos will be updated
+---> Package glusterfs-api.x86_64 0:3.7.1-16.0.1.el7.centos will be an update
+--> Processing Dependency: glusterfs-client-xlators = 3.7.1-16.0.1.el7.centos for package: glusterfs-api-3.7.1-16.0.1.el7.centos.x86_64
+--> Processing Dependency: glusterfs = 3.7.1-16.0.1.el7.centos for package: glusterfs-api-3.7.1-16.0.1.el7.centos.x86_64
+---> Package gperftools-libs.x86_64 0:2.4-7.el7 will be installed
+--> Processing Dependency: libunwind.so.8()(64bit) for package: gperftools-libs-2.4-7.el7.x86_64
+---> Package librados2.x86_64 1:0.80.7-3.el7 will be installed
+--> Processing Dependency: libboost_thread-mt.so.1.53.0()(64bit) for package: 1:librados2-0.80.7-3.el7.x86_64
+---> Package librbd1.x86_64 1:0.80.7-3.el7 will be installed
+---> Package libvirt-client.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-client.x86_64 0:1.2.17-13.el7_2.4 will be an update
+--> Processing Dependency: libsystemd.so.0(LIBSYSTEMD_209)(64bit) for package: libvirt-client-1.2.17-13.el7_2.4.x86_64
+--> Processing Dependency: libsystemd.so.0()(64bit) for package: libvirt-client-1.2.17-13.el7_2.4.x86_64
+---> Package libvirt-daemon.x86_64 0:1.1.1-29.el7 will be updated
+--> Processing Dependency: libvirt-daemon = 1.1.1-29.el7 for package: libvirt-daemon-kvm-1.1.1-29.el7.x86_64
+---> Package libvirt-daemon.x86_64 0:1.2.17-13.el7_2.4 will be an update
+---> Package libvirt-daemon-config-network.x86_64 0:1.2.17-13.el7_2.4 will be installed
+---> Package libvirt-daemon-config-nwfilter.x86_64 0:1.2.17-13.el7_2.4 will be installed
+---> Package libvirt-daemon-driver-interface.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-daemon-driver-interface.x86_64 0:1.2.17-13.el7_2.4 will be an update
+---> Package libvirt-daemon-driver-lxc.x86_64 0:1.2.17-13.el7_2.4 will be installed
+---> Package libvirt-daemon-driver-network.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-daemon-driver-network.x86_64 0:1.2.17-13.el7_2.4 will be an update
+---> Package libvirt-daemon-driver-nodedev.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-daemon-driver-nodedev.x86_64 0:1.2.17-13.el7_2.4 will be an update
+---> Package libvirt-daemon-driver-nwfilter.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-daemon-driver-nwfilter.x86_64 0:1.2.17-13.el7_2.4 will be an update
+---> Package libvirt-daemon-driver-qemu.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-daemon-driver-qemu.x86_64 0:1.2.17-13.el7_2.4 will be an update
+---> Package libvirt-daemon-driver-secret.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-daemon-driver-secret.x86_64 0:1.2.17-13.el7_2.4 will be an update
+---> Package libvirt-daemon-driver-storage.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-daemon-driver-storage.x86_64 0:1.2.17-13.el7_2.4 will be an update
+--> Processing Dependency: libdevmapper.so.1.02(DM_1_02_97)(64bit) for package: libvirt-daemon-driver-storage-1.2.17-13.el7_2.4.x86_64
+---> Package qemu-img.x86_64 10:1.5.3-60.el7 will be updated
+---> Package qemu-img.x86_64 10:1.5.3-105.el7_2.3 will be an update
+---> Package qemu-kvm-common.x86_64 10:1.5.3-60.el7 will be updated
+---> Package qemu-kvm-common.x86_64 10:1.5.3-105.el7_2.3 will be an update
+---> Package virt-manager-common.noarch 0:1.2.1-8.el7 will be installed
+--> Processing Dependency: libvirt-python >= 0.7.0 for package: virt-manager-common-1.2.1-8.el7.noarch
+--> Processing Dependency: libosinfo >= 0.2.11 for package: virt-manager-common-1.2.1-8.el7.noarch
+--> Processing Dependency: python-ipaddr for package: virt-manager-common-1.2.1-8.el7.noarch
+--> Running transaction check
+---> Package boost-thread.x86_64 0:1.53.0-25.el7 will be installed
+--> Processing Dependency: boost-system(x86-64) = 1.53.0-25.el7 for package: boost-thread-1.53.0-25.el7.x86_64
+---> Package device-mapper-libs.x86_64 7:1.02.84-14.el7 will be updated
+--> Processing Dependency: device-mapper-libs = 7:1.02.84-14.el7 for package: 7:device-mapper-1.02.84-14.el7.x86_64
+---> Package device-mapper-libs.x86_64 7:1.02.107-5.el7_2.1 will be an update
+---> Package glusterfs.x86_64 0:3.4.0.59rhs-1.el7.centos will be updated
+--> Processing Dependency: glusterfs = 3.4.0.59rhs-1.el7.centos for package: glusterfs-fuse-3.4.0.59rhs-1.el7.centos.x86_64
+---> Package glusterfs.x86_64 0:3.7.1-16.0.1.el7.centos will be an update
+--> Processing Dependency: glusterfs-libs = 3.7.1-16.0.1.el7.centos for package: glusterfs-3.7.1-16.0.1.el7.centos.x86_64
+---> Package glusterfs-client-xlators.x86_64 0:3.7.1-16.0.1.el7.centos will be installed
+---> Package libosinfo.x86_64 0:0.2.7-10.el7 will be updated
+---> Package libosinfo.x86_64 0:0.2.12-3.el7 will be an update
+---> Package libunwind.x86_64 2:1.1-5.el7_2.2 will be installed
+---> Package libvirt-daemon-kvm.x86_64 0:1.1.1-29.el7 will be updated
+---> Package libvirt-daemon-kvm.x86_64 0:1.2.17-13.el7_2.4 will be an update
+---> Package libvirt-python.x86_64 0:1.2.17-2.el7 will be installed
+---> Package python-ipaddr.noarch 0:2.1.9-5.el7 will be installed
+---> Package systemd-libs.x86_64 0:208-11.el7 will be updated
+--> Processing Dependency: systemd-libs = 208-11.el7 for package: systemd-208-11.el7.x86_64
+---> Package systemd-libs.x86_64 0:219-19.el7_2.7 will be an update
+--> Running transaction check
+---> Package boost-system.x86_64 0:1.53.0-18.el7 will be updated
+---> Package boost-system.x86_64 0:1.53.0-25.el7 will be an update
+---> Package device-mapper.x86_64 7:1.02.84-14.el7 will be updated
+--> Processing Dependency: device-mapper = 7:1.02.84-14.el7 for package: 7:device-mapper-event-1.02.84-14.el7.x86_64
+---> Package device-mapper.x86_64 7:1.02.107-5.el7_2.1 will be an update
+---> Package glusterfs-fuse.x86_64 0:3.4.0.59rhs-1.el7.centos will be updated
+---> Package glusterfs-fuse.x86_64 0:3.7.1-16.0.1.el7.centos will be an update
+---> Package glusterfs-libs.x86_64 0:3.4.0.59rhs-1.el7.centos will be updated
+---> Package glusterfs-libs.x86_64 0:3.7.1-16.0.1.el7.centos will be an update
+---> Package systemd.x86_64 0:208-11.el7 will be updated
+--> Processing Dependency: systemd = 208-11.el7 for package: systemd-sysv-208-11.el7.x86_64
+--> Processing Dependency: systemd = 208-11.el7 for package: systemd-python-208-11.el7.x86_64
+--> Processing Dependency: systemd = 208-11.el7 for package: libgudev1-208-11.el7.x86_64
+---> Package systemd.x86_64 0:219-19.el7_2.7 will be an update
+--> Processing Dependency: kmod >= 18-4 for package: systemd-219-19.el7_2.7.x86_64
+--> Running transaction check
+---> Package device-mapper-event.x86_64 7:1.02.84-14.el7 will be updated
+---> Package device-mapper-event.x86_64 7:1.02.107-5.el7_2.1 will be an update
+--> Processing Dependency: device-mapper-event-libs = 7:1.02.107-5.el7_2.1 for package: 7:device-mapper-event-1.02.107-5.el7_2.1.x86_64
+---> Package kmod.x86_64 0:14-9.el7 will be updated
+---> Package kmod.x86_64 0:20-5.el7 will be an update
+---> Package libgudev1.x86_64 0:208-11.el7 will be updated
+---> Package libgudev1.x86_64 0:219-19.el7_2.7 will be an update
+---> Package systemd-python.x86_64 0:208-11.el7 will be updated
+---> Package systemd-python.x86_64 0:219-19.el7_2.7 will be an update
+---> Package systemd-sysv.x86_64 0:208-11.el7 will be updated
+---> Package systemd-sysv.x86_64 0:219-19.el7_2.7 will be an update
+--> Running transaction check
+---> Package device-mapper-event-libs.x86_64 7:1.02.84-14.el7 will be updated
+---> Package device-mapper-event-libs.x86_64 7:1.02.107-5.el7_2.1 will be an update
+--> Processing Conflict: systemd-219-19.el7_2.7.x86_64 conflicts initscripts < 9.49.28-1
+--> Restarting Dependency Resolution with new changes.
+--> Running transaction check
+---> Package initscripts.x86_64 0:9.49.17-1.el7 will be updated
+---> Package initscripts.x86_64 0:9.49.30-1.el7_2.2 will be an update
+--> Processing Conflict: systemd-219-19.el7_2.7.x86_64 conflicts dracut < 033-243
+--> Restarting Dependency Resolution with new changes.
+--> Running transaction check
+---> Package dracut.x86_64 0:033-161.el7 will be updated
+--> Processing Dependency: dracut = 033-161.el7 for package: dracut-config-rescue-033-161.el7.x86_64
+--> Processing Dependency: dracut = 033-161.el7 for package: dracut-network-033-161.el7.x86_64
+---> Package dracut.x86_64 0:033-360.el7_2 will be an update
+--> Running transaction check
+---> Package dracut-config-rescue.x86_64 0:033-161.el7 will be updated
+---> Package dracut-config-rescue.x86_64 0:033-360.el7_2 will be an update
+---> Package dracut-network.x86_64 0:033-161.el7 will be updated
+---> Package dracut-network.x86_64 0:033-360.el7_2 will be an update
+--> Finished Dependency Resolution
+
+Dependencies Resolved
+
+====================================================================================================================================================
+ Package                                          Arch                    Version                                    Repository                Size
+====================================================================================================================================================
+Installing:
+ libvirt                                          x86_64                  1.2.17-13.el7_2.4                          updates                  118 k
+ virt-install                                     noarch                  1.2.1-8.el7                                base                      85 k
+Updating:
+ dracut                                           x86_64                  033-360.el7_2                              updates                  311 k
+ initscripts                                      x86_64                  9.49.30-1.el7_2.2                          updates                  429 k
+ qemu-kvm                                         x86_64                  10:1.5.3-105.el7_2.3                       updates                  1.8 M
+Installing for dependencies:
+ boost-thread                                     x86_64                  1.53.0-25.el7                              base                      57 k
+ glusterfs-client-xlators                         x86_64                  3.7.1-16.0.1.el7.centos                    updates                  732 k
+ gperftools-libs                                  x86_64                  2.4-7.el7                                  base                     272 k
+ librados2                                        x86_64                  1:0.80.7-3.el7                             base                     1.5 M
+ librbd1                                          x86_64                  1:0.80.7-3.el7                             base                     350 k
+ libunwind                                        x86_64                  2:1.1-5.el7_2.2                            updates                   56 k
+ libvirt-daemon-config-network                    x86_64                  1.2.17-13.el7_2.4                          updates                  119 k
+ libvirt-daemon-config-nwfilter                   x86_64                  1.2.17-13.el7_2.4                          updates                  122 k
+ libvirt-daemon-driver-lxc                        x86_64                  1.2.17-13.el7_2.4                          updates                  746 k
+ libvirt-python                                   x86_64                  1.2.17-2.el7                               base                     309 k
+ python-ipaddr                                    noarch                  2.1.9-5.el7                                base                      36 k
+ virt-manager-common                              noarch                  1.2.1-8.el7                                base                     1.0 M
+Updating for dependencies:
+ boost-system                                     x86_64                  1.53.0-25.el7                              base                      39 k
+ device-mapper                                    x86_64                  7:1.02.107-5.el7_2.1                       updates                  252 k
+ device-mapper-event                              x86_64                  7:1.02.107-5.el7_2.1                       updates                  167 k
+ device-mapper-event-libs                         x86_64                  7:1.02.107-5.el7_2.1                       updates                  169 k
+ device-mapper-libs                               x86_64                  7:1.02.107-5.el7_2.1                       updates                  304 k
+ dracut-config-rescue                             x86_64                  033-360.el7_2                              updates                   49 k
+ dracut-network                                   x86_64                  033-360.el7_2                              updates                   90 k
+ glusterfs                                        x86_64                  3.7.1-16.0.1.el7.centos                    updates                  422 k
+ glusterfs-api                                    x86_64                  3.7.1-16.0.1.el7.centos                    updates                   60 k
+ glusterfs-fuse                                   x86_64                  3.7.1-16.0.1.el7.centos                    updates                  107 k
+ glusterfs-libs                                   x86_64                  3.7.1-16.0.1.el7.centos                    updates                  322 k
+ kmod                                             x86_64                  20-5.el7                                   base                     114 k
+ libgudev1                                        x86_64                  219-19.el7_2.7                             updates                   65 k
+ libosinfo                                        x86_64                  0.2.12-3.el7                               base                     256 k
+ libvirt-client                                   x86_64                  1.2.17-13.el7_2.4                          updates                  4.3 M
+ libvirt-daemon                                   x86_64                  1.2.17-13.el7_2.4                          updates                  585 k
+ libvirt-daemon-driver-interface                  x86_64                  1.2.17-13.el7_2.4                          updates                  162 k
+ libvirt-daemon-driver-network                    x86_64                  1.2.17-13.el7_2.4                          updates                  302 k
+ libvirt-daemon-driver-nodedev                    x86_64                  1.2.17-13.el7_2.4                          updates                  161 k
+ libvirt-daemon-driver-nwfilter                   x86_64                  1.2.17-13.el7_2.4                          updates                  185 k
+ libvirt-daemon-driver-qemu                       x86_64                  1.2.17-13.el7_2.4                          updates                  570 k
+ libvirt-daemon-driver-secret                     x86_64                  1.2.17-13.el7_2.4                          updates                  155 k
+ libvirt-daemon-driver-storage                    x86_64                  1.2.17-13.el7_2.4                          updates                  327 k
+ libvirt-daemon-kvm                               x86_64                  1.2.17-13.el7_2.4                          updates                  117 k
+ qemu-img                                         x86_64                  10:1.5.3-105.el7_2.3                       updates                  657 k
+ qemu-kvm-common                                  x86_64                  10:1.5.3-105.el7_2.3                       updates                  391 k
+ systemd                                          x86_64                  219-19.el7_2.7                             updates                  5.1 M
+ systemd-libs                                     x86_64                  219-19.el7_2.7                             updates                  357 k
+ systemd-python                                   x86_64                  219-19.el7_2.7                             updates                   99 k
+ systemd-sysv                                     x86_64                  219-19.el7_2.7                             updates                   53 k
+
+Transaction Summary
+====================================================================================================================================================
+Install  2 Packages (+12 Dependent packages)
+Upgrade  3 Packages (+30 Dependent packages)
+
+Total size: 24 M
+Total download size: 20 M
+Downloading packages:
+No Presto metadata available for base
+updates/7/x86_64/prestodelta   FAILED                                          
+http://mirror.nbrc.ac.in/centos/7.2.1511/updates/x86_64/repodata/0cd7e36861b35a6dada37afc36f4b5fa02b8b37d448b667d0cd27ea44f401053-prestodelta.xml.gz: [Errno 14] curl#6 - "Could not resolve host: mirror.nbrc.ac.in; Unknown error"
+Trying other mirror.
+updates/7/x86_64/prestodelta   FAILED                                          
+http://mirror.dhakacom.com/centos/7.2.1511/updates/x86_64/repodata/0cd7e36861b35a6dada37afc36f4b5fa02b8b37d448b667d0cd27ea44f401053-prestodelta.xml.gz: [Errno 14] curl#6 - "Could not resolve host: mirror.dhakacom.com; Unknown error"
+Trying other mirror.
+updates/7/x86_64/prestodelta   FAILED                                          
+http://centos-hn.viettelidc.com.vn/7.2.1511/updates/x86_64/repodata/0cd7e36861b35a6dada37afc36f4b5fa02b8b37d448b667d0cd27ea44f401053-prestodelta.xml.gz: [Errno 14] curl#6 - "Could not resolve host: centos-hn.viettelidc.com.vn; Temporary failure in name resolution"
+Trying other mirror.
+updates/7/x86_64/prestodelta                                                                                                 | 421 kB  00:00:04     
+(1/33): boost-system-1.53.0-25.el7.x86_64.rpm                                                                                |  39 kB  00:00:02     
+(2/33): device-mapper-event-libs-1.02.107-5.el7_2.1.x86_64.rpm                                                               | 169 kB  00:00:03     
+(3/33): device-mapper-libs-1.02.107-5.el7_2.1.x86_64.rpm                                                                     | 304 kB  00:00:04     
+(4/33): glusterfs-3.7.1-16.0.1.el7.centos.x86_64.rpm                                                                         | 422 kB  00:00:05     
+(5/33): glusterfs-api-3.7.1-16.0.1.el7.centos.x86_64.rpm                                                                     |  60 kB  00:00:05     
+(6/33): glusterfs-fuse-3.7.1-16.0.1.el7.centos.x86_64.rpm                                                                    | 107 kB  00:00:05     
+(7/33): dracut-033-360.el7_2.x86_64.rpm                                                                                      | 311 kB  00:00:12     
+(8/33): initscripts-9.49.30-1.el7_2.2.x86_64.rpm                                                                             | 429 kB  00:00:09     
+(9/33): libvirt-1.2.17-13.el7_2.4.x86_64.rpm                                                                                 | 118 kB  00:00:03     
+(10/33): libgudev1-219-19.el7_2.7.x86_64.rpm                                                                                 |  65 kB  00:00:11     
+(11/33): libunwind-1.1-5.el7_2.2.x86_64.rpm                                                                                  |  56 kB  00:00:07     
+(12/33): glusterfs-client-xlators-3.7.1-16.0.1.el7.centos.x86_64.rpm                                                         | 732 kB  00:00:16     
+(13/33): libvirt-daemon-config-nwfilter-1.2.17-13.el7_2.4.x86_64.rpm                                                         | 122 kB  00:00:06     
+(14/33): libosinfo-0.2.12-3.el7.x86_64.rpm                                                                                   | 256 kB  00:00:16     
+(15/33): libvirt-daemon-driver-interface-1.2.17-13.el7_2.4.x86_64.rpm                                                        | 162 kB  00:00:08     
+(16/33): libvirt-daemon-driver-network-1.2.17-13.el7_2.4.x86_64.rpm                                                          | 302 kB  00:00:11     
+(17/33): libvirt-daemon-driver-nwfilter-1.2.17-13.el7_2.4.x86_64.rpm                                                         | 185 kB  00:00:10     
+(18/33): libvirt-daemon-driver-lxc-1.2.17-13.el7_2.4.x86_64.rpm                                                              | 746 kB  00:00:21     
+(19/33): libvirt-daemon-driver-qemu-1.2.17-13.el7_2.4.x86_64.rpm                                                             | 570 kB  00:00:20     
+(20/33): libvirt-python-1.2.17-2.el7.x86_64.rpm                                                                              | 309 kB  00:00:22     
+(21/33): libvirt-daemon-driver-storage-1.2.17-13.el7_2.4.x86_64.rpm                                                          | 327 kB  00:00:29     
+(22/33): libvirt-daemon-driver-nodedev-1.2.17-13.el7_2.4.x86_64.rpm                                                          | 161 kB  00:00:42     
+(23/33): python-ipaddr-2.1.9-5.el7.noarch.rpm                                                                                |  36 kB  00:00:12     
+(24/33): libvirt-client-1.2.17-13.el7_2.4.x86_64.rpm                                                                         | 4.3 MB  00:00:58     
+(25/33): qemu-kvm-common-1.5.3-105.el7_2.3.x86_64.rpm                                                                        | 391 kB  00:00:13     
+(26/33): qemu-img-1.5.3-105.el7_2.3.x86_64.rpm                                                                               | 657 kB  00:00:19     
+(27/33): systemd-libs-219-19.el7_2.7.x86_64.rpm                                                                              | 357 kB  00:00:12     
+(28/33): systemd-python-219-19.el7_2.7.x86_64.rpm                                                                            |  99 kB  00:00:10     
+(29/33): qemu-kvm-1.5.3-105.el7_2.3.x86_64.rpm                                                                               | 1.8 MB  00:00:30     
+(30/33): systemd-sysv-219-19.el7_2.7.x86_64.rpm                                                                              |  53 kB  00:00:15     
+(31/33): virt-install-1.2.1-8.el7.noarch.rpm                                                                                 |  85 kB  00:00:10     
+(32/33): virt-manager-common-1.2.1-8.el7.noarch.rpm                                                                          | 1.0 MB  00:00:23     
+(33/33): systemd-219-19.el7_2.7.x86_64.rpm                                                                                   | 5.1 MB  00:01:16     
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Total                                                                                                               138 kB/s |  20 MB  00:02:27     
+Running transaction check
+Running transaction test
+
+
+Transaction check error:
+  file /usr/lib/systemd/system/blk-availability.service from install of device-mapper-7:1.02.107-5.el7_2.1.x86_64 conflicts with file from package lvm2-7:2.02.105-14.el7.x86_64
+  file /usr/sbin/blkdeactivate from install of device-mapper-7:1.02.107-5.el7_2.1.x86_64 conflicts with file from package lvm2-7:2.02.105-14.el7.x86_64
+  file /usr/share/man/man8/blkdeactivate.8.gz from install of device-mapper-7:1.02.107-5.el7_2.1.x86_64 conflicts with file from package lvm2-7:2.02.105-14.el7.x86_64
+
+Error Summary
+-------------
+
+[root@localhost KVM]# lsmod | grep kvm
+kvm_intel             138567  0 
+kvm                   441119  1 kvm_intel
+[root@localhost KVM]# systemctl start libvirtd
+[root@localhost KVM]# systemctl enable libvirtd
+[root@localhost KVM]# nmcli c add type bridge autoconnect yes con-name br0 ifname br0
+Connection 'br0' (215b1cb1-4b9d-4005-a6fe-f07979f55d22) successfully added.
+[root@localhost KVM]# nmcli c modify br0 ipv4.addresses 10.0.0.30/24 ipv4.method manual
+[root@localhost KVM]# nmcli c modify br0 ipv4.gateway 10.0.0.1
+Error: invalid property 'gateway': 'gateway' not among [method, dns, dns-search, addresses, address-labels, routes, ignore-auto-routes, ignore-auto-dns, dhcp-client-id, dhcp-send-hostname, dhcp-hostname, never-default, may-fail].
+[root@localhost KVM]# nmcli c modify br0 ipv4.dns 10.0.0.1
+[root@localhost KVM]# nmcli c delete eno16777736
+Error: unknown connection: eno16777736
+Error: cannot delete unknown connection(s): 'eno16777736'.
+[root@localhost KVM]# nmcli c add type bridge-slave autoconnect yes con-name eno16777736 ifname eno16777736 master br0
+Connection 'eno16777736' (c58dc0b8-f41c-450b-94c5-b5a142db997f) successfully added.
+[root@localhost KVM]# reboot
+

@@ -1,0 +1,38 @@
+4. Ancestor Commits
+
+
+You rebased your latest commit after a commit from your co-worker, but now the page is rendering strangely. To figure out why, get a diff that includes the previous commit, as well as its parent.
+
+
+$ git diff HEAD^^
+
+diff --git a/index.html b/index.html
+index 99daa4c..983e9c3 100644
+--- a/index.html
++++ b/index.html
+@@ -4,5 +4,11 @@
+     <title>Pet Store</title>
+   </head>
+   <body>
++[m    <ul>
++[m      <li>MENU</li>
++[m      <li><a href="cat.html">Cats</a></li>
++[m      <li><a href="dog.html">Dogs</a></li>
++[m      <li><a href="pizza.html">Pizza</a></li>
++[m    </ul>
+   </body>
+ </html>
+diff --git a/narwhal.html b/narwhal.html
+new file mode 100644
+index 0000000..272ddd4
+--- /dev/null
++++ b/narwhal.html
+@@ -0,0 +1,6 @@
++[m<!DOCTYPE html>
++[m<html lang="en">
++[m  <head>
++[m    <title>Our Narwhals</title>
++[m  </head>
++[m</html>
+
+Success!

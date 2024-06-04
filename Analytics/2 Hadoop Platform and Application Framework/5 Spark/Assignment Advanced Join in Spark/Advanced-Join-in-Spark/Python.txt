@@ -1,0 +1,51 @@
+[cloudera@quickstart R]$ gedit parse_shows.py
+[cloudera@quickstart R]$ chmod +x parse_shows.py
+[cloudera@quickstart R]$ python parse_shows.py
+('Hourly_Sports', 21)
+[cloudera@quickstart R]$ cat parse_shows.py
+def split_show_views(line):
+    line = line.split(",")
+    show = line[0]
+    views = int(line[1])
+    return (show, views)
+
+test_line = 'Hourly_Sports,21'
+
+print split_show_views(test_line)
+[cloudera@quickstart R]$ gedit parse_channels.py
+[cloudera@quickstart R]$ chmod +x parse_channels.py
+[cloudera@quickstart R]$ python parse_channels.py
+('Hourly_Sports', 'DEF')
+[cloudera@quickstart R]$ cat parse_channels.py
+def split_show_channel(line):
+    line = line.split(",")
+    show = line[0]
+    channel = line[1]
+    return (show, channel)
+
+test_line = 'Hourly_Sports,DEF'
+
+print split_show_channel(test_line)
+[cloudera@quickstart R]$ gedit extract_channel.py
+[cloudera@quickstart R]$ chmod +x extract_channel.py
+[cloudera@quickstart R]$ python extract_channel.py
+(u'DEF', 1038)
+[cloudera@quickstart R]$ cat extract_channel.py
+def extract_channel_views(show_views_channel):
+    views = int(show_views_channel[1][0])
+    channel = show_views_channel[1][1]
+    return (channel, views)
+
+test_tuple = (u'Baked_Talking', (u'168', u'MAN'))
+
+print extract_channel_views(test_tuple)
+[cloudera@quickstart R]$ gedit some_channels.py
+[cloudera@quickstart R]$ chmod +x some_channels.py
+[cloudera@quickstart R]$ python some_channels.py
+3
+[cloudera@quickstart R]$ cat some_channels.py
+def some_function(a, b):
+    return a + b
+
+print some_function(1, 2)
+[cloudera@quickstart R]$

@@ -1,0 +1,82 @@
+5.7 Declaring Dependencies
+
+Let’s write another feature. This one will calculate the total amount of money we spent in the state of Florida on our last trip to Disney. To calculate this, a new function will take our existing balance as an argument and then add the Florida sales tax. This new feature will require us to make a call to a web service API to grab the tax amount, so we’ll need to add two third-party dependencies to our project.
+
+mix.exs
+
+defmodule Expenses.Mixfile do
+  use Mix.Project
+
+  def project do
+    [app: :expenses,
+     version: "0.1.0",
+     elixir: "~> 1.4",
+     build_embedded: Mix.env == :prod,
+     start_permanent: Mix.env == :prod,
+     deps: deps()]
+  end
+
+  def application do
+    # Specify extra applications you'll use from Erlang/Elixir
+    [extra_applications: [:logger]]
+  end
+
+  defp deps do
+    []
+  end
+end
+
+
+1. In the mix.exs file, add the dependency for :httpoison with the semantic version requirement of "~> 0.10.0". This library will allow us to make HTTP calls to a remote server.
+
+Answer:
+mix.exs
+
+defmodule Expenses.Mixfile do
+  use Mix.Project
+
+  def project do
+    [app: :expenses,
+     version: "0.1.0",
+     elixir: "~> 1.4",
+     build_embedded: Mix.env == :prod,
+     start_permanent: Mix.env == :prod,
+     deps: deps()]
+  end
+
+  def application do
+    # Specify extra applications you'll use from Erlang/Elixir
+    [extra_applications: [:logger]]
+  end
+
+  defp deps do
+    [{:httpoison, "~> 0.10.0"}]
+  end
+end
+
+2. Now add the dependency for the :poison library with the semantic version requirement of "~> 3.0". This library parses JSON to Elixir code.
+
+Answer:
+mix.exs
+
+defmodule Expenses.Mixfile do
+  use Mix.Project
+
+  def project do
+    [app: :expenses,
+     version: "0.1.0",
+     elixir: "~> 1.4",
+     build_embedded: Mix.env == :prod,
+     start_permanent: Mix.env == :prod,
+     deps: deps()]
+  end
+
+  def application do
+    # Specify extra applications you'll use from Erlang/Elixir
+    [extra_applications: [:logger]]
+  end
+
+  defp deps do
+    [{:httpoison, "~> 0.10.0"}, {:poison, "~> 3.0"}]
+  end
+end

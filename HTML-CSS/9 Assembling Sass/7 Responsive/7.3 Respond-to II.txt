@@ -1,0 +1,57 @@
+7.3 Respond-to II
+
+
+Let's make our respond-to more flexible by allowing it to accept query values rather than fixed breakpoints. Rewrite the mixin to output a media query with a min-width of the $query argument, which contains the @content block.
+
+
+CSS
+
+Mixin "respond-to" does not accept a content block.
+
+APPLICATION.SCSS 
+
+@mixin respond-to($query) {
+
+}
+
+.factory {
+  width: 100%;
+  @include respond-to(960px) {
+    width: percentage(600px / 960px);
+  }
+  @include respond-to(768px) {
+    width: 50%;
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+@mixin respond-to($query) {
+  @media (min-width: $query) {
+    @content;
+  }
+}
+
+.factory {
+  width: 100%;
+  @include respond-to(960px) {
+    width: percentage(600px / 960px);
+  }
+  @include respond-to(768px) {
+    width: 50%;
+  }
+}
+
+
+CSS
+
+.factory {
+  width: 100%; }
+  @media (min-width: 960px) {
+    .factory {
+      width: 62.5%; } }
+  @media (min-width: 768px) {
+    .factory {
+      width: 50%; } }

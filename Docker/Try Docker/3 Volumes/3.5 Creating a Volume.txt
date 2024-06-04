@@ -1,0 +1,37 @@
+3.5 Creating a Volume
+
+The first two approaches involved copying a file into a container. But as soon as the container is modified and stopped, all of those changes disappear. This is a problem if we’re using a container for local development, and one way to fix this problem is to use a data volume to create a connection between files on our local computer (host) and the filesystem in the container.
+
+1. Type docker run -d -p 80:80 -v /my-files:/usr/local/apache2/htdocs web-server:1.1 to create a link between the folder /my-files on your host machine and the htdocs folder in the container. This also runs the container in the background.
+
+Answer:
+
+Enter your solution below
+
+$
+
+2. Let’s see what this looks like from inside the container.
+
+Type docker container exec -it elegant_noether /bin/bash to get a shell in the container.
+
+Answer:
+
+Enter your solution below
+
+$
+
+3. Type cd /usr/local/apache2/htdocs to change the directory to the htdocs folder.
+
+Answer:
+
+Enter your solution below
+
+$
+
+4. Now that we’re in the right folder, type ls -la. This will show us that the container thinks those files on our local machine are inside of it, even though we know the truth — that we’ve created a volume that’s linking those local files to the container!
+
+Answer:
+
+Enter your solution below
+
+$

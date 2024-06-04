@@ -1,0 +1,21 @@
+7.2 Pinpointing Leaks
+
+Let's check our application for memory leaks. Go to the Profiles panel, select the Take Heap Snapshot option, and click the Take Snapshot button. Now we have a snapshot of what our sample calendar app looks like before we've performed any actions. After the snapshot is created, navigate to tomorrow's events in the calendar by clicking "Next".
+
+Now that we've performed an action in our calendar, let's take another snapshot. Once that finishes, look for the drop-down option to switch from a Summary view to a Comparison view. Then, sort the by the Constructor column and look for Detached DOM tree in the list. Apparently we are leaking an <li> element whenever we navigate around in our calendar! Click "Prev" to return to today's events and move on.
+
+Now we've fixed the code that was causing the problem. Take another snapshot. Then navigate forward in the calendar by clicking "Next" again.
+
+Take one last snapshot. Switch to a Comparison view to compare the two snapshots. Sort by Constructor again and you should be able to see that we no longer have any more detached <li> elements! Type console.log("Done!") to finish the course!
+
+F12
+Profiles
+
+Console
+Uncaught TypeError: Cannot read property 'innerHTML' of undefined
+
+console.log("Done!");
+
+Done!
+
+undefined

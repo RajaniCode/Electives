@@ -1,0 +1,21 @@
+3.5 Becoming More Social
+
+We have a pattern to validate a shipmate's Twitter URL. However, after a few examples are validated, we see a few issues with our pattern.
+
+First off, our pattern should accept either 'http' or 'https' in the URL. Update the pattern to allow for an optional 's' in the first part of the URL.
+
+Next, that 'www.' at the front needs to optional too - so update the pattern.
+
+Finally, let's match several different combinations of our top level domain. We will want to match '.com' and '.org'.
+
+REGULAR EXPRESSION
+/http:\/\/www\.twitter\.com\/codeschool/
+
+Subjects
+https://www.twitter.com/codeschool
+https://twitter.com/codeschool
+http://twitter.org/codeschool
+
+
+REGULAR EXPRESSION
+/http(s)?:\/\/(www\.)?twitter\.(com|org)\/codeschool/

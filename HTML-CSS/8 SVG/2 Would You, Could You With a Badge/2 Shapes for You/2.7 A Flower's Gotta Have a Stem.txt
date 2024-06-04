@@ -1,0 +1,153 @@
+2.7 A Flower's Gotta Have a Stem
+
+We have created a flower bud using two circle elements. Let's create a line that will act as our flower's stem.
+
+Let's create a stroke for our background circle.
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+</head>
+<body>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+    <!-- Bg Circle -->
+    <circle cx="170" cy="170" r="162" fill="#068C70" stroke="#FFFFFF" stroke-width="15"/>
+
+    <!-- Chimney -->
+    <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+    <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+    <!-- House -->
+    <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+    <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+    <!-- Door -->
+    <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  	<rect x="153" y="218" fill="#E04E27" width="36" height="10" rx="5" ry="5"/>
+    <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+
+    <!-- Flower -->
+    
+    <circle fill="#EC7E23" cx="228" cy="267" r="6"/>
+    <circle fill="#FBCE1D" cx="231" cy="266" r="2"/>
+  </svg>
+</body>
+</html>
+
+1. Create a line element.
+
+Answer:
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+</head>
+<body>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+    <!-- Bg Circle -->
+    <circle cx="170" cy="170" r="162" fill="#068C70" stroke="#FFFFFF" stroke-width="15"/>
+
+    <!-- Chimney -->
+    <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+    <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+    <!-- House -->
+    <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+    <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+    <!-- Door -->
+    <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  	<rect x="153" y="218" fill="#E04E27" width="36" height="10" rx="5" ry="5"/>
+    <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+
+    <!-- Flower -->
+    <line />
+    <circle fill="#EC7E23" cx="228" cy="267" r="6"/>
+    <circle fill="#FBCE1D" cx="231" cy="266" r="2"/>
+  </svg>
+</body>
+</html>
+
+2. Position the line element by setting the x1 attribute to 228 and y1 attribute to 267. Then, set the x2 attribute to 228 and y2 attribute to 282.
+
+Answer:
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+</head>
+<body>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+    <!-- Bg Circle -->
+    <circle cx="170" cy="170" r="162" fill="#068C70" stroke="#FFFFFF" stroke-width="15"/>
+
+    <!-- Chimney -->
+    <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+    <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+    <!-- House -->
+    <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+    <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+    <!-- Door -->
+    <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  	<rect x="153" y="218" fill="#E04E27" width="36" height="10" rx="5" ry="5"/>
+    <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+
+    <!-- Flower -->
+    <line x1="228" y1="267" x2="228" y2="282" />
+    <circle fill="#EC7E23" cx="228" cy="267" r="6"/>
+    <circle fill="#FBCE1D" cx="231" cy="266" r="2"/>
+  </svg>
+</body>
+</html>
+
+3. Lastly, set the stroke color to #068C70 and the stroke-width to 1.
+
+Answer:
+
+index.html
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>You, Me & SVG</title>
+</head>
+<body>
+  <svg version="1.1" xmlns="http://www.w3.org/2000/svg" height="340" width="340" style="background-color:#F6F7F7;">
+    <!-- Bg Circle -->
+    <circle cx="170" cy="170" r="162" fill="#068C70" stroke="#FFFFFF" stroke-width="15"/>
+
+    <!-- Chimney -->
+    <rect x="98" y="127" fill="#FBF6A7" width="14" height="21"/>
+    <rect x="95" y="123" fill="#E04E27" width="20" height="4"/>
+
+    <!-- House -->
+    <rect x="90" y="198" fill="#FBF6A7" width="162" height="84"/>
+    <rect x="80" y="148" fill="#E04E27" width="184" height="56"/>
+
+    <!-- Door -->
+    <rect x="153" y="222" fill="#E04E27" width="36" height="60"/>
+  	<rect x="153" y="218" fill="#E04E27" width="36" height="10" rx="5" ry="5"/>
+    <rect x="183" y="252" fill="#FBF6A7" width="2" height="8"/>
+
+    <!-- Flower -->
+    <line x1="228" y1="267" x2="228" y2="282" stroke="#068C70" stroke-width="1" />
+    <circle fill="#EC7E23" cx="228" cy="267" r="6"/>
+    <circle fill="#FBCE1D" cx="231" cy="266" r="2"/>
+  </svg>
+</body>
+</html>

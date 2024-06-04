@@ -1,0 +1,64 @@
+3.3 Creating Controllers
+
+Controllers are the place to write logic that can request data from a model and pass it on to a view for rendering.
+
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+
+1. Start by creating a class named FarmController that extends the Controller class.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller { }
+
+2. Next, create a public method named index that queries for all farms and stores them in a variable named $farms.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+    public function index()
+    {
+        $farms = Farm::all();
+    }
+}
+
+3. In the index method, return a view with the template name of 'farms.index' and pass along the $farms data in an array with the key of 'farms'.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Farm;
+use Illuminate\Http\Request;
+
+class FarmController extends Controller
+{
+    public function index()
+    {
+        $farms = Farm::all();
+        return view('farms.index', ['farms' => $farms]);
+    }
+}

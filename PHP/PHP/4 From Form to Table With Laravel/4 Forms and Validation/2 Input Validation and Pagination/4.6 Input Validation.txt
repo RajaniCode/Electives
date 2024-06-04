@@ -1,0 +1,148 @@
+4.6 Input Validation
+
+We will want to validate our three input fields before we save them to the database, so let's work with our FarmController to add validation.
+
+app/Http/Controllers/FarmController.php
+<?php
+namespace App\Http\Controllers;
+use App\Farm;
+use Illuminate\Http\Request;
+​
+class FarmController extends Controller
+{
+  /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        
+      
+      Farm::create($request->all());
+      return redirect('farms');
+    }
+}
+
+
+1.  Inside the store method, add a call to $this->validate() with two arguments. The first argument should be the $request object, and the second will be an empty shorthand array [].
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+namespace App\Http\Controllers;
+use App\Farm;
+use Illuminate\Http\Request;
+​
+class FarmController extends Controller
+{
+  /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+        function store(Request $request)
+        {
+             $this->validate($request, [ ]);
+             Farm::create($request->all());
+            return redirect('farms');
+        }
+}
+
+2. Next, we will need a key-value pair for each of our inputs of 'name', 'city', and 'website'. For now, we can leave each of the values as an empty string.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+namespace App\Http\Controllers;
+use App\Farm;
+use Illuminate\Http\Request;
+​
+class FarmController extends Controller
+{
+  /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        function store(Request $request)
+        {
+              $this->validate($request, [ ]);
+              $this->validate($request, [
+              'name' => '',
+               'website' => '',
+               'city' => '',
+              ]);
+             Farm::create($request->all());
+            return redirect('farms');
+        }
+}
+
+3. Each item will have its own rules, but all will be required. Add the required rule as a value for each key.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+namespace App\Http\Controllers;
+use App\Farm;
+use Illuminate\Http\Request;
+​
+class FarmController extends Controller
+{
+  /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        function store(Request $request)
+        {
+              $this->validate($request, [ ]);
+              $this->validate($request, [
+              'name' => 'required',
+               'website' => 'required',
+               'city' => 'required',
+              ]);
+             Farm::create($request->all());
+            return redirect('farms');
+        }
+}
+
+4. For the name and website inputs, we will want to add the unique rule. Remember that we can use the pipe | symbol to separate the rules. The unique rule should also be specific to the farms table.
+
+Answer
+app/Http/Controllers/FarmController.php
+<?php
+namespace App\Http\Controllers;
+use App\Farm;
+use Illuminate\Http\Request;
+​
+class FarmController extends Controller
+{
+  /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        function store(Request $request)
+        {
+              $this->validate($request, [ ]);
+              $this->validate($request, [
+              'name' => 'required|unique:farms',
+               'website' => 'required|unique:farms' ,
+               'city' => 'required',
+              ]);
+             Farm::create($request->all());
+            return redirect('farms');
+        }
+}

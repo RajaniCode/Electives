@@ -1,0 +1,306 @@
+4.4 For Each With an Index
+
+Create navigation with a foreach loop.
+
+index.php
+
+<?php
+$cities = array(
+  'tokyo' => [
+    13.6,
+    1868,
+    'Japan',
+    'map-japan.png'
+  ],
+  'dc' => [
+    0.6,
+    1790,
+    'United States',
+    'map-us.png'
+  ],
+  'moscow' => [
+    11.5,
+    1147,
+    'Russia',
+    'map-russia.png'
+  ],
+  'london' => [
+    8.6,
+    43,
+    'England',
+    'map-england.png'
+  ],
+);
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li>City of Washington DC</li>
+            <li>Population: <?php echo $cities['dc'][0]; ?> million.</li>
+            <li>Established: <?php echo $cities['dc'][1]; ?> AD.</li>
+            <li>Country: <?php echo $cities['dc'][2]; ?></li>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            Washington DC is the capital of the United States.
+          </p>
+        </div>
+      </div>
+      <div class="map">
+        <img class='map' src="/images/map-dc.png"/>
+        <div class="nav">
+          <ul>
+            <?php
+            
+              echo '<li>';
+              echo "<a href='#' class='#'>United States</a>";
+              echo '</li>';
+            
+            ?>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+
+1. Using a foreach loop, cycle through each item in the $cities array assigning both a key named $city and a value named $data variable.
+
+Answer:
+index.php
+
+<?php
+$cities = array(
+  'tokyo' => [
+    13.6,
+    1868,
+    'Japan',
+    'map-japan.png'
+  ],
+  'dc' => [
+    0.6,
+    1790,
+    'United States',
+    'map-us.png'
+  ],
+  'moscow' => [
+    11.5,
+    1147,
+    'Russia',
+    'map-russia.png'
+  ],
+  'london' => [
+    8.6,
+    43,
+    'England',
+    'map-england.png'
+  ],
+);
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li>City of Washington DC</li>
+            <li>Population: <?php echo $cities['dc'][0]; ?> million.</li>
+            <li>Established: <?php echo $cities['dc'][1]; ?> AD.</li>
+            <li>Country: <?php echo $cities['dc'][2]; ?></li>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            Washington DC is the capital of the United States.
+          </p>
+        </div>
+      </div>
+      <div class="map">
+        <img class='map' src="/images/map-dc.png"/>
+        <div class="nav">
+          <ul>
+            <?php
+              foreach($cities as $city => $data) {
+                echo '<li>';
+                echo "<a href='#' class='#'>United States</a>";
+                echo '</li>';
+              }
+            ?>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+2. Add a class of "item" to the <li> tag in the first echo statement. Then, using the existing <a> tag, replace the class name using the array key.
+
+Answer:
+index.php
+
+<?php
+$cities = array(
+  'tokyo' => [
+    13.6,
+    1868,
+    'Japan',
+    'map-japan.png'
+  ],
+  'dc' => [
+    0.6,
+    1790,
+    'United States',
+    'map-us.png'
+  ],
+  'moscow' => [
+    11.5,
+    1147,
+    'Russia',
+    'map-russia.png'
+  ],
+  'london' => [
+    8.6,
+    43,
+    'England',
+    'map-england.png'
+  ],
+);
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li>City of Washington DC</li>
+            <li>Population: <?php echo $cities['dc'][0]; ?> million.</li>
+            <li>Established: <?php echo $cities['dc'][1]; ?> AD.</li>
+            <li>Country: <?php echo $cities['dc'][2]; ?></li>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            Washington DC is the capital of the United States.
+          </p>
+        </div>
+      </div>
+      <div class="map">
+        <img class='map' src="/images/map-dc.png"/>
+        <div class="nav">
+          <ul>
+            <?php
+              foreach($cities as $city => $data) {
+              echo '<li class="item">';
+              echo "<a href='#' class='$city'>United States</a>";
+              echo '</li>';
+            }
+            ?>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+
+3. Finally, assign the value of the country as the name inside of the anchor tag. Your final items will all be different values, but should look like this:
+
+<a href='#' class='tokyo'>Japan</a>
+Note: The value in the loop is also an array, where we will access each item by its integer key. For example:
+
+$data[1] // Gives you the 'year established'
+
+Answer:
+index.php
+
+<?php
+$cities = array(
+  'tokyo' => [
+    13.6,
+    1868,
+    'Japan',
+    'map-japan.png'
+  ],
+  'dc' => [
+    0.6,
+    1790,
+    'United States',
+    'map-us.png'
+  ],
+  'moscow' => [
+    11.5,
+    1147,
+    'Russia',
+    'map-russia.png'
+  ],
+  'london' => [
+    8.6,
+    43,
+    'England',
+    'map-england.png'
+  ],
+);
+?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/master.css" media="screen">
+    <title>Try PHP</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="sidebar">
+        <div class="info">
+          <ul>
+            <li>City of Washington DC</li>
+            <li>Population: <?php echo $cities['dc'][0]; ?> million.</li>
+            <li>Established: <?php echo $cities['dc'][1]; ?> AD.</li>
+            <li>Country: <?php echo $cities['dc'][2]; ?></li>
+          </ul>
+        </div>
+        <div class="details">
+          <p>
+            Washington DC is the capital of the United States.
+          </p>
+        </div>
+      </div>
+      <div class="map">
+        <img class='map' src="/images/map-dc.png"/>
+        <div class="nav">
+          <ul>
+            <?php
+              foreach($cities as $city => $data) {
+              echo '<li class="item">';
+              echo "<a href='#' class='$city'>$data[2]</a>";
+              echo '</li>';
+            }
+            ?>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

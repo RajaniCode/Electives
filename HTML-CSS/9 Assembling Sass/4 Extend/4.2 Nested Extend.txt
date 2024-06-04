@@ -1,0 +1,78 @@
+4.2 Nested Extend
+
+
+The developers are using .notice in some places of the application, .error in others, and are unable to only use one or the other. Extend the .notice styles into an .error declaration.
+
+
+CSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+}
+.notice.alert {
+  background: red;
+  box-shadow: 0 0 10px red;
+}
+.notice a {
+  color: #222;
+}
+.notice a:hover {
+  color: #313131;
+}
+
+APPLICATION.SCSS 
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+  &.alert {
+    background: red;
+    box-shadow: 0 0 10px red;
+  }
+  a {
+    color: #222;
+    &:hover {
+      color: #313131;
+    }
+  }
+}
+
+Answer:
+
+APPLICATION.SCSS
+
+.notice {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px;
+  &.alert {
+    background: red;
+    box-shadow: 0 0 10px red;
+  }
+  a {
+    color: #222;
+    &:hover {
+      color: #313131;
+    }
+  }
+}
+.error {
+  @extend .notice;
+}
+
+CSS
+
+.notice, .error {
+  background: yellow;
+  border: 5px solid #000;
+  padding: 20px; }
+  .notice.alert, .alert.error {
+    background: red;
+    box-shadow: 0 0 10px red; }
+  .notice a, .error a {
+    color: #222; }
+    .notice a:hover, .error a:hover {
+      color: #313131; }

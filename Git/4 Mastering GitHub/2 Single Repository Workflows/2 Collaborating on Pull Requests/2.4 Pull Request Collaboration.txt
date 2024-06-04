@@ -1,0 +1,70 @@
+2.4 Pull Request Collaboration
+
+You should see a comment on your most recent pull request. This is similar to the last level where were working on a fork, but now the comment is on a pull request within your fork of repository.
+
+GitHub Username: pluralschool
+
+Make the changes we recommended locally, then add, commit and push them up to the "deadly_skills" branch on GitHub.
+
+Answer:
+
+Welcome to Git (version 1.9.5-preview20150319)
+
+
+Run 'git help git' to display the help index.
+Run 'git help <command>' to display help for specific commands.
+
+Rajani@RAJANIDELL ~
+$ cd "E:\Working\Git\Code School Course\4 Mastering GitHub\2 Single Reposi
+tory Workflows\2 Collaborating on Pull Requests\dojo_rules"
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (deadly_skills)
+
+$ git fetch
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (deadly_skills)
+
+$ git branch -a
+* deadly_skills
+  master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/deadly_skills
+  remotes/origin/gh-pages
+  remotes/origin/master
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (deadly_skills)
+
+$ git checkout deadly_skills
+Already on 'deadly_skills'
+Your branch is up-to-date with 'origin/deadly_skills'.
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (deadly_skills)
+
+$ git commit -a -m "Update to include rebase"
+[deadly_skills 582b611] Update to include rebase
+ 1 file changed, 3 insertions(+), 1 deletion(-)
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (deadly_skills)
+
+$ git push origin deadly_skills
+Username for 'https://github.com': pluralschool
+Password for 'https://pluralschool@github.com':
+Counting objects: 9, done.
+Delta compression using up to 8 threads.
+Compressing objects: 100% (3/3), done.
+Writing objects: 100% (3/3), 312 bytes | 0 bytes/s, done.
+Total 3 (delta 2), reused 0 (delta 0)
+To https://github.com/pluralschool/dojo_rules.git
+   f8c4af8..582b611  deadly_skills -> deadly_skills
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (deadly_skills)
+
+$ git commit
+On branch deadly_skills
+Your branch is up-to-date with 'origin/deadly_skills'.
+
+nothing to commit, working directory clean
+
+Rajani@RAJANIDELL /e/Working/Git/Code School Course/4 Mastering GitHub/2 Single Repository Workflows/2 Collaborating on Pull Requests/dojo_rules (deadly_skills)
+
+$

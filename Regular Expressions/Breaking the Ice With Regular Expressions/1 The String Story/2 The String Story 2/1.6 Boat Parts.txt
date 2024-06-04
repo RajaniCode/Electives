@@ -1,0 +1,18 @@
+1.6 Boat Parts
+
+What regular expression would return a match for each of these 4 subject strings?
+
+anchor
+bridge
+paddle
+rudder
+
+[Single Answer]
+
+/[a-z+]/
+/[a-z][a-z][a-z][a-z][a-z][a-z]/
+/[a+z]/
+/[a-z](6)/
+
+
+Answer: /[a-z][a-z][a-z][a-z][a-z][a-z]/

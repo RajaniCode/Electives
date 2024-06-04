@@ -1,0 +1,52 @@
+1.10 Update
+
+We can also write code to update data in a datastore, so let's practice one way of retrieving a single piece of data, updating it, and saving it back to the datastore.
+
+app.php
+<?php
+
+use App\Farm;
+
+
+1. Using the find method, find a farm with the ID of 3 and store it in a variable called $farm.
+
+Answer
+app.php
+<?php
+
+use App\Farm;
+$farm = Farm::find(3);
+
+
+2. Create an array named $data with the following key value pairs:
+
+name: Thompson Farms,
+city: Thomasville, and
+website: thompsonfarms.com.
+
+Answer
+app.php
+<?php
+
+use App\Farm;
+$farm = Farm::find(3);
+$data = [
+'name' => 'Thompson Farms',
+'city' => 'Thomasville',
+'website' => 'thompsonfarms.com'
+];
+
+3. Using the $data array and the fill method on the $farm object, update the information in the $farm variable.
+
+Answer
+app.php
+<?php
+
+use App\Farm;
+$farm = Farm::find(3);
+$data = [
+'name' => 'Thompson Farms',
+'city' => 'Thomasville',
+'website' => 'thompsonfarms.com'
+];
+$farm->fill($data);

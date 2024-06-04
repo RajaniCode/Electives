@@ -1,0 +1,42 @@
+10. Squashing Commits II
+
+
+After designating a commit to be squashed, another editor pops up enabling you to set a commit message for the resulting commit. Go ahead and set to: squashed some poodles.
+
+
+Terminal
+
+
+# This is a combination of 2 commits.
+# The first commit's message is:
+
+Implement poodles
+
+# This is the 2nd commit message:
+
+Add title to poodle page
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Not currently on any branch.
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       new file:   poodles.txt
+#       new file:   unicorns.txt
+
+
+Answer:
+Terminal
+
+# This is a combination of 2 commits.
+squashed some poodles
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# Not currently on any branch.
+# Changes to be committed:
+#   (use "git reset HEAD <file>..." to unstage)
+#
+#       new file:   poodles.txt
+#       new file:   unicorns.txt

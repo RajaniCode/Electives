@@ -1,0 +1,40 @@
+3.2 Adding Routes
+
+Let’s add the ability to create new events from the web app, starting with the routes file.
+
+lib/neon_web/router.ex
+defmodule NeonWeb.Router do
+  use NeonWeb, :router
+
+  pipeline :browser do
+    plug :accepts, ["html"]
+    plug :fetch_session
+    plug :fetch_flash
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
+  end
+
+  pipeline :api do
+    plug :accepts, ["json"]
+  end
+  
+  scope "/", NeonWeb do
+    pipe_through :browser
+
+    get "/", EventController, :index
+
+    
+    
+  end
+end
+
+
+1. Add a new GET route for "/events/new" that calls the :new action on the EventController module.
+
+Answer:
+lib/neon_web/router.ex
+
+2. Add a new POST route for "/events" that calls the :create action on the EventController module.
+
+Answer: 
+lib/neon_web/router.ex

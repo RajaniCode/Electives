@@ -1,0 +1,90 @@
+1.2 Installing and Creating With Laravel
+
+We will be installing Laravel's installer globally using the composer require command, then creating a new application.
+
+
+1. Using composer, globally require the package laravel/installer.
+
+Answer:
+$ composer global require laravel/installer
+
+2. Now that we have the Laravel installer available, create a new project called market.
+
+Answer: laravel new market
+
+
+# Note
+$ composer global require laravel/installer                                     
+Using version ^1.3 for laravel/installer                                        
+./composer.json has been updated                                                
+Loading composer repositories with package information                          
+Updating dependencies (including require-dev)                                   
+Package operations: 10 installs, 0 updates, 0 removals                          
+  - Installing symfony/process (v3.3.2): Downloading (100%)                     
+  - Installing psr/log (1.0.2): Loading from cache                              
+  - Installing symfony/debug (v3.3.2): Downloading (100%)                       
+  - Installing symfony/polyfill-mbstring (v1.4.0): Downloading (100%)           
+  - Installing symfony/console (v3.3.2): Downloading (100%)                     
+  - Installing guzzlehttp/promises (v1.3.1): Downloading (100%)                 
+  - Installing psr/http-message (1.0.1): Downloading (100%)                     
+  - Installing guzzlehttp/psr7 (1.4.2): Downloading (100%)                      
+  - Installing guzzlehttp/guzzle (6.3.0): Downloading (100%)                    
+  - Installing laravel/installer (v1.3.6): Downloading (100%)                   
+symfony/console suggests installing symfony/event-dispatcher ()                 
+symfony/console suggests installing symfony/filesystem ()                       
+Writing lock file                                                               
+Generating autoload files                                                       
+$ laravel new market
+
+league/flysystem suggests installing league/flysystem-copy (Allows you to use Co
+py.com storage)                                                                 
+league/flysystem suggests installing league/flysystem-eventable-filesystem (Allo
+ws you to use EventableFilesystem)                                              
+league/flysystem suggests installing league/flysystem-rackspace (Allows you to u
+se Rackspace Cloud Files)                                                       
+league/flysystem suggests installing league/flysystem-sftp (Allows you to use SF
+TP server storage via phpseclib)                                                
+league/flysystem suggests installing league/flysystem-webdav (Allows you to use 
+WebDAV storage)                                                                 
+league/flysystem suggests installing league/flysystem-ziparchive (Allows you to 
+use ZipArchive adapter)                                                         
+league/flysystem suggests installing spatie/flysystem-dropbox (Allows you to use
+ Dropbox storage)                                                               
+laravel/framework suggests installing aws/aws-sdk-php (Required to use the SQS q
+ueue driver and SES mail driver (~3.0).)                                        
+laravel/framework suggests installing doctrine/dbal (Required to rename columns 
+and drop SQLite columns (~2.5).)                                                
+laravel/framework suggests installing guzzlehttp/guzzle (Required to use the Mai
+lgun and Mandrill mail drivers and the ping methods on schedules (~6.0).)       
+laravel/framework suggests installing league/flysystem-aws-s3-v3 (Required to us
+e the Flysystem S3 driver (~1.0).)                                              
+laravel/framework suggests installing league/flysystem-rackspace (Required to us
+e the Flysystem Rackspace driver (~1.0).)                                       
+laravel/framework suggests installing nexmo/client (Required to use the Nexmo tr
+ansport (~1.0).)                                                                
+laravel/framework suggests installing pda/pheanstalk (Required to use the beanst
+alk queue driver (~3.0).)                                                       
+laravel/framework suggests installing predis/predis (Required to use the redis c
+ache and queue drivers (~1.0).)                                                 
+laravel/framework suggests installing pusher/pusher-php-server (Required to use 
+the Pusher broadcast driver (~2.0).)                                            
+laravel/framework suggests installing symfony/dom-crawler (Required to use most 
+of the crawler integration testing tools (~3.2).)                               
+laravel/framework suggests installing symfony/psr-http-message-bridge (Required 
+to psr7 bridging features (0.2.*).)                                             
+sebastian/global-state suggests installing ext-uopz (*)                         
+phpunit/phpunit-mock-objects suggests installing ext-soap (*)                   
+phpunit/php-code-coverage suggests installing ext-xdebug (^2.5.1)               
+phpunit/phpunit suggests installing ext-xdebug (*)                              
+phpunit/phpunit suggests installing phpunit/php-invoker (~1.1)                  
+Generating optimized autoload files                                             
+> php -r "file_exists('.env') || copy('.env.example', '.env');"                 
+> Illuminate\Foundation\ComposerScripts::postInstall                            
+> php artisan optimize                                                          
+Generating optimized class loader                                               
+The compiled services file has been removed.                                    
+> php artisan key:generate                                                      
+Application key [base64:Fnxjhow0q35sxoPgwnyInRyjMxL3qqiMlAcALGd7rB8=] set succes
+sfully.                                                                         
+Application ready! Build something amazing.                                     
+$
